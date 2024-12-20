@@ -12,17 +12,8 @@ describe Schematics::Tokens::Function do
 
     its(:references) { is_expected.to be_empty }
     its(:value) { is_expected.to eq('Time.current') }
-    its(:to_sql) { is_expected.to eq('NOW()') }
+    its(:to_sql) { is_expected.to eq('current_timestamp') }
     its(:to_str) { is_expected.to eq('#{Time.current}') } # rubocop:disable Lint/InterpolationCheck
-  end
-
-  context 'when function is RAND' do
-    let(:value) { 'RAND()' }
-
-    its(:references) { is_expected.to be_empty }
-    its(:value) { is_expected.to eq('rand') }
-    its(:to_sql) { is_expected.to eq('RAND()') }
-    its(:to_str) { is_expected.to eq('#{rand}') } # rubocop:disable Lint/InterpolationCheck
   end
 
   context 'when function is SUM with reference' do

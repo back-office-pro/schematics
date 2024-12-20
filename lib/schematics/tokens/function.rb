@@ -8,24 +8,28 @@ module Schematics
     class Function < Token
       include Behaviours::Preloadable
 
-      REGEX = %r{((?:NOW|RAND|SUM|AVG|MIN|MAX|COUNT|ABS|ROUND|CEIL|FLOOR)\([\$\w\.\s\*\+\-/]*\))}
-      CAPTURING_REGEX = /(NOW|RAND|SUM|AVG|MIN|MAX|COUNT|ABS|ROUND|CEIL|FLOOR)\((.*)\)/
+      REGEX = %r{((?:NOW|SUM|AVG|MIN|MAX|COUNT|ABS|ROUND|CEIL|FLOOR)\([\$\w\.\s\*\+\-/]*\))}
+      CAPTURING_REGEX = /(NOW|SUM|AVG|MIN|MAX|COUNT|ABS|ROUND|CEIL|FLOOR)\((.*)\)/
       PRECEDENCE = 5
 
       def references = variables
         .flat_map(&:references)
         .uniq
 
-      def to_sql = super.tr('$', '')
+      def to_sql =
+        case @value
+        when 'NOW()'
+          'current_timestamp'
+        else
+          super.tr('$', '')
+        end
 
       def to_str = "\#{#{value}}"
 
       def value =
         case @value
-        in 'NOW()'
+        when 'NOW()'
           'Time.current'
-        in 'RAND()'
-          'rand'
         else
           tokens
             .each_with_object(name)

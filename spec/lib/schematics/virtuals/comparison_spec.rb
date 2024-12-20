@@ -54,14 +54,14 @@ describe Schematics::Virtuals::Comparison do
 
   its(:to_sql) do
     is_expected.to eq <<~SQL.squish
-      (categories.vat = 10 AND (products.sold_at IS NULL OR NOW() < products.sold_at))
+      (categories.vat = 10 AND (products.sold_at IS NULL OR current_timestamp < products.sold_at))
     SQL
   end
 
   its(:search_alias) do
     is_expected.to eq <<~RUBY
       ransacker :big_price do
-        Arel.sql("(categories.vat = 10 AND (products.sold_at IS NULL OR NOW() < products.sold_at))")
+        Arel.sql("(categories.vat = 10 AND (products.sold_at IS NULL OR current_timestamp < products.sold_at))")
       end
     RUBY
   end
@@ -74,8 +74,8 @@ describe Schematics::Virtuals::Comparison do
       rescue StandardError => e
         Virtuals::Errors::StandardError.build(e)
       end
-      scope :big_price, -> { where(Arel.sql("(categories.vat = 10 AND (products.sold_at IS NULL OR NOW() < products.sold_at))")) }
-      scope :not_big_price, -> { where.not(Arel.sql("(categories.vat = 10 AND (products.sold_at IS NULL OR NOW() < products.sold_at))")) }
+      scope :big_price, -> { where(Arel.sql("(categories.vat = 10 AND (products.sold_at IS NULL OR current_timestamp < products.sold_at))")) }
+      scope :not_big_price, -> { where.not(Arel.sql("(categories.vat = 10 AND (products.sold_at IS NULL OR current_timestamp < products.sold_at))")) }
     RUBY
   end
 
