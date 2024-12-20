@@ -30,8 +30,8 @@ describe Schematics::Attributes::Boolean do
   its(:input_name) { is_expected.to eq('entity[toggle]') }
   its(:icon) { is_expected.to eq(:toggle_on) }
   its(:search_column) { is_expected.to eq(:toggle) }
-  its(:search_predicate) { is_expected.to eq(:eq) }
-  its(:search_query) { is_expected.to eq(:toggle_eq) }
+  its(:search_predicate) { is_expected.to eq(:true) }
+  its(:search_query) { is_expected.to eq(:toggle_true) }
   its(:to_spec) { is_expected.to eq('A entity has a **toggle** attribute of type *boolean*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.entity.toggle') }
 

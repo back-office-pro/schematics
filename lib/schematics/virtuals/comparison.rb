@@ -13,7 +13,7 @@ module Schematics
         end
       end
 
-      def search_predicate = :eq
+      def search_predicate = :true
 
       def icon = :toggle_on
 

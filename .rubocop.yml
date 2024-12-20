@@ -54,6 +54,8 @@ Layout/EmptyLineBetweenDefs:
   AllowAdjacentOneLineDefs: false
 Lint/HeredocMethodCallPosition:
   Enabled: true
+Lint/BooleanSymbol:
+  Enabled: false
 Naming/InclusiveLanguage:
   Enabled: true
 Style/AsciiComments:
