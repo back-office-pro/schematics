@@ -30,7 +30,7 @@ jobs:
       - name: Install postgres and dependencies
         run: |
           sudo apt-get update
-          sudo apt-get -yqq install libpq-dev sqlite-dev libvips-dev graphviz
+          sudo apt-get -yqq install libpq-dev libsqlite3-dev libvips-dev graphviz
       - name: Install app generator gems
         run: |
           gem install rails -v 8.0.0
