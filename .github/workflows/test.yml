@@ -30,7 +30,7 @@ jobs:
       - name: Install postgres and dependencies
         run: |
           sudo apt-get update
-          sudo apt-get -yqq install libpq-dev libsqlite3-dev libvips-dev graphviz
+          sudo apt-get -yqq install libpq-dev libvips-dev graphviz
       - name: Install app generator gems
         run: |
           gem install rails -v 8.0.0
@@ -50,98 +50,84 @@ jobs:
         if: always()
         env:
           RAILS_ENV: test
-          PRIMARY_DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
           SEARCH_DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/abilities
       - name: Run component tests
         if: always()
         env:
           RAILS_ENV: test
-          PRIMARY_DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
           SEARCH_DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/components
       - name: Run config tests
         if: always()
         env:
           RAILS_ENV: test
-          PRIMARY_DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
           SEARCH_DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/config
       - name: Run db tests
         if: always()
         env:
           RAILS_ENV: test
-          PRIMARY_DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
           SEARCH_DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/db
       - name: Run feature tests
         if: always()
         env:
           RAILS_ENV: test
-          PRIMARY_DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
           SEARCH_DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/features
       - name: Run generator tests
         if: always()
         env:
           RAILS_ENV: test
-          PRIMARY_DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
           SEARCH_DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/generators
       - name: Run mailer tests
         if: always()
         env:
           RAILS_ENV: test
-          PRIMARY_DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
           SEARCH_DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/mailers
       - name: Run mapper tests
         if: always()
         env:
           RAILS_ENV: test
-          PRIMARY_DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
           SEARCH_DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/mappers
       - name: Run model tests
         if: always()
         env:
           RAILS_ENV: test
-          PRIMARY_DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
           SEARCH_DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/models
       - name: Run query tests
         if: always()
         env:
           RAILS_ENV: test
-          PRIMARY_DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
           SEARCH_DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/queries
       - name: Run routing tests
         if: always()
         env:
           RAILS_ENV: test
-          PRIMARY_DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
           SEARCH_DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/routing
       - name: Run serializer tests
         if: always()
         env:
           RAILS_ENV: test
-          PRIMARY_DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
           SEARCH_DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/serializers
       - name: Run request tests
         if: always()
         env:
           RAILS_ENV: test
-          PRIMARY_DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
           SEARCH_DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/requests
       - name: Run interactor tests
         if: always()
         env:
           RAILS_ENV: test
-          PRIMARY_DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
           SEARCH_DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
           PGUSER: postgres
           PGPASSWORD: postgres
@@ -151,6 +137,5 @@ jobs:
         if: always()
         env:
           RAILS_ENV: test
-          PRIMARY_DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
           SEARCH_DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/jobs
