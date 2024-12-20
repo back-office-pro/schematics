@@ -12,7 +12,7 @@ module Schematics
     class RenameEntity < Command
       def generators
         case target
-        in :build
+        when :build
           [
             scaffold_generator,
             feature_generator,
@@ -22,7 +22,7 @@ module Schematics
             has_and_belongs_to_many_associations.map(&method(:rename_join_table_migration_generator)), # rubocop:disable Layout/LineLength
             has_and_belongs_to_many_associations.map(&method(:rename_column_migration_generator))
           ].compact.flatten
-        in :clean
+        when :clean
           [
             scaffold_generator(behavior: :revoke),
             feature_generator(behavior: :revoke)
