@@ -151,7 +151,7 @@ module Schematics
             if attribute.options.aspect_ratio
               is_expected
                 .to validate_aspect_ratio_of(attribute.name.to_sym)
-                .allowing(attribute.options.aspect_ratio)
+                .allowing(*attribute.options.aspect_ratio)
             end
           end
         end
