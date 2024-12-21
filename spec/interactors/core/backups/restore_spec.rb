@@ -11,15 +11,14 @@ RSpec.describe Core::Backups::Restore do
   describe '.call' do
     subject(:call) { described_class.call(backup:, clean:) }
 
-    before do
-      [user, backup, user.really_destroy!]
-    end
+    before { [user, backup, user.really_destroy!, call] }
 
-    it 'restores the user', skip: 'to be fixed' do
-      expect { call }
-        .to change(User, :count)
-        .from(0)
-        .to(1)
+    after { User.delete_all }
+
+    uses_transaction 'restores the user'
+
+    it 'restores the user' do
+      expect { user.reload }.not_to raise_error
     end
   end
 end
