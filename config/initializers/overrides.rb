@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'active_record/override/connection_adapters/sqlite3_adapter'
 require 'active_record/override/generators/migration_generator'
 require 'active_storage/override/attachment'
 require 'active_storage/override/blob'
@@ -53,6 +54,9 @@ Rails.configuration.to_prepare do
     def serializable_hash(*)
       super
     end
+  end
+  ActiveRecord::ConnectionAdapters::SQLite3::TableDefinition.class_eval do
+    alias_method :jsonb, :json
   end
   PgSearch::Document.establish_connection(:search)
 end
@@ -127,4 +131,8 @@ ActiveSupport.on_load(:action_text_rich_text) do
       ['body']
     end
   end
+end
+
+ActiveSupport.on_load(:active_record_sqlite3adapter) do
+  prepend ActiveRecord::Override::ConnectionAdapters::SQLite3Adapter
 end
