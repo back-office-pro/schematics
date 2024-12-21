@@ -18,8 +18,8 @@ module Schematics
     after_action { pagy_headers_merge(@pagy) if @pagy }
 
     protect_from_forgery with: :null_session, if: -> { request.format.json? }
-
     allow_browser versions: :modern, block: :unsupported_browser
+    stale_when_importmap_changes
 
     def paper_trail_enabled_for_controller
       current_user in ::User
