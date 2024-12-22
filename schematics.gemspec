@@ -70,7 +70,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'ferrum', '0.15.0'
   spec.add_dependency 'friendly_id', '5.4.2'
   spec.add_dependency 'friendly_id-mobility', '1.0.4'
-  spec.add_dependency 'fx', '0.9.0'
   spec.add_dependency 'git', '2.3.3'
   spec.add_dependency 'google-cloud-storage', '1.54.0'
   spec.add_dependency 'groupdate', '6.5.1'
