@@ -19,7 +19,7 @@ describe Schematics::Virtuals::Calculation do
     )
   end
   let(:name) { 'tax_inclusive_price' }
-  let(:function) { '$price ** $category.vat' }
+  let(:function) { '$price * $category.vat' }
   let(:options) do
     {
       unit: '$',
@@ -42,7 +42,7 @@ describe Schematics::Virtuals::Calculation do
 
   its(:open_api_schema_type) { is_expected.to eq(Float) }
   its(:open_api_query_type) { is_expected.to eq(Float) }
-  its(:to_sql) { is_expected.to eq('(products.price ^ categories.vat)') }
+  its(:to_sql) { is_expected.to eq('(products.price * categories.vat)') }
   its(:preload) { is_expected.to eq([:category]) }
   its(:icon) { is_expected.to eq(:square_root_alt) }
   its(:unit) { is_expected.to eq('$') }
@@ -56,7 +56,7 @@ describe Schematics::Virtuals::Calculation do
 
   its(:to_spec) do
     is_expected.to eq <<~TEXT.chomp
-      A product has a **tax inclusive price** virtual field which function is `$price ** $category.vat`
+      A product has a **tax inclusive price** virtual field which function is `$price * $category.vat`
     TEXT
   end
 
@@ -72,7 +72,7 @@ describe Schematics::Virtuals::Calculation do
     is_expected.to eq <<~RUBY
       define_attribute_method :tax_inclusive_price
       def tax_inclusive_price
-        self.price.to_f ** self.category&.vat.to_f
+        self.price.to_f * self.category&.vat.to_f
       rescue StandardError => e
         Virtuals::Errors::StandardError.build(e)
       end

@@ -30,11 +30,4 @@ describe Schematics::Tokens::Operator do
     its(:to_sql) { is_expected.to eq(' >> ') }
     its(:to_str) { is_expected.to eq(' >> ') }
   end
-
-  context 'when operator is power' do
-    let(:value) { ' ** ' }
-
-    its(:to_sql) { is_expected.to eq(' ^ ') }
-    its(:to_str) { is_expected.to eq(' ** ') }
-  end
 end

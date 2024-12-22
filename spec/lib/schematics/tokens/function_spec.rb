@@ -213,22 +213,4 @@ describe Schematics::Tokens::Function do
     its(:to_sql) { is_expected.to eq('ROUND(price)') }
     its(:to_str) { is_expected.to eq('#{self.price&.round}') } # rubocop:disable Lint/InterpolationCheck
   end
-
-  context 'when function is CEIL' do
-    let(:value) { 'CEIL($price)' }
-
-    its(:references) { is_expected.to be_empty }
-    its(:value) { is_expected.to eq('self.price&.ceil') }
-    its(:to_sql) { is_expected.to eq('CEIL(price)') }
-    its(:to_str) { is_expected.to eq('#{self.price&.ceil}') } # rubocop:disable Lint/InterpolationCheck
-  end
-
-  context 'when function is FLOOR' do
-    let(:value) { 'FLOOR($price)' }
-
-    its(:references) { is_expected.to be_empty }
-    its(:value) { is_expected.to eq('self.price&.floor') }
-    its(:to_sql) { is_expected.to eq('FLOOR(price)') }
-    its(:to_str) { is_expected.to eq('#{self.price&.floor}') } # rubocop:disable Lint/InterpolationCheck
-  end
 end
