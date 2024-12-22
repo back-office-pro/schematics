@@ -55,7 +55,6 @@ Rails.configuration.to_prepare do
   ActiveRecord::ConnectionAdapters::SQLite3::TableDefinition.class_eval do
     alias_method :jsonb, :json
   end
-  PgSearch::Document.establish_connection(:search)
 end
 
 Rails.configuration.to_prepare do

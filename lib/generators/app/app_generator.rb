@@ -49,7 +49,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   def install_search_migrations
     return unless generating?
 
-    template 'db/functions/immutable_unaccent_v01.sql'
     rails_command 'schematics:install:migrations DATABASE=search MIGRATIONS_PATH=db/search_migrate', env: # rubocop:disable Layout/LineLength
   end
 
