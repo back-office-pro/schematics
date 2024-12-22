@@ -9,8 +9,6 @@ require 'active_support/dependencies'
 require 'arel/override/predications'
 require 'bootstrap-email/config'
 require 'bootstrap-email/override/config'
-require 'fx/adapters/postgres'
-require 'fx/override/adapters/postgres'
 require 'onelogin/override/ruby-saml/settings'
 require 'onelogin/ruby-saml/settings'
 require 'open_api/override/router'
@@ -38,7 +36,6 @@ Puma::Configuration.prepend(Puma::Override::Configuration)
 OneLogin::RubySaml::Settings.prepend(OneLogin::Override::RubySaml::Settings)
 Arel::Predications.prepend(Arel::Override::Predications)
 SolidQueue::Configuration.prepend(SolidQueue::Override::Configuration)
-Fx::Adapters::Postgres.prepend(Fx::Override::Adapters::Postgres)
 BootstrapEmail::Config.prepend(BootstrapEmail::Override::Config)
 
 Rails.configuration.to_prepare do

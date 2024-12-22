@@ -4,7 +4,6 @@ require 'active_support/core_ext/securerandom'
 require 'active_support/core_ext/string/inquiry'
 require 'fileutils'
 require 'json'
-require 'pg'
 require 'rails/generators/rails/app/app_generator'
 
 # :reek:RepeatedConditional
@@ -13,13 +12,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
 
   def initialize(generator, options = {})
     super(generator, options.merge(default_options), options)
-  end
-
-  def create_postgres_user
-    return if container?
-    return unless generating?
-
-    pg_exec("CREATE USER #{db_username} WITH ENCRYPTED PASSWORD '#{db_password}' CREATEDB")
   end
 
   def create_root
@@ -66,20 +58,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     return unless generating?
 
     rails_command 'db:create', env:
-  end
-
-  def drop_postgres_user
-    return if container?
-    return unless destroying?
-
-    pg_exec("DROP USER #{db_username}")
-  end
-
-  def store_database_password
-    return if container?
-    return unless generating?
-
-    rails_command "schematics:db:password[#{db_password}]", env:
   end
 
   def generate_schematics
@@ -265,7 +243,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   private
 
   def default_options = {
-    database: 'postgresql',
+    database: 'sqlite3',
     skip_test: true,
     skip_keeps: true,
     skip_javascript: true,
@@ -284,18 +262,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
 
   def generating?
     behavior == :invoke
-  end
-
-  def pg_exec(query)
-    ::PG
-      .connect(connect_timeout: 1)
-      .exec(query)
-  end
-
-  def db_username = app_name.underscore
-
-  def db_password
-    @db_password ||= SecureRandom.base58
   end
 
   def destroy_github_repo
