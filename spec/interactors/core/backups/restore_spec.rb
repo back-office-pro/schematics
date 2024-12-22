@@ -13,7 +13,7 @@ RSpec.describe Core::Backups::Restore do
 
     before { [user, backup, user.really_destroy!, call] }
 
-    after { User.delete_all }
+    after { [User, Role, Team].each(&:delete_all) }
 
     uses_transaction 'restores the user'
 
