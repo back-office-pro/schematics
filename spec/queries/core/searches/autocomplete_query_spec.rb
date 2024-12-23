@@ -12,7 +12,7 @@ RSpec.describe Core::Searches::AutocompleteQuery do
   let(:role) { admin_role }
   let(:search) { user.first_name }
 
-  before { user.create_or_update_pg_search_document }
+  before { user.create_search_index }
 
   describe '.call' do
     subject { query.call(anything, ability, search) }

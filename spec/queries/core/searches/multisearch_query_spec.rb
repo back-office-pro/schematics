@@ -13,7 +13,7 @@ RSpec.describe Core::Searches::MultisearchQuery do
   let(:other_user) { User.create!(email: 'jane.doe@nowhere.com', role:) }
   let(:ability) { Schematics::Ability.new(user) }
 
-  before { [user, other_user].each(&:create_or_update_pg_search_document) }
+  before { [user, other_user].each(&:create_search_index) }
 
   describe '.call' do
     subject { query.call(param, ability) }
