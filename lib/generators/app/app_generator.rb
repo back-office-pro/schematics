@@ -257,8 +257,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     skip_kamal: true
   }
 
-  def container? = options[:container]
-
   def generating?
     behavior == :invoke
   end
@@ -277,6 +275,8 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
 
     `cd #{app_path} && RAILS_ENV=#{env} rails destroy systemd`
   end
+
+  def container? = options[:container]
 
   def destroy_nginx_subdomain
     return if container?
