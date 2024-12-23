@@ -6,7 +6,7 @@ module Schematics
       def call(query, ability)
         where("#{table_name} MATCH ?", query)
           .select(:searchable_id, :searchable_type)
-          .ranked
+          .order(:rank)
           .group_by(&:searchable_type)
           .transform_keys(&:safe_constantize)
           .map { |klass, records| klass&.preload_all&.where(id: [records.map(&:searchable_id)]) }

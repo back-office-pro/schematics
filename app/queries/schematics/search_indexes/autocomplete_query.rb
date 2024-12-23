@@ -8,7 +8,7 @@ module Schematics
       def call(*, ability, query)
         where("#{table_name} MATCH ?", query)
           .select(:searchable_id, :searchable_type)
-          .ranked
+          .order(:rank)
           .map { _1.searchable_type.safe_constantize&.preload_all&.where(id: _1.searchable_id) }
           .filter_map { _1.accessible_by(ability) }
           .compact_blank
