@@ -8,7 +8,7 @@ RSpec.describe 'Home' do
 
   let(:role) { admin_role }
 
-  before { user.create_or_update_pg_search_document }
+  before { user.create_search_index }
 
   it 'searches for user with typeahead', :js do # rubocop:disable RSpec/ExampleLength
     find('.toast').click_button

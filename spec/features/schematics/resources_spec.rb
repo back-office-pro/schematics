@@ -11,7 +11,7 @@ RSpec.describe 'Resources' do
     "col_#{User.entity.id}_#{User.entity.find_field_by_name('email').id}"
   end
 
-  before { user.create_or_update_pg_search_document }
+  before { user.create_search_index }
 
   it 'filters by email', :js do # rubocop:disable RSpec/ExampleLength
     visit users_path
