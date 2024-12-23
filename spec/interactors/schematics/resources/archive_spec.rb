@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::Resources::Archive do
+  include ActiveJob::TestHelper
+
   include_context 'with import'
 
   let(:team) { Team.create!(name_en: 'Team', name_fr: 'Equipe', name_it: 'Squadra') }
@@ -21,7 +23,7 @@ RSpec.describe Schematics::Resources::Archive do
 
   before do
     versions
-    [team, message, import, file].each(&:create_or_update_pg_search_document)
+    [team, message, import, file].each(&:create_search_index)
   end
 
   describe '.call' do
@@ -54,10 +56,12 @@ RSpec.describe Schematics::Resources::Archive do
           .by(-1)
       end
 
-      it 'destroys the pg_search document' do
-        expect { call }
-          .to change(PgSearch::Document, :count)
-          .by(-1)
+      it 'destroys the search index' do
+        perform_enqueued_jobs do
+          expect { call }
+            .to change(Schematics::SearchIndex, :count)
+            .by(-1)
+        end
       end
 
       it 'does not archive the version to keep it on timeline' do
@@ -86,10 +90,12 @@ RSpec.describe Schematics::Resources::Archive do
           .by(-1)
       end
 
-      it 'destroys the pg_search document' do
-        expect { call }
-          .to change(PgSearch::Document, :count)
-          .by(-1)
+      it 'destroys the search index' do
+        perform_enqueued_jobs do
+          expect { call }
+            .to change(Schematics::SearchIndex, :count)
+            .by(-1)
+        end
       end
 
       it 'does not archive the version to keep it on timeline' do
@@ -130,10 +136,12 @@ RSpec.describe Schematics::Resources::Archive do
           .by(-1)
       end
 
-      it 'destroys the pg_search documents' do
-        expect { call }
-          .to change(PgSearch::Document, :count)
-          .by(-2)
+      it 'destroys the search indexes' do
+        perform_enqueued_jobs do
+          expect { call }
+            .to change(Schematics::SearchIndex, :count)
+            .by(-2)
+        end
       end
 
       it 'does not archive the version to keep it on timeline' do
