@@ -2,7 +2,7 @@
 
 module Core
   module Migrations
-    class Reindex
+    class RebuildSearchIndexes
       include Schematics::Progressable
 
       delegate :migration, to: :context, private: true
@@ -14,7 +14,7 @@ module Core
       def call = perform_all_later(
         migrator_new_and_changed_entities
           .filter_map(&:model_class)
-          .map(&Schematics::RebuildPgSearchDocumentsJob.method(:new))
+          .map(&Schematics::RebuildSearchIndexJob.method(:new))
       )
     end
   end
