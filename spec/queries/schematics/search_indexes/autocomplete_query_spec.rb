@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Core::Searches::AutocompleteQuery do
+RSpec.describe Schematics::SearchIndexes::AutocompleteQuery do
   subject(:query) { described_class }
 
   include_context 'with user'
