@@ -2,19 +2,19 @@
 
 module Core
   module Migrations
-    class Reindex
+    class CleanSearchIndexes
       include Schematics::Progressable
 
       delegate :migration, to: :context, private: true
-      delegate :migrator_new_and_changed_entities, to: :migration, private: true
+      delegate :migrator_old_entities, to: :migration, private: true
       delegate :perform_all_later, to: ::ActiveJob, private: true
 
-      progressable migration: 75
+      progressable migration: 65
 
       def call = perform_all_later(
-        migrator_new_and_changed_entities
+        migrator_old_entities
           .filter_map(&:model_class)
-          .map(&Schematics::RebuildPgSearchDocumentsJob.method(:new))
+          .map(&Schematics::DestroySearchIndexJob.method(:new))
       )
     end
   end

@@ -5,22 +5,59 @@ module Schematics
     extend ActiveSupport::Concern
 
     included do
-      include PgSearch::Model
-      after_restore :update_pg_search_document
-      multisearchable against: multisearchable_elements
-
-      def update_pg_search_document
-        UpdatePgSearchDocumentJob.perform_later(self)
-      end
+      after_restore :create_search_index_async
+      after_create_commit :create_search_index_async
+      after_update_commit :rebuild_search_index_async
+      after_destroy_commit :destroy_search_index_async
     end
 
     class_methods do
-      def rebuild_pg_search_documents = find_each(&:create_or_update_pg_search_document)
+      def rebuild_search_index = find_each(&:rebuild_search_index)
 
-      def multisearchable_elements = entity
-        .multisearchable_elements
-        .map(&:name)
-        .map(&:to_sym)
+      def destroy_search_index
+        SearchIndex.delete_by(searchable_type: self)
+      end
+    end
+
+    def search_index_content = self
+      .class
+      .entity
+      .multisearchable_elements
+      .map { _1.format(public_send(_1.name)) }
+      .compact_blank
+      .join(' ')
+
+    def create_search_index
+      SearchIndex.insert_sql(
+        content: search_index_content,
+        searchable_type: self.class.to_s,
+        searchable_id: id
+      )
+    end
+
+    def destroy_search_index
+      SearchIndex.delete_by(searchable_id: id)
+    end
+
+    def rebuild_search_index
+      transaction do
+        destroy_search_index
+        create_search_index
+      end
+    end
+
+    private
+
+    def create_search_index_async
+      CreateSearchIndexJob.perform_later(self)
+    end
+
+    def rebuild_search_index_async
+      RebuildSearchIndexJob.perform_later(self)
+    end
+
+    def destroy_search_index_async
+      DestroySearchIndexJob.perform_later(self)
     end
   end
 end

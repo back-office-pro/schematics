@@ -22,6 +22,10 @@ module Schematics
         authenticate
         cached_serialized_json
         changed_link_preview_urls
+        create_search_index
+        create_search_index_async
+        destroy_search_index
+        destroy_search_index_async
         destroy_without_paranoia
         friendly_id
         friendly_id_config
@@ -48,14 +52,16 @@ module Schematics
         paranoia_column
         paranoia_sentinel_value
         really_delete
+        rebuild_search_index
+        rebuild_search_index_async
         rich_text_mentions
+        search_index_content
         serialized_json
         slug
         slugs
         to_param
         to_s
         unstale
-        update_pg_search_document
         version_association_name
         version_class_name
         versions_association_name

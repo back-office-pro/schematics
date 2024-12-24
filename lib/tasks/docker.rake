@@ -31,8 +31,6 @@ namespace :schematics do
 
     desc 'Docker entrypoint'
     task :entrypoint do # rubocop:disable Rails/RakeEnvironment
-      puts 'Waiting for postgres to be ready...'
-      sleep 30
       puts 'Creating database...'
       `bin/rails db:create`
       puts 'Migrating database...'

@@ -5,9 +5,9 @@ RUN apk add --update --no-cache \
     --repository http://dl-3.alpinelinux.org/alpine/edge/main vips-dev
 
 RUN apk --update add --virtual \
-    runtime-deps postgresql-client build-base libxml2-dev \
+    runtime-deps build-base libxml2-dev \
     libxslt-dev nodejs yarn libffi-dev readline \
-    build-base postgresql-dev sqlite-dev libc-dev linux-headers \
+    build-base sqlite-dev libc-dev linux-headers \
     readline-dev file git tzdata graphviz jemalloc bash \
     && rm -rf /var/cache/apk/*
 

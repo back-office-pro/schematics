@@ -23,7 +23,7 @@ RSpec.describe Schematics::Resources::Destroy do
 
   before do
     versions
-    [team, message, import, file].each(&:create_or_update_pg_search_document)
+    [team, message, import, file].each(&:create_search_index)
     allow(ActiveRecord::Base).to receive(:lock_optimistically).and_return(false)
   end
 
@@ -59,10 +59,12 @@ RSpec.describe Schematics::Resources::Destroy do
           .by(-1)
       end
 
-      it 'destroys the pg_search document' do
-        expect { call }
-          .to change(PgSearch::Document, :count)
-          .by(-1)
+      it 'destroys the search index' do
+        perform_enqueued_jobs do
+          expect { call }
+            .to change(Schematics::SearchIndex, :count)
+            .by(-1)
+        end
       end
 
       it 'does not destroy the version to keep it on timeline' do
@@ -91,10 +93,12 @@ RSpec.describe Schematics::Resources::Destroy do
           .by(-1)
       end
 
-      it 'destroys the pg_search document' do
-        expect { call }
-          .to change(PgSearch::Document, :count)
-          .by(-1)
+      it 'destroys the search index' do
+        perform_enqueued_jobs do
+          expect { call }
+            .to change(Schematics::SearchIndex, :count)
+            .by(-1)
+        end
       end
 
       it 'does not destroy the version to keep it on timeline' do
@@ -137,10 +141,10 @@ RSpec.describe Schematics::Resources::Destroy do
         end
       end
 
-      it 'destroys the pg_search documents' do
+      it 'destroys the search indexes' do
         perform_enqueued_jobs do
           expect { call }
-            .to change(PgSearch::Document, :count)
+            .to change(Schematics::SearchIndex, :count)
             .by(-2)
         end
       end

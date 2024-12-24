@@ -20,8 +20,8 @@ development:
     <<: *sqlite3
     database: storage/development.sqlite3
   search:
-    <<: *postgresql
-    database: <%= Tenant.app_name %>_development_search
+    <<: *sqlite3
+    database: storage/development_search.sqlite3
     migrations_paths: db/search_migrate
   cable:
     <<: *sqlite3
@@ -41,8 +41,8 @@ test:
     <<: *sqlite3
     database: storage/test.sqlite3
   search:
-    <<: *postgresql
-    database: <%= Tenant.app_name %>_test
+    <<: *sqlite3
+    database: storage/test_search.sqlite3
     migrations_paths: db/search_migrate
 
 production:
@@ -50,10 +50,8 @@ production:
     <<: *sqlite3
     database: storage/production.sqlite3
   search:
-    <<: *postgresql
-    database: <%= Tenant.app_name %>_production_search
-    username: <%= Tenant.app_name %>
-    password: <%= Rails.application.credentials.database_password %>
+    <<: *sqlite3
+    database: storage/production_search.sqlite3
     migrations_paths: db/search_migrate
   cable:
     <<: *sqlite3
