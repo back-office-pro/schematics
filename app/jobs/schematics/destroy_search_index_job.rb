@@ -4,8 +4,8 @@ module Schematics
   class DestroySearchIndexJob < ApplicationJob
     queue_as :search_indexes
 
-    def perform(**)
-      SearchIndex.delete_by(**)
+    def perform(resource)
+      resource.destroy_search_index
     end
   end
 end

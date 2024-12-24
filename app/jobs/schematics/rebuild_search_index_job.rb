@@ -5,12 +5,7 @@ module Schematics
     queue_as :search_indexes
 
     def perform(resource)
-      case resource
-      when Class
-        resource.find_each(&:rebuild_search_index)
-      else
-        resource.rebuild_search_index
-      end
+      resource.rebuild_search_index
     end
   end
 end

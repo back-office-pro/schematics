@@ -11,6 +11,14 @@ module Schematics
       after_destroy_commit :destroy_search_index_async
     end
 
+    class_methods do
+      def rebuild_search_index = find_each(&:rebuild_search_index)
+
+      def destroy_search_index
+        SearchIndex.delete_by(searchable_type: self)
+      end
+    end
+
     def search_index_content = self
       .class
       .entity
@@ -48,7 +56,7 @@ module Schematics
     end
 
     def destroy_search_index_async
-      DestroySearchIndexJob.perform_later(searchable_id: id)
+      DestroySearchIndexJob.perform_later(self)
     end
   end
 end
