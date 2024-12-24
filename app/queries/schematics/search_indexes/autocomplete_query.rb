@@ -6,7 +6,7 @@ module Schematics
       LIMIT = 5
 
       def call(*, ability, query)
-        where("#{table_name} MATCH ?", query)
+        where("#{table_name} MATCH ?", query.to_json)
           .select(:searchable_id, :searchable_type)
           .order(:rank)
           .map { _1.searchable_type.safe_constantize&.preload_all&.where(id: _1.searchable_id) }
