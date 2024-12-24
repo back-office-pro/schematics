@@ -24,6 +24,7 @@ module Schematics
       .entity
       .multisearchable_elements
       .map { _1.format(public_send(_1.name)) }
+      .compact_blank
       .join(' ')
 
     def create_search_index
