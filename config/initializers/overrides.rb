@@ -128,7 +128,5 @@ end
 
 ActiveSupport.on_load(:active_record_sqlite3adapter) do
   prepend ActiveRecord::Override::ConnectionAdapters::SQLite3Adapter
-  ActiveRecord::ConnectionAdapters::SQLite3::TableDefinition.class_eval do
-    alias_method :jsonb, :json
-  end
+  ActiveRecord::ConnectionAdapters::SQLite3::TableDefinition.alias_method(:jsonb, :json)
 end
