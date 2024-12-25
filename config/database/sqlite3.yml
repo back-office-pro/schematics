@@ -1,59 +1,55 @@
 default: &default
-  encoding: unicode
-  pool: <%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>
-
-sqlite3: &sqlite3
-  <<: *default
   adapter: sqlite3
+  pool: <%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>
   timeout: 30_000
 
 development:
   primary:
-    <<: *sqlite3
+    <<: *default
     database: storage/development.sqlite3
   search:
-    <<: *sqlite3
+    <<: *default
     database: storage/development_search.sqlite3
     migrations_paths: db/search_migrate
   cable:
-    <<: *sqlite3
+    <<: *default
     database: storage/development_cable.sqlite3
     migrations_paths: db/cable_migrate
   cache:
-    <<: *sqlite3
+    <<: *default
     database: storage/development_cache.sqlite3
     migrations_paths: db/cache_migrate
   queue:
-    <<: *sqlite3
+    <<: *default
     database: storage/development_queue.sqlite3
     migrations_paths: db/queue_migrate
 
 test:
   primary:
-    <<: *sqlite3
+    <<: *default
     database: storage/test.sqlite3
   search:
-    <<: *sqlite3
+    <<: *default
     database: storage/test_search.sqlite3
     migrations_paths: db/search_migrate
 
 production:
   primary:
-    <<: *sqlite3
+    <<: *default
     database: storage/production.sqlite3
   search:
-    <<: *sqlite3
+    <<: *default
     database: storage/production_search.sqlite3
     migrations_paths: db/search_migrate
   cable:
-    <<: *sqlite3
+    <<: *default
     database: storage/production_cable.sqlite3
     migrations_paths: db/cable_migrate
   cache:
-    <<: *sqlite3
+    <<: *default
     database: storage/production_cache.sqlite3
     migrations_paths: db/cache_migrate
   queue:
-    <<: *sqlite3
+    <<: *default
     database: storage/production_queue.sqlite3
     migrations_paths: db/queue_migrate

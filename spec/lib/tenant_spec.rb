@@ -32,6 +32,7 @@ describe Tenant do
     its(:port) { is_expected.to eq(3000) }
     its(:ssl_path) { is_expected.to eq(Pathname.new('/etc/letsencrypt/live/back-office.pro')) }
     its(:version) { is_expected.to eq('1.0.0') }
+    its(:database) { is_expected.to eq(:sqlite3) }
   end
 
   context 'when environment is production and in demo application' do
