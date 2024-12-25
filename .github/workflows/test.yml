@@ -19,7 +19,7 @@ jobs:
           sudo apt-get -yqq install libvips-dev graphviz
       - name: Install app generator gems
         run: |
-          gem install rails -v 8.0.0
+          gem install rails -v 8.0.1
       - name: Git configuration
         run: |
           git config --global user.name "back-office"
