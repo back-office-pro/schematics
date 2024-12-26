@@ -39,7 +39,6 @@ module I18n
           .flatten_to_nested
       end
 
-      # :reek:NilCheck
       def count_to_key(count)
         return '' unless count
         return '.zero' if count.zero?
