@@ -8,8 +8,8 @@ module Schematics
     class Function < Token
       include Behaviours::Preloadable
 
-      REGEX = %r{((?:NOW|SUM|AVG|MIN|MAX|COUNT|ABS|ROUND)\([\$\w\.\s\*\+\-/]*\))}
-      CAPTURING_REGEX = /(NOW|SUM|AVG|MIN|MAX|COUNT|ABS|ROUND)\((.*)\)/
+      REGEX = %r{((?:NOW|SUM|AVG|MIN|MAX|COUNT|ABS|ROUND|CEIL|FLOOR)\([\$\w\.\s\*\+\-/]*\))}
+      CAPTURING_REGEX = /(NOW|SUM|AVG|MIN|MAX|COUNT|ABS|ROUND|CEIL|FLOOR)\((.*)\)/
       PRECEDENCE = 5
 
       def references = variables
