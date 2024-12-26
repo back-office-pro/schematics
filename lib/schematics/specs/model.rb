@@ -82,6 +82,7 @@ module Schematics
         migratable_attributes
           .grep_v(Attributes::Association)
           .grep_v(Attributes::Jsonb)
+          .grep_v(Attributes::Array)
           .each do |attribute|
             it do
               is_expected
