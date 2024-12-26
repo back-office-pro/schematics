@@ -22,7 +22,7 @@ describe Schematics::Attributes::Array do
 
   its(:icon) { is_expected.to eq(:list) }
   its(:database_index_type) { is_expected.to eq(:gin) }
-  its(:database_type) { is_expected.to eq('json') }
+  its(:database_type) { is_expected.to eq('jsonb') }
   its(:column_name) { is_expected.to eq('ids') }
   its(:open_api_body_type) { is_expected.to eq([String]) }
   its(:open_api_schema_type) { is_expected.to eq([String]) }

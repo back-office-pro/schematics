@@ -11,7 +11,7 @@ module Schematics
 
       def database_index_type = :gin
 
-      def database_type = 'json'
+      def database_type = 'jsonb'
 
       def default = [SecureRandom.base58]
 
