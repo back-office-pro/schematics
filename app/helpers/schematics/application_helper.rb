@@ -13,7 +13,7 @@ module Schematics
       tag.i(
         class: [style, icon.to_s.dasherize, size, animation]
           .compact
-          .map { "fa-#{_1}" }
+          .map { "fa-#{it}" }
           .push(binding.local_variable_get(:class)),
         **
       )
@@ -21,14 +21,14 @@ module Schematics
 
     def stylesheet_link_tags = Dir
       .glob(ASSETS_DIRECTORY.join('**', '*.css'))
-      .map { _1[ASSETS_PATH, 1] }
+      .map { it[ASSETS_PATH, 1] }
       .each_with_object(media: 'all', 'data-turbo-track': 'reload')
       .map(&method(:stylesheet_link_tag))
       .join
 
     Dir
       .glob(COMPONENTS_DIRECTORY.join('**', 'component.rb'))
-      .map { _1[COMPONENTS_PATH, 1] }
+      .map { it[COMPONENTS_PATH, 1] }
       .each do |component|
         method_name = component.tr('/', '_').prepend('__')
         define_method(method_name) do |method_or_collection = :new, **kwargs, &block|

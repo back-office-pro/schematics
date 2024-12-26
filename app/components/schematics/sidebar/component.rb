@@ -12,7 +12,7 @@ module Schematics
         .reject(&:core?)
         .filter_map(&:model_class)
         .push(::Import, ::Emailing, ::ActiveStorage::Blob)
-        .select { can?(:index, _1) }
+        .select { can?(:index, it) }
         .sort_by(&:human_name)
     end
   end

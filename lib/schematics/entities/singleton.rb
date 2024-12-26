@@ -5,9 +5,9 @@ module Schematics
     class Singleton < Entity
       DEFAULT_ACTIONS = %i[show update].freeze
 
-      def id_attribute = super.tap { _1.options = { hidden: true } }
+      def id_attribute = super.tap { it.options = { hidden: true } }
 
-      def created_at_attribute = super.tap { _1.options = { hidden: true } }
+      def created_at_attribute = super.tap { it.options = { hidden: true } }
 
       def to_str = <<~RUBY
         include Schematics::Singleton

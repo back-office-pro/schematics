@@ -8,8 +8,8 @@ module Schematics
         (versions || self)
           .with_user
           .with_item
-          .then_tap { _1.accessible_by(ability) unless versions }
-          .then_tap { _1.filter_by_user_preferences unless versions }
+          .then_tap { it.accessible_by(ability) unless versions }
+          .then_tap { it.filter_by_user_preferences unless versions }
           .reorder(created_at: :desc)
       end
     end

@@ -11,7 +11,7 @@ options = {}
 
 OptionParser
   .new do |opts|
-    opts.on('--name', '--name=NAME', 'Application name') { app_name = log_name = _1 }
+    opts.on('--name', '--name=NAME', 'Application name') { app_name = log_name = it }
     opts.on('--container', 'Run into docker') { options[:container] = true }
     opts.on('--destroy', 'Destroy application') do
       options[:behavior] = :revoke

@@ -22,7 +22,7 @@ module Schematics
       def open_api_body_type = entity
         .open_api_body
         .values
-        .map { _1.merge(id: String, _destroy: 'boolean') }
+        .map { it.merge(id: String, _destroy: 'boolean') }
 
       def input_name = "#{entity.name}[#{attributes_param_key}]"
 

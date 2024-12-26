@@ -39,7 +39,7 @@ module Schematics
           Associations.const_get(type.camelize.to_sym).new(belongs_to:)
         end
 
-        def to_proc = -> { build(**_1) }
+        def to_proc = -> { build(**it) }
       end
 
       def open_api_schema_type = [id: super, descriptor.name.to_sym => super]

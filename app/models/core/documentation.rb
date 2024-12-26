@@ -5,5 +5,5 @@ class Documentation < Schematics::ApplicationRecord
   attribute :app_version, default: -> { Migration.current_version }
   attribute :core_version, default: -> { Schematics::VERSION }
 
-  normalizes :data, with: -> { _1.symbolize_keys }
+  normalizes :data, with: -> { it.symbolize_keys }
 end

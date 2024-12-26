@@ -20,7 +20,7 @@ module Schematics
 
     memoize def file = Tempfile
       .new
-      .tap { _1.write(content) }
+      .tap { it.write(content) }
       .tap(&:rewind)
 
     def filename = "#{human_name_plural.dasherize}.#{extension}"

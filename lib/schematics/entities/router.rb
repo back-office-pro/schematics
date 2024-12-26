@@ -64,8 +64,8 @@ module Schematics
 
       def routes = actions
         .excluding(:archive)
-        .tap { _1.push(:new) if can?(:create) }
-        .tap { _1.push(:edit) if can?(:update) }
+        .tap { it.push(:new) if can?(:create) }
+        .tap { it.push(:edit) if can?(:update) }
 
       def resource_routes = [
         delete_route,

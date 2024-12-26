@@ -14,7 +14,7 @@ module Schematics
       def attributes
         return super unless persisted?
 
-        super.select { can?(:update, resource, _1.name) }
+        super.select { can?(:update, resource, it.name) }
       end
 
       def wrapper_class

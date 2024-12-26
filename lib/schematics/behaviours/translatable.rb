@@ -18,7 +18,7 @@ module Schematics
 
         I18n
           .available_locales
-          .map { :"#{name}_#{_1}" }
+          .map { :"#{name}_#{it}" }
           .unshift(super)
       end
 

@@ -19,7 +19,7 @@ module I18n
         case [scope, key]
         in [:routes, model]
           PREFIXES
-            .filter_map { resolve(locale, nil, :"#{_1}#{model.to_s.singularize}.other", default: nil) } # rubocop:disable Layout/LineLength
+            .filter_map { resolve(locale, nil, :"#{it}#{model.to_s.singularize}.other", default: nil) } # rubocop:disable Layout/LineLength
             .first
             &.gsub(/\b\w{1,2}\b/, '')
             &.parameterize(separator: '-')

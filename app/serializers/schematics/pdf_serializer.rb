@@ -28,7 +28,7 @@ module Schematics
     memoize def file = Tempfile
       .new
       .tap(&:binmode)
-      .tap { _1.write(content) }
+      .tap { it.write(content) }
       .tap(&:rewind)
 
     def filename = "#{human_name.dasherize}-#{@resource.to_param}.#{extension}"
@@ -53,7 +53,7 @@ module Schematics
       .configuration
       .action_dispatch
       .merge(key_generator:)
-      .transform_keys { "action_dispatch.#{_1}" }
+      .transform_keys { "action_dispatch.#{it}" }
 
     def pdf_options = {
       header_template: PDFHeader::Component.new(resource: @resource).to_html,

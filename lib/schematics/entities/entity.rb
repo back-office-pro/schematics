@@ -68,7 +68,7 @@ module Schematics
           Entities.const_get(type.camelize.to_sym).new(**)
         end
 
-        def to_proc = -> { build(**_1) }
+        def to_proc = -> { build(**it) }
       end
 
       def attributes=(attributes)
@@ -157,11 +157,11 @@ module Schematics
       end
 
       def find_event_by_name(name)
-        events.find { _1.name == name }
+        events.find { it.name == name }
       end
 
       def find_event_by_suffixed_name(name)
-        events.find { _1.suffixed_name == name }
+        events.find { it.suffixed_name == name }
       end
 
       def check_for_association_name_collisions
@@ -171,7 +171,7 @@ module Schematics
           .each do |association|
             association.prefixed = associations
                                    .excluding(association)
-                                   .any? { _1.name == association.name }
+                                   .any? { it.name == association.name }
           end
       end
 
@@ -222,7 +222,7 @@ module Schematics
       def default = model_class.new(
         **non_state_machine_attributes
           .concat(has_and_belongs_to_many_associations.reject(&:hidden?))
-          .to_h { [_1.name, _1.default] }
+          .to_h { [it.name, it.default] }
       )
 
       def default_associations = belongs_to_attributes

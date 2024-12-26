@@ -20,14 +20,14 @@ module Schematics
       .concat(clean_commands.grep(Commands::RenameEntity))
       .map(&:entity)
 
-    def changed_entities = Array(
+    def changed_entities = Array( # rubocop:disable Metrics/CyclomaticComplexity
       @current_schema
         &.entities
         &.excluding(old_entities)
         &.reject do |current_entity|
           @new_schema
             .entities
-            .find { _1.id == current_entity.id }
+            .find { it.id == current_entity.id }
             .model_elements
             .flat_map(&:to_str)
             .eql?(current_entity.model_elements.flat_map(&:to_str))
@@ -40,7 +40,7 @@ module Schematics
 
     def build_commands
       @new_schema.entities.map do |new_entity|
-        current_entity = @current_schema&.entities&.find { _1.id == new_entity.id }
+        current_entity = @current_schema&.entities&.find { it.id == new_entity.id }
         next Commands::CreateEntity.new(entity: new_entity) unless current_entity
 
         [
@@ -59,7 +59,7 @@ module Schematics
       return [] unless @current_schema
 
       @current_schema.entities.map do |current_entity|
-        new_entity = @new_schema.entities.find { _1.id == current_entity.id }
+        new_entity = @new_schema.entities.find { it.id == current_entity.id }
         next Commands::DestroyEntity.new(entity: current_entity) unless new_entity
 
         [
@@ -92,10 +92,11 @@ module Schematics
         .map { |attribute| Commands::AddPermission.new(entity:, attribute:) }
     end
 
+    # :reek:FeatureEnvy
     def add_event_permission_commands(entity, current_entity)
       entity
         .events
-        .reject { |event| current_entity.events.find { _1.id == event.id } }
+        .reject { |event| current_entity.events.find { it.id == event.id } }
         .map { |event| Commands::AddPermission.new(entity:, attribute: event.name) }
     end
 
@@ -105,7 +106,7 @@ module Schematics
         .map do |event|
           rename_permission_command(
             entity,
-            current_entity.events.find { _1.id == event.id },
+            current_entity.events.find { it.id == event.id },
             event
           )
         end
@@ -126,7 +127,7 @@ module Schematics
       %i[virtuals events enum_values].flat_map do |items|
         entity
           .public_send(items)
-          .reject { |item| current_entity.public_send(items).find { _1.id == item.id } }
+          .reject { |item| current_entity.public_send(items).find { it.id == item.id } }
           .map { |attribute| Commands::AddTranslation.new(entity:, attribute:) }
       end
     end
@@ -138,7 +139,7 @@ module Schematics
           .map do |item|
             rename_translation_command(
               entity,
-              current_entity.public_send(items).find { _1.id == item.id },
+              current_entity.public_send(items).find { it.id == item.id },
               item
             )
           end
@@ -157,7 +158,7 @@ module Schematics
       entity
         .has_and_belongs_to_many_associations
         .reject(&:hidden?)
-        .reject { |association| associations.find { _1.association_type == association.association_type } } # rubocop:disable Layout/LineLength
+        .reject { |association| associations.find { it.association_type == association.association_type } } # rubocop:disable Layout/LineLength
         .map { |attribute| Commands::AddAssociation.new(entity:, attribute:) }
     end
 
@@ -165,7 +166,7 @@ module Schematics
       entity
         .attributes
         .map do |attribute|
-          current_attribute = current_entity.attributes.find { _1.id == attribute.id }
+          current_attribute = current_entity.attributes.find { it.id == attribute.id }
           next Commands::AddAttribute.new(entity:, attribute:) unless current_attribute
 
           [
@@ -206,17 +207,18 @@ module Schematics
         .map { |attribute| Commands::RemovePermission.new(entity:, attribute:) }
     end
 
+    # :reek:FeatureEnvy
     def remove_event_permission_commands(entity, new_entity)
       entity
         .events
-        .reject { |event| new_entity.events.find { _1.id == event.id } }
+        .reject { |event| new_entity.events.find { it.id == event.id } }
         .map { |event| Commands::RemovePermission.new(entity:, attribute: event.name) }
     end
 
     def remove_attribute_commands(entity, new_entity)
       entity
         .attributes
-        .reject { |attribute| new_entity.attributes.find { _1.id == attribute.id } }
+        .reject { |attribute| new_entity.attributes.find { it.id == attribute.id } }
         .map { |attribute| Commands::RemoveAttribute.new(entity:, attribute:) }
     end
 
@@ -224,7 +226,7 @@ module Schematics
       %i[virtuals events enum_values].flat_map do |items|
         entity
           .public_send(items)
-          .reject { |item| new_entity.public_send(items).find { _1.id == item.id } }
+          .reject { |item| new_entity.public_send(items).find { it.id == item.id } }
           .map { |attribute| Commands::RemoveTranslation.new(entity:, attribute:) }
       end
     end
@@ -234,7 +236,7 @@ module Schematics
       entity
         .has_and_belongs_to_many_associations
         .reject(&:hidden?)
-        .reject { |association| associations.find { _1.association_type == association.association_type } } # rubocop:disable Layout/LineLength
+        .reject { |association| associations.find { it.association_type == association.association_type } } # rubocop:disable Layout/LineLength
         .map { |attribute| Commands::RemoveAssociation.new(entity:, attribute:) }
     end
   end

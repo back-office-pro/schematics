@@ -11,7 +11,7 @@ module Schematics
         return super if entity.existing?
 
         super + <<~RUBY
-          normalizes :#{name}, with: -> { _1.strip.#{normalization || :itself}.presence }
+          normalizes :#{name}, with: -> { it.strip.#{normalization || :itself}.presence }
         RUBY
       end
     end

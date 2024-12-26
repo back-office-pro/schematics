@@ -430,8 +430,8 @@ module Schematics
                 [
                   element.column_name.to_sym,
                   element.public_send([format, 'default'].compact.join('_'))
-                         .then_tap { _1.save! && _1.id if element in Attributes::Association }
-                         .then_tap { _1.map(&:save!) && _1.map(&:id) if element in Associations::HasAndBelongsToMany } # rubocop:disable Layout/LineLength
+                         .then_tap { it.save! && it.id if element in Attributes::Association }
+                         .then_tap { it.map(&:save!) && it.map(&:id) if element in Associations::HasAndBelongsToMany } # rubocop:disable Layout/LineLength
                 ]
               end
           }

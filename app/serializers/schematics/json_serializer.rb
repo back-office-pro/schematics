@@ -65,15 +65,17 @@ module Schematics
         element.name,
         case element
         when Attributes::Attachments
-          element.format @resource
-            .public_send(element.name.to_sym)
-            .includes(element.includes)
-            .then_tap { _1.accessible_by(@options[:ability]) if @options.key?(:ability) }
+          element.format(
+            @resource
+              .public_send(element.name.to_sym)
+              .includes(element.includes)
+              .then_tap { it.accessible_by(@options[:ability]) if @options.key?(:ability) }
+          )
         when Associations::HasMany, Associations::HasManyThrough, Associations::HasAndBelongsToMany
           @resource
             .public_send(element.name.to_sym)
             .includes(element.includes)
-            .then_tap { _1.accessible_by(@options[:ability]) if @options.key?(:ability) }
+            .then_tap { it.accessible_by(@options[:ability]) if @options.key?(:ability) }
             .limit(Loadable::ASSOCIATIONS_LIMIT)
             .order(created_at: :desc)
             .as_json(association: !expand?)
@@ -86,7 +88,7 @@ module Schematics
         when Virtuals::Virtual
           @resource
             .public_send(element.name.to_sym)
-            .then_tap { _1.try(:original_message) }
+            .then_tap { it.try(:original_message) }
         else
           @resource.public_send(element.name.to_sym)
         end
