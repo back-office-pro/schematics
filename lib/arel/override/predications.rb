@@ -4,10 +4,7 @@ module Arel
   module Override
     module Predications
       def any(other)
-        Nodes::Equality.new(
-          Nodes.build_quoted(other, self),
-          Nodes::NamedFunction.new('ANY', [self])
-        )
+        Nodes::NamedFunction.new('CAST', [as('TEXT')]).matches("%#{other}%")
       end
     end
   end
