@@ -21,7 +21,9 @@ module Schematics
         super
         subclass.class_eval do
           superclass.concerns&.each(&method(:include))
-          entity&.model_elements&.each(&method(:eval))
+          entity&.model_elements&.each do
+            eval(it) # rubocop:disable Security/Eval
+          end
         end
       end
 

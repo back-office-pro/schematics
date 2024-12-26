@@ -63,7 +63,7 @@ describe Schematics::Attributes::Model do
 
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
-      validates :model, {:inclusion=>{:in=>["Permission"], :allow_blank=>true}}
+      validates :model, {inclusion: {in: ["Permission"], allow_blank: true}}
     RUBY
   end
 

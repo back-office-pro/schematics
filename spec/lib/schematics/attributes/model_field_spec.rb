@@ -63,7 +63,7 @@ describe Schematics::Attributes::ModelField do
 
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
-      validates :part, {:inclusion=>{:in=>[], :allow_blank=>true}}
+      validates :part, {inclusion: {in: [], allow_blank: true}}
     RUBY
   end
 

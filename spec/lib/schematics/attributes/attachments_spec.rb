@@ -61,7 +61,7 @@ describe Schematics::Attributes::Attachments do
 
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
-      validates :files, {:storage_quota=>true}
+      validates :files, {storage_quota: true}
     RUBY
   end
 
@@ -103,7 +103,7 @@ describe Schematics::Attributes::Attachments do
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :files, {:attached=>true, :storage_quota=>true}
+        validates :files, {attached: true, storage_quota: true}
       RUBY
     end
   end
@@ -117,7 +117,7 @@ describe Schematics::Attributes::Attachments do
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :files, {:storage_quota=>true, :limit=>{:min=>1}}
+        validates :files, {storage_quota: true, limit: {min: 1}}
       RUBY
     end
   end
@@ -131,7 +131,7 @@ describe Schematics::Attributes::Attachments do
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :files, {:storage_quota=>true, :limit=>{:max=>1}}
+        validates :files, {storage_quota: true, limit: {max: 1}}
       RUBY
     end
   end

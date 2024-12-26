@@ -61,7 +61,7 @@ describe Schematics::Attributes::Phone do
 
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
-      validates :phone, {:phone=>{:allow_blank=>true}}
+      validates :phone, {phone: {allow_blank: true}}
     RUBY
   end
 
@@ -79,7 +79,7 @@ describe Schematics::Attributes::Phone do
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :phone, {:uniqueness_with_deleted=>{:case_sensitive=>true, :allow_blank=>true}, :phone=>{:allow_blank=>true}}
+        validates :phone, {uniqueness_with_deleted: {case_sensitive: true, allow_blank: true}, phone: {allow_blank: true}}
       RUBY
     end
   end
@@ -92,7 +92,7 @@ describe Schematics::Attributes::Phone do
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :phone, {:presence=>true, :phone=>{:allow_blank=>false}}
+        validates :phone, {presence: true, phone: {allow_blank: false}}
       RUBY
     end
   end
