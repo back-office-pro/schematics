@@ -23,8 +23,9 @@ module Schematics
 
       def to_open_api_body = [:"#{column_name}#{'!' if required?}", open_api_body_type]
 
+      # :reek:NilCheck
       def to_str
-        return super unless options.default
+        return super if options.default.nil?
 
         super + <<~RUBY
           attribute :#{name}, default: -> { #{options.default.to_json} }
