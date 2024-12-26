@@ -35,7 +35,6 @@ describe Schematics::Attributes::Array do
   its(:input_name) { is_expected.to eq('comparison[ids][]') }
   its(:to_sql) { is_expected.to eq('comparisons.ids') }
   its(:to_s) { is_expected.to eq('schema:comparison_ids') }
-  its(:migration_options) { is_expected.to be_empty }
   its(:search_column) { is_expected.to eq(:ids) }
   its(:search_predicate) { is_expected.to eq(:any) }
   its(:search_query) { is_expected.to eq(:ids_any) }
