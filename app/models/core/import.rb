@@ -24,7 +24,7 @@ class Import < Schematics::ApplicationRecord
   def finalize!(import_errors)
     return update!(state: 'error', import_errors:) if import_errors
 
-    PgSearch::Multisearch.rebuild(model_class)
+    model_class.rebuild_search_index
     state_finished!
   end
 

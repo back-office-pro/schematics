@@ -40,6 +40,7 @@ describe Schematics::Attributes::BelongsTo do
   its(:inverse_association) { is_expected.to be_a(Schematics::Associations::HasMany) }
   its(:allowed_association_types) { is_expected.to include('user', 'role') }
   its(:input_name) { is_expected.to eq('entity[user_id]') }
+  its(:migration_options) { is_expected.to eq(index: { where: 'deleted_at IS NULL' }) }
   its(:search_column) { is_expected.to eq(:user_full_name) }
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:user_i_cont) }
@@ -138,6 +139,10 @@ describe Schematics::Attributes::BelongsTo do
     it { is_expected.to be_polymorphic }
 
     its(:permitted_params) { is_expected.to eq(%i[user_id user_type]) }
+
+    its(:migration_options) do
+      is_expected.to eq(index: { where: 'deleted_at IS NULL' }, polymorphic: true)
+    end
 
     its(:to_str) do
       is_expected.to eq <<~RUBY

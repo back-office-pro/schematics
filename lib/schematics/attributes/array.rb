@@ -11,13 +11,11 @@ module Schematics
 
       def database_index_type = :gin
 
-      def database_type = 'string'
+      def database_type = 'jsonb'
 
       def default = [SecureRandom.base58]
 
       def icon = :list
-
-      def migration_options = super.merge(array: true)
 
       def open_api_schema_type = [super]
 

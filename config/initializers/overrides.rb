@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'active_record/override/connection_adapters/sqlite3_adapter'
 require 'active_record/override/generators/migration_generator'
 require 'active_storage/override/attachment'
 require 'active_storage/override/blob'
@@ -8,8 +9,6 @@ require 'active_support/dependencies'
 require 'arel/override/predications'
 require 'bootstrap-email/config'
 require 'bootstrap-email/override/config'
-require 'fx/adapters/postgres'
-require 'fx/override/adapters/postgres'
 require 'onelogin/override/ruby-saml/settings'
 require 'onelogin/ruby-saml/settings'
 require 'open_api/override/router'
@@ -37,7 +36,6 @@ Puma::Configuration.prepend(Puma::Override::Configuration)
 OneLogin::RubySaml::Settings.prepend(OneLogin::Override::RubySaml::Settings)
 Arel::Predications.prepend(Arel::Override::Predications)
 SolidQueue::Configuration.prepend(SolidQueue::Override::Configuration)
-Fx::Adapters::Postgres.prepend(Fx::Override::Adapters::Postgres)
 BootstrapEmail::Config.prepend(BootstrapEmail::Override::Config)
 
 Rails.configuration.to_prepare do
@@ -54,7 +52,6 @@ Rails.configuration.to_prepare do
       super
     end
   end
-  PgSearch::Document.establish_connection(:search)
 end
 
 Rails.configuration.to_prepare do
@@ -126,5 +123,12 @@ ActiveSupport.on_load(:action_text_rich_text) do
     def ransackable_attributes(*)
       ['body']
     end
+  end
+end
+
+ActiveSupport.on_load(:active_record_sqlite3adapter) do
+  prepend ActiveRecord::Override::ConnectionAdapters::SQLite3Adapter
+  ActiveRecord::ConnectionAdapters::SQLite3::TableDefinition.class_eval do
+    define_column_methods :jsonb
   end
 end

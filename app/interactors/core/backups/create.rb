@@ -5,29 +5,33 @@ module Core
     class Create
       include Interactor
 
-      delegate :current_database, to: 'ActiveRecord::Base.lease_connection', private: true
+      delegate :root, :env, to: ::Rails, private: true
       delegate :create_and_upload!, to: ::ActiveStorage::Blob, private: true
-      delegate :tables, to: :context, private: true
+      delegate :current_database,
+               :adapter_name,
+               to: 'ActiveRecord::Base.lease_connection',
+               private: true
 
       def call
-        IO.popen(command) do |io|
+        IO.popen(command.compact.join(' ')) do |io|
           context.file = create_and_upload!(key:, filename:, content_type:, io: file(io.read))
         end
       end
 
       private
 
-      def command = [
-        'pg_dump',
-        '-Fc',
-        ('-a' if table_options.any?),
-        table_options,
-        current_database
-      ].flatten.compact.join(' ')
-
-      def table_options
-        Array(tables).map { "-t #{_1}" }
+      def command
+        case adapter_name
+        when 'SQLite'
+          ["sqlite3 #{db_path} '.dump #{tables.join(' ')}' | gzip -c"]
+        when 'PostgreSQL'
+          ['pg_dump -Fc', ('-a' if tables.any?), tables.map { "-t #{_1}" }, current_database]
+        end
       end
+
+      def db_path = root.join('storage', "#{env}.sqlite3")
+
+      def tables = Array(context.tables)
 
       def key = File.join(
         'backups',

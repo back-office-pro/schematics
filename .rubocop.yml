@@ -177,6 +177,7 @@ RSpec/SpecFilePathFormat:
     - spec/requests/active_storage/**/*
     - spec/requests/core/**/*
     - spec/routing/**/*
+    - spec/lib/active_record/connection_adapters/sqlite3_adapter_spec.rb
     - spec/lib/bootstrap-email/config_spec.rb
     - spec/lib/onelogin/ruby-saml/settings_spec.rb
 RSpec/DescribeClass:

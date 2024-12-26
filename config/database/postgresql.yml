@@ -1,18 +1,15 @@
-default: &default
+postgresql: &postgresql
+  adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>
-
-postgresql: &postgresql
-  <<: *default
-  adapter: postgresql
   connect_timeout: 1
   checkout_timeout: 1
   variables:
     statement_timeout: <%= ENV.fetch('STATEMENT_TIMEOUT', '5s') %>
 
 sqlite3: &sqlite3
-  <<: *default
   adapter: sqlite3
+  pool: <%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>
   timeout: 30_000
 
 development:
@@ -20,8 +17,8 @@ development:
     <<: *postgresql
     database: <%= Tenant.app_name %>_development
   search:
-    <<: *postgresql
-    database: <%= Tenant.app_name %>_development_search
+    <<: *sqlite3
+    database: storage/development_search.sqlite3
     migrations_paths: db/search_migrate
   cable:
     <<: *sqlite3
@@ -38,24 +35,20 @@ development:
 
 test:
   primary:
-    <<: *postgresql
-    database: <%= Tenant.app_name %>_test
+    <<: *sqlite3
+    database: storage/test.sqlite3
   search:
-    <<: *postgresql
-    database: <%= Tenant.app_name %>_test
+    <<: *sqlite3
+    database: storage/test_search.sqlite3
     migrations_paths: db/search_migrate
 
 production:
   primary:
     <<: *postgresql
     database: <%= Tenant.app_name %>_production
-    username: <%= Tenant.app_name %>
-    password: <%= Rails.application.credentials.database_password %>
   search:
-    <<: *postgresql
-    database: <%= Tenant.app_name %>_production_search
-    username: <%= Tenant.app_name %>
-    password: <%= Rails.application.credentials.database_password %>
+    <<: *sqlite3
+    database: storage/production_search.sqlite3
     migrations_paths: db/search_migrate
   cable:
     <<: *sqlite3

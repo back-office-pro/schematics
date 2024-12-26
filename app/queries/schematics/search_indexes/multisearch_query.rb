@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-module Core
-  module Searches
-    class MultisearchQuery < Schematics::ApplicationQuery
+module Schematics
+  module SearchIndexes
+    class MultisearchQuery < ApplicationQuery
       def call(query, ability)
-        PgSearch
-          .multisearch(query)
+        where("#{table_name} MATCH ?", query.to_json)
           .select(:searchable_id, :searchable_type)
+          .order(:rank)
           .group_by(&:searchable_type)
           .transform_keys(&:safe_constantize)
-          .map { |klass, documents| klass&.preload_all&.where(id: [documents.map(&:searchable_id)]) } # rubocop:disable Layout/LineLength
+          .map { |klass, records| klass&.preload_all&.where(id: [records.map(&:searchable_id)]) }
           .filter_map { _1.accessible_by(ability) }
           .compact_blank
       end

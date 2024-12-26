@@ -46,10 +46,10 @@ RSpec.describe Schematics::Resources::Restore do
           .by(1)
       end
 
-      it 'creates the pg_search document' do
+      it 'creates the search index' do
         perform_enqueued_jobs do
           expect { call }
-            .to change(PgSearch::Document, :count)
+            .to change(Schematics::SearchIndex, :count)
             .by(1)
         end
       end
@@ -76,10 +76,10 @@ RSpec.describe Schematics::Resources::Restore do
           .by(1)
       end
 
-      it 'creates the pg_search documents' do
+      it 'creates the search index' do
         perform_enqueued_jobs do
           expect { call }
-            .to change(PgSearch::Document, :count)
+            .to change(Schematics::SearchIndex, :count)
             .by(1)
         end
       end
@@ -118,10 +118,10 @@ RSpec.describe Schematics::Resources::Restore do
           .by(1)
       end
 
-      it 'creates the pg_search documents' do
+      it 'creates the search indexes' do
         perform_enqueued_jobs do
           expect { call }
-            .to change(PgSearch::Document, :count)
+            .to change(Schematics::SearchIndex, :count)
             .by(2)
         end
       end

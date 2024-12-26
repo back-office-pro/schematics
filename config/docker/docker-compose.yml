@@ -1,12 +1,4 @@
 services:
-  postgres:
-    image: postgres:17
-    ports:
-      - 5432:5432
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_HOST_AUTH_METHOD: trust
   clamav:
     image: clamav/clamav:latest
     ports:
@@ -26,15 +18,11 @@ services:
     volumes:
       - storage-data:/app/storage
     depends_on:
-      - postgres
       - clamav
       - chrome
     environment:
-      - PRIMARY_DATABASE_URL=postgres://postgres@postgres
-      - SEARCH_DATABASE_URL=postgres://postgres@postgres
       - CHROME_URL=http://chrome:3333
       - SCHEMATICS_MASTER_KEY=$SCHEMATICS_MASTER_KEY
 volumes:
-  postgres-data:
   clamav-data:
   storage-data:

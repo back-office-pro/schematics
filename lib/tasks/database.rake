@@ -15,16 +15,21 @@ namespace :schematics do
       Schematics::Engine.load_seed
     end
 
-    desc 'Store database password in credentials'
-    task :password, [:password] => :environment do |_task, args|
-      credentials = Rails.application.credentials
-      credentials.write(credentials.read + "database_password: #{args[:password]}")
-    end
-
     ActiveRecordDoctor::Rake::Task.new do |task|
       task.deps = [:environment]
       task.config_path = Schematics::Engine.root.join('config', 'active_record_doctor.rb')
       task.setup = -> { Rails.application.eager_load! }
+    end
+
+    namespace :migrate do
+      desc 'Migrate database from sqlite3 to postgres'
+      task postgres: :environment do
+        db_path = Rails.root.join('storage', "#{Rails.env}.sqlite3")
+        db_name = [Tenant.app_name, Rails.env].join('_')
+        `createdb #{db_name}`
+        `pgloader --with "preserve index names" sqlite://#{db_path} postgres://localhost/#{db_name}`
+        Core::Migrations::Restart.call
+      end
     end
 
     namespace :encryption do

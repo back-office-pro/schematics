@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/module/delegation'
+require 'pg'
 require 'uri'
 
 # :reek:Attribute
@@ -98,7 +99,18 @@ class Tenant
       Schematics::VERSION
     end
 
+    def database = %i[sqlite3 postgresql][database_index]
+
     private
+
+    def database_index
+      PG
+        .connect(connect_timeout: 1)
+        .exec("SELECT 1 FROM pg_database WHERE datname='#{app_name}_#{Rails.env}'")
+        .count
+    rescue PG::Error
+      0
+    end
 
     def data
       JSON.parse ActiveRecord::Base
