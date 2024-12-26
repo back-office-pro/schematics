@@ -5,7 +5,7 @@ module ActiveRecord
     module ConnectionAdapters
       module SQLite3Adapter
         def native_database_types
-          super.merge jsonb: { name: 'json' }
+          super.merge jsonb: { name: 'jsonb' }
         end
       end
     end
