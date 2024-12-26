@@ -7,7 +7,7 @@ RSpec.describe Schematics::DestroySearchIndexJob do
 
   describe '#perform_later' do
     it 'queues the job' do
-      expect { described_class.perform_later(user) }
+      expect { described_class.perform_later(searchable_id: user.id) }
         .to have_enqueued_job(described_class)
         .exactly(:once)
         .on_queue('search_indexes')
@@ -16,10 +16,10 @@ RSpec.describe Schematics::DestroySearchIndexJob do
   end
 
   describe '#perform_now' do
-    subject(:perform_now) { described_class.perform_now(resource) }
+    subject(:perform_now) { described_class.perform_now(**params) }
 
     context 'when destroying a user' do
-      let(:resource) { user }
+      let(:params) { { searchable_id: user.id } }
 
       before { user.create_search_index }
 
@@ -31,7 +31,7 @@ RSpec.describe Schematics::DestroySearchIndexJob do
     end
 
     context 'when destroying all users' do
-      let(:resource) { User }
+      let(:params) { { searchable_type: 'User' } }
       let(:other_user) { User.create!(email: 'jane.doe@nowhere.com', role:) }
 
       before { [user, other_user].each(&:create_search_index) }

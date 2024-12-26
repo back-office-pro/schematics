@@ -13,8 +13,8 @@ module Core
 
       def call = perform_all_later(
         migrator_old_entities
-          .filter_map(&:model_class)
-          .map(&Schematics::DestroySearchIndexJob.method(:new))
+          .filter_map(&:class_name)
+          .map { |searchable_type| Schematics::DestroySearchIndexJob.new(searchable_type:) }
       )
     end
   end
