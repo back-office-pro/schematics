@@ -21,6 +21,17 @@ namespace :schematics do
       task.setup = -> { Rails.application.eager_load! }
     end
 
+    namespace :migrate do
+      desc 'Migrate database from sqlite3 to postgres'
+      task postgres: :environment do
+        db_path = Rails.root.join('storage', "#{Rails.env}.sqlite3")
+        db_name = [Tenant.app_name, Rails.env].join('_')
+        `createdb #{db_name}`
+        `pgloader --with "preserve index names" sqlite://#{db_path} postgres://localhost/#{db_name}`
+        Core::Migrations::Restart.call
+      end
+    end
+
     namespace :encryption do
       desc 'Generate database encryption credentials'
       task init: :environment do
