@@ -47,12 +47,22 @@ describe Schematics::Attributes::Boolean do
     )
   end
 
-  context 'when there is a default value' do
+  context 'when true is the default value' do
     let(:options) { { default: true } }
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
         attribute :toggle, default: -> { true }
+      RUBY
+    end
+  end
+
+  context 'when false is the default value' do
+    let(:options) { { default: false } }
+
+    its(:to_str) do
+      is_expected.to eq <<~RUBY
+        attribute :toggle, default: -> { false }
       RUBY
     end
   end
