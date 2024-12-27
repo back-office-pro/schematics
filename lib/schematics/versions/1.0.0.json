@@ -115,7 +115,7 @@
       {
         "id": "bd7a0d23-d403-4e00-ba58-d04318f2f21c",
         "name": "otp_backup_codes",
-        "type": "jsonb",
+        "type": "array",
         "options": {
           "hidden": true,
           "encrypted": true
