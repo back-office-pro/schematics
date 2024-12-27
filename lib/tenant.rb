@@ -95,7 +95,7 @@ class Tenant
         .lease_connection
         .execute('SELECT core_version FROM documentations ORDER BY created_at DESC LIMIT 1')
         .first
-        .fetch("core_version")
+        .fetch('core_version')
     rescue StandardError
       Schematics::VERSION
     end
@@ -118,7 +118,7 @@ class Tenant
         .lease_connection
         .execute('SELECT data FROM migrations WHERE state = 4 ORDER BY created_at DESC LIMIT 1')
         .first
-        .fetch("data")
+        .fetch('data')
     rescue StandardError
       []
     end
