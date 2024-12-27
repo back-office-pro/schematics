@@ -18,7 +18,6 @@ describe Schematics::Attributes::Jsonb do
   it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
-  it { is_expected.to be_a(Schematics::Behaviours::Encryptable) }
 
   its(:icon) { is_expected.to eq(:table) }
   its(:database_index_type) { is_expected.to eq(:gin) }
@@ -44,8 +43,7 @@ describe Schematics::Attributes::Jsonb do
       Schematics::Options::Hidden,
       Schematics::Options::Cached,
       Schematics::Options::Default,
-      Schematics::Options::Readonly,
-      Schematics::Options::Encrypted
+      Schematics::Options::Readonly
     )
   end
 
@@ -62,6 +60,6 @@ describe Schematics::Attributes::Jsonb do
   describe '.compatible_types' do
     subject { described_class.compatible_types }
 
-    it { is_expected.to contain_exactly(described_class) }
+    it { is_expected.to contain_exactly(described_class, Schematics::Attributes::Array) }
   end
 end

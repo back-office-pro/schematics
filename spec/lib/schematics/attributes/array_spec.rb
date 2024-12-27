@@ -18,6 +18,7 @@ describe Schematics::Attributes::Array do
   it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Encryptable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
 
   its(:icon) { is_expected.to eq(:list) }
@@ -48,7 +49,8 @@ describe Schematics::Attributes::Array do
       Schematics::Options::Hidden,
       Schematics::Options::Cached,
       Schematics::Options::Default,
-      Schematics::Options::Readonly
+      Schematics::Options::Readonly,
+      Schematics::Options::Encrypted
     )
   end
 
@@ -63,6 +65,6 @@ describe Schematics::Attributes::Array do
   describe '.compatible_types' do
     subject { described_class.compatible_types }
 
-    it { is_expected.to contain_exactly(described_class) }
+    it { is_expected.to contain_exactly(described_class, Schematics::Attributes::Jsonb) }
   end
 end
