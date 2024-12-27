@@ -12,6 +12,9 @@ span.text-body-tertiary = '-' if value.nil?
         = __avatar(user: value, width: 18, height: 18, size: :xl)
       - else
         = __resource_link_to(resource: value)
+- when Schematics::Attributes::Array
+  - value.each do |element|
+    span.badge.bg-primary.me-1 = element
 - when Schematics::Attributes::Jsonb
   - case value
   - in Schematics::Schema
@@ -74,9 +77,6 @@ span.text-body-tertiary = '-' if value.nil?
   .progress.fs-6 role='progressbar' aria-valuenow=value aria-valuemin='0' aria-valuemax='100'
     .progress-bar style="width: #{value}%"
       = element.format(value)
-- when Schematics::Attributes::Array
-  - value.each do |element|
-    span.badge.bg-primary.me-1 = element
 - when Schematics::Behaviours::Searchable
   = highlight element.format(value), highlight_text
 - else
