@@ -12,7 +12,7 @@ RSpec.describe Schematics::CreateSearchIndexJob do
       expect { described_class.perform_later(user) }
         .to have_enqueued_job(described_class)
         .exactly(:once)
-        .on_queue('search_indexes')
+        .on_queue('low')
         .at(:no_wait)
     end
   end

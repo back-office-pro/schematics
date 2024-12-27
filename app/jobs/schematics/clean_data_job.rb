@@ -3,7 +3,7 @@
 module Schematics
   class CleanDataJob < ApplicationJob
     include Quietable
-    queue_as :cleanups
+    queue_as :low
 
     def perform = ::DataCleaning
       .all

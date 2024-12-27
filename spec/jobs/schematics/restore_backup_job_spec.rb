@@ -12,7 +12,7 @@ RSpec.describe Schematics::RestoreBackupJob do
       expect { described_class.perform_later(backup) }
         .to have_enqueued_job(described_class)
         .exactly(:once)
-        .on_queue('backups')
+        .on_queue('critical')
         .at(:no_wait)
     end
   end

@@ -3,7 +3,7 @@
 module Schematics
   class LoadSubscriptionJob < ApplicationJob
     include Quietable
-    queue_as :default
+    queue_as :critical
 
     retry_on Stripe::StripeError, wait: :polynomially_longer, attempts: 5
 

@@ -13,7 +13,7 @@ RSpec.describe Schematics::NotifyJob do
         .to have_enqueued_job(described_class)
         .exactly(:once)
         .with(comment, 'mention', user)
-        .on_queue('notifications')
+        .on_queue('low')
         .at(:no_wait)
     end
   end

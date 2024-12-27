@@ -3,7 +3,7 @@
 module Schematics
   class GenerateCSVJob < ApplicationJob
     limits_concurrency key: ->(user, *) { user }
-    queue_as :exports
+    queue_as :default
 
     def perform(user, resources, dropdown)
       serializer = CSVSerializer.new(resources, user.preferences)

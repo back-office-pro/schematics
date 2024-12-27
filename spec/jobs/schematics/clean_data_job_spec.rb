@@ -61,7 +61,7 @@ RSpec.describe Schematics::CleanDataJob do
       expect { described_class.perform_later }
         .to have_enqueued_job(described_class)
         .exactly(:once)
-        .on_queue('cleanups')
+        .on_queue('low')
         .at(:no_wait)
     end
   end
@@ -110,7 +110,7 @@ RSpec.describe Schematics::CleanDataJob do
         .to have_enqueued_job(ActiveStorage::PurgeJob)
         .exactly(:twice)
         .with(file)
-        .on_queue('cleanups')
+        .on_queue('low')
         .at(:no_wait)
     end
 

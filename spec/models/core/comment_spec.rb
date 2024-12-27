@@ -15,7 +15,7 @@ RSpec.describe Comment do
         .to have_enqueued_job(Schematics::NotifyJob)
         .exactly(:once)
         .with(record, 'mention', user)
-        .on_queue('notifications')
+        .on_queue('low')
         .at(:no_wait)
     end
   end

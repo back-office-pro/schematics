@@ -3,7 +3,7 @@
 module Schematics
   class ImportJob < ApplicationJob
     include Quietable
-    queue_as :imports
+    queue_as :default
 
     discard_on ActiveStorage::FileNotFoundError
 

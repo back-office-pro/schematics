@@ -3,7 +3,7 @@
 module Schematics
   class MigrateCoreJob < ApplicationJob
     include Quietable
-    queue_as :migrations
+    queue_as :critical
 
     def perform
       return if ::Tenant.version == VERSION

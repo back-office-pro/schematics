@@ -13,7 +13,7 @@ RSpec.describe Schematics::BulkActionJob do
       expect { described_class.perform_later(user.id, model_class, ids) }
         .to have_enqueued_job(described_class)
         .exactly(:once)
-        .on_queue('cleanups')
+        .on_queue('default')
         .at(:no_wait)
     end
   end

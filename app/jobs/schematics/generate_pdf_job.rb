@@ -3,7 +3,7 @@
 module Schematics
   class GeneratePDFJob < ApplicationJob
     limits_concurrency key: ->(user, *) { user }
-    queue_as :exports
+    queue_as :default
 
     def perform(user, resource)
       serializer = PDFSerializer.new(resource)

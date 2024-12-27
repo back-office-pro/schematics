@@ -3,7 +3,7 @@
 module Schematics
   class GenerateLinkPreviewJob < ApplicationJob
     include Quietable
-    queue_as :default
+    queue_as :low
 
     retry_on OpenURI::HTTPError, wait: :polynomially_longer, attempts: 5
 

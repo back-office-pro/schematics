@@ -2,7 +2,7 @@
 
 module Schematics
   class RebuildSearchIndexJob < ApplicationJob
-    queue_as :search_indexes
+    queue_as :low
 
     def perform(resource)
       resource.rebuild_search_index

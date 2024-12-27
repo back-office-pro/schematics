@@ -21,7 +21,7 @@ RSpec.describe Schematics::GeneratePDFJob do
         .to have_enqueued_job(described_class)
         .exactly(:once)
         .with(user, resource)
-        .on_queue('exports')
+        .on_queue('default')
         .at(:no_wait)
     end
   end
@@ -44,7 +44,7 @@ RSpec.describe Schematics::GeneratePDFJob do
         .to have_enqueued_job(ActiveStorage::PurgeJob)
         .exactly(:once)
         .with(an_instance_of(ActiveStorage::Blob))
-        .on_queue('cleanups')
+        .on_queue('low')
         .at(Schematics::Resources::GenerateFile::PURGE_WAIT.from_now)
     end
 

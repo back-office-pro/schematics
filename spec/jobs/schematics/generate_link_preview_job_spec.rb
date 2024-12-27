@@ -26,7 +26,7 @@ RSpec.describe Schematics::GenerateLinkPreviewJob do
         .to have_enqueued_job(described_class)
         .exactly(:once)
         .with(url)
-        .on_queue('default')
+        .on_queue('low')
         .at(:no_wait)
     end
   end

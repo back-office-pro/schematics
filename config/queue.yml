@@ -1,0 +1,6 @@
+---
+workers:
+  - queues:
+    - critical
+    - default
+    - low

@@ -12,7 +12,7 @@ RSpec.describe User do
     expect { record.save! }
       .to have_enqueued_mail(Schematics::UserMailer, :new_account)
       .with(record)
-      .on_queue('mailers')
+      .on_queue('default')
   end
 
   describe '#log_search!' do

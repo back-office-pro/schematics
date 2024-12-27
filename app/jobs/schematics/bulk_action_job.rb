@@ -2,7 +2,8 @@
 
 module Schematics
   class BulkActionJob < ApplicationJob
-    queue_as :cleanups
+    limits_concurrency key: ->(whodunnit, *) { whodunnit }
+    queue_as :default
 
     def perform(whodunnit, model_class, ids)
       PaperTrail.request(whodunnit:) do

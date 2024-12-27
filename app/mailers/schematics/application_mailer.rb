@@ -2,7 +2,7 @@
 
 module Schematics
   class ApplicationMailer < ::Tenant.application_mailer_class
-    self.deliver_later_queue_name = :mailers
+    self.deliver_later_queue_name = :default
     layout 'schematics/mailer'
     helper ApplicationHelper
 

@@ -13,7 +13,7 @@ RSpec.describe Schematics::ImportJob do
         .to have_enqueued_job(described_class)
         .exactly(:once)
         .with(import)
-        .on_queue('imports')
+        .on_queue('default')
         .at(:no_wait)
     end
   end

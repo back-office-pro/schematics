@@ -2,7 +2,7 @@
 
 module Schematics
   class CreateSearchIndexJob < ApplicationJob
-    queue_as :search_indexes
+    queue_as :low
 
     def perform(resource)
       resource.create_search_index

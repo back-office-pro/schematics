@@ -128,7 +128,7 @@ module Schematics
     config.active_record.action_on_strict_loading_violation = :log
     config.active_record.encryption.support_unencrypted_data = true
     config.active_record.encryption.extend_queries = true
-    config.active_record.queues.destroy = :cleanups
+    config.active_record.queues.destroy = :low
 
     # Mailer
     config.action_mailer.preview_paths << root.join('spec', 'mailers', 'previews')
@@ -168,7 +168,7 @@ module Schematics
 
     # Active Storage
     config.after_initialize do
-      config.active_storage.queues.purge = :cleanups
+      config.active_storage.queues.purge = :low
       config.active_storage.track_variants = false
     end
   end

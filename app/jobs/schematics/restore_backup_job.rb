@@ -3,7 +3,7 @@
 module Schematics
   class RestoreBackupJob < ApplicationJob
     include Quietable
-    queue_as :backups
+    queue_as :critical
 
     discard_on ActiveStorage::FileNotFoundError
 

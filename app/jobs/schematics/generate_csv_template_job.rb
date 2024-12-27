@@ -3,7 +3,7 @@
 module Schematics
   class GenerateCSVTemplateJob < ApplicationJob
     limits_concurrency key: ->(user, *) { user }
-    queue_as :exports
+    queue_as :default
 
     def perform(user, model_class)
       serializer = CSVTemplateSerializer.new(model_class)

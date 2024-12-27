@@ -24,7 +24,7 @@ RSpec.describe Migration do
       .to have_enqueued_job(Schematics::MigrateSchemaJob)
       .exactly(:once)
       .with(record)
-      .on_queue('migrations')
+      .on_queue('critical')
       .at(:no_wait)
   end
 
@@ -33,7 +33,7 @@ RSpec.describe Migration do
       .to have_enqueued_job(Schematics::RollbackSchemaJob)
       .exactly(:once)
       .with(record)
-      .on_queue('migrations')
+      .on_queue('critical')
       .at(:no_wait)
   end
 
@@ -42,7 +42,7 @@ RSpec.describe Migration do
       .to have_enqueued_job(Schematics::GenerateSchemaJob)
       .exactly(:once)
       .with(record)
-      .on_queue('migrations')
+      .on_queue('critical')
       .at(:no_wait)
   end
 

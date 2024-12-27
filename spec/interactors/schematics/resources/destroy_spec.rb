@@ -158,7 +158,7 @@ RSpec.describe Schematics::Resources::Destroy do
           .to have_enqueued_job(ActiveStorage::PurgeJob)
           .exactly(:once)
           .with(file)
-          .on_queue('cleanups')
+          .on_queue('low')
           .at(:no_wait)
       end
     end

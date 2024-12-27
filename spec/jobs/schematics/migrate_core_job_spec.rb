@@ -10,7 +10,7 @@ RSpec.describe Schematics::MigrateCoreJob do
       expect { described_class.perform_later }
         .to have_enqueued_job(described_class)
         .exactly(:once)
-        .on_queue('migrations')
+        .on_queue('critical')
         .at(:no_wait)
     end
   end

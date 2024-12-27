@@ -11,7 +11,7 @@ RSpec.describe Schematics::GenerateSchemaJob do
         .to have_enqueued_job(described_class)
         .exactly(:once)
         .with(migration)
-        .on_queue('migrations')
+        .on_queue('critical')
         .at(:no_wait)
     end
   end

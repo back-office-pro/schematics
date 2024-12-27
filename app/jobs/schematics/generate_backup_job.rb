@@ -3,7 +3,7 @@
 module Schematics
   class GenerateBackupJob < ApplicationJob
     include Quietable
-    queue_as :backups
+    queue_as :critical
 
     retry_on IOError, wait: :polynomially_longer, attempts: 5
 

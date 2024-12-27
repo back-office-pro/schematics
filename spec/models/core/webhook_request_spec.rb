@@ -14,7 +14,7 @@ RSpec.describe WebhookRequest do
       .to have_enqueued_job(Schematics::TriggerWebhookJob)
       .exactly(:once)
       .with(record)
-      .on_queue('webhooks')
+      .on_queue('low')
       .at(:no_wait)
   end
 end

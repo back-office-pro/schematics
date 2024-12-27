@@ -10,7 +10,7 @@ RSpec.describe Schematics::DestroySearchIndexJob do
       expect { described_class.perform_later(searchable_id: user.id) }
         .to have_enqueued_job(described_class)
         .exactly(:once)
-        .on_queue('search_indexes')
+        .on_queue('low')
         .at(:no_wait)
     end
   end

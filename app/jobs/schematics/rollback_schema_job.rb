@@ -3,7 +3,7 @@
 module Schematics
   class RollbackSchemaJob < ApplicationJob # rubocop:disable Obsession/Rails/ServiceName
     include Quietable
-    queue_as :migrations
+    queue_as :critical
 
     def perform(migration)
       return if migration.state_generating?

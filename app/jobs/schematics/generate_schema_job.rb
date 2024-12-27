@@ -3,7 +3,7 @@
 module Schematics
   class GenerateSchemaJob < ApplicationJob
     include Quietable
-    queue_as :migrations
+    queue_as :critical
 
     discard_on Faraday::UnauthorizedError
 
