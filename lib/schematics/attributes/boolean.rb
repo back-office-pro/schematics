@@ -27,6 +27,14 @@ module Schematics
       end
 
       def validators = super.merge(acceptance:)
+
+      def to_str
+        return super if options.default
+
+        super + <<~RUBY
+          attribute :#{name}, default: -> { false }
+        RUBY
+      end
     end
   end
 end

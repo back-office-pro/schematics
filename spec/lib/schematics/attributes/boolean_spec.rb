@@ -47,6 +47,12 @@ describe Schematics::Attributes::Boolean do
     )
   end
 
+  its(:to_str) do
+    is_expected.to eq <<~RUBY
+      attribute :toggle, default: -> { false }
+    RUBY
+  end
+
   context 'when true is the default value' do
     let(:options) { { default: true } }
 

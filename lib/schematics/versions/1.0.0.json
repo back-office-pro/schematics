@@ -2003,26 +2003,17 @@
       {
         "id": "2a821df0-0984-483e-bc50-4396d30944cc",
         "name": "pdf_attachment",
-        "type": "boolean",
-        "options": {
-          "default": false
-        }
+        "type": "boolean"
       },
       {
         "id": "093dbaf0-7932-4154-92bf-5fd51bdb39e4",
         "name": "svg_attachment",
-        "type": "boolean",
-        "options": {
-          "default": false
-        }
+        "type": "boolean"
       },
       {
         "id": "842d0f00-4680-42a2-a308-26f280a8cde5",
         "name": "ics_attachment",
-        "type": "boolean",
-        "options": {
-          "default": false
-        }
+        "type": "boolean"
       }
     ]
   },
@@ -2085,10 +2076,7 @@
       {
         "id": "12ca2b4b-b673-43d1-a41e-2160ab35a324",
         "name": "really_destroy",
-        "type": "boolean",
-        "options": {
-          "default": false
-        }
+        "type": "boolean"
       }
     ]
   },
