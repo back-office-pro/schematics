@@ -5,7 +5,6 @@ Description=<%= Tenant.human %> HTTP Server Accept Sockets
 ListenStream=0.0.0.0:9292
 ListenStream=0.0.0.0:9293
 
-NoDelay=true
 ReusePort=true
 Backlog=1024
 
