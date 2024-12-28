@@ -42,25 +42,27 @@ module Schematics
         .reverse
 
       def resource_routes_definition
-        case @entity
-        when Singleton
-          <<~RUBY
-            resource :#{resource}, only: #{routes}, model_name: '#{class_name}' do
-            #{resource_routes.indent(2).chomp}
-            end
-          RUBY
-        when Entity
-          <<~RUBY
-            resources :#{resource.pluralize}, only: #{routes}, model_name: '#{class_name}' do
-            #{resource_routes.indent(2).chomp}
-            end
-          RUBY
-        end
+        <<~RUBY
+          #{route_method} :#{resource}, only: #{routes}, model_name: '#{class_name}' do
+          #{resource_routes.indent(2).chomp}
+          end
+        RUBY
+      end
+
+      def route_method
+        return :resource if singleton?
+
+        :resources
+      end
+
+      def singleton?
+        @entity in Singleton
       end
 
       def resource = name
         .split('/')
         .last
+        .then_tap { it.pluralize unless singleton? }
 
       def routes = actions
         .excluding(:archive)
@@ -110,20 +112,11 @@ module Schematics
       end
 
       def nested_resource_routes_definition
-        case @entity
-        when Singleton
-          <<~RUBY
-            resource :#{resource}, only: [], model_name: '#{class_name}' do
-            #{nested_resource_routes.indent(2).chomp}
-            end
-          RUBY
-        when Entity
-          <<~RUBY
-            resources :#{resource.pluralize}, only: [], model_name: '#{class_name}' do
-            #{nested_resource_routes.indent(2).chomp}
-            end
-          RUBY
-        end
+        <<~RUBY
+          #{route_method} :#{resource}, only: [], model_name: '#{class_name}' do
+          #{nested_resource_routes.indent(2).chomp}
+          end
+        RUBY
       end
 
       def nested_resource_routes = [
@@ -196,7 +189,7 @@ module Schematics
       end
 
       def resolver
-        return unless @entity in Singleton
+        return unless singleton?
 
         <<~RUBY
           resolve '#{class_name}' do |resource, options|
