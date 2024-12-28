@@ -26,9 +26,11 @@ module Schematics
         triggers.each do |trigger|
           it { is_expected.to respond_to(trigger.method_name) }
           it do
-            is_expected
-              .to callback(trigger.method_name)
-              .public_send(*trigger.action.split('_'))
+            is_expected.to(
+              callback(trigger.method_name)
+                .public_send(*trigger.action.split('_'))
+                .tap { it.after(:commit) if trigger.action.start_with?('after') }
+            )
           end
         end
 
