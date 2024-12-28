@@ -53,7 +53,7 @@ module Schematics
           #{action}_commit :#{method_name}
           def #{method_name}
             #{method_body}
-            save!
+            save
           rescue StandardError => e
             raise TriggerError, Virtuals::Errors::StandardError.build(e)
           end
@@ -66,7 +66,7 @@ module Schematics
         <<~RUBY
           def #{action}
             #{method_body}
-            save!
+            save
           rescue StandardError => e
             raise TriggerError, Virtuals::Errors::StandardError.build(e)
           end

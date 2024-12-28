@@ -23,7 +23,7 @@ describe Schematics::Trigger do
       is_expected.to eq <<~RUBY
         def after_close_event
           self.in_stock = true
-          save!
+          save
         rescue StandardError => e
           raise TriggerError, Virtuals::Errors::StandardError.build(e)
         end
@@ -50,7 +50,7 @@ describe Schematics::Trigger do
           after_create_commit :after_create_abcd_123e
           def after_create_abcd_123e
             self.in_stock = true
-            save!
+            save
           rescue StandardError => e
             raise TriggerError, Virtuals::Errors::StandardError.build(e)
           end
