@@ -43,11 +43,11 @@ describe Schematics::Associations::HasManyNested do
   its('descriptor.name') { is_expected.to eq('type') }
 
   its(:permitted_params) do
-    is_expected.to eq(entities_attributes: %i[type lock_version id _destroy])
+    is_expected.to eq(entities_attributes: [%i[type lock_version id _destroy]])
   end
 
   its(:permitted_json_params) do
-    is_expected.to eq(entities_attributes: %i[type lock_version id _destroy])
+    is_expected.to eq(entities_attributes: [%i[type lock_version id _destroy]])
   end
 
   its(:to_str) do
