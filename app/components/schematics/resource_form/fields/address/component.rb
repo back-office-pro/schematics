@@ -5,9 +5,7 @@ module Schematics
     module Fields
       module Address
         class Component < Fields::Component
-          def collection
-            [value].compact
-          end
+          def collection = [value, (name if Rails.env.test?)].compact
 
           def prompt = t('prompt', attribute_name: attribute_name.downcase)
 

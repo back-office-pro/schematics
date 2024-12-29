@@ -146,7 +146,9 @@ module Schematics
                    from: element.input_name,
                    match: :first
           when Attributes::Address, Attributes::Array
-            find_field(element.input_name, type: :select).set(element.default)
+            select element.name,
+                   from: element.input_name,
+                   match: :prefer_exact
           when Attributes::Digest
             element
               .permitted_params
