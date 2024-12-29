@@ -15,6 +15,7 @@ module Schematics
                  :edit_profile_url,
                  to: 'Schematics::Engine.routes.url_helpers'
         delegate :model_class,
+                 :model_classes,
                  :entity,
                  :can?,
                  :params,
@@ -188,8 +189,8 @@ module Schematics
           it 'creates record' do
             if ability.can?(:create, model_class)
               expect { post index_path, params:, headers: }
-                .to change(model_class, :count)
-                .by(1)
+                .to change { model_classes.sum(&:count) }
+                .by(model_classes.size)
               is_expected.to redirect_to(polymorphic_path(model_class.last))
             else
               expect { post index_path, params:, headers: }
@@ -202,8 +203,8 @@ module Schematics
             [headers, api_key_headers].each do |headers|
               if ability.can?(:create, model_class)
                 expect { post index_path, params: params(:json), headers:, as: :json }
-                  .to change(model_class, :count)
-                  .by(1)
+                  .to change { model_classes.sum(&:count) }
+                  .by(model_classes.size)
                 is_expected.to have_http_status(:created)
                 model_class.last.really_destroy!
               else
@@ -421,20 +422,37 @@ module Schematics
           entity.can?(action) && allow?(action)
         end
 
+        def model_classes = entity
+          .has_many_nested_associations
+          .map(&:model_class)
+          .push(model_class)
+
         # :reek:FeatureEnvy
-        def params(format = nil) # rubocop:disable Metrics/CyclomaticComplexity
-          {
-            entity.table_name.to_sym => fillable_elements
-              .grep_v(Associations::HasManyNested)
-              .to_h do |element|
-                [
-                  element.column_name.to_sym,
-                  element.public_send([format, 'default'].compact.join('_'))
-                         .then_tap { it.save! && it.id if element in Attributes::Association }
-                         .then_tap { it.map(&:save!) && it.map(&:id) if element in Associations::HasAndBelongsToMany } # rubocop:disable Layout/LineLength
-                ]
-              end
-          }
+        def params(format = nil)
+          { entity.table_name.to_sym => fillable_elements.to_h { nested_params(it, format) } }
+        end
+
+        def nested_params(element, format) # rubocop:disable Metrics/CyclomaticComplexity
+          case element
+          when Associations::HasManyNested
+            [
+              element.attributes_param_key,
+              [
+                element
+                  .entity
+                  .fillable_elements
+                  .excluding(element.belongs_to)
+                  .to_h { nested_params(it, format) }
+              ]
+            ]
+          else
+            [
+              element.column_name.to_sym,
+              element.public_send([format, 'default'].compact.join('_'))
+                     .then_tap { it.tap(&:save!).id if element in Attributes::Association }
+                     .then_tap { it.map(&:save!) && it.map(&:id) if element in Associations::HasAndBelongsToMany } # rubocop:disable Layout/LineLength
+            ]
+          end
         end
       end
     end

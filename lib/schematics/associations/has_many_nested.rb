@@ -36,9 +36,9 @@ module Schematics
 
       def to_str = super.concat(accepts_nested_attributes_for_to_str)
 
-      private
-
       def attributes_param_key = :"#{name}_attributes"
+
+      private
 
       def accepts_nested_attributes_for_to_str = <<~RUBY
         accepts_nested_attributes_for :#{name}
