@@ -90,7 +90,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'mobility', '1.3.1'
   spec.add_dependency 'mobility-actiontext', '1.1.1'
   spec.add_dependency 'mobility-ransack', '1.2.2'
-  spec.add_dependency 'nokogiri', '1.18.0'
+  spec.add_dependency 'nokogiri', '1.18.1'
   spec.add_dependency 'octokit', '9.2.0'
   spec.add_dependency 'oj', '3.16.9'
   spec.add_dependency 'olive_branch', '4.0.1'
