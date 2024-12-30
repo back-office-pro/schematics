@@ -12,6 +12,7 @@ module Schematics
       memoize def inverse_association
         return super if polymorphic?
         return super if inverse_association_type == 'has_one'
+        return super unless entity.can?(:create)
 
         Associations::HasManyNested.new(belongs_to: self)
       end
