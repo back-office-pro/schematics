@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  module Virtuals
+  module Triggers
     module Errors
       class NoMethodError < NameError
         def name = super
@@ -11,7 +11,7 @@ module Schematics
         def to_s
           return super if receiver
 
-          translate('errors.virtuals.nil')
+          translate('errors.triggers.nil')
         end
       end
     end

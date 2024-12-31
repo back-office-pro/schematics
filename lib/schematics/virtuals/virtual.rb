@@ -70,7 +70,7 @@ module Schematics
         def #{name}
           #{method_body}
         rescue StandardError => e
-          Virtuals::Errors::StandardError.build(e)
+          Triggers::Errors::StandardError.build(e)
         end
       RUBY
 

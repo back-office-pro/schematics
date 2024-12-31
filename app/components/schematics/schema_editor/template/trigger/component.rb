@@ -5,7 +5,7 @@ module Schematics
     module Template
       module Trigger
         class Component < Template::Component
-          def trigger = Schematics::Trigger.new
+          def trigger = Schematics::Triggers::Trigger.new
         end
       end
     end

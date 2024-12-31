@@ -1,20 +1,22 @@
 # frozen_string_literal: true
 
 module Schematics
-  module Virtuals
+  module Triggers
     module Errors
+      # :reek:InstanceVariableAssumption
       class TypeError < StandardError
-        def to_s = translate('errors.virtuals.type', **types)
+        def to_s = translate('errors.triggers.type', **types)
 
         private
 
         def types = %i[source target]
           .zip(
-            message
+            @exception
+              .message
               .scan(/([A-Z][a-z]+)/)
               .flatten
               .map(&:downcase)
-              .map { "errors.virtuals.types.#{it}" }
+              .map { "errors.triggers.types.#{it}" }
               .map(&method(:translate))
           ).to_h
       end

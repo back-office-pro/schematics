@@ -74,7 +74,7 @@ describe Schematics::Virtuals::Calculation do
       def tax_inclusive_price
         self.price.to_f * self.category&.vat.to_f
       rescue StandardError => e
-        Virtuals::Errors::StandardError.build(e)
+        Triggers::Errors::StandardError.build(e)
       end
     RUBY
   end

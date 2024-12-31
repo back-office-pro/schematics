@@ -12,7 +12,7 @@ module Schematics
       rescue_from ActiveRecord::StaleObjectError, with: :stale_object_error
       rescue_from ActionController::UnknownFormat, with: :unknown_format
       rescue_from ActiveSupport::MessageVerifier::InvalidSignature, with: :invalid_token
-      rescue_from Schematics::TriggerError, with: :trigger_error
+      rescue_from Triggers::Errors::StandardError, with: :trigger_error
       rescue_from Aws::S3::Errors::ServiceError, with: :storage_error
       rescue_from Google::Cloud::Error, with: :storage_error
       rescue_from AzureBlob::Error, with: :storage_error

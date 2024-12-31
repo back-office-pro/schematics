@@ -89,7 +89,7 @@ module Schematics
         @triggers = triggers
                     .each_with_object(entity: self)
                     .map(&:merge)
-                    .map(&Trigger)
+                    .map(&Triggers::Trigger)
       end
 
       def associations=(associations)

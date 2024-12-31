@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module Schematics
-  module Virtuals
+  module Triggers
     module Errors
       class NameError < StandardError
-        def to_s = translate('errors.virtuals.name', name:)
+        def to_s = translate('errors.triggers.name', name:)
       end
     end
   end

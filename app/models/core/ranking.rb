@@ -19,7 +19,7 @@ class Ranking < Schematics::ApplicationRecord
   def field_name_formatted = :"#{name}_formatted"
 
   def to_s
-    title || I18n.t('errors.virtuals.name', name: model)
+    title || I18n.t('errors.triggers.name', name: model)
   end
 
   private

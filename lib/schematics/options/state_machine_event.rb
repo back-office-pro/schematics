@@ -55,7 +55,7 @@ module Schematics
 
       private
 
-      memoize def trigger = Trigger.new(entity:, action:, callback:)
+      memoize def trigger = Triggers::Trigger.new(entity:, action:, callback:)
 
       def spec_interpolations = super.merge(name:, from: Array(from).to_sentence, to:)
 

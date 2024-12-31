@@ -2,7 +2,7 @@
 it:
   activemodel:
     attributes:
-      schematics/trigger:
+      schematics/triggers/trigger:
         action: Azione
         actions:
           after_create: Dopo la creazione
@@ -13,3 +13,5 @@ it:
           before_save: Prima di salvare
         callback: Funzione
         to_spec: Un(a) %{entity_name} ha un trigger **%{action}** la cui funzione è `%{callback}`
+    models:
+      schematics/triggers/trigger: Grilletto

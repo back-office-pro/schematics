@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Schematics::Virtuals::Errors::NoMethodError do
+describe Schematics::Triggers::Errors::NoMethodError do
   subject(:error) { described_class.new(exception) }
 
   let(:exception) { NoMethodError.new(nil, 'foo_formatted', receiver:) }

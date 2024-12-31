@@ -3,9 +3,9 @@
 require 'active_support/core_ext/module/delegation'
 
 module Schematics
-  module Virtuals
+  module Triggers
     module Errors
-      class StandardError
+      class StandardError < ::StandardError
         include Behaviours::Renderable
         delegate_missing_to :@exception
 
@@ -16,6 +16,7 @@ module Schematics
         end
 
         def initialize(exception)
+          super
           @exception = exception
         end
       end

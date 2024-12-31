@@ -6,7 +6,7 @@ class Metric < Schematics::ApplicationRecord
   delegate :to_sql, :format, to: :entity_field, allow_nil: true, private: true
 
   def to_s
-    title || I18n.t('errors.virtuals.name', name: model)
+    title || I18n.t('errors.triggers.name', name: model)
   end
 
   memoize def value(range = period_range)

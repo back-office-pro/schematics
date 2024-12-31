@@ -6,8 +6,8 @@ module Schematics
       class Component < ApplicationComponent
         option :builder
 
-        def collection = Schematics::Trigger::ACTIONS
-          .map { [t(it, scope: %i[activemodel attributes schematics/trigger actions]), it] }
+        def collection = Schematics::Triggers::Trigger::ACTIONS
+          .map { [t(it, scope: %i[activemodel attributes schematics/triggers/trigger actions]), it] } # rubocop:disable Layout/LineLength
           .sort
 
         def icon = :atom
@@ -26,7 +26,7 @@ module Schematics
 
         private
 
-        def attribute_name = Schematics::Trigger
+        def attribute_name = Schematics::Triggers::Trigger
           .human_attribute_name('action')
           .downcase
       end

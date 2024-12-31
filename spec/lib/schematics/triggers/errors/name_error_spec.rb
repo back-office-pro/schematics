@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Schematics::Virtuals::Errors::NameError do
+describe Schematics::Triggers::Errors::NameError do
   subject(:error) { described_class.new(exception) }
 
   let(:exception) { NameError.new(nil, 'foo') }

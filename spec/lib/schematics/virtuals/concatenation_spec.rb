@@ -68,7 +68,7 @@ describe Schematics::Virtuals::Concatenation do
       def full_name
         "\#{first_name_formatted} \#{profile&.last_name_formatted}"
       rescue StandardError => e
-        Virtuals::Errors::StandardError.build(e)
+        Triggers::Errors::StandardError.build(e)
       end
     RUBY
   end

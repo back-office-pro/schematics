@@ -2,7 +2,7 @@
 fr:
   activemodel:
     attributes:
-      schematics/trigger:
+      schematics/triggers/trigger:
         action: Action
         actions:
           after_create: Après ajout
@@ -13,3 +13,5 @@ fr:
           before_save: Avant sauvegarde
         callback: Fonction
         to_spec: Un(e) %{entity_name} a un déclencheur **%{action}** dont la fonction est `%{callback}`
+    models:
+      schematics/triggers/trigger: Déclencheur

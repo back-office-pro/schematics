@@ -29,7 +29,7 @@ en:
       singular: is not singular
       storage_quota: storage capacity is exceeded
       too_many_entities: The schema contains more entities than your plan allows (%{data_size}/%{quota_entities})
-    virtuals:
+    triggers:
       name: "%{name} is not defined"
       nil: a variable does not have value
       type: conversion from %{source} to %{target}

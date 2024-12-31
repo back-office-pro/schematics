@@ -109,14 +109,14 @@ describe Schematics::Attributes::StateMachine do
         self.in_stock = false
         save
       rescue StandardError => e
-        raise TriggerError, Virtuals::Errors::StandardError.build(e)
+        raise Triggers::Errors::StandardError, Triggers::Errors::StandardError.build(e)
       end
       def after_refuse_event; end
       def after_reopen_event
         self.in_stock = true
         save
       rescue StandardError => e
-        raise TriggerError, Virtuals::Errors::StandardError.build(e)
+        raise Triggers::Errors::StandardError, Triggers::Errors::StandardError.build(e)
       end
     RUBY
   end

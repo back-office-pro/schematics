@@ -2,7 +2,7 @@
 en:
   activemodel:
     attributes:
-      schematics/trigger:
+      schematics/triggers/trigger:
         action: Action
         actions:
           after_create: After creation
@@ -13,3 +13,5 @@ en:
           before_save: Before save
         callback: Callback
         to_spec: A %{entity_name} has a **%{action}** trigger which function is `%{callback}`
+    models:
+      schematics/triggers/trigger: Trigger
