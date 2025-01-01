@@ -6,7 +6,8 @@ module Schematics
       def available_options = super.excluding(
         Options::Min,
         Options::Limit,
-        Options::Length
+        Options::Length,
+        Options::CaseInsensitive
       )
 
       def values = Array(options.values)

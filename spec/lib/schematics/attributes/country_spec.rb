@@ -57,8 +57,7 @@ describe Schematics::Attributes::Country do
       Schematics::Options::Cached,
       Schematics::Options::Default,
       Schematics::Options::Readonly,
-      Schematics::Options::Unique,
-      Schematics::Options::CaseInsensitive
+      Schematics::Options::Unique
     )
   end
 

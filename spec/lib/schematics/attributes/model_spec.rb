@@ -55,7 +55,6 @@ describe Schematics::Attributes::Model do
       Schematics::Options::Default,
       Schematics::Options::Readonly,
       Schematics::Options::Unique,
-      Schematics::Options::CaseInsensitive,
       Schematics::Options::AllowHidden,
       Schematics::Options::Exclude
     )

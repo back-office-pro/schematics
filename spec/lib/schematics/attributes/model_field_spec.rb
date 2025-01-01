@@ -55,7 +55,6 @@ describe Schematics::Attributes::ModelField do
       Schematics::Options::Default,
       Schematics::Options::Readonly,
       Schematics::Options::Unique,
-      Schematics::Options::CaseInsensitive,
       Schematics::Options::DependsOn,
       Schematics::Options::Type
     )
