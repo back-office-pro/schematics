@@ -52,7 +52,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'bundler-audit', '0.9.2'
   spec.add_dependency 'cancancan', '3.6.1'
   spec.add_dependency 'capistrano', '3.19.2'
-  spec.add_dependency 'capistrano3-puma', '6.0.0.beta.1'
+  spec.add_dependency 'capistrano3-puma', '6.0.0'
   spec.add_dependency 'capistrano-bundler', '2.1.1'
   spec.add_dependency 'capistrano-rails', '1.7.0'
   spec.add_dependency 'capybara', '3.40.0'
