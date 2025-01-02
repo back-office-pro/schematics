@@ -61,7 +61,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'countries', '7.0.0'
   spec.add_dependency 'csv', '3.3.2'
   spec.add_dependency 'cuprite', '0.15.1'
-  spec.add_dependency 'dry-initializer', '3.1.1'
+  spec.add_dependency 'dry-initializer', '3.2.0'
   spec.add_dependency 'dry-transformer', '1.0.1'
   spec.add_dependency 'easy_translate', '0.5.1'
   spec.add_dependency 'enummer', '1.1.0'
