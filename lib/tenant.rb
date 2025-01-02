@@ -102,6 +102,15 @@ class Tenant
 
     def database = %i[sqlite3 postgresql][database_index]
 
+    def model_classes = schema
+      .entities
+      .reject(&:core?)
+      .filter_map(&:model_class)
+
+    def controller_classes = model_classes
+      .map { "#{it.to_s.pluralize}Controller" }
+      .filter_map(&:safe_constantize)
+
     private
 
     def database_index

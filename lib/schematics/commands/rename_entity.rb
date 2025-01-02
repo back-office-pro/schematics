@@ -15,7 +15,6 @@ module Schematics
         when :build
           [
             scaffold_generator,
-            feature_generator,
             translations_generator,
             permissions_generator,
             migration_generator,
@@ -23,10 +22,7 @@ module Schematics
             has_and_belongs_to_many_associations.map(&method(:rename_column_migration_generator))
           ].compact.flatten
         when :clean
-          [
-            scaffold_generator(behavior: :revoke),
-            feature_generator(behavior: :revoke)
-          ].compact
+          [scaffold_generator(behavior: :revoke)].compact
         end
       end
 
@@ -37,15 +33,9 @@ module Schematics
 
         Rails::Generators::ScaffoldGenerator.new(
           [name, *migratable_attributes],
-          ['--skip-resource-route', '--skip-migration'],
+          ['--skip-migration'],
           behavior:
         )
-      end
-
-      def feature_generator(behavior: :invoke)
-        return if core?
-
-        Rspec::Generators::FeatureGenerator.new([name], [], behavior:)
       end
 
       def translations_generator

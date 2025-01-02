@@ -12,9 +12,7 @@ module Schematics
           def title = t('.title')
 
           def entities_size = ::Tenant
-            .schema
-            .entities
-            .reject(&:core?) # rubocop:disable Performance/Count
+            .model_classes
             .size
 
           def percentage

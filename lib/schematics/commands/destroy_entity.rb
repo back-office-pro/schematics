@@ -4,7 +4,6 @@ require 'rails/generators'
 require 'rails/generators/rails/migration/migration_generator'
 require 'rails/generators/rails/scaffold/scaffold_generator'
 require 'generators/permissions/permissions_generator'
-require 'generators/rspec/feature/feature_generator'
 require 'generators/translations/translations_generator'
 
 module Schematics
@@ -12,7 +11,6 @@ module Schematics
     class DestroyEntity < Command
       def generators = [
         scaffold_generator,
-        feature_generator,
         translations_generator,
         permissions_generator,
         migration_generator,
@@ -26,15 +24,9 @@ module Schematics
 
         Rails::Generators::ScaffoldGenerator.new(
           [name, *migratable_attributes],
-          ['--skip-resource-route', '--skip-migration'],
+          ['--skip-migration'],
           behavior: :revoke
         )
-      end
-
-      def feature_generator
-        return if core?
-
-        Rspec::Generators::FeatureGenerator.new([name], [], behavior: :revoke)
       end
 
       def translations_generator

@@ -168,6 +168,7 @@ RSpec/MultipleMemoizedHelpers:
   Max: 18
 RSpec/EmptyExampleGroup:
   Exclude:
+    - lib/spec/*
     - spec/requests/schematics/message_replies_spec.rb
     - spec/*/active_storage/**/*
     - spec/*/core/**/*

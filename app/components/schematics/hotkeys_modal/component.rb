@@ -12,10 +12,7 @@ module Schematics
       def title = t('.title')
 
       def groups = ::Tenant
-        .schema
-        .entities
-        .reject(&:core?)
-        .filter_map(&:model_class)
+        .model_classes
         .push(::Import, ::ActiveStorage::Blob, ::Emailing)
         .select { can?(:index, it) }
         .sort_by(&:human_name)

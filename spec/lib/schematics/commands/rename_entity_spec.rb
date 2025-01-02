@@ -30,28 +30,26 @@ describe Schematics::Commands::RenameEntity do
       let(:target) { :build }
       let(:behavior) { :invoke }
 
-      its(:size) { is_expected.to eq(7) }
+      its(:size) { is_expected.to eq(6) }
       its([0]) { is_expected.to be_a(Rails::Generators::ScaffoldGenerator) }
       its([0]) { is_expected.to have_attributes(name: 'prospect', behavior:) }
-      its([1]) { is_expected.to be_a(Rspec::Generators::FeatureGenerator) }
+      its([1]) { is_expected.to be_a(TranslationsGenerator) }
       its([1]) { is_expected.to have_attributes(name: 'prospect', behavior:) }
-      its([2]) { is_expected.to be_a(TranslationsGenerator) }
+      its([2]) { is_expected.to be_a(PermissionsGenerator) }
       its([2]) { is_expected.to have_attributes(name: 'prospect', behavior:) }
-      its([3]) { is_expected.to be_a(PermissionsGenerator) }
-      its([3]) { is_expected.to have_attributes(name: 'prospect', behavior:) }
+      its([3]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
+      its([3]) { is_expected.to have_attributes(name: 'rename_clients_to_prospects', behavior:) }
       its([4]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
-      its([4]) { is_expected.to have_attributes(name: 'rename_clients_to_prospects', behavior:) }
       its([5]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
-      its([6]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
 
-      its([5]) do
+      its([4]) do
         is_expected.to have_attributes(
           name: 'rename_clients_users_to_prospects_users',
           behavior:
         )
       end
 
-      its([6]) do
+      its([5]) do
         is_expected.to have_attributes(
           name: 'rename_client_id_to_prospect_id_in_prospects_users',
           behavior:
@@ -65,9 +63,7 @@ describe Schematics::Commands::RenameEntity do
 
       its([0]) { is_expected.to be_a(Rails::Generators::ScaffoldGenerator) }
       its([0]) { is_expected.to have_attributes(name: 'prospect', behavior:) }
-      its([1]) { is_expected.to be_a(Rspec::Generators::FeatureGenerator) }
-      its([1]) { is_expected.to have_attributes(name: 'prospect', behavior:) }
-      its(:size) { is_expected.to eq(2) }
+      its(:size) { is_expected.to eq(1) }
     end
   end
 end

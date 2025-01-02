@@ -5,7 +5,6 @@ require 'rails/generators/rails/migration/migration_generator'
 require 'rails/generators/rails/scaffold/scaffold_generator'
 require 'rails/generators/rails/scaffold_controller/scaffold_controller_generator'
 require 'generators/permissions/permissions_generator'
-require 'generators/rspec/feature/feature_generator'
 require 'generators/translations/translations_generator'
 
 module Schematics
@@ -16,7 +15,6 @@ module Schematics
 
         [
           scaffold_generator,
-          feature_generator,
           translations_generator,
           permissions_generator,
           migration_generator,
@@ -29,7 +27,7 @@ module Schematics
       def scaffold_controller_generator
         return if core?
 
-        Rails::Generators::ScaffoldControllerGenerator.new([name], ['--skip-resource-route'])
+        Rails::Generators::ScaffoldControllerGenerator.new([name])
       end
 
       def scaffold_generator
@@ -37,14 +35,8 @@ module Schematics
 
         Rails::Generators::ScaffoldGenerator.new(
           [name, *migratable_attributes],
-          ['--skip-resource-route', '--skip-migration']
+          ['--skip-migration']
         )
-      end
-
-      def feature_generator
-        return if core?
-
-        Rspec::Generators::FeatureGenerator.new([name])
       end
 
       def translations_generator

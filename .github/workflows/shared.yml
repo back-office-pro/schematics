@@ -33,7 +33,7 @@ jobs:
         env:
           RAILS_ENV: test
           SCHEMATICS_MASTER_KEY: ${{ secrets.SCHEMATICS_MASTER_KEY }}
-        run: bundle exec rspec
+        run: bin/rails schematics:rspec
   brakeman:
     name: Brakeman
     runs-on: ubuntu-latest

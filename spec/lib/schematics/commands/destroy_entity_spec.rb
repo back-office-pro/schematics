@@ -38,20 +38,18 @@ describe Schematics::Commands::DestroyEntity do
   describe '#generators' do
     subject { command.generators }
 
-    its(:size) { is_expected.to eq(6) }
+    its(:size) { is_expected.to eq(5) }
     its([0]) { is_expected.to be_a(Rails::Generators::ScaffoldGenerator) }
     its([0]) { is_expected.to have_attributes(name:, behavior:) }
-    its([1]) { is_expected.to be_a(Rspec::Generators::FeatureGenerator) }
+    its([1]) { is_expected.to be_a(TranslationsGenerator) }
     its([1]) { is_expected.to have_attributes(name:, behavior:) }
-    its([2]) { is_expected.to be_a(TranslationsGenerator) }
+    its([2]) { is_expected.to be_a(PermissionsGenerator) }
     its([2]) { is_expected.to have_attributes(name:, behavior:) }
-    its([3]) { is_expected.to be_a(PermissionsGenerator) }
-    its([3]) { is_expected.to have_attributes(name:, behavior:) }
+    its([3]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
+    its([3]) { is_expected.to have_attributes(name: 'drop_assemblies', behavior: :invoke) }
     its([4]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
-    its([4]) { is_expected.to have_attributes(name: 'drop_assemblies', behavior: :invoke) }
-    its([5]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
 
-    its([5]) do
+    its([4]) do
       is_expected.to have_attributes(
         name: 'drop_join_table_assemblies_users',
         behavior: :invoke
