@@ -111,18 +111,20 @@ module Schematics
       end
 
       class_methods do
-        delegate :model_class, :controller_path, to: :controller_class
         delegate :entity, to: :model_class
         delegate :events, :default, to: :entity
-        alias_method :controller, :controller_path
 
-        def controller_class
+        def model_class
           top_level_description.constantize
         end
 
         def model_name
           model_class.to_s
         end
+
+        def controller = model_name
+          .pluralize
+          .underscore
 
         def allow?(action)
           Array(metadata[:except]).exclude?(action)
