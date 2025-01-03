@@ -12,6 +12,7 @@ module Schematics
           def title = t('.title')
 
           def entities_size = ::Tenant
+            .schema
             .model_classes
             .size
 

@@ -55,6 +55,10 @@ module Schematics
       .flat_map(&:association_attributes)
       .select(&:polymorphic?)
 
+    def model_classes = entities
+      .reject(&:core?)
+      .filter_map(&:model_class)
+
     def root_route
       return 'home#index' if valid?
 

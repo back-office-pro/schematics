@@ -7,6 +7,7 @@ module Schematics
       delegate :preferences_sidebar_toggled, to: :current_user
 
       def model_classes = ::Tenant
+        .schema
         .model_classes
         .push(::Import, ::Emailing, ::ActiveStorage::Blob)
         .select { can?(:index, it) }

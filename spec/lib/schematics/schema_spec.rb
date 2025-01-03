@@ -7,6 +7,7 @@ describe Schematics::Schema do
 
   it { is_expected.to be_valid }
   its(:root_route) { is_expected.to eq('home#index') }
+  its(:model_classes) { is_expected.to be_empty }
 
   describe '#find_entity_by_name' do
     subject { schema.find_entity_by_name('user') }
