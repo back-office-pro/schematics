@@ -1,6 +1,0 @@
-require_relative '../../config/environment'
-require 'capybara/rspec'
-
-RSpec.describe <%= class_name %>, <%= type_metatag(:feature) %> do
-  include Schematics::Specs::Feature
-end
