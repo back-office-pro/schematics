@@ -402,7 +402,6 @@ module Schematics
       end
 
       class_methods do
-        delegate :model_class, to: :controller_class
         delegate :entity, to: :model_class
         delegate :fillable_elements,
                  :fillable_attributes,
@@ -410,7 +409,7 @@ module Schematics
                  :default,
                  to: :entity
 
-        def controller_class
+        def model_class
           top_level_description.constantize
         end
 

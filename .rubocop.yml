@@ -169,14 +169,10 @@ RSpec/MultipleMemoizedHelpers:
 RSpec/EmptyExampleGroup:
   Exclude:
     - lib/spec/*
-    - spec/requests/schematics/message_replies_spec.rb
     - spec/*/active_storage/**/*
     - spec/*/core/**/*
 RSpec/SpecFilePathFormat:
   Exclude:
-    - spec/requests/schematics/message_replies_spec.rb
-    - spec/requests/active_storage/**/*
-    - spec/requests/core/**/*
     - spec/routing/**/*
     - spec/lib/active_record/connection_adapters/sqlite3_adapter_spec.rb
     - spec/lib/bootstrap-email/config_spec.rb

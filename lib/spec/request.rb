@@ -2,7 +2,7 @@
 
 require_relative "#{Dir.pwd}/config/environment"
 
-Tenant.controller_classes.each do
+Tenant.model_classes.each do
   RSpec.describe it, type: :request do
     include Schematics::Specs::Request
   end
