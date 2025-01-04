@@ -9,15 +9,22 @@ module Core
       progressable migration: 90
 
       def call
-        FileUtils.mkdir_p(fixtures_path)
-        fixtures_path.join('migrations.yml').write(migration.to_yaml)
+        ::ActiveStorage::Blob.find_by(key:).try(:purge)
+        ::ActiveStorage::Blob.create_and_upload!(key:, filename:, content_type:, io:)
       end
 
       private
 
-      def fixtures_path = ::Rails
-        .root
-        .join('spec/fixtures')
+      def key = File.join('backups', filename)
+
+      def filename = 'migration.json'
+
+      def content_type = ::Mime[:json].to_s
+
+      def io = Tempfile
+        .new
+        .tap { it.write(migration.data.to_json) }
+        .tap(&:rewind)
     end
   end
 end

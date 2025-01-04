@@ -25,15 +25,12 @@ jobs:
         env:
           RAILS_ENV: test
           SCHEMATICS_MASTER_KEY: ${{ secrets.SCHEMATICS_MASTER_KEY }}
-          FIXTURES_PATH: spec/fixtures
-          FIXTURES: migrations
-        if: ${{ hashFiles('spec/fixtures/migrations.yml') != '' }}
-        run: bin/rails db:fixtures:load
+        run: bin/rails schematics:rspec:prepare
       - name: Run tests
         env:
           RAILS_ENV: test
           SCHEMATICS_MASTER_KEY: ${{ secrets.SCHEMATICS_MASTER_KEY }}
-        run: bin/rails schematics:rspec
+        run: bin/rails schematics:rspec:run
   brakeman:
     name: Brakeman
     runs-on: ubuntu-latest
