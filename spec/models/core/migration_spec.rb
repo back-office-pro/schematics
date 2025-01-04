@@ -9,16 +9,6 @@ RSpec.describe Migration do
   its(:migrator) { is_expected.to be_a(Schematics::Migrator) }
   its(:commit_message) { is_expected.to eq('Migration v0.0 (core v1.0.0)') }
 
-  its(:to_yaml) do
-    is_expected.to eq <<~YAML
-      ---
-      one:
-        state: finished
-        version: 0.0
-        data: []
-    YAML
-  end
-
   it 'enqueues a migrate schema job after migrate' do
     expect { record.migrate! }
       .to have_enqueued_job(Schematics::MigrateSchemaJob)

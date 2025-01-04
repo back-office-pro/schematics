@@ -80,10 +80,6 @@ class Migration < Schematics::ApplicationRecord
     author&.locale || ::Configuration.locale
   end
 
-  def to_yaml = { one: { state: STATE_STATE_FINISHED.to_s, version:, data: data.as_json } }
-    .deep_stringify_keys
-    .to_yaml
-
   private
 
   def quota_entities_cannot_be_exceeded
