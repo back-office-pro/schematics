@@ -11,8 +11,8 @@ module Schematics
     end
 
     class_methods do
-      def allow_unauthenticated_access(**options)
-        skip_before_action :authenticate_user!, **options
+      def allow_unauthenticated_access(**)
+        skip_before_action(:authenticate_user!, **)
       end
     end
 
