@@ -9,10 +9,12 @@ module Schematics
     include Viewable
     include Lockable
     include Redirectable
+    include Authorizable
 
     before_action :set_resource, except: %i[index new create]
     before_action :set_resources, only: :index
     before_action :set_draft, only: %i[new edit create duplicate update]
+    before_action :authorize_resource, except: :trigger
     before_action :redirect_to_resource_path, only: :show
     before_action :redirect_to_edit_resource_path, only: :edit
     before_action :set_breadcrumb
@@ -27,8 +29,6 @@ module Schematics
     respond_to :svg, :ics, only: :show
 
     prepend_view_path Engine.root.join('app', 'views', 'core')
-
-    authorize_resource instance_name: :resource, except: :trigger
 
     delegate :model_class, to: :class
     delegate :human_name, :human_name_plural, :gender, to: :model_class
