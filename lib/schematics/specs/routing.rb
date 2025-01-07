@@ -122,9 +122,7 @@ module Schematics
           model_class.to_s
         end
 
-        def controller = model_name
-          .pluralize
-          .underscore
+        def controller = 'schematics/routing'
 
         def allow?(action)
           Array(metadata[:except]).exclude?(action)
