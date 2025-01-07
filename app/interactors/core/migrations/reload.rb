@@ -6,7 +6,6 @@ module Core
       include Schematics::Progressable
 
       delegate :migration, to: :context, private: true
-      delegate :reload!, to: ::OpenApi::Router, private: true
       delegate :migrator_old_and_changed_entities,
                :migrator_new_and_changed_entities,
                :migrator_changed_entities,
@@ -14,8 +13,6 @@ module Core
                private: true
 
       progressable migration: 70
-
-      before :reload!
 
       def call
         migrator_old_and_changed_entities.each(&method(:remove_constants))
@@ -44,7 +41,6 @@ module Core
           load Schematics::Engine.root.join('app', 'controllers', 'core', "#{entity.name.pluralize}_controller.rb") # rubocop:disable Layout/LineLength
         else
           load ::Rails.root.join('app', 'models', "#{entity.name}.rb")
-          load ::Rails.root.join('app', 'controllers', "#{entity.name.pluralize}_controller.rb")
         end
       end
     end

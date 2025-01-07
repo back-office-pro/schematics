@@ -11,8 +11,6 @@ require 'bootstrap-email/config'
 require 'bootstrap-email/override/config'
 require 'onelogin/override/ruby-saml/settings'
 require 'onelogin/ruby-saml/settings'
-require 'open_api/override/router'
-require 'open_api/router'
 require 'puma/configuration'
 require 'puma/override/configuration'
 require 'rails/generators'
@@ -29,8 +27,6 @@ Rails::Generators::GeneratedAttribute.singleton_class.prepend(GeneratedAttribute
 Rails::Generators::GeneratedAttribute.prepend(GeneratedAttribute)
 
 ActiveRecord::Generators::MigrationGenerator.prepend(MigrationGenerator)
-
-OpenApi::Router.singleton_class.prepend(OpenApi::Override::Router)
 
 Puma::Configuration.prepend(Puma::Override::Configuration)
 OneLogin::RubySaml::Settings.prepend(OneLogin::Override::RubySaml::Settings)
