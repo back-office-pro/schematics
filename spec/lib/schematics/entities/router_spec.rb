@@ -12,7 +12,7 @@ describe Schematics::Entities::Router do
   context 'when no actions are defined' do
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        resources :users, only: [:index, :show, :create, :update, :destroy, :new, :edit], model_name: 'User' do
+        resources :users, only: [:index, :show, :create, :update, :destroy, :new, :edit], controller: 'schematics/routing', model_name: 'User' do
           get :delete, on: :member
           delete :archive, on: :member
           delete :restore, on: :member
@@ -78,7 +78,7 @@ describe Schematics::Entities::Router do
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        resources :users, only: [:index, :show, :create, :update, :destroy, :new, :edit], model_name: 'User' do
+        resources :users, only: [:index, :show, :create, :update, :destroy, :new, :edit], controller: 'schematics/routing', model_name: 'User' do
           get :delete, on: :member
           delete :archive, on: :member
           delete :restore, on: :member
@@ -112,7 +112,7 @@ describe Schematics::Entities::Router do
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        resources :users, only: [:index, :show, :create, :new], model_name: 'User' do
+        resources :users, only: [:index, :show, :create, :new], controller: 'schematics/routing', model_name: 'User' do
           post :duplicate, on: :member
         end
         resources :users, only: [], model_name: 'User' do
@@ -137,7 +137,7 @@ describe Schematics::Entities::Router do
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        resource :configuration, only: [:show, :update, :edit], model_name: 'Configuration' do
+        resource :configuration, only: [:show, :update, :edit], controller: 'schematics/routing', model_name: 'Configuration' do
 
         end
         resource :configuration, only: [], model_name: 'Configuration' do
@@ -156,8 +156,8 @@ describe Schematics::Entities::Router do
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        namespace :active_storage do
-          resources :attachments, only: [:index, :show, :create, :update, :destroy, :new, :edit], model_name: 'ActiveStorage::Attachment' do
+        scope path: :active_storage, as: :active_storage do
+          resources :attachments, only: [:index, :show, :create, :update, :destroy, :new, :edit], controller: 'schematics/routing', model_name: 'ActiveStorage::Attachment' do
             get :delete, on: :member
             delete :archive, on: :member
             delete :restore, on: :member
@@ -191,10 +191,10 @@ describe Schematics::Entities::Router do
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        namespace :i18n do
-          namespace :backend do
-            namespace :active_record do
-              resources :translations, only: [:index, :show, :create, :update, :destroy, :new, :edit], model_name: 'I18n::Backend::ActiveRecord::Translation' do
+        scope path: :i18n, as: :i18n do
+          scope path: :backend, as: :backend do
+            scope path: :active_record, as: :active_record do
+              resources :translations, only: [:index, :show, :create, :update, :destroy, :new, :edit], controller: 'schematics/routing', model_name: 'I18n::Backend::ActiveRecord::Translation' do
                 get :delete, on: :member
                 delete :archive, on: :member
                 delete :restore, on: :member
@@ -234,8 +234,8 @@ describe Schematics::Entities::Router do
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        namespace :main do
-          resource :subscription, only: [:show, :update, :edit], model_name: 'Main::Subscription' do
+        scope path: :main, as: :main do
+          resource :subscription, only: [:show, :update, :edit], controller: 'schematics/routing', model_name: 'Main::Subscription' do
 
           end
         end
