@@ -7,6 +7,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.acronym 'ICS'
   inflect.acronym 'JSON'
   inflect.acronym 'OpenAI'
+  inflect.acronym 'OpenAPI'
   inflect.acronym 'PDF'
   inflect.acronym 'SVG'
 end
