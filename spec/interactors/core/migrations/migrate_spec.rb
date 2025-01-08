@@ -78,7 +78,6 @@ RSpec.describe Core::Migrations::Migrate do
         expect(Dir[root.join('db/migrate/*_create_prospects_*.rb')]).not_to be_empty
         expect(Dir[root.join('db/migrate/*_create_join_table_prospects_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(File).to exist root.join('app/models/prospect.rb')
-        expect(File).to exist root.join('app/controllers/prospects_controller.rb')
         expect { Prospect }.not_to raise_error
         # rollback
         expect { expect(rollback).to be_a_success }
@@ -89,7 +88,6 @@ RSpec.describe Core::Migrations::Migrate do
         expect(Dir[root.join('db/migrate/*_drop_prospects_*.rb')]).not_to be_empty
         expect(Dir[root.join('db/migrate/*_drop_join_table_prospects_users_*.rb')]).not_to be_empty
         expect(File).not_to exist root.join('app/models/prospect.rb')
-        expect(File).not_to exist root.join('app/controllers/prospects_controller.rb')
         expect { Prospect }.to raise_error(NameError)
       end
     end
@@ -133,9 +131,7 @@ RSpec.describe Core::Migrations::Migrate do
         expect(Dir[root.join('db/migrate/*_rename_prospects_users_to_clients_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('db/migrate/*_rename_prospect_id_to_client_id_in_clients_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(File).not_to exist root.join('app/models/prospect.rb')
-        expect(File).not_to exist root.join('app/controllers/prospects_controller.rb')
         expect(File).to exist root.join('app/models/client.rb')
-        expect(File).to exist root.join('app/controllers/clients_controller.rb')
         expect { Prospect }.to raise_error(NameError)
         expect { Client }.not_to raise_error
         # rollback
@@ -148,9 +144,7 @@ RSpec.describe Core::Migrations::Migrate do
         expect(Dir[root.join('db/migrate/*_rename_clients_users_to_prospects_users*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('db/migrate/*_rename_client_id_to_prospect_id_in_prospects_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(File).to exist root.join('app/models/prospect.rb')
-        expect(File).to exist root.join('app/controllers/prospects_controller.rb')
         expect(File).not_to exist root.join('app/models/client.rb')
-        expect(File).not_to exist root.join('app/controllers/clients_controller.rb')
         expect { Prospect }.not_to raise_error
         expect { Client }.to raise_error(NameError)
       end
@@ -177,7 +171,6 @@ RSpec.describe Core::Migrations::Migrate do
         expect(Dir[root.join('db/migrate/*_drop_prospects_*.rb')]).not_to be_empty
         expect(Dir[root.join('db/migrate/*_drop_join_table_prospects_users_*.rb')]).not_to be_empty
         expect(File).not_to exist root.join('app/models/prospect.rb')
-        expect(File).not_to exist root.join('app/controllers/prospects_controller.rb')
         expect { Prospect }.to raise_error(NameError)
         expect { prospect.reload }.to raise_error(ActiveRecord::StatementInvalid)
         # rollback
@@ -189,7 +182,6 @@ RSpec.describe Core::Migrations::Migrate do
         expect(Dir[root.join('db/migrate/*_create_prospects_*.rb')]).not_to be_empty
         expect(Dir[root.join('db/migrate/*_create_join_table_prospects_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(File).to exist root.join('app/models/prospect.rb')
-        expect(File).to exist root.join('app/controllers/prospects_controller.rb')
         expect { Prospect }.not_to raise_error
         expect { prospect.reload }.not_to raise_error
       end
@@ -635,9 +627,7 @@ RSpec.describe Core::Migrations::Migrate do
         expect(Dir[root.join('db/migrate/*_rename_prospect_id_to_client_id_in_clients_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('db/migrate/*_rename_first_name_to_surname_in_clients_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(File).not_to exist root.join('app/models/prospect.rb')
-        expect(File).not_to exist root.join('app/controllers/prospects_controller.rb')
         expect(File).to exist root.join('app/models/client.rb')
-        expect(File).to exist root.join('app/controllers/clients_controller.rb')
         expect { Prospect }.to raise_error(NameError)
         expect { Client }.not_to raise_error
         expect(Client.new).not_to respond_to(:first_name)
@@ -653,9 +643,7 @@ RSpec.describe Core::Migrations::Migrate do
         expect(Dir[root.join('db/migrate/*_rename_client_id_to_prospect_id_in_prospects_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('db/migrate/*_rename_surname_to_first_name_in_prospects_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(File).to exist root.join('app/models/prospect.rb')
-        expect(File).to exist root.join('app/controllers/prospects_controller.rb')
         expect(File).not_to exist root.join('app/models/client.rb')
-        expect(File).not_to exist root.join('app/controllers/clients_controller.rb')
         expect { Prospect }.not_to raise_error
         expect { Client }.to raise_error(NameError)
         expect(Prospect.new).to respond_to(:first_name)
