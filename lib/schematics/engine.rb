@@ -99,7 +99,7 @@ module Schematics
     config.app_generators do |generator|
       generator.orm :active_record, primary_key_type: :string
       generator.templates.unshift root.join('lib', 'templates')
-      generator.test_framework false
+      generator.test_framework nil
       generator.resource_route false
       generator.assets false
       generator.helper false
