@@ -10,9 +10,11 @@ module Schematics
       end
 
     def controller_class
-      "::#{params[:model_name].pluralize}Controller".constantize
-    rescue NameError
-      ResourcesController
+      controller_name.safe_constantize || ResourcesController
     end
+
+    private
+
+    def controller_name = "::#{params[:model_name].pluralize}Controller"
   end
 end
