@@ -14,7 +14,7 @@ module Schematics
 
       def icon = :table
 
-      def open_api_schema_type = {}
+      def open_api_schema_type = 'object'
 
       def permitted_params = { super => {} }
     end
