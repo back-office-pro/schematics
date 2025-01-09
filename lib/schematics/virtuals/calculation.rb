@@ -14,7 +14,7 @@ module Schematics
 
       def icon = :square_root_alt
 
-      def open_api_schema_type = ::Float
+      def open_api_schema_type = 'float'
 
       def allowed_variables = entity
         .numerable_elements

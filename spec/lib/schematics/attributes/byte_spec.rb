@@ -27,9 +27,9 @@ describe Schematics::Attributes::Byte do
 
   its(:database_type) { is_expected.to eq('float') }
   its(:column_name) { is_expected.to eq('byte_size') }
-  its(:open_api_body_type) { is_expected.to eq(Float) }
-  its(:open_api_schema_type) { is_expected.to eq(Float) }
-  its(:open_api_query_type) { is_expected.to eq(Float) }
+  its(:open_api_body_type) { is_expected.to eq('float') }
+  its(:open_api_schema_type) { is_expected.to eq('float') }
+  its(:open_api_query_type) { is_expected.to eq('float') }
   its(:input_name) { is_expected.to eq('active_storage_attachment[byte_size]') }
   its(:validators) { is_expected.to eq(numericality: { allow_blank: true }) }
   its(:icon) { is_expected.to eq(:weight_hanging) }

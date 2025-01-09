@@ -30,7 +30,7 @@ module Schematics
         super&.to_s || '9.99'
       end
 
-      def open_api_schema_type = ::Float
+      def open_api_schema_type = 'float'
 
       def validators = super.merge(
         numericality: {
