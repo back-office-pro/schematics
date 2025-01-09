@@ -24,9 +24,9 @@ describe Schematics::Attributes::Enum do
 
   its(:database_type) { is_expected.to eq('integer') }
   its(:column_name) { is_expected.to eq('state') }
-  its(:open_api_body_type) { is_expected.to eq(String) }
-  its(:open_api_schema_type) { is_expected.to eq(String) }
-  its(:open_api_query_type) { is_expected.to eq(String) }
+  its(:open_api_body_type) { is_expected.to eq('string') }
+  its(:open_api_schema_type) { is_expected.to eq('string') }
+  its(:open_api_query_type) { is_expected.to eq('string') }
   its(:input_name) { is_expected.to eq('product[state]') }
   its(:icon) { is_expected.to eq(:list_ol) }
   its(:default) { is_expected.to eq('available') }

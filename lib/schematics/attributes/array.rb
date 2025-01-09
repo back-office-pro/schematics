@@ -12,7 +12,7 @@ module Schematics
 
       def icon = :list
 
-      def open_api_schema_type = [::String]
+      def open_api_schema_type = %w[string]
 
       def open_api_query_type = super.first
 

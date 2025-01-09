@@ -34,8 +34,8 @@ describe Schematics::Associations::HasManyNested do
   its(:type) { is_expected.to eq('has_many') }
   its(:name) { is_expected.to eq('entities') }
   its(:class_name) { is_expected.to eq('Entity') }
-  its(:open_api_schema_type) { is_expected.to eq([id: String, type: String]) }
-  its(:open_api_body_type) { is_expected.to eq([id: String, type: String, _destroy: 'boolean']) }
+  its(:open_api_schema_type) { is_expected.to eq([id: 'string', type: 'string']) }
+  its(:open_api_body_type) { is_expected.to eq([id: 'string', type: 'string', _destroy: 'boolean']) } # rubocop:disable Layout/LineLength
   its(:input_name) { is_expected.to eq('entity[entities_attributes]') }
   its(:attributes_param_key) { is_expected.to eq(:entities_attributes) }
   its(:weight) { is_expected.to eq(3) }

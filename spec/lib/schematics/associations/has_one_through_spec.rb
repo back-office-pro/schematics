@@ -48,8 +48,8 @@ describe Schematics::Associations::HasOneThrough do
   its(:class_name) { is_expected.to eq('User') }
   its(:column_name) { is_expected.to eq('user_id') }
   its(:source) { is_expected.to eq('user') }
-  its(:open_api_schema_type) { is_expected.to eq(id: String, full_name: String) }
-  its(:open_api_query_type) { is_expected.to eq(String) }
+  its(:open_api_schema_type) { is_expected.to eq(id: 'string', full_name: 'string') }
+  its(:open_api_query_type) { is_expected.to eq('string') }
   its(:weight) { is_expected.to eq(3) }
   its(:search_column) { is_expected.to eq(:user_full_name) }
   its(:search_predicate) { is_expected.to eq(:i_cont) }

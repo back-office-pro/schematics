@@ -19,7 +19,7 @@ module Schematics
 
       def default = super.to_i
 
-      def open_api_schema_type = ::Integer
+      def open_api_schema_type = 'integer'
 
       def precision = 0
 

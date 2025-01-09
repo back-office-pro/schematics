@@ -12,8 +12,8 @@ module Schematics
       def open_api_schema = {
         token_type: TOKEN_TYPE,
         expires_in: ACCESS_TOKEN_DURATION.to_i,
-        access_token: String,
-        refresh_token: String
+        access_token: 'string',
+        refresh_token: 'string'
       }
     end
 

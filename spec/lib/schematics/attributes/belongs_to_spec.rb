@@ -26,9 +26,9 @@ describe Schematics::Attributes::BelongsTo do
 
   its(:database_type) { is_expected.to eq('belongs_to') }
   its(:column_name) { is_expected.to eq('user_id') }
-  its(:open_api_body_type) { is_expected.to eq(String) }
-  its(:open_api_schema_type) { is_expected.to eq(id: String, full_name: String) }
-  its(:open_api_query_type) { is_expected.to eq(String) }
+  its(:open_api_body_type) { is_expected.to eq('string') }
+  its(:open_api_schema_type) { is_expected.to eq(id: 'string', full_name: 'string') }
+  its(:open_api_query_type) { is_expected.to eq('string') }
   its(:association_type) { is_expected.to eq('user') }
   its(:inverse_association_name) { is_expected.to eq('entity') }
   its(:inverse_association_type) { is_expected.to eq('has_many') }

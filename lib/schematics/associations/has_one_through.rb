@@ -12,7 +12,7 @@ module Schematics
         .first
         .transform_keys(descriptor.name.to_sym => inverse_entity.descriptor.name.to_sym)
 
-      def open_api_query_type = ::String
+      def open_api_query_type = 'string'
 
       def source = belongs_to.name
 

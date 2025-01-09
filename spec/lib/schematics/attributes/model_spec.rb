@@ -32,9 +32,9 @@ describe Schematics::Attributes::Model do
 
   its(:database_type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('model') }
-  its(:open_api_body_type) { is_expected.to eq(String) }
-  its(:open_api_schema_type) { is_expected.to eq(String) }
-  its(:open_api_query_type) { is_expected.to eq(String) }
+  its(:open_api_body_type) { is_expected.to eq('string') }
+  its(:open_api_schema_type) { is_expected.to eq('string') }
+  its(:open_api_query_type) { is_expected.to eq('string') }
   its(:input_name) { is_expected.to eq('permission[model]') }
   its(:icon) { is_expected.to eq(:project_diagram) }
   its(:default) { is_expected.to eq('Permission') }

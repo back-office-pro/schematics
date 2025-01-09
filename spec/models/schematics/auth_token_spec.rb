@@ -13,8 +13,8 @@ RSpec.describe Schematics::AuthToken do
     is_expected.to match(
       token_type: 'Bearer',
       expires_in: 600,
-      access_token: String,
-      refresh_token: String
+      access_token: 'string',
+      refresh_token: 'string'
     )
   end
 end
