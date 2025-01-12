@@ -8,7 +8,7 @@ RSpec.describe OpenAPI::Root do
   let(:schema) { Schematics::Schema.new }
   let(:expected_hash) do
     {
-      openapi: '3.1.0',
+      openapi: '3.1.1',
       security: [],
       tags: Array,
       paths: Hash,
