@@ -19,9 +19,10 @@ module OpenAPI
 
       def responses = [
         Components::Response.new(code: 201, description: 'Success', data: open_api_schema),
-        Components::Response.new(code: 400, description: 'Bad Request'),
-        Components::Response.new(code: 401, description: 'Not Authorized'),
-        Components::Response.new(code: 422, description: 'Unprocessable Content')
+        Components::Response.bad_request,
+        Components::Response.not_authorized,
+        Components::Response.forbidden,
+        Components::Response.unprocessable_content
       ]
 
       def import_entity = entity

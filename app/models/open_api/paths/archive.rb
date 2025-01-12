@@ -13,8 +13,9 @@ module OpenAPI
 
       def responses = [
         Components::Response.new(code: 204, description: 'Success'),
-        Components::Response.new(code: 401, description: 'Not Authorized'),
-        Components::Response.new(code: 404, description: 'Not Found')
+        Components::Response.not_authorized,
+        Components::Response.forbidden,
+        Components::Response.not_found
       ]
     end
   end

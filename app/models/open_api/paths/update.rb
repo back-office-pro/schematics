@@ -14,6 +14,8 @@ module OpenAPI
         "#{root_path}/{id}"
       end
 
+      def operation_id = "#{super}_#{http_method.capitalize}"
+
       def request_body = Components::Request
         .new(entity:)
         .to_h
@@ -24,10 +26,11 @@ module OpenAPI
 
       def responses = [
         Components::Response.new(code: 204, description: 'Success'),
-        Components::Response.new(code: 400, description: 'Bad Request'),
-        Components::Response.new(code: 401, description: 'Not Authorized'),
-        Components::Response.new(code: 404, description: 'Not Found'),
-        Components::Response.new(code: 422, description: 'Unprocessable Content')
+        Components::Response.bad_request,
+        Components::Response.not_authorized,
+        Components::Response.forbidden,
+        Components::Response.not_found,
+        Components::Response.unprocessable_content
       ]
     end
   end
