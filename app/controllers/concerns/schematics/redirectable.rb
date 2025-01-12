@@ -13,9 +13,10 @@ module Schematics
 
     def redirect_to_edit_resource_path
       return unless request.format.html?
-      return if request.path == edit_polymorphic_path(@resource)
+      return if request.path == main_app.edit_polymorphic_path(@resource)
 
-      redirect_to edit_polymorphic_path(@resource), status: :moved_permanently
+      redirect_to main_app.edit_polymorphic_path(@resource),
+                  status: :moved_permanently
     end
   end
 end
