@@ -6,15 +6,15 @@ module OpenAPI
     include ::ActiveModel::API
     attr_accessor :schema
 
-    DEFAULT_TAGS = %w[
-      Message replies
-      One time passwords
-      Password resets
-      Preferences
-      Profile
-      Sudos
-      Tokens
-      Versions
+    DEFAULT_TAGS = [
+      'Message replies',
+      'One time passwords',
+      'Password resets',
+      'Preferences',
+      'Profile',
+      'Sudos',
+      'Tokens',
+      'Versions'
     ].freeze
 
     def to_h = { openapi:, security:, tags:, paths:, components: }
