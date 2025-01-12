@@ -176,6 +176,7 @@ module Schematics
       end
 
       def permitted_params = fillable_elements
+        .grep_v(Attributes::User)
         .flat_map(&:permitted_params)
         .push(:lock_version)
 
