@@ -31,9 +31,9 @@ module OpenAPI
 
       protected
 
-      def summary = [self.class.name.demodulize, model_class.human_name].join(' ')
+      def summary = "#{self.class.name.demodulize.underscore.humanize}_#{model_class.human_name}"
 
-      def operation_id = [class_name, self.class.name.demodulize].join('_')
+      def operation_id = "#{class_name}_#{self.class.name.demodulize}"
 
       def tags = [model_class.human_name_plural.humanize]
 

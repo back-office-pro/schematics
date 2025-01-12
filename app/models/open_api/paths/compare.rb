@@ -2,7 +2,7 @@
 
 module OpenAPI
   module Paths
-    class Import < NestedPath
+    class Compare < NestedPath
       protected
 
       def root_path = super.pluralize
@@ -10,6 +10,8 @@ module OpenAPI
       def singleton? = true
 
       def summary = super.pluralize
+
+      def nested_entity_name = 'comparison'
     end
   end
 end
