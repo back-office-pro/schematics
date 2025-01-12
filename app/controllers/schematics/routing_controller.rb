@@ -9,12 +9,10 @@ module Schematics
         define_method(action) { controller_class.dispatch(action, request, response) }
       end
 
+    def controller_name = "::#{params[:model_name].pluralize}Controller"
+
     def controller_class
       controller_name.safe_constantize || ResourcesController
     end
-
-    private
-
-    def controller_name = "::#{params[:model_name].pluralize}Controller"
   end
 end
