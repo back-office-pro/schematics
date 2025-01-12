@@ -984,6 +984,7 @@
         "type": "model",
         "options": {
           "required": true,
+          "readonly": true,
           "allow_hidden": true
         }
       },
