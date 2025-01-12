@@ -29,15 +29,14 @@ module Schematics
 
     prepend_view_path Engine.root.join('app', 'views', 'core')
 
-    delegate :model_class, to: :class
     delegate :human_name, :human_name_plural, :gender, to: :model_class
 
     helper_method :model_class
 
-    class << self
-      def model_class = controller_path
-        .classify
-        .safe_constantize
+    def model_name = params[:model_name]
+
+    def model_class
+      model_name.safe_constantize
     end
 
     def archive
@@ -143,7 +142,7 @@ module Schematics
     end
 
     def set_draft
-      @draft = current_user.find_or_create_draft!(model_class.to_s, @resource&.id)
+      @draft = current_user.find_or_create_draft!(model_name, @resource&.id)
     end
 
     def set_breadcrumb
