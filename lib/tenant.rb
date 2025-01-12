@@ -75,9 +75,7 @@ class Tenant
     def demo? = app_name.eql?('demo') && !Rails.env.test?
 
     def default_password
-      return unless demo?
-
-      'Azerty1234?!'
+      'Azerty1234?!!' if demo?
     end
 
     def host

@@ -15,7 +15,7 @@ RSpec.describe Core::Imports::ReadData do
           first_name: 'John',
           last_name: 'Doe',
           locale: :en,
-          password: 'Azerty1234?!',
+          password: 'Azerty1234?!!',
           time_zone: 'UTC',
           teams:,
           role:
@@ -25,7 +25,7 @@ RSpec.describe Core::Imports::ReadData do
           first_name: 'Jane',
           last_name: 'Doe',
           locale: :fr,
-          password: 'Azerty1234?!',
+          password: 'Azerty1234?!!',
           time_zone: 'Paris',
           teams:,
           role:

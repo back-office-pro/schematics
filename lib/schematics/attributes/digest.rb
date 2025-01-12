@@ -22,7 +22,7 @@ module Schematics
 
       def column_name = "#{super}_digest"
 
-      def default = 'Azerty1234?!'
+      def default = 'Azerty1234?!!'
 
       def icon = :key
 

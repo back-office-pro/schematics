@@ -26,7 +26,7 @@ describe Schematics::Attributes::Digest do
   its(:open_api_body_type) { is_expected.to eq(String) }
   its(:open_api_schema_type) { is_expected.to eq(String) }
   its(:input_name) { is_expected.to eq('entity[password_digest]') }
-  its(:default) { is_expected.to eq('Azerty1234?!') }
+  its(:default) { is_expected.to eq('Azerty1234?!!') }
   its(:permitted_params) { is_expected.to eq(%i[password password_confirmation]) }
   its(:icon) { is_expected.to eq(:key) }
   its(:to_spec) { is_expected.to eq('A entity has a **password** attribute of type *password*') }

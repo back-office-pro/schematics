@@ -22,7 +22,7 @@ RSpec.describe Session, except: %i[create destroy] do
 
     context 'when credentials are correct' do
       let(:email) { 'john.doe@nowhere.com' }
-      let(:password) { 'Azerty1234?!' }
+      let(:password) { 'Azerty1234?!!' }
       let(:remember_me) { true }
 
       before { do_request }
