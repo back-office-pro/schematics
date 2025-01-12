@@ -22,7 +22,7 @@ module OpenAPI
                 'bulk_action[ids]': {
                   type: 'array',
                   items: {
-                    type: 'string',
+                    type: 'string'
                   },
                   required: true
                 }
