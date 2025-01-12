@@ -31,7 +31,7 @@ module OpenAPI
 
       protected
 
-      def summary = "#{self.class.name.demodulize.underscore.humanize}_#{model_class.human_name}"
+      def summary = "#{self.class.name.demodulize.underscore.humanize} #{model_class.human_name}"
 
       def operation_id = "#{class_name}_#{self.class.name.demodulize}"
 
