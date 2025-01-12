@@ -18,6 +18,7 @@ module OpenAPI
               type: 'object',
               properties: fillable_elements
                 .grep_v(Schematics::Attributes::User)
+                .grep_v(Schematics::Associations::HasManyNested)
                 .map do |element|
                   {
                     element.input_name => Type
