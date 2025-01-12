@@ -21,23 +21,26 @@ module OpenAPI
 
     private
 
-    def openapi = '3.1.0'
+    def openapi = '3.1.1'
 
     def security = []
 
     def tags = schema
       .entities
+      .flat_map(&method(:entity_paths))
+      .compact
+      .map(&:entity)
       .map(&:model_class)
       .map(&:human_name_plural)
       .map(&:humanize)
       .concat(DEFAULT_TAGS)
+      .uniq
       .sort
       .map { |name| { name: } }
 
     def paths = schema
       .entities
-      .map(&method(:entity_paths))
-      .flatten
+      .flat_map(&method(:entity_paths))
       .filter_map(&:to_h)
       .reduce(&:deep_merge)
       .sort
