@@ -3,6 +3,10 @@
 @import url('/animate.css/animate.css');
 
 .swagger-ui {
+  .information-container {
+    display: none;
+  }
+
   .scheme-container {
     background: transparent;
     box-shadow: none;
