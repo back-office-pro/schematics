@@ -5,7 +5,6 @@ module Schematics
     include Fillable
     include Filterable
     include Calendarable
-    include Documentable
     include Viewable
     include Lockable
     include Redirectable
