@@ -423,7 +423,7 @@ module Schematics
 
         def model_classes = entity
           .has_many_nested_associations
-          .map(&:model_class)
+          .filter_map(&:model_class)
           .push(model_class)
 
         # :reek:FeatureEnvy
