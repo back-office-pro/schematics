@@ -49,6 +49,7 @@ module Schematics
         )
       end
 
+      # :reek:FeatureEnvy
       def create_join_table_migration_generator(association)
         return if existing?
 
