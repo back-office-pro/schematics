@@ -9,7 +9,7 @@ module Schematics
 
     def initialize(resource)
       @resource = resource
-      @template = ::PDFTemplate.find_by(model: model_class.to_s)
+      @template = ::PDFTemplate.find_by(model: model_name)
     end
 
     memoize def content
@@ -35,24 +35,32 @@ module Schematics
 
     private
 
+    def model_class
+      @resource.class
+    end
+
     def assets_url = URI
       .const_get(ssl? ? :HTTPS : :HTTP)
       .build(**default_url_options)
       .to_s
 
-    def renderer = "#{model_class.to_s.pluralize}Controller"
-      .constantize
+    def controller_class
+      "#{model_name.pluralize}Controller".constantize
+    end
+
+    def renderer = controller_class
       .renderer
       .new(**renderer_options)
 
-    def model_class
-      @resource.class
+    def model_name
+      model_class.to_s
     end
 
     def renderer_options = ::Rails
       .configuration
       .action_dispatch
       .merge(key_generator:)
+      .merge('request.parameters': { model_name: })
       .transform_keys { "action_dispatch.#{it}" }
 
     def pdf_options = {
