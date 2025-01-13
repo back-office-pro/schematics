@@ -38,8 +38,8 @@ module Schematics
 
     def old_and_changed_entities = old_entities.concat(changed_entities)
 
-    def build_commands # rubocop:disable Metrics/CyclomaticComplexity
-      @new_schema.entities.reject(&:existing?).map do |new_entity|
+    def build_commands
+      @new_schema.entities.map do |new_entity|
         current_entity = @current_schema&.entities&.find { it.id == new_entity.id }
         next Commands::CreateEntity.new(entity: new_entity) unless current_entity
 

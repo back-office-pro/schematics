@@ -40,12 +40,18 @@ module Schematics
         PermissionsGenerator.new([name])
       end
 
-      def migration_generator = Rails::Generators::MigrationGenerator.new(
-        ["create_#{table_name.pluralize}", *migratable_attributes],
-        ['--timestamps=true', '--primary_key_type=string']
-      )
+      def migration_generator
+        return if existing?
+
+        Rails::Generators::MigrationGenerator.new(
+          ["create_#{table_name.pluralize}", *migratable_attributes],
+          ['--timestamps=true', '--primary_key_type=string']
+        )
+      end
 
       def create_join_table_migration_generator(association)
+        return if existing?
+
         Rails::Generators::MigrationGenerator.new(
           [
             "create_join_table_#{association.join_table}",
