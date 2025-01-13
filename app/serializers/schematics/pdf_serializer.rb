@@ -48,7 +48,7 @@ module Schematics
       .build(**default_url_options)
       .to_s
 
-    def controller_name = "#{model_name.pluralize}Controller"
+    def controller_name = "::#{model_name.pluralize}Controller"
 
     def controller_class
       controller_name.safe_constantize || ResourcesController
