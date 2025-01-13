@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'debug', '1.10.0'
   spec.add_development_dependency 'fuubar', '2.5.1'
   spec.add_development_dependency 'i18n-tasks', '1.0.14'
-  spec.add_development_dependency 'reek', '6.3.0'
+  spec.add_development_dependency 'reek', '6.4.0'
   spec.add_development_dependency 'rspec-its', '2.0.0'
   spec.add_development_dependency 'rubocop', '1.70.0'
   spec.add_development_dependency 'rubocop-capybara', '2.21.0'
