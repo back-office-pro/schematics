@@ -8,7 +8,7 @@ class ComparisonsController < Schematics::ResourcesController
 
   protected
 
-  def model_class = Comparison
+  def model_name = 'Comparison'
 
   def parent_model_name
     @resource.try(:model) || super

@@ -42,7 +42,7 @@ class SessionsController < Schematics::ResourcesController
 
   private
 
-  def model_class = Session
+  def model_name = 'Session'
 
   def permitted_params = %i[email password remember_me]
 

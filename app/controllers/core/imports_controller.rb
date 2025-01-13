@@ -19,7 +19,7 @@ class ImportsController < Schematics::ResourcesController
 
   protected
 
-  def model_class = Import
+  def model_name = 'Import'
 
   def attributes = entity
     .fillable_elements

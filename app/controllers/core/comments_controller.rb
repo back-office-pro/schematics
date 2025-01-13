@@ -7,7 +7,7 @@ class CommentsController < Schematics::ResourcesController
 
   protected
 
-  def model_class = Comment
+  def model_name = 'Comment'
 
   def resource_path = polymorphic_path(record, comments: '').chop
 
