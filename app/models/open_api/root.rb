@@ -30,7 +30,7 @@ module OpenAPI
       .flat_map(&method(:entity_paths))
       .compact
       .map(&:entity)
-      .map(&:model_class)
+      .filter_map(&:model_class)
       .map(&:human_name_plural)
       .map(&:humanize)
       .concat(DEFAULT_TAGS)
@@ -40,6 +40,7 @@ module OpenAPI
 
     def paths = schema
       .entities
+      .select(&:model_class)
       .flat_map(&method(:entity_paths))
       .filter_map(&:to_h)
       .reduce(&:deep_merge)
