@@ -82,7 +82,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'interactor', '3.1.2'
   spec.add_dependency 'isolator', '1.1.0'
   spec.add_dependency 'letter_opener', '1.10.0'
-  spec.add_dependency 'liquid', '5.6.0'
+  spec.add_dependency 'liquid', '5.6.1'
   spec.add_dependency 'listen', '3.9.0'
   spec.add_dependency 'lograge', '0.14.0'
   spec.add_dependency 'memery', '1.6.0'
