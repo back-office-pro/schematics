@@ -35,6 +35,10 @@ module Schematics
 
     private
 
+    def model_name
+      model_class.to_s
+    end
+
     def model_class
       @resource.class
     end
@@ -51,10 +55,6 @@ module Schematics
     def renderer = controller_class
       .renderer
       .new(**renderer_options)
-
-    def model_name
-      model_class.to_s
-    end
 
     def renderer_options = ::Rails
       .configuration
