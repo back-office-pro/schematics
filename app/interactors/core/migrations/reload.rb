@@ -28,24 +28,15 @@ module Core
       private
 
       def remove_constants(entity)
-        case entity
-        when proc(&:existing?)
-          Object.__send__(:remove_const, :"#{entity.class_name.pluralize}Controller".to_sym)
-        when proc(&:core?)
-          Object.__send__(:remove_const, entity.class_name.to_sym)
-          Object.__send__(:remove_const, :"#{entity.class_name.pluralize}Controller".to_sym)
-        else
-          Object.__send__(:remove_const, entity.class_name.to_sym)
-        end
+        Object.__send__(:remove_const, entity.class_name.to_sym) unless entity.existing?
       end
 
       def load_files(entity)
         case entity
         when proc(&:existing?)
-          load Schematics::Engine.root.join('app', 'controllers', "#{entity.name.pluralize}_controller.rb") # rubocop:disable Layout/LineLength
+          # do nothing
         when proc(&:core?)
           load Schematics::Engine.root.join('app', 'models', 'core', "#{entity.name}.rb")
-          load Schematics::Engine.root.join('app', 'controllers', 'core', "#{entity.name.pluralize}_controller.rb") # rubocop:disable Layout/LineLength
         else
           load ::Rails.root.join('app', 'models', "#{entity.name}.rb")
         end
