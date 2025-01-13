@@ -28,7 +28,15 @@ module Core
       private
 
       def remove_constants(entity)
-        Object.__send__(:remove_const, entity.class_name.to_sym)
+        case entity
+        when proc(&:existing?)
+          Object.__send__(:remove_const, :"#{entity.class_name.pluralize}Controller".to_sym)
+        when proc(&:core?)
+          Object.__send__(:remove_const, entity.class_name.to_sym)
+          Object.__send__(:remove_const, :"#{entity.class_name.pluralize}Controller".to_sym)
+        else
+          Object.__send__(:remove_const, entity.class_name.to_sym)
+        end
       end
 
       def load_files(entity)
