@@ -11,12 +11,12 @@ module Schematics
 
     EVENTS = %w[create update destroy archive restore import duplicate].freeze
     OPEN_API_SCHEMA = {
-      id: ::String,
-      created_at: ::DateTime,
-      event: ::String,
-      user: { id: ::String, full_name: ::String },
-      item: {},
-      object_changes: {}
+      id: 'string',
+      created_at: 'datetime',
+      event: 'string',
+      user: { id: 'string', full_name: 'string' },
+      item: 'object',
+      object_changes: 'object'
     }.freeze
 
     belongs_to :user,
