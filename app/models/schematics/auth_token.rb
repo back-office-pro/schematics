@@ -8,15 +8,6 @@ module Schematics
 
     delegate :generate_token_for, to: :@session, private: true
 
-    class << self
-      def open_api_schema = {
-        token_type: TOKEN_TYPE,
-        expires_in: ACCESS_TOKEN_DURATION.to_i,
-        access_token: 'string',
-        refresh_token: 'string'
-      }
-    end
-
     def initialize(session)
       @session = session
     end
