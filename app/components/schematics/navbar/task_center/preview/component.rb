@@ -13,7 +13,7 @@ module Schematics
             @task = task
           end
 
-          def href = task_path(@task)
+          def href = polymorphic_path(@task)
 
           def css_class
             'text-danger' if late?
