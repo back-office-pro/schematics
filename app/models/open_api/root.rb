@@ -6,37 +6,18 @@ module OpenAPI
     include ::ActiveModel::API
     attr_accessor :schema
 
-    DEFAULT_TAGS = [
-      'Message replies',
-      'One time passwords',
-      'Password resets',
-      'Preferences',
-      'Profile',
-      'Sudos',
-      'Tokens',
-      'Versions'
-    ].freeze
-
-    def to_h = { openapi:, security:, tags:, paths:, components: }
+    def to_h
+      doc = open_api_data
+      doc[:paths] = paths.deep_merge(doc[:paths]).sort.to_h
+      doc[:tags] = tags.concat(doc[:tags]).sort { _1[:name] <=> _2[:name] } # rubocop:disable Style/NumberedParametersLimit
+      doc
+    end
 
     private
 
-    def openapi = '3.1.1'
-
-    def security = []
-
-    def tags = schema
-      .entities
-      .flat_map(&method(:entity_paths))
-      .compact
-      .map(&:entity)
-      .filter_map(&:model_class)
-      .map(&:human_name_plural)
-      .map(&:humanize)
-      .concat(DEFAULT_TAGS)
-      .uniq
-      .sort
-      .map { |name| { name: } }
+    def open_api_data = ::YAML
+      .load_file(Schematics::Engine.root.join('lib', 'open_api.yml'))
+      .deep_symbolize_keys
 
     def paths = schema
       .entities
@@ -44,8 +25,16 @@ module OpenAPI
       .flat_map(&method(:entity_paths))
       .filter_map(&:to_h)
       .reduce(&:deep_merge)
-      .sort
       .to_h
+
+    def tags = schema
+      .entities
+      .select(&:model_class)
+      .flat_map(&method(:entity_paths))
+      .compact
+      .map(&:tag)
+      .uniq
+      .map { |name| { name: } }
 
     def entity_paths(entity) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
       [
@@ -67,20 +56,5 @@ module OpenAPI
         *entity.events.map { |event| Paths::Trigger.new(entity:, event:) }
       ]
     end
-
-    def components = {
-      securitySchemes: {
-        token: {
-          type: 'http',
-          scheme: 'bearer',
-          bearerFormat: 'JWT'
-        },
-        api_key: {
-          type: 'apiKey',
-          name: 'x-api-key',
-          in: 'header'
-        }
-      }
-    }
   end
 end
