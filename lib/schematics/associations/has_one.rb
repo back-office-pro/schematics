@@ -9,7 +9,7 @@ module Schematics
 
       def open_api_schema_type = super.first
 
-      def open_api_query_type = ::String
+      def open_api_query_type = 'string'
 
       def search_column = :"#{name}_#{descriptor.name}"
 

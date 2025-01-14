@@ -27,9 +27,9 @@ describe Schematics::Attributes::Rating do
 
   its(:database_type) { is_expected.to eq('float') }
   its(:column_name) { is_expected.to eq('rating') }
-  its(:open_api_body_type) { is_expected.to eq(Float) }
-  its(:open_api_schema_type) { is_expected.to eq(Float) }
-  its(:open_api_query_type) { is_expected.to eq(Float) }
+  its(:open_api_body_type) { is_expected.to eq('float') }
+  its(:open_api_schema_type) { is_expected.to eq('float') }
+  its(:open_api_query_type) { is_expected.to eq('float') }
   its(:input_name) { is_expected.to eq('product[rating]') }
   its(:validators) { is_expected.to eq(numericality: { allow_blank: true, in: 0..5 }) }
   its(:icon) { is_expected.to eq(:star) }

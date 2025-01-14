@@ -39,7 +39,7 @@ describe Schematics::Commands::DestroyEntity do
     subject { command.generators }
 
     its(:size) { is_expected.to eq(5) }
-    its([0]) { is_expected.to be_a(Rails::Generators::ScaffoldGenerator) }
+    its([0]) { is_expected.to be_a(Rails::Generators::ModelGenerator) }
     its([0]) { is_expected.to have_attributes(name:, behavior:) }
     its([1]) { is_expected.to be_a(TranslationsGenerator) }
     its([1]) { is_expected.to have_attributes(name:, behavior:) }

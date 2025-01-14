@@ -19,17 +19,17 @@ module Schematics
       end
 
       def to_str = [
-        namespace_nesting(resource_routes_definition),
+        scope_nesting(resource_routes_definition),
         scope_nesting(nested_resource_routes_definition),
         resolver
       ].compact.join
 
       private
 
-      def namespace_nesting(source)
+      def scope_nesting(source)
         namespaces.reduce(source) do |code, namespace|
           <<~RUBY
-            namespace :#{namespace} do
+            scope path: :#{namespace}, as: :#{namespace} do
             #{code.indent(2).chomp}
             end
           RUBY
@@ -43,7 +43,7 @@ module Schematics
 
       def resource_routes_definition
         <<~RUBY
-          #{route_method} :#{resource}, only: #{routes}, model_name: '#{class_name}' do
+          #{route_method} :#{resource}, only: #{routes}, controller: 'schematics/routing', model_name: '#{class_name}' do
           #{resource_routes.indent(2).chomp}
           end
         RUBY
@@ -99,16 +99,6 @@ module Schematics
         <<~RUBY
           post :duplicate, on: :member
         RUBY
-      end
-
-      def scope_nesting(source)
-        namespaces.reduce(source) do |code, namespace|
-          <<~RUBY
-            scope path: :#{namespace}, as: :#{namespace} do
-            #{code.indent(2).chomp}
-            end
-          RUBY
-        end
       end
 
       def nested_resource_routes_definition

@@ -2,38 +2,27 @@
 
 require 'rails/generators'
 require 'rails/generators/rails/migration/migration_generator'
-require 'rails/generators/rails/scaffold/scaffold_generator'
-require 'rails/generators/rails/scaffold_controller/scaffold_controller_generator'
+require 'rails/generators/rails/model/model_generator'
 require 'generators/permissions/permissions_generator'
 require 'generators/translations/translations_generator'
 
 module Schematics
   module Commands
     class CreateEntity < Command
-      def generators
-        return [scaffold_controller_generator].compact if existing?
-
-        [
-          scaffold_generator,
-          translations_generator,
-          permissions_generator,
-          migration_generator,
-          has_and_belongs_to_many_associations.map(&method(:create_join_table_migration_generator))
-        ].compact.flatten
-      end
+      def generators = [
+        model_generator,
+        translations_generator,
+        permissions_generator,
+        migration_generator,
+        has_and_belongs_to_many_associations.map(&method(:create_join_table_migration_generator))
+      ].compact.flatten
 
       private
 
-      def scaffold_controller_generator
+      def model_generator
         return if core?
 
-        Rails::Generators::ScaffoldControllerGenerator.new([name])
-      end
-
-      def scaffold_generator
-        return if core?
-
-        Rails::Generators::ScaffoldGenerator.new(
+        Rails::Generators::ModelGenerator.new(
           [name, *migratable_attributes],
           ['--skip-migration']
         )
@@ -51,12 +40,19 @@ module Schematics
         PermissionsGenerator.new([name])
       end
 
-      def migration_generator = Rails::Generators::MigrationGenerator.new(
-        ["create_#{table_name.pluralize}", *migratable_attributes],
-        ['--timestamps=true', '--primary_key_type=string']
-      )
+      def migration_generator
+        return if existing?
 
+        Rails::Generators::MigrationGenerator.new(
+          ["create_#{table_name.pluralize}", *migratable_attributes],
+          ['--timestamps=true', '--primary_key_type=string']
+        )
+      end
+
+      # :reek:FeatureEnvy
       def create_join_table_migration_generator(association)
+        return if existing?
+
         Rails::Generators::MigrationGenerator.new(
           [
             "create_join_table_#{association.join_table}",

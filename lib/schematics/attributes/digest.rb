@@ -26,6 +26,8 @@ module Schematics
 
       def icon = :key
 
+      def open_api_schema_type = 'password'
+
       def permitted_params = [name.to_sym, :"#{name}_confirmation"]
 
       def to_str = super + <<~RUBY

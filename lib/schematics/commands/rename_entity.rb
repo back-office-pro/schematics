@@ -2,7 +2,7 @@
 
 require 'rails/generators'
 require 'rails/generators/rails/migration/migration_generator'
-require 'rails/generators/rails/scaffold/scaffold_generator'
+require 'rails/generators/rails/model/model_generator'
 require 'generators/permissions/permissions_generator'
 require 'generators/rspec/feature/feature_generator'
 require 'generators/translations/translations_generator'
@@ -14,7 +14,7 @@ module Schematics
         case target
         when :build
           [
-            scaffold_generator,
+            model_generator,
             translations_generator,
             permissions_generator,
             migration_generator,
@@ -22,16 +22,16 @@ module Schematics
             has_and_belongs_to_many_associations.map(&method(:rename_column_migration_generator))
           ].compact.flatten
         when :clean
-          [scaffold_generator(behavior: :revoke)].compact
+          [model_generator(behavior: :revoke)].compact
         end
       end
 
       private
 
-      def scaffold_generator(behavior: :invoke)
+      def model_generator(behavior: :invoke)
         return if core?
 
-        Rails::Generators::ScaffoldGenerator.new(
+        Rails::Generators::ModelGenerator.new(
           [name, *migratable_attributes],
           ['--skip-migration'],
           behavior:

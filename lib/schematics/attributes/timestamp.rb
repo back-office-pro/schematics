@@ -11,7 +11,7 @@ module Schematics
 
       def icon = :clock
 
-      def open_api_schema_type = ::DateTime
+      def open_api_schema_type = 'datetime'
     end
   end
 end

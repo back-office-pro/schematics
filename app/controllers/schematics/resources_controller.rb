@@ -5,14 +5,15 @@ module Schematics
     include Fillable
     include Filterable
     include Calendarable
-    include Documentable
     include Viewable
     include Lockable
     include Redirectable
+    include Authorizable
 
     before_action :set_resource, except: %i[index new create]
     before_action :set_resources, only: :index
     before_action :set_draft, only: %i[new edit create duplicate update]
+    before_action :authorize_resource, except: :trigger
     before_action :redirect_to_resource_path, only: :show
     before_action :redirect_to_edit_resource_path, only: :edit
     before_action :set_breadcrumb
@@ -28,17 +29,14 @@ module Schematics
 
     prepend_view_path Engine.root.join('app', 'views', 'core')
 
-    authorize_resource instance_name: :resource, except: :trigger
-
-    delegate :model_class, to: :class
     delegate :human_name, :human_name_plural, :gender, to: :model_class
 
     helper_method :model_class
 
-    class << self
-      def model_class = controller_path
-        .classify
-        .safe_constantize
+    def model_name = params[:model_name]
+
+    def model_class
+      model_name.safe_constantize
     end
 
     def archive
@@ -144,7 +142,7 @@ module Schematics
     end
 
     def set_draft
-      @draft = current_user.find_or_create_draft!(model_class.to_s, @resource&.id)
+      @draft = current_user.find_or_create_draft!(model_name, @resource&.id)
     end
 
     def set_breadcrumb

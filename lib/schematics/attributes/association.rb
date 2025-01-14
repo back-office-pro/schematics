@@ -40,9 +40,9 @@ module Schematics
         inverse_entity.default
       end
 
-      def open_api_body_type = ::String
+      def open_api_body_type = 'string'
 
-      def open_api_query_type = ::String
+      def open_api_query_type = 'string'
 
       def open_api_schema_type = { id: super, descriptor.name.to_sym => super }
 

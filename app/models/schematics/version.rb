@@ -10,14 +10,6 @@ module Schematics
     include Translatable
 
     EVENTS = %w[create update destroy archive restore import duplicate].freeze
-    OPEN_API_SCHEMA = {
-      id: ::String,
-      created_at: ::DateTime,
-      event: ::String,
-      user: { id: ::String, full_name: ::String },
-      item: {},
-      object_changes: {}
-    }.freeze
 
     belongs_to :user,
                class_name: 'User',

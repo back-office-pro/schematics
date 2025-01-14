@@ -19,6 +19,8 @@ class ImportsController < Schematics::ResourcesController
 
   protected
 
+  def model_name = 'Import'
+
   def attributes = entity
     .fillable_elements
     .grep_v(Schematics::Attributes::Jsonb)

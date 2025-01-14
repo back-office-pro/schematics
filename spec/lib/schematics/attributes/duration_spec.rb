@@ -27,9 +27,9 @@ describe Schematics::Attributes::Duration do
 
   its(:database_type) { is_expected.to eq('integer') }
   its(:column_name) { is_expected.to eq('duration') }
-  its(:open_api_body_type) { is_expected.to eq(Integer) }
-  its(:open_api_schema_type) { is_expected.to eq(Integer) }
-  its(:open_api_query_type) { is_expected.to eq(Integer) }
+  its(:open_api_body_type) { is_expected.to eq('integer') }
+  its(:open_api_schema_type) { is_expected.to eq('integer') }
+  its(:open_api_query_type) { is_expected.to eq('integer') }
   its(:input_name) { is_expected.to eq('movie[duration]') }
   its(:icon) { is_expected.to eq(:hourglass) }
   its(:to_spec) { is_expected.to eq('A movie has a **duration** attribute of type *duration*') }

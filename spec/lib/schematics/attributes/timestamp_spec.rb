@@ -19,7 +19,7 @@ describe Schematics::Attributes::Timestamp do
   its(:database_type) { is_expected.to eq('datetime') }
   its(:default) { is_expected.to be_a(String) }
   its(:column_name) { is_expected.to eq('read_notifications_at') }
-  its(:open_api_schema_type) { is_expected.to eq(DateTime) }
+  its(:open_api_schema_type) { is_expected.to eq('datetime') }
   its(:icon) { is_expected.to eq(:clock) }
   its(:validators) { is_expected.to be_empty }
   its('validators.to_str') { is_expected.to be_blank }

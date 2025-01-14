@@ -35,8 +35,8 @@ describe Schematics::Virtuals::Concatenation do
   it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
   it { is_expected.to be_valid }
 
-  its(:open_api_schema_type) { is_expected.to eq(String) }
-  its(:open_api_query_type) { is_expected.to eq(String) }
+  its(:open_api_schema_type) { is_expected.to eq('string') }
+  its(:open_api_query_type) { is_expected.to eq('string') }
   its(:to_sql) { is_expected.to eq("(users.first_name || ' ' || profiles.last_name)") }
   its(:preload) { is_expected.to eq([:profile]) }
   its(:icon) { is_expected.to eq(:align_justify) }

@@ -31,9 +31,9 @@ describe Schematics::Attributes::Integer do
   its(:database_type) { is_expected.to eq('integer') }
   its(:default) { is_expected.to be_zero }
   its(:column_name) { is_expected.to eq('price') }
-  its(:open_api_body_type) { is_expected.to eq(Integer) }
-  its(:open_api_schema_type) { is_expected.to eq(Integer) }
-  its(:open_api_query_type) { is_expected.to eq(Integer) }
+  its(:open_api_body_type) { is_expected.to eq('integer') }
+  its(:open_api_schema_type) { is_expected.to eq('integer') }
+  its(:open_api_query_type) { is_expected.to eq('integer') }
   its(:input_name) { is_expected.to eq('entity[price]') }
   its(:unit) { is_expected.to eq('$') }
   its(:precision) { is_expected.to be_zero }

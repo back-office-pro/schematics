@@ -8,10 +8,6 @@ module Schematics
     before_action -> { authorize!(:reply, record) }
     helper_method :attributes
 
-    class << self
-      def model_class = ::Message
-    end
-
     def new
       @resource = record.new_reply
     end

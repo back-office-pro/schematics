@@ -27,8 +27,8 @@ describe Schematics::Attributes::Secret do
 
   its(:database_type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('gcloud_api_key') }
-  its(:open_api_body_type) { is_expected.to eq(String) }
-  its(:open_api_schema_type) { is_expected.to eq(String) }
+  its(:open_api_body_type) { is_expected.to eq('string') }
+  its(:open_api_schema_type) { is_expected.to eq('string') }
   its(:validators) { is_expected.to be_empty }
   its('validators.to_str') { is_expected.to be_blank }
   its(:default) { is_expected.to be_a(String) }

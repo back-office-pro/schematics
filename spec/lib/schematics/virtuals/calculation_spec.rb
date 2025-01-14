@@ -40,8 +40,8 @@ describe Schematics::Virtuals::Calculation do
   it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
   it { is_expected.to be_valid }
 
-  its(:open_api_schema_type) { is_expected.to eq(Float) }
-  its(:open_api_query_type) { is_expected.to eq(Float) }
+  its(:open_api_schema_type) { is_expected.to eq('float') }
+  its(:open_api_query_type) { is_expected.to eq('float') }
   its(:to_sql) { is_expected.to eq('(products.price * categories.vat)') }
   its(:preload) { is_expected.to eq([:category]) }
   its(:icon) { is_expected.to eq(:square_root_alt) }

@@ -6,7 +6,6 @@ module Core
       include Schematics::Progressable
 
       delegate :migration, to: :context, private: true
-      delegate :reload!, to: ::OpenApi::Router, private: true
       delegate :migrator_old_and_changed_entities,
                :migrator_new_and_changed_entities,
                :migrator_changed_entities,
@@ -14,8 +13,6 @@ module Core
                private: true
 
       progressable migration: 70
-
-      before :reload!
 
       def call
         migrator_old_and_changed_entities.each(&method(:remove_constants))
@@ -31,20 +28,17 @@ module Core
       private
 
       def remove_constants(entity)
-        Object.__send__(:remove_const, entity.class_name.to_sym)
-        Object.__send__(:remove_const, :"#{entity.class_name.pluralize}Controller".to_sym)
+        Object.__send__(:remove_const, entity.class_name.to_sym) unless entity.existing?
       end
 
       def load_files(entity)
         case entity
         when proc(&:existing?)
-          load Schematics::Engine.root.join('app', 'controllers', "#{entity.name.pluralize}_controller.rb") # rubocop:disable Layout/LineLength
+          # do nothing
         when proc(&:core?)
           load Schematics::Engine.root.join('app', 'models', 'core', "#{entity.name}.rb")
-          load Schematics::Engine.root.join('app', 'controllers', 'core', "#{entity.name.pluralize}_controller.rb") # rubocop:disable Layout/LineLength
         else
           load ::Rails.root.join('app', 'models', "#{entity.name}.rb")
-          load ::Rails.root.join('app', 'controllers', "#{entity.name.pluralize}_controller.rb")
         end
       end
     end

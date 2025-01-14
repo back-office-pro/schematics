@@ -14,6 +14,8 @@ class EmailingsController < Schematics::ResourcesController
     authorize!(:email, parent_model_class)
   end
 
+  def model_name = 'Emailing'
+
   def record
     @resource.try(:record) || super
   end

@@ -31,7 +31,7 @@ describe Schematics::Commands::RenameEntity do
       let(:behavior) { :invoke }
 
       its(:size) { is_expected.to eq(6) }
-      its([0]) { is_expected.to be_a(Rails::Generators::ScaffoldGenerator) }
+      its([0]) { is_expected.to be_a(Rails::Generators::ModelGenerator) }
       its([0]) { is_expected.to have_attributes(name: 'prospect', behavior:) }
       its([1]) { is_expected.to be_a(TranslationsGenerator) }
       its([1]) { is_expected.to have_attributes(name: 'prospect', behavior:) }
@@ -61,7 +61,7 @@ describe Schematics::Commands::RenameEntity do
       let(:target) { :clean }
       let(:behavior) { :revoke }
 
-      its([0]) { is_expected.to be_a(Rails::Generators::ScaffoldGenerator) }
+      its([0]) { is_expected.to be_a(Rails::Generators::ModelGenerator) }
       its([0]) { is_expected.to have_attributes(name: 'prospect', behavior:) }
       its(:size) { is_expected.to eq(1) }
     end

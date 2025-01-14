@@ -2,7 +2,7 @@
 
 require 'rails/generators'
 require 'rails/generators/rails/migration/migration_generator'
-require 'rails/generators/rails/scaffold/scaffold_generator'
+require 'rails/generators/rails/model/model_generator'
 require 'generators/permissions/permissions_generator'
 require 'generators/translations/translations_generator'
 
@@ -10,7 +10,7 @@ module Schematics
   module Commands
     class DestroyEntity < Command
       def generators = [
-        scaffold_generator,
+        model_generator,
         translations_generator,
         permissions_generator,
         migration_generator,
@@ -19,10 +19,10 @@ module Schematics
 
       private
 
-      def scaffold_generator
+      def model_generator
         return if core?
 
-        Rails::Generators::ScaffoldGenerator.new(
+        Rails::Generators::ModelGenerator.new(
           [name, *migratable_attributes],
           ['--skip-migration'],
           behavior: :revoke

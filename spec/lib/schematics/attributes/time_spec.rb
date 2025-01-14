@@ -24,9 +24,9 @@ describe Schematics::Attributes::Time do
 
   its(:database_type) { is_expected.to eq('time') }
   its(:column_name) { is_expected.to eq('hour') }
-  its(:open_api_body_type) { is_expected.to eq(DateTime) }
-  its(:open_api_schema_type) { is_expected.to eq(DateTime) }
-  its(:open_api_query_type) { is_expected.to eq(DateTime) }
+  its(:open_api_body_type) { is_expected.to eq('datetime') }
+  its(:open_api_schema_type) { is_expected.to eq('datetime') }
+  its(:open_api_query_type) { is_expected.to eq('datetime') }
   its(:input_name) { is_expected.to eq('message[hour]') }
   its(:icon) { is_expected.to eq(:clock) }
   its(:validators) { is_expected.to be_empty }

@@ -24,9 +24,9 @@ describe Schematics::Attributes::RichText do
 
   its(:database_type) { is_expected.to eq('rich_text') }
   its(:column_name) { is_expected.to eq('summary') }
-  its(:open_api_body_type) { is_expected.to eq(String) }
-  its(:open_api_schema_type) { is_expected.to eq(String) }
-  its(:open_api_query_type) { is_expected.to eq(String) }
+  its(:open_api_body_type) { is_expected.to eq('string') }
+  its(:open_api_schema_type) { is_expected.to eq('string') }
+  its(:open_api_query_type) { is_expected.to eq('string') }
   its(:input_name) { is_expected.to eq('entity[summary]') }
   its(:preload) { is_expected.to eq([rich_text_summary: [embeds_attachments: :blob]]) }
   its(:icon) { is_expected.to eq(:align_justify) }
