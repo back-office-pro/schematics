@@ -16,12 +16,16 @@ module OpenAPI
                to: :entity,
                private: true
 
+      def tag = model_class
+        .human_name_plural
+        .humanize
+
       def to_h = {
-        path => {
+        path.to_sym => {
           http_method => {
             summary:,
             operationId: operation_id,
-            tags:,
+            tags: [tag],
             parameters: parameters.compact.sort_by(&:name).map(&:to_h),
             requestBody: request_body,
             responses: responses.map(&:to_h).reduce(&:deep_merge)
@@ -34,8 +38,6 @@ module OpenAPI
       def summary = "#{self.class.name.demodulize.underscore.humanize} #{model_class.human_name}"
 
       def operation_id = "#{class_name}_#{self.class.name.demodulize}"
-
-      def tags = [model_class.human_name_plural.humanize]
 
       def parameters = [
         Components::Parameter.new(
