@@ -6,7 +6,7 @@ module OpenAPI
     include ::ActiveModel::API
     attr_accessor :schema
 
-    def to_h
+    def to_h = I18n.with_locale(:en) do
       doc = open_api_data
       doc[:paths] = paths.deep_merge(doc[:paths]).sort.to_h
       doc[:tags] = tags.concat(doc[:tags]).sort { _1[:name] <=> _2[:name] } # rubocop:disable Style/NumberedParametersLimit
