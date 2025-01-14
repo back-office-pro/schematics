@@ -20,9 +20,9 @@ module Schematics
           .humanize(capitalize: false)
       end
 
-      def human_name_plural = model_name
-        .human(count: 2)
-        .humanize(capitalize: false)
+      def human_name_plural(options = {})
+        human_name(**options, count: 2)
+      end
     end
   end
 end
