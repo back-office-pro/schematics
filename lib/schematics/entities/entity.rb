@@ -252,7 +252,9 @@ module Schematics
         .compact
         .uniq
 
-      def to_str = ''
+      def to_str = <<~RUBY
+        class #{class_name} < Schematics::ApplicationRecord; end
+      RUBY
 
       def association_elements = has_many_and_through_and_belongs_to_many_associations
         .reject(&:existing?)
@@ -265,7 +267,7 @@ module Schematics
 
       def model_elements = elements
         .concat(triggers, validators, search_aliases)
-        .push(self, descriptor)
+        .push(descriptor)
 
       def start_date_attribute_name = date_attributes
         .find(&:start_date?)

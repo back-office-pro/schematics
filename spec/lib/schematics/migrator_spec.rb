@@ -110,8 +110,7 @@ describe Schematics::Migrator do
       its([0]) do
         is_expected.to have_attributes(
           entity: kind_of(Schematics::Entities::Entity),
-          attribute: kind_of(Schematics::Entities::Entity),
-          target: :build
+          attribute: kind_of(Schematics::Entities::Entity)
         )
       end
     end
@@ -119,16 +118,7 @@ describe Schematics::Migrator do
     describe '#clean_commands' do
       subject { migration.clean_commands }
 
-      its(:size) { is_expected.to eq(1) }
-      its([0]) { is_expected.to be_a(Schematics::Commands::RenameEntity) }
-
-      its([0]) do
-        is_expected.to have_attributes(
-          entity: kind_of(Schematics::Entities::Entity),
-          attribute: kind_of(Schematics::Entities::Entity),
-          target: :clean
-        )
-      end
+      it { is_expected.to be_empty }
     end
 
     describe '#new_entities' do
@@ -451,8 +441,7 @@ describe Schematics::Migrator do
       its([0]) do
         is_expected.to have_attributes(
           entity: kind_of(Schematics::Entities::Entity),
-          attribute: kind_of(Schematics::Entities::Entity),
-          target: :build
+          attribute: kind_of(Schematics::Entities::Entity)
         )
       end
 
@@ -468,16 +457,7 @@ describe Schematics::Migrator do
     describe '#clean_commands' do
       subject { migration.clean_commands }
 
-      its(:size) { is_expected.to eq(1) }
-      its([0]) { is_expected.to be_a(Schematics::Commands::RenameEntity) }
-
-      its([0]) do
-        is_expected.to have_attributes(
-          entity: kind_of(Schematics::Entities::Entity),
-          attribute: kind_of(Schematics::Entities::Entity),
-          target: :clean
-        )
-      end
+      it { is_expected.to be_empty }
     end
 
     describe '#new_entities' do

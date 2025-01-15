@@ -17,8 +17,8 @@ module Schematics
 
     def old_entities = clean_commands
       .grep(Commands::DestroyEntity)
-      .concat(clean_commands.grep(Commands::RenameEntity))
       .map(&:entity)
+      .concat(build_commands.grep(Commands::RenameEntity).map(&:attribute))
 
     def changed_entities = Array( # rubocop:disable Metrics/CyclomaticComplexity
       @current_schema
@@ -44,7 +44,7 @@ module Schematics
         next Commands::CreateEntity.new(entity: new_entity) unless current_entity
 
         [
-          rename_entity_command(new_entity, current_entity, :build),
+          rename_entity_command(new_entity, current_entity),
           add_permission_commands(new_entity, current_entity),
           rename_permission_commands(new_entity, current_entity),
           add_translation_commands(new_entity, current_entity),
@@ -63,7 +63,6 @@ module Schematics
         next Commands::DestroyEntity.new(entity: current_entity) unless new_entity
 
         [
-          rename_entity_command(current_entity, new_entity, :clean),
           remove_permission_commands(current_entity, new_entity),
           remove_attribute_commands(current_entity, new_entity),
           remove_translation_commands(current_entity, new_entity),
@@ -74,10 +73,10 @@ module Schematics
 
     private
 
-    def rename_entity_command(entity, other_entity, target)
+    def rename_entity_command(entity, other_entity)
       return if entity.name == other_entity.name
 
-      Commands::RenameEntity.new(entity:, attribute: other_entity, target:)
+      Commands::RenameEntity.new(entity:, attribute: other_entity)
     end
 
     def add_permission_commands(entity, current_entity)

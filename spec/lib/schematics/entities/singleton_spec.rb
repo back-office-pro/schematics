@@ -15,7 +15,7 @@ describe Schematics::Entities::Singleton do
 
   its(:actions) { is_expected.to eq(%i[show update]) }
 
-  its(:to_str) do
+  its('model_elements.last') do
     is_expected.to eq <<~RUBY
       include Schematics::Singleton
     RUBY

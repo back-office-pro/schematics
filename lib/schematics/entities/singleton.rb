@@ -9,7 +9,7 @@ module Schematics
 
       def created_at_attribute = super.tap { it.options = { hidden: true } }
 
-      def to_str = <<~RUBY
+      def model_elements = super.push <<~RUBY
         include Schematics::Singleton
       RUBY
     end

@@ -14,9 +14,13 @@ module Core
 
       progressable migration: 70
 
-      def call
-        migrator_old_and_changed_entities.each(&method(:remove_constants))
-        migrator_new_and_changed_entities.each(&method(:load_files))
+      def call # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+        migrator_old_and_changed_entities
+          .reject(&:existing?)
+          .each(&method(:remove_constant))
+        migrator_new_and_changed_entities
+          .select(&:core?)
+          .each(&method(:load_file))
         migrator_changed_entities
           .filter_map(&:model_class)
           .each(&:reset_column_information)
@@ -27,19 +31,12 @@ module Core
 
       private
 
-      def remove_constants(entity)
-        Object.__send__(:remove_const, entity.class_name.to_sym) unless entity.existing?
+      def remove_constant(entity)
+        Object.__send__(:remove_const, entity.class_name.to_sym)
       end
 
-      def load_files(entity)
-        case entity
-        when proc(&:existing?)
-          # do nothing
-        when proc(&:core?)
-          load Schematics::Engine.root.join('app', 'models', 'core', "#{entity.name}.rb")
-        else
-          load ::Rails.root.join('app', 'models', "#{entity.name}.rb")
-        end
+      def load_file(entity)
+        load Schematics::Engine.root.join('app', 'models', 'core', "#{entity.name}.rb")
       end
     end
   end
