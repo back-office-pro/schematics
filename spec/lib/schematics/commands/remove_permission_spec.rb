@@ -15,7 +15,7 @@ describe Schematics::Commands::RemovePermission do
     subject { command.generators }
 
     its([0]) { is_expected.to be_a(PermissionGenerator) }
-    its([0]) { is_expected.to have_attributes(name: 'client', behavior: :revoke) }
+    its([0]) { is_expected.to have_attributes(name: 'Client', behavior: :revoke) }
     its(:size) { is_expected.to eq(1) }
   end
 end

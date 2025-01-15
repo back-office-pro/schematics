@@ -8,7 +8,7 @@ module Schematics
     class RenamePermission < Command
       def generators = [
         PermissionGenerator.new(
-          [name],
+          [class_name],
           ["--action=#{target}", "--rename=#{attribute}"]
         )
       ]

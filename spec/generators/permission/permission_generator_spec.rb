@@ -4,7 +4,7 @@ require 'rails_helper'
 require 'generators/permission/permission_generator'
 
 RSpec.describe PermissionGenerator do
-  subject(:generator) { described_class.new(['user'], options, behavior:) }
+  subject(:generator) { described_class.new(['User'], options, behavior:) }
 
   include_context 'with admin role'
 

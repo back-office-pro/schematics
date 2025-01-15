@@ -9,7 +9,7 @@ class PermissionGenerator < Rails::Generators::NamedBase
 
     Permission.reload_definitions!
     PaperTrail.request(enabled: false) do
-      Role.admin.permissions.push(Permission.create!(model:, action:))
+      Role.admin.permissions.push(Permission.create!(model: name, action:))
     end
   end
 
@@ -17,7 +17,7 @@ class PermissionGenerator < Rails::Generators::NamedBase
     return unless destroying?
 
     PaperTrail.request(enabled: false) do
-      Permission.delete_by(model:, action:)
+      Permission.delete_by(model: name, action:)
     end
   end
 
@@ -25,7 +25,7 @@ class PermissionGenerator < Rails::Generators::NamedBase
     return unless renaming?
 
     PaperTrail.request(enabled: false) do
-      Permission.where(model:, action: old_action).update!(action:)
+      Permission.where(model: name, action: old_action).update!(action:)
     end
   end
 
@@ -36,12 +36,6 @@ class PermissionGenerator < Rails::Generators::NamedBase
   end
 
   def old_action = options[:rename]
-
-  def model = entity.class_name
-
-  def entity = Tenant
-    .schema
-    .find_entity_by_name(name.underscore)
 
   def action = options[:action]
 

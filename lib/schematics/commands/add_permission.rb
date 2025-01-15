@@ -7,7 +7,7 @@ module Schematics
   module Commands
     class AddPermission < Command
       def generators = [
-        PermissionGenerator.new([name], ["--action=#{attribute}"])
+        PermissionGenerator.new([class_name], ["--action=#{attribute}"])
       ]
 
       def weight = 3

@@ -7,7 +7,11 @@ module Schematics
   module Commands
     class RemovePermission < Command
       def generators = [
-        PermissionGenerator.new([name], ["--action=#{attribute}"], behavior: :revoke)
+        PermissionGenerator.new(
+          [class_name],
+          ["--action=#{attribute}"],
+          behavior: :revoke
+        )
       ]
 
       def weight = 3
