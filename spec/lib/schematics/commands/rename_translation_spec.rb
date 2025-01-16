@@ -22,6 +22,7 @@ describe Schematics::Commands::RenameTranslation do
       its([0]) do
         is_expected.to have_attributes(
           name: 'activerecord.attributes.client.name',
+          options: a_hash_including(rename: 'activerecord.attributes.client.surname'),
           behavior: :invoke
         )
       end
@@ -37,6 +38,7 @@ describe Schematics::Commands::RenameTranslation do
       its([0]) do
         is_expected.to have_attributes(
           name: 'activerecord.events.client.follow',
+          options: a_hash_including(rename: 'activerecord.attributes.client.surname'),
           behavior: :invoke
         )
       end
