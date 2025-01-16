@@ -14,6 +14,7 @@ module Schematics
                :table_name,
                :class_name,
                :association_attributes,
+               :actions_with_events,
                :core?,
                :existing?,
                :schema,

@@ -24,7 +24,7 @@ module Schematics
       end
 
       def permissions_generator
-        PermissionsGenerator.new([name], [], behavior: :revoke)
+        PermissionsGenerator.new([class_name], [], behavior: :revoke)
       end
 
       def migration_generator = Rails::Generators::MigrationGenerator.new(

@@ -9,7 +9,7 @@ RSpec.describe PermissionsGenerator do
   include_context 'with user'
   include_context 'with admin role'
 
-  let(:name) { 'user' }
+  let(:name) { 'User' }
   let(:model) { 'User' }
   let(:behavior) { :invoke }
   let(:options) { [] }
@@ -22,14 +22,6 @@ RSpec.describe PermissionsGenerator do
 
   describe '#invoke_all' do
     subject(:invoke_all) { generator.invoke_all }
-
-    context 'when invoking' do
-      it 'creates admin permissions' do
-        expect { invoke_all }
-          .to change(admin_role.permissions, :count)
-          .by(6)
-      end
-    end
 
     context 'when revoking' do
       let(:behavior) { :revoke }
@@ -60,7 +52,7 @@ RSpec.describe PermissionsGenerator do
     end
 
     context 'when renaming' do
-      let(:name) { 'role' }
+      let(:name) { 'Role' }
       let(:options) { ['--rename=User'] }
 
       it 'updates permissions' do

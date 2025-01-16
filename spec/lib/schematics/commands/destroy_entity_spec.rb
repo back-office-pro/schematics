@@ -42,7 +42,7 @@ describe Schematics::Commands::DestroyEntity do
     its([0]) { is_expected.to be_a(TranslationsGenerator) }
     its([0]) { is_expected.to have_attributes(name:, behavior:) }
     its([1]) { is_expected.to be_a(PermissionsGenerator) }
-    its([1]) { is_expected.to have_attributes(name:, behavior:) }
+    its([1]) { is_expected.to have_attributes(name: 'Assembly', behavior:) }
     its([2]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
     its([2]) { is_expected.to have_attributes(name: 'drop_assemblies', behavior: :invoke) }
     its([3]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }

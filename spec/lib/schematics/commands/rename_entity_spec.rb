@@ -30,11 +30,18 @@ describe Schematics::Commands::RenameEntity do
     its([0]) { is_expected.to be_a(TranslationsGenerator) }
     its([0]) { is_expected.to have_attributes(name: 'prospect', behavior:) }
     its([1]) { is_expected.to be_a(PermissionsGenerator) }
-    its([1]) { is_expected.to have_attributes(name: 'prospect', behavior:) }
     its([2]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
     its([2]) { is_expected.to have_attributes(name: 'rename_clients_to_prospects', behavior:) }
     its([3]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
     its([4]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
+
+    its([1]) do
+      is_expected.to have_attributes(
+        name: 'Prospect',
+        options: a_hash_including(rename: 'Client'),
+        behavior:
+      )
+    end
 
     its([3]) do
       is_expected.to have_attributes(

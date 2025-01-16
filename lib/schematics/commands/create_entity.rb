@@ -2,7 +2,7 @@
 
 require 'rails/generators'
 require 'rails/generators/rails/migration/migration_generator'
-require 'generators/permissions/permissions_generator'
+require 'generators/permission/permission_generator'
 require 'generators/translations/translations_generator'
 
 module Schematics
@@ -10,7 +10,7 @@ module Schematics
     class CreateEntity < Command
       def generators = [
         translations_generator,
-        permissions_generator,
+        actions_with_events.map(&method(:permission_generator)),
         migration_generator,
         has_and_belongs_to_many_associations.map(&method(:create_join_table_migration_generator))
       ].compact.flatten
@@ -23,10 +23,10 @@ module Schematics
         TranslationsGenerator.new([name])
       end
 
-      def permissions_generator
+      def permission_generator(action)
         return if core?
 
-        PermissionsGenerator.new([name])
+        PermissionGenerator.new([class_name], ["--action=#{action}"])
       end
 
       def migration_generator

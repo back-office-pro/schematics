@@ -27,7 +27,7 @@ module Schematics
       def old_name = attribute.name
 
       def permissions_generator = PermissionsGenerator.new(
-        [name],
+        [class_name],
         ["--rename=#{old_class_name}"]
       )
 
