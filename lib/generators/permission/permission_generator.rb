@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# :reek:MissingSafeMethod
 class PermissionGenerator < Rails::Generators::NamedBase
   class_option :action, type: :string
   class_option :rename, type: :string
