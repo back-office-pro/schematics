@@ -14,7 +14,7 @@ module Schematics
         migration_generator,
         has_and_belongs_to_many_associations.map(&method(:rename_join_table_migration_generator)),
         has_and_belongs_to_many_associations.map(&method(:rename_column_migration_generator))
-      ].compact.flatten
+      ].flatten.compact
 
       private
 

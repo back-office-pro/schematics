@@ -13,7 +13,7 @@ module Schematics
         permissions_generator,
         migration_generator,
         has_and_belongs_to_many_associations.map(&method(:drop_join_table_migration_generator))
-      ].compact.flatten
+      ].flatten.compact
 
       private
 
