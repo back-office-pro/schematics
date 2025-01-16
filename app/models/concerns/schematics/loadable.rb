@@ -57,11 +57,6 @@ module Schematics
 
       def preload_all = includes(entity.includes).preload(entity.preload)
 
-      def reload_definitions!
-        Object.__send__(:remove_const, name.to_sym)
-        load Engine.root.join('app', 'models', 'core', "#{name.underscore}.rb") if entity.core?
-      end
-
       def print_model
         print entity.model_elements.map(&:to_str).join # rubocop:disable Rails/Output
       end
