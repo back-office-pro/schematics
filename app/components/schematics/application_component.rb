@@ -13,6 +13,7 @@ module Schematics
 
     use_helpers :current_user,
                 :current_ability,
+                :current_schema,
                 :can?,
                 :cannot?,
                 :content_security_policy_nonce,

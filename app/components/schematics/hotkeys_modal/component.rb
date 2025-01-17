@@ -11,8 +11,7 @@ module Schematics
 
       def title = t('.title')
 
-      def groups = ::Tenant
-        .schema
+      def groups = current_schema
         .model_classes
         .push(::Import, ::ActiveStorage::Blob, ::Emailing)
         .select { can?(:index, it) }

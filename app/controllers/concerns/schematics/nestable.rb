@@ -19,8 +19,7 @@ module Schematics
 
     protected
 
-    def parent_model_class = ::Tenant
-      .schema
+    def parent_model_class = current_schema
       .entities
       .to_h { [it.class_name, it.model_class] }
       .fetch(parent_model_name)

@@ -53,8 +53,7 @@ module Schematics
       .ids
       .map { { "dashboard_rankings_#{it}" => [] } }
 
-    def timeline_preferences = ::Tenant
-      .schema
+    def timeline_preferences = current_schema
       .entities
       .reject(&:hidden?)
       .flat_map do |entity|
@@ -63,13 +62,11 @@ module Schematics
           .map { |action| [action, entity.class_name].join('_') }
       end
 
-    def viewer_preferences = ::Tenant
-      .schema
+    def viewer_preferences = current_schema
       .entities
       .map { "viewer_#{it.id}" }
 
-    def viewer_col_preferences = ::Tenant
-      .schema
+    def viewer_col_preferences = current_schema
       .entities
       .flat_map(&:listable_elements)
       .map { "col_#{it.entity.id}_#{it.id}" }

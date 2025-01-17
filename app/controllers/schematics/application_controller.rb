@@ -3,6 +3,7 @@
 module Schematics
   class ApplicationController < ::Tenant.application_controller_class
     include ::Pagy::Backend
+    include Tenantable
     include Localizable
     include Authenticable
     include Sudoable
