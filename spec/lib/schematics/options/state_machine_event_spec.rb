@@ -35,6 +35,7 @@ describe Schematics::Options::StateMachineEvent do
   its(:color) { is_expected.to eq(:success) }
   its(:confirm) { is_expected.to be_falsy }
   its(:human) { is_expected.to eq('Complete') }
+  its(:i18n_scope) { is_expected.to eq(:events) }
   its(:i18n_key) { is_expected.to eq('activerecord.events.task.complete') }
 
   its(:to_spec) do

@@ -4,12 +4,14 @@ require 'rails/generators'
 require 'rails/generators/rails/migration/migration_generator'
 require 'generators/permission/permission_generator'
 require 'generators/translations/translations_generator'
+require 'generators/translation/translation_generator'
 
 module Schematics
   module Commands
     class CreateEntity < Command
       def generators = [
         translations_generator,
+        translatable_elements.map(&method(:translation_generator)),
         actions_with_events.map(&method(:permission_generator)),
         migration_generator,
         has_and_belongs_to_many_associations.map(&method(:create_join_table_migration_generator))
@@ -21,6 +23,12 @@ module Schematics
         return if core?
 
         TranslationsGenerator.new([name])
+      end
+
+      def translation_generator(element)
+        return if core?
+
+        TranslationGenerator.new([element.i18n_key])
       end
 
       def permission_generator(action)

@@ -11,15 +11,13 @@ module Schematics
 
       attr_accessor :enum, :value
 
+      def i18n_scope = :enums
+
       def i18n_key
         [super, value].join('.')
       end
 
       alias id i18n_key
-
-      private
-
-      def i18n_scope = :enums
     end
   end
 end

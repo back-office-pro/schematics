@@ -4,12 +4,14 @@ require 'rails/generators'
 require 'rails/generators/rails/migration/migration_generator'
 require 'generators/permissions/permissions_generator'
 require 'generators/translations/translations_generator'
+require 'generators/translation/translation_generator'
 
 module Schematics
   module Commands
     class DestroyEntity < Command
       def generators = [
         translations_generator,
+        translatable_elements.map(&method(:translation_generator)),
         permissions_generator,
         migration_generator,
         has_and_belongs_to_many_associations.map(&method(:drop_join_table_migration_generator))
@@ -21,6 +23,12 @@ module Schematics
         return if core?
 
         TranslationsGenerator.new([name], [], behavior: :revoke)
+      end
+
+      def translation_generator(element)
+        return if core?
+
+        TranslationGenerator.new([element.i18n_key], [], behavior: :revoke)
       end
 
       def permissions_generator

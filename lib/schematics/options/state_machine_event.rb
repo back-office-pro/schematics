@@ -43,6 +43,8 @@ module Schematics
 
       def suffixed_name = "#{name}_#{state_machine_name}"
 
+      def i18n_scope = :events
+
       def human
         translate(i18n_key, default: name.humanize)
       end
@@ -58,8 +60,6 @@ module Schematics
       memoize def trigger = Triggers::Trigger.new(entity:, action:, callback:)
 
       def spec_interpolations = super.merge(name:, from: Array(from).to_sentence, to:)
-
-      def i18n_scope = :events
     end
   end
 end

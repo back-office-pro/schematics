@@ -28,6 +28,12 @@ module Schematics
 
       protected
 
+      def translatable_elements = entity
+        .fields
+        .concat(has_and_belongs_to_many_associations)
+        .concat(entity.enum_attributes.flat_map(&:enum_values))
+        .concat(entity.state_machine_attributes.flat_map(&:events))
+
       def has_and_belongs_to_many_associations = entity # rubocop:disable Naming/PredicateName
         .has_and_belongs_to_many_associations
         .reject(&:hidden?)
