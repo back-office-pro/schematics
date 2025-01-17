@@ -4,18 +4,19 @@ require 'rails_helper'
 require 'cancan/matchers'
 
 RSpec.describe Schematics::TeamAbility do
-  subject(:ability) { ability_class.new(user) }
+  subject(:ability) { ability_class.new(user, schema) }
 
   include_context 'with user'
 
   let(:ability_class) do
     Class.new(described_class) do
-      def initialize(user)
-        can :read, model_classes
+      def initialize(user, schema)
+        can :read, :all
         super
       end
     end
   end
+  let(:schema) { Schematics::Schema.new }
   let(:first_team) { Team.create!(name: 'My Team 1') }
   let(:second_team) { Team.create!(name: 'My Team 2') }
   let(:other_user) do
