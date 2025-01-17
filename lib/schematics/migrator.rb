@@ -5,7 +5,7 @@ module Schematics
   class Migrator # rubocop:disable Metrics/ClassLength
     attr_reader :new_schema
 
-    def initialize(new_schema, current_schema = nil)
+    def initialize(new_schema = Schema.new, current_schema = nil)
       @new_schema = new_schema
       @current_schema = current_schema
     end
