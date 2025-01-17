@@ -6,7 +6,7 @@ class RepositoryGenerator < Rails::Generators::Base
 
     client.create_repository(
       Tenant.subdomain,
-      organization: Tenant.organization,
+      organization: Instance.organization,
       private: true
     )
   end
@@ -14,7 +14,7 @@ class RepositoryGenerator < Rails::Generators::Base
   def destroy_repository
     return unless destroying?
 
-    client.delete_repository("#{Tenant.organization}/#{Tenant.subdomain}")
+    client.delete_repository("#{Instance.organization}/#{Tenant.subdomain}")
   end
 
   private

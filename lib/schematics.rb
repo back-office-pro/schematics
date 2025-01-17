@@ -5,6 +5,7 @@ require 'active_model/validations/associated'
 require 'active_model/validations/uniqueness'
 require 'array'
 require 'hash'
+require 'instance'
 require 'numeric'
 require 'object'
 require 'tenant'
@@ -36,6 +37,7 @@ loader.ignore("#{__dir__}/spec")
 loader.ignore("#{__dir__}/validators")
 loader.ignore("#{__dir__}/array.rb")
 loader.ignore("#{__dir__}/hash.rb")
+loader.ignore("#{__dir__}/instance.rb")
 loader.ignore("#{__dir__}/numeric.rb")
 loader.ignore("#{__dir__}/object.rb")
 loader.ignore("#{__dir__}/rubygems_plugin.rb")

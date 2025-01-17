@@ -61,7 +61,7 @@ module Schematics
         def url
           return '#' unless external_doc?
 
-          ::Tenant.url(path:)
+          ::Instance.url(path:)
         end
 
         def render?

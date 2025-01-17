@@ -28,49 +28,13 @@ class Tenant
       .module_parent_name
       .underscore
 
-    def application_record_class
-      return ApplicationRecord if defined?(ApplicationRecord)
-
-      ActiveRecord::Base
-    end
-
-    def application_controller_class
-      return ApplicationController if defined?(ApplicationController)
-
-      ActionController::Base
-    end
-
-    def application_job_class
-      return ApplicationJob if defined?(ApplicationJob)
-
-      ActiveJob::Base
-    end
-
-    def application_mailer_class
-      return ApplicationMailer if defined?(ApplicationMailer)
-
-      ActionMailer::Base
-    end
-
     def subdomain = app_name.dasherize
-
-    def domain = ENV.fetch('HOST', 'back-office.pro')
-
-    def url(path: nil) = URI::HTTPS
-      .build(host: "www.#{domain}", path:)
-      .to_s
-
-    def organization = domain.parameterize
 
     def human = app_name.humanize
 
     def default_url_options = { host:, port: }.compact
 
     def default_mailer_options = { from: "no-reply@#{host}" }
-
-    def ssl_path = Pathname.new("/etc/letsencrypt/live/#{domain}")
-
-    def ssl? = ssl_path.exist?
 
     def demo? = app_name.eql?('demo') && !Rails.env.test?
 
@@ -79,7 +43,7 @@ class Tenant
     end
 
     def host
-      return "#{subdomain}.#{domain}" if Rails.env.production?
+      return "#{subdomain}.#{Instance.domain}" if Rails.env.production?
 
       'localhost'
     end

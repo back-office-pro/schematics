@@ -21,7 +21,7 @@ RSpec.describe Schematics::Button::Help::Component, type: :component do
     let(:model_class) { Migration }
     let(:path) { '/docs/en/reference/migrations' }
 
-    it { is_expected.to have_link(text, href: Tenant.url(path:)) }
+    it { is_expected.to have_link(text, href: Instance.url(path:)) }
   end
 
   context 'when model class is not core' do
@@ -34,6 +34,6 @@ RSpec.describe Schematics::Button::Help::Component, type: :component do
     let(:model_class) { nil }
     let(:path) { '/docs/en/reference/' }
 
-    it { is_expected.to have_link(text, href: Tenant.url(path:)) }
+    it { is_expected.to have_link(text, href: Instance.url(path:)) }
   end
 end

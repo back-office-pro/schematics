@@ -9,9 +9,9 @@ Rails.application.configure do
   config.eager_load = true
 
   # Security
-  config.assume_ssl = Tenant.ssl?
-  config.force_ssl = Tenant.ssl?
-  config.hosts = [Tenant.host] if Tenant.ssl?
+  config.assume_ssl = Instance.ssl?
+  config.force_ssl = Instance.ssl?
+  config.hosts = [Tenant.host] if Instance.ssl?
   config.require_master_key = true
   config.sandbox_by_default = true
 

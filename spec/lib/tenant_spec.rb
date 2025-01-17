@@ -16,21 +16,16 @@ describe Tenant do
     let(:app_name) { 'Demo' }
 
     it { is_expected.to be_demo }
-    it { is_expected.not_to be_ssl }
 
     its(:schema) { is_expected.to be_a(Schematics::Schema) }
     its(:app_name) { is_expected.to eq('demo') }
     its(:subdomain) { is_expected.to eq('demo') }
-    its(:domain) { is_expected.to eq('back-office.pro') }
-    its(:url) { is_expected.to eq('https://www.back-office.pro') }
-    its(:organization) { is_expected.to eq('back-office-pro') }
     its(:human) { is_expected.to eq('Demo') }
     its(:default_url_options) { is_expected.to eq(host: 'localhost', port: 3000) }
     its(:default_mailer_options) { is_expected.to eq(from: 'no-reply@localhost') }
     its(:default_password) { is_expected.to eq('Azerty1234?!!') }
     its(:host) { is_expected.to eq('localhost') }
     its(:port) { is_expected.to eq(3000) }
-    its(:ssl_path) { is_expected.to eq(Pathname.new('/etc/letsencrypt/live/back-office.pro')) }
     its(:version) { is_expected.to eq('1.0.0') }
     its(:database) { is_expected.to eq(:sqlite3) }
   end

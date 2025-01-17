@@ -3,7 +3,7 @@
 Rails.configuration.exceptions_app = Rails.application.routes
 
 Rails.application.routes.prepend do
-  direct(:website) { Tenant.url }
+  direct(:website) { Instance.url }
   mount Schematics::Engine, at: '/'
   mount MissionControl::Jobs::Engine, at: '/internal/jobs'
   localized do
