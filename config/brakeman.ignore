@@ -23,13 +23,13 @@
     {
       "warning_type": "Dangerous Eval",
       "warning_code": 13,
-      "fingerprint": "08cd5b0e0541840c2806c6426e89bab96539aed6d5921ce21908e51c9a321446",
+      "fingerprint": "9d5cd7f00886cf3aff04944591c3b037b62e41d0a23ecc887b1120d6d85e0136",
       "check_name": "Evaluation",
       "message": "Dynamic code evaluation",
       "file": "app/models/concerns/schematics/loadable.rb",
-      "line": 25,
+      "line": 26,
       "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
-      "code": "eval(it, binding, \"app/models/concerns/schematics/loadable.rb\", 25)",
+      "code": "eval(it, binding, \"app/models/concerns/schematics/loadable.rb\", 26)",
       "render_path": null,
       "location": {
         "type": "method",
