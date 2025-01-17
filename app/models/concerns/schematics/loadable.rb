@@ -14,6 +14,7 @@ module Schematics
     end
 
     class_methods do
+      delegate :schema, to: ::Tenant
       # :reek:Attribute
       attr_accessor :concerns
 
@@ -27,9 +28,9 @@ module Schematics
         end
       end
 
-      def entity = ::Tenant
-        .schema
-        .find_entity_by_name(name.underscore)
+      def entity
+        schema.find_entity_by_name(name.underscore)
+      end
 
       def filter_attributes = entity
         .non_renderable_attributes
