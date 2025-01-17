@@ -11,8 +11,6 @@ RSpec.describe Schematics::DemoAbility do
   let(:user) { User.new(role:) }
   let(:role) { admin_role }
 
-  before { allow(Tenant).to receive(:demo?).and_return(true) }
-
   it { is_expected.not_to be_able_to(:destroy, user) }
   it { is_expected.not_to be_able_to(:archive, user) }
   it { is_expected.not_to be_able_to(:update, user, :password) }

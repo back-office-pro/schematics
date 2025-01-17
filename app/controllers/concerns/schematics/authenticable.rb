@@ -38,7 +38,11 @@ module Schematics
     end
 
     def current_ability
-      @current_ability ||= Ability.new(current_user)
+      @current_ability ||= begin
+        ability = Ability.new(current_user)
+        ability.merge(DemoAbility.new) if Tenant.demo?
+        ability
+      end
     end
 
     def current_session
