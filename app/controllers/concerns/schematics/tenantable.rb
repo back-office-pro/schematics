@@ -5,11 +5,14 @@ module Schematics
     extend ActiveSupport::Concern
 
     included do
+      helper_method :current_tenant
       helper_method :current_schema
     end
 
+    def current_tenant = ::Tenant
+
     def current_schema
-      ::Tenant.schema
+      current_tenant.schema
     end
   end
 end
