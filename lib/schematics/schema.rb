@@ -59,12 +59,6 @@ module Schematics
       .reject(&:core?)
       .filter_map(&:model_class)
 
-    def root_route
-      return 'home#index' if valid?
-
-      'exception#schema_error'
-    end
-
     def draw_routes = entities
       .map(&:router)
       .each { yield(it) && progress_bar.increment }

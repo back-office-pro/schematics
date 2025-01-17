@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Schematics::Engine.routes.draw do
-  root Tenant.schema.root_route
+  root 'home#index'
   get 'robots.txt', to: 'robots#index', as: :robots
   get 'emojis.json', to: 'emojis#index', as: :emojis
 

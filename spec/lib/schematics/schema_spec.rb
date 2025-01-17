@@ -6,7 +6,6 @@ describe Schematics::Schema do
   let(:data) { [] }
 
   it { is_expected.to be_valid }
-  its(:root_route) { is_expected.to eq('home#index') }
   its(:model_classes) { is_expected.to be_empty }
 
   describe '#find_entity_by_name' do
@@ -82,7 +81,6 @@ describe Schematics::Schema do
     end
 
     it { is_expected.not_to be_valid }
-    its(:root_route) { is_expected.to eq('exception#schema_error') }
   end
 
   context 'when there is a one-level circular association loop' do

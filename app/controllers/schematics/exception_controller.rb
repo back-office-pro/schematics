@@ -16,9 +16,5 @@ module Schematics
     def not_found
       respond_with nil, status: :not_found
     end
-
-    def schema_error
-      respond_with nil, status: :not_acceptable
-    end
   end
 end
