@@ -26,6 +26,7 @@ module Schematics
         TranslationsGenerator.new([name], ["--rename=#{old_name}"])
       end
 
+      # :reek:FeatureEnvy
       def translation_generator(element)
         return if core?
 
