@@ -5,10 +5,9 @@ properties:
     type: string
     description: |
       The unique entity name at singular, in snake case and in english.
-      The name must not be among <%= Tenant
-        .schema
+      The name must not be among <%= Schematics::Schema
+        .new
         .entities
-        .select(&:core?)
         .map(&:name)
         .concat(Schematics::Entities::Entity::NAME_DENYLIST)
         .to_sentence %>
