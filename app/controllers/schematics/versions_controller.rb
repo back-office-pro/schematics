@@ -38,7 +38,6 @@ module Schematics
     def set_version
       @version = model_class
                  .with_user
-                 .with_item
                  .load_async
                  .find(params[:id])
     end
