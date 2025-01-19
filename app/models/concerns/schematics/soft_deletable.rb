@@ -5,7 +5,7 @@ module Schematics
     extend ActiveSupport::Concern
 
     included do
-      acts_as_paranoid delete_all_enabled: true
+      acts_as_paranoid
     end
   end
 end
