@@ -38,7 +38,7 @@ describe Schematics::Attributes::Phone do
   its(:search_query) { is_expected.to eq(:phone_i_cont) }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.phone') }
-  its(:to_s) { is_expected.to eq('schema:user_phone') }
+  its(:to_s) { is_expected.to eq('phone:string:index') }
   its(:normalization) { is_expected.to be_nil }
   its(:to_spec) { is_expected.to eq('A user has a **phone** attribute of type *phone number*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.user.phone') }

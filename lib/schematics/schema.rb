@@ -45,12 +45,6 @@ module Schematics
       entities.find { it.name == name }
     end
 
-    def find_attribute_by_prefixed_name(name)
-      entities
-        .flat_map(&:attributes)
-        .find { it.prefixed_name == name }
-    end
-
     def polymorphic_associations = entities
       .flat_map(&:association_attributes)
       .select(&:polymorphic?)

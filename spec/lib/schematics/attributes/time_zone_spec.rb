@@ -42,7 +42,7 @@ describe Schematics::Attributes::TimeZone do
   its(:search_query) { is_expected.to eq(:time_zone_in) }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.time_zone') }
-  its(:to_s) { is_expected.to eq('schema:user_time_zone') }
+  its(:to_s) { is_expected.to eq('time_zone:string:index') }
   its(:collection) { is_expected.to eq([['(GMT+01:00) Paris', 'Paris']]) }
   its(:normalization) { is_expected.to be_nil }
   its(:to_spec) { is_expected.to eq('A user has a **time zone** attribute of type *time zone*') }

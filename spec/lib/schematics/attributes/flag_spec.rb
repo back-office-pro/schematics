@@ -35,7 +35,7 @@ describe Schematics::Attributes::Flag do
   its(:search_query) { is_expected.to eq(:states_in) }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('products.states') }
-  its(:to_s) { is_expected.to eq('schema:product_states') }
+  its(:to_s) { is_expected.to eq('states:integer:index') }
   its(:permitted_params) { is_expected.to eq(states: []) }
   its(:to_spec) { is_expected.to eq('A product has a **states** attribute of type *flag*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.product.states') }

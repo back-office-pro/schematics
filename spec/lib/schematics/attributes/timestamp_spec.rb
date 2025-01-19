@@ -25,7 +25,7 @@ describe Schematics::Attributes::Timestamp do
   its('validators.to_str') { is_expected.to be_blank }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.read_notifications_at') }
-  its(:to_s) { is_expected.to eq('schema:user_read_notifications_at') }
+  its(:to_s) { is_expected.to eq('read_notifications_at:datetime') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.user.read_notifications_at') }
 
   its(:to_spec) do

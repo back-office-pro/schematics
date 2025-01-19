@@ -48,11 +48,11 @@ describe Schematics::Attributes::User do
   its(:weight) { is_expected.to eq(2) }
   its(:inverse_association) { is_expected.to be_a(Schematics::Associations::HasMany) }
   its(:allowed_association_types) { is_expected.to include('user', 'role') }
-  its(:migration_options) { is_expected.to eq(index: { where: 'deleted_at IS NULL' }) }
   its(:search_column) { is_expected.to eq(:user_full_name) }
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:user_i_cont) }
   its(:to_spec) { is_expected.to eq('A entity has a **user** attribute of type *current user*') }
+  its(:to_s) { is_expected.to eq('user:belongs_to:index') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.entity.user') }
 
   its(:available_options) do
@@ -148,9 +148,7 @@ describe Schematics::Attributes::User do
 
     it { is_expected.to be_polymorphic }
 
-    its(:migration_options) do
-      is_expected.to eq(index: { where: 'deleted_at IS NULL' }, polymorphic: true)
-    end
+    its(:to_s) { is_expected.to eq('user:belongs_to{polymorphic}:index') }
 
     its(:to_str) do
       is_expected.to eq <<~RUBY

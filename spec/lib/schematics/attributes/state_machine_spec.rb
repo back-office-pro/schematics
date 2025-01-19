@@ -67,7 +67,7 @@ describe Schematics::Attributes::StateMachine do
   its(:search_query) { is_expected.to eq(:state_in) }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('orders.state') }
-  its(:to_s) { is_expected.to eq('schema:order_state') }
+  its(:to_s) { is_expected.to eq('state:integer:index') }
   its(:to_spec) { is_expected.to eq('A order has a **state** attribute of type *state machine*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.order.state') }
 

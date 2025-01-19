@@ -36,7 +36,7 @@ describe Schematics::Attributes::Email do
   its(:search_query) { is_expected.to eq(:email_i_cont) }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.email') }
-  its(:to_s) { is_expected.to eq('schema:user_email') }
+  its(:to_s) { is_expected.to eq('email:string:index') }
   its(:to_spec) { is_expected.to eq('A user has a **email** attribute of type *email*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.user.email') }
 

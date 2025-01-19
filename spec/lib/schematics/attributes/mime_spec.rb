@@ -37,7 +37,7 @@ describe Schematics::Attributes::Mime do
   its(:default) { is_expected.to eq('image/png') }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('active_storage_attachments.content_type') }
-  its(:to_s) { is_expected.to eq('schema:active_storage_attachment_content_type') }
+  its(:to_s) { is_expected.to eq('content_type:string:index') }
   its(:collection) { is_expected.to eq([['PNG', 'image/png']]) }
   its(:normalization) { is_expected.to be_nil }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.active_storage/attachment.content_type') } # rubocop:disable Layout/LineLength

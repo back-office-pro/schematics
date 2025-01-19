@@ -41,7 +41,7 @@ describe Schematics::Attributes::ModelField do
   its(:validators) { is_expected.to eq(inclusion: { in: [], allow_blank: true }) }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('assemblies.part') }
-  its(:to_s) { is_expected.to eq('schema:assembly_part') }
+  its(:to_s) { is_expected.to eq('part:string:index') }
   its(:normalization) { is_expected.to be_nil }
   its(:to_spec) { is_expected.to eq('A assembly has a **part** attribute of type *model field*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.assembly.part') }

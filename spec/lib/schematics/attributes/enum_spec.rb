@@ -35,7 +35,7 @@ describe Schematics::Attributes::Enum do
   its(:search_query) { is_expected.to eq(:state_in) }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('products.state') }
-  its(:to_s) { is_expected.to eq('schema:product_state') }
+  its(:to_s) { is_expected.to eq('state:integer:index') }
   its(:to_spec) { is_expected.to eq('A product has a **state** attribute of type *enumeration*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.product.state') }
 

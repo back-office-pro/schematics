@@ -29,7 +29,7 @@ describe Schematics::Attributes::Attachments do
   its(:validators) { is_expected.to eq(storage_quota: true) }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('active_storage_blobs.filename') }
-  its(:to_s) { is_expected.to eq('schema:directory_files') }
+  its(:to_s) { is_expected.to eq('files:attachments') }
   its(:preload) { is_expected.to eq([files_attachments: [blob: :variant_records]]) }
   its(:includes) { is_expected.to eq(blob: :variant_records) }
   its(:extension) { is_expected.to be_nil }

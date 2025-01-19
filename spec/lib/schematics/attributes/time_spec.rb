@@ -33,7 +33,7 @@ describe Schematics::Attributes::Time do
   its('validators.to_str') { is_expected.to be_blank }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('messages.hour') }
-  its(:to_s) { is_expected.to eq('schema:message_hour') }
+  its(:to_s) { is_expected.to eq('hour:time:index') }
   its(:to_spec) { is_expected.to eq('A message has a **hour** attribute of type *time*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.message.hour') }
 

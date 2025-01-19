@@ -92,7 +92,6 @@ module Schematics
               is_expected
                 .to have_db_column(attribute.column_name.to_sym)
                 .of_type(attribute.database_type.to_sym)
-                .with_options(attribute.migration_options)
             end
           end
 

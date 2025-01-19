@@ -35,7 +35,7 @@ describe Schematics::Attributes::Date do
   its(:weight) { is_expected.to eq(1) }
   its(:group_method) { is_expected.to eq(:group_by_day) }
   its(:to_sql) { is_expected.to eq('users.created_at') }
-  its(:to_s) { is_expected.to eq('schema:user_created_at') }
+  its(:to_s) { is_expected.to eq('created_at:date:index') }
   its(:to_spec) { is_expected.to eq('A user has a **created at** attribute of type *date*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.user.created_at') }
 

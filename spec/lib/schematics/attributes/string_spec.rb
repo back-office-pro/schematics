@@ -51,7 +51,7 @@ describe Schematics::Attributes::String do
   its('validators.to_str') { is_expected.to be_blank }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.last_name') }
-  its(:to_s) { is_expected.to eq('schema:user_last_name') }
+  its(:to_s) { is_expected.to eq('last_name:string:index') }
   its(:to_spec) { is_expected.to eq('A user has a **last name** attribute of type *string*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.user.last_name') }
 

@@ -34,7 +34,7 @@ describe Schematics::Attributes::Datetime do
   its('validators.to_str') { is_expected.to be_blank }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.created_at') }
-  its(:to_s) { is_expected.to eq('schema:user_created_at') }
+  its(:to_s) { is_expected.to eq('created_at:datetime:index') }
   its(:to_spec) { is_expected.to eq('A user has a **created at** attribute of type *datetime*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.user.created_at') }
 

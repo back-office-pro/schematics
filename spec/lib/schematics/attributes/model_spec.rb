@@ -41,7 +41,7 @@ describe Schematics::Attributes::Model do
   its(:validators) { is_expected.to eq(inclusion: { in: ['Permission'], allow_blank: true }) }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('permissions.model') }
-  its(:to_s) { is_expected.to eq('schema:permission_model') }
+  its(:to_s) { is_expected.to eq('model:string:index') }
   its(:normalization) { is_expected.to be_nil }
   its(:to_spec) { is_expected.to eq('A permission has a **model** attribute of type *model*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.permission.model') }

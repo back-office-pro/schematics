@@ -59,11 +59,9 @@ module Schematics
 
       def database_type = type
 
-      def prefixed_name = "#{entity.table_name}_#{name}"
-
       def to_sql = "#{entity.table_name.pluralize}.#{column_name}"
 
-      def to_s = "schema:#{prefixed_name}"
+      def to_s = "#{column_name}:#{database_type}"
 
       def to_str = ''
 

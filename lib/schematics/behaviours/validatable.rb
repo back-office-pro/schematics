@@ -18,6 +18,12 @@ module Schematics
           presence: required?
         }
       )
+
+      def to_s
+        return super unless unique?
+
+        "#{super}:uniq"
+      end
     end
   end
 end

@@ -40,7 +40,7 @@ describe Schematics::Attributes::Country do
   its(:validators) { is_expected.to eq(inclusion: { in: ['FR'], allow_blank: true }) }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.country') }
-  its(:to_s) { is_expected.to eq('schema:user_country') }
+  its(:to_s) { is_expected.to eq('country:string:index') }
   its(:collection) { is_expected.to eq([%w[France FR]]) }
   its(:search_column) { is_expected.to eq(:country) }
   its(:search_predicate) { is_expected.to eq(:in) }

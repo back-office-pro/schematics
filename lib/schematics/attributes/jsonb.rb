@@ -8,8 +8,6 @@ module Schematics
       include Behaviours::Fillable
       include Behaviours::Renderable
 
-      def database_index_type = :gin
-
       def default = {}
 
       def icon = :table

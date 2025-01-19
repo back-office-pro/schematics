@@ -50,10 +50,11 @@ module Schematics
 
       def weight = 2
 
-      def migration_options = super.merge(
-        index: { where: 'deleted_at IS NULL' },
-        polymorphic: polymorphic?
-      ).compact_blank
+      def to_s
+        return "#{name}:#{database_type}:index" unless polymorphic?
+
+        "#{name}:#{database_type}{polymorphic}:index"
+      end
 
       def class_name = association_type.camelize
 
