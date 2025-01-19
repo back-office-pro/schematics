@@ -21,7 +21,7 @@ module I18n
           PREFIXES
             .filter_map { resolve(locale, nil, :"#{it}#{model.to_s.singularize}.other", default: nil) } # rubocop:disable Layout/LineLength
             .first
-            &.gsub(/\b\w{1,2}\b/, '')
+            &.remove(/\b\w{1,2}\b/)
             &.parameterize(separator: '-')
         else
           nil

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/array/access'
+require 'active_support/core_ext/string/filters'
 
 module Schematics
   module Tokens
@@ -21,7 +22,7 @@ module Schematics
         when 'NOW()'
           'current_timestamp'
         else
-          super.tr('$', '')
+          super.remove('$')
         end
 
       def to_str = "\#{#{value}}"
