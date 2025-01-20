@@ -52,7 +52,7 @@ describe Schematics::Entities::Entity do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      class Discussion < Schematics::ApplicationRecord; end
+      class ::Discussion < Schematics::ApplicationRecord; end
     RUBY
   end
 

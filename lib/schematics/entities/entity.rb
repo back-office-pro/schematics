@@ -253,7 +253,7 @@ module Schematics
         .uniq
 
       def to_str = <<~RUBY
-        class #{class_name} < Schematics::ApplicationRecord; end
+        class ::#{class_name} < Schematics::ApplicationRecord; end
       RUBY
 
       def association_elements = has_many_and_through_and_belongs_to_many_associations
