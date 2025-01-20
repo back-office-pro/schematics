@@ -52,8 +52,10 @@ module Schematics
         end
       end
 
-      def create_without_validations(attributes)
-        attributes.map { new(**it).save(validate: false) }
+      def create_without_validations(resources)
+        Array
+          .wrap(resources)
+          .map { |attributes| new(**attributes).tap { it.save(validate: false) } }
       end
 
       def preload_all = includes(entity.includes).preload(entity.preload)

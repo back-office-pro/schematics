@@ -8,9 +8,8 @@ class PermissionGenerator < Rails::Generators::NamedBase
   def generate_permission
     return unless generating?
 
-    reload_permission_definition!
     PaperTrail.request(enabled: false) do
-      Role.admin.permissions.push(Permission.create!(model: name, action:))
+      Role.admin.permissions.push(Permission.create_without_validations(model: name, action:))
     end
   end
 
@@ -37,11 +36,6 @@ class PermissionGenerator < Rails::Generators::NamedBase
   end
 
   def old_action = options[:rename]
-
-  def reload_permission_definition!
-    Object.__send__(:remove_const, :Permission)
-    load Schematics::Engine.root.join('app', 'models', 'core', 'permission.rb')
-  end
 
   def action = options[:action]
 
