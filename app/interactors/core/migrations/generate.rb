@@ -9,7 +9,6 @@ module Core
       delegate :migration, :fail!, to: :context, private: true
       delegate :migrator_clean_commands,
                :migrator_build_commands,
-               :migrator_new_schema,
                :persisted?,
                to: :migration,
                private: true
@@ -21,10 +20,7 @@ module Core
       # :reek:UncommunicativeVariableName
       def call
         migrator_clean_commands
-          .flat_map(&:generators)
-          .each(&method(:invoke))
-        ::Tenant.schema = migrator_new_schema
-        migrator_build_commands
+          .concat(migrator_build_commands)
           .flat_map(&:generators)
           .each(&method(:invoke))
       rescue StandardError => e
@@ -32,10 +28,9 @@ module Core
         fail!
       end
 
-      def rollback
-        ::Tenant.schema = ::Migration.current_data
-        ::Git.init.clean(ff: true, d: true)
-      end
+      def rollback = ::Git
+        .init
+        .clean(ff: true, d: true)
 
       private
 

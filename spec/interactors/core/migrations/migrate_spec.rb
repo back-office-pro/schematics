@@ -6,19 +6,15 @@ RSpec.describe Core::Migrations::Migrate do
   include_context 'with google translate stub'
   include_context 'with user'
 
-  let(:migration) { Migration.new(data:, version: 2.0, state:) }
-  let(:initial_migration) { Migration.new(data: initial_data, version: 1.0, state:) }
-  let(:schema) { Schematics::Schema.new(data: current_data) }
-  let(:current_data) { initial_data }
-  let(:state) { Migration::STATE_STATE_IN_PROGRESS }
-  let(:rollback_state) { Migration::STATE_STATE_ROLLBACKING }
+  let(:migration) do
+    Migration.create!(data:, version: 2.0, state: Migration::STATE_STATE_IN_PROGRESS)
+  end
+  let(:initial_migration) do
+    Migration.create!(data: initial_data, version: 1.0, state: Migration::STATE_STATE_FINISHED)
+  end
   let(:root) { Rails.root }
   let(:restart_file) { root.join('tmp/restart.txt') }
   let(:rollback_user_transaction) { [User, Role, Team].each(&:delete_all) }
-  let(:rollback_migration) { Migration.new(data:, version: 2.0, state: rollback_state) }
-  let(:rollback_initial_migration) do
-    Migration.new(data: initial_data, version: 1.0, state: rollback_state)
-  end
   let(:initial_data) do
     [
       {
@@ -42,27 +38,30 @@ RSpec.describe Core::Migrations::Migrate do
     Dir.chdir(root) { described_class.call(migration: initial_migration) }
   end
   let(:rollback_prospect_entity) do
-    Dir.chdir(root) { Core::Migrations::Rollback.call(migration: rollback_initial_migration) }
+    Dir.chdir(root) do
+      Core::Migrations::Rollback.call(
+        migration: initial_migration.tap(&:state_rollbacking!).tap(&:clear_memery_cache!)
+      )
+    end
   end
   let(:migrate) do
     Dir.chdir(root) { described_class.call(migration:) }
   end
   let(:rollback) do
-    rollback_migration.backup = migration.backup.blob
-    Dir.chdir(root) { Core::Migrations::Rollback.call(migration: rollback_migration) }
+    Dir.chdir(root) do
+      Core::Migrations::Rollback.call(
+        migration: migration.tap(&:state_rollbacking!).tap(&:clear_memery_cache!)
+      )
+    end
   end
 
   before do
-    Tenant.schema = schema
     FileUtils.touch(restart_file)
     allow(Role).to receive(:admin).and_return(Role.new)
-    allow(migration).to receive_messages(previously_migrated_schema: schema)
-    allow(rollback_migration).to receive_messages(previously_migrated_schema: schema)
   end
 
   describe '.call' do
     context 'when creating a new entity' do
-      let(:current_data) { [] }
       let(:data) { initial_data }
 
       uses_transaction 'migrates and rollbacks successfully'

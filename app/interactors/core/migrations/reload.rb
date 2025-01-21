@@ -9,12 +9,14 @@ module Core
       delegate :migrator_old_and_changed_entities,
                :migrator_new_and_changed_entities,
                :migrator_changed_entities,
+               :migrator_new_schema,
                to: :migration,
                private: true
 
       progressable migration: 70
 
       def call # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+        ::Tenant.schema = migrator_new_schema
         migrator_old_and_changed_entities
           .reject(&:existing?)
           .each(&method(:remove_constant))
