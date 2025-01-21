@@ -118,13 +118,13 @@ module Schematics
 
     # Action Dispatch
     config.action_dispatch.signed_cookie_digest = 'SHA256'
-    config.action_dispatch.rescue_responses['ActiveRecord::PendingMigrationError'] = :service_unavailable # rubocop:disable Layout/LineLength
 
     # Active Record
     config.active_record.enumerate_columns_in_select_statements = true
     config.active_record.async_query_executor = :global_thread_pool
     config.active_record.strict_loading_by_default = true
     config.active_record.query_log_tags_enabled = true
+    config.active_record.migration_error = false
     config.active_record.action_on_strict_loading_violation = :log
     config.active_record.encryption.support_unencrypted_data = true
     config.active_record.encryption.extend_queries = true

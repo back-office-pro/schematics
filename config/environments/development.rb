@@ -34,7 +34,6 @@ Rails.application.configure do
   config.active_support.disallowed_deprecation_warnings = []
 
   # Active Record
-  config.active_record.migration_error = :page_load
   config.active_record.verbose_query_logs = true
   config.active_record.db_warnings_action = :raise
 
