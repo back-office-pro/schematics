@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'i18n-tasks', '1.0.14'
   spec.add_development_dependency 'reek', '6.4.0'
   spec.add_development_dependency 'rspec-its', '2.0.0'
-  spec.add_development_dependency 'rubocop', '1.70.0'
+  spec.add_development_dependency 'rubocop', '1.71.0'
   spec.add_development_dependency 'rubocop-capybara', '2.21.0'
   spec.add_development_dependency 'rubocop-obsession', '0.1.13'
   spec.add_development_dependency 'rubocop-performance', '1.23.1'
