@@ -39,9 +39,7 @@ RSpec.describe Core::Migrations::Migrate do
   end
   let(:rollback_prospect_entity) do
     Dir.chdir(root) do
-      Core::Migrations::Rollback.call(
-        migration: initial_migration.tap(&:state_rollbacking!).tap(&:clear_memery_cache!)
-      )
+      Core::Migrations::Rollback.call(migration: initial_migration.tap(&:state_rollbacking!))
     end
   end
   let(:migrate) do
@@ -49,9 +47,7 @@ RSpec.describe Core::Migrations::Migrate do
   end
   let(:rollback) do
     Dir.chdir(root) do
-      Core::Migrations::Rollback.call(
-        migration: migration.tap(&:state_rollbacking!).tap(&:clear_memery_cache!)
-      )
+      Core::Migrations::Rollback.call(migration: migration.tap(&:state_rollbacking!))
     end
   end
 
