@@ -6,7 +6,7 @@ module Schematics
     queue_as :critical
 
     def perform
-      return if ::Tenant.version == VERSION
+      return if ::Documentation.last.core_version == VERSION
 
       Core::Migrations::Migrate.call(migration: ::Migration.core)
     end
