@@ -3,6 +3,8 @@
 require 'uri'
 
 class Instance
+  DEFAULT_PORT = 3000
+
   class << self
     def application_record_class
       return ApplicationRecord if defined?(ApplicationRecord)

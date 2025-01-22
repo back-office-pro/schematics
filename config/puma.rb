@@ -2,7 +2,7 @@
 
 threads ENV.fetch('RAILS_MAX_THREADS', 3)
 
-port ENV.fetch('PORT', Tenant.port) if Rails.env.development?
+port ENV.fetch('PORT', Instance::DEFAULT_PORT) if Rails.env.development?
 
 bind ENV.fetch('SOCKET', "unix://#{Rails.root.join('tmp/sockets/puma.sock')}")
 

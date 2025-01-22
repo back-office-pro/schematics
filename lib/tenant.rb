@@ -1,13 +1,10 @@
 # frozen_string_literal: true
 
-require 'active_support/core_ext/module/delegation'
 require 'pg'
-require 'uri'
 
 # :reek:Attribute
 class Tenant
   class << self
-    DEFAULT_PORT = 3000
     SEMAPHORE = Mutex.new.freeze
 
     def schema
@@ -49,7 +46,7 @@ class Tenant
     end
 
     def port
-      DEFAULT_PORT unless Rails.env.production?
+      Instance::DEFAULT_PORT unless Rails.env.production?
     end
 
     def version
