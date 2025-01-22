@@ -8,6 +8,7 @@ require 'hash'
 require 'instance'
 require 'numeric'
 require 'object'
+require 'schema_cache'
 require 'tenant'
 require 'validators/singular_validator'
 require 'zeitwerk'
@@ -41,6 +42,7 @@ loader.ignore("#{__dir__}/instance.rb")
 loader.ignore("#{__dir__}/numeric.rb")
 loader.ignore("#{__dir__}/object.rb")
 loader.ignore("#{__dir__}/rubygems_plugin.rb")
+loader.ignore("#{__dir__}/schema_cache.rb")
 loader.ignore("#{__dir__}/tenant.rb")
 loader.setup
 

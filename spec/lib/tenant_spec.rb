@@ -17,7 +17,6 @@ describe Tenant do
 
     it { is_expected.to be_demo }
 
-    its(:schema) { is_expected.to be_a(Schematics::Schema) }
     its(:app_name) { is_expected.to eq('demo') }
     its(:subdomain) { is_expected.to eq('demo') }
     its(:human) { is_expected.to eq('Demo') }
@@ -26,7 +25,6 @@ describe Tenant do
     its(:default_password) { is_expected.to eq('Azerty1234?!!') }
     its(:host) { is_expected.to eq('localhost') }
     its(:port) { is_expected.to eq(3000) }
-    its(:version) { is_expected.to eq('1.0.0') }
     its(:database) { is_expected.to eq(:sqlite3) }
   end
 

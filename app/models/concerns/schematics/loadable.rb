@@ -14,7 +14,6 @@ module Schematics
     end
 
     class_methods do
-      delegate :schema, to: ::Tenant
       # :reek:Attribute
       attr_accessor :concerns
 
@@ -27,6 +26,8 @@ module Schematics
           end
         end
       end
+
+      def schema = ::SchemaCache
 
       def entity
         schema.find_entity_by_name(name.underscore)

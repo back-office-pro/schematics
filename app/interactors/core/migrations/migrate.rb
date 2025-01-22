@@ -10,12 +10,12 @@ module Core
                GenerateBackup,
                MigrateDatabase,
                CleanSearchIndexes,
+               Cache,
                Reload,
                RebuildSearchIndexes,
                GenerateDocumentation,
                GenerateFixture,
-               Commit,
-               Restart
+               Commit
     end
   end
 end

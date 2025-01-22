@@ -3,15 +3,19 @@
     {
       "warning_type": "Dangerous Eval",
       "warning_code": 13,
-      "fingerprint": "02db02b94eeb01a7aec11f81b55664784b868cc2c17885462e6de0b606a7df9d",
+      "fingerprint": "08cd5b0e0541840c2806c6426e89bab96539aed6d5921ce21908e51c9a321446",
       "check_name": "Evaluation",
       "message": "Dynamic code evaluation",
-      "file": "config/initializers/const_missing.rb",
-      "line": 7,
+      "file": "app/models/concerns/schematics/loadable.rb",
+      "line": 25,
       "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
-      "code": "eval(Tenant.schema.find_entity_by_name(name.to_s.underscore), binding, \"config/initializers/const_missing.rb\", 7)",
+      "code": "eval(it, binding, \"app/models/concerns/schematics/loadable.rb\", 25)",
       "render_path": null,
-      "location": null,
+      "location": {
+        "type": "method",
+        "class": "Schematics::Loadable",
+        "method": "inherited"
+      },
       "user_input": null,
       "confidence": "Weak",
       "cwe_id": [
@@ -23,19 +27,15 @@
     {
       "warning_type": "Dangerous Eval",
       "warning_code": 13,
-      "fingerprint": "9d5cd7f00886cf3aff04944591c3b037b62e41d0a23ecc887b1120d6d85e0136",
+      "fingerprint": "721de66535651afa05ca7425cca9fd2553ef4e574c25e726da0fab39c38606d4",
       "check_name": "Evaluation",
       "message": "Dynamic code evaluation",
-      "file": "app/models/concerns/schematics/loadable.rb",
-      "line": 26,
+      "file": "config/initializers/const_missing.rb",
+      "line": 7,
       "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
-      "code": "eval(it, binding, \"app/models/concerns/schematics/loadable.rb\", 26)",
+      "code": "eval(SchemaCache.find_entity_by_name(name.to_s.underscore), binding, \"config/initializers/const_missing.rb\", 7)",
       "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Schematics::Loadable",
-        "method": "inherited"
-      },
+      "location": null,
       "user_input": null,
       "confidence": "Weak",
       "cwe_id": [

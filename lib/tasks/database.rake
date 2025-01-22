@@ -28,7 +28,7 @@ namespace :schematics do
         db_name = [Tenant.app_name, Rails.env].join('_')
         `createdb #{db_name}`
         `pgloader --with "preserve index names" sqlite://#{db_path} postgres://localhost/#{db_name}`
-        Core::Migrations::Restart.call
+        FileUtils.touch Rails.root.join('tmp/restart.txt')
       end
     end
 

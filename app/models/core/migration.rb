@@ -26,7 +26,9 @@ class Migration < Schematics::ApplicationRecord
     delegate :version, :data, to: :current, prefix: true, allow_nil: true
     delegate :business_sector, to: Subscription, private: true
 
-    def current = state_finished.last
+    def current = state_in_progress
+      .or(state_finished)
+      .last
 
     def scheduled = state_scheduled.last
 

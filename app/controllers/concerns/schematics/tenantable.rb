@@ -11,8 +11,6 @@ module Schematics
 
     def current_tenant = ::Tenant
 
-    def current_schema
-      current_tenant.schema
-    end
+    def current_schema = ::SchemaCache
   end
 end

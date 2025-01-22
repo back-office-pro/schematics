@@ -12,7 +12,7 @@ Rails.application.routes.prepend do
     get 'service-worker', to: 'rails/pwa#service_worker', as: :pwa_service_worker
     get 'manifest', to: 'rails/pwa#manifest', as: :pwa_manifest
     get 'login', to: 'sessions#new', as: :login
-    Tenant.schema.draw_routes do
+    SchemaCache.draw_routes do
       eval it, binding, __FILE__, __LINE__ # rubocop:disable Security/Eval
     end
   end

@@ -9,6 +9,7 @@ module Schematics
       return if ::Documentation.last.core_version == VERSION
 
       Core::Migrations::Migrate.call(migration: ::Migration.core)
+      FileUtils.touch Rails.root.join('tmp/restart.txt')
     end
   end
 end

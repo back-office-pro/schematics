@@ -1,10 +1,10 @@
 ---
 en:
   backup:
-    restore_database: This action can lead to data loss and temporary service interruption
+    restore_database: This action may result in data loss regarding ongoing actions
   default: Please confirm your action
   migration:
-    migrate: This action can lead to data loss and temporary service interruption
-    rollback: This action can lead to data loss and temporary service interruption
+    migrate: This action may result in data loss regarding ongoing actions
+    rollback: This action may result in data loss regarding ongoing actions
   subscription:
     cancel: You can reactivate your subscription at any time before the current expiry date

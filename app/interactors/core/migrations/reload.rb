@@ -5,18 +5,19 @@ module Core
     class Reload
       include Schematics::Progressable
 
+      delegate :reload_routes!, to: 'Rails.application', private: true
       delegate :migration, to: :context, private: true
       delegate :migrator_old_and_changed_entities,
                :migrator_new_and_changed_entities,
                :migrator_changed_entities,
-               :migrator_new_schema,
                to: :migration,
                private: true
 
       progressable migration: 70
 
+      before :reload_routes!
+
       def call # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
-        ::Tenant.schema = migrator_new_schema
         migrator_old_and_changed_entities
           .reject(&:existing?)
           .each(&method(:remove_constant))
