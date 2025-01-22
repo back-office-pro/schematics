@@ -38,7 +38,8 @@ describe Schematics::Attributes::ModelField do
   its(:input_name) { is_expected.to eq('assembly[part]') }
   its(:icon) { is_expected.to eq(:code) }
   its(:default) { is_expected.to be_nil }
-  its(:validators) { is_expected.to eq(inclusion: { in: [], allow_blank: true }) }
+  its(:validators) { is_expected.to be_empty }
+  its('validators.to_str') { is_expected.to be_blank }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('assemblies.part') }
   its(:to_s) { is_expected.to eq('part:string:index') }
@@ -58,12 +59,6 @@ describe Schematics::Attributes::ModelField do
       Schematics::Options::DependsOn,
       Schematics::Options::Type
     )
-  end
-
-  its('validators.to_str') do
-    is_expected.to eq <<~RUBY
-      validates :part, {inclusion: {in: [], allow_blank: true}}
-    RUBY
   end
 
   describe '#format' do

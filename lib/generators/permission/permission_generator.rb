@@ -9,7 +9,7 @@ class PermissionGenerator < Rails::Generators::NamedBase
     return unless generating?
 
     PaperTrail.request(enabled: false) do
-      Role.admin.permissions.push(Permission.create_without_validations(model: name, action:))
+      Role.admin.permissions.push(Permission.create!(model: name, action:))
     end
   end
 

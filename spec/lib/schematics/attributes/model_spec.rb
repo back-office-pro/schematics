@@ -38,7 +38,8 @@ describe Schematics::Attributes::Model do
   its(:input_name) { is_expected.to eq('permission[model]') }
   its(:icon) { is_expected.to eq(:project_diagram) }
   its(:default) { is_expected.to eq('Permission') }
-  its(:validators) { is_expected.to eq(inclusion: { in: ['Permission'], allow_blank: true }) }
+  its(:validators) { is_expected.to be_empty }
+  its('validators.to_str') { is_expected.to be_blank }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('permissions.model') }
   its(:to_s) { is_expected.to eq('model:string:index') }
@@ -58,12 +59,6 @@ describe Schematics::Attributes::Model do
       Schematics::Options::AllowHidden,
       Schematics::Options::Exclude
     )
-  end
-
-  its('validators.to_str') do
-    is_expected.to eq <<~RUBY
-      validates :model, {inclusion: {in: ["Permission"], allow_blank: true}}
-    RUBY
   end
 
   describe '#format' do

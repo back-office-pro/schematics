@@ -28,6 +28,8 @@ module Schematics
 
       def icon = :code
 
+      def validators = super.merge(inclusion: nil)
+
       def values = entity
         .schema
         .entities
