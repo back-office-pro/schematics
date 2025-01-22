@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'uri'
+
 class Instance
   class << self
     def application_record_class
