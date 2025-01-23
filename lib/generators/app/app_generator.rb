@@ -202,7 +202,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     return if env.development?
     return unless generating?
 
-    rails_command 'generate repository', env:
+    rails_command "generate repository #{app_name}", env:
   end
 
   def add_remote_to_repo
@@ -224,7 +224,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     return if env.development?
     return unless generating?
 
-    rails_command 'generate systemd', env:
+    rails_command "generate systemd #{app_name}", env:
   end
 
   def deploy_nginx_subdomain
@@ -232,7 +232,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     return if env.development?
     return unless generating?
 
-    rails_command 'generate nginx', env:
+    rails_command "generate nginx #{app_name}", env:
   end
 
   def destroy_root
@@ -264,7 +264,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   def destroy_github_repo
     return if env.development?
 
-    `cd #{app_path} && RAILS_ENV=#{env} rails destroy repository`
+    `cd #{app_path} && RAILS_ENV=#{env} rails destroy repository #{app_name}`
   end
 
   def env = (app_path == 'spec/demo' ? 'development' : 'production').inquiry
@@ -273,7 +273,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     return if container?
     return if env.development?
 
-    `cd #{app_path} && RAILS_ENV=#{env} rails destroy systemd`
+    `cd #{app_path} && RAILS_ENV=#{env} rails destroy systemd #{app_name}`
   end
 
   def container? = options[:container]
@@ -282,7 +282,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     return if container?
     return if env.development?
 
-    `cd #{app_path} && RAILS_ENV=#{env} rails destroy nginx`
+    `cd #{app_path} && RAILS_ENV=#{env} rails destroy nginx #{app_name}`
   end
 
   def drop_database
