@@ -256,6 +256,10 @@ module Schematics
         class ::#{class_name} < Schematics::ApplicationRecord; end
       RUBY
 
+      def digest
+        Digest::MD5.hexdigest(model_elements.map(&:to_str).join)
+      end
+
       def association_elements = has_many_and_through_and_belongs_to_many_associations
         .reject(&:existing?)
         .to_a

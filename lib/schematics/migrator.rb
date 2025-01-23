@@ -20,7 +20,7 @@ module Schematics
       .map(&:entity)
       .concat(build_commands.grep(Commands::RenameEntity).map(&:attribute))
 
-    def changed_entities = Array( # rubocop:disable Metrics/CyclomaticComplexity
+    def changed_entities = Array(
       @current_schema
         &.entities
         &.excluding(old_entities)
@@ -28,9 +28,8 @@ module Schematics
           @new_schema
             .entities
             .find { it.id == current_entity.id }
-            .model_elements
-            .flat_map(&:to_str)
-            .eql?(current_entity.model_elements.flat_map(&:to_str))
+            .digest
+            .eql?(current_entity.digest)
         end
     )
 
