@@ -70,6 +70,8 @@ describe Schematics::Attributes::Phone do
 
     it { is_expected.to be_unique }
 
+    its(:to_s) { is_expected.to eq('phone:string:uniq') }
+
     its(:validators) do
       is_expected.to eq(
         uniqueness_with_deleted: { case_sensitive: true, allow_blank: true },

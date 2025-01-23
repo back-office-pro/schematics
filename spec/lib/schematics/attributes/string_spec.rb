@@ -78,6 +78,8 @@ describe Schematics::Attributes::String do
 
     it { is_expected.to be_unique }
 
+    its(:to_s) { is_expected.to eq('last_name:string:uniq') }
+
     its(:validators) do
       is_expected.to eq(uniqueness_with_deleted: { case_sensitive: true, allow_blank: true })
     end

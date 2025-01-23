@@ -61,7 +61,9 @@ module Schematics
 
       def to_sql = "#{entity.table_name.pluralize}.#{column_name}"
 
-      def to_s = "#{column_name}:#{database_type}"
+      def to_s = [column_name, database_type, ('uniq' if unique?)]
+        .compact
+        .join(':')
 
       def to_str = ''
 
