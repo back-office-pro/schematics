@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
-class RepositoryGenerator < Rails::Generators::Base
+class RepositoryGenerator < Rails::Generators::NamedBase
+  DENYLIST = %w[schematics ansible-playbook back-office.pro].freeze
+
   def generate_repository
     return unless generating?
 
     client.create_repository(
-      Tenant.subdomain,
+      name,
       organization: Instance.organization,
       private: true
     )
@@ -13,8 +15,9 @@ class RepositoryGenerator < Rails::Generators::Base
 
   def destroy_repository
     return unless destroying?
+    return if DENYLIST.include?(name)
 
-    client.delete_repository("#{Instance.organization}/#{Tenant.subdomain}")
+    client.delete_repository("#{Instance.organization}/#{name}")
   end
 
   private
