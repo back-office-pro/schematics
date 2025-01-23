@@ -3,6 +3,7 @@
 class SchemaCache
   class << self
     delegate_missing_to :cache
+    delegate :as_json, to: :cache
 
     private
 
