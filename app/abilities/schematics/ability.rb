@@ -2,7 +2,7 @@
 
 module Schematics
   class Ability < ApplicationAbility
-    def initialize(user, schema = Schema.new) # rubocop:disable Metrics/AbcSize
+    def initialize(user, schema = Schema.new)
       super
       merge PermissionAbility.new(user)
       merge ActiveStorage::AttachmentAbility.new(user)
@@ -26,7 +26,6 @@ module Schematics
       merge RoleAbility.new
       merge AdminAbility.new(self)
       merge FeatureFlagAbility.new
-      merge DemoAbility.new
       merge SubscriptionAbility.new(user)
       merge SessionAbility.new(user)
       merge TeamAbility.new(user, schema)
