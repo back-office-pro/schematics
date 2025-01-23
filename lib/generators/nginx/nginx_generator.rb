@@ -2,7 +2,7 @@
 
 require 'fileutils'
 
-class NginxGenerator < Rails::Generators::Base
+class NginxGenerator < Rails::Generators::NamedBase
   source_root File.expand_path('templates', __dir__)
 
   def generate_site_configuration
@@ -32,9 +32,11 @@ class NginxGenerator < Rails::Generators::Base
 
   def nginx_path = Pathname.new('/etc/nginx')
 
-  def sites_available_path = nginx_path.join('sites-available', Tenant.subdomain)
+  def sites_available_path = nginx_path.join('sites-available', name)
 
-  def sites_enabled_path = nginx_path.join('sites-enabled', Tenant.subdomain)
+  def sites_enabled_path = nginx_path.join('sites-enabled', name)
+
+  def upstream_name = name.underscore
 
   def destroying?
     behavior == :revoke
