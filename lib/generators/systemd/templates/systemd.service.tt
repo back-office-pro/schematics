@@ -1,7 +1,7 @@
 [Unit]
-Description=<%= Tenant.human %> HTTP Server
+Description=<%= name.humanize %> HTTP Server
 After=network.target
-Requires=puma-<%= Tenant.subdomain %>.socket
+Requires=<%= socket_filename %>
 
 [Service]
 User=root

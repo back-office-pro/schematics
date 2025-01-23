@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SystemdGenerator < Rails::Generators::Base
+class SystemdGenerator < Rails::Generators::NamedBase
   source_root File.expand_path('templates', __dir__)
 
   def generate_service
@@ -36,11 +36,11 @@ class SystemdGenerator < Rails::Generators::Base
 
   def service_path = systemd_path.join('system', service_filename)
 
-  def service_filename = "puma-#{Tenant.subdomain}.service"
+  def service_filename = "puma-#{name}.service"
 
   def socket_path = systemd_path.join('system', socket_filename)
 
-  def socket_filename = "puma-#{Tenant.subdomain}.socket"
+  def socket_filename = "puma-#{name}.socket"
 
   def destroying?
     behavior == :revoke
