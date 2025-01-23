@@ -42,6 +42,8 @@ class SystemdGenerator < Rails::Generators::NamedBase
 
   def socket_filename = "puma-#{name}.socket"
 
+  def server_name = name.humanize
+
   def destroying?
     behavior == :revoke
   end

@@ -1,5 +1,5 @@
 [Unit]
-Description=<%= name.humanize %> HTTP Server
+Description=<%= server_name %> HTTP Server
 After=network.target
 Requires=<%= socket_filename %>
 

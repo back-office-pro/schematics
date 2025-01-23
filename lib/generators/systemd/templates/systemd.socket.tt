@@ -1,5 +1,5 @@
 [Unit]
-Description=<%= name.humanize %> HTTP Server Accept Sockets
+Description=<%= server_name %> HTTP Server Accept Sockets
 
 [Socket]
 ListenStream=0.0.0.0:9292
