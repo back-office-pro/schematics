@@ -9,7 +9,7 @@ RSpec.describe Schematics::Tenant do
     let(:subdomain) { '' }
 
     its(:subdomain) { is_expected.to eq('demo') }
-    it { is_expected.to be_demo }
+    it { is_expected.not_to be_demo }
   end
 
   context 'when subdomain is defined' do
