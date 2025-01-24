@@ -15,8 +15,6 @@ class Tenant
 
     def default_url_options = { host:, port: }.compact
 
-    def default_mailer_options = { from: "no-reply@#{host}" }
-
     def demo? = app_name.eql?('demo') && !Rails.env.test?
 
     def database = %i[sqlite3 postgresql][database_index]

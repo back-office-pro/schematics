@@ -40,6 +40,8 @@ class Instance
       .build(host: "www.#{domain}", path:)
       .to_s
 
+    def default_mailer_options = { from: "no-reply@#{domain}" }
+
     def organization
       domain.parameterize
     end
