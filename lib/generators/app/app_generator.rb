@@ -121,7 +121,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     return if container?
     return unless generating?
 
-    rails_command "schematics:db:seed name=#{app_name}", env:
+    rails_command "schematics:db:seed NAME=#{app_name}", env:
   end
 
   def backup_credentials

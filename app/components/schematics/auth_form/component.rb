@@ -4,7 +4,7 @@ module Schematics
   module AuthForm
     class Component < ApplicationComponent
       delegate :new_password_reset_path, to: 'Schematics::Engine.routes.url_helpers'
-      delegate :demo?, :default_password, to: :current_tenant, private: true
+      delegate :demo?, to: :current_tenant, private: true
       delegate :email, to: ::Subscription, private: true
 
       def url = sessions_path
@@ -17,7 +17,9 @@ module Schematics
         ::User.new(email:)
       end
 
-      def value = default_password
+      def value
+        'Azerty1234?!!' if demo?
+      end
     end
   end
 end

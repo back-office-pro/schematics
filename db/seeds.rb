@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+COMPANY_NAME = ENV['NAME']&.underscore&.humanize.freeze
+PASSWORD = (ENV['NAME'] == 'demo' ? 'Azerty1234?!!' : nil).freeze
+
 PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
   Role.create!(
     [
@@ -18,13 +21,13 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
     ]
   )
   Configuration.instance.update!(
+    company_name: COMPANY_NAME,
     available_locales: [Subscription.default_locale],
-    company_name: ENV['name']&.underscore&.humanize,
     locale: Subscription.default_locale
   )
   Documentation.create!
   Migration.default.save!
-  User.create!(email: Subscription.email, password: Tenant.default_password, role: Role.admin)
+  User.create!(email: Subscription.email, password: PASSWORD, role: Role.admin)
   Dashboard.create!(
     [
       {

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'active_support/core_ext/module/delegation'
 require 'pg'
 
 class Tenant
@@ -19,10 +20,6 @@ class Tenant
     def default_mailer_options = { from: "no-reply@#{host}" }
 
     def demo? = app_name.eql?('demo') && !Rails.env.test?
-
-    def default_password
-      'Azerty1234?!!' if demo?
-    end
 
     def host
       return "#{subdomain}.#{Instance.domain}" if Rails.env.production?

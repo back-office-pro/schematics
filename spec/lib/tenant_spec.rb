@@ -21,7 +21,6 @@ describe Tenant do
     its(:subdomain) { is_expected.to eq('demo') }
     its(:default_url_options) { is_expected.to eq(host: 'localhost', port: 3000) }
     its(:default_mailer_options) { is_expected.to eq(from: 'no-reply@localhost') }
-    its(:default_password) { is_expected.to eq('Azerty1234?!!') }
     its(:database) { is_expected.to eq(:sqlite3) }
   end
 
@@ -39,7 +38,5 @@ describe Tenant do
     let(:app_name) { 'BackOffice' }
 
     it { is_expected.not_to be_demo }
-
-    its(:default_password) { is_expected.to be_nil }
   end
 end
