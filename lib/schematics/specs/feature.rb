@@ -30,7 +30,7 @@ module Schematics
         let(:user) do
           ::User.create!(
             email: 'john.doe@nowhere.com',
-            password: 'Azerty1234?!!',
+            password: Attributes::Digest::DEFAULT,
             first_name: 'John',
             last_name: 'Doe',
             otp_last_at: 1.year.ago.to_i,

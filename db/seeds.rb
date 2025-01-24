@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 COMPANY_NAME = ENV['NAME']&.underscore&.humanize.freeze
-PASSWORD = (ENV['NAME'] == 'demo' ? 'Azerty1234?!!' : nil).freeze
+PASSWORD = (ENV['NAME'] == 'demo' ? Schematics::Attributes::Digest::DEFAULT : nil).freeze
 
 PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
   Role.create!(

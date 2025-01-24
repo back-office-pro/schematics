@@ -5,6 +5,7 @@ module Schematics
     class Digest < Attribute
       include Behaviours::Migratable
       include Behaviours::Fillable
+      DEFAULT = 'Azerty1234?!!'
       REGEX = /
         (?=.*\d)           # contain at least one number
         (?=.*[a-z])        # contain at least one lowercase letter
@@ -22,7 +23,7 @@ module Schematics
 
       def column_name = "#{super}_digest"
 
-      def default = 'Azerty1234?!!'
+      def default = DEFAULT
 
       def icon = :key
 

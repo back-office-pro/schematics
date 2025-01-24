@@ -18,7 +18,7 @@ module Schematics
       end
 
       def value
-        'Azerty1234?!!' if demo?
+        Attributes::Digest::DEFAULT if demo?
       end
     end
   end

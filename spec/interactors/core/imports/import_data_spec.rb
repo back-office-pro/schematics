@@ -29,7 +29,7 @@ RSpec.describe Core::Imports::ImportData do
             email: 'john.doe@somewhere.com',
             first_name: 'John',
             last_name: 'Doe',
-            password: 'Azerty1234?!!',
+            password: Schematics::Attributes::Digest::DEFAULT,
             locale: 'en',
             role_id: role.id,
             time_zone: 'UTC'
@@ -38,7 +38,7 @@ RSpec.describe Core::Imports::ImportData do
             email: 'jane.doe@somewhere.com',
             first_name: 'Jane',
             last_name: 'Doe',
-            password: 'Azerty1234?!!',
+            password: Schematics::Attributes::Digest::DEFAULT,
             locale: 'fr',
             role_id: role.id,
             time_zone: 'Paris'

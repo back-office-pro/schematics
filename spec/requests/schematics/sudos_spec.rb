@@ -10,7 +10,7 @@ RSpec.describe 'Sudos' do
     let(:params) { { user: { password: } } }
 
     context 'when password is correct' do
-      let(:password) { 'Azerty1234?!!' }
+      let(:password) { Schematics::Attributes::Digest::DEFAULT }
 
       before { do_request }
 

@@ -16,7 +16,7 @@ RSpec.describe Core::Imports::ValidateData do
             first_name: 'John',
             last_name: 'Doe',
             locale: :en,
-            password: 'Azerty1234?!!',
+            password: Schematics::Attributes::Digest::DEFAULT,
             time_zone: 'UTC',
             teams:,
             role:
@@ -26,7 +26,7 @@ RSpec.describe Core::Imports::ValidateData do
             first_name: 'Jane',
             last_name: 'Doe',
             locale: :fr,
-            password: 'Azerty1234?!!',
+            password: Schematics::Attributes::Digest::DEFAULT,
             time_zone: 'Paris',
             teams:,
             role:
@@ -77,7 +77,7 @@ RSpec.describe Core::Imports::ValidateData do
             first_name: 'John',
             last_name: 'Doe',
             locale: :en,
-            password: 'Azerty1234?!!',
+            password: Schematics::Attributes::Digest::DEFAULT,
             time_zone: 'UTC',
             teams:,
             role:
@@ -87,7 +87,7 @@ RSpec.describe Core::Imports::ValidateData do
             first_name: 'Jane',
             last_name: 'Doe',
             locale: :fr,
-            password: 'Azerty1234?!!',
+            password: Schematics::Attributes::Digest::DEFAULT,
             time_zone: 'Paris',
             teams:,
             role:

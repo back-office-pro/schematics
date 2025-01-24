@@ -19,7 +19,7 @@ RSpec.describe 'Profile' do
     end
 
     context 'when password_challenge is right' do
-      let(:password_challenge) { 'Azerty1234?!!' }
+      let(:password_challenge) { Schematics::Attributes::Digest::DEFAULT }
 
       before { do_request }
 
