@@ -7,7 +7,7 @@ module Schematics
     attr_writer :subdomain
 
     def subdomain
-      @subdomain.presence || Rails.application.class.module_parent_name.underscore
+      @subdomain.presence || Rails.application.class.module_parent_name.dasherize
     end
 
     def demo?
