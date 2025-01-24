@@ -19,7 +19,6 @@ describe Tenant do
 
     its(:app_name) { is_expected.to eq('demo') }
     its(:subdomain) { is_expected.to eq('demo') }
-    its(:human) { is_expected.to eq('Demo') }
     its(:default_url_options) { is_expected.to eq(host: 'localhost', port: 3000) }
     its(:default_mailer_options) { is_expected.to eq(from: 'no-reply@localhost') }
     its(:default_password) { is_expected.to eq('Azerty1234?!!') }

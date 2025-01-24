@@ -2,7 +2,6 @@
 
 # :reek:MissingSafeMethod
 class Configuration < Schematics::ApplicationRecord
-  attribute :company_name, default: -> { Tenant.human }
   attribute :available_locales, default: -> { Rails.configuration.i18n.available_locales.map(&:to_s) } # rubocop:disable Layout/LineLength
   attribute :locale, default: -> { Rails.configuration.i18n.default_locale }
 

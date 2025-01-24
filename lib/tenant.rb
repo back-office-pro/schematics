@@ -12,8 +12,6 @@ class Tenant
 
     def subdomain = app_name.dasherize
 
-    def human = app_name.humanize
-
     def default_url_options = { host:, port: }.compact
 
     def default_mailer_options = { from: "no-reply@#{host}" }

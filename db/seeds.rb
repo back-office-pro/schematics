@@ -19,6 +19,7 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
   )
   Configuration.instance.update!(
     available_locales: [Subscription.default_locale],
+    company_name: ENV['name']&.underscore&.humanize,
     locale: Subscription.default_locale
   )
   Documentation.create!
