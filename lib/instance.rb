@@ -51,5 +51,9 @@ class Instance
     def ssl?
       ssl_path.exist?
     end
+
+    def port
+      DEFAULT_PORT unless Rails.env.production?
+    end
   end
 end

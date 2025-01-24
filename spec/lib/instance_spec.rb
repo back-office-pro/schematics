@@ -1,13 +1,29 @@
 # frozen_string_literal: true
 
+require 'active_support/core_ext/string/inquiry'
+require 'rails'
+
 describe Instance do
   subject { described_class }
 
-  it { is_expected.not_to be_ssl }
+  before { allow(Rails).to receive(:env).and_return(environment.inquiry) }
 
-  its(:domain) { is_expected.to eq('back-office.pro') }
-  its(:url) { is_expected.to eq('https://www.back-office.pro') }
-  its(:support_email) { is_expected.to eq('support@back-office.pro') }
-  its(:organization) { is_expected.to eq('back-office-pro') }
-  its(:ssl_path) { is_expected.to eq(Pathname.new('/etc/letsencrypt/live/back-office.pro')) }
+  context 'when environment is development' do
+    let(:environment) { 'development' }
+
+    it { is_expected.not_to be_ssl }
+
+    its(:domain) { is_expected.to eq('back-office.pro') }
+    its(:url) { is_expected.to eq('https://www.back-office.pro') }
+    its(:support_email) { is_expected.to eq('support@back-office.pro') }
+    its(:organization) { is_expected.to eq('back-office-pro') }
+    its(:ssl_path) { is_expected.to eq(Pathname.new('/etc/letsencrypt/live/back-office.pro')) }
+    its(:port) { is_expected.to eq(3000) }
+  end
+
+  context 'when environment is production' do
+    let(:environment) { 'production' }
+
+    its(:port) { is_expected.to be_nil }
+  end
 end

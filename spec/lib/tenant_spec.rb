@@ -22,8 +22,6 @@ describe Tenant do
     its(:default_url_options) { is_expected.to eq(host: 'localhost', port: 3000) }
     its(:default_mailer_options) { is_expected.to eq(from: 'no-reply@localhost') }
     its(:default_password) { is_expected.to eq('Azerty1234?!!') }
-    its(:host) { is_expected.to eq('localhost') }
-    its(:port) { is_expected.to eq(3000) }
     its(:database) { is_expected.to eq(:sqlite3) }
   end
 
@@ -34,8 +32,6 @@ describe Tenant do
     it { is_expected.to be_demo }
 
     its(:default_url_options) { is_expected.to eq(host: 'demo.back-office.pro') }
-    its(:host) { is_expected.to eq('demo.back-office.pro') }
-    its(:port) { is_expected.to be_nil }
   end
 
   context 'when environment is development and not in demo application' do

@@ -4,6 +4,8 @@ require 'pg'
 
 class Tenant
   class << self
+    delegate :port, to: Instance, private: true
+
     def app_name = Rails
       .application
       .class
@@ -26,10 +28,6 @@ class Tenant
       return "#{subdomain}.#{Instance.domain}" if Rails.env.production?
 
       'localhost'
-    end
-
-    def port
-      Instance::DEFAULT_PORT unless Rails.env.production?
     end
 
     def database = %i[sqlite3 postgresql][database_index]
