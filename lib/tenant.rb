@@ -19,15 +19,15 @@ class Tenant
 
     def demo? = app_name.eql?('demo') && !Rails.env.test?
 
+    def database = %i[sqlite3 postgresql][database_index]
+
+    private
+
     def host
       return "#{app_name.dasherize}.#{Instance.domain}" if Rails.env.production?
 
       'localhost'
     end
-
-    def database = %i[sqlite3 postgresql][database_index]
-
-    private
 
     def database_index
       PG
