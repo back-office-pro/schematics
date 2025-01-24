@@ -18,7 +18,6 @@ describe Tenant do
     it { is_expected.to be_demo }
 
     its(:app_name) { is_expected.to eq('demo') }
-    its(:subdomain) { is_expected.to eq('demo') }
     its(:default_url_options) { is_expected.to eq(host: 'localhost', port: 3000) }
     its(:default_mailer_options) { is_expected.to eq(from: 'no-reply@localhost') }
     its(:database) { is_expected.to eq(:sqlite3) }

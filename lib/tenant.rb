@@ -13,8 +13,6 @@ class Tenant
       .module_parent_name
       .underscore
 
-    def subdomain = app_name.dasherize
-
     def default_url_options = { host:, port: }.compact
 
     def default_mailer_options = { from: "no-reply@#{host}" }
@@ -22,7 +20,7 @@ class Tenant
     def demo? = app_name.eql?('demo') && !Rails.env.test?
 
     def host
-      return "#{subdomain}.#{Instance.domain}" if Rails.env.production?
+      return "#{app_name.dasherize}.#{Instance.domain}" if Rails.env.production?
 
       'localhost'
     end
