@@ -3,7 +3,7 @@
 require 'active_support/core_ext/string/inquiry'
 require 'rails'
 
-describe Instance do
+describe Server do
   subject { described_class }
 
   before { allow(Rails).to receive(:env).and_return(environment.inquiry) }

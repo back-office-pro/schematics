@@ -5,7 +5,7 @@ require 'pg'
 
 class Tenant
   class << self
-    delegate :port, to: Instance, private: true
+    delegate :port, to: Server, private: true
 
     def app_name = Rails
       .application
@@ -20,7 +20,7 @@ class Tenant
     private
 
     def host
-      return "#{app_name.dasherize}.#{Instance.domain}" if Rails.env.production?
+      return "#{app_name.dasherize}.#{Server.domain}" if Rails.env.production?
 
       'localhost'
     end

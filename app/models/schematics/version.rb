@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  class Version < ::Instance.application_record_class
+  class Version < ::Server.application_record_class
     self.table_name = :paper_trail_versions # rubocop:disable Rails/TableNameAssignment
 
     include ::PaperTrail::VersionConcern

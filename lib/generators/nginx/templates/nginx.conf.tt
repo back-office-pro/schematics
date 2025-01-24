@@ -1,10 +1,10 @@
-<%- if Instance.ssl? -%>
+<%- if Server.ssl? -%>
 upstream <%= upstream_name %> {
   server unix://<%= Rails.root.join('tmp', 'sockets', 'puma.sock') %>;
 }
 
 server {
-  server_name <%= name %>.<%= Instance.domain %>;
+  server_name <%= name %>.<%= Server.domain %>;
   listen [::]:443 ssl;
   listen 443 ssl;
 
@@ -23,8 +23,8 @@ server {
     proxy_cache_bypass $http_upgrade;
   }
 
-  ssl_certificate <%= Instance.ssl_path.join('fullchain.pem') %>;
-  ssl_certificate_key <%= Instance.ssl_path.join('privkey.pem') %>;
+  ssl_certificate <%= Server.ssl_path.join('fullchain.pem') %>;
+  ssl_certificate_key <%= Server.ssl_path.join('privkey.pem') %>;
   include /etc/letsencrypt/options-ssl-nginx.conf;
   ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 }
@@ -34,7 +34,7 @@ upstream <%= upstream_name %> {
 }
 
 server {
-  server_name <%= name %>.<%= Instance.domain %>;
+  server_name <%= name %>.<%= Server.domain %>;
   listen 80;
   listen [::]:80;
 

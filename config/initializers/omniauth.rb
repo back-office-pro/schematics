@@ -6,7 +6,7 @@ Rails.configuration.middleware.use OmniAuth::Builder do
            Schematics::Engine.credentials.google_oauth2.client_secret,
            { prompt: 'select_account' }
   provider :saml,
-           sp_entity_id: Instance.domain,
+           sp_entity_id: Server.domain,
            idp_sso_service_url: -> { Configuration.sso_service_url },
            idp_cert_fingerprint: -> { Configuration.sso_cert_fingerprint },
            name_identifier_format: 'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress',

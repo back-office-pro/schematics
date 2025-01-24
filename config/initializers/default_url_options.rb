@@ -4,4 +4,4 @@ Rails.application.default_url_options = Tenant.default_url_options
 Rails.application.routes.default_url_options = Tenant.default_url_options
 Rails.configuration.action_controller.default_url_options = Tenant.default_url_options
 Rails.configuration.action_mailer.default_url_options = Tenant.default_url_options
-Rails.configuration.action_mailer.default_options = Instance.default_mailer_options
+Rails.configuration.action_mailer.default_options = Server.default_mailer_options

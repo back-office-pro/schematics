@@ -5,7 +5,7 @@ module Schematics
     module Support
       module Email
         class Component < Support::Component
-          delegate :support_email, to: ::Instance, private: true
+          delegate :support_email, to: ::Server, private: true
           delegate :email_support?, to: ::Subscription, private: true
           delegate :icon, to: '::Message.entity'
 

@@ -5,7 +5,7 @@ module Schematics
     delegate :render, to: :renderer, private: true
     delegate :human_name, to: :model_class, private: true
     delegate :default_url_options, to: ::Tenant, private: true
-    delegate :ssl?, to: ::Instance, private: true
+    delegate :ssl?, to: ::Server, private: true
     delegate :key_generator, to: '::Rails.application', private: true
 
     def initialize(resource)

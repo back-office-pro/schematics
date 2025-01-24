@@ -8,7 +8,7 @@ class RepositoryGenerator < Rails::Generators::NamedBase
 
     client.create_repository(
       name,
-      organization: Instance.organization,
+      organization: Server.organization,
       private: true
     )
   end
@@ -17,7 +17,7 @@ class RepositoryGenerator < Rails::Generators::NamedBase
     return unless destroying?
     return if DENYLIST.include?(name)
 
-    client.delete_repository("#{Instance.organization}/#{name}")
+    client.delete_repository("#{Server.organization}/#{name}")
   end
 
   private

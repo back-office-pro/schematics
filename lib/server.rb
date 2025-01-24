@@ -2,7 +2,7 @@
 
 require 'uri'
 
-class Instance
+class Server
   DEFAULT_PORT = 3000
 
   class << self

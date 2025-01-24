@@ -5,7 +5,7 @@ module Schematics
     module HelpCenter
       module Terms
         class Component < ApplicationComponent
-          delegate :url, to: ::Instance
+          delegate :url, to: ::Server
 
           def title = t('.text')
 
