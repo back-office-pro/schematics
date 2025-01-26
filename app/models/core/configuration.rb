@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # :reek:MissingSafeMethod
-class Configuration < Schematics::ApplicationRecord
+class ::Configuration < Schematics::ApplicationRecord
   attribute :available_locales, default: -> { Rails.configuration.i18n.available_locales.map(&:to_s) } # rubocop:disable Layout/LineLength
   attribute :locale, default: -> { Rails.configuration.i18n.default_locale }
 

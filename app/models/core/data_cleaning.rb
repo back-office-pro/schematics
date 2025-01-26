@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # :reek:MissingSafeMethod
-class DataCleaning < Schematics::ApplicationRecord
+class ::DataCleaning < Schematics::ApplicationRecord
   class << self
     def internal = %w[APIRequest Backup Comparison Draft LinkPreview Search Session]
       .map { |model| find_or_initialize_by(model:) }

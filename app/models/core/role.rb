@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Role < Schematics::ApplicationRecord
+class ::Role < Schematics::ApplicationRecord
   class << self
     def admin = first_or_initialize
   end

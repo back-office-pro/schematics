@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # :reek:MissingSafeMethod
-class Permission < Schematics::ApplicationRecord
+class ::Permission < Schematics::ApplicationRecord
   scope :features, ::Core::Permissions::FeaturesQuery
 
   class << self

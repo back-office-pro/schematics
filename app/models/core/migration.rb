@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # :reek:MissingSafeMethod
-class Migration < Schematics::ApplicationRecord
+class ::Migration < Schematics::ApplicationRecord
   GATEWAY = ::Core::Migrations::OpenAI::ChatGPT
 
   serialize :data, coder: Schematics::Schema

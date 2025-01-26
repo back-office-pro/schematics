@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # :reek:MissingSafeMethod
-class Session < Schematics::ApplicationRecord
+class ::Session < Schematics::ApplicationRecord
   ACTIVE_DELAY = 15.minutes.freeze
 
   scope :active, ::Core::Sessions::ActiveQuery

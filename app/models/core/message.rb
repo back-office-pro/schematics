@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Message < Schematics::ApplicationRecord
+class ::Message < Schematics::ApplicationRecord
   scope :unread, ::Core::Messages::UnreadQuery
   scope :read, ::Core::Messages::ReadQuery
 

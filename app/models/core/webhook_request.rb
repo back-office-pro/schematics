@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class WebhookRequest < Schematics::ApplicationRecord
+class ::WebhookRequest < Schematics::ApplicationRecord
   def after_retry_event
     Schematics::TriggerWebhookJob.perform_later(self)
   end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # :reek:MissingSafeMethod
-class Import < Schematics::ApplicationRecord
+class ::Import < Schematics::ApplicationRecord
   delegate :locale, to: :author
   after_create_commit :perform_import_job
 

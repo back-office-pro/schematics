@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Emailing < Schematics::ApplicationRecord
+class ::Emailing < Schematics::ApplicationRecord
   after_create_commit :deliver_emails
 
   def serializers = [

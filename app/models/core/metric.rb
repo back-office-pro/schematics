@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Metric < Schematics::ApplicationRecord
+class ::Metric < Schematics::ApplicationRecord
   include ::Core::Measurable
 
   delegate :to_sql, :format, to: :entity_field, allow_nil: true, private: true

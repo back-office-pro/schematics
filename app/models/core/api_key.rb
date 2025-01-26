@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # :reek:MissingSafeMethod
-class APIKey < Schematics::ApplicationRecord
+class ::APIKey < Schematics::ApplicationRecord
   def login!(*) = self
 
   def touch!(request, response, response_time)

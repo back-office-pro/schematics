@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class WebhookEndpoint < Schematics::ApplicationRecord
+class ::WebhookEndpoint < Schematics::ApplicationRecord
   validates :url, exclusion: { in: :denied_urls }
 
   scope :subscribed, ::Core::WebhookEndpoints::SubscribedQuery

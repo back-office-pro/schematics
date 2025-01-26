@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class LinkPreview < Schematics::ApplicationRecord
+class ::LinkPreview < Schematics::ApplicationRecord
   def title
     super || url
   end
