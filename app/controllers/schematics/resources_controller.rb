@@ -120,6 +120,11 @@ module Schematics
 
     protected
 
+    def _prefixes = super
+      .dup
+      .unshift(model_name.underscore.pluralize)
+      .uniq
+
     def set_resource
       @resource = model_class
                   .preload_all
