@@ -67,7 +67,7 @@ Rails.application.configure do
     {
       active_record_instrumentation: false,
       expiry_method: :job,
-      expiry_queue: :cleanups,
+      expiry_queue: :low,
       max_age: 2.weeks.to_i,
       max_entries: 2000,
       max_size: 1.gigabyte
