@@ -4,6 +4,7 @@ def Object.const_missing(name)
   entity = SchemaCache.find_entity_by_name(name.to_s.underscore)
   return super unless entity
 
+  Rails.logger.info "Loading #{name}..."
   path = Schematics::Engine.root.join('app', 'models', 'core', "#{entity.name}.rb")
 
   if path.exist?
