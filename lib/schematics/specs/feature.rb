@@ -34,7 +34,7 @@ module Schematics
             first_name: 'John',
             last_name: 'Doe',
             otp_last_at: 1.year.ago.to_i,
-            teams: Team.all,
+            teams: ::Team.all,
             role:
           )
         end
