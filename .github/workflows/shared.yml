@@ -15,7 +15,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get -yqq install libvips-dev graphviz
+          sudo apt-get -yqq install libvips-dev ffmpeg graphviz
       - name: Setup Database
         env:
           RAILS_ENV: test
