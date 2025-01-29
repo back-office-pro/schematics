@@ -16,16 +16,6 @@ module Schematics
       rescue_from Aws::S3::Errors::ServiceError, with: :storage_error
       rescue_from Google::Cloud::Error, with: :storage_error
       rescue_from AzureBlob::Error, with: :storage_error
-      rescue_from NoMethodError, with: :reload_after_migration
-    end
-
-    # TODO: remove after integrating new routing system
-    def reload_after_migration
-      Core::Migrations::Reload.call(migration: Migration.current)
-      respond_to do |format|
-        format.json { head :service_unavailable }
-        format.any { redirect_to(request.path) }
-      end
     end
 
     def access_denied

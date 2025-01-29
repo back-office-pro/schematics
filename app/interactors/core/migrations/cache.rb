@@ -7,9 +7,10 @@ module Core
 
       progressable migration: 70
 
-      def call = ::Rails
-        .cache
-        .delete('schema')
+      def call
+        ::Rails.cache.write('reload', true)
+        ::Rails.cache.delete('schema')
+      end
     end
   end
 end
