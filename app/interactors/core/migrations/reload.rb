@@ -3,17 +3,14 @@
 module Core
   module Migrations
     class Reload
-      include Schematics::Progressable
+      include Interactor
 
       delegate :reload_routes!, to: 'Rails.application', private: true
       delegate :migration, to: :context, private: true
       delegate :migrator_old_and_changed_entities,
-               :migrator_new_and_changed_entities,
                :migrator_changed_entities,
                to: :migration,
                private: true
-
-      progressable migration: 70
 
       before :reload_routes!
 
