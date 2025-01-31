@@ -10,10 +10,10 @@ module Schematics
 
     private
 
-    def switch_localization(&block)
+    def switch_localization(&)
       ::I18n.with_locale(current_user.locale) do
         ::Time.use_zone(current_user.time_zone) do
-          ::I18n.in_beginning_of_week(&block)
+          ::I18n.in_beginning_of_week(&)
         end
       end
     end
