@@ -65,6 +65,24 @@ module Schematics
         print entity.model_elements.map(&:to_str).join # rubocop:disable Rails/Output
       end
 
+      def load!(name)
+        entity = schema.find_entity_by_name(name.to_s.underscore)
+        return unless entity
+
+        unless const_defined?(name)
+          Rails.logger.info "Loading #{name}..."
+          path = Engine.root.join('app', 'models', 'core', "#{entity.name}.rb")
+
+          if path.exist?
+            load(path)
+          else
+            eval(entity, binding, __FILE__, __LINE__) # rubocop:disable Security/Eval
+          end
+        end
+
+        const_get(name)
+      end
+
       private
 
       def loadable(concerns: [])
