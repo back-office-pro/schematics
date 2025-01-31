@@ -25,13 +25,13 @@ module Schematics
       validates :action,
                 presence: true,
                 inclusion: { in: ACTIONS }
-      attr_accessor :entity, :action, :callback
+      attr_accessor :id, :entity, :action, :callback
 
       class << self
         def to_proc = -> { new(**it) }
       end
 
-      memoize def method_name = [action, SecureRandom.uuid]
+      def method_name = [action, id]
         .join('_')
         .underscore
         .to_sym

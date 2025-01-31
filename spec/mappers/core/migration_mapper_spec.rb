@@ -12,7 +12,7 @@ RSpec.describe Core::MigrationMapper do
       {
         'entities_attributes' => {
           '0' => {
-            'id' => '123',
+            'id' => '7fd48606-93fd-4820-9f5a-88d813a16b85',
             'name' => 'product',
             'options_attributes' => {
               'descriptor' => 'price',
@@ -23,7 +23,7 @@ RSpec.describe Core::MigrationMapper do
             },
             'attributes_attributes' => {
               '0' => {
-                'id' => '123',
+                'id' => '16124c81-4abe-414d-ad28-55b36957db72',
                 'type' => 'string',
                 'name' => 'foo',
                 'options_attributes' => {
@@ -33,7 +33,7 @@ RSpec.describe Core::MigrationMapper do
                 }
               },
               '1' => {
-                'id' => '456',
+                'id' => '523d8d58-ffe9-43ab-8cb7-868ac4d0ae75',
                 'type' => 'state_machine',
                 'name' => 'state',
                 'options_attributes' => {
@@ -43,7 +43,7 @@ RSpec.describe Core::MigrationMapper do
                   ],
                   'events' => {
                     '0' => {
-                      'id' => '789',
+                      'id' => '76667a46-7392-4c38-a81c-836d4efcd72b',
                       'name' => 'close',
                       'from' => 'pending',
                       'to' => 'closed'
@@ -54,7 +54,7 @@ RSpec.describe Core::MigrationMapper do
             },
             'virtuals_attributes' => {
               '0' => {
-                'id' => '1011',
+                'id' => '54d26529-8f7e-44ee-bc3c-e0d2933fa481',
                 'name' => 'price',
                 'function' => '$foo',
                 'options_attributes' => {
@@ -65,6 +65,7 @@ RSpec.describe Core::MigrationMapper do
             },
             'triggers_attributes' => {
               '0' => {
+                'id' => '7380ee01-9c06-4591-a894-677bf4952dde',
                 'action' => 'after_save',
                 'callback' => '$foo = true'
               }
@@ -86,7 +87,7 @@ RSpec.describe Core::MigrationMapper do
       {
         data: [
           {
-            id: '123',
+            id: '7fd48606-93fd-4820-9f5a-88d813a16b85',
             name: 'product',
             options: {
               descriptor: 'price',
@@ -97,7 +98,7 @@ RSpec.describe Core::MigrationMapper do
             },
             attributes: [
               {
-                id: '123',
+                id: '16124c81-4abe-414d-ad28-55b36957db72',
                 name: 'foo',
                 type: 'string',
                 options: {
@@ -106,7 +107,7 @@ RSpec.describe Core::MigrationMapper do
                 }
               },
               {
-                id: '456',
+                id: '523d8d58-ffe9-43ab-8cb7-868ac4d0ae75',
                 name: 'state',
                 type: 'state_machine',
                 options: {
@@ -116,7 +117,7 @@ RSpec.describe Core::MigrationMapper do
                   ],
                   events: [
                     {
-                      id: '789',
+                      id: '76667a46-7392-4c38-a81c-836d4efcd72b',
                       name: 'close',
                       from: 'pending',
                       to: 'closed'
@@ -127,7 +128,7 @@ RSpec.describe Core::MigrationMapper do
             ],
             virtuals: [
               {
-                id: '1011',
+                id: '54d26529-8f7e-44ee-bc3c-e0d2933fa481',
                 name: 'price',
                 function: '$foo',
                 options: {
@@ -138,6 +139,7 @@ RSpec.describe Core::MigrationMapper do
             ],
             triggers: [
               {
+                id: '7380ee01-9c06-4591-a894-677bf4952dde',
                 action: 'after_save',
                 callback: '$foo = true'
               }

@@ -89,9 +89,11 @@
       - create
       - destroy
   triggers:
-    - action: after_create
+    - id: <%= SecureRandom.uuid %>
+      action: after_create
       callback: $part.quantity -= $quantity
-    - action: after_destroy
+    - id: <%= SecureRandom.uuid %>
+      action: after_destroy
       callback: $part.quantity += $quantity
   virtuals:
     - id: <%= SecureRandom.uuid %>
@@ -127,9 +129,11 @@
       - create
       - destroy
   triggers:
-    - action: after_create
+    - id: <%= SecureRandom.uuid %>
+      action: after_create
       callback: $part.quantity += $quantity
-    - action: after_destroy
+    - id: <%= SecureRandom.uuid %>
+      action: after_destroy
       callback: $part.quantity -= $quantity
   virtuals:
     - id: <%= SecureRandom.uuid %>

@@ -5,7 +5,7 @@ module Schematics
     module Template
       module Trigger
         class Component < Template::Component
-          def trigger = Schematics::Triggers::Trigger.new
+          def trigger = Triggers::Trigger.new(id: 'RANDOM_UUID', entity:)
         end
       end
     end

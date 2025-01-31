@@ -7,5 +7,6 @@
         .col-auto
           = __schema_editor_button_remove(wrapper: '.schema-editor-trigger')
     .card-body
+      = builder.hidden_field :id
       = builder.select :action, collection, { prompt: }, { required: true, data: { controller: 'dropdown' } }
       = builder.text_field :callback, data:

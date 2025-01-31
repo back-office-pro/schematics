@@ -1,17 +1,16 @@
 # frozen_string_literal: true
 
 describe Schematics::Triggers::Trigger do
-  subject { described_class.new(entity:, action:, callback:) }
+  subject { described_class.new(id:, entity:, action:, callback:) }
 
   let(:entity) { Schematics::Entities::Entity.new(name: 'task') }
   let(:callback) { '$in_stock = true' }
-
-  before { allow(SecureRandom).to receive(:uuid).and_return('abcd-123e') }
+  let(:id) { '10ee534b-896e-4fc9-9070-ff060500c614' }
 
   context 'when trigger is coming from state machine' do
     let(:action) { 'after_close_event' }
 
-    its(:method_name) { is_expected.to eq(:after_close_event_abcd_123e) }
+    its(:method_name) { is_expected.to eq(:after_close_event_10ee534b_896e_4fc9_9070_ff060500c614) }
 
     its(:to_spec) do
       is_expected.to eq <<~TEXT.chomp
@@ -34,7 +33,7 @@ describe Schematics::Triggers::Trigger do
   context 'when trigger is a model callback and action is after_create' do
     let(:action) { 'after_create' }
 
-    its(:method_name) { is_expected.to eq(:after_create_abcd_123e) }
+    its(:method_name) { is_expected.to eq(:after_create_10ee534b_896e_4fc9_9070_ff060500c614) }
 
     its(:to_spec) do
       is_expected.to eq <<~TEXT.chomp
@@ -44,8 +43,8 @@ describe Schematics::Triggers::Trigger do
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        after_create_commit :after_create_abcd_123e
-        def after_create_abcd_123e
+        after_create_commit :after_create_10ee534b_896e_4fc9_9070_ff060500c614
+        def after_create_10ee534b_896e_4fc9_9070_ff060500c614
           self.in_stock = true
           save
         rescue StandardError => e
@@ -58,7 +57,7 @@ describe Schematics::Triggers::Trigger do
   context 'when trigger is a model callback and action is before_create' do
     let(:action) { 'before_create' }
 
-    its(:method_name) { is_expected.to eq(:before_create_abcd_123e) }
+    its(:method_name) { is_expected.to eq(:before_create_10ee534b_896e_4fc9_9070_ff060500c614) }
 
     its(:to_spec) do
       is_expected.to eq <<~TEXT.chomp
@@ -68,8 +67,8 @@ describe Schematics::Triggers::Trigger do
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        before_create :before_create_abcd_123e
-        def before_create_abcd_123e
+        before_create :before_create_10ee534b_896e_4fc9_9070_ff060500c614
+        def before_create_10ee534b_896e_4fc9_9070_ff060500c614
           self.in_stock = true
         rescue StandardError => e
           raise Triggers::Errors::StandardError, Triggers::Errors::StandardError.build(e)

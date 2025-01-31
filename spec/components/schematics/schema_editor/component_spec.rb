@@ -78,6 +78,7 @@ RSpec.describe Schematics::SchemaEditor::Component, type: :component do
         ],
         triggers: [
           {
+            id: '83cca8ab-7268-45b2-a0c9-9b6be158e331',
             action: 'after_save',
             callback: '$error.foo = true'
           }
@@ -361,6 +362,14 @@ RSpec.describe Schematics::SchemaEditor::Component, type: :component do
   end
 
   describe 'Trigger fields' do
+    it 'has an id hidden field' do
+      expect(component).to have_field(
+        'migration[entities_attributes][0][triggers_attributes][0][id]',
+        with: '83cca8ab-7268-45b2-a0c9-9b6be158e331',
+        type: 'hidden'
+      )
+    end
+
     it 'has an action dropdown' do
       expect(component).to have_select(
         'migration[entities_attributes][0][triggers_attributes][0][action]',
