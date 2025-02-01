@@ -10,17 +10,24 @@ describe Schematics::Associations::HasManyNested do
     )
   end
 
-  let(:entity) do
-    Schematics::Entities::Entity.new(
-      name: 'entity',
-      options: {
-        descriptor: 'type'
+  let(:data) do
+    [
+      {
+        name: 'entity',
+        options: {
+          descriptor: 'type'
+        },
+        attributes: [
+          { name: 'type', type: 'string' }
+        ]
       },
-      attributes: [
-        { name: 'type', type: 'string' }
-      ]
-    )
+      {
+        name: 'schema'
+      }
+    ]
   end
+  let(:schema) { Schematics::Schema.new(data:) }
+  let(:entity) { Schematics::Entities::Entity.new(schema:, **data.first) }
   let(:options) { {} }
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
@@ -83,11 +90,5 @@ describe Schematics::Associations::HasManyNested do
         accepts_nested_attributes_for :entities
       RUBY
     end
-  end
-
-  context 'when association has a name collision' do
-    before { association.prefixed = true }
-
-    its(:name) { is_expected.to eq('schema_entities') }
   end
 end

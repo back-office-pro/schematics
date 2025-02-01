@@ -17,6 +17,8 @@ module Schematics
 
       delegate :hidden?, to: :options
       delegate :entity,
+               :inverse_entity,
+               :inverse_association,
                :required?,
                :polymorphic?,
                :column_name,
@@ -31,7 +33,7 @@ module Schematics
                :schema,
                :existing?,
                to: :entity
-      attr_accessor :belongs_to, :prefixed
+      attr_accessor :belongs_to
 
       class << self
         def build(type: 'has_many', entity: nil, belongs_to: nil, name: nil, options: nil)
@@ -47,7 +49,7 @@ module Schematics
       def weight = 3
 
       def name
-        return [inverse_of, source].join('_') if prefixed
+        return [inverse_of, source].join('_') if prefixed?
 
         source
       end
@@ -59,6 +61,11 @@ module Schematics
       def to_str = scope_to_str.concat(association_to_str)
 
       protected
+
+      def prefixed? = inverse_entity
+        .associations
+        .reject { it.belongs_to == belongs_to }
+        .any? { it.source == source }
 
       def scope_to_str = <<~RUBY
         scope :with_#{name}, -> { includes(#{preload}) }

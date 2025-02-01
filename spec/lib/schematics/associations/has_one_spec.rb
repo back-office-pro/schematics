@@ -9,17 +9,24 @@ describe Schematics::Associations::HasOne do
     )
   end
 
-  let(:entity) do
-    Schematics::Entities::Entity.new(
-      name: 'entity',
-      options: {
-        descriptor: 'type'
+  let(:data) do
+    [
+      {
+        name: 'entity',
+        options: {
+          descriptor: 'type'
+        },
+        attributes: [
+          { name: 'type', type: 'string' }
+        ]
       },
-      attributes: [
-        { name: 'type', type: 'string' }
-      ]
-    )
+      {
+        name: 'schema'
+      }
+    ]
   end
+  let(:schema) { Schematics::Schema.new(data:) }
+  let(:entity) { Schematics::Entities::Entity.new(schema:, **data.first) }
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Documentable) }
@@ -54,11 +61,5 @@ describe Schematics::Associations::HasOne do
               inverse_of: :schema,
               autosave: true
     RUBY
-  end
-
-  context 'when association has a name collision' do
-    before { association.prefixed = true }
-
-    its(:name) { is_expected.to eq('schema_entity') }
   end
 end

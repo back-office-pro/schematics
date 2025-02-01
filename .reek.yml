@@ -22,9 +22,6 @@ detectors:
   BooleanParameter:
     exclude:
       - Component
-  Attribute:
-    exclude:
-      - prefixed
   ControlParameter:
     exclude:
       - initialize

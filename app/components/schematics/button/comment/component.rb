@@ -14,7 +14,7 @@ module Schematics
         end
 
         memoize def count = resource
-          .comments
+          .record_comments
           .count
 
         def title = ::Comment

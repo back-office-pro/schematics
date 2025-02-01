@@ -74,7 +74,6 @@ module Schematics
       add_has_many_through_associations
       add_has_one_through_associations
       add_inverse_polymorphic_associations
-      entities.each(&:check_for_association_name_collisions)
     end
 
     # :reek:FeatureEnvy

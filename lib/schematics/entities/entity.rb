@@ -167,17 +167,6 @@ module Schematics
         events.find { it.suffixed_name == name }
       end
 
-      def check_for_association_name_collisions
-        associations
-          .grep_v(Associations::HasAndBelongsToMany)
-          .reject(&:prefixed)
-          .each do |association|
-            association.prefixed = associations
-                                   .excluding(association)
-                                   .any? { it.name == association.name }
-          end
-      end
-
       def permitted_params = fillable_elements
         .grep_v(Attributes::User)
         .flat_map(&:permitted_params)

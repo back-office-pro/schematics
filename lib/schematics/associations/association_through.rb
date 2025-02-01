@@ -8,6 +8,8 @@ module Schematics
     class AssociationThrough < Association
       attr_accessor :through
 
+      def source = inverse_association.name
+
       def type = super.chomp('_through')
 
       protected

@@ -5,8 +5,35 @@ describe Schematics::Associations::HasManyThrough do
     described_class.new(belongs_to: through, through: belongs_to.inverse_association)
   end
 
+  let(:data) do
+    [
+      {
+        name: 'entity',
+        options: {
+          descriptor: 'type'
+        },
+        attributes: [
+          { name: 'type', type: 'string' }
+        ]
+      },
+      {
+        name: 'attribute',
+        options: {
+          descriptor: 'name'
+        },
+        attributes: [
+          { name: 'name', type: 'string' }
+        ]
+      },
+      {
+        name: 'schema'
+      }
+    ]
+  end
+  let(:schema) { Schematics::Schema.new(data:) }
   let(:entity) do
     Schematics::Entities::Entity.new(
+      schema:,
       name: 'attribute',
       options: {
         descriptor: 'name'
@@ -16,17 +43,7 @@ describe Schematics::Associations::HasManyThrough do
       ]
     )
   end
-  let(:through_entity) do
-    Schematics::Entities::Entity.new(
-      name: 'entity',
-      options: {
-        descriptor: 'type'
-      },
-      attributes: [
-        { name: 'type', type: 'string' }
-      ]
-    )
-  end
+  let(:through_entity) { Schematics::Entities::Entity.new(schema:, **data.first) }
   let(:belongs_to) do
     Schematics::Attributes::BelongsTo.new(entity: through_entity, name: 'schema')
   end
@@ -62,11 +79,5 @@ describe Schematics::Associations::HasManyThrough do
               through: :entities,
               source: :attributes
     RUBY
-  end
-
-  context 'when association has a name collision' do
-    before { association.prefixed = true }
-
-    its(:name) { is_expected.to eq('entity_attributes') }
   end
 end

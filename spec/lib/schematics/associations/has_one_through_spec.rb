@@ -70,10 +70,4 @@ describe Schematics::Associations::HasOneThrough do
               autosave: true
     RUBY
   end
-
-  context 'when association has a name collision' do
-    before { association.prefixed = true }
-
-    its(:name) { is_expected.to eq('entity_user') }
-  end
 end

@@ -9,8 +9,8 @@ module Core
           .with_user_teams_name
           .with_user_role_permissions
           .with_user_role_name
-          .with_user_drafts
           .with_user_slugs
+          .with_record_drafts
           .where(id: access_token)
           .or(active.where(id:))
           .load_async
