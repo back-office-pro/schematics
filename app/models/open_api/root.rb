@@ -4,7 +4,9 @@ module OpenAPI
   # :reek:Attribute
   class Root
     include ::ActiveModel::API
-    attr_accessor :schema
+    include ::ActiveModel::Attributes
+
+    attribute :schema, default: -> { Schematics::Schema.new }
 
     def to_h = I18n.with_locale(:en) do
       doc = open_api_data
@@ -21,7 +23,6 @@ module OpenAPI
 
     def paths = schema
       .entities
-      .select(&:model_class)
       .flat_map(&method(:entity_paths))
       .filter_map(&:to_h)
       .reduce(&:deep_merge)
@@ -29,7 +30,6 @@ module OpenAPI
 
     def tags = schema
       .entities
-      .select(&:model_class)
       .flat_map(&method(:entity_paths))
       .compact
       .map(&:tag)

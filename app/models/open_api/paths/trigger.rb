@@ -17,7 +17,7 @@ module OpenAPI
 
       def http_method = :patch
 
-      def summary = [event.human, model_class.human_name].join(' ')
+      def summary = [event.human, human_name].join(' ')
 
       def operation_id = [class_name, event.name.capitalize].join('_')
 

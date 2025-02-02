@@ -3,9 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe OpenAPI::Root do
-  subject { described_class.new(schema:) }
+  subject { described_class.new }
 
-  let(:schema) { Schematics::Schema.new }
   let(:expected_hash) do
     {
       openapi: '3.1.1',

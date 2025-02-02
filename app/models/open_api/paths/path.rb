@@ -5,10 +5,10 @@ module OpenAPI
     # :reek:Attribute
     class Path
       include ::ActiveModel::API
+      include ::ActionView::Helpers::TranslationHelper
       attr_accessor :entity
 
       delegate :searchable_elements,
-               :model_class,
                :class_name,
                :open_api_schema,
                :open_api_body,
@@ -16,9 +16,7 @@ module OpenAPI
                to: :entity,
                private: true
 
-      def tag = model_class
-        .human_name_plural
-        .humanize
+      def tag = translate(:other, scope: [:activerecord, :models, entity.name])
 
       def to_h = {
         path.to_sym => {
@@ -35,7 +33,9 @@ module OpenAPI
 
       protected
 
-      def summary = "#{self.class.name.demodulize.underscore.humanize} #{model_class.human_name}"
+      def summary = "#{self.class.name.demodulize.underscore.humanize} #{human_name}"
+
+      def human_name = translate(:one, scope: [:activerecord, :models, entity.name])
 
       def operation_id = "#{class_name}_#{self.class.name.demodulize}"
 
