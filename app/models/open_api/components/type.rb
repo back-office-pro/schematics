@@ -30,7 +30,7 @@ module OpenAPI
           {
             type: 'object',
             properties: type
-              .map { |name, value| { name.to_s.delete_suffix('!') => to_h(value) } }
+              .map { |name, value| { name.to_s.delete_suffix('!').to_sym => to_h(value) } }
               .reduce(&:merge),
             required: type
               .keys

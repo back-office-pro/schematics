@@ -21,7 +21,7 @@ module OpenAPI
                 .grep_v(Schematics::Associations::HasManyNested)
                 .map do |element|
                   {
-                    element.input_name => Type
+                    element.input_name.to_sym => Type
                       .new(value: element.open_api_body_type)
                       .to_h
                       .merge(default: element.options.default, required: element.required?)

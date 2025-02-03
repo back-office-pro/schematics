@@ -7,7 +7,7 @@ module OpenAPI
       include ::ActiveModel::API
       attr_accessor :name, :type, :description
 
-      def to_h = { name => { description:, schema: } }
+      def to_h = { name.to_sym => { description:, schema: } }
 
       private
 
