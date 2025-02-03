@@ -5,11 +5,9 @@ module OpenAPI
     class Compare < NestedPath
       protected
 
-      def root_path = super.pluralize
+      alias summary_slug tag
 
       def singleton? = true
-
-      def summary = super.pluralize
 
       def nested_entity_name = 'comparison'
     end

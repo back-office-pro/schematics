@@ -7,19 +7,26 @@ module OpenAPI
     include ::ActiveModel::Attributes
 
     attribute :schema, default: -> { Schematics::Schema.new }
+    attribute :locale, default: -> { Rails.configuration.i18n.default_locale }
 
-    def to_h = I18n.with_locale(:en) do
-      doc = open_api_data
-      doc[:paths] = paths.deep_merge(doc[:paths]).sort.to_h
-      doc[:tags] = tags.concat(doc[:tags]).sort { _1[:name] <=> _2[:name] } # rubocop:disable Style/NumberedParametersLimit
-      doc
+    def to_h
+      ::I18n.with_locale(locale) do
+        doc = open_api_data
+        doc[:paths] = paths.deep_merge(doc[:paths]).sort.to_h
+        doc[:tags] = tags.concat(doc[:tags]).sort { _1[:name] <=> _2[:name] } # rubocop:disable Style/NumberedParametersLimit
+        doc
+      end
     end
 
     private
 
     def open_api_data = ::YAML
-      .load_file(Schematics::Engine.root.join('lib', 'open_api.yml'))
+      .load_file(open_api_data_path)
       .deep_symbolize_keys
+
+    def open_api_data_path = Schematics::Engine
+      .root
+      .join('config', 'locales', 'open_api', "#{locale}.yml")
 
     def paths = schema
       .entities
@@ -38,10 +45,10 @@ module OpenAPI
 
     def entity_paths(entity) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
       [
-        (Paths::List.new(entity:) if entity.can?(:index)),
+        (Paths::Index.new(entity:) if entity.can?(:index)),
         (Paths::Autocomplete.new(entity:) if entity.can?(:index)),
         (Paths::Compare.new(entity:) if entity.can?(:index)),
-        (Paths::Create.new(entity:) if entity.can?(:create)),
+        (Paths::Create.new(entity:) if entity.can?(:create) && entity.name != 'session'),
         (Paths::Duplicate.new(entity:) if entity.can?(:create)),
         (Paths::Import.new(entity:) if entity.can?(:create)),
         (Paths::Archive.new(entity:) if entity.can?(:archive)),

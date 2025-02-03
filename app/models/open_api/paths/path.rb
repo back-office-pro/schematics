@@ -33,7 +33,15 @@ module OpenAPI
 
       protected
 
-      def summary = "#{self.class.name.demodulize.underscore.humanize} #{human_name}"
+      def summary = [
+        translate(
+          self.class.name.demodulize.underscore,
+          scope: %i[activerecord enums permission action]
+        ),
+        summary_slug
+      ].join(' ')
+
+      def summary_slug = human_name
 
       def human_name = translate(:one, scope: [:activerecord, :models, entity.name])
 
@@ -44,7 +52,7 @@ module OpenAPI
           name: 'x-api-inflection',
           type: 'string',
           in: 'header',
-          description: 'Inflect payload keys. Possible values are camel, dash, snake or pascal.'
+          description: translate('open_api.parameters.inflection')
         )
       ]
 
@@ -54,13 +62,13 @@ module OpenAPI
         entity in Schematics::Entities::Singleton
       end
 
-      def root_path = class_name
-        .gsub('ActiveStorage', 'Storage')
-        .gsub('Blob', 'File')
-        .underscore
-        .then_tap { it.pluralize unless singleton? }
-        .tr('_', '-')
-        .prepend('/')
+      def root_path = File.join(
+        [
+          '',
+          (translate('routes.active_storage') if entity.name.start_with?('active_storage')),
+          (singleton? ? summary_slug : tag).gsub(/\b\w{1,2}\b/, '').parameterize(separator: '-')
+        ].compact
+      )
     end
   end
 end

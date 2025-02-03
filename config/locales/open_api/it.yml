@@ -1,0 +1,1226 @@
+---
+openapi: 3.1.1
+security: []
+tags:
+  - name: Risposte ai messaggi
+  - name: Password monousi
+  - name: Passwords
+  - name: Preferenze
+  - name: Profilo
+  - name: Accessi limitati
+  - name: Tokens
+  - name: Storico
+paths:
+  "/messaggi/{id}/risposte":
+    post:
+      summary: Rispondere a un messaggio
+      operationId: MessageReplies_Create
+      tags:
+        - Risposte ai messaggi
+      parameters:
+        - name: id
+          in: path
+          required: false
+          schema:
+            type: string
+        - name: x-api-inflection
+          in: header
+          required: false
+          schema:
+            type: string
+            description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+          description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+      requestBody:
+        required: false
+        description: ''
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                message[content]:
+                  type: string
+                  required: true
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: object
+                  properties:
+                    content:
+                      type: string
+                    author_id:
+                      type: string
+                  required:
+                    - content
+                    - author_id
+      responses:
+        '201':
+          description: Successo
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  subject:
+                    type: string
+                  content:
+                    type: string
+                  created_at:
+                    type: string
+                    format: date-time
+                  author:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      full_name:
+                        type: string
+                  parent:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      subject:
+                        type: string
+                  role:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+        '400':
+          description: Richiesta non valida
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Non autorizzato
+          content:
+            application/json:
+              schema:
+                type: object
+        '403':
+          description: Vietato
+          content:
+            application/json:
+              schema:
+                type: object
+        '422':
+          description: Contenuto non processabile
+          content:
+            application/json:
+              schema:
+                type: object
+  "/password-monousi":
+    get:
+      summary: Ottieni i codici di recupero 2FA dell'utente attuale
+      operationId: OneTimePasswords_Show
+      tags:
+        - Password monousi
+      parameters:
+        - name: x-api-inflection
+          in: header
+          required: false
+          schema:
+            type: string
+            description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+          description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+      responses:
+        '200':
+          description: Successo
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    codes:
+                      type: array
+                      items:
+                        type: string
+        '401':
+          description: Non autorizzato
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      summary: Sbloccare la sessione a due fattori
+      operationId: OneTimePasswords_Create
+      tags:
+        - Password monousi
+      parameters:
+        - name: x-api-inflection
+          in: header
+          required: false
+          schema:
+            type: string
+            description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+          description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+      requestBody:
+        required: false
+        description: ''
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                user[otp_token]:
+                  type: string
+                  required: true
+                user[otp_attempt]:
+                  type: string
+                  required: true
+                user[remember_me]:
+                  type: boolean
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    otp_token:
+                      type: string
+                    otp_attempt:
+                      type: string
+                    remember_me:
+                      type: boolean
+                  required:
+                    - otp_token
+                    - otp_attempt
+      responses:
+        '200':
+          description: Successo
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token_type:
+                    type: string
+                  expires_in:
+                    type: integer
+                  access_token:
+                    type: string
+                  refresh_token:
+                    type: string
+        '400':
+          description: Richiesta non valida
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Non autorizzato
+          content:
+            application/json:
+              schema:
+                type: object
+    patch:
+      summary: Aggiornare la configurazione 2FA dell'utente attuale
+      operationId: OneTimePasswords_Update_Patch
+      tags:
+        - Password monousi
+      parameters:
+        - name: x-api-inflection
+          in: header
+          required: false
+          schema:
+            type: string
+            description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+          description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+      requestBody:
+        required: false
+        description: ''
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                user[otp_attempt]:
+                  type: string
+                  required: true
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    otp_attempt:
+                      type: string
+                  required:
+                    - otp_attempt
+      responses:
+        '204':
+          description: Successo
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Richiesta non valida
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Non autorizzato
+          content:
+            application/json:
+              schema:
+                type: object
+        '422':
+          description: Contenuto non processabile
+          content:
+            application/json:
+              schema:
+                type: object
+    put:
+      summary: Aggiornare la configurazione 2FA dell'utente attuale
+      operationId: OneTimePasswords_Update_Put
+      tags:
+        - Password monousi
+      parameters:
+        - name: x-api-inflection
+          in: header
+          required: false
+          schema:
+            type: string
+            description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+          description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+      requestBody:
+        required: false
+        description: ''
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                user[otp_attempt]:
+                  type: string
+                  required: true
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    otp_attempt:
+                      type: string
+                  required:
+                    - otp_attempt
+      responses:
+        '204':
+          description: Successo
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Richiesta non valida
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Non autorizzato
+          content:
+            application/json:
+              schema:
+                type: object
+        '422':
+          description: Contenuto non processabile
+          content:
+            application/json:
+              schema:
+                type: object
+    delete:
+      summary: Rimuovere l'attuale configurazione 2FA dell'utente
+      operationId: OneTimePasswords_Destroy
+      tags:
+        - Password monousi
+      parameters:
+        - name: x-api-inflection
+          in: header
+          required: false
+          schema:
+            type: string
+            description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+          description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+      responses:
+        '204':
+          description: Successo
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Non autorizzato
+          content:
+            application/json:
+              schema:
+                type: object
+  "/passwords":
+    post:
+      summary: Crea una richiesta di reimpostazione della password
+      operationId: PasswordResets_Create
+      tags:
+        - Passwords
+      parameters:
+        - name: x-api-inflection
+          in: header
+          required: false
+          schema:
+            type: string
+            description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+          description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+      requestBody:
+        required: false
+        description: ''
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                user[email]:
+                  type: string
+                  required: true
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                  required:
+                    - email
+      responses:
+        '201':
+          description: Successo
+          content:
+            application/json:
+              schema:
+                type: object
+        '422':
+          description: Contenuto non processabile
+          content:
+            application/json:
+              schema:
+                type: object
+  "/passwords/{token}":
+    patch:
+      summary: Aggiorna la password dell'utente
+      operationId: PasswordResets_Update_Patch
+      tags:
+        - Passwords
+      parameters:
+        - name: token
+          in: path
+          required: false
+          schema:
+            type: string
+        - name: x-api-inflection
+          in: header
+          required: false
+          schema:
+            type: string
+            description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+          description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+      requestBody:
+        required: false
+        description: ''
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                user[password]:
+                  type: string
+                  required: true
+                user[password_confirmation]:
+                  type: string
+                  required: true
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    password:
+                      type: string
+                    password_confirmation:
+                      type: string
+                  required:
+                    - password
+                    - password_confirmation
+      responses:
+        '204':
+          description: Successo
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Richiesta non valida
+          content:
+            application/json:
+              schema:
+                type: object
+        '422':
+          description: Contenuto non processabile
+          content:
+            application/json:
+              schema:
+                type: object
+    put:
+      summary: Aggiorna la password dell'utente
+      operationId: PasswordResets_Update_Put
+      tags:
+        - Passwords
+      parameters:
+        - name: token
+          in: path
+          required: false
+          schema:
+            type: string
+        - name: x-api-inflection
+          in: header
+          required: false
+          schema:
+            type: string
+            description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+          description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+      requestBody:
+        required: false
+        description: ''
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                user[password]:
+                  type: string
+                  required: true
+                user[password_confirmation]:
+                  type: string
+                  required: true
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    password:
+                      type: string
+                    password_confirmation:
+                      type: string
+                  required:
+                    - password
+                    - password_confirmation
+      responses:
+        '204':
+          description: Successo
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Richiesta non valida
+          content:
+            application/json:
+              schema:
+                type: object
+        '422':
+          description: Contenuto non processabile
+          content:
+            application/json:
+              schema:
+                type: object
+  "/preferenze":
+    patch:
+      summary: Aggiorna le preferenze attuali dell'utente
+      operationId: Preferences_Update_Patch
+      tags:
+        - Preferenze
+      parameters:
+        - name: x-api-inflection
+          in: header
+          required: false
+          schema:
+            type: string
+            description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+          description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+      requestBody:
+        required: false
+        description: ''
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                user[preferences][theme]:
+                  type: string
+                user[preferences][sidebar_toggled]:
+                  type: boolean
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    preferences:
+                      type: object
+                      properties:
+                        theme:
+                          type: string
+                        sidebar_toggled:
+                          type: boolean
+      responses:
+        '204':
+          description: Successo
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Non autorizzato
+          content:
+            application/json:
+              schema:
+                type: object
+    put:
+      summary: Aggiorna le preferenze attuali dell'utente
+      operationId: Preferences_Update_Put
+      tags:
+        - Preferenze
+      parameters:
+        - name: x-api-inflection
+          in: header
+          required: false
+          schema:
+            type: string
+            description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+          description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+      requestBody:
+        required: false
+        description: ''
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                user[preferences][theme]:
+                  type: string
+                user[preferences][sidebar_toggled]:
+                  type: boolean
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    preferences:
+                      type: object
+                      properties:
+                        theme:
+                          type: string
+                        sidebar_toggled:
+                          type: boolean
+      responses:
+        '204':
+          description: Successo
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Non autorizzato
+          content:
+            application/json:
+              schema:
+                type: object
+  "/profilo":
+    patch:
+      summary: Aggiorna il profilo utente attuale
+      operationId: Profile_Update_Patch
+      tags:
+        - Profilo
+      parameters:
+        - name: x-api-inflection
+          in: header
+          required: false
+          schema:
+            type: string
+            description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+          description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+      requestBody:
+        required: false
+        description: ''
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                user[email]:
+                  type: string
+                user[password]:
+                  type: string
+                user[password_confirmation]:
+                  type: string
+                user[password_challenge]:
+                  type: string
+                  required: true
+                user[first_name]:
+                  type: string
+                user[last_name]:
+                  type: string
+                user[avatar]:
+                  type: string
+                user[locale]:
+                  type: string
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
+                    password_confirmation:
+                      type: string
+                    password_challenge:
+                      type: string
+                    first_name:
+                      type: string
+                    last_name:
+                      type: string
+                    avatar:
+                      type: string
+                    locale:
+                      type: string
+                  required:
+                    - password_challenge
+      responses:
+        '204':
+          description: Successo
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Richiesta non valida
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Non autorizzato
+          content:
+            application/json:
+              schema:
+                type: object
+        '422':
+          description: Contenuto non processabile
+          content:
+            application/json:
+              schema:
+                type: object
+    put:
+      summary: Aggiorna il profilo utente attuale
+      operationId: Profile_Update_Put
+      tags:
+        - Profilo
+      parameters:
+        - name: x-api-inflection
+          in: header
+          required: false
+          schema:
+            type: string
+            description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+          description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+      requestBody:
+        required: false
+        description: ''
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                user[email]:
+                  type: string
+                user[password]:
+                  type: string
+                user[password_confirmation]:
+                  type: string
+                user[password_challenge]:
+                  type: string
+                  required: true
+                user[first_name]:
+                  type: string
+                user[last_name]:
+                  type: string
+                user[avatar]:
+                  type: string
+                user[locale]:
+                  type: string
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
+                    password_confirmation:
+                      type: string
+                    password_challenge:
+                      type: string
+                    first_name:
+                      type: string
+                    last_name:
+                      type: string
+                    avatar:
+                      type: string
+                    locale:
+                      type: string
+              required:
+                - password_challenge
+      responses:
+        '204':
+          description: Successo
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Richiesta non valida
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Non autorizzato
+          content:
+            application/json:
+              schema:
+                type: object
+        '422':
+          description: Contenuto non processabile
+          content:
+            application/json:
+              schema:
+                type: object
+  "/accessi-limitati":
+    post:
+      summary: Creare una richiesta di accesso limitato
+      operationId: Sudos_Create
+      tags:
+        - Accessi limitati
+      parameters:
+        - name: x-api-inflection
+          in: header
+          required: false
+          schema:
+            type: string
+            description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+          description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+      requestBody:
+        required: false
+        description: ''
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                user[password]:
+                  type: string
+                  required: true
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    password:
+                      type: string
+                  required:
+                    - password
+      responses:
+        '201':
+          description: Successo
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Richiesta non valida
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Non autorizzato
+          content:
+            application/json:
+              schema:
+                type: object
+        '422':
+          description: Contenuto non processabile
+          content:
+            application/json:
+              schema:
+                type: object
+  "/sessioni":
+    post:
+      summary: Aggiungere Sessione
+      operationId: Sessions_Create
+      tags:
+        - Sessioni
+      parameters:
+        - name: x-api-inflection
+          in: header
+          required: false
+          schema:
+            type: string
+            description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+          description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+      requestBody:
+        required: false
+        description: ''
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                session[email]:
+                  type: string
+                  required: true
+                session[password]:
+                  type: string
+                  required: true
+                session[remember_me]:
+                  type: boolean
+          application/json:
+            schema:
+              type: object
+              properties:
+                session:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
+                    remember_me:
+                      type: boolean
+                  required:
+                    - email
+                    - password
+      responses:
+        '200':
+          description: Successo
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token_type:
+                    type: string
+                  expires_in:
+                    type: integer
+                  access_token:
+                    type: string
+                  refresh_token:
+                    type: string
+        '400':
+          description: Richiesta non valida
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Non autorizzato
+          content:
+            application/json:
+              schema:
+                type: object
+  "/storico":
+    get:
+      summary: Storico
+      operationId: Versions_Index
+      tags:
+        - Storico
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            description: Numero di pagina
+          description: Numero di pagina
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            description: Elementi per pagina
+          description: Elementi per pagina
+        - name: x-api-inflection
+          in: header
+          required: false
+          schema:
+            type: string
+            description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+          description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+      responses:
+        '200':
+          description: Successo
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    created_at:
+                      type: string
+                      format: date-time
+                    event:
+                      type: string
+                    user:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        full_name:
+                          type: string
+                    item:
+                      type: object
+                    object_changes:
+                      type: object
+          headers:
+            current-page:
+              description: Pagina corrente
+              schema:
+                type: integer
+            page-items:
+              description: Elementi per pagina
+              schema:
+                type: integer
+            total-count:
+              description: Conteggio totale degli elementi
+              schema:
+                type: integer
+            total-pages:
+              description: Numero di pagine
+              schema:
+                type: integer
+        '401':
+          description: Non autorizzato
+          content:
+            application/json:
+              schema:
+                type: object
+  "/storico/{id}":
+    get:
+      summary: Consultare Storico
+      operationId: Versions_Show
+      tags:
+        - Storico
+      parameters:
+        - name: id
+          in: path
+          required: false
+          schema:
+            type: string
+        - name: x-api-inflection
+          in: header
+          required: false
+          schema:
+            type: string
+            description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+          description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+      responses:
+        '200':
+          description: Successo
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                    id:
+                      type: string
+                    created_at:
+                      type: string
+                      format: date-time
+                    event:
+                      type: string
+                    user:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        full_name:
+                          type: string
+                    item:
+                      type: object
+                    object_changes:
+                      type: object
+        '401':
+          description: Non autorizzato
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Non trovato
+          content:
+            application/json:
+              schema:
+                type: object
+  "/storico/{id}/ripristinare":
+    patch:
+      summary: Ripristinare Storico
+      operationId: Versions_Revert
+      tags:
+        - Storico
+      parameters:
+        - name: id
+          in: path
+          required: false
+          schema:
+            type: string
+        - name: x-api-inflection
+          in: header
+          required: false
+          schema:
+            type: string
+            description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+          description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+      responses:
+        '204':
+          description: Successo
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Richiesta non valida
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Non autorizzato
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Non trovato
+          content:
+            application/json:
+              schema:
+                type: object
+        '422':
+          description: Contenuto non processabile
+          content:
+            application/json:
+              schema:
+                type: object
+  "/tokens":
+    post:
+      summary: Crea un nuovo token di accesso
+      operationId: Tokens_Create
+      tags:
+        - Tokens
+      parameters:
+        - name: x-api-inflection
+          in: header
+          required: false
+          schema:
+            type: string
+            description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+          description: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+      requestBody:
+        required: false
+        description: ''
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                refresh_token:
+                  type: string
+                  required: true
+          application/json:
+            schema:
+              type: object
+              properties:
+                refresh_token:
+                  type: string
+              required:
+                - refresh_token
+      responses:
+        '200':
+          description: Successo
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token_type:
+                    type: string
+                  expires_in:
+                    type: integer
+                  access_token:
+                    type: string
+                  refresh_token:
+                    type: string
+        '400':
+          description: Richiesta non valida
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Non autorizzato
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  securitySchemes:
+    token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    api_key:
+      type: apiKey
+      name: x-api-key
+      in: header

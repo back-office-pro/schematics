@@ -5,11 +5,11 @@ module OpenAPI
     class BulkArchive < Path
       protected
 
-      def path = "#{root_path}/bulk-actions"
+      alias summary_slug tag
+
+      def path = File.join(root_path, translate('routes.bulk_actions'))
 
       def http_method = :post
-
-      def summary = super.pluralize
 
       def request_body = {
         required: false,
@@ -52,7 +52,10 @@ module OpenAPI
       }
 
       def responses = [
-        Components::Response.new(code: 200, description: 'Success'),
+        Components::Response.new(
+          code: 200,
+          description: translate('open_api.responses.success')
+        ),
         Components::Response.bad_request,
         Components::Response.not_authorized,
         Components::Response.forbidden

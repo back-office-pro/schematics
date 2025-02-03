@@ -8,17 +8,37 @@ module OpenAPI
       attr_accessor :code, :description, :headers, :data
 
       class << self
-        def bad_request = new(code: 400, description: 'Bad Request')
+        delegate :translate, to: ::I18n, private: true
 
-        def not_authorized = new(code: 401, description: 'Not Authorized')
+        def bad_request = new(
+          code: 400,
+          description: translate('open_api.responses.bad_request')
+        )
 
-        def forbidden = new(code: 403, description: 'Forbidden')
+        def not_authorized = new(
+          code: 401,
+          description: translate('open_api.responses.not_authorized')
+        )
 
-        def not_found = new(code: 404, description: 'Not Found')
+        def forbidden = new(
+          code: 403,
+          description: translate('open_api.responses.forbidden')
+        )
 
-        def method_not_allowed = new(code: 405, description: 'Action Not Authorized')
+        def not_found = new(
+          code: 404,
+          description: translate('open_api.responses.not_found')
+        )
 
-        def unprocessable_content = new(code: 422, description: 'Unprocessable Content')
+        def method_not_allowed = new(
+          code: 405,
+          description: translate('open_api.responses.method_not_allowed')
+        )
+
+        def unprocessable_content = new(
+          code: 422,
+          description: translate('open_api.responses.unprocessable_content')
+        )
       end
 
       def to_h = {

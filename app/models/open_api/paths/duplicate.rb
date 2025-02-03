@@ -5,14 +5,18 @@ module OpenAPI
     class Duplicate < Path
       protected
 
-      def path = "#{root_path}/{id}/duplicate"
+      def path = File.join(root_path, '{id}', translate('routes.duplicate'))
 
       def http_method = :post
 
       def parameters = super.push(Components::Parameter.id)
 
       def responses = [
-        Components::Response.new(code: 201, description: 'Success', data: open_api_schema),
+        Components::Response.new(
+          code: 201,
+          description: translate('open_api.responses.success'),
+          data: open_api_schema
+        ),
         Components::Response.bad_request,
         Components::Response.not_authorized,
         Components::Response.forbidden,

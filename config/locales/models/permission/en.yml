@@ -10,9 +10,14 @@ en:
       permission:
         action:
           archive: Archive
+          autocomplete: Autocomplete
+          bulk_archive: Bulk archive
+          comment: Comment
+          compare: Compare
           create: Add
           destroy: Delete
           duplicate: Duplicate
+          forward: Forward
           import: Import
           index: List
           read: Read

@@ -2,21 +2,21 @@
 openapi: 3.1.1
 security: []
 tags:
-  - name: Message replies
-  - name: One time passwords
-  - name: Password resets
-  - name: Preferences
-  - name: Profile
-  - name: Sudos
-  - name: Tokens
-  - name: Versions
+  - name: Réponses aux messages
+  - name: Mots de passe uniques
+  - name: Mots de passe
+  - name: Préférences
+  - name: Profil
+  - name: Accès restreints
+  - name: Jetons
+  - name: Historique
 paths:
-  "/messages/{id}/replies":
+  "/messages/{id}/reponses":
     post:
-      summary: Reply to a message
+      summary: Répondre à un message
       operationId: MessageReplies_Create
       tags:
-        - Message replies
+        - Réponses aux messages
       parameters:
         - name: id
           in: path
@@ -28,10 +28,8 @@ paths:
           required: false
           schema:
             type: string
-            description: Inflect payload keys. Possible values are camel, dash, snake
-              or pascal.
-          description: Inflect payload keys. Possible values are camel, dash, snake
-            or pascal.
+            description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
+          description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
       requestBody:
         required: false
         description: ''
@@ -59,7 +57,7 @@ paths:
                     - author_id
       responses:
         '201':
-          description: Success
+          description: Succès
           content:
             application/json:
               schema:
@@ -96,48 +94,46 @@ paths:
                       name:
                         type: string
         '400':
-          description: Bad Request
+          description: Demande invalide
           content:
             application/json:
               schema:
                 type: object
         '401':
-          description: Not Authorized
+          description: Non autorisé
           content:
             application/json:
               schema:
                 type: object
         '403':
-          description: Forbidden
+          description: Interdit
           content:
             application/json:
               schema:
                 type: object
         '422':
-          description: Unprocessable Content
+          description: Contenu non traitable
           content:
             application/json:
               schema:
                 type: object
-  "/one-time-passwords":
+  "/mots-de-passe-uniques":
     get:
-      summary: Get current user 2FA recovery codes
+      summary: Obtenir les codes de récupération 2FA de l’utilisateur actuel
       operationId: OneTimePasswords_Show
       tags:
-        - One time passwords
+        - Mots de passe uniques
       parameters:
         - name: x-api-inflection
           in: header
           required: false
           schema:
             type: string
-            description: Inflect payload keys. Possible values are camel, dash, snake
-              or pascal.
-          description: Inflect payload keys. Possible values are camel, dash, snake
-            or pascal.
+            description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
+          description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
       responses:
         '200':
-          description: Success
+          description: Succès
           content:
             application/json:
               schema:
@@ -150,26 +146,24 @@ paths:
                       items:
                         type: string
         '401':
-          description: Not Authorized
+          description: Non autorisé
           content:
             application/json:
               schema:
                 type: object
     post:
-      summary: Unlock two-factor session
+      summary: Déverrouiller la session à deux facteurs
       operationId: OneTimePasswords_Create
       tags:
-        - One time passwords
+        - Mots de passe uniques
       parameters:
         - name: x-api-inflection
           in: header
           required: false
           schema:
             type: string
-            description: Inflect payload keys. Possible values are camel, dash, snake
-              or pascal.
-          description: Inflect payload keys. Possible values are camel, dash, snake
-            or pascal.
+            description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
+          description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
       requestBody:
         required: false
         description: ''
@@ -204,7 +198,7 @@ paths:
                     - otp_attempt
       responses:
         '200':
-          description: Success
+          description: Succès
           content:
             application/json:
               schema:
@@ -219,32 +213,30 @@ paths:
                   refresh_token:
                     type: string
         '400':
-          description: Bad Request
+          description: Demande invalide
           content:
             application/json:
               schema:
                 type: object
         '401':
-          description: Not Authorized
+          description: Non autorisé
           content:
             application/json:
               schema:
                 type: object
     patch:
-      summary: Update current user 2FA setup
+      summary: Mettre à jour la configuration 2FA de l’utilisateur actuel
       operationId: OneTimePasswords_Update_Patch
       tags:
-        - One time passwords
+        - Mots de passe uniques
       parameters:
         - name: x-api-inflection
           in: header
           required: false
           schema:
             type: string
-            description: Inflect payload keys. Possible values are camel, dash, snake
-              or pascal.
-          description: Inflect payload keys. Possible values are camel, dash, snake
-            or pascal.
+            description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
+          description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
       requestBody:
         required: false
         description: ''
@@ -269,44 +261,42 @@ paths:
                     - otp_attempt
       responses:
         '204':
-          description: Success
+          description: Succès
           content:
             application/json:
               schema:
                 type: object
         '400':
-          description: Bad Request
+          description: Demande invalide
           content:
             application/json:
               schema:
                 type: object
         '401':
-          description: Not Authorized
+          description: Non autorisé
           content:
             application/json:
               schema:
                 type: object
         '422':
-          description: Unprocessable Content
+          description: Contenu non traitable
           content:
             application/json:
               schema:
                 type: object
     put:
-      summary: Update current user 2FA setup
+      summary: Mettre à jour la configuration 2FA de l’utilisateur actuel
       operationId: OneTimePasswords_Update_Put
       tags:
-        - One time passwords
+        - Mots de passe uniques
       parameters:
         - name: x-api-inflection
           in: header
           required: false
           schema:
             type: string
-            description: Inflect payload keys. Possible values are camel, dash, snake
-              or pascal.
-          description: Inflect payload keys. Possible values are camel, dash, snake
-            or pascal.
+            description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
+          description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
       requestBody:
         required: false
         description: ''
@@ -331,73 +321,69 @@ paths:
                     - otp_attempt
       responses:
         '204':
-          description: Success
+          description: Succès
           content:
             application/json:
               schema:
                 type: object
         '400':
-          description: Bad Request
+          description: Demande invalide
           content:
             application/json:
               schema:
                 type: object
         '401':
-          description: Not Authorized
+          description: Non autorisé
           content:
             application/json:
               schema:
                 type: object
         '422':
-          description: Unprocessable Content
+          description: Contenu non traitable
           content:
             application/json:
               schema:
                 type: object
     delete:
-      summary: Remove current user 2FA setup
+      summary: Supprimer la configuration 2FA de l’utilisateur actuel
       operationId: OneTimePasswords_Destroy
       tags:
-        - One time passwords
+        - Mots de passe uniques
       parameters:
         - name: x-api-inflection
           in: header
           required: false
           schema:
             type: string
-            description: Inflect payload keys. Possible values are camel, dash, snake
-              or pascal.
-          description: Inflect payload keys. Possible values are camel, dash, snake
-            or pascal.
+            description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
+          description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
       responses:
         '204':
-          description: Success
+          description: Succès
           content:
             application/json:
               schema:
                 type: object
         '401':
-          description: Not Authorized
+          description: Non autorisé
           content:
             application/json:
               schema:
                 type: object
-  "/passwords":
+  "/mots-de-passe":
     post:
-      summary: Create a password reset request
+      summary: Créer une demande de réinitialisation de mot de passe
       operationId: PasswordResets_Create
       tags:
-        - Password resets
+        - Mots de passe
       parameters:
         - name: x-api-inflection
           in: header
           required: false
           schema:
             type: string
-            description: Inflect payload keys. Possible values are camel, dash, snake
-              or pascal.
-          description: Inflect payload keys. Possible values are camel, dash, snake
-            or pascal.
+            description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
+          description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
       requestBody:
         required: false
         description: ''
@@ -422,25 +408,25 @@ paths:
                     - email
       responses:
         '201':
-          description: Success
+          description: Succès
           content:
             application/json:
               schema:
                 type: object
         '422':
-          description: Unprocessable Content
+          description: Contenu non traitable
           content:
             application/json:
               schema:
                 type: object
-  "/passwords/{token}":
+  "/mots-de-passe/{jeton}":
     patch:
-      summary: Update user password
+      summary: Mettre à jour le mot de passe de l’utilisateur
       operationId: PasswordResets_Update_Patch
       tags:
-        - Password resets
+        - Mots de passe
       parameters:
-        - name: token
+        - name: jeton
           in: path
           required: false
           schema:
@@ -450,10 +436,8 @@ paths:
           required: false
           schema:
             type: string
-            description: Inflect payload keys. Possible values are camel, dash, snake
-              or pascal.
-          description: Inflect payload keys. Possible values are camel, dash, snake
-            or pascal.
+            description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
+          description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
       requestBody:
         required: false
         description: ''
@@ -484,30 +468,30 @@ paths:
                     - password_confirmation
       responses:
         '204':
-          description: Success
+          description: Succès
           content:
             application/json:
               schema:
                 type: object
         '400':
-          description: Bad Request
+          description: Demande invalide
           content:
             application/json:
               schema:
                 type: object
         '422':
-          description: Unprocessable Content
+          description: Contenu non traitable
           content:
             application/json:
               schema:
                 type: object
     put:
-      summary: Update user password
+      summary: Mettre à jour le mot de passe de l’utilisateur
       operationId: PasswordResets_Update_Put
       tags:
-        - Password resets
+        - Mots de passe
       parameters:
-        - name: token
+        - name: jeton
           in: path
           required: false
           schema:
@@ -517,10 +501,8 @@ paths:
           required: false
           schema:
             type: string
-            description: Inflect payload keys. Possible values are camel, dash, snake
-              or pascal.
-          description: Inflect payload keys. Possible values are camel, dash, snake
-            or pascal.
+            description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
+          description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
       requestBody:
         required: false
         description: ''
@@ -551,39 +533,37 @@ paths:
                     - password_confirmation
       responses:
         '204':
-          description: Success
+          description: Succès
           content:
             application/json:
               schema:
                 type: object
         '400':
-          description: Bad Request
+          description: Demande invalide
           content:
             application/json:
               schema:
                 type: object
         '422':
-          description: Unprocessable Content
+          description: Contenu non traitable
           content:
             application/json:
               schema:
                 type: object
   "/preferences":
     patch:
-      summary: Update current user preferences
+      summary: Mettre à jour les préférences de l’utilisateur actuel
       operationId: Preferences_Update_Patch
       tags:
-        - Preferences
+        - Préférences
       parameters:
         - name: x-api-inflection
           in: header
           required: false
           schema:
             type: string
-            description: Inflect payload keys. Possible values are camel, dash, snake
-              or pascal.
-          description: Inflect payload keys. Possible values are camel, dash, snake
-            or pascal.
+            description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
+          description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
       requestBody:
         required: false
         description: ''
@@ -612,32 +592,30 @@ paths:
                           type: boolean
       responses:
         '204':
-          description: Success
+          description: Succès
           content:
             application/json:
               schema:
                 type: object
         '401':
-          description: Not Authorized
+          description: Non autorisé
           content:
             application/json:
               schema:
                 type: object
     put:
-      summary: Update current user preferences
+      summary: Mettre à jour les préférences de l’utilisateur actuel
       operationId: Preferences_Update_Put
       tags:
-        - Preferences
+        - Préférences
       parameters:
         - name: x-api-inflection
           in: header
           required: false
           schema:
             type: string
-            description: Inflect payload keys. Possible values are camel, dash, snake
-              or pascal.
-          description: Inflect payload keys. Possible values are camel, dash, snake
-            or pascal.
+            description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
+          description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
       requestBody:
         required: false
         description: ''
@@ -666,33 +644,31 @@ paths:
                           type: boolean
       responses:
         '204':
-          description: Success
+          description: Succès
           content:
             application/json:
               schema:
                 type: object
         '401':
-          description: Not Authorized
+          description: Non autorisé
           content:
             application/json:
               schema:
                 type: object
-  "/profile":
+  "/profil":
     patch:
-      summary: Update current user profile
+      summary: Mettre à jour le profil de l’utilisateur actuel
       operationId: Profile_Update_Patch
       tags:
-        - Profile
+        - Profil
       parameters:
         - name: x-api-inflection
           in: header
           required: false
           schema:
             type: string
-            description: Inflect payload keys. Possible values are camel, dash, snake
-              or pascal.
-          description: Inflect payload keys. Possible values are camel, dash, snake
-            or pascal.
+            description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
+          description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
       requestBody:
         required: false
         description: ''
@@ -745,44 +721,42 @@ paths:
                     - password_challenge
       responses:
         '204':
-          description: Success
+          description: Succès
           content:
             application/json:
               schema:
                 type: object
         '400':
-          description: Bad Request
+          description: Demande invalide
           content:
             application/json:
               schema:
                 type: object
         '401':
-          description: Not Authorized
+          description: Non autorisé
           content:
             application/json:
               schema:
                 type: object
         '422':
-          description: Unprocessable Content
+          description: Contenu non traitable
           content:
             application/json:
               schema:
                 type: object
     put:
-      summary: Update current user profile
+      summary: Mettre à jour le profil de l’utilisateur actuel
       operationId: Profile_Update_Put
       tags:
-        - Profile
+        - Profil
       parameters:
         - name: x-api-inflection
           in: header
           required: false
           schema:
             type: string
-            description: Inflect payload keys. Possible values are camel, dash, snake
-              or pascal.
-          description: Inflect payload keys. Possible values are camel, dash, snake
-            or pascal.
+            description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
+          description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
       requestBody:
         required: false
         description: ''
@@ -835,45 +809,43 @@ paths:
                 - password_challenge
       responses:
         '204':
-          description: Success
+          description: Succès
           content:
             application/json:
               schema:
                 type: object
         '400':
-          description: Bad Request
+          description: Demande invalide
           content:
             application/json:
               schema:
                 type: object
         '401':
-          description: Not Authorized
+          description: Non autorisé
           content:
             application/json:
               schema:
                 type: object
         '422':
-          description: Unprocessable Content
+          description: Contenu non traitable
           content:
             application/json:
               schema:
                 type: object
-  "/restricted-access":
+  "/acces-restreints":
     post:
-      summary: Create a sudo request
+      summary: Créer une requête d'accès restreint
       operationId: Sudos_Create
       tags:
-        - Sudos
+        - Accès restreints
       parameters:
         - name: x-api-inflection
           in: header
           required: false
           schema:
             type: string
-            description: Inflect payload keys. Possible values are camel, dash, snake
-              or pascal.
-          description: Inflect payload keys. Possible values are camel, dash, snake
-            or pascal.
+            description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
+          description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
       requestBody:
         required: false
         description: ''
@@ -898,32 +870,32 @@ paths:
                     - password
       responses:
         '201':
-          description: Success
+          description: Succès
           content:
             application/json:
               schema:
                 type: object
         '400':
-          description: Bad Request
+          description: Demande invalide
           content:
             application/json:
               schema:
                 type: object
         '401':
-          description: Not Authorized
+          description: Non autorisé
           content:
             application/json:
               schema:
                 type: object
         '422':
-          description: Unprocessable Content
+          description: Contenu non traitable
           content:
             application/json:
               schema:
                 type: object
   "/sessions":
     post:
-      summary: Create a session
+      summary: Ajouter Session
       operationId: Sessions_Create
       tags:
         - Sessions
@@ -933,10 +905,8 @@ paths:
           required: false
           schema:
             type: string
-            description: Inflect payload keys. Possible values are camel, dash, snake
-              or pascal.
-          description: Inflect payload keys. Possible values are camel, dash, snake
-            or pascal.
+            description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
+          description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
       requestBody:
         required: false
         description: ''
@@ -971,7 +941,7 @@ paths:
                     - password
       responses:
         '200':
-          description: Success
+          description: Succès
           content:
             application/json:
               schema:
@@ -986,50 +956,48 @@ paths:
                   refresh_token:
                     type: string
         '400':
-          description: Bad Request
+          description: Demande invalide
           content:
             application/json:
               schema:
                 type: object
         '401':
-          description: Not Authorized
+          description: Non autorisé
           content:
             application/json:
               schema:
                 type: object
-  "/timeline":
+  "/historique":
     get:
-      summary: History
+      summary: Historique
       operationId: Versions_Index
       tags:
-        - Versions
+        - Historique
       parameters:
         - name: page
           in: query
           required: false
           schema:
             type: integer
-            description: Page number
-          description: Page number
+            description: Numéro de page
+          description: Numéro de page
         - name: limit
           in: query
           required: false
           schema:
             type: integer
-            description: Items per page
-          description: Items per page
+            description: Éléments par page
+          description: Éléments par page
         - name: x-api-inflection
           in: header
           required: false
           schema:
             type: string
-            description: Inflect payload keys. Possible values are camel, dash, snake
-              or pascal.
-          description: Inflect payload keys. Possible values are camel, dash, snake
-            or pascal.
+            description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
+          description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
       responses:
         '200':
-          description: Success
+          description: Succès
           content:
             application/json:
               schema:
@@ -1057,33 +1025,33 @@ paths:
                       type: object
           headers:
             current-page:
-              description: Current page
+              description: Page actuelle
               schema:
                 type: integer
             page-items:
-              description: Items per page
+              description: Éléments par page
               schema:
                 type: integer
             total-count:
-              description: Total count of items
+              description: Nombre total d'éléments
               schema:
                 type: integer
             total-pages:
-              description: Pages count
+              description: Nombre de pages
               schema:
                 type: integer
         '401':
-          description: Not Authorized
+          description: Non autorisé
           content:
             application/json:
               schema:
                 type: object
-  "/timeline/{id}":
+  "/historique/{id}":
     get:
-      summary: Show version
+      summary: Consulter Historique
       operationId: Versions_Show
       tags:
-        - Versions
+        - Historique
       parameters:
         - name: id
           in: path
@@ -1095,13 +1063,11 @@ paths:
           required: false
           schema:
             type: string
-            description: Inflect payload keys. Possible values are camel, dash, snake
-              or pascal.
-          description: Inflect payload keys. Possible values are camel, dash, snake
-            or pascal.
+            description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
+          description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
       responses:
         '200':
-          description: Success
+          description: Succès
           content:
             application/json:
               schema:
@@ -1126,23 +1092,23 @@ paths:
                     object_changes:
                       type: object
         '401':
-          description: Not Authorized
+          description: Non autorisé
           content:
             application/json:
               schema:
                 type: object
         '404':
-          description: Not Found
+          description: Non trouvé
           content:
             application/json:
               schema:
                 type: object
-  "/timeline/{id}/revert":
+  "/historique/{id}/retablir":
     patch:
-      summary: Revert version
+      summary: Rétablir Historique
       operationId: Versions_Revert
       tags:
-        - Versions
+        - Historique
       parameters:
         - name: id
           in: path
@@ -1154,57 +1120,53 @@ paths:
           required: false
           schema:
             type: string
-            description: Inflect payload keys. Possible values are camel, dash, snake
-              or pascal.
-          description: Inflect payload keys. Possible values are camel, dash, snake
-            or pascal.
+            description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
+          description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
       responses:
         '204':
-          description: Success
+          description: Succès
           content:
             application/json:
               schema:
                 type: object
         '400':
-          description: Bad Request
+          description: Demande invalide
           content:
             application/json:
               schema:
                 type: object
         '401':
-          description: Not Authorized
+          description: Non autorisé
           content:
             application/json:
               schema:
                 type: object
         '404':
-          description: Not Found
+          description: Non trouvé
           content:
             application/json:
               schema:
                 type: object
         '422':
-          description: Unprocessable Content
+          description: Contenu non traitable
           content:
             application/json:
               schema:
                 type: object
-  "/tokens":
+  "/jetons":
     post:
-      summary: Create a new access token
+      summary: Créer un jeton d’accès
       operationId: Tokens_Create
       tags:
-        - Tokens
+        - Jetons
       parameters:
         - name: x-api-inflection
           in: header
           required: false
           schema:
             type: string
-            description: Inflect payload keys. Possible values are camel, dash, snake
-              or pascal.
-          description: Inflect payload keys. Possible values are camel, dash, snake
-            or pascal.
+            description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
+          description: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
       requestBody:
         required: false
         description: ''
@@ -1226,7 +1188,7 @@ paths:
                 - refresh_token
       responses:
         '200':
-          description: Success
+          description: Succès
           content:
             application/json:
               schema:
@@ -1241,13 +1203,13 @@ paths:
                   refresh_token:
                     type: string
         '400':
-          description: Bad Request
+          description: Demande invalide
           content:
             application/json:
               schema:
                 type: object
         '401':
-          description: Not Authorized
+          description: Non autorisé
           content:
             application/json:
               schema:

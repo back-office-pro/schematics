@@ -1,0 +1,10 @@
+---
+fr:
+  open_api:
+    parameters:
+      filter_by: Filtrer par %{element}
+      inflection: Inflexion des clés de charge utile. Les valeurs possibles sont camel, dash, snake ou pascal.
+      limit: Nombre d'éléments par page
+      page: Numéro de page
+      sort: Liste des champs de tri séparés par une virgule
+      with_deleted: Afficher les archives

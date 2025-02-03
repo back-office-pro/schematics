@@ -23,7 +23,7 @@ module OpenAPI
         Components::Response.not_found,
         Components::Response.new(
           code: 200,
-          description: 'Success',
+          description: translate('open_api.responses.success'),
           data: open_api_schema_with_associations
         )
       ]
