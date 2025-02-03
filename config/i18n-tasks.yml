@@ -12,12 +12,8 @@ search:
   relative_roots:
     - app/components
     - app/controllers
-    - app/interactors
-    - app/helpers
     - app/mailers
     - app/views
-  exclude:
-    - app/interactors/schematics/imports
 ignore_missing:
   - activerecord.*
   - activemodel.*
@@ -25,6 +21,7 @@ ignore_missing:
   - titles.*
   - errors.*
   - attributes.*
+  - open_api.*
   - schematics.*
   - sessions.*
   - subscriptions.*
@@ -45,6 +42,7 @@ ignore_unused:
   - titles.*
   - errors.*
   - attributes.*
+  - open_api.*
   - schematics.*
   - sessions.*
   - subscriptions.*

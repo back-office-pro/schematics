@@ -1,0 +1,11 @@
+---
+it:
+  open_api:
+    responses:
+      bad_request: Richiesta non valida
+      forbidden: Vietato
+      method_not_allowed: Azione non autorizzata
+      not_authorized: Non autorizzato
+      not_found: Non trovato
+      success: Successo
+      unprocessable_content: Contenuto non processabile

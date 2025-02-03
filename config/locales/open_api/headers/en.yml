@@ -1,0 +1,8 @@
+---
+en:
+  open_api:
+    headers:
+      current_page: Current page
+      page_items: Items per page
+      total_count: Total count of items
+      total_pages: Pages count

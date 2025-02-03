@@ -18,6 +18,7 @@ en:
     profile: profile
     replies: replies
     restore: restore
+    revert: revert
     sudo: restricted-access
     sudos: restricted-access
     tokens: tokens

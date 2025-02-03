@@ -18,6 +18,7 @@ it:
     profile: profilo
     replies: risposte
     restore: restaurare
+    revert: ripristinare
     sudo: accesso-limitato
     sudos: accessi-limitati
     tokens: tokens

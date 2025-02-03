@@ -1,0 +1,10 @@
+---
+en:
+  open_api:
+    parameters:
+      filter_by: Filter by %{element}
+      inflection: Inflect payload keys. Possible values are camel, dash, snake or pascal.
+      limit: Items per page
+      page: Page number
+      sort: Sort fields list separated by comma
+      with_deleted: Display archives

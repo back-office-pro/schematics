@@ -5,14 +5,17 @@ module OpenAPI
     class Archive < Path
       protected
 
-      def path = "#{root_path}/{id}/archive"
+      def path = File.join(root_path, '{id}', translate('routes.archive'))
 
       def http_method = :delete
 
       def parameters = super.push(Components::Parameter.id)
 
       def responses = [
-        Components::Response.new(code: 204, description: 'Success'),
+        Components::Response.new(
+          code: 204,
+          description: translate('open_api.responses.success')
+        ),
         Components::Response.not_authorized,
         Components::Response.forbidden,
         Components::Response.not_found

@@ -8,10 +8,14 @@ module OpenAPI
       protected
 
       def path
-        return "#{root_path}/#{nested_entity_name.pluralize}" if singleton?
+        return File.join(root_path, nested_path) if singleton?
 
-        "#{root_path}/{id}/#{nested_entity_name.pluralize}"
+        File.join(root_path, '{id}', nested_path)
       end
+
+      def nested_path = translate(:other, scope: [:activerecord, :models, nested_entity_name])
+        .gsub(/\b\w{1,2}\b/, '')
+        .parameterize(separator: '-')
 
       def http_method = :post
 
@@ -24,7 +28,11 @@ module OpenAPI
         .to_h
 
       def responses = [
-        Components::Response.new(code: 201, description: 'Success', data: open_api_schema),
+        Components::Response.new(
+          code: 201,
+          description: translate('open_api.responses.success'),
+          data: open_api_schema
+        ),
         Components::Response.bad_request,
         Components::Response.not_authorized,
         Components::Response.forbidden,

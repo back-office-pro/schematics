@@ -3,13 +3,9 @@
 module OpenAPI
   module Paths
     class Import < NestedPath
-      protected
-
-      def root_path = super.pluralize
+      alias summary_slug tag
 
       def singleton? = true
-
-      def summary = super.pluralize
     end
   end
 end

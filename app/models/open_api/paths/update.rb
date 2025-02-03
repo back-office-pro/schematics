@@ -25,7 +25,10 @@ module OpenAPI
       )
 
       def responses = [
-        Components::Response.new(code: 204, description: 'Success'),
+        Components::Response.new(
+          code: 204,
+          description: translate('open_api.responses.success')
+        ),
         Components::Response.bad_request,
         Components::Response.not_authorized,
         Components::Response.forbidden,

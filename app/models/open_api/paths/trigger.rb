@@ -8,12 +8,9 @@ module OpenAPI
 
       protected
 
-      def path = [
-        root_path,
-        ('{id}' unless singleton?),
-        event.state_machine_name,
-        event.name
-      ].compact.join('/')
+      def path = File.join(
+        [root_path, ('{id}' unless singleton?), event.state_machine_name, event.name].compact
+      )
 
       def http_method = :patch
 
@@ -26,7 +23,10 @@ module OpenAPI
       )
 
       def responses = [
-        Components::Response.new(code: 204, description: 'Success'),
+        Components::Response.new(
+          code: 204,
+          description: translate('open_api.responses.success')
+        ),
         Components::Response.not_authorized,
         Components::Response.forbidden,
         Components::Response.not_found,

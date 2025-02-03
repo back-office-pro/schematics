@@ -1,0 +1,10 @@
+---
+it:
+  open_api:
+    parameters:
+      filter_by: Filtra per %{element}
+      inflection: Inflecta le chiavi del payload. I valori possibili sono camel, dash, snake o pascal.
+      limit: Elementi per pagina
+      page: Numero di pagina
+      sort: Elenco dei campi da ordinare separati da virgola
+      with_deleted: Visualizza archivio
