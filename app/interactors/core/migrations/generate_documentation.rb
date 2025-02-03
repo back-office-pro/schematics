@@ -11,7 +11,7 @@ module Core
       progressable migration: 80
 
       def call
-        ::Documentation.create!(app_version: version, data:)
+        ::Documentation.create_with_default_data!(app_version: version, data:)
       end
 
       private

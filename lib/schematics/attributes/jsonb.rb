@@ -7,6 +7,7 @@ module Schematics
       include Behaviours::Indexable
       include Behaviours::Fillable
       include Behaviours::Renderable
+      include Behaviours::Translatable
 
       def default = {}
 

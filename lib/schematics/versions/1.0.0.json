@@ -1757,7 +1757,10 @@
       {
         "id": "c3002ee2-99f1-46e9-af79-5658eda849cf",
         "name": "data",
-        "type": "jsonb"
+        "type": "jsonb",
+        "options": {
+          "translated": true
+        }
       }
     ]
   },

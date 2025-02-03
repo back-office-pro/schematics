@@ -25,7 +25,7 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
     available_locales: [Subscription.default_locale],
     locale: Subscription.default_locale
   )
-  Documentation.create!
+  Documentation.create_with_default_data!
   Migration.default.save!
   User.create!(email: Subscription.email, password: PASSWORD, role: Role.admin)
   Dashboard.create!(
