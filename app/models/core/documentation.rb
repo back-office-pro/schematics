@@ -5,7 +5,7 @@ class ::Documentation < Schematics::ApplicationRecord
   attribute :app_version, default: -> { Migration.current_version }
   attribute :core_version, default: -> { Schematics::VERSION }
 
-  #normalizes :data, with: -> { JSON.parse(it).symbolize_keys }
+  # normalizes :data, with: -> { JSON.parse(it).symbolize_keys }
 
   class << self
     def create_with_default_data!(options = {})
@@ -14,7 +14,7 @@ class ::Documentation < Schematics::ApplicationRecord
 
     def default_data = I18n
       .available_locales
-      .map { |locale| { :"data_#{locale}" => OpenAPI::Root.new(schema:, locale:) } }
+      .map { |locale| { "data_#{locale}": OpenAPI::Root.new(schema:, locale:) } }
       .reduce(&:merge)
       .transform_values(&:to_h)
       .transform_values(&:to_json)
