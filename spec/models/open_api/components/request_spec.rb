@@ -5,7 +5,8 @@ require 'rails_helper'
 RSpec.describe OpenAPI::Components::Request do
   subject { described_class.new(entity:) }
 
-  let(:entity) { Schematics::Schema.new.find_entity_by_name('team') }
+  let(:schema) { Schematics::Schema.new }
+  let(:entity) { schema.find_entity_by_name('team') }
   let(:expected_hash) do
     {
       required: false,
