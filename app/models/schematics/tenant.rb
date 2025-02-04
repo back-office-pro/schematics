@@ -11,7 +11,7 @@ module Schematics
     end
 
     def demo?
-      subdomain == 'demo' && !Rails.env.test?
+      subdomain == 'Demo' && !Rails.env.test?
     end
   end
 end
