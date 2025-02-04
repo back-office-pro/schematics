@@ -3,6 +3,8 @@
 module OpenAPI
   module Paths
     class Import < NestedPath
+      protected
+
       alias summary_slug tag
 
       def singleton? = true
