@@ -49,7 +49,7 @@ module OpenAPI
         (Paths::Index.new(entity:) if entity.can?(:index)),
         (Paths::Autocomplete.new(entity:) if entity.can?(:index)),
         (Paths::Compare.new(entity:) if entity.can?(:index)),
-        (Paths::Create.new(entity:) if entity.can?(:create) && entity.name != 'session'),
+        (Paths::Create.new(entity:) if entity.can?(:create)),
         (Paths::Duplicate.new(entity:) if entity.can?(:create)),
         (Paths::Import.new(entity:) if entity.can?(:create)),
         (Paths::Archive.new(entity:) if entity.can?(:archive)),
