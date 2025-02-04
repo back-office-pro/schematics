@@ -40,7 +40,8 @@ module OpenAPI
       ]
 
       def nested_entity_name = self
-        .class.name
+        .class
+        .name
         .demodulize
         .downcase
 
