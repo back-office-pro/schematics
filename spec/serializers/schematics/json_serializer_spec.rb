@@ -32,9 +32,9 @@ RSpec.describe Schematics::JSONSerializer do
       it { is_expected.to include('sent_messages') }
       it { is_expected.to include('imports') }
       it { is_expected.to include('searches') }
-      it { is_expected.to include('drafts') }
+      it { is_expected.to include('record_drafts') }
       it { is_expected.to include('sessions') }
-      it { is_expected.to include('comments') }
+      it { is_expected.to include('record_comments') }
       it { is_expected.not_to include('password') }
     end
 
@@ -54,9 +54,9 @@ RSpec.describe Schematics::JSONSerializer do
       it { is_expected.not_to include('sent_messages') }
       it { is_expected.not_to include('imports') }
       it { is_expected.not_to include('searches') }
-      it { is_expected.not_to include('drafts') }
+      it { is_expected.not_to include('record_drafts') }
       it { is_expected.not_to include('sessions') }
-      it { is_expected.not_to include('comments') }
+      it { is_expected.not_to include('record_comments') }
       it { is_expected.not_to include('password') }
     end
 
@@ -93,9 +93,9 @@ RSpec.describe Schematics::JSONSerializer do
       it { is_expected.not_to include('sent_messages') }
       it { is_expected.not_to include('imports') }
       it { is_expected.not_to include('searches') }
-      it { is_expected.not_to include('drafts') }
+      it { is_expected.not_to include('record_drafts') }
       it { is_expected.not_to include('sessions') }
-      it { is_expected.not_to include('comments') }
+      it { is_expected.not_to include('record_comments') }
       it { is_expected.not_to include('password') }
       it { is_expected.to include(expected_metadata) }
     end
@@ -137,9 +137,9 @@ RSpec.describe Schematics::JSONSerializer do
       it { is_expected.to include('sent_messages') }
       it { is_expected.to include('imports') }
       it { is_expected.to include('searches') }
-      it { is_expected.to include('drafts') }
+      it { is_expected.to include('record_drafts') }
       it { is_expected.to include('sessions') }
-      it { is_expected.to include('comments') }
+      it { is_expected.to include('record_comments') }
       it { is_expected.not_to include('password') }
     end
   end
