@@ -10,15 +10,10 @@ module Core
 
       progressable migration: 80
 
-      def call
-        ::Documentation.create!(app_version: version, data:)
-      end
-
-      private
-
-      def data = ::OpenAPI::Root
-        .new(schema: migrator_new_schema)
-        .to_h
+      def call = ::Documentation.create!(
+        schema: migrator_new_schema,
+        app_version: version
+      )
     end
   end
 end
