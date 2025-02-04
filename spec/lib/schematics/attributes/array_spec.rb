@@ -20,6 +20,7 @@ describe Schematics::Attributes::Array do
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Encryptable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Translatable) }
 
   its(:icon) { is_expected.to eq(:list) }
   its(:database_type) { is_expected.to eq('jsonb') }
@@ -49,7 +50,8 @@ describe Schematics::Attributes::Array do
       Schematics::Options::Cached,
       Schematics::Options::Default,
       Schematics::Options::Readonly,
-      Schematics::Options::Encrypted
+      Schematics::Options::Encrypted,
+      Schematics::Options::Translated
     )
   end
 
