@@ -101,6 +101,12 @@ ActiveSupport.on_load(:active_storage_attachment) do
   after_restore -> { blob&.restore! }
 
   prepend ActiveStorage::Override::Attachment
+
+  def to_s = Rails
+    .application
+    .routes
+    .url_helpers
+    .rails_blob_url(self, **Tenant.default_url_options)
 end
 
 ActiveSupport.on_load(:active_storage_blob) do

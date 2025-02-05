@@ -24,5 +24,5 @@ class ::Permission < Schematics::ApplicationRecord
     .application
     .routes
     .url_helpers
-    .polymorphic_url(model_class)
+    .polymorphic_url(model_class, **Tenant.default_url_options)
 end

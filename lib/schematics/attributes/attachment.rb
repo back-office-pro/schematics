@@ -76,7 +76,7 @@ module Schematics
         )
 
       def format(value)
-        Rails.application.routes.url_helpers.url_for(value) if value.attached?
+        value.attachment.to_s if value.attached?
       end
 
       def icon

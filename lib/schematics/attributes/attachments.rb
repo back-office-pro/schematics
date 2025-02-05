@@ -11,7 +11,7 @@ module Schematics
       def default = [super]
 
       def format(values)
-        values.map(&Rails.application.routes.url_helpers.method(:url_for))
+        values.map(&:to_s)
       end
 
       def json_default = [super]
