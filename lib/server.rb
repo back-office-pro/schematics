@@ -36,11 +36,11 @@ class Server
 
     def support_email = "support@#{domain}"
 
+    def no_reply_email = "no-reply@#{domain}"
+
     def url(path: nil) = URI::HTTPS
       .build(host: "www.#{domain}", path:)
       .to_s
-
-    def default_mailer_options = { from: "no-reply@#{domain}" }
 
     def organization
       domain.parameterize

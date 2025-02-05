@@ -16,7 +16,7 @@ describe Server do
     its(:domain) { is_expected.to eq('back-office.pro') }
     its(:url) { is_expected.to eq('https://www.back-office.pro') }
     its(:support_email) { is_expected.to eq('support@back-office.pro') }
-    its(:default_mailer_options) { is_expected.to eq(from: 'no-reply@back-office.pro') }
+    its(:no_reply_email) { is_expected.to eq('no-reply@back-office.pro') }
     its(:organization) { is_expected.to eq('back-office-pro') }
     its(:ssl_path) { is_expected.to eq(Pathname.new('/etc/letsencrypt/live/back-office.pro')) }
     its(:port) { is_expected.to eq(3000) }
