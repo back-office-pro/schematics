@@ -53,11 +53,6 @@ module Schematics
       .reject(&:core?)
       .filter_map(&:model_class)
 
-    def draw_routes = entities
-      .map(&:router)
-      .each { yield(it) && progress_bar.increment }
-      .tap { progress_bar.reset }
-
     private
 
     memoize def progress_bar = ::ProgressBar.create(total: entities.size)
