@@ -7,6 +7,8 @@ module Schematics
         LIMIT = 10
         delegate :icon, to: '::Message.entity'
 
+        def messages_path = polymorphic_path(::Message)
+
         def display_count
           count >= LIMIT ? "#{LIMIT.pred}+" : count
         end
