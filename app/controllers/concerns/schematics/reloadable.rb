@@ -11,10 +11,14 @@ module Schematics
     private
 
     def reload!
-      return unless Rails.cache.read('reload')
+      old_and_changed_model_classes = Rails.cache.read('old_and_changed_model_classes')
+      return unless old_and_changed_model_classes
 
-      Rails.cache.delete('reload')
-      Core::Migrations::Reload.call(migration: Migration.current)
+      Rails.cache.delete('old_and_changed_model_classes')
+      Rails.application.reload_routes!
+      old_and_changed_model_classes
+        .select(&Object.method(:const_defined?))
+        .each(&Object.method(:remove_const))
     end
   end
 end

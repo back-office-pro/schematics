@@ -10,7 +10,6 @@ module Core
                GenerateBackup,
                MigrateDatabase,
                CleanSearchIndexes,
-               Cache,
                Reload,
                RebuildSearchIndexes,
                GenerateDocumentation,

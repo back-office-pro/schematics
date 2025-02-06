@@ -3,22 +3,20 @@
 module Core
   module Migrations
     class Reload
-      include Interactor
+      include Schematics::Progressable
 
-      delegate :reload_routes!, to: 'Rails.application', private: true
       delegate :migration, to: :context, private: true
       delegate :migrator_old_and_changed_entities,
                :migrator_changed_entities,
                to: :migration,
                private: true
 
-      before :reload_routes!
+      progressable migration: 70
 
-      def call # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
-        migrator_old_and_changed_entities
-          .reject(&:existing?)
-          .map(&:class_name)
-          .map(&:to_sym)
+      def call
+        Rails.cache.delete('schema')
+        Rails.cache.write('old_and_changed_model_classes', old_and_changed_model_classes)
+        old_and_changed_model_classes
           .select(&Object.method(:const_defined?))
           .each(&Object.method(:remove_const))
         migrator_changed_entities
@@ -28,6 +26,13 @@ module Core
           .filter_map(&:model_class)
           .each(&:define_attribute_methods)
       end
+
+      private
+
+      def old_and_changed_model_classes = migrator_old_and_changed_entities
+        .reject(&:existing?)
+        .map(&:class_name)
+        .map(&:to_sym)
     end
   end
 end
