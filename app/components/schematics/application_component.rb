@@ -9,6 +9,7 @@ module Schematics
     include ::Turbo::DriveHelper
     include ::Importmap::ImportmapTagsHelper
     include ApplicationHelper
+    include ResourcesHelper
     extend ::Dry::Initializer
 
     use_helpers :current_user,
