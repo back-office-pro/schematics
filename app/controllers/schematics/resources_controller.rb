@@ -33,7 +33,9 @@ module Schematics
 
     helper_method :model_class
 
-    def model_name = params[:model_name]
+    def model_name = params[:resource]
+      .singularize
+      .classify
 
     def model_class
       model_name.safe_constantize
@@ -102,7 +104,7 @@ module Schematics
     end
 
     def trigger
-      event = entity.find_event_by_suffixed_name(params.expect(:event))
+      event = entity.find_event_by_suffixed_name("#{params[:event]}_#{params[:state]}")
       authorize! event.name.to_sym, @resource
       result = Resources::Trigger.call(resource: @resource, event:)
       respond_with result,
@@ -157,12 +159,12 @@ module Schematics
     end
 
     def index_path
-      return main_app.polymorphic_path(model_class) if can?(:index, model_class)
+      return main_app.route_resources_path(model_class) if can?(:index, model_class)
 
       schematics.root_path
     end
 
-    def resource_path = main_app.polymorphic_path(@resource)
+    def resource_path = main_app.route_resource_path(@resource)
 
     def flash_interpolation_options = { human_name:, gender: }
   end
