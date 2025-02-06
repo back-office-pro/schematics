@@ -7,7 +7,7 @@ RSpec.describe WebhookEndpoint do
   include Rails.application.routes.url_helpers
 
   context 'when url is malicious and would lead to an infinite loop' do
-    before { record.url = polymorphic_url(User, host: 'localhost', port: 3000) }
+    before { record.url = polymorphic_url(User) }
 
     it { is_expected.not_to be_valid }
   end
