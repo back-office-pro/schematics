@@ -116,7 +116,7 @@ Gem::Specification.new do |spec|
   # spec.add_dependency 'ratonvirus', '0.4.3'
   # spec.add_dependency 'ratonvirus-clamby', '0.4.0'
   spec.add_dependency 'responders', '3.1.1'
-  spec.add_dependency 'rollbar', '3.6.0'
+  spec.add_dependency 'rollbar', '3.6.1'
   spec.add_dependency 'rouge', '4.5.1'
   spec.add_dependency 'route_translator', '14.2.0'
   spec.add_dependency 'rqrcode', '2.2.0'
