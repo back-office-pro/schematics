@@ -5,7 +5,7 @@ module Schematics
     delegate :state_inactive?, to: '::Subscription.instance', private: true
     delegate :quota_users_exceeded?,
              :quota_api_keys_exceeded?,
-             to: ::Subscription,
+             to: '::Subscription',
              private: true
 
     def initialize(user)

@@ -6,7 +6,7 @@ module Schematics
              :comments_feature_flag,
              :tasks_feature_flag,
              :meetings_feature_flag,
-             to: ::Configuration,
+             to: '::Configuration',
              private: true
 
     def initialize
