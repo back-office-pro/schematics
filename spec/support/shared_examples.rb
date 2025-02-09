@@ -50,6 +50,8 @@ end
 RSpec.shared_examples 'an interpolable template' do
   include_context 'with user'
 
+  it { is_expected.to be_a(Schematics::Interpolable) }
+
   describe '#interpolate' do
     subject { record.interpolate(user) }
 
