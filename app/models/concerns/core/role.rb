@@ -13,7 +13,7 @@ module Core
     def permission_ids
       return super if persisted?
 
-      ::Permission.features.ids
+      Permissions::FeaturesQuery.call.ids
     end
   end
 end
