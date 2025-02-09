@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe Chart do
   include Schematics::Specs::Model
 
-  it { is_expected.to be_a(Core::Measurable) }
+  it { is_expected.to be_a(Schematics::Measurable) }
 
   its(:border_width) { is_expected.to eq(1) }
   its(:col_size) { is_expected.to eq(3) }

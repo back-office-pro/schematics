@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe Ranking do
   include Schematics::Specs::Model
 
-  it { is_expected.to be_a(Core::Measurable) }
+  it { is_expected.to be_a(Schematics::Measurable) }
 
   its(:icon) { is_expected.to eq(:users) }
   its(:model_class) { is_expected.to eq(User) }
