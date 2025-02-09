@@ -9,7 +9,7 @@ RSpec.describe Core::Sessions::ActiveQuery do
 
   let(:first_session) { Session.create!(user:) }
   let(:second_session) { Session.create!(user:) }
-  let(:time) { Time.current - Session::ACTIVE_DELAY }
+  let(:time) { 15.minutes.ago }
 
   before { [first_session, travel_to(time) { second_session }] }
 
