@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Core
+module Schematics
   module Measurable
     extend ActiveSupport::Concern
 
