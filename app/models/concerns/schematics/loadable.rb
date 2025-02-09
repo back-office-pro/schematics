@@ -20,6 +20,7 @@ module Schematics
       def inherited(subclass)
         super
         subclass.class_eval do
+          prepend Core.const_get(name) if Object.const_defined?("Core::#{name}")
           superclass.concerns&.each(&method(:include))
           entity&.model_elements&.each do
             eval it, binding, __FILE__, __LINE__ # rubocop:disable Security/Eval
@@ -69,15 +70,9 @@ module Schematics
         entity = schema.find_entity_by_name(name.to_s.underscore)
         return unless entity
 
-        unless const_defined?(name)
+        unless Object.const_defined?(name)
           Rails.logger.info "Loading #{name}..."
-          path = Engine.root.join('app', 'models', 'core', "#{entity.name}.rb")
-
-          if path.exist?
-            load(path)
-          else
-            eval(entity, binding, __FILE__, __LINE__) # rubocop:disable Security/Eval
-          end
+          eval(entity, binding, __FILE__, __LINE__) # rubocop:disable Security/Eval
         end
 
         const_get(name)
