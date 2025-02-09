@@ -32,9 +32,9 @@ module Core
       end
     end
 
-    def online? = sessions
-      .active
-      .exists?
+    def online?
+      @online ||= sessions.active.exists?
+    end
 
     def to_s
       full_name.presence || email
