@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ::Chart < Schematics::ApplicationRecord
-  include ::Core::Measurable
+  include Schematics::Measurable
 
   attribute :color, default: -> { ::Configuration.theme_color }
 

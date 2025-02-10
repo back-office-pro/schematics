@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ::Ranking < Schematics::ApplicationRecord
-  include ::Core::Measurable
+  include Schematics::Measurable
 
   delegate :to_sql, :name, to: :entity_field, allow_nil: true, private: true
 
