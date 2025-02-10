@@ -20,8 +20,8 @@ module Schematics
       def inherited(subclass)
         super
         subclass.class_eval do
-          prepend Core.const_get(name) if Object.const_defined?("Core::#{name}")
           superclass.concerns&.each(&method(:include))
+          prepend Core.const_get(name) if Object.const_defined?("Core::#{name}")
           entity&.model_elements&.each do
             eval it, binding, __FILE__, __LINE__ # rubocop:disable Security/Eval
           end
