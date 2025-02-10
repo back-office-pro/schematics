@@ -5,8 +5,8 @@ module Core
     class Create
       include Interactor
 
-      delegate :root, :env, to: ::Rails, private: true
-      delegate :create_and_upload!, to: ::ActiveStorage::Blob, private: true
+      delegate :root, :env, to: '::Rails', private: true
+      delegate :create_and_upload!, to: '::ActiveStorage::Blob', private: true
       delegate :current_database,
                :adapter_name,
                to: 'ActiveRecord::Base.lease_connection',

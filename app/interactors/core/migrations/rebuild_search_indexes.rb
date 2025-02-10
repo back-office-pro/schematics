@@ -7,7 +7,7 @@ module Core
 
       delegate :migration, to: :context, private: true
       delegate :migrator_new_and_changed_entities, to: :migration, private: true
-      delegate :perform_all_later, to: ::ActiveJob, private: true
+      delegate :perform_all_later, to: '::ActiveJob', private: true
 
       progressable migration: 75
 

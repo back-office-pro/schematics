@@ -13,7 +13,7 @@ module Core
 
       validates_associated :data
       validate :quota_entities_cannot_be_exceeded
-      delegate :quota_entities, to: ::Subscription, private: true
+      delegate :quota_entities, to: '::Subscription', private: true
       delegate :build_commands,
                :clean_commands,
                :old_entities,
@@ -29,7 +29,7 @@ module Core
 
     class_methods do
       delegate :version, :data, to: :current, prefix: true, allow_nil: true
-      delegate :business_sector, to: ::Subscription, private: true
+      delegate :business_sector, to: '::Subscription', private: true
 
       def current = state_finished.last
 

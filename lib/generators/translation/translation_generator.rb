@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TranslationGenerator < Rails::Generators::NamedBase
-  delegate :available_locales, to: I18n
+  delegate :available_locales, to: 'I18n'
   class_option :rename, type: :string
 
   def generate_model_translation

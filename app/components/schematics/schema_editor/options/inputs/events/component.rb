@@ -6,7 +6,7 @@ module Schematics
       module Inputs
         module Events
           class Component < Inputs::Component
-            delegate :collection, to: Schematics::Options::Icon, prefix: :icons
+            delegate :collection, to: 'Schematics::Options::Icon', prefix: :icons
             delegate :object, to: :builder, private: true
             delegate :values, to: :object
 
