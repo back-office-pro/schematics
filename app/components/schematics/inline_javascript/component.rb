@@ -3,7 +3,7 @@
 module Schematics
   module InlineJavascript
     class Component < ApplicationComponent
-      delegate :credentials, to: Engine, private: true
+      delegate :credentials, to: 'Engine', private: true
       delegate :user_notifications_path,
                :preferences_path,
                :emojis_path,

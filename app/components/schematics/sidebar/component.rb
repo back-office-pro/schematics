@@ -3,7 +3,7 @@
 module Schematics
   module Sidebar
     class Component < ApplicationComponent
-      delegate :company_name, to: ::Configuration
+      delegate :company_name, to: '::Configuration'
       delegate :preferences_sidebar_toggled, to: :current_user
 
       def model_classes = current_schema

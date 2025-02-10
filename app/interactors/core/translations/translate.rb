@@ -5,10 +5,10 @@ module Core
     class Translate
       include Interactor
 
-      delegate :gcloud_api_key_with_fallback, to: ::Configuration, private: true
-      delegate :translate, to: ::EasyTranslate, private: true
+      delegate :gcloud_api_key_with_fallback, to: '::Configuration', private: true
+      delegate :translate, to: '::EasyTranslate', private: true
       delegate :text, :locale, to: :context, private: true
-      delegate :t, to: ::I18n, private: true
+      delegate :t, to: '::I18n', private: true
 
       def call
         context.value = translate(text.humanize, to: locale, key: gcloud_api_key_with_fallback)

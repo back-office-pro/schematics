@@ -3,7 +3,7 @@
 module Schematics
   module GoogleMap
     class Component < ApplicationComponent
-      delegate :gcloud_api_key_with_fallback, to: ::Configuration, private: true
+      delegate :gcloud_api_key_with_fallback, to: '::Configuration', private: true
       option :address
 
       def url = ::URI::HTTPS

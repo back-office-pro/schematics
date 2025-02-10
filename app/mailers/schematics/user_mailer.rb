@@ -2,7 +2,7 @@
 
 module Schematics
   class UserMailer < ApplicationMailer
-    delegate :default_url_options, to: ::Tenant
+    delegate :default_url_options, to: '::Tenant'
 
     def new_account(user)
       @user = user

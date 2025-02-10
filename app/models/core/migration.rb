@@ -9,7 +9,7 @@ class ::Migration < Schematics::ApplicationRecord
 
   validates_associated :data
   validate :quota_entities_cannot_be_exceeded
-  delegate :quota_entities, to: Subscription, private: true
+  delegate :quota_entities, to: 'Subscription', private: true
   delegate :build_commands,
            :clean_commands,
            :old_entities,

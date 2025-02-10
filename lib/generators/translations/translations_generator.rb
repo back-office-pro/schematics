@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Metrics/ClassLength
-  delegate :available_locales, to: I18n
+  delegate :available_locales, to: 'I18n'
   class_option :rename, type: :string
 
   def generate_model_gender_translations

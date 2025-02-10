@@ -8,7 +8,7 @@ module OpenAPI
       attr_accessor :code, :description, :headers, :data
 
       class << self
-        delegate :translate, to: ::I18n, private: true
+        delegate :translate, to: '::I18n', private: true
 
         def bad_request = new(
           code: 400,
