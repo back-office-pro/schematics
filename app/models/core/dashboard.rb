@@ -4,6 +4,6 @@ class ::Dashboard < Schematics::ApplicationRecord
   scope :accessible_by_role, ::Core::Dashboards::AccessibleByRoleQuery
 
   def icon
-    Role.entity.icon if roles.any?
+    :user_lock if roles.any?
   end
 end
