@@ -21,23 +21,15 @@ RSpec.describe Schematics::SubscriptionAbility do
     it { is_expected.to be_able_to(:enable, Subscription) }
   end
 
-  xcontext 'when users quota is exceeded' do
-    before do
-      allow(Subscription)
-        .to receive(:quota_users_exceeded?)
-        .and_return(true)
-    end
+  context 'when users quota is exceeded' do
+    before { allow(User).to receive(:count).and_return(100) }
 
     it { is_expected.not_to be_able_to(:create, User) }
     it { is_expected.not_to be_able_to(:restore, User) }
   end
 
-  xcontext 'when api keys quota is exceeded' do
-    before do
-      allow(::Subscription)
-        .to receive(:quota_api_keys_exceeded?)
-        .and_return(true)
-    end
+  context 'when api keys quota is exceeded' do
+    before { allow(APIKey).to receive(:count).and_return(100) }
 
     it { is_expected.not_to be_able_to(:create, APIKey) }
     it { is_expected.not_to be_able_to(:restore, APIKey) }
