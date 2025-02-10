@@ -98,7 +98,7 @@ RSpec.describe Subscription do
   describe '.quota_api_keys' do
     subject { described_class.quota_api_keys }
 
-    it { is_expected.to eq(2) }
+    it { is_expected.to eq(3) }
   end
 
   describe '.quota_storage' do
