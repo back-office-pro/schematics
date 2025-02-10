@@ -50,10 +50,6 @@ RSpec.describe Core::Migrations::Migrate do
     end
   end
 
-  before do
-    allow(Role).to receive(:admin).and_return(Role.new)
-  end
-
   describe '.call' do
     context 'when creating a new entity' do
       let(:data) { initial_data }
