@@ -5,7 +5,7 @@ require 'pg'
 
 class Tenant
   class << self
-    delegate :port, to: Server, private: true
+    delegate :port, to: 'Server', private: true
 
     def app_name = Rails
       .application

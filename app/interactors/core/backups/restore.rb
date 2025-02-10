@@ -5,7 +5,7 @@ module Core
     class Restore
       include Interactor
 
-      delegate :root, :env, to: ::Rails, private: true
+      delegate :root, :env, to: '::Rails', private: true
       delegate :backup, :clean, to: :context, private: true
       delegate :disconnect!, to: 'ActiveRecord::Base.connection_pool', private: true
       delegate :current_database,

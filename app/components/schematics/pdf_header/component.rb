@@ -3,7 +3,7 @@
 module Schematics
   module PDFHeader
     class Component < ApplicationComponent
-      delegate :theme_color, :company_name, to: ::Configuration
+      delegate :theme_color, :company_name, to: '::Configuration'
       option :resource
 
       def style = <<~CSS.squish

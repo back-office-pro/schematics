@@ -4,7 +4,7 @@ module Core
   module Migrations
     class Copy
       include Interactor
-      delegate :copy, to: ::ActiveRecord::Migration, private: true
+      delegate :copy, to: '::ActiveRecord::Migration', private: true
 
       def call = copy(destination_path, source)
 
