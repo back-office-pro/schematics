@@ -36,11 +36,7 @@ RSpec.describe Schematics::SubscriptionAbility do
   end
 
   context 'when subscription is inactive' do
-    before do
-      allow(Subscription.instance)
-        .to receive(:state_inactive?)
-        .and_return(true)
-    end
+    before { Subscription.instance.state_inactive! }
 
     it { is_expected.not_to be_able_to(:create, :all) }
     it { is_expected.not_to be_able_to(:restore, :all) }
