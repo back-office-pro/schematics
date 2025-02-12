@@ -63,7 +63,7 @@ module Schematics
       .configuration
       .action_dispatch
       .merge(key_generator:)
-      .merge('request.parameters': { model_name: })
+      .merge('request.parameters': { resource: model_name })
       .transform_keys { "action_dispatch.#{it}" }
 
     def pdf_options = {

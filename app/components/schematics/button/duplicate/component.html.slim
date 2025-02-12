@@ -1,4 +1,4 @@
-= button_to polymorphic_path(resource, action: :duplicate), method: :post, data:, class: css_classes, title:, form: do
+= button_to duplicate_resource_path(resource), method: :post, data:, class: css_classes, title:, form: do
   span.icon = fa_icon :clone
   span.icon.d-none = fa_icon :spinner, animation: 'spin'
   span.text.d-none.d-xxl-inline = title

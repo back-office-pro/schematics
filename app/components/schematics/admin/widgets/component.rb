@@ -11,7 +11,7 @@ module Schematics
 
         def title = t('.title')
 
-        def path = polymorphic_path(model_class)
+        def path = resources_path(model_class)
 
         def render?
           can?(action, model_class)

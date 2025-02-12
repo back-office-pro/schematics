@@ -10,4 +10,4 @@
     = form.fields_for :entities, entities do |builder|
       = __schema_editor_entity(builder:)
   = __button_confirm
-  = __button_cancel(path: resource)
+  = __button_cancel(path: resource_path(resource))

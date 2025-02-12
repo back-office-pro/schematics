@@ -7,7 +7,7 @@ module Schematics
         LIMIT = 10
         delegate :icon, to: '::Meeting.entity'
 
-        def meetings_path = polymorphic_path(::Meeting)
+        def meetings_path = resources_path(::Meeting)
 
         def display_count
           count >= LIMIT ? "#{LIMIT.pred}+" : count

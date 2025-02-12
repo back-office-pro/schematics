@@ -9,9 +9,9 @@ class CommentsController < Schematics::ResourcesController
 
   def model_name = 'Comment'
 
-  def resource_path = polymorphic_path(record, comments: '').chop
+  def show_path = resource_path(record, comments: '').chop
 
-  def index_path = resource_path
+  def index_path = show_path
 
   def parent_model_name
     @resource.try(:record_type) || super

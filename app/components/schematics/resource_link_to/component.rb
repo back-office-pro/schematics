@@ -26,9 +26,9 @@ module Schematics
       def path
         case resource
         when String
-          polymorphic_path(resource.safe_constantize)
+          resources_path(resource.safe_constantize)
         else
-          polymorphic_path(resource)
+          resource_path(resource)
         end
       end
 

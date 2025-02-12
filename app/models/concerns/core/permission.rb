@@ -29,6 +29,6 @@ module Core
       .application
       .routes
       .url_helpers
-      .polymorphic_url(model_class, **Tenant.default_url_options)
+      .resources_url(resource: model_class.model_name.collection, **Tenant.default_url_options)
   end
 end

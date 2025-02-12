@@ -17,7 +17,7 @@ module Schematics
             'fw-bold' unless read?(current_user)
           end
 
-          def href = polymorphic_path(@message)
+          def href = resource_path(@message)
         end
       end
     end

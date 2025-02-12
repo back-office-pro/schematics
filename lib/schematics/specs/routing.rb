@@ -9,9 +9,11 @@ module Schematics
 
       included do
         include Rails.application.routes.url_helpers
+        include ResourcesHelper
+
         delegate :model_class,
+                 :resource,
                  :controller,
-                 :model_name,
                  :locale,
                  :can?,
                  :events,
@@ -20,8 +22,7 @@ module Schematics
 
         let(:record) { default.tap(&:save!) }
         let(:id) { record.to_param unless record in ::Singleton }
-        let(:parent_id) { :"#{model_class.model_name.param_key}_id" }
-        let(:params) { { locale:, model_name:, controller: } }
+        let(:params) { { locale:, resource:, controller: } }
 
         before do
           allow_any_instance_of(ActiveStorageValidations::ContentTypeValidator)
@@ -32,80 +33,85 @@ module Schematics
         it do
           if can?(:index)
             is_expected
-              .to route(:get, polymorphic_path(model_class))
+              .to route(:get, resources_path(model_class))
               .to params.merge(action: :index)
             is_expected
-              .to route(:post, polymorphic_path([model_class, :autocompletions], format: nil))
+              .to route(:post, autocomplete_resource_path(model_class))
               .to params.merge(controller: 'schematics/autocompletions', action: :create)
             is_expected
-              .to route(:post, polymorphic_path([model_class, ::Comparison], format: nil))
+              .to route(:post, compare_resource_path(model_class))
               .to params.merge(controller: :comparisons, action: :create)
           end
           if can?(:show)
             is_expected
-              .to route(:get, polymorphic_path(record))
+              .to route(:get, resource_path(record))
               .to params.merge(action: :show, id:).compact
             is_expected
-              .to route(:get, new_polymorphic_path([record, ::Comment], format: nil))
-              .to params.merge(controller: :comments, parent_id => id, action: :new).compact
+              .to route(:get, new_comment_resource_path(record))
+              .to params.merge(controller: :comments, id:, action: :new).compact
             is_expected
-              .to route(:post, polymorphic_path([record, ::Comment], format: nil))
-              .to params.merge(controller: :comments, parent_id => id, action: :create).compact
+              .to route(:post, comment_resource_path(record))
+              .to params.merge(controller: :comments, id:, action: :create).compact
             is_expected
-              .to route(:get, new_polymorphic_path([record, ::Emailing], format: nil))
-              .to params.merge(controller: :emailings, parent_id => id, action: :new).compact
+              .to route(:get, new_emailing_resource_path(record))
+              .to params.merge(controller: :emailings, id:, action: :new).compact
             is_expected
-              .to route(:post, polymorphic_path([record, ::Emailing], format: nil))
-              .to params.merge(controller: :emailings, parent_id => id, action: :create).compact
+              .to route(:post, emailing_resource_path(record))
+              .to params.merge(controller: :emailings, id:, action: :create).compact
           end
           if can?(:create)
             is_expected
-              .to route(:get, new_polymorphic_path(model_class))
+              .to route(:get, new_resource_path(model_class))
               .to params.merge(action: :new)
             is_expected
-              .to route(:post, polymorphic_path(model_class))
+              .to route(:post, resources_path(model_class))
               .to params.merge(action: :create)
             is_expected
-              .to route(:post, polymorphic_path(record, action: :duplicate))
+              .to route(:post, duplicate_resource_path(record))
               .to params.merge(id:, action: :duplicate)
             is_expected
-              .to route(:get, new_polymorphic_path([model_class, ::Import], format: nil))
+              .to route(:get, new_import_resource_path(model_class))
               .to params.merge(controller: :imports, action: :new)
             is_expected
-              .to route(:post, polymorphic_path([model_class, ::Import], format: nil))
+              .to route(:post, import_resource_path(model_class))
               .to params.merge(controller: :imports, action: :create)
           end
           if can?(:update)
             is_expected
-              .to route(:get, edit_polymorphic_path(record))
+              .to route(:get, edit_resource_path(record))
               .to params.merge(id:, action: :edit).compact
             is_expected
-              .to route(:patch, polymorphic_path(record))
+              .to route(:patch, resource_path(record))
               .to params.merge(id:, action: :update).compact
           end
           if can?(:destroy)
             is_expected
-              .to route(:delete, polymorphic_path(record))
+              .to route(:delete, resource_path(record))
               .to params.merge(id:, action: :destroy)
             is_expected
-              .to route(:get, polymorphic_path(record, action: :delete))
+              .to route(:get, delete_resource_path(record))
               .to params.merge(id:, action: :delete)
           end
           if can?(:archive)
             is_expected
-              .to route(:delete, polymorphic_path(record, action: :archive))
+              .to route(:delete, archive_resource_path(record))
               .to params.merge(id:, action: :archive)
             is_expected
-              .to route(:delete, polymorphic_path(record, action: :restore))
+              .to route(:delete, restore_resource_path(record))
               .to params.merge(id:, action: :restore)
             is_expected
-              .to route(:post, polymorphic_path([model_class, :bulk_actions], format: nil))
+              .to route(:post, bulk_resource_path(model_class))
               .to params.merge(controller: 'schematics/bulk_actions', action: :create)
           end
           events.each do |event|
             is_expected
-              .to route(:patch, polymorphic_path([event.name.to_sym, record], action: event.state_machine_name.to_sym, format: nil)) # rubocop:disable Layout/LineLength
-              .to params.merge(action: :trigger, id:, event: event.suffixed_name).compact
+              .to route(:patch, trigger_resource_path(record, event))
+              .to params.merge(
+                action: :trigger,
+                state: event.state_machine_name,
+                event: event.name,
+                id:
+              ).compact
           end
         end
       end
@@ -118,8 +124,13 @@ module Schematics
           top_level_description.constantize
         end
 
-        def model_name
-          model_class.to_s
+        def resource
+          case entity
+          when Entities::Singleton
+            model_class.model_name.element
+          else
+            model_class.model_name.collection
+          end
         end
 
         def controller = 'schematics/routing'

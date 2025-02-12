@@ -1,4 +1,4 @@
-- breadcrumb title, new_polymorphic_path([parent_model_class, model_class], format: nil)
+- breadcrumb title, new_import_resource_path(parent_model_class)
 .card.shadow-sm.animate__animated.animate__zoomIn
   .card-header.p-2
     .row.align-items-center
@@ -8,5 +8,5 @@
         = __button_help(model_class:)
         = __button_generate_file_in_background(:csv_template)
   .card-body.p-3.pt-1
-    - url = polymorphic_path([parent_model_class, model_class], format: nil)
-    = __resource_form(resource: @resource, url:, attributes:, cancel_path: parent_model_class)
+    - url = import_resource_path(parent_model_class)
+    = __resource_form(resource: @resource, url:, attributes:, cancel_path: resources_path(parent_model_class))

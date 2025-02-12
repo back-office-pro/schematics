@@ -32,7 +32,7 @@ module Schematics
         _metadata: {
           icon: icon.to_s.dasherize,
           descriptor: @resource.to_s,
-          url: Rails.application.routes.url_helpers.polymorphic_path(@resource),
+          url: Rails.application.routes.url_helpers.resource_path(@resource),
           sgid: attachable_sgid
         }
       }

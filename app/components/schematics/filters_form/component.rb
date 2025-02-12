@@ -5,7 +5,7 @@ module Schematics
     class Component < ApplicationComponent
       option :model_class
 
-      def url = polymorphic_path(model_class)
+      def url = resources_path(model_class)
 
       def method = :get
 

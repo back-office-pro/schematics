@@ -17,7 +17,7 @@ module Schematics
       result = Versions::Revert.call(version: @version)
       respond_with(
         result,
-        location: main_app.polymorphic_path(@version.item),
+        location: main_app.resource_path(@version.item),
         redirect_on_failure: true,
         flash_interpolation_options: {
           human_name: @version.model_class.human_name,

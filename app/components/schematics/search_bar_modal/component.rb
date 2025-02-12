@@ -5,6 +5,10 @@ module Schematics
     class Component < ApplicationComponent
       delegate :history, to: 'current_user.searches'
 
+      def url = resource_path(::Search)
+
+      def model = ::Search.new
+
       def action = %w[
         keyup->search-bar#search
         search->search-bar#clearResults

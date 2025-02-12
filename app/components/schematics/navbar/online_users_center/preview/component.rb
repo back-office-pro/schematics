@@ -13,7 +13,7 @@ module Schematics
             @session = session
           end
 
-          def href = polymorphic_path(user)
+          def href = resource_path(user)
         end
       end
     end

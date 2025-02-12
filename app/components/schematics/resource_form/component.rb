@@ -8,8 +8,16 @@ module Schematics
 
       option :resource
       option :url, optional: true
+      option :cancel_path, optional: true
       option :attributes, default: -> { resource.class.entity.fillable_elements }
-      option :cancel_path, default: -> { resource }
+
+      def url
+        super || persisted? ? resource_path(resource) : resources_path(resource.class)
+      end
+
+      def cancel_path
+        super || resource_path(resource)
+      end
 
       def attributes
         return super unless persisted?
