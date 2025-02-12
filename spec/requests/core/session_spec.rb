@@ -9,7 +9,7 @@ RSpec.describe Session, except: %i[create destroy] do
     include_context 'with unauthenticated user'
 
     let(:do_request) { post(url, params:, headers:) }
-    let(:url) { Rails.application.routes.url_helpers.sessions_path }
+    let(:url) { resources_path(described_class) }
     let(:params) { { session: { email:, password:, remember_me: } } }
     let(:expected_response) do
       {

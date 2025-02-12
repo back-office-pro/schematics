@@ -74,7 +74,7 @@ RSpec.describe Schematics::JSONSerializer do
           _metadata: {
             icon: 'users',
             descriptor: 'DOE John',
-            url: Rails.application.routes.url_helpers.polymorphic_path(user),
+            url: Rails.application.routes.url_helpers.resource_path(user),
             sgid: be_a(String)
           }
         }
