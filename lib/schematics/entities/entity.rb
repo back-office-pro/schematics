@@ -223,8 +223,6 @@ module Schematics
         .filter_map(&:default)
         .flatten
 
-      def router = Router.new(self)
-
       def joins = virtuals
         .flat_map(&:preload)
         .compact
