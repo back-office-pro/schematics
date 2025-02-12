@@ -20,7 +20,7 @@ Schematics::Engine.routes.draw do
     resources :versions, only: %i[index show] do
       patch :revert, on: :member
     end
-    resources :messages, only: [], model_name: 'Message' do
+    resources :messages, only: [], resource: 'messages' do
       resources :message_replies, only: %i[new create], path: :replies, as: :replies
     end
   end
