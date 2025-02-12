@@ -139,6 +139,8 @@ Metrics/BlockLength:
     - map_array
     - map_values
     - draw
+    - prepend
+    - localized
 Metrics/MethodLength:
   Max: 35
   AllowedMethods:
