@@ -123,7 +123,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rspec-rails', '7.1.1'
   spec.add_dependency 'ruby-graphviz', '1.2.5'
   spec.add_dependency 'ruby-openai', '7.4.0'
-  spec.add_dependency 'ruby-progressbar', '1.13.0'
   spec.add_dependency 'ruby-vips', '2.2.3'
   spec.add_dependency 'shoulda-callback-matchers', '1.1.4'
   spec.add_dependency 'shoulda-matchers', '6.4.0'

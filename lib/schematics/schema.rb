@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'active_model'
-require 'ruby-progressbar'
 require 'singleton'
 
 module Schematics
@@ -54,8 +53,6 @@ module Schematics
       .filter_map(&:model_class)
 
     private
-
-    memoize def progress_bar = ::ProgressBar.create(total: entities.size)
 
     def core_data = ::JSON
       .parse(File.read(core_data_filepath), symbolize_names: true)
