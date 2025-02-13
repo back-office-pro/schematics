@@ -2,7 +2,7 @@
 
 Rails.configuration.exceptions_app = Rails.application.routes
 
-Rails.application.routes.prepend do
+Rails.application.routes.append do
   direct(:website) { Server.url }
   mount Schematics::Engine, at: '/'
   mount MissionControl::Jobs::Engine, at: '/internal/jobs'
