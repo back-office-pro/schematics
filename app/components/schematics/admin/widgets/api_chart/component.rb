@@ -11,6 +11,8 @@ module Schematics
 
           def title = t('.title')
 
+          def path = resource_path(resource)
+
           memoize def resource = ::Chart
             .with_string_translations
             .api
