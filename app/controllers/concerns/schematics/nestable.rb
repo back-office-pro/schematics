@@ -24,9 +24,7 @@ module Schematics
       .to_h { [it.class_name, it.model_class] }
       .fetch(parent_model_name)
 
-    def parent_model_name = params[:resource]
-      .singularize
-      .classify
+    def parent_model_name = params[:resource].classify
 
     def record = parent_model_class
       .preload_all
