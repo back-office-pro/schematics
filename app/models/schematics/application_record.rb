@@ -15,6 +15,7 @@ module Schematics
     include Mentionable
     include Previewable
     include Attachable
+    include Routable
 
     loadable concerns: [
       SoftDeletable,

@@ -13,85 +13,79 @@ module Schematics
 
     module ModuleMethods
       def resources_url(model_class, **)
-        super(resource: model_class.model_name.collection, **)
+        super(**model_class.route_params, **)
       end
 
       def resources_path(model_class, **)
-        super(resource: model_class.model_name.collection, **)
+        super(**model_class.route_params, **)
       end
 
       def new_resource_path(model_class, **)
-        super(resource: model_class.model_name.collection, **)
+        super(**model_class.route_params, **)
       end
 
       def resource_path(resource, **)
-        super(resource: resource.model_name.collection, id: resource.to_param, **)
+        super(**resource.route_params, **)
       end
 
       def edit_resource_path(resource, **)
-        super(resource: resource.model_name.collection, id: resource.to_param, **)
+        super(**resource.route_params, **)
       end
 
       def archive_resource_path(resource, **)
-        super(resource: resource.model_name.collection, id: resource.to_param, **)
+        super(**resource.route_params, **)
       end
 
       def restore_resource_path(resource, **)
-        super(resource: resource.model_name.collection, id: resource.to_param, **)
+        super(**resource.route_params, **)
       end
 
       def duplicate_resource_path(resource, **)
-        super(resource: resource.model_name.collection, id: resource.to_param, **)
+        super(**resource.route_params, **)
       end
 
       def delete_resource_path(resource, **)
-        super(resource: resource.model_name.collection, id: resource.to_param, **)
+        super(**resource.route_params, **)
       end
 
       def new_import_resource_path(model_class, **)
-        super(resource: model_class.model_name.collection, **)
+        super(**model_class.route_params, **)
       end
 
       def import_resource_path(model_class, **)
-        super(resource: model_class.model_name.collection, **)
+        super(**model_class.route_params, **)
       end
 
       def compare_resource_path(model_class, **)
-        super(resource: model_class.model_name.collection, **)
+        super(**model_class.route_params, **)
       end
 
       def bulk_resource_path(model_class, **)
-        super(resource: model_class.model_name.collection, **)
+        super(**model_class.route_params, **)
       end
 
       def autocomplete_resource_path(model_class, **)
-        super(resource: model_class.model_name.collection, **)
+        super(**model_class.route_params, **)
       end
 
       def new_comment_resource_path(resource, **)
-        super(resource: resource.model_name.collection, id: resource.to_param, **)
+        super(**resource.route_params, **)
       end
 
       def new_emailing_resource_path(resource, **)
-        super(resource: resource.model_name.collection, id: resource.to_param, **)
+        super(**resource.route_params, **)
       end
 
       def comment_resource_path(resource, **)
-        super(resource: resource.model_name.collection, id: resource.to_param, **)
+        super(**resource.route_params, **)
       end
 
       def emailing_resource_path(resource, **)
-        super(resource: resource.model_name.collection, id: resource.to_param, **)
+        super(**resource.route_params, **)
       end
 
       def trigger_resource_path(resource, event, **)
-        super(
-          resource: resource.model_name.collection,
-          id: resource.to_param,
-          state: event.state_machine_name,
-          event: event.name,
-          **
-        )
+        super(**resource.route_params, state: event.state_machine_name, event: event.name, **)
       end
     end
   end

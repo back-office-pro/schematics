@@ -29,6 +29,6 @@ module Core
       .application
       .routes
       .url_helpers
-      .resources_url(resource: model_class.model_name.collection, **Tenant.default_url_options)
+      .resources_url(**model_class.route_params, **Tenant.default_url_options)
   end
 end
