@@ -5,7 +5,7 @@ module Schematics
     class Component < ApplicationComponent
       delegate :history, to: 'current_user.searches'
 
-      def url = resource_path(::Search)
+      def url = resources_path(::Search)
 
       def model = ::Search.new
 
