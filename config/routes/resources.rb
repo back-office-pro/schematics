@@ -3,10 +3,10 @@
 get '/:resource', to: 'schematics/routing#index', as: :resources
 get '/:resource/new', to: 'schematics/routing#new', as: :new_resource
 post '/:resource', to: 'schematics/routing#create'
-get '/:resource(/:id)', to: 'schematics/routing#show', as: :resource
 get '/:resource(/:id)/edit', to: 'schematics/routing#edit', as: :edit_resource
-patch '/:resource/:id', to: 'schematics/routing#update'
-put '/:resource/:id', to: 'schematics/routing#update'
+get '/:resource(/:id)', to: 'schematics/routing#show', as: :resource
+patch '/:resource(/:id)', to: 'schematics/routing#update'
+put '/:resource(/:id)', to: 'schematics/routing#update'
 delete '/:resource/:id', to: 'schematics/routing#destroy'
 delete '/:resource/:id/archive', to: 'schematics/routing#archive', as: :archive_resource
 delete '/:resource/:id/restore', to: 'schematics/routing#restore', as: :restore_resource
