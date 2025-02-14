@@ -46,7 +46,7 @@ RSpec.describe Schematics::ResourceLinkTo::Component, type: :component do
     before { allow(vc_test_controller).to receive(:current_user).and_return(user) }
 
     it { is_expected.to have_css('i', class: 'fa-users') }
-    it { is_expected.to have_link('DOE John', href: user_path(user)) }
+    it { is_expected.to have_link('DOE John', href: resource_path(resource)) }
   end
 
   context 'when resource is user class with ability' do
@@ -55,6 +55,6 @@ RSpec.describe Schematics::ResourceLinkTo::Component, type: :component do
     before { allow(vc_test_controller).to receive(:current_user).and_return(user) }
 
     it { is_expected.to have_css('i', class: 'fa-users') }
-    it { is_expected.to have_link('User', href: users_path) }
+    it { is_expected.to have_link('User', href: resources_path(resource)) }
   end
 end
