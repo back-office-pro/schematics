@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 RSpec.shared_context 'with unauthenticated user' do
-  include Schematics::Engine.routes.url_helpers
-
   subject { response }
 
   include_context 'with user'
