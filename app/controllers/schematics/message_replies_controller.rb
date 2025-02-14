@@ -3,6 +3,7 @@
 module Schematics
   class MessageRepliesController < ResourcesController
     include Nestable
+    include ResourcesHelper
 
     skip_authorize_resource
     before_action -> { authorize!(:reply, record) }

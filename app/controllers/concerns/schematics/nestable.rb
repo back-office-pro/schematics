@@ -38,7 +38,7 @@ module Schematics
       return unless can?(:index, parent_model_class)
 
       title = t('titles.schematics.resources.index', human_name_plural: parent_human_name_plural)
-      breadcrumb title, resources_path(parent_model_class)
+      breadcrumb title, main_app.resources_path(parent_model_class)
     end
   end
 end
