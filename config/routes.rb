@@ -11,11 +11,11 @@ Schematics::Engine.routes.draw do
     get 'admin', to: 'admin#index', as: :admin
     delete 'logout', to: 'home#destroy', as: :logout
     get '/messages/:id/replies/new',
-        to: 'schematics/message_replies#new',
+        to: 'message_replies#new',
         resource: 'messages',
         as: :new_message_reply
     post '/messages/:id/replies',
-         to: 'schematics/message_replies#create',
+         to: 'message_replies#create',
          resource: 'messages',
          as: :message_replies
     resource :user_notifications, only: :update
