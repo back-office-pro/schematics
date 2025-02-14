@@ -5,7 +5,7 @@ module Schematics
     module Widgets
       module Configuration
         class Component < Widgets::Component
-          def path = edit_resource_path(::Configuration)
+          def path = edit_resource_path(::Configuration.instance)
 
           protected
 

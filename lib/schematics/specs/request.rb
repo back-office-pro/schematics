@@ -93,7 +93,7 @@ module Schematics
             end
           end
 
-          if !(entity in Entities::Singleton) && allow?(:not_found)
+          unless entity in Entities::Singleton
             it 'is not found' do
               get resource_path(default), headers:, as: :html
               redirect_path = ability.can?(:index, model_class) ? index_path : root_path

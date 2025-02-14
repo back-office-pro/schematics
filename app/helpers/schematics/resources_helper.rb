@@ -25,21 +25,11 @@ module Schematics
       end
 
       def resource_path(resource, **)
-        case resource
-        when Singleton
-          super(resource: resource.model_name.element, **)
-        else
-          super(resource: resource.model_name.collection, id: resource.to_param, **)
-        end
+        super(resource: resource.model_name.collection, id: resource.to_param, **)
       end
 
       def edit_resource_path(resource, **)
-        case resource
-        when Singleton
-          super(resource: resource.model_name.element, **)
-        else
-          super(resource: resource.model_name.collection, id: resource.to_param, **)
-        end
+        super(resource: resource.model_name.collection, id: resource.to_param, **)
       end
 
       def archive_resource_path(resource, **)
@@ -95,23 +85,13 @@ module Schematics
       end
 
       def trigger_resource_path(resource, event, **)
-        case resource
-        when Singleton
-          super(
-            resource: resource.model_name.element,
-            state: event.state_machine_name,
-            event: event.name,
-            **
-          )
-        else
-          super(
-            resource: resource.model_name.collection,
-            id: resource.to_param,
-            state: event.state_machine_name,
-            event: event.name,
-            **
-          )
-        end
+        super(
+          resource: resource.model_name.collection,
+          id: resource.to_param,
+          state: event.state_machine_name,
+          event: event.name,
+          **
+        )
       end
     end
   end

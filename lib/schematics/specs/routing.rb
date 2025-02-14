@@ -10,7 +10,6 @@ module Schematics
       included do
         include ResourcesHelper
         delegate :model_class,
-                 :resource,
                  :controller,
                  :locale,
                  :can?,
@@ -19,7 +18,8 @@ module Schematics
                  to: :class
 
         let(:record) { default.tap(&:save!) }
-        let(:id) { record.to_param unless record in ::Singleton }
+        let(:resource) { model_class.model_name.collection }
+        let(:id) { record.to_param }
         let(:params) { { locale:, resource:, controller: } }
 
         before do
@@ -120,15 +120,6 @@ module Schematics
 
         def model_class
           top_level_description.constantize
-        end
-
-        def resource
-          case entity
-          when Entities::Singleton
-            model_class.model_name.element
-          else
-            model_class.model_name.collection
-          end
         end
 
         def controller = 'schematics/routing'
