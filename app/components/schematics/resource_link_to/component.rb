@@ -25,10 +25,10 @@ module Schematics
 
       def path
         case resource
-        when String
-          resources_path(resource.safe_constantize)
         when Class
           resources_path(resource)
+        when String
+          resources_path(resource.safe_constantize)
         else
           resource_path(resource)
         end
