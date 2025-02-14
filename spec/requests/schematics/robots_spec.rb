@@ -3,6 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Robots' do
+  include Schematics::Engine.routes.url_helpers
   include_context 'with unauthenticated user'
 
   describe 'GET #index' do
