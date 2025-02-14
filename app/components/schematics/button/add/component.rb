@@ -21,7 +21,7 @@ module Schematics
         def path
           return new_resource_path(model_class) unless resource
 
-          public_send(:"new_#{model_class.to_s.underscore}_resource_path", resource)
+          new_comment_resource_path(resource)
         end
 
         def render?
