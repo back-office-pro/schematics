@@ -14,6 +14,10 @@ module Schematics
       end
     end
 
+    class_methods do
+      def route_params = { resource: model_name.element }
+    end
+
     def cache_key = model_name.singular
   end
 end
