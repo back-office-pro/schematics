@@ -9,7 +9,6 @@ module Schematics
     include Lockable
     include Redirectable
     include Authorizable
-    include Rails.application.routes.url_helpers
     include ResourcesHelper
 
     before_action :set_resource, except: %i[index new create]

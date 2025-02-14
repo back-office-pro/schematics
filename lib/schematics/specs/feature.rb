@@ -8,9 +8,7 @@ module Schematics
       extend ActiveSupport::Concern
 
       included do
-        include Rails.application.routes.url_helpers
         include ResourcesHelper
-
         delegate :t, to: '::I18n'
         delegate :available_locales, to: '::Configuration'
         delegate :entity,

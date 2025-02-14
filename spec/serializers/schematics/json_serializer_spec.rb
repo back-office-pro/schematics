@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::JSONSerializer do
-  include Rails.application.routes.url_helpers
   include Schematics::ResourcesHelper
 
   subject(:serializer) { described_class.new(user, options) }

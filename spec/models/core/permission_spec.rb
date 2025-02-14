@@ -4,7 +4,6 @@ require 'rails_helper'
 
 RSpec.describe Permission do
   include Schematics::Specs::Model
-  include Rails.application.routes.url_helpers
   include Schematics::ResourcesHelper
 
   its(:model_class) { is_expected.to eq(User) }

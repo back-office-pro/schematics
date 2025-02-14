@@ -4,7 +4,6 @@ require 'rails_helper'
 
 RSpec.describe WebhookEndpoint do
   include Schematics::Specs::Model
-  include Rails.application.routes.url_helpers
   include Schematics::ResourcesHelper
 
   context 'when url is malicious and would lead to an infinite loop' do
