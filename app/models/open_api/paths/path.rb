@@ -66,7 +66,7 @@ module OpenAPI
         [
           '',
           (translate('routes.active_storage') if entity.name.start_with?('active_storage')),
-          (singleton? ? summary_slug : tag).gsub(/\b\w{1,2}\b/, '').parameterize(separator: '-')
+          (singleton? ? summary_slug : tag).parameterize(separator: '-')
         ].compact
       )
     end

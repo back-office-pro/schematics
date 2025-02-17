@@ -14,7 +14,6 @@ module OpenAPI
       end
 
       def nested_path = translate(:other, scope: [:activerecord, :models, nested_entity_name])
-        .gsub(/\b\w{1,2}\b/, '')
         .parameterize(separator: '-')
 
       def http_method = :post

@@ -78,7 +78,6 @@ module Schematics
 
         def slug = human_name_plural
           .to_s
-          .remove(/\b\w{1,2}\b/)
           .parameterize(separator: '-')
       end
     end
