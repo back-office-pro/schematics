@@ -62,13 +62,7 @@ module OpenAPI
         entity in Schematics::Entities::Singleton
       end
 
-      def root_path = File.join(
-        [
-          '',
-          (translate('routes.active_storage') if entity.name.start_with?('active_storage')),
-          (singleton? ? summary_slug : tag).parameterize(separator: '-')
-        ].compact
-      )
+      def root_path = File.join('', (singleton? ? summary_slug : tag).parameterize(separator: '-'))
     end
   end
 end

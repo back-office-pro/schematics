@@ -10,10 +10,18 @@ RSpec.describe OpenAPI::Paths::Trigger do
   let(:event) { entity.find_event_by_name('cancel') }
   let(:expected_hash) do
     {
-      '/subscription/state/cancel': {
+      '/subscription/{id}/state/cancel': {
         patch: {
           operationId: 'Subscription_Cancel',
           parameters: [
+            {
+              in: 'path',
+              name: 'id',
+              required: false,
+              schema: {
+                type: 'string'
+              }
+            },
             {
               description: 'Inflect payload keys. Possible values are camel, dash, snake or pascal.', # rubocop:disable Layout/LineLength
               in: 'header',
