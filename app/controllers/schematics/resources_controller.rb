@@ -34,7 +34,7 @@ module Schematics
 
     helper_method :model_class
 
-    def model_name = params[:resource].classify
+    def model_name = resolve_route
 
     def model_class
       model_name.safe_constantize

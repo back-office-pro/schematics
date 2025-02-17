@@ -24,7 +24,7 @@ module Schematics
       .to_h { [it.class_name, it.model_class] }
       .fetch(parent_model_name)
 
-    def parent_model_name = params[:resource].classify
+    def parent_model_name = resolve_route
 
     def record = parent_model_class
       .preload_all
@@ -36,7 +36,7 @@ module Schematics
       return unless can?(:index, parent_model_class)
 
       title = t('titles.schematics.resources.index', human_name_plural: parent_human_name_plural)
-      breadcrumb title, main_app.resources_path(parent_model_class)
+      breadcrumb title, resources_path(parent_model_class)
     end
   end
 end
