@@ -5,7 +5,7 @@ module Schematics
     extend ActiveSupport::Concern
 
     class_methods do
-      def route_params = { resource: model_name.collection }
+      def route_params = { resource: human_name_plural.parameterize(separator: '-') }
     end
 
     def route_params = self

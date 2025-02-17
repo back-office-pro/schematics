@@ -15,7 +15,7 @@ module Schematics
     end
 
     class_methods do
-      def route_params = { resource: model_name.element }
+      def route_params = { resource: human_name.parameterize(separator: '-') }
     end
 
     def cache_key = model_name.singular
