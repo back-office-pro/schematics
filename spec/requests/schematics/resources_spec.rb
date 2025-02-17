@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Resources' do
+  include Schematics::ResourcesHelper
+
   include_context 'with authenticated user'
   include_context 'with admin role'
 
