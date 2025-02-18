@@ -24,7 +24,7 @@ module Schematics
       .to_h { [it.class_name, it.model_class] }
       .fetch(parent_model_name)
 
-    def parent_model_name = resolve_route
+    def parent_model_name = resolve_model_name_from_route
 
     def record = parent_model_class
       .preload_all
