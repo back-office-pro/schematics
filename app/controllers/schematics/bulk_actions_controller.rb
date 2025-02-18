@@ -14,7 +14,7 @@ module Schematics
     private
 
     def bulk_action_params
-      params.except(bulk_action: [[:ids]])
+      params.expect(bulk_action: [ids: []])
     end
   end
 end
