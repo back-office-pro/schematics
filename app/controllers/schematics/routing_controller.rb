@@ -26,7 +26,9 @@ module Schematics
     def controller_class
       CORE_CONTROLLERS
         .invert
-        .select { it.include?(params[:resource]) }&.values.first || ResourcesController
+        .select { it.include?(params[:resource]) }
+        &.values
+        &.first || ResourcesController
     end
   end
 end
