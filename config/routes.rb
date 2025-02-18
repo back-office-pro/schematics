@@ -10,14 +10,8 @@ Schematics::Engine.routes.draw do
     get 'sudo', to: 'sudos#new', as: :sudo
     get 'admin', to: 'admin#index', as: :admin
     delete 'logout', to: 'home#destroy', as: :logout
-    get '/messages/:id/replies/new',
-        to: 'message_replies#new',
-        resource: 'messages',
-        as: :new_message_reply
-    post '/messages/:id/replies',
-         to: 'message_replies#create',
-         resource: 'messages',
-         as: :message_replies
+    get '/messages/:id/replies/new', to: 'message_replies#new', as: :new_message_reply
+    post '/messages/:id/replies', to: 'message_replies#create', as: :message_replies
     resource :user_notifications, only: :update
     resource :preferences, only: %i[edit update]
     resource :one_time_passwords, only: %i[show edit new update create destroy]

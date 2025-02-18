@@ -15,6 +15,10 @@ module Schematics
 
     private
 
+    def model_name = 'Message'
+
+    def parent_model_name = model_name
+
     def attributes = entity.rich_text_attributes
 
     def resource_defaults = super.merge(
