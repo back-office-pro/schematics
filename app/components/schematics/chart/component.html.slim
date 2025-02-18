@@ -4,7 +4,7 @@
       = __card_heading(icon:, title: @chart)
     .card-body.p-3.pt-1.pb-2
       = public_send type,
-                    polymorphic_path(@chart, format: :json),
+                    resource_path(@chart, format: :json),
                     id: css_id,
                     xtitle:,
                     ytitle:,

@@ -2,6 +2,8 @@
 
 module Schematics
   class VersionsController < ApplicationController
+    include ResourcesHelper
+
     authorize_resource class: Version
     before_action :set_version, only: %i[show revert]
     delegate :human_name, :gender, to: :model_class, private: true
@@ -17,7 +19,7 @@ module Schematics
       result = Versions::Revert.call(version: @version)
       respond_with(
         result,
-        location: main_app.polymorphic_path(@version.item),
+        location: resource_path(@version.item),
         redirect_on_failure: true,
         flash_interpolation_options: {
           human_name: @version.model_class.human_name,

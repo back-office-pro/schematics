@@ -18,7 +18,11 @@ module Schematics
 
         def css_classes = %w[btn btn-primary btn-sm btn-icon-split ms-1]
 
-        def path = new_polymorphic_path([resource, model_class].compact, format: nil)
+        def path
+          return new_resource_path(model_class) unless resource
+
+          new_comment_resource_path(resource)
+        end
 
         def render?
           can?(:new, model_class)

@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Resources' do
+  include Schematics::ResourcesHelper
+
   include_context 'with login'
   include_context 'with admin role'
 
@@ -14,16 +16,16 @@ RSpec.describe 'Resources' do
   before { user.create_search_index }
 
   it 'filters by email', :js do # rubocop:disable RSpec/ExampleLength
-    visit users_path
+    visit resources_path(User)
     fill_in 'filter[email]', with: user.email
     page.driver.wait_for_network_idle # Ajax
     find('ul[data-typeahead-target="results"] > li:first-child').click
     page.driver.wait_for_network_idle # Turbo
-    expect(page).to have_current_path(users_path(filter: { email: user.email }))
+    expect(page).to have_current_path(resources_path(User, filter: { email: user.email }))
   end
 
   it 'edits email in place', :js do # rubocop:disable RSpec/ExampleLength
-    visit user_path(user)
+    visit resource_path(user)
     first('.card-body .edit-in-place').click
     page.driver.wait_for_network_idle # Turbo
     fill_in 'user[email]', with: 'admin@nowhere.com'
@@ -33,24 +35,24 @@ RSpec.describe 'Resources' do
   end
 
   it 'compares permissions', :js do # rubocop:disable RSpec/ExampleLength
-    visit permissions_path
+    visit resources_path(Permission)
     check Permission.last.id
     check Permission.second_to_last.id
     find('.table').click_button
     page.driver.wait_for_network_idle # Turbo
-    expect(page).to have_current_path(comparison_path(Comparison.last))
+    expect(page).to have_current_path(resource_path(Comparison.last))
   end
 
   it 'hides user email column', :js do
     skip('not working on CI') if ENV['CI'].present?
-    visit users_path
+    visit resources_path(User)
     find_by_id('settings-dropdown').click
     uncheck column_css_class
     expect(find("th.#{column_css_class}", visible: :all)).not_to be_visible
   end
 
   it 'automatically saves the form content', :js do # rubocop:disable RSpec/ExampleLength
-    visit new_user_path
+    visit new_resource_path(User)
     fill_in('user[email]', with: user.email).send_keys(:tab)
     sleep(5) # Ajax
     refresh
@@ -60,7 +62,7 @@ RSpec.describe 'Resources' do
   end
 
   it 'automatically saves the form content even if offline', :js do # rubocop:disable RSpec/ExampleLength
-    visit new_user_path
+    visit new_resource_path(User)
     page.driver.browser.network.offline_mode
     fill_in('user[email]', with: user.email).send_keys(:tab)
     page.driver.browser.network.emulate_network_conditions(
@@ -77,14 +79,14 @@ RSpec.describe 'Resources' do
   end
 
   it 'downloads a CSV file', :js, skip: 'not supported by driver' do
-    visit permissions_path
+    visit resources_path(Permission)
     find_by_id('generate_file_in_background').click
     page.driver.browser.downloads.wait { first('#generate_file_in_background .dropdown-item').click } # rubocop:disable Layout/LineLength
     expect(page.driver.browser.downloads.files.first['suggestedFilename']).to eq('permissions.csv')
   end
 
   it 'downloads a PDF file', :js, skip: 'not supported by driver' do
-    visit user_path(user)
+    visit resource_path(user)
     page.driver.browser.downloads.wait { find_by_id('generate_file_in_background').click }
     expect(page.driver.browser.downloads.files.first['suggestedFilename']).to eq('user-john-doe.pdf') # rubocop:disable Layout/LineLength
   end

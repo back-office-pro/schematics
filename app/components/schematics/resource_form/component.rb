@@ -3,18 +3,29 @@
 module Schematics
   module ResourceForm
     class Component < ApplicationComponent
-      delegate :persisted?, to: :resource, private: true
+      delegate :persisted?, to: :@resource, private: true
       use_helpers :rich_textarea_tag, :turbo_frame_request?
 
-      option :resource
-      option :url, optional: true
-      option :attributes, default: -> { resource.class.entity.fillable_elements }
-      option :cancel_path, default: -> { resource }
+      def initialize(resource:, url: nil, cancel_path: nil, attributes: nil)
+        super
+        @resource = resource
+        @url = url
+        @cancel_path = cancel_path
+        @attributes = attributes || resource.class.entity.fillable_elements
+      end
+
+      def url
+        @url || default_url
+      end
+
+      def cancel_path
+        @cancel_path || resource_path(@resource)
+      end
 
       def attributes
-        return super unless persisted?
+        return @attributes unless persisted?
 
-        super.select { can?(:update, resource, it.name) }
+        @attributes.select { can?(:update, @resource, it.name) }
       end
 
       def wrapper_class
@@ -27,6 +38,14 @@ module Schematics
         return :inline if turbo_frame_request?
 
         :vertical
+      end
+
+      private
+
+      def default_url
+        return resource_path(@resource) if persisted?
+
+        resources_path(@resource.class)
       end
     end
   end

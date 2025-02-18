@@ -8,7 +8,7 @@ module Schematics
       extend ActiveSupport::Concern
 
       included do
-        include Rails.application.routes.url_helpers
+        include ResourcesHelper
         delegate :t, to: '::I18n'
         delegate :available_locales, to: '::Configuration'
         delegate :entity,
@@ -60,7 +60,7 @@ module Schematics
           it 'visits the index' do
             if ability.can?(:index, model_class)
               login_with_2fa
-              visit polymorphic_path(model_class)
+              visit resources_path(model_class)
               text = t('titles.schematics.resources.index', human_name_plural:)
               is_expected.to have_selector 'h6', text:
             end
@@ -72,7 +72,7 @@ module Schematics
             default_associations.each(&:save!)
             if ability.can?(:new, model_class)
               login_with_2fa
-              visit new_polymorphic_path(model_class)
+              visit new_resource_path(model_class)
               fill_form
               click_button t('schematics.application.button.confirm')
               is_expected.to have_text t('schematics.resources.create.success', human_name:)
@@ -85,7 +85,7 @@ module Schematics
             record
             if ability.can?(:edit, record)
               login_with_2fa
-              visit edit_polymorphic_path(record)
+              visit edit_resource_path(record)
               fill_form
               click_button t('schematics.application.button.confirm')
               is_expected.to have_text t('schematics.resources.update.success', human_name:)

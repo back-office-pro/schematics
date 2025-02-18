@@ -1,9 +1,9 @@
-- breadcrumb record.to_s, record
-- breadcrumb title, new_polymorphic_path([record, model_class], format: nil)
+- breadcrumb record.to_s, resource_path(record)
+- breadcrumb title, new_comment_resource_path(record)
 .card.shadow-sm.animate__animated.animate__zoomIn
   .card-header.p-2
     .row.align-items-center
       .col.text-truncate.px-1
         = __card_heading(icon: model_class.entity.icon, title:)
   .card-body.p-3.pt-1
-    = __resource_form(resource: @resource, url: polymorphic_path([record, model_class], format: nil), cancel_path: record)
+    = __resource_form(resource: @resource, url: comment_resource_path(record), cancel_path: resource_path(record))

@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'PasswordResets' do
   include ActiveSupport::Testing::TimeHelpers
+  include Schematics::Engine.routes.url_helpers
 
   include_context 'with unauthenticated user'
 

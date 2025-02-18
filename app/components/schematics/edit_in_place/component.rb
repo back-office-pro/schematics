@@ -7,6 +7,8 @@ module Schematics
       option :element
 
       def frame_id = dom_id(resource, element.name)
+
+      def url = resource_path(resource)
     end
   end
 end

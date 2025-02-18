@@ -27,10 +27,7 @@ module Schematics
             )
           end
 
-          def url = polymorphic_path(
-            [event.state_machine_name.to_sym, event.name.to_sym, resource],
-            format: nil
-          )
+          def url = trigger_resource_path(resource, event)
 
           def icon_class
             'fa-fw' if compact?

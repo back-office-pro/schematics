@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 require 'active_model'
-require 'ruby-progressbar'
 require 'singleton'
 
 module Schematics
   # :reek:InstanceVariableAssumption
-  class Schema # rubocop:disable Metrics/ClassLength
+  class Schema
     include ::ActiveModel::API
     include ::ActiveModel::NestedAttributes
 
@@ -53,14 +52,7 @@ module Schematics
       .reject(&:core?)
       .filter_map(&:model_class)
 
-    def draw_routes = entities
-      .map(&:router)
-      .each { yield(it) && progress_bar.increment }
-      .tap { progress_bar.reset }
-
     private
-
-    memoize def progress_bar = ::ProgressBar.create(total: entities.size)
 
     def core_data = ::JSON
       .parse(File.read(core_data_filepath), symbolize_names: true)

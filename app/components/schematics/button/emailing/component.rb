@@ -17,7 +17,7 @@ module Schematics
 
         def css_classes = %w[btn btn-sm btn-icon-split bg-body-tertiary ms-1]
 
-        def path = new_polymorphic_path([resource, ::Emailing], format: nil)
+        def path = new_emailing_resource_path(resource)
 
         def render?
           can?(:email, resource)

@@ -1,4 +1,4 @@
-- breadcrumb title, main_app.polymorphic_path(@resource, action: :delete)
+- breadcrumb title, delete_resource_path(@resource)
 .card.shadow-sm.animate__animated.animate__zoomIn
   .card-header.px-1.py-2
     = __card_heading(icon: :trash, title:)
@@ -12,6 +12,6 @@
     - if associations.any?
       .text-secondary = t('schematics.application.delete.warning', human_name: @human_name, gender: @gender, resource: @resource)
       = __viewer_association(associations)
-    = form_with model: @resource, url: main_app.polymorphic_path(@resource), method: :delete, class: 'mt-3' do
+    = form_with model: @resource, url: resource_path(@resource), method: :delete, class: 'mt-3' do
       = __button_confirm
-      = __button_cancel(path: @resource)
+      = __button_cancel(path: resource_path(@resource))

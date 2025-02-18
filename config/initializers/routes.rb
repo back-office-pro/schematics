@@ -2,7 +2,7 @@
 
 Rails.configuration.exceptions_app = Rails.application.routes
 
-Rails.application.routes.prepend do
+Rails.application.routes.append do
   direct(:website) { Server.url }
   mount Schematics::Engine, at: '/'
   mount MissionControl::Jobs::Engine, at: '/internal/jobs'
@@ -12,8 +12,6 @@ Rails.application.routes.prepend do
     get 'service-worker', to: 'rails/pwa#service_worker', as: :pwa_service_worker
     get 'manifest', to: 'rails/pwa#manifest', as: :pwa_manifest
     get 'login', to: 'sessions#new', as: :login
-    SchemaCache.draw_routes do
-      eval it, binding, __FILE__, __LINE__ # rubocop:disable Security/Eval
-    end
+    draw :resources
   end
 end

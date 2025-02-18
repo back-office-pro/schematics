@@ -3,5 +3,5 @@
 class SubscriptionsController < Schematics::ResourcesController
   protected
 
-  def resource_path = admin_path
+  def show_path = admin_path
 end

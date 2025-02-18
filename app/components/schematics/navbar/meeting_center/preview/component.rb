@@ -13,7 +13,7 @@ module Schematics
             @meeting = meeting
           end
 
-          def href = polymorphic_path(@meeting)
+          def href = resource_path(@meeting)
         end
       end
     end

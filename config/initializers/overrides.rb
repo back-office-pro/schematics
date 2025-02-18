@@ -76,6 +76,7 @@ ActiveSupport.on_load(:active_storage_record) do
   include Schematics::Serializable
   include Schematics::Identifiable
   include Schematics::Translatable
+  include Schematics::Routable
 
   loadable concerns: [Schematics::SoftDeletable]
 

@@ -6,17 +6,16 @@ module Schematics
 
     def redirect_to_resource_path
       return unless request.format.html?
-      return if request.path.start_with?(resource_path)
+      return if request.path.start_with?(show_path)
 
-      redirect_to resource_path, status: :moved_permanently
+      redirect_to show_path, status: :moved_permanently
     end
 
     def redirect_to_edit_resource_path
       return unless request.format.html?
-      return if request.path == main_app.edit_polymorphic_path(@resource)
+      return if request.path == edit_resource_path(@resource)
 
-      redirect_to main_app.edit_polymorphic_path(@resource),
-                  status: :moved_permanently
+      redirect_to edit_resource_path(@resource), status: :moved_permanently
     end
   end
 end

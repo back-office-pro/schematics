@@ -20,6 +20,8 @@ module Schematics
 
         def params = { session: { email: } }
 
+        def sessions_path = resources_path(::Session)
+
         def render?
           can?(:impersonate, resource)
         end

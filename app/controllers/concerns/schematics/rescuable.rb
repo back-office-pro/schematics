@@ -33,7 +33,7 @@ module Schematics
       switch_localization do
         respond_to do |format|
           format.html do
-            redirect_back_or_to resource_path,
+            redirect_back_or_to show_path,
                                 alert: t('schematics.application.invalid_transition.alert')
           end
           format.json do

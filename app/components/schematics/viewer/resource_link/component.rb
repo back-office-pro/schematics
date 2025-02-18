@@ -15,7 +15,7 @@ module Schematics
 
           {
             action: 'click->application#visit',
-            'application-href-param': polymorphic_path(resource)
+            'application-href-param': resource_path(resource)
           }
         end
 

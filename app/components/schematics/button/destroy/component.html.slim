@@ -1,4 +1,4 @@
-= form_with model: resource, method: :delete, class: 'd-inline'
+= form_with model: resource, url:, method: :delete, class: 'd-inline'
   = __confirm_dialog(target:)
 = button_tag data:, title:, class: css_classes do
   span.icon = fa_icon :trash, class: icon_class

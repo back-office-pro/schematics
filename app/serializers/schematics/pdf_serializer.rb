@@ -3,7 +3,7 @@
 module Schematics
   class PDFSerializer
     delegate :render, to: :renderer, private: true
-    delegate :human_name, to: :model_class, private: true
+    delegate :human_name, :route_params, to: :model_class, private: true
     delegate :default_url_options, to: '::Tenant', private: true
     delegate :ssl?, to: '::Server', private: true
     delegate :key_generator, to: '::Rails.application', private: true
@@ -63,7 +63,7 @@ module Schematics
       .configuration
       .action_dispatch
       .merge(key_generator:)
-      .merge('request.parameters': { model_name: })
+      .merge('request.parameters': route_params)
       .transform_keys { "action_dispatch.#{it}" }
 
     def pdf_options = {

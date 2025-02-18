@@ -19,9 +19,9 @@ module Schematics
         .sort_by(&:name)
 
       def url
-        return migrations_path if new_record?
+        return resources_path(::Migration) if new_record?
 
-        migration_path(resource)
+        resource_path(resource)
       end
 
       def form_method

@@ -1,4 +1,4 @@
 .row.g-0
   .col
     = fa_icon icon, class: "text-#{icon_text_class}"
-    = link_to attribute_name, polymorphic_path(model_class, **link_params), class: 'ms-2'
+    = link_to attribute_name, resources_path(model_class, **link_params), class: 'ms-2'

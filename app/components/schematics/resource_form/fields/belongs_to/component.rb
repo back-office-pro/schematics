@@ -30,7 +30,7 @@ module Schematics
 
           protected
 
-          def url = polymorphic_path(model_class, format: :json)
+          def url = resources_path(model_class, format: :json)
         end
       end
     end

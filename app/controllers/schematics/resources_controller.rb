@@ -9,6 +9,7 @@ module Schematics
     include Lockable
     include Redirectable
     include Authorizable
+    include ResourcesHelper
 
     before_action :set_resource, except: %i[index new create]
     before_action :set_resources, only: :index
@@ -33,7 +34,7 @@ module Schematics
 
     helper_method :model_class
 
-    def model_name = params[:model_name]
+    def model_name = resolve_model_name_from_route
 
     def model_class
       model_name.safe_constantize
@@ -76,7 +77,7 @@ module Schematics
     def duplicate
       @resource = @resource.dup
       result = Resources::Duplicate.call(resource: @resource)
-      respond_with result, location: resource_path
+      respond_with result, location: show_path
     end
 
     def new
@@ -88,7 +89,7 @@ module Schematics
     def create
       @resource = model_class.new(resource_params_with_defaults)
       result = Resources::Create.call(resource: @resource, draft: @draft)
-      respond_with result, location: resource_path
+      respond_with result, location: show_path
     end
 
     def restore
@@ -98,15 +99,15 @@ module Schematics
 
     def update
       result = Resources::UpdateAndCache.call(resource: @resource, draft: @draft, resource_params:)
-      respond_with result, location: resource_path
+      respond_with result, location: show_path
     end
 
     def trigger
-      event = entity.find_event_by_suffixed_name(params.expect(:event))
+      event = entity.find_event_by_suffixed_name("#{params[:event]}_#{params[:state]}")
       authorize! event.name.to_sym, @resource
       result = Resources::Trigger.call(resource: @resource, event:)
       respond_with result,
-                   location: -> { request.referer || resource_path },
+                   location: -> { request.referer || show_path },
                    action: :show,
                    flash_interpolation_options: { event: event.human.downcase }
     end
@@ -157,12 +158,12 @@ module Schematics
     end
 
     def index_path
-      return main_app.polymorphic_path(model_class) if can?(:index, model_class)
+      return resources_path(model_class) if can?(:index, model_class)
 
       schematics.root_path
     end
 
-    def resource_path = main_app.polymorphic_path(@resource)
+    def show_path = resource_path(@resource)
 
     def flash_interpolation_options = { human_name:, gender: }
   end

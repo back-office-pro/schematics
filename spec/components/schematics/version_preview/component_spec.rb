@@ -17,7 +17,7 @@ RSpec.describe Schematics::VersionPreview::Component, type: :component do
     let(:event) { 'create' }
     let(:object) { nil }
 
-    it { is_expected.to have_link(user.to_s, href: user_path(user)) }
+    it { is_expected.to have_link(user.to_s, href: resource_path(user)) }
     it { is_expected.to have_no_css('.row[role]') }
     it { is_expected.to have_no_css('.row[data-action]') }
     it { is_expected.to have_no_css('.row[data-application-href-param]') }
@@ -27,7 +27,7 @@ RSpec.describe Schematics::VersionPreview::Component, type: :component do
     let(:event) { 'update' }
     let(:object) { user.as_json }
 
-    it { is_expected.to have_link(user.to_s, href: user_path(user)) }
+    it { is_expected.to have_link(user.to_s, href: resource_path(user)) }
     it { is_expected.to have_css('.row[role]') }
     it { is_expected.to have_css('.row[data-action]') }
     it { is_expected.to have_css('.row[data-application-href-param]') }
@@ -39,7 +39,19 @@ RSpec.describe Schematics::VersionPreview::Component, type: :component do
 
     before { user.really_destroy! }
 
-    it { is_expected.to have_no_link(user.to_s, href: user_path(user)) }
+    it { is_expected.to have_no_link(user.to_s, href: resource_path(user)) }
+    it { is_expected.to have_no_css('.row[role]') }
+    it { is_expected.to have_no_css('.row[data-action]') }
+    it { is_expected.to have_no_css('.row[data-application-href-param]') }
+  end
+
+  context 'when version has a archive event' do
+    let(:event) { 'archive' }
+    let(:object) { nil }
+
+    before { user.destroy! }
+
+    it { is_expected.to have_no_link(user.to_s, href: resource_path(user)) }
     it { is_expected.to have_no_css('.row[role]') }
     it { is_expected.to have_no_css('.row[data-action]') }
     it { is_expected.to have_no_css('.row[data-application-href-param]') }

@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::JSONSerializer do
+  include Schematics::ResourcesHelper
+
   subject(:serializer) { described_class.new(user, options) }
 
   include_context 'with user'
@@ -74,7 +76,7 @@ RSpec.describe Schematics::JSONSerializer do
           _metadata: {
             icon: 'users',
             descriptor: 'DOE John',
-            url: Rails.application.routes.url_helpers.polymorphic_path(user),
+            url: resource_path(user),
             sgid: be_a(String)
           }
         }

@@ -4,11 +4,11 @@ require 'rails_helper'
 
 RSpec.describe Permission do
   include Schematics::Specs::Model
-  include Rails.application.routes.url_helpers
+  include Schematics::ResourcesHelper
 
   its(:model_class) { is_expected.to eq(User) }
   its(:webhook_event) { is_expected.to start_with('user.') }
-  its(:webhook_url) { is_expected.to eq(polymorphic_url(User)) }
+  its(:webhook_url) { is_expected.to eq(resources_url(User)) }
 
   describe '.create_entities_permissions!' do
     subject(:create_entities_permissions!) do

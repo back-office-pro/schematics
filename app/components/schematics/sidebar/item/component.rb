@@ -19,7 +19,7 @@ module Schematics
           @counter = model_class_counter
         end
 
-        def path = polymorphic_path(@model_class)
+        def path = resources_path(@model_class)
 
         def css_classes = class_names(
           'nav-link',

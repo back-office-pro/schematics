@@ -1,9 +1,9 @@
-- breadcrumb record.to_s, main_app.polymorphic_path(record)
-- breadcrumb title, new_message_reply_path(record)
+- breadcrumb record.to_s, resource_path(record)
+- breadcrumb title, schematics.new_message_reply_path(record)
 .card.shadow-sm.animate__animated.animate__zoomIn
   .card-header.p-2
     .row.align-items-center
       .col.text-truncate.px-1
         = __card_heading(icon: :reply, title:)
   .card-body.p-3.pt-1
-    = __resource_form(resource: @resource, url: message_replies_path(record), attributes:, cancel_path: record)
+    = __resource_form(resource: @resource, url: schematics.message_replies_path(record), attributes:, cancel_path: resource_path(record))

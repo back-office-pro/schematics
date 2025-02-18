@@ -15,7 +15,7 @@ module Schematics
         end
 
         def path(value)
-          polymorphic_path(@model_class, filter_key => { @attribute.name => value })
+          resources_path(@model_class, filter_key => { @attribute.name => value })
         end
 
         def css_classes(value)
@@ -34,7 +34,7 @@ module Schematics
 
         def render? = request
           .path
-          .start_with?(polymorphic_path(@model_class))
+          .start_with?(resources_path(@model_class))
 
         private
 

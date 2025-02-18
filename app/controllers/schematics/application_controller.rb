@@ -14,6 +14,7 @@ module Schematics
     include Rescuable
     include Themeable
     include Versionable
+    include RouteResolvable
 
     before_action { Rack::MiniProfiler.authorize_request unless Rails.env.test? }
     before_action :set_paper_trail_whodunnit

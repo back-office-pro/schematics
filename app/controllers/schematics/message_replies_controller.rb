@@ -3,6 +3,7 @@
 module Schematics
   class MessageRepliesController < ResourcesController
     include Nestable
+    include ResourcesHelper
 
     skip_authorize_resource
     before_action -> { authorize!(:reply, record) }
@@ -13,6 +14,10 @@ module Schematics
     end
 
     private
+
+    def model_name = 'Message'
+
+    def parent_model_name = model_name
 
     def attributes = entity.rich_text_attributes
 

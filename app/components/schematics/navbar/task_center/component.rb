@@ -7,6 +7,8 @@ module Schematics
         LIMIT = 10
         delegate :icon, to: '::Task.entity'
 
+        def tasks_path = resources_path(::Task)
+
         def display_count
           count >= LIMIT ? "#{LIMIT.pred}+" : count
         end

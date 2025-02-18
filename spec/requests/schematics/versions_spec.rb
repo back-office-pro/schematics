@@ -3,6 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Versions' do
+  include Schematics::Engine.routes.url_helpers
   include_context 'with authenticated user'
   include_context 'with admin role'
 

@@ -17,6 +17,8 @@ module Schematics
           'ms-1': !compact?
         )
 
+        def url = resource_path(resource)
+
         def icon_class
           'fa-fw' if compact?
         end

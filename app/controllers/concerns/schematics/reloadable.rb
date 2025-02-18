@@ -15,7 +15,6 @@ module Schematics
       return unless old_and_changed_model_classes
 
       Rails.cache.delete('old_and_changed_model_classes')
-      Rails.application.reload_routes!
       old_and_changed_model_classes
         .select(&Object.method(:const_defined?))
         .each(&Object.method(:remove_const))

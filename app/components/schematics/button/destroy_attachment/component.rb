@@ -13,6 +13,8 @@ module Schematics
           .entity
           .find_field_by_name(name)
 
+        def url = resource_path(record)
+
         def target = "confirm-dialog-#{record.id}-#{attachment.id}"
 
         def title = t('schematics.application.button.destroy')

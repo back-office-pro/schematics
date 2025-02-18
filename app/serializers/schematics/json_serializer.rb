@@ -2,6 +2,7 @@
 
 module Schematics
   class JSONSerializer
+    include ResourcesHelper
     delegate :class, to: :@resource, prefix: :model, private: true
     delegate :attachable_sgid, to: :@resource, private: true
     delegate :entity, to: :model_class, private: true
@@ -32,7 +33,7 @@ module Schematics
         _metadata: {
           icon: icon.to_s.dasherize,
           descriptor: @resource.to_s,
-          url: Rails.application.routes.url_helpers.polymorphic_path(@resource),
+          url: resource_path(@resource),
           sgid: attachable_sgid
         }
       }

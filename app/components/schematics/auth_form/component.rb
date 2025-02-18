@@ -7,7 +7,7 @@ module Schematics
       delegate :demo?, to: :current_tenant, private: true
       delegate :email, to: '::Subscription', private: true
 
-      def url = sessions_path
+      def url = resources_path(::Session)
 
       def scope = :session
 

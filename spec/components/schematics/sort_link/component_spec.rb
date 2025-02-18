@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Schematics::SortLink::Component, type: :component do
   subject do
-    with_request_url users_path(sort:) do
+    with_request_url resources_path(User, sort:) do
       render_inline described_class.new(field:, model_class:)
     end
   end
@@ -15,28 +15,28 @@ RSpec.describe Schematics::SortLink::Component, type: :component do
   context 'when emails are not ordered' do
     let(:sort) { nil }
 
-    it { is_expected.to have_link('Email', href: users_path(sort: 'email')) }
+    it { is_expected.to have_link('Email', href: resources_path(User, sort: 'email')) }
     it { is_expected.to have_css('i', class: 'fa-envelope text-secondary') }
   end
 
   context 'when emails are not ordered and first names are in descendant order' do
     let(:sort) { '-first_name' }
 
-    it { is_expected.to have_link('Email', href: users_path(sort: '-first_name,email')) }
+    it { is_expected.to have_link('Email', href: resources_path(User, sort: '-first_name,email')) }
     it { is_expected.to have_css('i', class: 'fa-envelope text-secondary') }
   end
 
   context 'when emails are in ascendant order' do
     let(:sort) { 'email' }
 
-    it { is_expected.to have_link('Email', href: users_path(sort: '-email')) }
+    it { is_expected.to have_link('Email', href: resources_path(User, sort: '-email')) }
     it { is_expected.to have_css('i', class: 'fa-sort-down text-danger') }
   end
 
   context 'when emails are in descendant order' do
     let(:sort) { '-email' }
 
-    it { is_expected.to have_link('Email', href: users_path(sort: 'email')) }
+    it { is_expected.to have_link('Email', href: resources_path(User, sort: 'email')) }
     it { is_expected.to have_css('i', class: 'fa-sort-up text-success') }
   end
 end

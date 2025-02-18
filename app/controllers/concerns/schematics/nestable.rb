@@ -24,19 +24,19 @@ module Schematics
       .to_h { [it.class_name, it.model_class] }
       .fetch(parent_model_name)
 
-    def parent_model_name = params[:model_name]
+    def parent_model_name = resolve_model_name_from_route
 
     def record = parent_model_class
       .preload_all
       .with_string_translations
       .load_async
-      .finder(params[:"#{parent_model_class.model_name.element}_id"])
+      .finder(params[:id])
 
     def set_breadcrumb
       return unless can?(:index, parent_model_class)
 
       title = t('titles.schematics.resources.index', human_name_plural: parent_human_name_plural)
-      breadcrumb title, main_app.polymorphic_path(parent_model_class)
+      breadcrumb title, resources_path(parent_model_class)
     end
   end
 end

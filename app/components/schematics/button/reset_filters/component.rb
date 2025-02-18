@@ -4,7 +4,7 @@ module Schematics
   module Button
     module ResetFilters
       class Component < ApplicationComponent
-        DENYLIST = %i[controller action locale page limit model_name].freeze
+        DENYLIST = %i[controller action resource locale page limit].freeze
         option :model_class
 
         def data = {
