@@ -5,6 +5,7 @@ module Schematics
     class Component < ApplicationComponent
       renders_one :body
       option :resource
+      delegate :deleted?, to: :resource, private: true
 
       def data = { turbo_frame: '_top' }
 
@@ -15,6 +16,8 @@ module Schematics
       end
 
       def authorized?
+        return false if deleted?
+
         case resource
         when String
           can?(ability, resource.safe_constantize)

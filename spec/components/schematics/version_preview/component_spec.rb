@@ -44,4 +44,16 @@ RSpec.describe Schematics::VersionPreview::Component, type: :component do
     it { is_expected.to have_no_css('.row[data-action]') }
     it { is_expected.to have_no_css('.row[data-application-href-param]') }
   end
+
+  context 'when version has a archive event' do
+    let(:event) { 'archive' }
+    let(:object) { nil }
+
+    before { user.destroy! }
+
+    it { is_expected.to have_no_link(user.to_s, href: resource_path(user)) }
+    it { is_expected.to have_no_css('.row[role]') }
+    it { is_expected.to have_no_css('.row[data-action]') }
+    it { is_expected.to have_no_css('.row[data-application-href-param]') }
+  end
 end
