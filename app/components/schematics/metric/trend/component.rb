@@ -7,7 +7,7 @@ module Schematics
         MAX_PERCENTAGE = 9999
 
         delegate :trend, :trend_progress, to: :metric, private: true
-        delegate :positive?, :negative?, :zero?, to: :trend, private: true
+        delegate :positive?, :negative?, :nonzero?, to: :trend, private: true
         option :metric
 
         def icon
@@ -26,9 +26,7 @@ module Schematics
           [(trend_progress.infinite? || trend_progress) * 100, MAX_PERCENTAGE].min
         end
 
-        def render?
-          !zero?
-        end
+        alias render? nonzero?
       end
     end
   end
