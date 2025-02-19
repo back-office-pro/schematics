@@ -56,7 +56,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'capistrano-bundler', '2.1.1'
   spec.add_dependency 'capistrano-rails', '1.7.0'
   spec.add_dependency 'capybara', '3.40.0'
-  spec.add_dependency 'chartkick', '5.1.3'
+  spec.add_dependency 'chartkick', '5.1.4'
   spec.add_dependency 'chroma', '0.2.0'
   spec.add_dependency 'countries', '7.1.1'
   spec.add_dependency 'csv', '3.3.2'
