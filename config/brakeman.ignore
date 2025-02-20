@@ -3,37 +3,13 @@
     {
       "warning_type": "Dangerous Eval",
       "warning_code": 13,
-      "fingerprint": "4a910bd026e9c7d3d1bf2489fe2f55862134deec7d24d90197a39da409e2dc90",
+      "fingerprint": "4d6045431693208dde4ee7bdd673640059e9c8f1be0ab41fc769dde449e3d641",
       "check_name": "Evaluation",
       "message": "Dynamic code evaluation",
       "file": "app/models/concerns/schematics/loadable.rb",
-      "line": 75,
+      "line": 27,
       "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
-      "code": "eval(schema.find_entity_by_name(name.to_s.underscore), binding, \"app/models/concerns/schematics/loadable.rb\", 75)",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Schematics::Loadable",
-        "method": "load!"
-      },
-      "user_input": null,
-      "confidence": "Weak",
-      "cwe_id": [
-        913,
-        95
-      ],
-      "note": ""
-    },
-    {
-      "warning_type": "Dangerous Eval",
-      "warning_code": 13,
-      "fingerprint": "9d5cd7f00886cf3aff04944591c3b037b62e41d0a23ecc887b1120d6d85e0136",
-      "check_name": "Evaluation",
-      "message": "Dynamic code evaluation",
-      "file": "app/models/concerns/schematics/loadable.rb",
-      "line": 26,
-      "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
-      "code": "eval(it, binding, \"app/models/concerns/schematics/loadable.rb\", 26)",
+      "code": "eval(it, binding, \"app/models/concerns/schematics/loadable.rb\", 27)",
       "render_path": null,
       "location": {
         "type": "method",
@@ -51,15 +27,19 @@
     {
       "warning_type": "Dangerous Eval",
       "warning_code": 13,
-      "fingerprint": "a802f2d0730f3608afa5d5de5f5a014d6ba85f2f3292773abfc6972838ee5738",
+      "fingerprint": "91d7455d167c55b56626179772538f23f8b3ed2cfbdf92fef6af5042f47760bb",
       "check_name": "Evaluation",
       "message": "Dynamic code evaluation",
-      "file": "config/initializers/routes.rb",
-      "line": 16,
+      "file": "app/models/concerns/schematics/loadable.rb",
+      "line": 76,
       "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
-      "code": "eval(it, binding, \"config/initializers/routes.rb\", 16)",
+      "code": "eval(schema.find_entity_by_name(name.to_s.underscore), binding, \"app/models/concerns/schematics/loadable.rb\", 76)",
       "render_path": null,
-      "location": null,
+      "location": {
+        "type": "method",
+        "class": "Schematics::Loadable",
+        "method": "load!"
+      },
       "user_input": null,
       "confidence": "Weak",
       "cwe_id": [
