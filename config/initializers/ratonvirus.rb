@@ -1,3 +1,4 @@
+# Copyright © 2025 Dev & Software. All rights reserved.
 # frozen_string_literal: true
 
 # TODO: Enable back when Ratonvirus will be compatible with Rails 8

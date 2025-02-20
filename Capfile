@@ -1,3 +1,4 @@
+# Copyright © 2025 Dev & Software. All rights reserved.
 # frozen_string_literal: true
 
 set :deploy_config_path, File.expand_path('config/deploy.rb', __dir__)

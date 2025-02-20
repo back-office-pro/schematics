@@ -1,3 +1,4 @@
+# Copyright © 2025 Dev & Software. All rights reserved.
 # frozen_string_literal: true
 
 threads ENV.fetch('RAILS_MAX_THREADS', 3)

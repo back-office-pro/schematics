@@ -68,6 +68,13 @@ Style/ClassMethodsDefinitions:
   EnforcedStyle: self_class
 Style/CollectionMethods:
   Enabled: true
+Style/Copyright:
+  Enabled: true
+  Notice: '^Copyright .+'
+  AutocorrectNotice: '# Copyright © 2025 Dev & Software. All rights reserved.'
+  Exclude:
+    - bin/importmap
+    - bin/schematics
 Style/DateTime:
   Enabled: true
 Style/ImplicitRuntimeError:

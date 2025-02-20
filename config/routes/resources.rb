@@ -1,3 +1,4 @@
+# Copyright © 2025 Dev & Software. All rights reserved.
 # frozen_string_literal: true
 
 get '/:resource', to: 'schematics/routing#index', as: :resources

@@ -1,3 +1,4 @@
+# Copyright © 2025 Dev & Software. All rights reserved.
 # frozen_string_literal: true
 
 require 'support/simplecov' if RSpec.configuration.files_to_run.size > 200

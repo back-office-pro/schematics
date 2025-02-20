@@ -1,3 +1,4 @@
+# Copyright © 2025 Dev & Software. All rights reserved.
 # frozen_string_literal: true
 
 $LOAD_PATH.push File.expand_path('lib', __dir__)
@@ -7,7 +8,7 @@ require 'schematics/version'
 Gem::Specification.new do |spec|
   spec.name = 'schematics'
   spec.version = Schematics::VERSION
-  spec.author = 'Dev & Software EURL'
+  spec.author = 'Dev & Software'
   spec.email = 'contact@back-office.pro'
   spec.homepage = 'https://www.back-office.pro'
   spec.summary = 'BackOffice app builder.'
