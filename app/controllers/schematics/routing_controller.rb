@@ -5,6 +5,13 @@ module Schematics
   class RoutingController < ApplicationController
     allow_unauthenticated_access
 
+    SINGLETON_CONTROLLERS = %w[
+      subscription
+      abonnement
+      abbonamento
+      configuration
+      configurazione
+    ].freeze
     CORE_CONTROLLERS = {
       ::ActiveStorage::BlobsController => %w[files fichiers],
       ::CommentsController => %w[comments commentaires commenti],
@@ -19,10 +26,18 @@ module Schematics
       ::UsersController => %w[users utilisateurs utenti]
     }.freeze
 
-    %i[index show new create edit update delete destroy archive restore duplicate trigger]
+    %i[show new create edit update delete destroy archive restore duplicate trigger]
       .each do |action|
         define_method(action) { controller_class.dispatch(action, request, response) }
       end
+
+    def index
+      if SINGLETON_CONTROLLERS.include?(params[:resource])
+        controller_class.dispatch(:show, request, response)
+      else
+        controller_class.dispatch(:index, request, response)
+      end
+    end
 
     def controller_class
       CORE_CONTROLLERS
