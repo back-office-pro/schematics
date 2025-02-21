@@ -11,6 +11,7 @@ RSpec.describe Schematics::GeneratePDFJob do
   include_context 'with user'
 
   let(:resource) { user }
+  let(:url_options) { { host: 'localhost', port: 3000 } }
 
   around do |example|
     freeze_time { example.run }
@@ -18,17 +19,17 @@ RSpec.describe Schematics::GeneratePDFJob do
 
   describe '#perform_later' do
     it 'queues the job' do
-      expect { described_class.perform_later(user, resource) }
+      expect { described_class.perform_later(user, url_options, resource) }
         .to have_enqueued_job(described_class)
         .exactly(:once)
-        .with(user, resource)
+        .with(user, url_options, resource)
         .on_queue('default')
         .at(:no_wait)
     end
   end
 
   describe '#perform_now' do
-    subject(:perform_now) { described_class.perform_now(user, resource) }
+    subject(:perform_now) { described_class.perform_now(user, url_options, resource) }
 
     let(:stream) do
       capture_turbo_stream_broadcasts([user, :generate_file_in_background]) { perform_now }

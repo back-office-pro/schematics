@@ -6,8 +6,8 @@ module Schematics
     limits_concurrency key: ->(user, *) { user }
     queue_as :default
 
-    def perform(user, resource)
-      serializer = PDFSerializer.new(resource)
+    def perform(user, url_options, resource)
+      serializer = PDFSerializer.new(resource, url_options)
       Resources::GenerateFile.call(user:, serializer:)
     end
   end
