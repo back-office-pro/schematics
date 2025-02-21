@@ -6,11 +6,17 @@ module OpenAPI
     class Show < Path
       protected
 
-      def path = "#{root_path}/{id}"
+      def path
+        return root_path if singleton?
+
+        "#{root_path}/{id}"
+      end
 
       def http_method = :get
 
-      def parameters = super.push(Components::Parameter.id)
+      def parameters = super.push(
+        (Components::Parameter.id unless singleton?)
+      )
 
       def responses = [
         Components::Response.not_authorized,

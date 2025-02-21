@@ -9,7 +9,11 @@ module OpenAPI
 
       protected
 
-      def path = "#{root_path}/{id}"
+      def path
+        return root_path if singleton?
+
+        "#{root_path}/{id}"
+      end
 
       def operation_id = "#{super}_#{http_method.capitalize}"
 
@@ -17,7 +21,9 @@ module OpenAPI
         .new(entity:)
         .to_h
 
-      def parameters = super.push(Components::Parameter.id)
+      def parameters = super.push(
+        (Components::Parameter.id unless singleton?)
+      )
 
       def responses = [
         Components::Response.new(

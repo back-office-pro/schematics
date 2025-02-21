@@ -9,7 +9,9 @@ module OpenAPI
 
       protected
 
-      def path = File.join(root_path, '{id}', event.state_machine_name, event.name)
+      def path = File.join(
+        [root_path, ('{id}' unless singleton?), event.state_machine_name, event.name].compact
+      )
 
       def http_method = :patch
 
@@ -17,7 +19,9 @@ module OpenAPI
 
       def operation_id = [class_name, event.name.capitalize].join('_')
 
-      def parameters = super.push(Components::Parameter.id)
+      def parameters = super.push(
+        (Components::Parameter.id unless singleton?)
+      )
 
       def responses = [
         Components::Response.new(
