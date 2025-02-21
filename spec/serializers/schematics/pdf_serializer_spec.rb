@@ -4,11 +4,12 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::PDFSerializer do
-  subject(:serializer) { described_class.new(user) }
+  subject(:serializer) { described_class.new(user, url_options) }
 
   include_context 'with user'
 
   let(:template) { PDFTemplate.create!(model: 'User', content: 'Custom template') }
+  let(:url_options) { { host: 'localhost', port: 3000 } }
 
   its(:file) { is_expected.to be_a(Tempfile) }
   its(:filename) { is_expected.to eq('user-doe-john.pdf') }
