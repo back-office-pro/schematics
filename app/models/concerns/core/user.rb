@@ -62,7 +62,7 @@ module Core
     end
 
     def deliver_new_account_mailer = Schematics::UserMailer
-      .new_account(self)
+      .new_account(self, ::Tenant.default_url_options)
       .deliver_later
   end
 end
