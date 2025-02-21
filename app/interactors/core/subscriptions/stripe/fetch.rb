@@ -10,7 +10,7 @@ module Core
         delegate :secret_key, to: 'Schematics::Engine.credentials.stripe', private: true
         delegate :name, to: :product, allow_nil: true, prefix: true, private: true
         delegate :customers, :products, to: 'client.v1', private: true
-        delegate :app_name, to: '::Tenant', private: true
+        delegate :customer_name, to: :context, private: true
         delegate :logger, to: '::Rails', private: true
         delegate :id,
                  :email,
@@ -45,7 +45,7 @@ module Core
         memoize def product = product_id && products.retrieve(product_id)
 
         memoize def customer = customers
-          .search(query: "name:'#{app_name.dasherize}'", expand: ['data.subscriptions'])
+          .search(query: "name:'#{customer_name}'", expand: ['data.subscriptions'])
           .data
           .first
 
