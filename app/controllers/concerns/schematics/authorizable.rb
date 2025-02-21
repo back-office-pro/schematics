@@ -14,7 +14,7 @@ module Schematics
     private
 
     def authorize_resource
-      authorize!(params[:action].to_sym, @resource || model_class)
+      authorize!(action_name.to_sym, @resource || model_class)
     end
   end
 end
