@@ -19,6 +19,8 @@ module Schematics
       def route_params = { resource: human_name.parameterize(separator: '-') }
     end
 
+    def route_params = super.except(:id)
+
     def cache_key = model_name.singular
   end
 end
