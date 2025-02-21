@@ -10,6 +10,7 @@ RSpec.describe Schematics::Tenant do
     let(:subdomain) { '' }
 
     its(:subdomain) { is_expected.to eq('Demo') }
+    its(:default_url_options) { is_expected.to eq(host: 'localhost', port: 3000) }
     it { is_expected.not_to be_demo }
   end
 
@@ -17,6 +18,7 @@ RSpec.describe Schematics::Tenant do
     let(:subdomain) { 'back-office' }
 
     its(:subdomain) { is_expected.to eq('back-office') }
+    its(:default_url_options) { is_expected.to eq(host: 'localhost', port: 3000) }
     it { is_expected.not_to be_demo }
   end
 end
