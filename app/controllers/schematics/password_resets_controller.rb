@@ -19,7 +19,10 @@ module Schematics
     def edit; end
 
     def create
-      result = PasswordResets::Create.call(resource_params)
+      result = PasswordResets::Create.call(
+        **resource_params,
+        url_options: current_tenant.default_url_options
+      )
       respond_with result, location: main_app.login_path
     end
 
