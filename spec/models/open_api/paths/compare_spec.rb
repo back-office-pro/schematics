@@ -6,7 +6,7 @@ require 'rails_helper'
 RSpec.describe OpenAPI::Paths::Compare do
   subject { described_class.new(entity:) }
 
-  let(:schema) { Schematics::Schema.new }
+  let(:schema) { Schematics::Schema.new(name: 'demo') }
   let(:entity) { schema.find_entity_by_name('team') }
   let(:expected_hash) do
     {

@@ -4,8 +4,8 @@
 describe Schematics::Migrator do
   subject(:migration) { described_class.new(new_schema, current_schema) }
 
-  let(:new_schema) { Schematics::Schema.new(data: new_data) }
-  let(:current_schema) { Schematics::Schema.new(data: current_data) }
+  let(:new_schema) { Schematics::Schema.new(name: 'demo', data: new_data) }
+  let(:current_schema) { Schematics::Schema.new(name: 'demo', data: current_data) }
 
   context 'when creating a new entity' do
     let(:current_data) { [] }

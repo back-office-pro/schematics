@@ -4,7 +4,7 @@
 describe Schematics::Associations::HasOneThrough do
   subject(:association) { described_class.new(belongs_to:, through:) }
 
-  let(:schema) { Schematics::Schema.new }
+  let(:schema) { Schematics::Schema.new(name: 'demo') }
   let(:entity) do
     Schematics::Entities::Entity.new(
       schema:,

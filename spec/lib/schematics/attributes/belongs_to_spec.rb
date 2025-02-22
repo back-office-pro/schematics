@@ -4,7 +4,7 @@
 describe Schematics::Attributes::BelongsTo do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:schema) { Schematics::Schema.new }
+  let(:schema) { Schematics::Schema.new(name: 'demo') }
   let(:entity) { Schematics::Entities::Entity.new(schema:, name: 'entity') }
   let(:name) { 'user' }
   let(:options) { { inverse_association_type: 'has_many' } }

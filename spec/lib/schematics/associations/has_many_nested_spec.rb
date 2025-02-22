@@ -27,7 +27,7 @@ describe Schematics::Associations::HasManyNested do
       }
     ]
   end
-  let(:schema) { Schematics::Schema.new(data:) }
+  let(:schema) { Schematics::Schema.new(name: 'demo', data:) }
   let(:entity) { Schematics::Entities::Entity.new(schema:, **data.first) }
   let(:options) { {} }
 
@@ -41,7 +41,7 @@ describe Schematics::Associations::HasManyNested do
 
   its(:type) { is_expected.to eq('has_many') }
   its(:name) { is_expected.to eq('entities') }
-  its(:class_name) { is_expected.to eq('Entity') }
+  its(:class_name) { is_expected.to eq('Demo::Entity') }
   its(:open_api_schema_type) { is_expected.to eq([id: 'string', type: 'string']) }
   its(:open_api_body_type) { is_expected.to eq([id: 'string', type: 'string', _destroy: 'boolean']) } # rubocop:disable Layout/LineLength
   its(:input_name) { is_expected.to eq('entity[entities_attributes]') }
@@ -64,7 +64,7 @@ describe Schematics::Associations::HasManyNested do
       scope :with_entities, -> { includes([:entities]) }
       has_many :entities,
               -> { with_deleted },
-              class_name: 'Entity',
+              class_name: 'Demo::Entity',
               foreign_key: 'schema_id',
               inverse_of: :schema,
               dependent: :nullify
@@ -84,7 +84,7 @@ describe Schematics::Associations::HasManyNested do
         scope :with_entities, -> { includes([:entities]) }
         has_many :entities,
                 -> { with_deleted },
-                class_name: 'Entity',
+                class_name: 'Demo::Entity',
                 foreign_key: 'schema_id',
                 inverse_of: :schema,
                 dependent: :destroy

@@ -5,7 +5,7 @@ describe Schematics::Attributes::ModelField do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
   let(:entity) { Schematics::Entities::Entity.new(schema:, name: 'assembly') }
-  let(:schema) { Schematics::Schema.new }
+  let(:schema) { Schematics::Schema.new(name: 'demo') }
   let(:name) { 'part' }
   let(:options) { { type: 'numerable_fields' } }
 

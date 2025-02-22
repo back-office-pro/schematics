@@ -6,7 +6,7 @@ describe Schematics::Commands::AddAssociation do
 
   include_context 'with custom generated attribute'
 
-  let(:schema) { Schematics::Schema.new }
+  let(:schema) { Schematics::Schema.new(name: 'demo') }
   let(:entity) { Schematics::Entities::Entity.new(schema:, name: 'client') }
   let(:attribute) do
     Schematics::Associations::Association.build(

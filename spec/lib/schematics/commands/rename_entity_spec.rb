@@ -6,7 +6,7 @@ describe Schematics::Commands::RenameEntity do
 
   include_context 'with custom generated attribute'
 
-  let(:schema) { Schematics::Schema.new }
+  let(:schema) { Schematics::Schema.new(name: 'demo') }
   let(:entity) do
     Schematics::Entities::Entity.new(schema:, name: 'prospect', attributes:, associations:)
   end
@@ -131,7 +131,7 @@ describe Schematics::Commands::RenameEntity do
 
     its([8]) do
       is_expected.to have_attributes(
-        name: 'Prospect',
+        name: 'Demo::Prospect',
         options: a_hash_including(rename: 'Client'),
         behavior:
       )

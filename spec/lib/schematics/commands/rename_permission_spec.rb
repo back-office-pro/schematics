@@ -4,7 +4,8 @@
 describe Schematics::Commands::RenamePermission do
   subject(:command) { described_class.new(entity:, attribute:, target:) }
 
-  let(:entity) { Schematics::Entities::Entity.new(name: 'client') }
+  let(:schema) { Schematics::Schema.new(name: 'demo') }
+  let(:entity) { Schematics::Entities::Entity.new(schema:, name: 'client') }
   let(:attribute) { 'create' }
   let(:target) { 'show' }
 
@@ -21,7 +22,7 @@ describe Schematics::Commands::RenamePermission do
 
     its([0]) do
       is_expected.to have_attributes(
-        name: 'Client',
+        name: 'Demo::Client',
         options: a_hash_including(action: target, rename: attribute),
         behavior: :invoke
       )

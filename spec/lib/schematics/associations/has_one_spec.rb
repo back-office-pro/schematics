@@ -26,7 +26,7 @@ describe Schematics::Associations::HasOne do
       }
     ]
   end
-  let(:schema) { Schematics::Schema.new(data:) }
+  let(:schema) { Schematics::Schema.new(name: 'demo', data:) }
   let(:entity) { Schematics::Entities::Entity.new(schema:, **data.first) }
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
@@ -39,7 +39,7 @@ describe Schematics::Associations::HasOne do
 
   its(:type) { is_expected.to eq('has_one') }
   its(:name) { is_expected.to eq('entity') }
-  its(:class_name) { is_expected.to eq('Entity') }
+  its(:class_name) { is_expected.to eq('Demo::Entity') }
   its(:column_name) { is_expected.to eq('schema_id') }
   its(:inverse_of) { is_expected.to eq('schema') }
   its(:open_api_schema_type) { is_expected.to eq(id: 'string', type: 'string') }
@@ -57,7 +57,7 @@ describe Schematics::Associations::HasOne do
       scope :with_entity, -> { includes([:entity]) }
       has_one :entity,
               -> { with_deleted },
-              class_name: 'Entity',
+              class_name: 'Demo::Entity',
               foreign_key: 'schema_id',
               inverse_of: :schema,
               autosave: true

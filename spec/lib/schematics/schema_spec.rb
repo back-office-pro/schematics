@@ -2,8 +2,9 @@
 # frozen_string_literal: true
 
 describe Schematics::Schema do
-  subject(:schema) { described_class.new(data:) }
+  subject(:schema) { described_class.new(name:, data:) }
 
+  let(:name) { 'demo' }
   let(:data) { [] }
 
   it { is_expected.to be_valid }

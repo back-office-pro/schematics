@@ -6,7 +6,7 @@ require 'rails_helper'
 RSpec.describe OpenAPI::Paths::Update do
   subject { described_class.new(entity:, http_method:) }
 
-  let(:schema) { Schematics::Schema.new }
+  let(:schema) { Schematics::Schema.new(name: 'demo') }
   let(:entity) { schema.find_entity_by_name('team') }
   let(:http_method) { :put }
   let(:expected_hash) do

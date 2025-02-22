@@ -6,7 +6,7 @@ require 'rails_helper'
 RSpec.describe OpenAPI::Paths::Trigger do
   subject { described_class.new(entity:, event:) }
 
-  let(:schema) { Schematics::Schema.new }
+  let(:schema) { Schematics::Schema.new(name: 'demo') }
   let(:entity) { schema.find_entity_by_name('subscription') }
   let(:event) { entity.find_event_by_name('cancel') }
   let(:expected_hash) do

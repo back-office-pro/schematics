@@ -4,7 +4,8 @@
 describe Schematics::Commands::AddPermission do
   subject(:command) { described_class.new(entity:, attribute:) }
 
-  let(:entity) { Schematics::Entities::Entity.new(name: 'client') }
+  let(:schema) { Schematics::Schema.new(name: 'demo') }
+  let(:entity) { Schematics::Entities::Entity.new(schema:, name: 'client') }
   let(:attribute) { 'create' }
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
@@ -20,7 +21,7 @@ describe Schematics::Commands::AddPermission do
 
     its([0]) do
       is_expected.to have_attributes(
-        name: 'Client',
+        name: 'Demo::Client',
         options: a_hash_including(action: attribute),
         behavior: :invoke
       )

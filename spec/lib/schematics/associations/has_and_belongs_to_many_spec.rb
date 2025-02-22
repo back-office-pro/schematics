@@ -11,7 +11,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
     )
   end
 
-  let(:schema) { Schematics::Schema.new }
+  let(:schema) { Schematics::Schema.new(name: 'demo') }
   let(:entity) do
     Schematics::Entities::Entity.new(
       schema:,
@@ -43,7 +43,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
   its(:type) { is_expected.to eq('has_and_belongs_to_many') }
   its(:name) { is_expected.to eq('permissions') }
   its(:column_name) { is_expected.to eq('permission_ids') }
-  its(:class_name) { is_expected.to eq('Permission') }
+  its(:class_name) { is_expected.to eq('Demo::Permission') }
   its(:open_api_schema_type) { is_expected.to eq([id: 'string', name: 'string']) }
   its(:open_api_body_type) { is_expected.to eq(['string']) }
   its(:permitted_params) { is_expected.to eq(permission_ids: []) }
@@ -72,7 +72,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
     is_expected.to eq <<~RUBY
       scope :with_permissions, -> { includes([:permissions]) }
       has_and_belongs_to_many :permissions,
-                              class_name: 'Permission',
+                              class_name: 'Demo::Permission',
                               join_table: 'permissions_roles',
                               foreign_key: 'role_id',
                               association_foreign_key: 'permission_id'

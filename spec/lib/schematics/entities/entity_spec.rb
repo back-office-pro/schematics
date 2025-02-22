@@ -4,7 +4,7 @@
 describe Schematics::Entities::Entity do
   subject(:entity) { described_class.new(schema:, name:, attributes:, options:) }
 
-  let(:schema) { Schematics::Schema.new }
+  let(:schema) { Schematics::Schema.new(name: 'demo') }
   let(:name) { 'discussion' }
   let(:options) { { core: true, existing: true } }
   let(:attributes) do
@@ -32,7 +32,7 @@ describe Schematics::Entities::Entity do
 
   its(:icon) { is_expected.to eq(:circle_nodes) }
   its(:actions) { is_expected.to eq(%i[index show create update destroy archive]) }
-  its(:class_name) { is_expected.to eq('Discussion') }
+  its(:class_name) { is_expected.to eq('Demo::Discussion') }
   its(:model_class) { is_expected.to be_nil }
   its(:weight) { is_expected.to eq(0) }
   its(:joins) { is_expected.to be_empty }
@@ -54,7 +54,7 @@ describe Schematics::Entities::Entity do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      class ::Discussion < Schematics::ApplicationRecord; end
+      class ::Demo::Discussion < Schematics::ApplicationRecord; end
     RUBY
   end
 

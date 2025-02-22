@@ -4,7 +4,7 @@
 describe Schematics::Attributes::User do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:schema) { Schematics::Schema.new }
+  let(:schema) { Schematics::Schema.new(name: 'demo') }
   let(:entity) do
     Schematics::Entities::Entity.new(
       schema:,
