@@ -17,7 +17,7 @@ RSpec.describe Schematics::TeamAbility do
       end
     end
   end
-  let(:schema) { Schematics::Schema.new }
+  let(:schema) { Schematics::Schema.new(name: 'demo') }
   let(:first_team) { Team.create!(name: 'My Team 1') }
   let(:second_team) { Team.create!(name: 'My Team 2') }
   let(:other_user) do
