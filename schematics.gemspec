@@ -42,7 +42,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'active_storage_validations', '2.0.2'
   spec.add_dependency 'after_commit_everywhere', '1.6.0'
   spec.add_dependency 'aws-sdk-s3', '1.182.0'
-  spec.add_dependency 'azure-blob', '0.5.6'
+  spec.add_dependency 'azure-blob', '0.5.7'
   spec.add_dependency 'based_uuid', '0.6.4'
   spec.add_dependency 'bcrypt', '3.1.20'
   spec.add_dependency 'bootsnap', '1.18.4'
