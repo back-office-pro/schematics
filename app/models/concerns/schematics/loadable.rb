@@ -29,7 +29,9 @@ module Schematics
         end
       end
 
-      def schema = ::SchemaCache
+      def schema
+        ::SchemaCache.fetch('current')
+      end
 
       def entity
         schema.find_entity_by_name(name.underscore)
