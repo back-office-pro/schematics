@@ -9,20 +9,20 @@ module Schematics
       include ::ActiveModel::Attributes
 
       attribute :permissions, default: -> { [] }
-      attribute :time_zone, default: -> { ::Configuration.time_zone_with_fallback }
-      attribute :locale, default: -> { ::Configuration.locale }
+      attribute :time_zone, default: -> { 'UTC' }
+      attribute :locale, default: -> { :en }
 
       delegate :admin?, to: :role
 
       def id = nil
 
-      def teams = ::Team.none
+      def teams = ::Demo::Team.none
 
       def preferences = {}
 
       def preferences_theme = nil
 
-      def role = ::Role.new(permissions:)
+      def role = ::Demo::Role.new(permissions:)
 
       def otp_enabled? = false
 

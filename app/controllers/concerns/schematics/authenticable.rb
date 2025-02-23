@@ -21,7 +21,7 @@ module Schematics
 
     def access_token = http_token || cookies.permanent.encrypted[:access_token]
 
-    def http_token = authenticate_with_http_token(&Session.method(:decode_access_token))
+    def http_token = authenticate_with_http_token(&current_module::Session.method(:decode_access_token))
 
     def api_key = request.headers['x-api-key']
 
@@ -47,8 +47,8 @@ module Schematics
     end
 
     def current_session
-      ::Session.authorized_by(access_token, session[:current_session_id]).first ||
-        ::APIKey.with_permissions.active.find_by(access_token: api_key) ||
+      current_module::Session.authorized_by(access_token, session[:current_session_id]).first ||
+        current_module::APIKey.with_permissions.active.find_by(access_token: api_key) ||
         Guest::Session.new(request:)
     end
 

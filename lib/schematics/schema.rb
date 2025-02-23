@@ -6,13 +6,13 @@ require 'singleton'
 
 module Schematics
   # :reek:InstanceVariableAssumption
-  class Schema
+  class Schema # rubocop:disable Metrics/ClassLength
     include ::ActiveModel::API
     include ::ActiveModel::NestedAttributes
 
     accepts_nested_attributes_for :entities
     validates_associated :entities
-    attr_reader :entities, :version
+    attr_reader :name, :entities, :version
 
     class << self
       def load(data)
@@ -24,10 +24,11 @@ module Schematics
       end
     end
 
-    def initialize(data: [], version: VERSION)
+    def initialize(name:, data: [], version: VERSION)
       data = ::JSON.parse(data) if data in ::String
       @data = data.map(&:deep_symbolize_keys)
       @version = version
+      @name = name
       self.entities = core_data.concat(@data)
     end
 
@@ -52,6 +53,10 @@ module Schematics
     def model_classes = entities
       .reject(&:core?)
       .filter_map(&:model_class)
+
+    def module_name
+      @name.camelize
+    end
 
     private
 

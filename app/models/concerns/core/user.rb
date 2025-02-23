@@ -10,8 +10,8 @@ module Core
     ONE_TIME_PASSWORD_DURATION = 10.minutes.freeze
 
     prepended do
-      attribute :time_zone, default: -> { ::Configuration.time_zone_with_fallback }
-      attribute :locale, default: -> { ::Configuration.locale }
+      attribute :time_zone, default: -> { 'UTC' }
+      attribute :locale, default: -> { :en }
 
       store_accessor :preferences,
                      :sidebar_toggled,

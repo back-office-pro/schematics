@@ -6,9 +6,9 @@ class SchemaCache
     def fetch(name)
       Rails
         .cache
-        .fetch("schema:#{name}") { Schematics::Schema.new(data:, version:) }
+        .fetch("schema:#{name}") { Schematics::Schema.new(name:, data:, version:) }
     rescue StandardError
-      Schematics::Schema.new(data:, version:)
+      Schematics::Schema.new(name:, data:, version:)
     end
 
     private

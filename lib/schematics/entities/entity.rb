@@ -190,7 +190,7 @@ module Schematics
       end
 
       def class_name
-        name.camelize
+        "#{schema.module_name}::#{name.camelize}"
       end
 
       def model_class

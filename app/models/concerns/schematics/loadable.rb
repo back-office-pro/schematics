@@ -22,7 +22,7 @@ module Schematics
         super
         subclass.class_eval do
           superclass.concerns&.each(&method(:include))
-          prepend Core.const_get(name) if Object.const_defined?("Core::#{name}")
+          prepend Core.const_get(name.demodulize) if Object.const_defined?("Core::#{name.demodulize}")
           entity&.model_elements&.each do
             eval it, binding, __FILE__, __LINE__ # rubocop:disable Security/Eval
           end
@@ -30,11 +30,11 @@ module Schematics
       end
 
       def schema
-        ::SchemaCache.fetch('current')
+        ::SchemaCache.fetch(name.deconstantize.underscore)
       end
 
       def entity
-        schema.find_entity_by_name(name.underscore)
+        schema.find_entity_by_name(name.demodulize.underscore)
       end
 
       def filter_attributes = entity

@@ -26,7 +26,7 @@ module Schematics
     stale_when_importmap_changes
 
     def paper_trail_enabled_for_controller
-      current_user in ::User
+      current_user.is_a?(current_module::User)
     end
 
     protected

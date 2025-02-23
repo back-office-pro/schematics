@@ -9,13 +9,14 @@ module Core
       delegate :migration, to: :context, private: true
       delegate :migrator_old_and_changed_entities,
                :migrator_changed_entities,
+               :migrator_new_schema,
                to: :migration,
                private: true
 
       progressable migration: 70
 
       def call
-        Rails.cache.delete('schema:current')
+        Rails.cache.delete("schema:#{migrator_new_schema.name}")
         Rails.cache.write('old_and_changed_model_classes', old_and_changed_model_classes)
         old_and_changed_model_classes
           .select(&Object.method(:const_defined?))
