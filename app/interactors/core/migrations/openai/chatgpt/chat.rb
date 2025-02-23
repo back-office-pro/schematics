@@ -32,7 +32,7 @@ module Core
           memoize def responses = client.chat(parameters:)
 
           def parameters = {
-            model: 'gpt-4o-2024-08-06',
+            model: 'gpt-4o-2024-11-20',
             temperature: 1,
             frequency_penalty: 0,
             presence_penalty: 0,
