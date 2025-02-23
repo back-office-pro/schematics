@@ -101,9 +101,11 @@ $defs:
       - aspect_ratio
     properties:
       aspect_ratio:
-        type: string
-        description: Aspect ratio of the image
-        enum: <%= Schematics::Options::AspectRatio.collection.map(&:second) %>
+        type: array
+        description: The aspect ratios of the image
+        items:
+          type: string
+          enum: <%= Schematics::Options::AspectRatio.collection.map(&:second) %>
   auto_increment:
     type: object
     additionalProperties: false
@@ -138,9 +140,11 @@ $defs:
       - content_type
     properties:
       content_type:
-        type: string
-        description: The content type of the attachment
-        enum: <%= Schematics::Options::ContentType.collection %>
+        type: array
+        description: The content types of the attachment
+        items:
+          type: string
+          enum: <%= Schematics::Options::ContentType.collection %>
   equal_to:
     type: object
     additionalProperties: false
@@ -342,16 +346,18 @@ $defs:
       scale:
         type: number
         description: The number of digits following the decimal point in the number
-  scheme:
+  schemes:
     type: object
     additionalProperties: false
     required:
-      - scheme
+      - schemes
     properties:
-      scheme:
-        type: string
-        description: The URL scheme
-        enum: <%= Schematics::Options::Scheme.collection %>
+      schemes:
+        type: array
+        description: The URL schemes
+        items:
+          type: string
+          enum: <%= Schematics::Options::Schemes.collection %>
   separator:
     type: object
     additionalProperties: false
@@ -1395,7 +1401,7 @@ $defs:
           - $ref: '#/$defs/min'
           - $ref: '#/$defs/limit'
           - $ref: '#/$defs/length'
-          - $ref: '#/$defs/scheme'
+          - $ref: '#/$defs/schemes'
         additionalProperties: false
   user:
     type: object
