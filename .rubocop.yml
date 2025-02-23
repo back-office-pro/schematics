@@ -3,10 +3,10 @@ plugins:
   - rubocop-rails
   - rubocop-rake
   - rubocop-rspec
+  - rubocop-thread_safety
 require:
   - rubocop-capybara
   - rubocop-obsession
-  - rubocop-thread_safety
 AllCops:
   NewCops: enable
   DisplayStyleGuide: true
@@ -225,4 +225,4 @@ Obsession/Rails/MigrationBelongsTo:
   Enabled: false
 # rubocop-thread_safety
 ThreadSafety/DirChdir:
-  Enabled: false
+  AllowCallWithBlock: true
