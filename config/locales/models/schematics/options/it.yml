@@ -58,7 +58,7 @@ it:
         readonly: Sola lettura
         required: Obbligatorio
         scale: Scala
-        scheme: Protocollo
+        schemes: Protocolli
         separator: Separatore
         size: Dimensione
         start_date: Data di inizio

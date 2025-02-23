@@ -11,7 +11,7 @@ module Schematics
 
       def available_options = super
         .excluding(Options::CaseInsensitive)
-        .push(Options::Scheme)
+        .push(Options::Schemes)
 
       def case_insensitive? = true
 

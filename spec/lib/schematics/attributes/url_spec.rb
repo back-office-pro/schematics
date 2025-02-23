@@ -54,7 +54,7 @@ describe Schematics::Attributes::Url do
       Schematics::Options::Min,
       Schematics::Options::Limit,
       Schematics::Options::Length,
-      Schematics::Options::Scheme
+      Schematics::Options::Schemes
     )
   end
 

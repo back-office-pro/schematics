@@ -3,7 +3,7 @@
 
 module Schematics
   module Options
-    class Scheme < Option
+    class Schemes < Option
       class << self
         def input_type = :select
 

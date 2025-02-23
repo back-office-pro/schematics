@@ -59,7 +59,7 @@ fr:
         readonly: Lecture seule
         required: Requis
         scale: Echelle
-        scheme: Protocole
+        schemes: Protocoles
         separator: Séparateur
         size: Taille
         start_date: Date de début
