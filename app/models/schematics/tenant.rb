@@ -9,11 +9,11 @@ module Schematics
     attr_writer :subdomain
 
     def subdomain
-      @subdomain.presence || Rails.application.class.module_parent_name.dasherize
+      @subdomain.presence || Rails.application.class.module_parent_name.underscore.dasherize
     end
 
     def demo?
-      subdomain == 'Demo' && !Rails.env.test?
+      subdomain == 'demo' && !Rails.env.test?
     end
 
     def default_url_options = { host:, port: }.compact
