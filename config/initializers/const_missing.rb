@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 def Demo.const_missing(name)
-  schema = ::SchemaCache.cache('demo')
+  schema = ::SchemaCache.fetch('demo')
   entity = schema.find_entity_by_name(name.to_s.underscore)
   return unless entity
 
