@@ -3,10 +3,10 @@
 
 module Schematics
   class DataCleaningAbility < ApplicationAbility
-    def initialize
+    def initialize(mod)
       super
-      cannot :duplicate, ::DataCleaning
-      cannot %i[update destroy], ::DataCleaning.internal
+      cannot :duplicate, mod::DataCleaning
+      cannot %i[update destroy], mod::DataCleaning.internal
     end
   end
 end

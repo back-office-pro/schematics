@@ -5,7 +5,7 @@ module Schematics
   module SchemaEditor
     module Entity
       class Component < ApplicationComponent
-        delegate :icon, to: '::Migration.entity'
+        delegate :icon, to: 'current_module::Migration.entity'
         delegate :index, to: :builder
         option :builder
 

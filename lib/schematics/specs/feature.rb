@@ -11,7 +11,7 @@ module Schematics
       included do
         include ResourcesHelper
         delegate :t, to: '::I18n'
-        delegate :available_locales, to: '::Configuration'
+        delegate :available_locales, to: 'current_module::Configuration'
         delegate :entity,
                  :model_class,
                  :human_name,

@@ -14,7 +14,7 @@ module Schematics
 
       def groups = current_schema
         .model_classes
-        .push(::Import, ::ActiveStorage::Blob, ::Emailing)
+        .push(current_module::Import, ::ActiveStorage::Blob, current_module::Emailing)
         .select { can?(:index, it) }
         .sort_by(&:human_name)
         .map

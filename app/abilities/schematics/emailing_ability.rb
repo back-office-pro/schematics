@@ -3,10 +3,10 @@
 
 module Schematics
   class EmailingAbility < ApplicationAbility
-    def initialize
+    def initialize(mod)
       super
       can :email, :all
-      cannot :email, ::Emailing
+      cannot :email, mod::Emailing
     end
   end
 end

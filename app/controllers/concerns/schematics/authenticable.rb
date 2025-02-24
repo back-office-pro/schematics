@@ -40,8 +40,8 @@ module Schematics
 
     def current_ability
       @current_ability ||= begin
-        ability = Ability.new(current_user, current_schema)
-        ability.merge(DemoAbility.new) if current_tenant.demo?
+        ability = Ability.new(current_user, current_module, current_schema)
+        ability.merge(DemoAbility.new(current_module)) if current_tenant.demo?
         ability
       end
     end

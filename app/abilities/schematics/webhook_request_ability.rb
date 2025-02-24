@@ -3,11 +3,11 @@
 
 module Schematics
   class WebhookRequestAbility < ApplicationAbility
-    def initialize(user)
+    def initialize(user, mod)
       super
       return unless user.admin?
 
-      can %i[read retry], ::WebhookRequest
+      can %i[read retry], mod::WebhookRequest
     end
   end
 end

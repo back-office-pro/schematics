@@ -75,7 +75,7 @@ module Schematics
 
       def association_to_str = <<~RUBY
         has_and_belongs_to_many :#{name},
-                                class_name: '#{class_name}',
+                                class_name: '#{class_name.demodulize}',
                                 join_table: '#{join_table}',
                                 foreign_key: '#{entity.table_name}_id',
                                 association_foreign_key: '#{inverse_entity.table_name}_id'

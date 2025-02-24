@@ -3,17 +3,17 @@
 
 module Schematics
   class MigrationAbility < ApplicationAbility
-    def initialize
+    def initialize(mod)
       super
-      cannot %i[import duplicate], ::Migration
-      cannot :update, ::Migration.state_finished
-      cannot %i[archive update], ::Migration.state_pending
-      cannot %i[archive update], ::Migration.state_in_progress
-      cannot %i[archive update], ::Migration.state_rollbacking
-      cannot %i[archive update], ::Migration.state_generating
-      cannot :create, ::Migration if ::Migration.any? && !::Migration.last.state_finished?
-      cannot :archive, ::Migration.current if ::Migration.current
-      cannot %i[update migrate rollback schedule unschedule], ::Migration.excluding(::Migration.last) # rubocop:disable Layout/LineLength
+      cannot %i[import duplicate], mod::Migration
+      cannot :update, mod::Migration.state_finished
+      cannot %i[archive update], mod::Migration.state_pending
+      cannot %i[archive update], mod::Migration.state_in_progress
+      cannot %i[archive update], mod::Migration.state_rollbacking
+      cannot %i[archive update], mod::Migration.state_generating
+      cannot :create, mod::Migration if mod::Migration.any? && !mod::Migration.last.state_finished?
+      cannot :archive, mod::Migration.current if mod::Migration.current
+      cannot %i[update migrate rollback schedule unschedule], mod::Migration.excluding(mod::Migration.last) # rubocop:disable Layout/LineLength
     end
   end
 end

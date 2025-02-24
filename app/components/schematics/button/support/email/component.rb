@@ -7,8 +7,8 @@ module Schematics
       module Email
         class Component < Support::Component
           delegate :support_email, to: '::Server', private: true
-          delegate :email_support?, to: '::Subscription', private: true
-          delegate :icon, to: '::Message.entity'
+          delegate :email_support?, to: 'current_module::Subscription', private: true
+          delegate :icon, to: 'current_module::Message.entity'
 
           alias render? email_support?
         end

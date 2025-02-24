@@ -6,9 +6,9 @@ module Schematics
     module MeetingCenter
       class Component < ApplicationComponent
         LIMIT = 10
-        delegate :icon, to: '::Meeting.entity'
+        delegate :icon, to: 'current_module::Meeting.entity'
 
-        def meetings_path = resources_path(::Meeting)
+        def meetings_path = resources_path(current_module::Meeting)
 
         def display_count
           count >= LIMIT ? "#{LIMIT.pred}+" : count

@@ -18,7 +18,7 @@ module Schematics
 
       private
 
-      def company_logo = ::Configuration
+      def company_logo = current_module::Configuration
         .with_attached_company_logo
         .company_logo
     end

@@ -3,9 +3,9 @@
 
 module Schematics
   class ComparisonAbility < ApplicationAbility
-    def initialize
+    def initialize(mod)
       super
-      can %i[create show], ::Comparison
+      can %i[create show], mod::Comparison
     end
   end
 end

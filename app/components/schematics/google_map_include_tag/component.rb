@@ -4,7 +4,7 @@
 module Schematics
   module GoogleMapIncludeTag
     class Component < ApplicationComponent
-      delegate :gcloud_api_key_with_fallback, to: '::Configuration', private: true
+      delegate :gcloud_api_key_with_fallback, to: 'current_module::Configuration', private: true
 
       def url = ::URI::HTTPS
         .build(host:, path:, query:)

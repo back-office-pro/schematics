@@ -5,7 +5,7 @@ module Schematics
   module Button
     module Draft
       class Component < ApplicationComponent
-        delegate :icon, to: '::Draft.entity'
+        delegate :icon, to: 'current_module::Draft.entity'
 
         def title = t('.text')
       end

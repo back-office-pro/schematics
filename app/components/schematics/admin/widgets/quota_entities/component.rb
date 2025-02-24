@@ -6,7 +6,7 @@ module Schematics
     module Widgets
       module QuotaEntities
         class Component < ApplicationComponent
-          delegate :quota_entities, to: '::Subscription'
+          delegate :quota_entities, to: 'current_module::Subscription'
 
           def icon = :bezier_curve
 

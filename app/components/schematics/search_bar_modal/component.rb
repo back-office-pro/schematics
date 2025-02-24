@@ -6,9 +6,9 @@ module Schematics
     class Component < ApplicationComponent
       delegate :history, to: 'current_user.searches'
 
-      def url = resources_path(::Search)
+      def url = resources_path(current_module::Search)
 
-      def model = ::Search.new
+      def model = current_module::Search.new
 
       def action = %w[
         keyup->search-bar#search
@@ -20,7 +20,7 @@ module Schematics
       ].join(' ')
 
       def render?
-        can?(:create, ::Search)
+        can?(:create, current_module::Search)
       end
     end
   end

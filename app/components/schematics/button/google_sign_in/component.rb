@@ -5,7 +5,7 @@ module Schematics
   module Button
     module GoogleSignIn
       class Component < ApplicationComponent
-        delegate :google_sign_in_feature_flag, to: '::Configuration', private: true
+        delegate :google_sign_in_feature_flag, to: 'current_module::Configuration', private: true
 
         def css_classes = %w[btn btn-primary btn-sm btn-icon-split ms-1]
 

@@ -3,11 +3,11 @@
 
 module Schematics
   class ConfigurationAbility < ApplicationAbility
-    def initialize(user)
+    def initialize(user, mod)
       super
       return unless user.admin?
 
-      can %i[show update], ::Configuration
+      can %i[show update], mod::Configuration
     end
   end
 end

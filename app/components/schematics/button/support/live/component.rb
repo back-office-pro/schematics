@@ -6,8 +6,8 @@ module Schematics
     module Support
       module Live
         class Component < Support::Component
-          delegate :live_support?, to: '::Subscription', private: true
-          delegate :icon, to: '::Meeting.entity'
+          delegate :live_support?, to: 'current_module::Subscription', private: true
+          delegate :icon, to: 'current_module::Meeting.entity'
 
           def data = { controller: 'support', action: 'click->support#open' }
 

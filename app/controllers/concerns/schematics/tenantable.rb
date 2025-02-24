@@ -8,6 +8,7 @@ module Schematics
     included do
       helper_method :current_tenant
       helper_method :current_schema
+      helper_method :current_module
       prepend_before_action :foo
     end
 

@@ -25,12 +25,12 @@ module Schematics
       DataCleaning
     ].freeze
 
-    def initialize(ability)
+    def initialize(ability, mod)
       super
       return if MODEL_CLASSES.all? { ability.cannot?(:index, it.constantize) } &&
-                ability.cannot?(:cancel, ::Subscription) &&
-                ability.cannot?(:update, ::Configuration) &&
-                ability.cannot?(:show, ::Chart.api)
+                ability.cannot?(:cancel, mod::Subscription) &&
+                ability.cannot?(:update, mod::Configuration) &&
+                ability.cannot?(:show, mod::Chart.api)
 
       can :index, :admin
     end

@@ -6,7 +6,7 @@ module Schematics
     module Widgets
       module Subscription
         class Component < ApplicationComponent
-          delegate :icon, to: '::Subscription.entity'
+          delegate :icon, to: 'current_module::Subscription.entity'
           delegate :state_inactive?, to: :resource
 
           memoize def resource = ::Subscription.instance

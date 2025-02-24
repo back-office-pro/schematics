@@ -20,7 +20,7 @@ module Schematics
         .to_json
         .html_safe
 
-      def maps_api_key = ::Configuration
+      def maps_api_key = current_module::Configuration
         .gcloud_api_key_with_fallback
         .to_json
         .html_safe # rubocop:disable Rails/OutputSafety
@@ -40,13 +40,13 @@ module Schematics
       def routes = {
         autocompletions: t('routes.autocompletions'),
         bulkActions: t('routes.bulk_actions'),
-        comparisons: ::Comparison.human_name_plural,
-        draft: resource_path(::Draft.new(id: ':id')),
+        comparisons: current_module::Comparison.human_name_plural,
+        draft: resource_path(current_module::Draft.new(id: ':id')),
         emojis: emojis_path,
         preferences: preferences_path,
-        searches: autocomplete_resource_path(::Search),
+        searches: autocomplete_resource_path(current_module::Search),
         userNotifications: user_notifications_path,
-        users: resources_path(::User)
+        users: resources_path(current_module::User)
       }.to_json.html_safe
     end
   end

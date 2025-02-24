@@ -6,7 +6,7 @@ module Schematics
     module Import
       class Component < ApplicationComponent
         delegate :human_name_plural, to: :model_class
-        delegate :icon, to: '::Import.entity'
+        delegate :icon, to: 'current_module::Import.entity'
         option :model_class
 
         def data = {

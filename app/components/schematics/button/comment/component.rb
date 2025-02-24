@@ -6,8 +6,8 @@ module Schematics
     module Comment
       class Component < ApplicationComponent
         LIMIT = 10
-        delegate :comments_feature_flag, to: '::Configuration', private: true
-        delegate :icon, to: '::Comment.entity'
+        delegate :comments_feature_flag, to: 'current_module::Configuration', private: true
+        delegate :icon, to: 'current_module::Comment.entity'
         option :resource
 
         def display_count

@@ -4,7 +4,7 @@
 def Demo.const_missing(name)
   schema = ::SchemaCache.fetch('demo')
   entity = schema.find_entity_by_name(name.to_s.underscore)
-  return unless entity
+  return Object.const_missing(name) unless entity
 
   unless const_defined?(name)
     Rails.logger.info "Loading #{name}..."

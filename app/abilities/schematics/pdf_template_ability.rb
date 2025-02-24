@@ -3,9 +3,9 @@
 
 module Schematics
   class PDFTemplateAbility < ApplicationAbility
-    def initialize
+    def initialize(mod)
       super
-      cannot :duplicate, ::PDFTemplate
+      cannot :duplicate, mod::PDFTemplate
     end
   end
 end

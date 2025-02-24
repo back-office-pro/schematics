@@ -3,15 +3,15 @@
 
 module Schematics
   class UserAbility < ApplicationAbility
-    def initialize(user)
+    def initialize(user, mod)
       super
       cannot %i[destroy archive], user
       can :update, user
       cannot :update, user, %i[role role_id teams team_ids]
       return unless user.admin?
 
-      can :impersonate, ::User
-      cannot :impersonate, ::User, role: ::Role.admin
+      can :impersonate, mod::User
+      cannot :impersonate, mod::User, role: mod::Role.admin
     end
   end
 end

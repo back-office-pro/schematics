@@ -3,16 +3,16 @@
 
 module Schematics
   class SessionAbility < ApplicationAbility
-    def initialize(user)
+    def initialize(user, mod)
       super
       case user
       when Guest::User
-        can :create, ::Session
+        can :create, mod::Session
       when proc(&:admin?)
-        can %i[create read destroy], ::Session
-        cannot :new, ::Session
+        can %i[create read destroy], mod::Session
+        cannot :new, mod::Session
       end
-      cannot %i[duplicate import], ::Session
+      cannot %i[duplicate import], mod::Session
     end
   end
 end

@@ -17,6 +17,7 @@ module Schematics
                 :current_ability,
                 :current_schema,
                 :current_tenant,
+                :current_module,
                 :can?,
                 :cannot?,
                 :content_security_policy_nonce,

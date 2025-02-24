@@ -6,7 +6,7 @@ module Schematics
     module RestoreDraft
       class Component < ApplicationComponent
         delegate :updated_at, to: :draft
-        delegate :icon, to: '::Draft.entity'
+        delegate :icon, to: 'current_module::Draft.entity'
         option :draft
 
         def title = t('.text')

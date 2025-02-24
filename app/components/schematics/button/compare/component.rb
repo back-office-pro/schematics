@@ -5,7 +5,7 @@ module Schematics
   module Button
     module Compare
       class Component < ApplicationComponent
-        delegate :icon, to: '::Comparison.entity'
+        delegate :icon, to: 'current_module::Comparison.entity'
         option :model_class
 
         def title = t('.text')

@@ -7,7 +7,7 @@ module Schematics
       class Component < ApplicationComponent
         delegate :sso_service_url,
                  :sso_cert_fingerprint,
-                 to: '::Configuration',
+                 to: 'current_module::Configuration',
                  private: true
 
         def css_classes = %w[btn btn-primary btn-sm btn-icon-split]

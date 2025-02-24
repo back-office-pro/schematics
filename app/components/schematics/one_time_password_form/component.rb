@@ -5,7 +5,7 @@ module Schematics
   module OneTimePasswordForm
     class Component < ApplicationComponent
       delegate :root_path, :one_time_passwords_path, to: 'Schematics::Engine.routes.url_helpers'
-      delegate :company_name, to: '::Configuration', private: true
+      delegate :company_name, to: 'current_module::Configuration', private: true
 
       alias model current_user
 

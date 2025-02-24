@@ -15,7 +15,7 @@ module Schematics
         }
 
         def render?
-          can?(:create, ::Search)
+          can?(:create, current_module::Search)
         end
       end
     end

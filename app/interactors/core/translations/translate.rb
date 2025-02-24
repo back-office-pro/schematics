@@ -6,7 +6,7 @@ module Core
     class Translate
       include Interactor
 
-      delegate :gcloud_api_key_with_fallback, to: '::Configuration', private: true
+      delegate :gcloud_api_key_with_fallback, to: 'current_module::Configuration', private: true
       delegate :translate, to: '::EasyTranslate', private: true
       delegate :text, :locale, to: :context, private: true
       delegate :t, to: '::I18n', private: true

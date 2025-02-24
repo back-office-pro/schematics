@@ -4,7 +4,7 @@
 module Schematics
   module EmailFooter
     class Component < ApplicationComponent
-      delegate :company_website, :company_address, to: '::Configuration'
+      delegate :company_website, :company_address, to: 'current_module::Configuration'
     end
   end
 end

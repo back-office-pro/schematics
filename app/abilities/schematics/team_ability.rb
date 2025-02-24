@@ -3,12 +3,12 @@
 
 module Schematics
   class TeamAbility < ApplicationAbility
-    def initialize(user, schema)
+    def initialize(user, mod, schema)
       super
       schema
         .entities
         .flat_map(&:has_and_belongs_to_many_associations)
-        .select { it.model_class == ::Team }
+        .select { it.model_class == mod::Team }
         .map(&:entity)
         .filter_map(&:model_class)
         .each do |model_class|

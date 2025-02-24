@@ -4,8 +4,8 @@
 module Schematics
   module Footer
     class Component < ApplicationComponent
-      delegate :entity, to: '::Migration'
-      delegate :company_name, to: '::Configuration'
+      delegate :entity, to: 'current_module::Migration'
+      delegate :company_name, to: 'current_module::Configuration'
       delegate :year, to: '::Time.current'
       delegate :icon, to: :entity
 

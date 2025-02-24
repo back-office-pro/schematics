@@ -25,7 +25,7 @@ module Schematics
 
         delegate :entity, :human_name_plural, to: :model_class, allow_nil: true, private: true
         delegate :core?, to: :entity, allow_nil: true, private: true
-        delegate :icon, to: '::Documentation.entity'
+        delegate :icon, to: 'current_module::Documentation.entity'
 
         option :wrapper_css_classes, default: -> { 'btn btn-sm btn-icon-split bg-body-tertiary' }
         option :text_css_classes, default: -> { 'd-none d-lg-inline' }

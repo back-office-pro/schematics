@@ -3,9 +3,9 @@
 
 module Schematics
   class RoleAbility < ApplicationAbility
-    def initialize
+    def initialize(mod)
       super
-      cannot %i[duplicate update destroy archive], ::Role.admin
+      cannot %i[duplicate update destroy archive], mod::Role.admin
     end
   end
 end

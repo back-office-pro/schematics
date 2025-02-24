@@ -4,7 +4,7 @@
 module Schematics
   class HomeController < ApplicationController
     def index
-      @dashboards = ::Dashboard
+      @dashboards = current_module::Dashboard
                     .preload_all
                     .accessible_by_role(current_user.role)
     end

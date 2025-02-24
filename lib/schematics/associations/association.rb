@@ -75,7 +75,7 @@ module Schematics
       def association_to_str = <<~RUBY.chomp
         #{type} :#{name},
                 -> { with_deleted },
-                class_name: '#{class_name}',
+                class_name: '#{class_name.demodulize}',
                 foreign_key: '#{column_name}'
       RUBY
 

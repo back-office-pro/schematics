@@ -3,9 +3,9 @@
 
 module Schematics
   class SearchAbility < ApplicationAbility
-    def initialize
+    def initialize(mod)
       super
-      can %i[autocomplete create show], ::Search
+      can %i[autocomplete create show], mod::Search
     end
   end
 end

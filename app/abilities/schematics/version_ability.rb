@@ -3,12 +3,12 @@
 
 module Schematics
   class VersionAbility < ApplicationAbility
-    def initialize(user)
+    def initialize(user, mod)
       super
       can(:read, Version, event: 'mention', user:)
       can(:revert, Version, user:)
       cannot :revert, Version, object: nil
-      cannot :revert, Version.where(item: ::Migration.state_finished)
+      cannot :revert, Version.where(item: mod::Migration.state_finished)
       user
         .role
         .permissions

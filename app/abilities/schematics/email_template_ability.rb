@@ -3,9 +3,9 @@
 
 module Schematics
   class EmailTemplateAbility < ApplicationAbility
-    def initialize
+    def initialize(mod)
       super
-      cannot :duplicate, ::EmailTemplate
+      cannot :duplicate, mod::EmailTemplate
     end
   end
 end

@@ -5,9 +5,9 @@ module Schematics
   module Navbar
     module OnlineUsersCenter
       class Component < ApplicationComponent
-        delegate :icon, to: '::User.entity'
+        delegate :icon, to: 'current_module::User.entity'
 
-        memoize def sessions = ::Session
+        memoize def sessions = current_module::Session
           .with_user
           .with_user_avatar
           .active

@@ -13,7 +13,7 @@ module Core
           delegate :logger, :env, to: '::Rails', private: true
           delegate :root, to: '::Schematics::Engine', private: true
           delegate :parse, to: '::ActiveSupport::ConfigurationFile', private: true
-          delegate :openai_access_token_with_fallback, to: '::Configuration', private: true
+          delegate :openai_access_token_with_fallback, to: 'current_module::Configuration', private: true
 
           after :log_data
 

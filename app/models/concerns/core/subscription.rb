@@ -50,9 +50,9 @@ module Core
         .sum(&:byte_size)
         .bytes
 
-      def users_size = ::User.count
+      def users_size = ::Demo::User.count
 
-      def api_keys_size = ::APIKey.count
+      def api_keys_size = ::Demo::APIKey.count
     end
 
     def load!

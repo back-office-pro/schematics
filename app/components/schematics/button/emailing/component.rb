@@ -5,7 +5,7 @@ module Schematics
   module Button
     module Emailing
       class Component < ApplicationComponent
-        delegate :icon, to: '::Emailing.entity'
+        delegate :icon, to: 'current_module::Emailing.entity'
         option :resource
 
         def data = {

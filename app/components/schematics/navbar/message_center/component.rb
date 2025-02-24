@@ -6,7 +6,7 @@ module Schematics
     module MessageCenter
       class Component < ApplicationComponent
         LIMIT = 10
-        delegate :icon, to: '::Message.entity'
+        delegate :icon, to: 'current_module::Message.entity'
 
         def messages_path = resources_path(::Message)
 

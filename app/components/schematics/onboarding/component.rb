@@ -10,7 +10,7 @@ module Schematics
 
       def title = t('.title')
 
-      def model_class = ::Migration
+      def model_class = current_module::Migration
 
       def render?
         can?(:create, model_class) && none?

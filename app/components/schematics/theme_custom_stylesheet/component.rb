@@ -4,7 +4,7 @@
 module Schematics
   module ThemeCustomStylesheet
     class Component < ApplicationComponent
-      delegate :theme_color, to: '::Configuration'
+      delegate :theme_color, to: 'current_module::Configuration'
 
       def theme_color_darken = theme_color
         .paint

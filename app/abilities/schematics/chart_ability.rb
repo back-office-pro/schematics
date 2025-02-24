@@ -3,10 +3,10 @@
 
 module Schematics
   class ChartAbility < ApplicationAbility
-    def initialize(user)
+    def initialize(user, mod)
       super
-      cannot %i[duplicate update destroy archive], ::Chart.api
-      cannot :show, ::Chart.api unless user.admin?
+      cannot %i[duplicate update destroy archive], mod::Chart.api
+      cannot :show, mod::Chart.api unless user.admin?
     end
   end
 end

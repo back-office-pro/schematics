@@ -3,10 +3,10 @@
 
 module Schematics
   class DemoAbility < ApplicationAbility
-    def initialize
+    def initialize(mod)
       super
-      cannot %i[destroy archive], ::User, role: ::Role.admin
-      cannot :update, ::User, %i[password password_confirmation email], role: ::Role.admin
+      cannot %i[destroy archive], mod::User, role: mod::Role.admin
+      cannot :update, mod::User, %i[password password_confirmation email], role: mod::Role.admin
     end
   end
 end
