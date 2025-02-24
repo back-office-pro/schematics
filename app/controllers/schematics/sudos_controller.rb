@@ -14,7 +14,7 @@ module Schematics
 
     private
 
-    def model_class = ::User
+    def model_class = current_module::User
 
     def permitted_params = %i[password]
   end

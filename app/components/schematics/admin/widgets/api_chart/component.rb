@@ -14,7 +14,7 @@ module Schematics
 
           def path = resource_path(resource)
 
-          memoize def resource = ::Chart
+          memoize def resource = current_module::Chart
             .with_string_translations
             .api
 

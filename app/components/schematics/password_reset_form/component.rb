@@ -8,7 +8,7 @@ module Schematics
 
       def url = password_resets_path
 
-      def model = ::User.new
+      def model = current_module::User.new
     end
   end
 end

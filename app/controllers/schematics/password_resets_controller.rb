@@ -38,7 +38,7 @@ module Schematics
               model_class.with_role.find_by_password_reset_token!(params[:token]) # rubocop:disable Rails/DynamicFindBy
     end
 
-    def model_class = ::User
+    def model_class = current_module::User
 
     def permitted_params = %i[email password password_confirmation]
 

@@ -68,7 +68,7 @@ module Schematics
       schematics.root_path
     end
 
-    def model_class = ::User
+    def model_class = current_module::User
 
     def permitted_params = %i[otp_token otp_attempt remember_me]
 

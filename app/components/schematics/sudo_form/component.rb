@@ -8,7 +8,7 @@ module Schematics
 
       def url = sudos_path
 
-      def model = ::User.new
+      def model = current_module::User.new
     end
   end
 end

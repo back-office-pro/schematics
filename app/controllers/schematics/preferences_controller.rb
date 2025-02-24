@@ -15,7 +15,7 @@ module Schematics
 
     private
 
-    def model_class = ::User
+    def model_class = current_module::User
 
     def resource_params = super.tap(&method(:cast_and_merge_preferences!))
 
@@ -42,15 +42,15 @@ module Schematics
       value
     end
 
-    def dashboard_metrics_preferences = ::Dashboard
+    def dashboard_metrics_preferences = current_module::Dashboard
       .ids
       .map { { "dashboard_metrics_#{it}" => [] } }
 
-    def dashboard_charts_preferences = ::Dashboard
+    def dashboard_charts_preferences = current_module::Dashboard
       .ids
       .map { { "dashboard_charts_#{it}" => [] } }
 
-    def dashboard_rankings_preferences = ::Dashboard
+    def dashboard_rankings_preferences = current_module::Dashboard
       .ids
       .map { { "dashboard_rankings_#{it}" => [] } }
 

@@ -21,7 +21,7 @@ module Schematics
 
       private
 
-      memoize def link_preview = ::LinkPreview.find_or_initialize_by(url:)
+      memoize def link_preview = current_module::LinkPreview.find_or_initialize_by(url:)
     end
   end
 end

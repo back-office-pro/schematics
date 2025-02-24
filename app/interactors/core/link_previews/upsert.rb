@@ -7,7 +7,7 @@ module Core
       include Interactor
       delegate :url, :title, :description, :image, to: :context, private: true
 
-      def call = ::LinkPreview
+      def call = current_module::LinkPreview
         .find_or_initialize_by(url:)
         .update!(title:, description:, image: blob)
 

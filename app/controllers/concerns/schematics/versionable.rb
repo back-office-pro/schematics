@@ -16,7 +16,7 @@ module Schematics
     end
 
     def assign_api_version
-      response.headers['x-api-version'] = ::Migration.current_version
+      response.headers['x-api-version'] = current_module::Migration.current_version
     end
   end
 end

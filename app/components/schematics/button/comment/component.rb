@@ -18,7 +18,7 @@ module Schematics
           .record_comments
           .count
 
-        def title = ::Comment
+        def title = current_module::Comment
           .human_name_plural
           .humanize
 

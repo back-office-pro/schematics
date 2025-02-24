@@ -23,7 +23,7 @@ module Schematics
           )
         end
 
-        def model_class = ::Comment
+        def model_class = current_module::Comment
 
         def title = "#{count} #{human_name(count:)}"
       end

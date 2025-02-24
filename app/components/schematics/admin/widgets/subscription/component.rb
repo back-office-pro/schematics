@@ -9,10 +9,10 @@ module Schematics
           delegate :icon, to: 'current_module::Subscription.entity'
           delegate :state_inactive?, to: :resource
 
-          memoize def resource = ::Subscription.instance
+          memoize def resource = current_module::Subscription.instance
 
           def render?
-            can?(:cancel, ::Subscription)
+            can?(:cancel, current_module::Subscription)
           end
         end
       end

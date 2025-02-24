@@ -9,7 +9,7 @@ module Schematics
       delegate :year, to: '::Time.current'
       delegate :icon, to: :entity
 
-      def resource = ::Migration
+      def resource = current_module::Migration
         .with_string_translations
         .current
     end

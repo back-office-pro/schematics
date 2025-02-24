@@ -13,7 +13,7 @@ module Schematics
     private
 
     def set_session
-      @session = ::Session.find_by_token_for!(:refresh_token, params.require(:refresh_token))
+      @session = current_module::Session.find_by_token_for!(:refresh_token, params.require(:refresh_token))
     end
   end
 end
