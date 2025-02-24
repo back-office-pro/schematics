@@ -47,6 +47,29 @@
         95
       ],
       "note": ""
+    },
+    {
+      "warning_type": "Remote Code Execution",
+      "warning_code": 24,
+      "fingerprint": "fdfa87309cf59ba32c022b457b04bb9bf2c296f710463a8d75c9ab45444fabdb",
+      "check_name": "UnsafeReflection",
+      "message": "Unsafe reflection method `constantize` called on parameter value",
+      "file": "app/controllers/schematics/routing_controller.rb",
+      "line": 47,
+      "link": "https://brakemanscanner.org/docs/warning_types/remote_code_execution/",
+      "code": "[Format Error]",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Schematics::RoutingController",
+        "method": "controller_class"
+      },
+      "user_input": "params[:resource]",
+      "confidence": "Medium",
+      "cwe_id": [
+        470
+      ],
+      "note": ""
     }
   ],
   "brakeman_version": "7.0.0"

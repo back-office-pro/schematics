@@ -12,19 +12,21 @@ module Schematics
       configuration
       configurazione
     ].freeze
+    # rubocop:disable Style/StringHashKeys
     CORE_CONTROLLERS = {
-      ::ActiveStorage::BlobsController => %w[files fichiers],
-      ::CommentsController => %w[comments commentaires commenti],
-      ::ComparisonsController => %w[comparisons comparaisons confronti],
-      ::EmailingsController => %w[emailings envois-d-e-mails invii-di-e-mail],
-      ::ImportsController => %w[imports importations importazioni],
-      ::MessagesController => %w[messages messaggi],
-      ::MigrationsController => %w[migrations migrazioni],
-      ::SearchesController => %w[searches recherches ricerche],
-      ::SessionsController => %w[sessions sessioni],
-      ::SubscriptionsController => %w[subscription abonnement abbonamento],
-      ::UsersController => %w[users utilisateurs utenti]
+      'ActiveStorage::BlobsController' => %w[files fichiers],
+      'CommentsController' => %w[comments commentaires commenti],
+      'ComparisonsController' => %w[comparisons comparaisons confronti],
+      'EmailingsController' => %w[emailings envois-d-e-mails invii-di-e-mail],
+      'ImportsController' => %w[imports importations importazioni],
+      'MessagesController' => %w[messages messaggi],
+      'MigrationsController' => %w[migrations migrazioni],
+      'SearchesController' => %w[searches recherches ricerche],
+      'SessionsController' => %w[sessions sessioni],
+      'SubscriptionsController' => %w[subscription abonnement abbonamento],
+      'UsersController' => %w[users utilisateurs utenti]
     }.freeze
+    # rubocop:enable Style/StringHashKeys
 
     %i[show new create edit update delete destroy archive restore duplicate trigger]
       .each do |action|
@@ -44,7 +46,8 @@ module Schematics
         .invert
         .select { it.include?(params[:resource]) }
         &.values
-        &.first || ResourcesController
+        &.first
+        &.constantize || ResourcesController
     end
   end
 end
