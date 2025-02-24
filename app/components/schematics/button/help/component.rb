@@ -5,22 +5,22 @@ module Schematics
   module Button
     module Help
       class Component < ApplicationComponent
-        ALLOWLIST = [
-          ::Migration,
-          ::Import,
-          ::Dashboard,
-          ::Metric,
-          ::Chart,
-          ::Ranking,
-          ::Configuration,
-          ::Role,
-          ::APIKey,
-          ::Team,
-          ::WebhookEndpoint,
-          ::PDFTemplate,
-          ::EmailTemplate,
-          ::DataCleaning,
-          ::Session
+        ALLOWLIST = %w[
+          Migration
+          Import
+          Dashboard
+          Metric
+          Chart
+          Ranking
+          Configuration
+          Role
+          APIKey
+          Team
+          WebhookEndpoint
+          PDFTemplate
+          EmailTemplate
+          DataCleaning
+          Session
         ].freeze
 
         delegate :entity, :human_name_plural, to: :model_class, allow_nil: true, private: true
@@ -72,7 +72,7 @@ module Schematics
         private
 
         def external_doc?
-          !model_class || ALLOWLIST.include?(model_class)
+          !model_class || ALLOWLIST.include?(model_class.to_s)
         end
 
         def path = File.join([t('.path'), slug].compact)
