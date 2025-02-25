@@ -27,7 +27,7 @@ module Schematics
 
     def initialize(ability, mod)
       super
-      return if MODEL_CLASSES.all? { ability.cannot?(:index, it.constantize) } &&
+      return if MODEL_CLASSES.all? { ability.cannot?(:index, mod.const_get(it)) } &&
                 ability.cannot?(:cancel, mod::Subscription) &&
                 ability.cannot?(:update, mod::Configuration) &&
                 ability.cannot?(:show, mod::Chart.api)
