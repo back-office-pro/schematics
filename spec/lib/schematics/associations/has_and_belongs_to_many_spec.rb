@@ -72,7 +72,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
     is_expected.to eq <<~RUBY
       scope :with_permissions, -> { includes([:permissions]) }
       has_and_belongs_to_many :permissions,
-                              class_name: 'Demo::Permission',
+                              class_name: 'Permission',
                               join_table: 'permissions_roles',
                               foreign_key: 'role_id',
                               association_foreign_key: 'permission_id'

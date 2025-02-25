@@ -57,7 +57,7 @@ describe Schematics::Associations::HasOne do
       scope :with_entity, -> { includes([:entity]) }
       has_one :entity,
               -> { with_deleted },
-              class_name: 'Demo::Entity',
+              class_name: 'Entity',
               foreign_key: 'schema_id',
               inverse_of: :schema,
               autosave: true

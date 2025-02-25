@@ -75,7 +75,7 @@ describe Schematics::Associations::HasManyThrough do
       scope :with_attributes, -> { includes([:attributes]) }
       has_many :attributes,
               -> { with_deleted },
-              class_name: 'Demo::Attribute',
+              class_name: 'Attribute',
               foreign_key: 'entity_id',
               through: :entities,
               source: :attributes

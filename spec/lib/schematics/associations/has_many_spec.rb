@@ -54,7 +54,7 @@ describe Schematics::Associations::HasMany do
       scope :with_entities, -> { includes([:entities]) }
       has_many :entities,
               -> { with_deleted },
-              class_name: 'Demo::Entity',
+              class_name: 'Entity',
               foreign_key: 'schema_id',
               inverse_of: :schema,
               dependent: :nullify
@@ -75,7 +75,7 @@ describe Schematics::Associations::HasMany do
         scope :with_entities, -> { includes([:entities]) }
         has_many :entities,
                 -> { with_deleted },
-                class_name: 'Demo::Entity',
+                class_name: 'Entity',
                 foreign_key: 'schema_id',
                 inverse_of: :schema,
                 dependent: :destroy
