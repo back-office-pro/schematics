@@ -9,7 +9,6 @@ module Schematics
       helper_method :current_tenant
       helper_method :current_schema
       helper_method :current_module
-      prepend_before_action :foo
     end
 
     def current_tenant
@@ -23,9 +22,5 @@ module Schematics
     def current_module = current_schema
       .module_name
       .constantize
-
-    def foo
-      Current.mod = ::Demo
-    end
   end
 end
