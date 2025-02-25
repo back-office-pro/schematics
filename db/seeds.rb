@@ -3,39 +3,40 @@
 
 COMPANY_NAME = ENV['NAME']&.underscore&.humanize.freeze
 PASSWORD = (ENV['NAME'] == 'demo' ? Schematics::Attributes::Digest::DEFAULT : nil).freeze
+mod = ENV['NAME'].classify.constantize
 
 PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
-  Role.create!(
+  mod::Role.create!(
     [
       {
         name_en: 'Admin',
         name_fr: 'Administrateur',
         name_it: 'Amministratore',
-        permissions: Permission.create_entities_permissions!
+        permissions: mod::Permission.create_entities_permissions!
       },
       {
         name_en: 'Collaborator',
         name_fr: 'Collaborateur',
         name_it: 'Collaboratore',
-        permissions: Permission.features
+        permissions: mod::Permission.features
       }
     ]
   )
-  Configuration.instance.update!(
+  mod::Configuration.instance.update!(
     company_name: COMPANY_NAME,
-    available_locales: [Subscription.default_locale],
-    locale: Subscription.default_locale
+    available_locales: [mod::Subscription.default_locale],
+    locale: mod::Subscription.default_locale
   )
-  Documentation.create!
-  Migration.default.save!
-  User.create!(email: Subscription.email, password: PASSWORD, role: Role.admin)
-  Dashboard.create!(
+  mod::Documentation.create!
+  mod::Migration.default.save!
+  mod::User.create!(email: mod::Subscription.email, password: PASSWORD, role: mod::Role.admin)
+  mod::Dashboard.create!(
     [
       {
         title_en: 'Admin dashboard',
         title_fr: 'Tableau de bord administrateur',
         title_it: 'Cruscotto amministratore',
-        roles: [Role.admin]
+        roles: [mod::Role.admin]
       },
       {
         title_en: 'Global dashboard',
@@ -44,43 +45,43 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
       }
     ]
   )
-  Ranking.create!(
+  mod::Ranking.create!(
     model: 'ActiveStorage::Blob',
     field: 'ActiveStorage::Blob#byte_size',
-    dashboards: [Dashboard.first]
+    dashboards: [mod::Dashboard.first]
   )
-  Metric.create!(
+  mod::Metric.create!(
     [
       {
         aggregate: 'count',
         model: 'Emailing',
-        dashboards: Dashboard.all
+        dashboards: mod::Dashboard.all
       },
       {
         aggregate: 'count',
         model: 'User',
         comparator: 'greater_than_or_equal_to',
-        threshold: Subscription.quota_users,
-        dashboards: [Dashboard.first]
+        threshold: mod::Subscription.quota_users,
+        dashboards: [mod::Dashboard.first]
       },
       {
         aggregate: 'count',
         model: 'APIKey',
         comparator: 'greater_than_or_equal_to',
-        threshold: Subscription.quota_api_keys,
-        dashboards: [Dashboard.first]
+        threshold: mod::Subscription.quota_api_keys,
+        dashboards: [mod::Dashboard.first]
       },
       {
         aggregate: 'sum',
         model: 'ActiveStorage::Blob',
         field: 'ActiveStorage::Blob#byte_size',
         comparator: 'greater_than_or_equal_to',
-        threshold: Subscription.quota_storage,
-        dashboards: [Dashboard.first]
+        threshold: mod::Subscription.quota_storage,
+        dashboards: [mod::Dashboard.first]
       }
     ]
   )
-  Chart.create_without_validations(
+  mod::Chart.create_without_validations(
     [
       {
         kind: 'bar',
@@ -95,18 +96,18 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
         aggregate: 'count',
         model: 'Meeting',
         x_field: 'Meeting#created_at/month',
-        dashboards: Dashboard.all
+        dashboards: mod::Dashboard.all
       },
       {
         kind: 'column',
         aggregate: 'count',
         model: 'Task',
         x_field: 'Task#created_at/month',
-        dashboards: Dashboard.all
+        dashboards: mod::Dashboard.all
       }
     ]
   )
-  DataCleaning.create_without_validations(
+  mod::DataCleaning.create_without_validations(
     [
       { model: 'Backup', period: 'week', really_destroy: true },
       { model: 'LinkPreview', period: 'week', really_destroy: true },

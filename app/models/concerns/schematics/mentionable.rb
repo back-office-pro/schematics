@@ -18,7 +18,7 @@ module Schematics
       .filter_map(&:body)
       .map(&:attachables)
       .flatten
-      .grep(::User)
+      .grep(Demo::User)
       .uniq
 
     protected

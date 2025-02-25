@@ -24,11 +24,11 @@ module Schematics
       end
     end
 
-    def initialize(name:, data: [], version: VERSION)
+    def initialize(name: nil, data: [], version: VERSION)
       data = ::JSON.parse(data) if data in ::String
       @data = data.map(&:deep_symbolize_keys)
       @version = version
-      @name = name
+      @name = name || 'demo'
       self.entities = core_data.concat(@data)
     end
 
