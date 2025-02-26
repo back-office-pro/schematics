@@ -9,7 +9,11 @@ module Schematics
     class << self
       delegate :call, to: :new
 
-      def module_class = "Demo#{module_parent_name.delete_prefix('Core').singularize}".constantize
+      def module_class
+        return module_parent_name.delete_prefix('Core').singularize.constantize if module_parent_name.start_with?("Schematics")
+
+        "Demo#{module_parent_name.delete_prefix('Core').singularize}".constantize
+      end
     end
 
     def initialize(model_class = self.class.module_class)

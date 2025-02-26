@@ -17,7 +17,7 @@ module Core
 
       private
 
-      memoize def user = ::User.find_by(email:)
+      memoize def user = Demo::User.find_by(email:)
 
       def email = resource_params[:email]
     end

@@ -16,13 +16,13 @@ module Schematics
 
       def id = nil
 
-      def teams = ::Demo::Team.none
+      def teams = Demo::Team.none
 
       def preferences = {}
 
       def preferences_theme = nil
 
-      def role = ::Demo::Role.new(permissions:)
+      def role = Demo::Role.new(permissions:)
 
       def otp_enabled? = false
 

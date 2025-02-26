@@ -16,7 +16,7 @@ module Schematics
     end
 
     class_methods do
-      def route_params = { resource: human_name.parameterize(separator: '-') }
+      def route_params = { resource: I18n.t("activerecord.models.#{name.demodulize.underscore}.one").parameterize(separator: '-') }
     end
 
     def route_params = super.except(:id)

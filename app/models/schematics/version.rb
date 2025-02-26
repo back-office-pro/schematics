@@ -13,7 +13,7 @@ module Schematics
     EVENTS = %w[create update destroy archive restore import duplicate].freeze
 
     belongs_to :user,
-               class_name: 'User',
+               class_name: 'Demo::User',
                foreign_key: :whodunnit,
                inverse_of: :paper_trail_versions
 
@@ -68,7 +68,7 @@ module Schematics
     private
 
     memoize def webhook_event
-      Permission.find_by(model: item_type, action: event)
+      Demo::Permission.find_by(model: item_type, action: event)
     end
 
     def broadcast_webhook_event

@@ -3,7 +3,7 @@
 
 Rails.configuration.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins ->(_source, _env) { Configuration.origins.push(/(.*?).#{Server.domain}/) }
+    origins ->(_source, _env) { Demo::Configuration.origins.push(/(.*?).#{Server.domain}/) }
     resource '*',
              headers: :any,
              methods: %i[get post put patch delete options head]

@@ -19,7 +19,7 @@ module Schematics
 
       def login!(user)
         PaperTrail.request(enabled: false) do
-          ::Session.create!(ip:, user_agent:, user:)
+          Demo::Session.create!(ip:, user_agent:, user:)
         end
       end
 

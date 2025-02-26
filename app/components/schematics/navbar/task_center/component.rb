@@ -29,7 +29,7 @@ module Schematics
           .value
 
         def render?
-          can?(:index, ::Task)
+          can?(:index, current_module::Task)
         end
 
         memoize def tasks = current_user

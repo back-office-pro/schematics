@@ -38,7 +38,7 @@ module Schematics
     def model_name = resolve_model_name_from_route
 
     def model_class
-      model_name.safe_constantize
+      current_module.const_get(model_name)
     end
 
     def archive

@@ -29,7 +29,7 @@ module Schematics
           .value
 
         def render?
-          can?(:index, ::Meeting)
+          can?(:index, current_module::Meeting)
         end
 
         memoize def meetings = current_user

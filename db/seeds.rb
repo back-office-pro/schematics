@@ -29,7 +29,7 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
   )
   mod::Documentation.create!
   mod::Migration.default.save!
-  mod::User.create!(email: mod::Subscription.email, password: PASSWORD, role: mod::Role.admin)
+  mod::User.create!(email: 'demo@back-office.pro', password: PASSWORD, role: mod::Role.admin)
   mod::Dashboard.create!(
     [
       {

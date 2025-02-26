@@ -17,7 +17,7 @@ module Core
 
       private
 
-      memoize def user = ::User.find_by(email:)
+      memoize def user = Demo::User.find_by(email:)
 
       def otp_token
         generate_token_for(:one_time_password) if otp_enabled?

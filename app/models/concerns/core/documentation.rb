@@ -7,7 +7,7 @@ module Core
     extend ActiveSupport::Concern
 
     prepended do
-      attribute :app_version, default: -> { ::Migration.current_version }
+      attribute :app_version, default: -> { Demo::Migration.current_version }
       attribute :core_version, default: -> { Schematics::VERSION }
     end
 

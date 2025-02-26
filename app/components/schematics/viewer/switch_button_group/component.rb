@@ -26,7 +26,7 @@ module Schematics
         end
 
         def can_compare?
-          can?(:create, ::Comparison) && can?(:show, resource)
+          can?(:create, current_module::Comparison) && can?(:show, resource)
         end
 
         def can_archive?

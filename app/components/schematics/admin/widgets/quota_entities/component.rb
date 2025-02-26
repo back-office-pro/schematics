@@ -27,7 +27,7 @@ module Schematics
           end
 
           def render?
-            can?(:cancel, ::Subscription)
+            can?(:cancel, current_module::Subscription)
           end
         end
       end

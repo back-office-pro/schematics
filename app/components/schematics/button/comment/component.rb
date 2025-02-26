@@ -24,7 +24,7 @@ module Schematics
 
         def render?
           comments_feature_flag &&
-            can?(:create, ::Comment) &&
+            can?(:create, current_module::Comment) &&
             can?(:comment, resource.class)
         end
       end

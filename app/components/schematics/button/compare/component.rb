@@ -13,7 +13,7 @@ module Schematics
         def icon_class = 'fa-fw fa-lg'
 
         def render?
-          can?(:create, ::Comparison) && can?(:show, model_class)
+          can?(:create, current_module::Comparison) && can?(:show, model_class)
         end
       end
     end

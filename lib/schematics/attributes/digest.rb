@@ -38,7 +38,6 @@ module Schematics
 
       def validators = super.merge(
         allow_blank:,
-        not_pwned: { on_error: :valid },
         confirmation: ({ allow_blank: } if confirm?),
         format: { with: REGEX, message: :password },
         length: {

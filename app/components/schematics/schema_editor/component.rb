@@ -20,7 +20,7 @@ module Schematics
         .sort_by(&:name)
 
       def url
-        return resources_path(::Migration) if new_record?
+        return resources_path(current_module::Migration) if new_record?
 
         resource_path(resource)
       end

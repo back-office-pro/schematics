@@ -34,7 +34,7 @@ module Schematics
       end
 
       def entity
-        schema.find_entity_by_name(name.demodulize.underscore)
+        schema.find_entity_by_name(name.start_with?('ActiveStorage') ? name.underscore : name.demodulize.underscore)
       end
 
       def filter_attributes = entity

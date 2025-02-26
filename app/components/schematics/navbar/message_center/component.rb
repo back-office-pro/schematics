@@ -8,7 +8,7 @@ module Schematics
         LIMIT = 10
         delegate :icon, to: 'current_module::Message.entity'
 
-        def messages_path = resources_path(::Message)
+        def messages_path = resources_path(current_module::Message)
 
         def display_count
           count >= LIMIT ? "#{LIMIT.pred}+" : count
@@ -30,7 +30,7 @@ module Schematics
           .limit(LIMIT)
 
         def render?
-          can?(:index, ::Message)
+          can?(:index, current_module::Message)
         end
 
         memoize def count = current_user

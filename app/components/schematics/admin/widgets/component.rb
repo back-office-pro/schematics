@@ -20,12 +20,13 @@ module Schematics
 
         protected
 
-        def model_class = self
-          .class
-          .module_parent_name
-          .demodulize
-          .singularize
-          .constantize
+        def model_class = current_module.const_get(
+          self
+            .class
+            .module_parent_name
+            .demodulize
+            .singularize
+        )
 
         def action = :index
       end

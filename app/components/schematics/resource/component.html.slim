@@ -8,7 +8,7 @@ span.text-body-tertiary = '-' if value.nil?
         = value
     - else
       - case value
-      - when User
+      - when current_module::User
         = __avatar(user: value, width: 18, height: 18, size: :xl)
       - else
         = __resource_link_to(resource: value)

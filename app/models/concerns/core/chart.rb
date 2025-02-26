@@ -7,7 +7,7 @@ module Core
 
     prepended do
       include Schematics::Measurable
-      attribute :color, default: -> { ::Configuration.theme_color }
+      attribute :color, default: -> { Demo::Configuration.theme_color }
     end
 
     class_methods do

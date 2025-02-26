@@ -8,14 +8,14 @@ module Schematics
       delegate :demo?, to: :current_tenant, private: true
       delegate :email, to: 'current_module::Subscription', private: true
 
-      def url = resources_path(::Session)
+      def url = resources_path(current_module::Session)
 
       def scope = :session
 
       def model
-        return ::User.new unless demo?
+        return current_module::User.new unless demo?
 
-        ::User.new(email:)
+        current_module::User.new(email:)
       end
 
       def value
