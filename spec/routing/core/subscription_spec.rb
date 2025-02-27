@@ -3,6 +3,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Subscription do
+RSpec.describe Demo::Subscription do
   include Schematics::Specs::Routing
 end

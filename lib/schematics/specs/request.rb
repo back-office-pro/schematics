@@ -33,20 +33,21 @@ module Schematics
         let(:api_key_headers) { { 'x-api-key' => @api_key.access_token } } # rubocop:disable Style/StringHashKeys
         let(:host) { RSpec::Rails::FeatureExampleGroup::DEFAULT_HOST }
         let(:headers_with_referer) { headers.merge('HTTP_REFERER' => edit_profile_url(host:)) } # rubocop:disable Style/StringHashKeys
-        let(:ability) { Ability.new(@user) }
+        let(:ability) { Ability.new(@user, Demo) }
         let(:index_path) { resources_path(model_class) }
 
         before_all do
           PaperTrail.request(enabled: false) do
-            @permissions = ::Permission.create_entities_permissions!
-            @role = ::Role.create!(name: 'Admin', permissions: @permissions)
-            @user = ::User.create!(email: 'john.doe@everywhere.com', role: @role)
-            @api_key = ::APIKey.create!(name: 'API key', permissions: @permissions)
-            @session = ::Session.create!(user: @user)
+            @permissions = Demo::Permission.create_entities_permissions!
+            @role = Demo::Role.create!(name: 'Admin', permissions: @permissions)
+            @user = Demo::User.create!(email: 'john.doe@everywhere.com', role: @role)
+            @api_key = Demo::APIKey.create!(name: 'API key', permissions: @permissions)
+            @session = Demo::Session.create!(user: @user)
           end
         end
 
         before do
+          host! "demo.example.com"
           allow(ActiveRecord::Base).to receive(:lock_optimistically).and_return(false)
           allow_any_instance_of(ActiveStorageValidations::ContentTypeValidator)
             .to receive(:enable_spoofing_protection?)

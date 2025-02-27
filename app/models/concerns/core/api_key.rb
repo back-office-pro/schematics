@@ -8,7 +8,7 @@ module Core
 
     def touch!(request, response, response_time)
       PaperTrail.request(enabled: false) do
-        ::APIRequest.create!(
+        Demo::APIRequest.create!(
           api_key: self,
           ip: request.ip,
           request_method: request.method,

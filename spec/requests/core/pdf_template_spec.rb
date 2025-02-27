@@ -3,6 +3,6 @@
 
 require 'rails_helper'
 
-RSpec.describe PDFTemplate do
+RSpec.describe Demo::PDFTemplate do
   include Schematics::Specs::Request
 end

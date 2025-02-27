@@ -3,6 +3,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Draft do
+RSpec.describe Demo::Draft do
   include Schematics::Specs::Routing
 end

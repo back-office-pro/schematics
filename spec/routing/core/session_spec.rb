@@ -3,6 +3,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Session do
+RSpec.describe Demo::Session do
   include Schematics::Specs::Routing
 end

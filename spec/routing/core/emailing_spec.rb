@@ -3,6 +3,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Emailing do
+RSpec.describe Demo::Emailing do
   include Schematics::Specs::Routing
 end

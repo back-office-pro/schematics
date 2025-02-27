@@ -3,6 +3,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Team do
+RSpec.describe Demo::Team do
   include Schematics::Specs::Routing
 end

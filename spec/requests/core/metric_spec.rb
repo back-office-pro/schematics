@@ -3,6 +3,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Metric do
+RSpec.describe Demo::Metric do
   include Schematics::Specs::Request
 end

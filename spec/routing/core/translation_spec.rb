@@ -3,6 +3,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Translation do
+RSpec.describe Demo::Translation do
   include Schematics::Specs::Routing
 end

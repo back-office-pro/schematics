@@ -3,6 +3,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Dashboard do
+RSpec.describe Demo::Dashboard do
   include Schematics::Specs::Request
 end

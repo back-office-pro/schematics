@@ -3,6 +3,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Comment, except: :update do
+RSpec.describe Demo::Comment, except: :update do
   include Schematics::Specs::Routing
 end

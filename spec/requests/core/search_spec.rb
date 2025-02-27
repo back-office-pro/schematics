@@ -3,6 +3,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Search, except: %i[index create] do
+RSpec.describe Demo::Search, except: %i[index create] do
   include Schematics::Specs::Request
 end

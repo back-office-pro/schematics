@@ -3,6 +3,6 @@
 
 require 'rails_helper'
 
-RSpec.describe User do
+RSpec.describe Demo::User do
   include Schematics::Specs::Routing
 end

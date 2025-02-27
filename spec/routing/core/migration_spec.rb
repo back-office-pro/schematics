@@ -3,6 +3,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Migration do
+RSpec.describe Demo::Migration do
   include Schematics::Specs::Routing
 end

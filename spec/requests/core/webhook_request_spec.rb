@@ -3,6 +3,6 @@
 
 require 'rails_helper'
 
-RSpec.describe WebhookRequest do
+RSpec.describe Demo::WebhookRequest do
   include Schematics::Specs::Request
 end

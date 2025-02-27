@@ -3,6 +3,6 @@
 
 require 'rails_helper'
 
-RSpec.describe EmailTemplate do
+RSpec.describe Demo::EmailTemplate do
   include Schematics::Specs::Routing
 end

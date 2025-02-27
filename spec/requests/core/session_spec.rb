@@ -3,7 +3,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Session, except: %i[create destroy] do
+RSpec.describe Demo::Session, except: %i[create destroy] do
   include Schematics::Specs::Request
 
   describe 'POST #create' do

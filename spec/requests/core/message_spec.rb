@@ -3,6 +3,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Message do
+RSpec.describe Demo::Message do
   include Schematics::Specs::Request
 end

@@ -30,7 +30,7 @@ module Core
     class_methods do
       def decode_access_token(token, *)
         generated_token_verifier
-          .verified(token, purpose: "Session\naccess_token\n600")
+          .verified(token, purpose: "Demo::Session\naccess_token\n600")
           .first
       end
     end

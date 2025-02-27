@@ -3,6 +3,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Chart do
+RSpec.describe Demo::Chart do
   include Schematics::Specs::Request
 end

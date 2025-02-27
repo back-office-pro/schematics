@@ -3,6 +3,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Role do
+RSpec.describe Demo::Role do
   include Schematics::Specs::Routing
 end

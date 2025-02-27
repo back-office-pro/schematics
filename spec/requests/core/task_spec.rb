@@ -3,6 +3,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Task do
+RSpec.describe Demo::Task do
   include Schematics::Specs::Request
 end

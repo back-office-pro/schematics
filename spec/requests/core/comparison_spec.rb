@@ -3,6 +3,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Comparison, except: :create do
+RSpec.describe Demo::Comparison, except: :create do
   include Schematics::Specs::Request
 end

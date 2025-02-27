@@ -3,6 +3,6 @@
 
 require 'rails_helper'
 
-RSpec.describe DataCleaning do
+RSpec.describe Demo::DataCleaning do
   include Schematics::Specs::Request
 end

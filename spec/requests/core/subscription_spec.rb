@@ -3,6 +3,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Subscription, except: :trigger do
+RSpec.describe Demo::Subscription, except: :trigger do
   include Schematics::Specs::Request
 end

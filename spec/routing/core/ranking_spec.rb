@@ -3,6 +3,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Ranking do
+RSpec.describe Demo::Ranking do
   include Schematics::Specs::Routing
 end
