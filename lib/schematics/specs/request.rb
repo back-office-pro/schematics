@@ -121,7 +121,7 @@ module Schematics
 
           it 'gets new comment' do
             get new_comment_resource_path(record), headers:, as: :html
-            if ability.can?(:comment, model_class) && ability.can?(:create, ::Comment)
+            if ability.can?(:comment, model_class) && ability.can?(:create, Demo::Comment)
               is_expected.to have_http_status(:success)
             else
               is_expected.to redirect_to(root_path)

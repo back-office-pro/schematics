@@ -11,14 +11,14 @@ RSpec.describe 'Resources' do
 
   let(:role) { admin_role }
   let(:first_api_key) do
-    APIKey.create!(
+    Demo::APIKey.create!(
       name: 'First key',
       expires_at: Time.current.yesterday,
       permissions:
     )
   end
   let(:second_api_key) do
-    APIKey.create!(
+    Demo::APIKey.create!(
       name: 'Second key',
       expires_at: Time.current.tomorrow,
       permissions:
@@ -28,7 +28,7 @@ RSpec.describe 'Resources' do
   before { [first_api_key, second_api_key] }
 
   describe 'GET #api_keys' do
-    let(:do_request) { get(resources_path(APIKey), params:, headers:) }
+    let(:do_request) { get(resources_path(Demo::APIKey), params:, headers:) }
 
     before { do_request }
 

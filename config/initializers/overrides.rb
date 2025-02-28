@@ -109,12 +109,54 @@ ActiveSupport.on_load(:active_storage_attachment) do
     .routes
     .url_helpers
     .rails_blob_url(self, **Tenant.default_url_options)
+
+    has_many :record_drafts,
+    -> { with_deleted },
+    class_name: 'Demo::Draft',
+    foreign_key: 'record_id',
+    inverse_of: :record,
+    dependent: :nullify
+
+has_many :record_comments,
+    -> { with_deleted },
+    class_name: 'Demo::Comment',
+    foreign_key: 'record_id',
+    inverse_of: :record,
+    dependent: :destroy
+
+has_many :record_emailings,
+    -> { with_deleted },
+    class_name: 'Demo::Emailing',
+    foreign_key: 'record_id',
+    inverse_of: :record,
+    dependent: :destroy
 end
 
 ActiveSupport.on_load(:active_storage_blob) do
   include Schematics::Multisearchable
   include Schematics::Searchable
   prepend ActiveStorage::Override::Blob
+
+  has_many :record_drafts,
+        -> { with_deleted },
+        class_name: 'Demo::Draft',
+        foreign_key: 'record_id',
+        inverse_of: :record,
+        dependent: :nullify
+
+has_many :record_comments,
+        -> { with_deleted },
+        class_name: 'Demo::Comment',
+        foreign_key: 'record_id',
+        inverse_of: :record,
+        dependent: :destroy
+
+has_many :record_emailings,
+        -> { with_deleted },
+        class_name: 'Demo::Emailing',
+        foreign_key: 'record_id',
+        inverse_of: :record,
+        dependent: :destroy
 end
 
 ActiveSupport.on_load(:action_text_rich_text) do

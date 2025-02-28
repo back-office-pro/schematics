@@ -5,7 +5,7 @@ module Schematics
   module ResourceForm
     module Fields
       class Component < ApplicationComponent
-        delegate :available_locales, to: '::Configuration'
+        delegate :available_locales, to: 'current_module::Configuration'
         delegate :name, :icon, :options, :required?, to: :field
         delegate :layout, to: :form
 

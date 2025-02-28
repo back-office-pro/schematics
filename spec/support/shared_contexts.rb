@@ -15,7 +15,7 @@ end
 RSpec.shared_context 'with authenticated user' do
   include_context 'with unauthenticated user'
 
-  let(:session) { Session.create!(user:) }
+  let(:session) { Demo::Session.create!(user:) }
   let(:access_token) { session.generate_token_for(:access_token) }
   let(:headers) do
     {
@@ -26,8 +26,8 @@ RSpec.shared_context 'with authenticated user' do
 end
 
 RSpec.shared_context 'with admin role' do
-  let(:permissions) { Permission.create_entities_permissions! }
-  let(:admin_role) { Role.create!(name: 'Admin', permissions:) }
+  let(:permissions) { Demo::Permission.create_entities_permissions! }
+  let(:admin_role) { Demo::Role.create!(name: 'Admin', permissions:) }
 
   before { admin_role }
 end
@@ -35,7 +35,7 @@ end
 RSpec.shared_context 'with import' do
   include_context 'with user'
 
-  let(:import) { Import.create!(file:, resources:, model:, author: user).reload }
+  let(:import) { Demo::Import.create!(file:, resources:, model:, author: user).reload }
   let(:model) { 'User' }
   let(:resources) { nil }
   let(:file) do
@@ -51,18 +51,18 @@ RSpec.shared_context 'with user' do
   let(:preferences) { {} }
   let(:teams) do
     [
-      Team.create!(name: 'My Team 1'),
-      Team.create!(name: 'My Team 2')
+      Demo::Team.create!(name: 'My Team 1'),
+      Demo::Team.create!(name: 'My Team 2')
     ]
   end
   let(:role) do
-    Role.create!(
+    Demo::Role.create!(
       name: 'Manager',
-      permissions: [Permission.create!(action: 'index', model: 'Import')]
+      permissions: [Demo::Permission.create!(action: 'index', model: 'Import')]
     )
   end
   let(:user) do
-    User.create!(
+    Demo::User.create!(
       email: 'john.doe@nowhere.com',
       password: Schematics::Attributes::Digest::DEFAULT,
       first_name: 'John',

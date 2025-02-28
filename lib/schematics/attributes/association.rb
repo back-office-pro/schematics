@@ -57,7 +57,7 @@ module Schematics
         "#{name}:#{database_type}{polymorphic}:index"
       end
 
-      def class_name = association_type.camelize
+      def class_name = "#{entity.schema.name.camelize}::#{association_type.camelize}"
 
       def model_class = class_name.safe_constantize
 

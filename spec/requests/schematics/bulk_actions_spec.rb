@@ -12,7 +12,7 @@ RSpec.describe 'BulkActions' do
   let(:role) { admin_role }
 
   describe 'POST #create' do
-    let(:do_request) { post(bulk_resource_path(User), params:, headers:) }
+    let(:do_request) { post(bulk_resource_path(Demo::User), params:, headers:) }
     let(:params) { { bulk_action: { ids: [user.id] } } }
 
     before { do_request }

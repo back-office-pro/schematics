@@ -13,7 +13,7 @@ RSpec.describe 'Autocompletions' do
 
   describe 'POST #create' do
     let(:do_request) { post(path, params:, headers:) }
-    let(:path) { autocomplete_resource_path(User, filter: { query => 'john' }) }
+    let(:path) { autocomplete_resource_path(Demo::User, filter: { query => 'john' }) }
     let(:params) { { autocompletion: { query: } } }
     let(:query) { 'email' }
 

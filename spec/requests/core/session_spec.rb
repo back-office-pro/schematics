@@ -99,11 +99,11 @@ RSpec.describe Demo::Session, except: %i[create destroy] do
       let(:email) { other_user.email }
       let(:password) { nil }
       let(:remember_me) { nil }
-      let(:other_user) { User.create!(email: 'jane.doe@nowhere.com', role: other_role) }
+      let(:other_user) { Demo::User.create!(email: 'jane.doe@nowhere.com', role: other_role) }
       let(:other_role) do
         Role.create!(
           name: 'Manager',
-          permissions: [Permission.create!(action: 'index', model: 'Import')]
+          permissions: [Demo::Permission.create!(action: 'index', model: 'Import')]
         )
       end
 
