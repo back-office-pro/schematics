@@ -136,7 +136,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'stripe', '13.5.0'
   spec.add_dependency 'terser', '1.2.5'
   spec.add_dependency 'test-prof', '1.4.4'
-  spec.add_dependency 'turbo-rails', '2.0.12'
+  spec.add_dependency 'turbo-rails', '2.0.13'
   spec.add_dependency 'validate_url', '1.0.15'
   spec.add_dependency 'valid_email', '0.2.1'
   spec.add_dependency 'view_component', '3.21.0'
