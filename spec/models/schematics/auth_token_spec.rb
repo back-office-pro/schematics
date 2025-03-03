@@ -8,7 +8,7 @@ RSpec.describe Schematics::AuthToken do
 
   include_context 'with user'
 
-  let(:session) { Session.create!(user:) }
+  let(:session) { Demo::Session.create!(user:) }
 
   its(:as_json) do
     is_expected.to match(

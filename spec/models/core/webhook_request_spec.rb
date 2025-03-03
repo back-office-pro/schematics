@@ -3,7 +3,7 @@
 
 require 'rails_helper'
 
-RSpec.describe WebhookRequest do
+RSpec.describe Demo::WebhookRequest do
   include Schematics::Specs::Model
 
   before { record.state_error! }

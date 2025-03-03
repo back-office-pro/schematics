@@ -3,6 +3,6 @@
 
 require 'rails_helper'
 
-RSpec.describe APIRequest do
+RSpec.describe Demo::APIRequest do
   include Schematics::Specs::Model
 end

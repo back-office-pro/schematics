@@ -26,7 +26,7 @@ RSpec.describe Schematics::ResourceLinkTo::Component, type: :component do
   end
 
   context 'when resource is user class without ability' do
-    let(:resource) { User }
+    let(:resource) { Demo::User }
 
     it { is_expected.to have_css('i', class: 'fa-users') }
     it { is_expected.to have_text('User') }
@@ -51,7 +51,7 @@ RSpec.describe Schematics::ResourceLinkTo::Component, type: :component do
   end
 
   context 'when resource is user class with ability' do
-    let(:resource) { User }
+    let(:resource) { Demo::User }
 
     before { allow(vc_test_controller).to receive(:current_user).and_return(user) }
 

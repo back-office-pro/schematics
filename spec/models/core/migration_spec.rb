@@ -3,7 +3,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Migration do
+RSpec.describe Demo::Migration do
   include Schematics::Specs::Model
 
   its(:locale) { is_expected.to eq('en') }

@@ -3,7 +3,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Backup do
+RSpec.describe Demo::Backup do
   include Schematics::Specs::Model
 
   it 'enqueues a restore backup job after restore database' do

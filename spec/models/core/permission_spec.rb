@@ -3,7 +3,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Permission do
+RSpec.describe Demo::Permission do
   include Schematics::Specs::Model
   include Schematics::ResourcesHelper
 

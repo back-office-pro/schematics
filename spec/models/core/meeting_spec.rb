@@ -3,6 +3,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Meeting do
+RSpec.describe Demo::Meeting do
   include Schematics::Specs::Model
 end

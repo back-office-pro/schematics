@@ -3,7 +3,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Emailing do
+RSpec.describe Demo::Emailing do
   include Schematics::Specs::Model
 
   its(:serializers) { is_expected.to be_empty }

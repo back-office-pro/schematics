@@ -10,7 +10,7 @@ RSpec.describe Schematics::EmailingMailer do
     subject { described_class.dispatch(emailing, user) }
 
     let(:emailing) do
-      Emailing.create!(
+      Demo::Emailing.create!(
         sender: user,
         recipients: [user],
         record: user,
@@ -20,7 +20,7 @@ RSpec.describe Schematics::EmailingMailer do
       )
     end
     let(:email_template) do
-      EmailTemplate.create!(
+      Demo::EmailTemplate.create!(
         subject: 'Welcome!',
         content: 'Welcome {{ full_name }}'
       )

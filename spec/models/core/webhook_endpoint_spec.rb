@@ -3,7 +3,7 @@
 
 require 'rails_helper'
 
-RSpec.describe WebhookEndpoint do
+RSpec.describe Demo::WebhookEndpoint do
   include Schematics::Specs::Model
   include Schematics::ResourcesHelper
 

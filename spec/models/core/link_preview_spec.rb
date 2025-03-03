@@ -3,6 +3,6 @@
 
 require 'rails_helper'
 
-RSpec.describe LinkPreview do
+RSpec.describe Demo::LinkPreview do
   include Schematics::Specs::Model
 end

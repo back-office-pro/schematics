@@ -3,7 +3,7 @@
 
 require 'rails_helper'
 
-RSpec.describe User do
+RSpec.describe Demo::User do
   include Schematics::Specs::Model
 
   let(:url_options) { { host: 'localhost', port: 3000 } }

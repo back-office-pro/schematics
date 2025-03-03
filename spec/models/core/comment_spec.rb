@@ -3,7 +3,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Comment do
+RSpec.describe Demo::Comment do
   include Schematics::Specs::Model
 
   include_context 'with user'

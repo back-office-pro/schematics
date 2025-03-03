@@ -9,16 +9,16 @@ RSpec.describe Schematics::WebhookRequestAbility do
 
   include_context 'with admin role'
 
-  let(:role) { Role.new }
-  let(:user) { User.new(role:) }
+  let(:role) { Demo::Role.new }
+  let(:user) { Demo::User.new(role:) }
 
-  it { is_expected.not_to be_able_to(:read, WebhookRequest) }
-  it { is_expected.not_to be_able_to(:retry, WebhookRequest) }
+  it { is_expected.not_to be_able_to(:read, Demo::WebhookRequest) }
+  it { is_expected.not_to be_able_to(:retry, Demo::WebhookRequest) }
 
   context 'when user is admin' do
     let(:role) { admin_role }
 
-    it { is_expected.to be_able_to(:read, WebhookRequest) }
-    it { is_expected.to be_able_to(:retry, WebhookRequest) }
+    it { is_expected.to be_able_to(:read, Demo::WebhookRequest) }
+    it { is_expected.to be_able_to(:retry, Demo::WebhookRequest) }
   end
 end

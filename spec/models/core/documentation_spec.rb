@@ -3,7 +3,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Documentation do
+RSpec.describe Demo::Documentation do
   include Schematics::Specs::Model
 
   its(:data) { is_expected.to be_empty }

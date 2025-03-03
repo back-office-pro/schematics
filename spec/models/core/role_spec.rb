@@ -3,7 +3,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Role do
+RSpec.describe Demo::Role do
   include Schematics::Specs::Model
 
   it { is_expected.not_to be_admin }

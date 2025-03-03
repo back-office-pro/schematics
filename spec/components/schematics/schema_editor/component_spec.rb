@@ -6,7 +6,7 @@ require 'rails_helper'
 RSpec.describe Schematics::SchemaEditor::Component, type: :component do
   subject(:component) { render_inline described_class.new(resource:) }
 
-  let(:resource) { Migration.new(data:) }
+  let(:resource) { Demo::Migration.new(data:) }
   let(:data) do
     [
       {

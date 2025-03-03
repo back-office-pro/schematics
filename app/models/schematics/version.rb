@@ -75,7 +75,7 @@ module Schematics
       return unless webhook_event
 
       PaperTrail.request(enabled: false) do
-        WebhookEndpoint.broadcast_all(webhook_event, item&.as_json(association: false))
+        Demo::WebhookEndpoint.broadcast_all(webhook_event, item&.as_json(association: false))
       end
     end
   end

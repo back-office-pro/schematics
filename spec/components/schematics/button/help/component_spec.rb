@@ -13,13 +13,13 @@ RSpec.describe Schematics::Button::Help::Component, type: :component do
   before { allow(vc_test_controller).to receive(:current_user).and_return(user) }
 
   context 'when model class is core but do not have external documentation' do
-    let(:model_class) { User }
+    let(:model_class) { Demo::User }
 
     it { is_expected.to have_no_link }
   end
 
   context 'when model class is core and have external documentation' do
-    let(:model_class) { Migration }
+    let(:model_class) { Demo::Migration }
     let(:path) { '/docs/en/reference/migrations' }
 
     it { is_expected.to have_link(text, href: Server.url(path:)) }

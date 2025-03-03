@@ -3,7 +3,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Import do
+RSpec.describe Demo::Import do
   include Schematics::Specs::Model
 
   its(:locale) { is_expected.to eq('en') }

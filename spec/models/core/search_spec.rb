@@ -3,6 +3,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Search do
+RSpec.describe Demo::Search do
   include Schematics::Specs::Model
 end

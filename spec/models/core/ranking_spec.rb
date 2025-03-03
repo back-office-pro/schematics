@@ -3,7 +3,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Ranking do
+RSpec.describe Demo::Ranking do
   include Schematics::Specs::Model
 
   it { is_expected.to be_a(Schematics::Measurable) }

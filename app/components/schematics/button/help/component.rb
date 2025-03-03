@@ -72,7 +72,7 @@ module Schematics
         private
 
         def external_doc?
-          !model_class || ALLOWLIST.include?(model_class.to_s)
+          !model_class || ALLOWLIST.include?(model_class.to_s.demodulize)
         end
 
         def path = File.join([t('.path'), slug].compact)

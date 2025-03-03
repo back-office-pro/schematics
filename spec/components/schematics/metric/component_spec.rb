@@ -10,7 +10,7 @@ RSpec.describe Schematics::Metric::Component, type: :component do
   include_context 'with admin role'
 
   let(:role) { admin_role }
-  let(:metric) { Metric.create!(aggregate: 'count', model: 'Task', threshold:) }
+  let(:metric) { Demo::Metric.create!(aggregate: 'count', model: 'Demo::Task', threshold:) }
 
   before { allow(vc_test_controller).to receive(:current_user).and_return(user) }
 

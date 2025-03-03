@@ -3,7 +3,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Metric do
+RSpec.describe Demo::Metric do
   include Schematics::Specs::Model
 
   it { is_expected.to be_a(Schematics::Measurable) }

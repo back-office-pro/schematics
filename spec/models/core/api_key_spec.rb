@@ -3,7 +3,7 @@
 
 require 'rails_helper'
 
-RSpec.describe APIKey do
+RSpec.describe Demo::APIKey do
   include Schematics::Specs::Model
 
   its(:login!) { is_expected.to eq(record) }
