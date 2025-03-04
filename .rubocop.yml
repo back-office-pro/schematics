@@ -73,6 +73,8 @@ Style/Copyright:
   Notice: '^Copyright .+'
   AutocorrectNotice: '# Copyright © 2025 Dev & Software. All rights reserved.'
   Exclude:
+    - app/components/**/*
+    - app/views/**/*
     - bin/importmap
     - bin/schematics
 Style/DateTime:
