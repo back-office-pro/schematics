@@ -5,6 +5,13 @@ require 'active_record_doctor'
 require 'active_record_doctor/rake/task'
 
 namespace :schematics do
+  namespace :copy do
+    desc 'Install engine migrations'
+    task migrations: :environment do
+      Core::Migrations::Copy.call
+    end
+  end
+
   namespace :db do
     desc 'Perform database backup'
     task backup: :environment do
@@ -26,7 +33,7 @@ namespace :schematics do
       desc 'Migrate database from sqlite3 to postgres'
       task postgres: :environment do
         db_path = Rails.root.join('storage', "#{Rails.env}.sqlite3")
-        db_name = [Tenant.app_name, Rails.env].join('_')
+        db_name = [Tenant.database_name, Rails.env].join('_')
         `createdb #{db_name}`
         `pgloader --with "preserve index names" sqlite://#{db_path} postgres://localhost/#{db_name}`
         FileUtils.touch Rails.root.join('tmp/restart.txt')
