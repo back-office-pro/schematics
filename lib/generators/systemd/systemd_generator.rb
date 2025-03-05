@@ -43,7 +43,7 @@ class SystemdGenerator < Rails::Generators::NamedBase
 
   def socket_filename = "puma-#{name}.socket"
 
-  def server_name = database_name
+  def server_name = name
     .underscore
     .humanize
 
