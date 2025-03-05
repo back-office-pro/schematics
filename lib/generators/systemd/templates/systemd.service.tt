@@ -7,6 +7,7 @@ Requires=<%= socket_filename %>
 User=root
 WorkingDirectory=<%= Rails.root %>
 Environment=RAILS_ENV=production
+Environment=DATABASE=<%= database_name %>
 ExecStart=<%= Rails.root.join('bin', 'rails') %> server
 StandardOutput=append:<%= Rails.root.join('log', 'systemd.access.log') %>
 StandardError=append:<%= Rails.root.join('log', 'systemd.error.log') %>
