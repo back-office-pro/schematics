@@ -60,7 +60,6 @@ Rails.application.configure do
   config.active_support.report_deprecations = false
 
   # Active Record
-  config.active_record.dump_schema_after_migration = false
   config.active_record.attributes_for_inspect = %i[id]
 
   # Logger
