@@ -11,11 +11,8 @@ module Schematics
       def generators = [migration_generator, translation_generator].compact
 
       def migration_generator = Rails::Generators::MigrationGenerator.new(
-        [
-          "create_join_table_#{attribute.join_table}",
-          table_name.pluralize,
-          "#{attribute.name}:uniq"
-        ]
+        ["create_join_table_#{attribute.join_table}", table_name.pluralize, "#{attribute.name}:uniq"], # rubocop:disable Layout/LineLength
+        ["--database=#{database}"]
       )
 
       def translation_generator

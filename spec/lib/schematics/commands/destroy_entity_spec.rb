@@ -2,10 +2,11 @@
 # frozen_string_literal: true
 
 describe Schematics::Commands::DestroyEntity do
-  subject(:command) { described_class.new(entity:) }
+  subject(:command) { described_class.new(database:, entity:) }
 
   include_context 'with custom generated attribute'
 
+  let(:database) { 'primary' }
   let(:schema) { Schematics::Schema.new }
   let(:entity) { Schematics::Entities::Entity.new(schema:, name:, attributes:, associations:) }
   let(:name) { 'assembly' }

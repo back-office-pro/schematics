@@ -2,10 +2,11 @@
 # frozen_string_literal: true
 
 describe Schematics::Commands::AddAttribute do
-  subject(:command) { described_class.new(entity:, attribute:) }
+  subject(:command) { described_class.new(database:, entity:, attribute:) }
 
   include_context 'with custom generated attribute'
 
+  let(:database) { 'primary' }
   let(:entity) { Schematics::Entities::Entity.new(name: 'client') }
   let(:attribute) { Schematics::Attributes::Attribute.build(entity:, type:, name: 'first_name') }
   let(:type) { 'string' }

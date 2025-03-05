@@ -15,7 +15,7 @@ module Schematics
         when Behaviours::Migratable
           Rails::Generators::MigrationGenerator.new(
             ["add_#{attribute.name}_to_#{table_name.pluralize}", attribute.to_s],
-            ['--primary_key_type=string']
+            ['--primary_key_type=string', "--database=#{database}"]
           )
         end
       end
