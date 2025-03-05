@@ -62,9 +62,11 @@ module Core
     end
 
     def migrator
-      return Schematics::Migrator.new(previously_migrated_schema, data) if state_rollbacking?
-
-      Schematics::Migrator.new(data, previously_migrated_schema)
+      if state_rollbacking?
+        Schematics::Migrator.new(Tenant.database_name, previously_migrated_schema, data)
+      else
+        Schematics::Migrator.new(Tenant.database_name, data, previously_migrated_schema)
+      end
     end
 
     def commit_message = [

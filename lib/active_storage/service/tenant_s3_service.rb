@@ -8,7 +8,7 @@ module ActiveStorage
     private
 
     def object_for(key)
-      bucket.object ::File.join(Tenant.app_name.dasherize, key)
+      bucket.object ::File.join(Tenant.database_name, key)
     end
   end
 end

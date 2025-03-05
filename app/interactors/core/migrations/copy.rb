@@ -6,14 +6,15 @@ module Core
     class Copy
       include Interactor
       delegate :copy, to: '::ActiveRecord::Migration', private: true
+      delegate :database_name, to: '::Tenant', private: true
 
       def call = copy(destination_path, source)
 
       private
 
-      def destination_path = ::ActiveRecord::Tasks::DatabaseTasks
-        .migrations_paths
-        .first
+      def destination_path = Schematics::Engine
+        .root
+        .join('db', "#{database_name}_migrate")
 
       def source = { schematics: ::Schematics::Engine.root.join('db', 'migrate') }
     end
