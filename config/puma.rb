@@ -9,5 +9,4 @@ bind ENV.fetch('SOCKET', "unix://#{Rails.root.join("tmp/sockets/#{Tenant.databas
 
 pidfile ENV.fetch('PIDFILE', Rails.root.join("tmp/pids/#{Tenant.database_name}.pid"))
 
-plugin :tmp_restart
 plugin :solid_queue
