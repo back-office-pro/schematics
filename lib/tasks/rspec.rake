@@ -14,8 +14,7 @@ namespace :schematics do
     desc 'Load current migration data'
     task prepare: :environment do
       suppress(ActiveStorage::FileNotFoundError) do
-        service = ENV['CI'].present? ? :amazon : :local
-        data = ActiveStorage::Blob.services.fetch(service).download('backups/migration.json')
+        data = ActiveStorage::Blob.service.download('backups/migration.json')
         PaperTrail.request(enabled: false) do
           Migration.create!(state: Migration::STATE_STATE_FINISHED, data: JSON.parse(data))
         end
