@@ -36,16 +36,7 @@ namespace :schematics do
         db_name = [Tenant.database_name, Rails.env].join('_')
         `createdb #{db_name}`
         `pgloader --with "preserve index names" sqlite://#{db_path} postgres://localhost/#{db_name}`
-        FileUtils.touch Rails.root.join('tmp/restart.txt')
-      end
-    end
-
-    namespace :encryption do
-      desc 'Generate database encryption credentials'
-      task init: :environment do
-        config = `rails db:encryption:init | tail -n +2`
-        credentials = Rails.application.credentials
-        credentials.write(credentials.read + config)
+        `pumactl -P #{Rails.root.join("tmp/pids/#{Tenant.database_name}.pid")} restart`
       end
     end
   end

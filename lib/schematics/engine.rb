@@ -120,6 +120,9 @@ module Schematics
     config.action_dispatch.signed_cookie_digest = 'SHA256'
 
     # Active Record
+    config.active_record.encryption.primary_key = credentials.active_record_encryption.primary_key
+    config.active_record.encryption.deterministic_key = credentials.active_record_encryption.deterministic_key # rubocop:disable Layout/LineLength
+    config.active_record.encryption.key_derivation_salt = credentials.active_record_encryption.key_derivation_salt # rubocop:disable Layout/LineLength
     config.active_record.enumerate_columns_in_select_statements = true
     config.active_record.async_query_executor = :global_thread_pool
     config.active_record.strict_loading_by_default = true
