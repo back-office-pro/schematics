@@ -7,17 +7,14 @@ require 'optparse'
 require_relative '../lib/generators/app/app_generator'
 require_relative '../lib/generators/tenant/tenant_generator'
 
-generator = AppGenerator
+tenant = false
 name = 'spec/demo'
 options = {}
 
 OptionParser
   .new do |opts|
     opts.on('--server', '--server=NAME', 'Generate a new server') { name = it }
-    opts.on('--tenant', '--tenant=NAME', 'Generate a new tenant') do
-      generator = TenantGenerator
-      name = it
-    end
+    opts.on('--tenant', '--tenant=NAME', 'Generate a new tenant') { tenant = name = it }
     opts.on('--destroy', 'Destroy server or tenant') do
       options[:behavior] = :revoke
       printf "\e[31mAre you sure? Press 'y' to continue: \e[0m"
@@ -31,9 +28,11 @@ if ENV['CI'].blank?
   $stderr.reopen($stdout)
 end
 
-generator
-  .new([name], **options)
-  .invoke_all
+if tenant
+  TenantGenerator.new([name], [], **options).invoke_all
+else
+  AppGenerator.new([name], **options).invoke_all
+end
 
 $stdout = STDOUT
 $stderr = STDERR
