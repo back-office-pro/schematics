@@ -69,13 +69,6 @@ module Core
       end
     end
 
-    def commit_message = [
-      ('[Rollback]' if state_rollbacking?),
-      self.class.name,
-      version&.to_s&.prepend('v'),
-      "(core v#{Schematics::VERSION})"
-    ].compact.join(' ')
-
     # :reek:ControlParameter
     def finalize!(failure)
       return state_error! if failure
