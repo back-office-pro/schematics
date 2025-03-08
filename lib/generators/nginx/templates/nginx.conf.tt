@@ -1,6 +1,6 @@
 <%- if Server.ssl? -%>
 upstream <%= upstream_name %> {
-  server unix://<%= Rails.root.join('tmp', 'sockets', 'puma.sock') %>;
+  server unix://<%= Rails.root.join('tmp', 'sockets', "#{name}.sock") %>;
 }
 
 server {
@@ -11,8 +11,8 @@ server {
   root <%= Rails.root.join('public') %>;
   try_files $uri/index.html $uri @<%= upstream_name %>;
 
-  access_log <%= Rails.root.join('log', 'nginx.access.log') %>;
-  error_log <%= Rails.root.join('log', 'nginx.error.log') %> info;
+  access_log <%= Rails.root.join('log', name, 'nginx.access.log') %>;
+  error_log <%= Rails.root.join('log', name, 'nginx.error.log') %> info;
 
   location @<%= upstream_name %> {
     proxy_pass http://<%= upstream_name %>;
@@ -30,7 +30,7 @@ server {
 }
 <%- else -%>
 upstream <%= upstream_name %> {
-  server unix://<%= Rails.root.join('tmp', 'sockets', 'puma.sock') %>;
+  server unix://<%= Rails.root.join('tmp', 'sockets', "#{name}.sock") %>;
 }
 
 server {
@@ -41,8 +41,8 @@ server {
   root <%= Rails.root.join('public') %>;
   try_files $uri/index.html $uri @<%= upstream_name %>;
 
-  access_log <%= Rails.root.join('log', 'nginx.access.log') %>;
-  error_log <%= Rails.root.join('log', 'nginx.error.log') %> info;
+  access_log <%= Rails.root.join('log', name, 'nginx.access.log') %>;
+  error_log <%= Rails.root.join('log', name, 'nginx.error.log') %> info;
 
   location @<%= upstream_name %> {
     proxy_pass http://<%= upstream_name %>;
