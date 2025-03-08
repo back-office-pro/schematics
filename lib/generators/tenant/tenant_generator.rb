@@ -2,7 +2,8 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/string/inquiry'
-require 'rails/generators'
+require 'fileutils'
+require 'rails/generators/named_base'
 
 class TenantGenerator < Rails::Generators::NamedBase
   def install_migrations
@@ -80,6 +81,13 @@ class TenantGenerator < Rails::Generators::NamedBase
     return unless destroying?
 
     `RAILS_ENV=#{env} DATABASE=#{name} DISABLE_DATABASE_ENVIRONMENT_CHECK=1 rails db:drop`
+  end
+
+  def destroy_migrations
+    return unless destroying?
+
+    FileUtils.rm_rf("db/#{name}_migrate")
+    FileUtils.rm_rf("db/#{name}_search_migrate")
   end
 
   private
