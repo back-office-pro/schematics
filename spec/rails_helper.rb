@@ -3,6 +3,7 @@
 
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
+`cd spec/demo && rails db:schema:dump DATABASE=demo`
 `cd spec/demo && rails db:test:prepare`
 require File.expand_path('../spec/demo/config/environment', __dir__)
 require 'paper_trail/frameworks/rspec'
