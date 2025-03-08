@@ -14,8 +14,7 @@ module Core
                Reload,
                RebuildSearchIndexes,
                CleanDocumentation,
-               GenerateFixture,
-               Commit
+               GenerateFixture
     end
   end
 end
