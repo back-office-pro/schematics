@@ -9,7 +9,7 @@ RSpec.describe Schematics::Tenant do
   context 'when subdomain is blank' do
     let(:subdomain) { '' }
 
-    its(:subdomain) { is_expected.to eq('demo') }
+    its(:subdomain) { is_expected.to be_nil }
     its(:default_url_options) { is_expected.to eq(host: 'localhost', port: 3000) }
     it { is_expected.not_to be_demo }
   end
