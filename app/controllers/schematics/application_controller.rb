@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  class ApplicationController < ::Server.application_controller_class
+  class ApplicationController < ::ActionController::Base
     include ::Pagy::Backend
     include Reloadable
     include Tenantable
