@@ -11,7 +11,7 @@ module Core
       def call
         %w[migrate search_migrate].each do |directory|
           copy(
-            Rails.root.join('db', "#{database_name}_#{directory}"),
+            Rails.root.join('db', database_name, directory),
             { schematics: Schematics::Engine.root.join('db', directory) }
           )
         end

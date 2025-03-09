@@ -6,53 +6,53 @@ default: &default
 development:
   primary:
     <<: *default
-    database: storage/development_<%= Tenant.database_name %>.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>_migrate
+    database: storage/<%= Tenant.database_name %>/development.sqlite3
+    migrations_paths: db/<%= Tenant.database_name %>/migrate
   search:
     <<: *default
-    database: storage/development_search_<%= Tenant.database_name %>.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>_search_migrate
+    database: storage/<%= Tenant.database_name %>/development_search.sqlite3
+    migrations_paths: db/<%= Tenant.database_name %>/search_migrate
   cable:
     <<: *default
-    database: storage/development_cable_<%= Tenant.database_name %>.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>_cable_migrate
+    database: storage/<%= Tenant.database_name %>/development_cable.sqlite3
+    migrations_paths: db/<%= Tenant.database_name %>/cable_migrate
   cache:
     <<: *default
-    database: storage/development_cache_<%= Tenant.database_name %>.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>_cache_migrate
+    database: storage/<%= Tenant.database_name %>/development_cache.sqlite3
+    migrations_paths: db/<%= Tenant.database_name %>/cache_migrate
   queue:
     <<: *default
-    database: storage/development_queue_<%= Tenant.database_name %>.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>_queue_migrate
+    database: storage/<%= Tenant.database_name %>/development_queue.sqlite3
+    migrations_paths: db/<%= Tenant.database_name %>/queue_migrate
 
 test:
   primary:
     <<: *default
-    database: storage/test_<%= Tenant.database_name %>.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>_migrate
+    database: storage/<%= Tenant.database_name %>/test.sqlite3
+    migrations_paths: db/<%= Tenant.database_name %>/migrate
   search:
     <<: *default
-    database: storage/test_search_<%= Tenant.database_name %>.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>_search_migrate
+    database: storage/<%= Tenant.database_name %>/test_search.sqlite3
+    migrations_paths: db/<%= Tenant.database_name %>/search_migrate
 
 production:
   primary:
     <<: *default
-    database: storage/production_<%= Tenant.database_name %>.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>_migrate
+    database: storage/<%= Tenant.database_name %>/production.sqlite3
+    migrations_paths: db/<%= Tenant.database_name %>/migrate
   search:
     <<: *default
-    database: storage/production_search_<%= Tenant.database_name %>.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>_search_migrate
+    database: storage/<%= Tenant.database_name %>/production_search.sqlite3
+    migrations_paths: db/<%= Tenant.database_name %>/search_migrate
   cable:
     <<: *default
-    database: storage/production_cable_<%= Tenant.database_name %>.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>_cable_migrate
+    database: storage/<%= Tenant.database_name %>/production_cable.sqlite3
+    migrations_paths: db/<%= Tenant.database_name %>/cable_migrate
   cache:
     <<: *default
-    database: storage/production_cache_<%= Tenant.database_name %>.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>_cache_migrate
+    database: storage/<%= Tenant.database_name %>/production_cache.sqlite3
+    migrations_paths: db/<%= Tenant.database_name %>/cache_migrate
   queue:
     <<: *default
-    database: storage/production_queue_<%= Tenant.database_name %>.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>_queue_migrate
+    database: storage/<%= Tenant.database_name %>/production_queue.sqlite3
+    migrations_paths: db/<%= Tenant.database_name %>/queue_migrate

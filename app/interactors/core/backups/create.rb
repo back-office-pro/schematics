@@ -31,7 +31,7 @@ module Core
         end
       end
 
-      def db_path = root.join('storage', "#{env}_#{database_name}.sqlite3")
+      def db_path = root.join('storage', database_name, "#{env}.sqlite3")
 
       def tables = Array(context.tables)
 
