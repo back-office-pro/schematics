@@ -10,7 +10,7 @@ module Core
       delegate :migrator_new_and_changed_entities, to: :migration, private: true
       delegate :perform_all_later, to: '::ActiveJob', private: true
 
-      progressable migration: 75
+      progressable migration: 85
 
       def call = perform_all_later(
         migrator_new_and_changed_entities
