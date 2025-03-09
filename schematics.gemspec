@@ -16,7 +16,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 3.4.2'
   spec.metadata['allowed_push_host'] = 'https://www.back-office.pro:9292/private'
   spec.metadata['rubygems_mfa_required'] = 'true'
-  spec.files = Dir['.bundle/config', '{app,config,db,lib}/**/{*,.*}', 'Capfile', 'package.json']
+  spec.files = Dir['.bundle/config', '{app,config,db,lib}/**/{*,.*}', 'package.json']
   spec.executables << 'schematics'
   spec.add_development_dependency 'debug', '1.10.0'
   spec.add_development_dependency 'fuubar', '2.5.1'
@@ -52,10 +52,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'browser', '6.2.0'
   spec.add_dependency 'bundler-audit', '0.9.2'
   spec.add_dependency 'cancancan', '3.6.1'
-  spec.add_dependency 'capistrano', '3.19.2'
-  spec.add_dependency 'capistrano3-puma', '6.0.0'
-  spec.add_dependency 'capistrano-bundler', '2.1.1'
-  spec.add_dependency 'capistrano-rails', '1.7.0'
   spec.add_dependency 'capybara', '3.40.0'
   spec.add_dependency 'chartkick', '5.1.4'
   spec.add_dependency 'chroma', '0.2.0'

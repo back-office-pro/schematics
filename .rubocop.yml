@@ -120,7 +120,6 @@ Style/RequireOrder:
   Exclude:
     - spec/**/*
     - bin/importmap
-    - Capfile
     - lib/schematics.rb
     - lib/schematics/commands/*.rb
     - app/controllers/schematics/resources_controller.rb
