@@ -8,7 +8,7 @@ RUN apk --update add --virtual \
     runtime-deps build-base libxml2-dev \
     libxslt-dev nodejs yarn libffi-dev readline \
     build-base sqlite-dev libc-dev linux-headers \
-    readline-dev file git tzdata graphviz jemalloc pgloader ffmpeg bash \
+    readline-dev file tzdata graphviz jemalloc pgloader ffmpeg bash \
     && rm -rf /var/cache/apk/*
 
 ARG BUNDLE_GITHUB__COM

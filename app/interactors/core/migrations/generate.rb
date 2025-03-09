@@ -29,10 +29,6 @@ module Core
         fail!
       end
 
-      def rollback = ::Git
-        .init
-        .clean(ff: true, d: true)
-
       private
 
       def invoke(generator)
