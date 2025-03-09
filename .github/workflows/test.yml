@@ -26,76 +26,46 @@ jobs:
           cd spec/demo && ruby ../../bin/schematics --tenant demo
       - name: Run ability tests
         if: always()
-        env:
-          RAILS_ENV: test
         run: bundle exec rspec spec/abilities
       - name: Run component tests
         if: always()
-        env:
-          RAILS_ENV: test
         run: bundle exec rspec spec/components
       - name: Run config tests
         if: always()
-        env:
-          RAILS_ENV: test
         run: bundle exec rspec spec/config
       - name: Run db tests
         if: always()
-        env:
-          RAILS_ENV: test
         run: bundle exec rspec spec/db
       - name: Run feature tests
         if: always()
-        env:
-          RAILS_ENV: test
         run: bundle exec rspec spec/features
       - name: Run generator tests
         if: always()
-        env:
-          RAILS_ENV: test
         run: bundle exec rspec spec/generators
       - name: Run mailer tests
         if: always()
-        env:
-          RAILS_ENV: test
         run: bundle exec rspec spec/mailers
       - name: Run mapper tests
         if: always()
-        env:
-          RAILS_ENV: test
         run: bundle exec rspec spec/mappers
       - name: Run model tests
         if: always()
-        env:
-          RAILS_ENV: test
         run: bundle exec rspec spec/models
       - name: Run query tests
         if: always()
-        env:
-          RAILS_ENV: test
         run: bundle exec rspec spec/queries
       - name: Run routing tests
         if: always()
-        env:
-          RAILS_ENV: test
         run: bundle exec rspec spec/routing
       - name: Run serializer tests
         if: always()
-        env:
-          RAILS_ENV: test
         run: bundle exec rspec spec/serializers
       - name: Run request tests
         if: always()
-        env:
-          RAILS_ENV: test
         run: bundle exec rspec spec/requests
       - name: Run interactor tests
         if: always()
-        env:
-          RAILS_ENV: test
         run: bundle exec rspec spec/interactors
       - name: Run job tests
         if: always()
-        env:
-          RAILS_ENV: test
         run: bundle exec rspec spec/jobs
