@@ -20,12 +20,10 @@ jobs:
       - name: Install app generator gems
         run: |
           gem install rails -v 8.0.1
-      - name: Git configuration
-        run: |
-          git config --global user.name "back-office"
-          git config --global user.email "support@back-office.pro"
       - name: Generate test application
-        run: ruby bin/schematics
+        run: |
+          ruby bin/schematics
+          cd spec/demo && ruby ../../bin/schematics --tenant demo
       - name: Run ability tests
         if: always()
         env:
