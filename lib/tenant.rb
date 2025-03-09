@@ -8,7 +8,7 @@ class Tenant
   class << self
     delegate :port, to: 'Server', private: true
 
-    def database_name = ENV.fetch('DATABASE', nil)
+    def database_name = ENV.fetch('DATABASE', 'demo')
 
     def default_url_options = { host:, port: }.compact
 

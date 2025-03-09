@@ -7,10 +7,7 @@ require 'rails'
 describe Tenant do
   subject { described_class }
 
-  before do
-    allow(Rails).to receive(:env).and_return(environment.inquiry)
-    stub_const('ENV', { 'DATABASE' => 'demo' })
-  end
+  before { allow(Rails).to receive(:env).and_return(environment.inquiry) }
 
   context 'when environment is development' do
     let(:environment) { 'development' }
