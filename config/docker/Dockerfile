@@ -19,10 +19,6 @@ ENV WEB_CONCURRENCY=auto
 ENV RAILS_ENV=production
 ENV LD_PRELOAD="/usr/lib/libjemalloc.so.2"
 
-RUN git config --global user.name "back-office"
-RUN git config --global user.email "support@back-office.pro"
-RUN git config --global init.defaultBranch "main"
-
 WORKDIR /app
 COPY . /app
 
