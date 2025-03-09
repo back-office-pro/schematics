@@ -2,7 +2,6 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-`cd spec/demo && rails db:schema:dump DATABASE=demo`
 ENV['RAILS_ENV'] ||= 'test'
 `cd spec/demo && rails db:test:prepare`
 require File.expand_path('../spec/demo/config/environment', __dir__)

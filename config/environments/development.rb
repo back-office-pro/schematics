@@ -50,6 +50,9 @@ Rails.application.configure do
   # Action View
   config.action_view.annotate_rendered_view_with_filenames = true
 
+  # Web Console
+  config.web_console.permissions = '192.168.0.0/16'
+
   # Assets
   config.assets.quiet = true
 

@@ -127,7 +127,6 @@ module Schematics
     config.active_record.strict_loading_by_default = true
     config.active_record.query_log_tags_enabled = true
     config.active_record.migration_error = false
-    config.active_record.dump_schema_after_migration = false
     config.active_record.action_on_strict_loading_violation = :log
     config.active_record.encryption.support_unencrypted_data = true
     config.active_record.encryption.extend_queries = true
