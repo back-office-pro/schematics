@@ -51,8 +51,6 @@ RSpec.describe Core::Migrations::Migrate do
     end
   end
 
-  before { stub_const('ENV', { 'DATABASE' => 'demo' }) }
-
   describe '.call' do
     context 'when creating a new entity' do
       let(:data) { initial_data }
