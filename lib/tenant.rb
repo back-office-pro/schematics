@@ -1,16 +1,13 @@
 # Copyright © 2025 Dev & Software. All rights reserved.
 # frozen_string_literal: true
 
-require 'active_support/core_ext/module/delegation'
 require 'pg'
 
 class Tenant
   class << self
-    delegate :port, to: 'Server', private: true
-
     def database_name = ENV.fetch('DATABASE', 'demo')
 
-    def default_url_options = { host:, port: }.compact
+    def default_url_options = { host:, port: Server.port }.compact
 
     def database = %i[sqlite3 postgresql][database_index]
 
