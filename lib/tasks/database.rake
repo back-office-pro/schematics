@@ -39,5 +39,14 @@ namespace :schematics do
         `pumactl -P #{Rails.root.join("tmp/pids/#{Tenant.database_name}.pid")} restart`
       end
     end
+
+    namespace :encryption do
+      desc 'Generate database encryption credentials'	
+      task init: :environment do	
+        config = `rails db:encryption:init | tail -n +2`	
+        credentials = Rails.application.credentials	
+        credentials.write(credentials.read + config)	
+      end
+    end
   end
 end
