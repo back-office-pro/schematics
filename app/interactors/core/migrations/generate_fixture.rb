@@ -7,7 +7,7 @@ module Core
       include Schematics::Progressable
       delegate :migration, to: :context, private: true
 
-      progressable migration: 90
+      progressable migration: 100
 
       def call
         ::ActiveStorage::Blob.find_by(key:).try(:purge)

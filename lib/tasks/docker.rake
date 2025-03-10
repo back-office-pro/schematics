@@ -29,23 +29,5 @@ namespace :schematics do
     task up: :environment do
       run :up, '-d'
     end
-
-    desc 'Docker entrypoint'
-    task :entrypoint do # rubocop:disable Rails/RakeEnvironment
-      puts 'Creating database...'
-      `bin/rails db:create`
-      puts 'Migrating database...'
-      `bin/rails db:migrate`
-      puts 'Preparing database...'
-      `bin/rails db:prepare`
-      puts 'Loading subscription...'
-      `bin/rails schematics:subscription:load`
-      puts 'Seeding database...'
-      `bin/rails schematics:db:seed`
-      puts 'Credentials backup...'
-      `bin/rails schematics:credentials:backup`
-      puts 'Removing pid file...'
-      `rm -rf tmp/pids/server.pid`
-    end
   end
 end

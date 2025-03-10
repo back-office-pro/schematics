@@ -8,7 +8,6 @@ RSpec.describe Migration do
 
   its(:locale) { is_expected.to eq('en') }
   its(:migrator) { is_expected.to be_a(Schematics::Migrator) }
-  its(:commit_message) { is_expected.to eq('Migration v0.0 (core v1.0.0)') }
 
   it 'enqueues a migrate schema job after migrate' do
     expect { record.migrate! }

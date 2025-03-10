@@ -8,6 +8,7 @@ module Core
       include Schematics::Progressable
 
       delegate :migration, :fail!, to: :context, private: true
+      delegate :database_name, to: '::Tenant', private: true
       delegate :migrator_clean_commands,
                :migrator_build_commands,
                :persisted?,
@@ -16,7 +17,10 @@ module Core
 
       progressable migration: 40
 
-      before { @index = Concurrent::AtomicFixnum.new }
+      before do
+        @index = Concurrent::AtomicFixnum.new
+        @files = migration_files
+      end
 
       # :reek:UncommunicativeVariableName
       def call
@@ -29,9 +33,9 @@ module Core
         fail!
       end
 
-      def rollback = ::Git
-        .init
-        .clean(ff: true, d: true)
+      def rollback = migration_files
+        .excluding(@files)
+        .each(&:delete)
 
       private
 
@@ -42,6 +46,10 @@ module Core
 
         update_progress!(@index.value.to_f / total * self.class.progress)
       end
+
+      def migration_files = ::Rails
+        .root
+        .glob("db/#{database_name}/migrate/*")
 
       def total = migrator_clean_commands
         .concat(migrator_build_commands)

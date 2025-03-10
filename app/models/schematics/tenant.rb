@@ -9,7 +9,7 @@ module Schematics
     attr_writer :subdomain
 
     def subdomain
-      @subdomain.presence || Rails.application.class.module_parent_name.underscore.dasherize
+      @subdomain.presence || ENV.fetch('DATABASE', 'demo')
     end
 
     def demo?

@@ -1,9 +1,6 @@
 # Copyright © 2025 Dev & Software. All rights reserved.
 # frozen_string_literal: true
 
-COMPANY_NAME = ENV['NAME']&.underscore&.humanize.freeze
-PASSWORD = (ENV['NAME'] == 'demo' ? Schematics::Attributes::Digest::DEFAULT : nil).freeze
-
 PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
   Role.create!(
     [
@@ -22,13 +19,17 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
     ]
   )
   Configuration.instance.update!(
-    company_name: COMPANY_NAME,
+    company_name: Tenant.database_name.underscore.humanize,
     available_locales: [Subscription.default_locale],
     locale: Subscription.default_locale
   )
   Documentation.create!
   Migration.default.save!
-  User.create!(email: Subscription.email, password: PASSWORD, role: Role.admin)
+  User.create!(
+    email: Subscription.email,
+    password: (Schematics::Attributes::Digest::DEFAULT if Tenant.database_name.eql?('demo')),
+    role: Role.admin
+  )
   Dashboard.create!(
     [
       {

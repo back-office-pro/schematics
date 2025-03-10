@@ -9,7 +9,7 @@ module Core
       delegate :migration, to: :context, private: true
       delegate :migrator_new_schema, :version, to: :migration, private: true
 
-      progressable migration: 80
+      progressable migration: 90
 
       def call = ::Documentation.create!(
         schema: migrator_new_schema,

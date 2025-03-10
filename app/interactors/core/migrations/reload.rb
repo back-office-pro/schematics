@@ -12,7 +12,7 @@ module Core
                to: :migration,
                private: true
 
-      progressable migration: 70
+      progressable migration: 75
 
       def call
         Rails.cache.delete('schema:current')

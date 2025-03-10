@@ -38,16 +38,17 @@ module Schematics
 
       def migration_generator = Rails::Generators::MigrationGenerator.new(
         ["drop_#{table_name.pluralize}", *migratable_attributes],
-        ['--timestamps=true', '--primary_key_type=string']
+        ['--timestamps=true', '--primary_key_type=string', "--database=#{database}"]
       )
 
+      # :reek:FeatureEnvy
       def drop_join_table_migration_generator(association)
         Rails::Generators::MigrationGenerator.new(
           [
             "drop_join_table_#{association.join_table}",
             association.entity.table_name.pluralize,
             association.inverse_entity.table_name.pluralize
-          ]
+          ], ["--database=#{database}"]
         )
       end
     end

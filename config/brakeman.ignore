@@ -49,6 +49,28 @@
       "note": ""
     },
     {
+      "warning_type": "Cross-Site Request Forgery",
+      "warning_code": 86,
+      "fingerprint": "f4518f7da0fe3b81962f193b43c4ed13521d0e52c73cf65f5c97aa2c8f70769e",
+      "check_name": "ForgerySetting",
+      "message": "`protect_from_forgery` should be configured with `with: :exception`",
+      "file": "app/controllers/schematics/application_controller.rb",
+      "line": 24,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross-site_request_forgery/",
+      "code": "protect_from_forgery(:with => :null_session, :if => (lambda do\n request.format.json?\n end))",
+      "render_path": null,
+      "location": {
+        "type": "controller",
+        "controller": "Schematics::ApplicationController"
+      },
+      "user_input": null,
+      "confidence": "Medium",
+      "cwe_id": [
+        352
+      ],
+      "note": ""
+    },
+    {
       "warning_type": "Remote Code Execution",
       "warning_code": 24,
       "fingerprint": "fdfa87309cf59ba32c022b457b04bb9bf2c296f710463a8d75c9ab45444fabdb",

@@ -57,16 +57,12 @@ module Core
 
     def load!
       PaperTrail.request(enabled: false) do
-        update!(GATEWAY::Fetch.call(customer_name: ::Tenant.app_name.dasherize).data)
+        update!(GATEWAY::Fetch.call.data)
       end
     end
 
-    def after_enable_event
-      GATEWAY::Enable.call(customer_name: ::Tenant.app_name.dasherize)
-    end
+    def after_enable_event = GATEWAY::Enable.call
 
-    def after_cancel_event
-      GATEWAY::Cancel.call(customer_name: ::Tenant.app_name.dasherize)
-    end
+    def after_cancel_event = GATEWAY::Cancel.call
   end
 end

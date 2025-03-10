@@ -5,16 +5,17 @@
 
 require 'optparse'
 require_relative '../lib/generators/app/app_generator'
+require_relative '../lib/generators/tenant/tenant_generator'
 
-app_name = 'spec/demo'
-log_name = 'log/demo'
+tenant = false
+name = 'spec/demo'
 options = {}
 
 OptionParser
   .new do |opts|
-    opts.on('--name', '--name=NAME', 'Application name') { app_name = log_name = it }
-    opts.on('--container', 'Run into docker') { options[:container] = true }
-    opts.on('--destroy', 'Destroy application') do
+    opts.on('--server', '--server=NAME', 'Generate a new server') { name = it }
+    opts.on('--tenant', '--tenant=NAME', 'Generate a new tenant') { tenant = name = it }
+    opts.on('--destroy', 'Destroy server or tenant') do
       options[:behavior] = :revoke
       printf "\e[31mAre you sure? Press 'y' to continue: \e[0m"
       exit unless $stdin.gets.chomp == 'y'
@@ -22,14 +23,16 @@ OptionParser
   end.parse!
 
 if ENV['CI'].blank?
-  $stdout.reopen("#{log_name}.log", 'w')
+  $stdout.reopen("log/#{name}.log", 'w')
   $stdout.sync = true
   $stderr.reopen($stdout)
 end
 
-AppGenerator
-  .new([app_name], **options)
-  .invoke_all
+if tenant
+  TenantGenerator.new([name], [], **options).invoke_all
+else
+  AppGenerator.new([name], **options).invoke_all
+end
 
 $stdout = STDOUT
 $stderr = STDERR

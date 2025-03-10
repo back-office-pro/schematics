@@ -10,7 +10,7 @@ module Core
       delegate :connection_pool, :transaction, to: '::ActiveRecord::Base', private: true
       delegate :migrate, to: 'connection_pool.migration_context', private: true
 
-      progressable migration: 55
+      progressable migration: 60
 
       # :reek:UncommunicativeVariableName
       def call

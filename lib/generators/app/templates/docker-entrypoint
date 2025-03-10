@@ -1,5 +1,10 @@
 #!/bin/bash -e
 
-bin/rails schematics:docker:entrypoint
+bin/rails db:create
+bin/rails db:migrate
+bin/rails db:prepare
+bin/rails schematics:subscription:load
+bin/rails schematics:db:seed
+bin/rails schematics:credentials:backup
 
 exec "$@"

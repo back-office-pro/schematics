@@ -64,16 +64,16 @@ RSpec.describe Core::Migrations::Migrate do
           .and change(Translation, :count).by(15)
           .and change(Documentation, :count).by(1)
         expect(migration.backup).not_to be_attached
-        expect(Dir[root.join('db/migrate/*_create_prospects_*.rb')]).not_to be_empty
-        expect(Dir[root.join('db/migrate/*_create_join_table_prospects_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('db/demo/migrate/*_create_prospects_*.rb')]).not_to be_empty
+        expect(Dir[root.join('db/demo/migrate/*_create_join_table_prospects_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect { Prospect }.not_to raise_error
         # rollback
         expect { expect(rollback).to be_a_success }
           .to change(Permission.with_deleted, :count).by(-6)
           .and change(Translation.with_deleted, :count).by(-15)
           .and change(Documentation.with_deleted, :count).by(-1)
-        expect(Dir[root.join('db/migrate/*_drop_prospects_*.rb')]).not_to be_empty
-        expect(Dir[root.join('db/migrate/*_drop_join_table_prospects_users_*.rb')]).not_to be_empty
+        expect(Dir[root.join('db/demo/migrate/*_drop_prospects_*.rb')]).not_to be_empty
+        expect(Dir[root.join('db/demo/migrate/*_drop_join_table_prospects_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect { Prospect }.to raise_error(NameError)
       end
     end
@@ -112,9 +112,9 @@ RSpec.describe Core::Migrations::Migrate do
           .and not_change(Translation, :count)
           .and change(Documentation, :count).by(1)
         expect(migration.backup).not_to be_attached
-        expect(Dir[root.join('db/migrate/*_rename_prospects_to_clients_*.rb')]).not_to be_empty
-        expect(Dir[root.join('db/migrate/*_rename_prospects_users_to_clients_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
-        expect(Dir[root.join('db/migrate/*_rename_prospect_id_to_client_id_in_clients_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('db/demo/migrate/*_rename_prospects_to_clients_*.rb')]).not_to be_empty
+        expect(Dir[root.join('db/demo/migrate/*_rename_prospects_users_to_clients_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('db/demo/migrate/*_rename_prospect_id_to_client_id_in_clients_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect { Prospect }.to raise_error(NameError)
         expect { Client }.not_to raise_error
         # rollback
@@ -122,9 +122,9 @@ RSpec.describe Core::Migrations::Migrate do
           .to not_change(Permission.with_deleted, :count)
           .and not_change(Translation.with_deleted, :count)
           .and change(Documentation.with_deleted, :count).by(-1)
-        expect(Dir[root.join('db/migrate/*_rename_clients_to_prospects_*.rb')]).not_to be_empty
-        expect(Dir[root.join('db/migrate/*_rename_clients_users_to_prospects_users*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
-        expect(Dir[root.join('db/migrate/*_rename_client_id_to_prospect_id_in_prospects_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('db/demo/migrate/*_rename_clients_to_prospects_*.rb')]).not_to be_empty
+        expect(Dir[root.join('db/demo/migrate/*_rename_clients_users_to_prospects_users*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('db/demo/migrate/*_rename_client_id_to_prospect_id_in_prospects_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect { Prospect }.not_to raise_error
         expect { Client }.to raise_error(NameError)
       end
@@ -147,8 +147,8 @@ RSpec.describe Core::Migrations::Migrate do
           .and change(Translation.with_deleted, :count).by(-15)
           .and change(Documentation, :count).by(1)
         expect(migration.backup).to be_attached
-        expect(Dir[root.join('db/migrate/*_drop_prospects_*.rb')]).not_to be_empty
-        expect(Dir[root.join('db/migrate/*_drop_join_table_prospects_users_*.rb')]).not_to be_empty
+        expect(Dir[root.join('db/demo/migrate/*_drop_prospects_*.rb')]).not_to be_empty
+        expect(Dir[root.join('db/demo/migrate/*_drop_join_table_prospects_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect { Prospect }.to raise_error(NameError)
         expect { prospect.reload }.to raise_error(ActiveRecord::StatementInvalid)
         # rollback
@@ -156,8 +156,8 @@ RSpec.describe Core::Migrations::Migrate do
           .to change(Permission, :count).by(6)
           .and change(Translation, :count).by(15)
           .and change(Documentation.with_deleted, :count).by(-1)
-        expect(Dir[root.join('db/migrate/*_create_prospects_*.rb')]).not_to be_empty
-        expect(Dir[root.join('db/migrate/*_create_join_table_prospects_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('db/demo/migrate/*_create_prospects_*.rb')]).not_to be_empty
+        expect(Dir[root.join('db/demo/migrate/*_create_join_table_prospects_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect { Prospect }.not_to raise_error
         expect { prospect.reload }.not_to raise_error
       end
@@ -202,14 +202,14 @@ RSpec.describe Core::Migrations::Migrate do
           .and change(Translation, :count).by(3)
           .and change(Documentation, :count).by(1)
         expect(migration.backup).not_to be_attached
-        expect(Dir[root.join('db/migrate/*_add_last_name_to_prospects_*.rb')]).not_to be_empty
+        expect(Dir[root.join('db/demo/migrate/*_add_last_name_to_prospects_*.rb')]).not_to be_empty
         expect(Prospect.new).to respond_to(:last_name)
         # rollback
         expect { expect(rollback).to be_a_success }
           .to not_change(Permission.with_deleted, :count)
           .and change(Translation.with_deleted, :count).by(-3)
           .and change(Documentation.with_deleted, :count).by(-1)
-        expect(Dir[root.join('db/migrate/*_remove_last_name_from_prospects_*.rb')]).not_to be_empty
+        expect(Dir[root.join('db/demo/migrate/*_remove_last_name_from_prospects_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Prospect.new).not_to respond_to(:last_name)
       end
     end
@@ -241,14 +241,14 @@ RSpec.describe Core::Migrations::Migrate do
           .and change(Translation.with_deleted, :count).by(-3)
           .and change(Documentation, :count).by(1)
         expect(migration.backup).not_to be_attached
-        expect(Dir[root.join('db/migrate/*_remove_first_name_from_prospects_*.rb')]).not_to be_empty
+        expect(Dir[root.join('db/demo/migrate/*_remove_first_name_from_prospects_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Prospect.new).not_to respond_to(:first_name)
         # rollback
         expect { expect(rollback).to be_a_success }
           .to not_change(Permission.with_deleted, :count)
           .and change(Translation, :count).by(3)
           .and change(Documentation.with_deleted, :count).by(-1)
-        expect(Dir[root.join('db/migrate/*_add_first_name_to_prospects_*.rb')]).not_to be_empty
+        expect(Dir[root.join('db/demo/migrate/*_add_first_name_to_prospects_*.rb')]).not_to be_empty
         expect(Prospect.new).to respond_to(:first_name)
       end
     end
@@ -292,14 +292,14 @@ RSpec.describe Core::Migrations::Migrate do
           .and change(Translation, :count).by(3)
           .and change(Documentation, :count).by(1)
         expect(migration.backup).not_to be_attached
-        expect(Dir[root.join('db/migrate/*_add_user_to_prospects_*.rb')]).not_to be_empty
+        expect(Dir[root.join('db/demo/migrate/*_add_user_to_prospects_*.rb')]).not_to be_empty
         expect(Prospect.new).to respond_to(:user)
         # rollback
         expect { expect(rollback).to be_a_success }
           .to not_change(Permission.with_deleted, :count)
           .and change(Translation.with_deleted, :count).by(-3)
           .and change(Documentation.with_deleted, :count).by(-1)
-        expect(Dir[root.join('db/migrate/*_remove_user_from_prospects_*.rb')]).not_to be_empty
+        expect(Dir[root.join('db/demo/migrate/*_remove_user_from_prospects_*.rb')]).not_to be_empty
         expect(Prospect.new).not_to respond_to(:user)
       end
     end
@@ -344,14 +344,14 @@ RSpec.describe Core::Migrations::Migrate do
           .and change(Translation, :count).by(3)
           .and change(Documentation, :count).by(1)
         expect(migration.backup).not_to be_attached
-        expect(Dir[root.join('db/migrate/*_create_join_table_prospects_teams_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('db/demo/migrate/*_create_join_table_prospects_teams_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Prospect.new).to respond_to(:teams)
         # rollback
         expect { expect(rollback).to be_a_success }
           .to not_change(Permission.with_deleted, :count)
           .and change(Translation.with_deleted, :count).by(-3)
           .and change(Documentation.with_deleted, :count).by(-1)
-        expect(Dir[root.join('db/migrate/*_drop_join_table_prospects_teams_*.rb')]).not_to be_empty
+        expect(Dir[root.join('db/demo/migrate/*_drop_join_table_prospects_teams_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Prospect.new).not_to respond_to(:teams)
       end
     end
@@ -387,14 +387,14 @@ RSpec.describe Core::Migrations::Migrate do
           .and change(Translation.with_deleted, :count).by(-3)
           .and change(Documentation, :count).by(1)
         expect(migration.backup).to be_attached
-        expect(Dir[root.join('db/migrate/*_drop_join_table_prospects_users_*.rb')]).not_to be_empty
+        expect(Dir[root.join('db/demo/migrate/*_drop_join_table_prospects_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Prospect.new).not_to respond_to(:users)
         # rollback
         expect { expect(rollback).to be_a_success }
           .to not_change(Permission, :count)
           .and change(Translation, :count).by(3)
           .and change(Documentation.with_deleted, :count).by(-1)
-        expect(Dir[root.join('db/migrate/*_create_join_table_prospects_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('db/demo/migrate/*_create_join_table_prospects_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Prospect.new).to respond_to(:users)
         expect(prospect.reload.users).to eq([user])
       end
@@ -436,7 +436,7 @@ RSpec.describe Core::Migrations::Migrate do
           .and not_change(Translation, :count)
           .and change(Documentation, :count).by(1)
         expect(migration.backup).not_to be_attached
-        expect(Dir[root.join('db/migrate/*_rename_first_name_to_surname_in_prospects_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('db/demo/migrate/*_rename_first_name_to_surname_in_prospects_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Prospect.new).not_to respond_to(:first_name)
         expect(Prospect.new).to respond_to(:surname)
         # rollback
@@ -444,7 +444,7 @@ RSpec.describe Core::Migrations::Migrate do
           .to not_change(Permission.with_deleted, :count)
           .and not_change(Translation.with_deleted, :count)
           .and change(Documentation.with_deleted, :count).by(-1)
-        expect(Dir[root.join('db/migrate/*_rename_surname_to_first_name_in_prospects_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('db/demo/migrate/*_rename_surname_to_first_name_in_prospects_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Prospect.new).to respond_to(:first_name)
         expect(Prospect.new).not_to respond_to(:surname)
       end
@@ -486,13 +486,13 @@ RSpec.describe Core::Migrations::Migrate do
           .and not_change(Translation, :count)
           .and change(Documentation, :count).by(1)
         expect(migration.backup).not_to be_attached
-        expect(Dir[root.join('db/migrate/*_change_first_name_column_string_in_prospects_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('db/demo/migrate/*_change_first_name_column_string_in_prospects_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         # rollback
         expect { expect(rollback).to be_a_success }
           .to not_change(Permission.with_deleted, :count)
           .and not_change(Translation.with_deleted, :count)
           .and change(Documentation.with_deleted, :count).by(-1)
-        expect(Dir[root.join('db/migrate/*_change_first_name_column_text_in_prospects_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('db/demo/migrate/*_change_first_name_column_text_in_prospects_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
       end
     end
 
@@ -535,13 +535,13 @@ RSpec.describe Core::Migrations::Migrate do
           .and not_change(Translation, :count)
           .and change(Documentation, :count).by(1)
         expect(migration.backup).not_to be_attached
-        expect(Dir[root.join('db/migrate/*_change_first_name_index_in_prospects_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('db/demo/migrate/*_change_first_name_index_in_prospects_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         # rollback
         expect { expect(rollback).to be_a_success }
           .to not_change(Permission.with_deleted, :count)
           .and not_change(Translation.with_deleted, :count)
           .and change(Documentation.with_deleted, :count).by(-1)
-        expect(Dir[root.join('db/migrate/*_change_first_name_index_in_prospects_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('db/demo/migrate/*_change_first_name_index_in_prospects_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
       end
     end
 
@@ -581,10 +581,10 @@ RSpec.describe Core::Migrations::Migrate do
           .and not_change(Translation, :count)
           .and change(Documentation, :count).by(1)
         expect(migration.backup).not_to be_attached
-        expect(Dir[root.join('db/migrate/*_rename_prospects_to_clients_*.rb')]).not_to be_empty
-        expect(Dir[root.join('db/migrate/*_rename_prospects_users_to_clients_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
-        expect(Dir[root.join('db/migrate/*_rename_prospect_id_to_client_id_in_clients_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
-        expect(Dir[root.join('db/migrate/*_rename_first_name_to_surname_in_clients_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('db/demo/migrate/*_rename_prospects_to_clients_*.rb')]).not_to be_empty
+        expect(Dir[root.join('db/demo/migrate/*_rename_prospects_users_to_clients_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('db/demo/migrate/*_rename_prospect_id_to_client_id_in_clients_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('db/demo/migrate/*_rename_first_name_to_surname_in_clients_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect { Prospect }.to raise_error(NameError)
         expect { Client }.not_to raise_error
         expect(Client.new).not_to respond_to(:first_name)
@@ -594,10 +594,10 @@ RSpec.describe Core::Migrations::Migrate do
           .to not_change(Permission.with_deleted, :count)
           .and not_change(Translation.with_deleted, :count)
           .and change(Documentation.with_deleted, :count).by(-1)
-        expect(Dir[root.join('db/migrate/*_rename_clients_to_prospects_*.rb')]).not_to be_empty
-        expect(Dir[root.join('db/migrate/*_rename_clients_users_to_prospects_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
-        expect(Dir[root.join('db/migrate/*_rename_client_id_to_prospect_id_in_prospects_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
-        expect(Dir[root.join('db/migrate/*_rename_surname_to_first_name_in_prospects_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('db/demo/migrate/*_rename_clients_to_prospects_*.rb')]).not_to be_empty
+        expect(Dir[root.join('db/demo/migrate/*_rename_clients_users_to_prospects_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('db/demo/migrate/*_rename_client_id_to_prospect_id_in_prospects_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('db/demo/migrate/*_rename_surname_to_first_name_in_prospects_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect { Prospect }.not_to raise_error
         expect { Client }.to raise_error(NameError)
         expect(Prospect.new).to respond_to(:first_name)

@@ -4,9 +4,10 @@
 module Schematics
   # :reek:DataClump
   class Migrator # rubocop:disable Metrics/ClassLength
-    attr_reader :new_schema
+    attr_reader :database, :new_schema
 
-    def initialize(new_schema = Schema.new, current_schema = nil)
+    def initialize(database, new_schema = Schema.new, current_schema = nil)
+      @database = database
       @new_schema = new_schema
       @current_schema = current_schema
     end
@@ -41,7 +42,7 @@ module Schematics
     def build_commands
       @new_schema.entities.map do |new_entity|
         current_entity = @current_schema&.entities&.find { it.id == new_entity.id }
-        next Commands::CreateEntity.new(entity: new_entity) unless current_entity
+        next Commands::CreateEntity.new(database:, entity: new_entity) unless current_entity
 
         [
           rename_entity_command(new_entity, current_entity),
@@ -60,7 +61,7 @@ module Schematics
 
       @current_schema.entities.map do |current_entity|
         new_entity = @new_schema.entities.find { it.id == current_entity.id }
-        next Commands::DestroyEntity.new(entity: current_entity) unless new_entity
+        next Commands::DestroyEntity.new(database:, entity: current_entity) unless new_entity
 
         [
           remove_permission_commands(current_entity, new_entity),
@@ -76,7 +77,7 @@ module Schematics
     def rename_entity_command(entity, other_entity)
       return if entity.name == other_entity.name
 
-      Commands::RenameEntity.new(entity:, attribute: other_entity)
+      Commands::RenameEntity.new(database:, entity:, attribute: other_entity)
     end
 
     def add_permission_commands(entity, current_entity)
@@ -158,7 +159,7 @@ module Schematics
         .has_and_belongs_to_many_associations
         .reject(&:hidden?)
         .reject { |association| associations.find { it.association_type == association.association_type } } # rubocop:disable Layout/LineLength
-        .map { |attribute| Commands::AddAssociation.new(entity:, attribute:) }
+        .map { |attribute| Commands::AddAssociation.new(database:, entity:, attribute:) }
     end
 
     def add_attribute_commands(entity, current_entity)
@@ -166,7 +167,7 @@ module Schematics
         .attributes
         .map do |attribute|
           current_attribute = current_entity.attributes.find { it.id == attribute.id }
-          next Commands::AddAttribute.new(entity:, attribute:) unless current_attribute
+          next Commands::AddAttribute.new(database:, entity:, attribute:) unless current_attribute
 
           [
             rename_attribute_command(entity, current_attribute, attribute),
@@ -179,19 +180,29 @@ module Schematics
     def rename_attribute_command(entity, current_attribute, new_attribute)
       return if current_attribute.name == new_attribute.name
 
-      Commands::RenameAttribute.new(entity:, attribute: current_attribute, target: new_attribute)
+      Commands::RenameAttribute.new(
+        database:,
+        entity:,
+        attribute: current_attribute,
+        target: new_attribute
+      )
     end
 
     def change_attribute_command(entity, current_attribute, new_attribute)
       return if current_attribute.database_type == new_attribute.database_type
 
-      Commands::ChangeAttribute.new(entity:, attribute: new_attribute, target: current_attribute)
+      Commands::ChangeAttribute.new(
+        database:,
+        entity:,
+        attribute: new_attribute,
+        target: current_attribute
+      )
     end
 
     def change_attribute_uniqueness_command(entity, current_attribute, new_attribute)
       return if current_attribute.unique? == new_attribute.unique?
 
-      Commands::ChangeAttributeUniqueness.new(entity:, attribute: new_attribute)
+      Commands::ChangeAttributeUniqueness.new(database:, entity:, attribute: new_attribute)
     end
 
     def remove_permission_commands(entity, new_entity)
@@ -218,7 +229,7 @@ module Schematics
       entity
         .attributes
         .reject { |attribute| new_entity.attributes.find { it.id == attribute.id } }
-        .map { |attribute| Commands::RemoveAttribute.new(entity:, attribute:) }
+        .map { |attribute| Commands::RemoveAttribute.new(database:, entity:, attribute:) }
     end
 
     def remove_translation_commands(entity, new_entity)
@@ -236,7 +247,7 @@ module Schematics
         .has_and_belongs_to_many_associations
         .reject(&:hidden?)
         .reject { |association| associations.find { it.association_type == association.association_type } } # rubocop:disable Layout/LineLength
-        .map { |attribute| Commands::RemoveAssociation.new(entity:, attribute:) }
+        .map { |attribute| Commands::RemoveAssociation.new(database:, entity:, attribute:) }
     end
   end
 end

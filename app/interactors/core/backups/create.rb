@@ -8,6 +8,7 @@ module Core
 
       delegate :root, :env, to: '::Rails', private: true
       delegate :create_and_upload!, to: '::ActiveStorage::Blob', private: true
+      delegate :database_name, to: '::Tenant', private: true
       delegate :current_database,
                :adapter_name,
                to: 'ActiveRecord::Base.lease_connection',
@@ -30,7 +31,7 @@ module Core
         end
       end
 
-      def db_path = root.join('storage', "#{env}.sqlite3")
+      def db_path = root.join('storage', database_name, "#{env}.sqlite3")
 
       def tables = Array(context.tables)
 

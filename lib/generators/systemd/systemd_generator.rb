@@ -21,8 +21,8 @@ class SystemdGenerator < Rails::Generators::NamedBase
 
     `systemctl stop #{socket_filename} #{service_filename}`
     `systemctl disable #{socket_filename} #{service_filename}`
-    File.delete service_path
-    File.delete socket_path
+    service_path.delete
+    socket_path.delete
     `systemctl daemon-reload`
     `systemctl reset-failed`
   end

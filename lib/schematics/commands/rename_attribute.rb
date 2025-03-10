@@ -14,9 +14,8 @@ module Schematics
         case attribute
         when Behaviours::Migratable
           Rails::Generators::MigrationGenerator.new(
-            [
-              "rename_#{attribute.column_name}_to_#{target.column_name}_in_#{table_name.pluralize}"
-            ]
+            ["rename_#{attribute.column_name}_to_#{target.column_name}_in_#{table_name.pluralize}"],
+            ["--database=#{database}"]
           )
         end
       end

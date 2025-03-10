@@ -1,6 +1,0 @@
-name: CI
-on: [push]
-jobs:
-  shared:
-    uses: back-office-pro/schematics/.github/workflows/shared.yml@main
-    secrets: inherit

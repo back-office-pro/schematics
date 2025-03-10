@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  class ApplicationJob < ::Server.application_job_class
+  class ApplicationJob < ::ActiveJob::Base
     include Rollbar::ActiveJob
 
     discard_on ActiveRecord::RecordNotFound, ActiveJob::DeserializationError

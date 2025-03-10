@@ -2,9 +2,9 @@
 # frozen_string_literal: true
 
 module Schematics
-  class ApplicationMailer < ::Server.application_mailer_class
+  class ApplicationMailer < ::ActionMailer::Base
     self.deliver_later_queue_name = :default
-    default from: ::Server.no_reply_email
+    default from: "no-reply@#{::Server.domain}"
     layout 'schematics/mailer'
     helper ApplicationHelper
 

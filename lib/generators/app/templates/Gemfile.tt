@@ -2,10 +2,6 @@ source "https://rubygems.org"
 
 <%- if env.development? -%>
 gem "web-console", group: :development
-<%- end -%>
-<%- if container? -%>
-gem "schematics", github: "back-office-pro/schematics"
-<%- elsif env.development? -%>
 gem "schematics", path: "<%= root_path %>"
 <%- else -%>
 gem "schematics", ENV['CI'] && { github: "back-office-pro/schematics" }

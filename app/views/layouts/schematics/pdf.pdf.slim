@@ -2,9 +2,8 @@ doctype html
 html
   head
     meta charset='utf-8'
-    = __application_stylesheet_link
     == stylesheet_link_tags
-    = __javascript_importmap
+    = javascript_importmap_tags 'schematics/application'
     = __theme_custom_stylesheet
   body
     = yield
