@@ -84,10 +84,7 @@ class TenantGenerator < Rails::Generators::NamedBase
   end
 
   def destroy_migrations
-    return unless destroying?
-
-    FileUtils.rm_rf("db/#{name}/migrate")
-    FileUtils.rm_rf("db/#{name}/search_migrate")
+    FileUtils.rm_rf("db/#{name}") if destroying?
   end
 
   private
