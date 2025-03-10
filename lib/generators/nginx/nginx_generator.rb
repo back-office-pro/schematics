@@ -20,8 +20,8 @@ class NginxGenerator < Rails::Generators::NamedBase
     return unless destroying?
     return unless nginx_path.exist?
 
-    File.delete sites_available_path
-    File.delete sites_enabled_path
+    sites_available_path.delete
+    sites_enabled_path.delete
     `service nginx reload`
   end
 
