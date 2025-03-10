@@ -3,6 +3,8 @@
 
 require 'active_support/core_ext/integer/time'
 
+FileUtils.mkdir_p Rails.root.join("log/#{Tenant.database_name}")
+
 Rails.application.configure do
   # Configuration
   config.enable_reloading = false
@@ -67,7 +69,9 @@ Rails.application.configure do
   config.log_level = :info
   config.log_tags = [:request_id]
   config.lograge.enabled = true
-  config.logger = ActiveSupport::TaggedLogging.logger($stdout)
+  config.logger = ActiveSupport::TaggedLogging.logger(
+    Rails.root.join("log/#{Tenant.database_name}/production.log")
+  )
 
   # Health check
   config.silence_healthcheck_path = '/up'

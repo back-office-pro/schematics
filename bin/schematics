@@ -23,7 +23,8 @@ OptionParser
   end.parse!
 
 if ENV['CI'].blank?
-  $stdout.reopen("log/#{name}.log", 'w')
+  FileUtils.mkdir_p("log/#{name}")
+  $stdout.reopen("log/#{name}/schematics.log", 'w')
   $stdout.sync = true
   $stderr.reopen($stdout)
 end
