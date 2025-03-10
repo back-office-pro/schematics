@@ -1,11 +1,11 @@
 plugins:
+  - rubocop-capybara
   - rubocop-performance
   - rubocop-rails
   - rubocop-rake
   - rubocop-rspec
   - rubocop-thread_safety
 require:
-  - rubocop-capybara
   - rubocop-obsession
 AllCops:
   NewCops: enable
