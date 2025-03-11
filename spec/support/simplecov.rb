@@ -9,7 +9,6 @@ SimpleCov.start(:rails) do
   add_filter %w[
     lib/generators/app
     lib/generators/nginx
-    lib/generators/repository
     lib/generators/systemd
     lib/schematics/version.rb
     lib/rubygems_plugin.rb
