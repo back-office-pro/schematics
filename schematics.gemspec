@@ -93,7 +93,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'omniauth-google-oauth2', '1.2.1'
   spec.add_dependency 'omniauth-rails_csrf_protection', '1.0.2'
   spec.add_dependency 'omniauth-saml', '2.2.2'
-  spec.add_dependency 'pagy', '9.3.3'
+  spec.add_dependency 'pagy', '9.3.4'
   spec.add_dependency 'paper_trail', '16.0.0'
   spec.add_dependency 'paranoia', '3.0.1'
   spec.add_dependency 'pg', '1.5.9'
