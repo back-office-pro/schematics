@@ -3,6 +3,8 @@
 
 require 'active_support/core_ext/integer/time'
 
+FileUtils.mkdir_p Rails.root.join("log/#{Tenant.database_name}")
+
 Rails.application.configure do
   # Configuration
   config.enable_reloading = true
@@ -73,4 +75,9 @@ Rails.application.configure do
       max_entries: 2000,
       max_size: 1.gigabyte
     }
+
+  # Logger
+  config.logger = ActiveSupport::TaggedLogging.logger(
+    Rails.root.join("log/#{Tenant.database_name}/development.log")
+  )
 end

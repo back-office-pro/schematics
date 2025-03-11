@@ -10,7 +10,6 @@ class NginxGenerator < Rails::Generators::NamedBase
     return unless generating?
     return unless nginx_path.exist?
 
-    empty_directory 'log'
     template 'nginx.conf', sites_available_path
     FileUtils.ln_s sites_available_path, sites_enabled_path
     `service nginx reload`
