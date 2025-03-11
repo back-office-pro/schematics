@@ -1,6 +1,10 @@
 ---
+dispatchers:
+  - polling_interval: 1
+    batch_size: 500
+    concurrency_maintenance_interval: 600
 workers:
-  - queues:
-    - critical
-    - default
-    - low
+  - queues: [critical, default, low]
+    threads: 3
+    polling_interval: 0.1
+    processes: 1
