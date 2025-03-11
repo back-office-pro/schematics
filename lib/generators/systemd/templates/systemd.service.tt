@@ -8,7 +8,9 @@ User=root
 WorkingDirectory=<%= Rails.root %>
 Environment=RAILS_ENV=production
 Environment=DATABASE=<%= name %>
-ExecStart=<%= Rails.root.join('bin', 'rails') %> server
+Environment=TLS_DOMAIN=<%= name %>.<%= Server.domain %>
+Environment=TARGET_PORT=0
+ExecStart=<%= Rails.root.join('bin', 'thrust') %> <%= Rails.root.join('bin', 'rails') %> server
 StandardOutput=append:<%= Rails.root.join('log', name, 'systemd.access.log') %>
 StandardError=append:<%= Rails.root.join('log', name, 'systemd.error.log') %>
 Restart=always

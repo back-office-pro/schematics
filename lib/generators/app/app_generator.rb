@@ -113,7 +113,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     skip_asset_pipeline: true,
     skip_rubocop: true,
     skip_brakeman: true,
-    skip_thruster: true,
     skip_kamal: true
   }
 
