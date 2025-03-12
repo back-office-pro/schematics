@@ -27,13 +27,11 @@ module Core
         api_keys_size >= quota_api_keys
       end
 
+      def email_support? = !live_support?
+
       def live_support? = quota
         .support
-        .positive?
-
-      def email_support? = quota
-        .support
-        .zero?
+        .eql?(2)
 
       def quota_storage = quota
         .storage
