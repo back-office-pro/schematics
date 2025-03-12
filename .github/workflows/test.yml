@@ -18,7 +18,7 @@ jobs:
           sudo apt-get update
           sudo apt-get -yqq install libvips-dev ffmpeg graphviz
       - name: Install app generator gems
-        run: gem install rails -v 8.0.1
+        run: gem install rails -v 8.0.2
       - name: Generate test application
         run: ruby bin/schematics
       - name: Generate test tenant
