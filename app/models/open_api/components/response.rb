@@ -11,6 +11,10 @@ module OpenAPI
       class << self
         delegate :translate, to: '::I18n', private: true
 
+        def success(code: 201, data: nil)
+          new(code:, description: translate('open_api.responses.success'), data:)
+        end
+
         def bad_request = new(
           code: 400,
           description: translate('open_api.responses.bad_request')

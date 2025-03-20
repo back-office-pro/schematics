@@ -15,11 +15,7 @@ module OpenAPI
         .to_h
 
       def responses = [
-        Components::Response.new(
-          code: 201,
-          description: translate('open_api.responses.success'),
-          data: open_api_schema
-        ),
+        Components::Response.success(data: open_api_schema),
         Components::Response.bad_request,
         Components::Response.not_authorized,
         Components::Response.forbidden,

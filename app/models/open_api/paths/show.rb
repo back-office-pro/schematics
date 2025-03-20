@@ -22,11 +22,7 @@ module OpenAPI
         Components::Response.not_authorized,
         Components::Response.forbidden,
         Components::Response.not_found,
-        Components::Response.new(
-          code: 200,
-          description: translate('open_api.responses.success'),
-          data: open_api_schema_with_associations
-        )
+        Components::Response.success(code: 200, data: open_api_schema_with_associations)
       ]
     end
   end
