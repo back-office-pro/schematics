@@ -5,7 +5,7 @@
 /config/credentials/development.key
 /config/credentials/test.key
 /config/credentials/production.key
-/config/credentials/standalone.key
+/config/credentials/on_premise.key
 /node_modules
 /Gemfile.lock
 /schematics-*.gem
