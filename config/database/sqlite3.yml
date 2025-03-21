@@ -35,7 +35,7 @@ test:
     database: storage/<%= Tenant.database_name %>/test_search.sqlite3
     migrations_paths: db/<%= Tenant.database_name %>/search_migrate
 
-production:
+production: &production
   primary:
     <<: *default
     database: storage/<%= Tenant.database_name %>/production.sqlite3
@@ -56,3 +56,6 @@ production:
     <<: *default
     database: storage/<%= Tenant.database_name %>/production_queue.sqlite3
     migrations_paths: db/<%= Tenant.database_name %>/queue_migrate
+
+on_premise:
+  <<: *production
