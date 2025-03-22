@@ -21,7 +21,6 @@ services:
       - chrome
     environment:
       - CHROME_URL=http://chrome:3333
-      - SCHEMATICS_MASTER_KEY=$SCHEMATICS_MASTER_KEY
 volumes:
   clamav-data:
   storage-data:
