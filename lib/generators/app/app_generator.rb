@@ -67,9 +67,7 @@ class AppGenerator < Rails::Generators::AppGenerator
     remove_file 'config/locales'
     remove_file 'config/cable.yml'
     remove_file 'config/cache.yml'
-    remove_file 'config/credentials.yml.enc' unless env.on_premise?
     remove_file 'config/queue.yml'
-    remove_file 'config/master.key' unless env.on_premise?
     remove_file 'config/puma.rb'
     remove_file 'config/recurring.yml'
     remove_file 'config/routes.rb'
@@ -81,6 +79,13 @@ class AppGenerator < Rails::Generators::AppGenerator
     remove_file '.gitattributes'
     remove_file '.ruby-version'
     remove_file 'README.md'
+  end
+
+  def remove_credentials
+    return if env.on_premise?
+
+    remove_file 'config/credentials.yml.enc'
+    remove_file 'config/master.key'
   end
 
   def precompile_assets
