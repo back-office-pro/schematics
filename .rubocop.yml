@@ -211,6 +211,8 @@ Rails/ReversibleMigrationMethodDefinition:
   Enabled: true
 Rails/TableNameAssignment:
   Enabled: true
+Rails/Inquiry:
+  Enabled: false
 # rubocop-performance
 Performance/MethodObjectAsBlock:
   Enabled: false
