@@ -30,7 +30,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   end
 
   def create_docker_entrypoint_file
-    return unless env.no_premise?
+    return unless env.on_premise?
 
     template 'docker-entrypoint', 'bin/docker-entrypoint'
     chmod 'bin/docker-entrypoint', 0o755 & ~File.umask, verbose: false
