@@ -1,0 +1,59 @@
+# syntax=docker/dockerfile:1
+# check=error=true
+
+ARG RUBY_VERSION=3.4.2
+FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
+
+WORKDIR /schematics
+
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y curl libjemalloc2 libvips sqlite3 postgresql-client && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
+ENV MALLOC_ARENA_MAX=2
+ENV RUBY_YJIT_ENABLE=1
+ENV WEB_CONCURRENCY=auto
+ENV RAILS_ENV=on_premise
+ENV DATABASE=on-premise
+
+FROM base AS build
+
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y build-essential git libyaml-dev pkg-config libpq-dev node-gyp python-is-python3 && \
+    apt-get install --no-install-recommends -y graphviz pgloader ffmpeg && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
+ARG NODE_VERSION=23.9.0
+ARG YARN_VERSION=1.22.22
+ENV PATH=/usr/local/node/bin:$PATH
+
+RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
+    /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
+    npm install -g yarn@$YARN_VERSION && \
+    rm -rf /tmp/node-build-master
+
+COPY . .
+
+RUN bundle install --jobs=4 --retry=3
+
+RUN rm -rf /schematics/config/credentials/development*
+RUN rm -rf /schematics/config/credentials/production*
+RUN rm -rf /schematics/config/credentials/test*
+
+RUN /schematics/bin/deploy
+
+WORKDIR /app
+
+RUN rm -rf /schematics
+
+RUN schematics --server on-premise
+
+WORKDIR /app/on-premise
+
+RUN schematics --tenant on-premise
+
+ENTRYPOINT ["/app/on-premise/bin/docker-entrypoint"]
+
+CMD ["bin/rails", "server", "-b", "0.0.0.0"]
+
+EXPOSE 3000
