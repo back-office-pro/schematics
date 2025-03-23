@@ -6,7 +6,7 @@ require 'fileutils'
 require 'rails/generators/rails/app/app_generator'
 
 # :reek:RepeatedConditional
-class AppGenerator < Rails::Generators::AppGenerator
+class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/ClassLength
   source_root superclass.source_root
 
   def initialize(generator, options = {})
@@ -30,6 +30,8 @@ class AppGenerator < Rails::Generators::AppGenerator
   end
 
   def create_docker_entrypoint_file
+    return unless env.on_premise?
+
     template 'docker-entrypoint', 'bin/docker-entrypoint'
     chmod 'bin/docker-entrypoint', 0o755 & ~File.umask, verbose: false
   end
@@ -65,9 +67,7 @@ class AppGenerator < Rails::Generators::AppGenerator
     remove_file 'config/locales'
     remove_file 'config/cable.yml'
     remove_file 'config/cache.yml'
-    remove_file 'config/credentials.yml.enc'
     remove_file 'config/queue.yml'
-    remove_file 'config/master.key'
     remove_file 'config/puma.rb'
     remove_file 'config/recurring.yml'
     remove_file 'config/routes.rb'
@@ -81,8 +81,15 @@ class AppGenerator < Rails::Generators::AppGenerator
     remove_file 'README.md'
   end
 
+  def remove_credentials
+    return if env.on_premise?
+
+    remove_file 'config/credentials.yml.enc'
+    remove_file 'config/master.key'
+  end
+
   def precompile_assets
-    return unless env.production?
+    return if env.development?
     return unless generating?
 
     rails_command 'assets:precompile', env:
@@ -114,7 +121,12 @@ class AppGenerator < Rails::Generators::AppGenerator
     behavior == :invoke
   end
 
-  def env = (app_path == 'spec/demo' ? 'development' : 'production').inquiry
+  def env
+    return 'development'.inquiry if app_path == 'spec/demo'
+    return 'on_premise'.inquiry if app_path == 'on-premise'
+
+    'production'.inquiry
+  end
 
   def destroying?
     behavior == :revoke

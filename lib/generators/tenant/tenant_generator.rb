@@ -12,6 +12,13 @@ class TenantGenerator < Rails::Generators::NamedBase
     rails_command "schematics:copy:migrations DATABASE=#{name}", env:
   end
 
+  def encrypt_database
+    return unless env.on_premise?
+    return unless generating?
+
+    rails_command 'schematics:db:encryption:init', env:
+  end
+
   def create_database
     return unless generating?
 
@@ -50,14 +57,14 @@ class TenantGenerator < Rails::Generators::NamedBase
   end
 
   def deploy_systemd_service
-    return if env.development?
+    return unless env.production?
     return unless generating?
 
     rails_command "generate systemd #{name}", env:
   end
 
   def deploy_nginx_subdomain
-    return if env.development?
+    return unless env.production?
     return unless generating?
 
     rails_command "generate nginx #{name}", env:
@@ -65,14 +72,14 @@ class TenantGenerator < Rails::Generators::NamedBase
 
   def destroy_systemd_service
     return unless destroying?
-    return if env.development?
+    return unless env.production?
 
     `RAILS_ENV=#{env} rails destroy systemd #{name}`
   end
 
   def destroy_nginx_subdomain
     return unless destroying?
-    return if env.development?
+    return unless env.production?
 
     `RAILS_ENV=#{env} rails destroy nginx #{name}`
   end
@@ -93,7 +100,12 @@ class TenantGenerator < Rails::Generators::NamedBase
     behavior == :invoke
   end
 
-  def env = (Dir.pwd.end_with?('spec/demo') ? 'development' : 'production').inquiry
+  def env
+    return 'development'.inquiry if Dir.pwd.end_with?('spec/demo')
+    return 'on_premise'.inquiry if Dir.pwd.end_with?('on-premise')
+
+    'production'.inquiry
+  end
 
   def destroying?
     behavior == :revoke

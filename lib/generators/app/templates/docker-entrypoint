@@ -1,10 +1,8 @@
 #!/bin/bash -e
 
-bin/rails db:create
-bin/rails db:migrate
-bin/rails db:prepare
-bin/rails schematics:subscription:load
-bin/rails schematics:db:seed
-bin/rails schematics:credentials:backup
+if [ -z "${LD_PRELOAD+x}" ]; then
+  LD_PRELOAD=$(find /usr/lib -name libjemalloc.so.2 -print -quit)
+  export LD_PRELOAD
+fi
 
-exec "$@"
+exec "${@}"

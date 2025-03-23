@@ -1,6 +1,6 @@
 services:
   clamav:
-    image: clamav/clamav:latest
+    image: clamav/clamav-debian:latest
     ports:
       - 3310:3310
     volumes:
@@ -11,8 +11,7 @@ services:
       - 3333:3000
   web:
     build:
-      context: $PWD
-      dockerfile: $DOCKERFILE_PATH
+      context: .
     ports:
       - 3000:3000
     volumes:
@@ -22,7 +21,6 @@ services:
       - chrome
     environment:
       - CHROME_URL=http://chrome:3333
-      - SCHEMATICS_MASTER_KEY=$SCHEMATICS_MASTER_KEY
 volumes:
   clamav-data:
   storage-data:
