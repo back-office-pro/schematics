@@ -49,6 +49,29 @@
       "note": ""
     },
     {
+      "warning_type": "Remote Code Execution",
+      "warning_code": 24,
+      "fingerprint": "a908f3541e471670a8ad1c46c14dfc8a4933feeb1a84ba65533a409a1c8ee1eb",
+      "check_name": "UnsafeReflection",
+      "message": "Unsafe reflection method `constantize` called on parameter value",
+      "file": "app/controllers/schematics/routing_controller.rb",
+      "line": 47,
+      "link": "https://brakemanscanner.org/docs/warning_types/remote_code_execution/",
+      "code": "{ \"ActiveStorage::BlobsController\" => ([\"files\", \"fichiers\"]), \"CommentsController\" => ([\"comments\", \"commentaires\", \"commenti\"]), \"ComparisonsController\" => ([\"comparisons\", \"comparaisons\", \"confronti\"]), \"EmailingsController\" => ([\"emailings\", \"envois-d-e-mails\", \"invii-di-e-mail\"]), \"ImportsController\" => ([\"imports\", \"importations\", \"importazioni\"]), \"MessagesController\" => ([\"messages\", \"messaggi\"]), \"MigrationsController\" => ([\"migrations\", \"migrazioni\"]), \"SearchesController\" => ([\"searches\", \"recherches\", \"ricerche\"]), \"SessionsController\" => ([\"sessions\", \"sessioni\"]), \"SubscriptionsController\" => ([\"subscription\", \"abonnement\", \"abbonamento\"]), \"UsersController\" => ([\"users\", \"utilisateurs\", \"utenti\"]) }.invert.select do\n it.include?(params[:resource])\n end.values.first.constantize",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Schematics::RoutingController",
+        "method": "controller_class"
+      },
+      "user_input": "params[:resource]",
+      "confidence": "Medium",
+      "cwe_id": [
+        470
+      ],
+      "note": ""
+    },
+    {
       "warning_type": "Cross-Site Request Forgery",
       "warning_code": 86,
       "fingerprint": "f4518f7da0fe3b81962f193b43c4ed13521d0e52c73cf65f5c97aa2c8f70769e",
@@ -67,29 +90,6 @@
       "confidence": "Medium",
       "cwe_id": [
         352
-      ],
-      "note": ""
-    },
-    {
-      "warning_type": "Remote Code Execution",
-      "warning_code": 24,
-      "fingerprint": "fdfa87309cf59ba32c022b457b04bb9bf2c296f710463a8d75c9ab45444fabdb",
-      "check_name": "UnsafeReflection",
-      "message": "Unsafe reflection method `constantize` called on parameter value",
-      "file": "app/controllers/schematics/routing_controller.rb",
-      "line": 47,
-      "link": "https://brakemanscanner.org/docs/warning_types/remote_code_execution/",
-      "code": "[Format Error]",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Schematics::RoutingController",
-        "method": "controller_class"
-      },
-      "user_input": "params[:resource]",
-      "confidence": "Medium",
-      "cwe_id": [
-        470
       ],
       "note": ""
     }
