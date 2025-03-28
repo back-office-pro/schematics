@@ -4,7 +4,7 @@
 module Schematics
   module SearchIndexes
     class MultisearchQuery < ApplicationQuery
-      def call(query, ability) # rubocop:disable Metrics/CyclomaticComplexity
+      def call(query, ability)
         where("#{table_name} MATCH ?", query.to_json)
           .select(:searchable_id, :searchable_type)
           .order(:rank)

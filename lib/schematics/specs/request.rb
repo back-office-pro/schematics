@@ -429,7 +429,7 @@ module Schematics
           { entity.table_name.to_sym => fillable_elements.to_h { nested_params(it, format) } }
         end
 
-        def nested_params(element, format) # rubocop:disable Metrics/CyclomaticComplexity
+        def nested_params(element, format)
           case element
           when Associations::HasManyNested
             [
