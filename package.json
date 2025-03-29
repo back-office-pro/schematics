@@ -18,7 +18,7 @@
     "flag-icons": "7.3.2",
     "pluralize-esm": "9.0.5",
     "sortablejs": "1.15.6",
-    "swagger-ui-dist": "5.20.1",
+    "swagger-ui-dist": "5.20.2",
     "swagger-ui-themes": "3.0.1",
     "timeago.js": "4.0.2",
     "tom-select": "2.3.1",
@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "standard": "17.1.2",
-    "stylelint": "16.16.0",
+    "stylelint": "16.17.0",
     "stylelint-config-standard": "37.0.0"
   },
   "stylelint": {
