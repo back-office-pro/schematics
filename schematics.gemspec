@@ -127,7 +127,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'solid_queue', '1.1.4'
   spec.add_dependency 'sqlite3', '2.6.0'
   spec.add_dependency 'stimulus-rails', '1.3.4'
-  spec.add_dependency 'stripe', '13.5.0'
+  spec.add_dependency 'stripe', '14.0.0'
   spec.add_dependency 'terser', '1.2.5'
   spec.add_dependency 'test-prof', '1.4.4'
   spec.add_dependency 'turbo-rails', '2.0.13'
