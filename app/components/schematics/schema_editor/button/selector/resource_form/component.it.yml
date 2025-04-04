@@ -1,3 +1,4 @@
 ---
 it:
+  missing_openai_access_token: Token di accesso OpenAI non configurato
   title: Costruttore di app AI

@@ -1,3 +1,4 @@
 ---
 en:
+  missing_openai_access_token: OpenAI access token not configured
   title: AI Application Generator
