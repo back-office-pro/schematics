@@ -2,8 +2,6 @@
 # frozen_string_literal: true
 
 class MigrationsController < Schematics::ResourcesController
-  rate_limit to: 3, within: 1.minute, only: %i[create update]
-
   def new
     super && edit
   end
