@@ -25,6 +25,7 @@ module Schematics
       return if migration.state_pending?
       return if migration.state_in_progress?
       return if migration.state_rollbacking?
+      return if ::Subscription.quota_prompts_exceeded?
 
       I18n.with_locale(migration.locale) do
         migration.state_generating!

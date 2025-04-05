@@ -10,11 +10,12 @@ module Core
 
           delegate :migration, to: :context, private: true
           delegate :prompt, to: :migration, private: true
-          delegate :logger, :env, to: '::Rails', private: true
+          delegate :logger, :env, :cache, to: '::Rails', private: true
           delegate :root, to: '::Schematics::Engine', private: true
           delegate :parse, to: '::ActiveSupport::ConfigurationFile', private: true
           delegate :openai_access_token_with_fallback, to: '::Configuration', private: true
 
+          before :increment_counter
           after :log_data
 
           def call
@@ -56,6 +57,10 @@ module Core
           def log_data = logger
             .tagged('OpenAI', 'ChatGPT')
             .info(context.data.to_json)
+
+          def increment_counter
+            cache.increment('prompts')
+          end
         end
       end
     end

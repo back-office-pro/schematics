@@ -8,11 +8,14 @@ module Schematics
         module ResourceForm
           class Component < ApplicationComponent
             delegate :openai_access_token_with_fallback, to: '::Configuration', private: true
+            delegate :quota_prompts_exceeded?, to: '::Subscription', private: true
 
             def icon = :brain
 
             def title
-              t('.missing_openai_access_token') if openai_access_token_with_fallback.nil?
+              return t('.missing_openai_access_token') unless openai_access_token_with_fallback
+
+              t('.quota_prompts_exceeded') if quota_prompts_exceeded?
             end
 
             def css_classes = class_names(disabled: title.present?)

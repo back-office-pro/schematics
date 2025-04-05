@@ -1,4 +1,5 @@
 ---
 it:
   missing_openai_access_token: Token di accesso OpenAI non configurato
+  quota_prompts_exceeded: Limite di chiamate IA raggiunto
   title: Costruttore di app AI

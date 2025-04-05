@@ -13,7 +13,7 @@ module Core
     end
 
     class_methods do
-      delegate :entities, :users, :api_keys, to: :quota, prefix: true
+      delegate :entities, :users, :api_keys, :prompts, to: :quota, prefix: true
 
       def quota_storage_will_be_exceeded?(size)
         storage_size + size.bytes >= quota_storage
@@ -25,6 +25,12 @@ module Core
 
       def quota_api_keys_exceeded?
         api_keys_size >= quota_api_keys
+      end
+
+      def quota_prompts_exceeded?
+        return false if ::Configuration.openai_access_token
+
+        Rails.cache.fetch('prompts').to_i >= quota_prompts
       end
 
       def email_support? = !live_support?
@@ -40,7 +46,7 @@ module Core
       private
 
       def quota = Data
-        .define(:entities, :storage, :users, :api_keys, :support)
+        .define(:entities, :storage, :users, :api_keys, :prompts, :support)
         .new(**metadata)
 
       def storage_size = ActiveStorage::Blob

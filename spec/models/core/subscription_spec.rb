@@ -14,6 +14,7 @@ RSpec.describe Subscription do
       api_keys: 2,
       storage: 1,
       entities: 1,
+      prompts: 100,
       support: 1
     }
   end
@@ -78,6 +79,12 @@ RSpec.describe Subscription do
     it { is_expected.to be_falsy }
   end
 
+  describe '.quota_prompts_exceeded?' do
+    subject { described_class.quota_prompts_exceeded? }
+
+    it { is_expected.to be_falsy }
+  end
+
   describe '.email_support?' do
     subject { described_class.email_support? }
 
@@ -112,5 +119,11 @@ RSpec.describe Subscription do
     subject { described_class.quota_entities }
 
     it { is_expected.to eq(10) }
+  end
+
+  describe '.quota_prompts' do
+    subject { described_class.quota_prompts }
+
+    it { is_expected.to eq(100) }
   end
 end
