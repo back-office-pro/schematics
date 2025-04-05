@@ -6,7 +6,7 @@ module Schematics
     class FilterByUserPreferencesQuery < ApplicationQuery
       def call = joins(:user).where(
         <<~SQL.squish
-          users.preferences -> CONCAT(paper_trail_versions.event, '_', paper_trail_versions.item_type) IS TRUE OR
+          users.preferences -> CONCAT(paper_trail_versions.event, '_', paper_trail_versions.item_type) = 'true' OR
           users.preferences -> CONCAT(paper_trail_versions.event, '_', paper_trail_versions.item_type) IS NULL
         SQL
       )
