@@ -6,6 +6,7 @@ module Schematics
     module Widgets
       module QuotaPrompts
         class Component < ApplicationComponent
+          delegate :openai_access_token, to: '::Configuration', private: true
           delegate :quota_prompts, to: '::Subscription'
 
           def icon = :brain
@@ -28,7 +29,7 @@ module Schematics
           end
 
           def render?
-            can?(:cancel, ::Subscription)
+            can?(:cancel, ::Subscription) && !openai_access_token
           end
         end
       end
