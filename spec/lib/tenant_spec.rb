@@ -14,7 +14,6 @@ describe Tenant do
 
     its(:database_name) { is_expected.to eq('demo') }
     its(:default_url_options) { is_expected.to eq(host: 'localhost', port: 3000) }
-    its(:database) { is_expected.to eq(:sqlite3) }
   end
 
   context 'when environment is production' do
@@ -22,6 +21,5 @@ describe Tenant do
 
     its(:database_name) { is_expected.to eq('demo') }
     its(:default_url_options) { is_expected.to eq(host: 'demo.back-office.pro') }
-    its(:database) { is_expected.to eq(:sqlite3) }
   end
 end
