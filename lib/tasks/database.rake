@@ -36,7 +36,6 @@ namespace :schematics do
         db_name = [Tenant.database_name, Rails.env].join('_')
         `createdb #{db_name}`
         `pgloader --with "preserve index names" sqlite://#{db_path} postgres://localhost/#{db_name}`
-        `pumactl -P #{Rails.root.join("tmp/pids/#{Tenant.database_name}.pid")} restart`
       end
     end
 
