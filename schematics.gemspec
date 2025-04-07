@@ -97,7 +97,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'paper_trail', '16.0.0'
   spec.add_dependency 'paranoia', '3.0.1'
   spec.add_dependency 'pg', '1.5.9'
-  spec.add_dependency 'phonelib', '0.10.6'
+  spec.add_dependency 'phonelib', '0.10.7'
   spec.add_dependency 'propshaft', '1.1.0'
   spec.add_dependency 'puma', '6.6.0'
   spec.add_dependency 'pwned', '2.4.1'
