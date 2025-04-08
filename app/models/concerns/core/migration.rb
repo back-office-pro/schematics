@@ -72,7 +72,7 @@ module Core
     # :reek:ControlParameter
     def finalize!(failure)
       return state_error! if failure
-      return update!(state: STATE_STATE_EDITING, progress: 0) if state_rollbacking?
+      return update!(state: self.class::STATE_STATE_EDITING, progress: 0) if state_rollbacking?
 
       state_finished!
     end
