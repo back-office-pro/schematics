@@ -14,7 +14,7 @@ Rails.application.configure do
   # Security
   config.assume_ssl = Server.ssl?
   config.force_ssl = Server.ssl?
-  config.hosts = [Server.domain.prepend('.')] if Server.ssl?
+  config.hosts = [Server.domain.dup.prepend('.')] if Server.ssl?
   config.require_master_key = true
   config.sandbox_by_default = true
 
