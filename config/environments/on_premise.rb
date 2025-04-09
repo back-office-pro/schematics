@@ -4,6 +4,9 @@
 require_relative 'production'
 
 Rails.application.configure do
+  # Security
+  config.require_master_key = true
+
   # Active Storage
   config.active_storage.service = :local
 end
