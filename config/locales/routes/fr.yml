@@ -12,6 +12,7 @@ fr:
     login: connexion
     logout: deconnexion
     new: nouveau
+    offline: hors-ligne
     one_time_passwords: mots-de-passe-uniques
     password_resets: mots-de-passe
     preferences: preferences

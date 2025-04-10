@@ -12,6 +12,7 @@ it:
     login: connessione
     logout: disconnessione
     new: nuovo
+    offline: offline
     one_time_passwords: password-monousi
     password_resets: passwords
     preferences: preferenze

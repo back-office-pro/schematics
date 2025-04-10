@@ -14,6 +14,7 @@ en:
         internal_server_error: Something went wrong
         maintenance_mode: Maintenance in progress
         not_found: Page not found
+        offline: No internet connection
         unsupported_browser: Please update your browser
       home:
         index: Dashboard

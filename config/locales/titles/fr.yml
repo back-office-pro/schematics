@@ -14,6 +14,7 @@ fr:
         internal_server_error: Quelque chose s'est mal passé
         maintenance_mode: Maintenance en cours
         not_found: Page non trouvée
+        offline: Pas de connexion internet
         unsupported_browser: Merci de mettre à jour votre navigateur
       home:
         index: Tableau de bord

@@ -17,5 +17,7 @@ module Schematics
     def not_found
       respond_with nil, status: :not_found
     end
+
+    def offline; end
   end
 end

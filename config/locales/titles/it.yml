@@ -14,6 +14,7 @@ it:
         internal_server_error: Qualcosa è andato storto
         maintenance_mode: Manutenzione in corso
         not_found: Pagina non trovata
+        offline: Nessuna connessione internet
         unsupported_browser: Aggiorna il tuo browser
       home:
         index: Cruscotto
