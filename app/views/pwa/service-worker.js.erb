@@ -1,13 +1,16 @@
 /* global importScripts, workbox, Response */
 
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/7.1.0/workbox-sw.js')
+importScripts('<%= asset_path("workbox-core/build/workbox-core.#{Rails.env.development? ? 'dev' : 'prod'}.js") %>')
+importScripts('<%= asset_path("workbox-recipes/build/workbox-recipes.#{Rails.env.development? ? 'dev' : 'prod'}.js") %>')
+importScripts('<%= asset_path("workbox-strategies/build/workbox-strategies.#{Rails.env.development? ? 'dev' : 'prod'}.js") %>')
+importScripts('<%= asset_path("workbox-routing/build/workbox-routing.#{Rails.env.development? ? 'dev' : 'prod'}.js") %>')
 
 const { warmStrategyCache } = workbox.recipes
 const { CacheFirst, NetworkFirst } = workbox.strategies
 const { registerRoute, Route, setCatchHandler } = workbox.routing
 
 const strategy = new CacheFirst()
-const urls = ['/offline.html']
+const urls = ['/offline']
 
 warmStrategyCache({ urls, strategy })
 
