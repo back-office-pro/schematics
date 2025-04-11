@@ -1,21 +1,6 @@
 @startuml
 left to right direction
-package "SaaS v1" {
-    actor "Customer"
-    folder "Application directory"
-    cloud "Github repository with CI features"
-    agent "Systemd & Puma server service"
-    agent "Nginx configuration file"
-    file "Application files"
-    database "4 databases"
-    "Systemd & Puma server service" -> "Github repository with CI features"
-    "Nginx configuration file" -> "Systemd & Puma server service"
-    "4 databases" -> "Nginx configuration file"
-    "Application files" -> "4 databases"
-    "Application directory" -> "Application files"
-    "Customer" -> "Application directory"
-}
-package "SaaS v2" {
+package "SaaS" {
     actor "Customer *"
     agent "Systemd & Puma server service *"
     agent "Nginx configuration file *"
