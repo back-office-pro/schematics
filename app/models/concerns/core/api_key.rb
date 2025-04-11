@@ -10,7 +10,7 @@ module Core
       PaperTrail.request(enabled: false) do
         ::APIRequest.create!(
           api_key: self,
-          ip: request.ip,
+          ip: request.remote_ip,
           request_method: request.method,
           endpoint: request.original_fullpath,
           response_code: response.response_code,
