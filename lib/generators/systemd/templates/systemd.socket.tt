@@ -2,8 +2,7 @@
 Description=<%= server_name %> HTTP Server Accept Sockets
 
 [Socket]
-ListenStream=0.0.0.0:9292
-ListenStream=0.0.0.0:9293
+ListenStream=<%= Rails.root.join('tmp', 'sockets', "#{name}.sock") %>
 
 ReusePort=true
 Backlog=1024
