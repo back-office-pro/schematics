@@ -26,7 +26,12 @@ module Schematics
       end
 
       def resource_path(resource, **)
-        super(**resource.route_params, **)
+        case resource
+        when ActiveStorage::Attachment
+          polymorphic_path(resource)
+        else
+          super(**resource.route_params, **)
+        end
       end
 
       def edit_resource_path(resource, **)
