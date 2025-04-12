@@ -11,7 +11,7 @@ module Schematics
 
     def destroy
       logout_user!
-      redirect_to main_app.login_path, notice: t('.success')
+      redirect_to main_app.login_path, notice: t('.success'), status: :see_other
     end
   end
 end
