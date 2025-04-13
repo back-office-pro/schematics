@@ -27,7 +27,7 @@ describe Schematics::Attributes::Attachments do
   its(:open_api_query_type) { is_expected.to eq('string') }
   its(:icon) { is_expected.to eq(:file) }
   its(:default) { is_expected.to be_all(Rack::Test::UploadedFile) }
-  its(:validators) { is_expected.to eq(storage_quota: true) }
+  its(:validators) { is_expected.to eq(antivirus: true, storage_quota: true) }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('active_storage_blobs.filename') }
   its(:to_s) { is_expected.to eq('files:attachments') }
@@ -62,7 +62,7 @@ describe Schematics::Attributes::Attachments do
 
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
-      validates :files, {storage_quota: true}
+      validates :files, {antivirus: true, storage_quota: true}
     RUBY
   end
 
@@ -99,12 +99,12 @@ describe Schematics::Attributes::Attachments do
     it { is_expected.to be_required }
 
     its(:validators) do
-      is_expected.to eq(attached: true, storage_quota: true)
+      is_expected.to eq(attached: true, antivirus: true, storage_quota: true)
     end
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :files, {attached: true, storage_quota: true}
+        validates :files, {attached: true, antivirus: true, storage_quota: true}
       RUBY
     end
   end
@@ -113,12 +113,12 @@ describe Schematics::Attributes::Attachments do
     let(:options) { { min: 1 } }
 
     its(:validators) do
-      is_expected.to eq(storage_quota: true, limit: { min: 1 })
+      is_expected.to eq(antivirus: true, storage_quota: true, limit: { min: 1 })
     end
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :files, {storage_quota: true, limit: {min: 1}}
+        validates :files, {antivirus: true, storage_quota: true, limit: {min: 1}}
       RUBY
     end
   end
@@ -127,12 +127,12 @@ describe Schematics::Attributes::Attachments do
     let(:options) { { max: 1 } }
 
     its(:validators) do
-      is_expected.to eq(storage_quota: true, limit: { max: 1 })
+      is_expected.to eq(antivirus: true, storage_quota: true, limit: { max: 1 })
     end
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :files, {storage_quota: true, limit: {max: 1}}
+        validates :files, {antivirus: true, storage_quota: true, limit: {max: 1}}
       RUBY
     end
   end

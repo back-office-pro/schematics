@@ -60,7 +60,7 @@ module Schematics
       def validators = super
         .rename_keys(presence: :attached)
         .merge(
-          antivirus: false,
+          antivirus: true,
           storage_quota: true,
           size: {
             less_than: options.size&.megabytes
