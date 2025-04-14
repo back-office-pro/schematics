@@ -11,5 +11,5 @@
             - resources.each.with_index(1) do |resource, rank|
               tr
                 th.text-center.text-primary = rank
-                td.text-center = __resource_link_to(resource:)
-                td.text-center = resource.public_send(field_name_formatted)
+                td.text-truncate.w-100.mw-0 = __resource_link_to(resource:)
+                td.text-center.text-nowrap = resource.public_send(field_name_formatted)
