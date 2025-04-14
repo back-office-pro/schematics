@@ -10,6 +10,6 @@
           tbody
             - resources.each.with_index(1) do |resource, rank|
               tr
-                th.text-center.text-primary = rank
+                th.text-center.text-primary.col-2 = rank
                 td.text-truncate.w-100.mw-0 = __resource_link_to(resource:)
                 td.text-center.text-nowrap = resource.public_send(field_name_formatted)
