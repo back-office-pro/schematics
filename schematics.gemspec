@@ -53,7 +53,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'bundler-audit', '0.9.2'
   spec.add_dependency 'cancancan', '3.6.1'
   spec.add_dependency 'capybara', '3.40.0'
-  spec.add_dependency 'chartkick', '5.1.4'
+  spec.add_dependency 'chartkick', '5.1.5'
   spec.add_dependency 'chroma', '0.2.0'
   spec.add_dependency 'countries', '7.1.1'
   spec.add_dependency 'csv', '3.3.4'
