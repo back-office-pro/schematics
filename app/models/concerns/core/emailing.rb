@@ -10,9 +10,9 @@ module Core
     end
 
     def serializers = [
-      (Schematics::PDFSerializer.new(record, Tenant.default_url_options) if pdf_attachment?),
-      (Schematics::ICSSerializer.new(record) if ics_attachment?),
-      (Schematics::SVGSerializer.new(record) if svg_attachment?)
+      (Schematics::PDFSerializer if pdf_attachment?),
+      (Schematics::ICSSerializer if ics_attachment?),
+      (Schematics::SVGSerializer if svg_attachment?)
     ].compact
 
     private

@@ -2,4 +2,4 @@ p = t('.body.first', user: @user)
 br
 p = t('.body.second')
 br
-p = link_to t('.body.link'), edit_password_reset_url(@token, **@url_options)
+p = link_to t('.body.link'), edit_password_reset_url(@token, **default_url_options)

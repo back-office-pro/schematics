@@ -5,12 +5,12 @@ module Schematics
   class PDFSerializer
     delegate :render, to: :renderer, private: true
     delegate :human_name, :route_params, to: :model_class, private: true
+    delegate :default_url_options, to: '::Tenant', private: true
     delegate :ssl?, to: '::Server', private: true
     delegate :key_generator, to: '::Rails.application', private: true
 
-    def initialize(resource, url_options)
+    def initialize(resource)
       @resource = resource
-      @url_options = url_options
       @template = ::PDFTemplate.find_by(model: model_name)
     end
 
@@ -47,7 +47,7 @@ module Schematics
 
     def assets_url = URI
       .const_get(ssl? ? :HTTPS : :HTTP)
-      .build(**@url_options)
+      .build(**default_url_options)
       .to_s
 
     def controller_name = "::#{model_name.pluralize}Controller"

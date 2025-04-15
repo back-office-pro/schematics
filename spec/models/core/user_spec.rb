@@ -6,15 +6,13 @@ require 'rails_helper'
 RSpec.describe User do
   include Schematics::Specs::Model
 
-  let(:url_options) { { host: 'localhost', port: 3000 } }
-
   it { is_expected.not_to be_admin }
   it { is_expected.not_to be_online }
 
   it 'sends a mail after create' do
     expect { record.save! }
       .to have_enqueued_mail(Schematics::UserMailer, :new_account)
-      .with(record, url_options)
+      .with(record)
       .on_queue('default')
   end
 

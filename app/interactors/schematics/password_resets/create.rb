@@ -5,10 +5,10 @@ module Schematics
   module PasswordResets
     class Create
       include Interactable
-      delegate :email, :url_options, to: :context, private: true
+      delegate :email, to: :context, private: true
 
       def call
-        UserMailer.password_reset(user, url_options).deliver_later if user
+        UserMailer.password_reset(user).deliver_later if user
       end
 
       private

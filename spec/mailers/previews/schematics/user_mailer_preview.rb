@@ -4,15 +4,11 @@
 module Schematics
   class UserMailerPreview < ActionMailer::Preview
     def new_account
-      UserMailer.new_account(::User.take, url_options)
+      UserMailer.new_account(::User.take)
     end
 
     def password_reset
-      UserMailer.password_reset(::User.take, url_options)
+      UserMailer.password_reset(::User.take)
     end
-
-    private
-
-    def url_options = { host: 'localhost', port: 3000 }
   end
 end

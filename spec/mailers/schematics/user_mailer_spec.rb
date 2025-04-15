@@ -7,9 +7,8 @@ RSpec.describe Schematics::UserMailer do
   include_context 'with user'
 
   describe '#new_account' do
-    subject(:mail) { described_class.new_account(user, url_options) }
+    subject(:mail) { described_class.new_account(user) }
 
-    let(:url_options) { { host: 'localhost', port: 3000 } }
     let(:expected_subject) { 'Activate your account' }
     let(:expected_body) do
       <<~TEXT.squish
@@ -24,9 +23,8 @@ RSpec.describe Schematics::UserMailer do
   end
 
   describe '#password_reset' do
-    subject(:mail) { described_class.password_reset(user, url_options) }
+    subject(:mail) { described_class.password_reset(user) }
 
-    let(:url_options) { { host: 'localhost', port: 3000 } }
     let(:expected_subject) { 'Password reset' }
     let(:expected_body) do
       <<~TEXT.squish

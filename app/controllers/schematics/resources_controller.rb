@@ -69,11 +69,7 @@ module Schematics
 
       respond_with(@resource, ability: current_ability) do |format|
         format.pdf do
-          GeneratePDFJob.perform_later(
-            current_user,
-            current_tenant.default_url_options,
-            @resource
-          )
+          GeneratePDFJob.perform_later(current_user, @resource)
           head :accepted
         end
       end

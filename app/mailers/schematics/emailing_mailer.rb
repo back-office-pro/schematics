@@ -9,6 +9,8 @@ module Schematics
       ::I18n.with_locale(recipient.locale) do
         emailing
           .serializers
+          .each_with_object(@resource)
+          .map(&:new)
           .select(&:content)
           .each { attachments[it.filename] = it.content }
       end
