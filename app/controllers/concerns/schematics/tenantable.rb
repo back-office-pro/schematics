@@ -14,8 +14,6 @@ module Schematics
       Tenant.new(subdomain: request.subdomain)
     end
 
-    def current_schema
-      ::SchemaCache.fetch('current')
-    end
+    def current_schema = ::SchemaCache
   end
 end

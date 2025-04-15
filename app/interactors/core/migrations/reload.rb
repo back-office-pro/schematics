@@ -15,7 +15,7 @@ module Core
       progressable migration: 75
 
       def call
-        Rails.cache.delete('schema:current')
+        Rails.cache.delete('schema')
         Rails.cache.write('old_and_changed_model_classes', old_and_changed_model_classes)
         old_and_changed_model_classes
           .select(&Object.method(:const_defined?))

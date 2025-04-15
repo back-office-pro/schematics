@@ -3,15 +3,18 @@
 
 class SchemaCache
   class << self
-    def fetch(name)
+    delegate_missing_to :cache
+    delegate :as_json, to: :cache
+
+    private
+
+    def cache
       Rails
         .cache
-        .fetch("schema:#{name}") { Schematics::Schema.new(data:, version:) }
+        .fetch('schema') { Schematics::Schema.new(data:, version:) }
     rescue StandardError
       Schematics::Schema.new(data:, version:)
     end
-
-    private
 
     def version
       ActiveRecord::Base

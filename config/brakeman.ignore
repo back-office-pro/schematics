@@ -3,30 +3,6 @@
     {
       "warning_type": "Dangerous Eval",
       "warning_code": 13,
-      "fingerprint": "09860090948d0bff8118468228a126b9837f3cc9285a617f7f324acc23393df5",
-      "check_name": "Evaluation",
-      "message": "Dynamic code evaluation",
-      "file": "app/models/concerns/schematics/loadable.rb",
-      "line": 78,
-      "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
-      "code": "eval(schema.find_entity_by_name(name.to_s.underscore), binding, \"app/models/concerns/schematics/loadable.rb\", 78)",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Schematics::Loadable",
-        "method": "load!"
-      },
-      "user_input": null,
-      "confidence": "Weak",
-      "cwe_id": [
-        913,
-        95
-      ],
-      "note": ""
-    },
-    {
-      "warning_type": "Dangerous Eval",
-      "warning_code": 13,
       "fingerprint": "4d6045431693208dde4ee7bdd673640059e9c8f1be0ab41fc769dde449e3d641",
       "check_name": "Evaluation",
       "message": "Dynamic code evaluation",
@@ -39,6 +15,30 @@
         "type": "method",
         "class": "Schematics::Loadable",
         "method": "inherited"
+      },
+      "user_input": null,
+      "confidence": "Weak",
+      "cwe_id": [
+        913,
+        95
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Dangerous Eval",
+      "warning_code": 13,
+      "fingerprint": "91d7455d167c55b56626179772538f23f8b3ed2cfbdf92fef6af5042f47760bb",
+      "check_name": "Evaluation",
+      "message": "Dynamic code evaluation",
+      "file": "app/models/concerns/schematics/loadable.rb",
+      "line": 76,
+      "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
+      "code": "eval(schema.find_entity_by_name(name.to_s.underscore), binding, \"app/models/concerns/schematics/loadable.rb\", 76)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Schematics::Loadable",
+        "method": "load!"
       },
       "user_input": null,
       "confidence": "Weak",
@@ -94,5 +94,5 @@
       "note": ""
     }
   ],
-  "brakeman_version": "7.0.0"
+  "brakeman_version": "7.0.2"
 }

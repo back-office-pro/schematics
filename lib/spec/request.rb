@@ -3,7 +3,7 @@
 
 require_relative "#{Dir.pwd}/config/environment"
 
-SchemaCache.fetch('current').model_classes.each do
+SchemaCache.model_classes.each do
   RSpec.describe it, type: :request do
     include Schematics::Specs::Request
   end
