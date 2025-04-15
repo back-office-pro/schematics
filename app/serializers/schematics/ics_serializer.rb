@@ -24,7 +24,7 @@ module Schematics
 
     memoize def content = calendar&.to_ical
 
-    def filename = "#{human_name.dasherize}-#{@resource.to_param}.#{extension}"
+    def filename = "#{human_name.parameterize}-#{@resource.to_param}.#{extension}"
 
     private
 

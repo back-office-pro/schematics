@@ -24,7 +24,7 @@ module Schematics
       .tap { it.write(content) }
       .tap(&:rewind)
 
-    def filename = "#{human_name_plural.dasherize}.#{extension}"
+    def filename = "#{human_name_plural.parameterize}.#{extension}"
 
     protected
 
