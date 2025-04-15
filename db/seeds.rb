@@ -27,7 +27,7 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
   Migration.default.save!
   User.create!(
     email: Subscription.email,
-    password: (Schematics::Attributes::Digest::DEFAULT if Tenant.database_name.eql?('demo')),
+    password: (Schematics::Attributes::Digest::DEFAULT if Tenant.demo?),
     role: Role.admin
   )
   Dashboard.create!(

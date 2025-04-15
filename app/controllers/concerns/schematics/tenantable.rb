@@ -10,9 +10,7 @@ module Schematics
       helper_method :current_schema
     end
 
-    def current_tenant
-      Tenant.new(subdomain: request.subdomain)
-    end
+    def current_tenant = ::Tenant
 
     def current_schema = ::SchemaCache
   end
