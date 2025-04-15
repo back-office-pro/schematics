@@ -63,7 +63,7 @@ module OpenAPI
         entity in Schematics::Entities::Singleton
       end
 
-      def root_path = File.join('', (singleton? ? summary_slug : tag).parameterize(separator: '-'))
+      def root_path = File.join('', (singleton? ? summary_slug : tag).parameterize)
     end
   end
 end

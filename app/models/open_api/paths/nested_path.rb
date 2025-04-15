@@ -14,8 +14,9 @@ module OpenAPI
         File.join(root_path, '{id}', nested_path)
       end
 
-      def nested_path = translate(:other, scope: [:activerecord, :models, nested_entity_name])
-        .parameterize(separator: '-')
+      def nested_path
+        translate(:other, scope: [:activerecord, :models, nested_entity_name]).parameterize
+      end
 
       def http_method = :post
 

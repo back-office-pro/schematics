@@ -22,7 +22,7 @@ module I18n
           PREFIXES
             .filter_map { resolve(locale, nil, :"#{it}#{model.to_s.singularize}.other", default: nil) } # rubocop:disable Layout/LineLength
             .first
-            &.parameterize(separator: '-')
+            &.parameterize
         else
           nil
         end

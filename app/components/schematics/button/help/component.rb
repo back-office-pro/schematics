@@ -79,7 +79,7 @@ module Schematics
 
         def slug = human_name_plural
           .to_s
-          .parameterize(separator: '-')
+          .parameterize
       end
     end
   end

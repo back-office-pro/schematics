@@ -6,7 +6,7 @@ module Schematics
     extend ActiveSupport::Concern
 
     class_methods do
-      def route_params = { resource: human_name_plural.parameterize(separator: '-') }
+      def route_params = { resource: human_name_plural.parameterize }
     end
 
     def route_params = self
