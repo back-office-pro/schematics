@@ -88,6 +88,7 @@ describe Schematics::Attributes::Attachments do
     is_expected.to eq <<~RUBY
       has_many_base64_attached :files
       accepts_nested_attributes_for :files_attachments,
+                                    update_only: true,
                                     allow_destroy: true,
                                     reject_if: :all_blank
     RUBY

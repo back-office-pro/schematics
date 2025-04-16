@@ -86,6 +86,7 @@ describe Schematics::Attributes::Attachment do
     is_expected.to eq <<~RUBY
       has_one_base64_attached :avatar
       accepts_nested_attributes_for :avatar_attachment,
+                                    update_only: true,
                                     allow_destroy: true,
                                     reject_if: :all_blank
     RUBY

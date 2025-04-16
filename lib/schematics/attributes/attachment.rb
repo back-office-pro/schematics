@@ -49,6 +49,7 @@ module Schematics
       def to_str = <<~RUBY
         #{attached_method} :#{name}
         accepts_nested_attributes_for :#{association_name},
+                                      update_only: true,
                                       allow_destroy: true,
                                       reject_if: :all_blank
       RUBY
