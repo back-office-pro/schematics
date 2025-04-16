@@ -146,6 +146,7 @@ Metrics/BlockLength:
     - map_array
     - map_values
     - draw
+    - constraints
 Metrics/MethodLength:
   Max: 35
   AllowedMethods:
