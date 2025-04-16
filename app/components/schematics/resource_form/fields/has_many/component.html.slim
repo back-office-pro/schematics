@@ -8,11 +8,11 @@ div id=id data-nested-form-target='targets'
           button.accordion-button.collapsed.py-1.pe-3.ps-1.bg-body-tertiary {
             type='button'
             data-bs-toggle='collapse'
-            data-bs-target="#collapse-#{id}"
+            data-bs-target="##{dom_id(form.object)}"
             aria-expanded='false'
-            aria-controls="collapse-#{id}"
+            aria-controls=dom_id(form.object)
           }
-            = __card_heading(icon:, title: human_name.humanize)
-        .accordion-collapse.collapse id="collapse-#{id}"
+            = __card_heading(icon:, title: form.object)
+        .accordion-collapse.collapse id=dom_id(form.object)
           .accordion-body.pb-1
             = __resource_form_fields(elements, form:)
