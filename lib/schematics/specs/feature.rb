@@ -74,7 +74,7 @@ module Schematics
             if ability.can?(:new, model_class)
               login_with_2fa
               visit new_resource_path(model_class)
-              fill_form
+              fill_form form_elements
               click_button t('schematics.application.button.confirm')
               is_expected.to have_text t('schematics.resources.create.success', human_name:)
             end
@@ -87,7 +87,7 @@ module Schematics
             if ability.can?(:edit, record)
               login_with_2fa
               visit edit_resource_path(record)
-              fill_form
+              fill_form form_elements_for_update
               click_button t('schematics.application.button.confirm')
               is_expected.to have_text t('schematics.resources.update.success', human_name:)
             end
@@ -115,8 +115,8 @@ module Schematics
       private
 
       # :reek:FeatureEnvy
-      def fill_form # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
-        form_elements.each do |element|
+      def fill_form(elements) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
+        elements.each do |element|
           case element
           when Associations::HasAndBelongsToMany
             select element.model_class.find(&element.filter_by).to_s,
@@ -175,6 +175,10 @@ module Schematics
         .fillable_elements
         .grep_v(Associations::HasMany)
         .grep_v(Attributes::User)
+
+      def form_elements_for_update
+        form_elements.select { ability.can?(:update, record, it.name.to_sym) }
+      end
     end
   end
 end
