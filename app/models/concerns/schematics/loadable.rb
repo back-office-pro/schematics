@@ -22,7 +22,6 @@ module Schematics
         super
         subclass.class_eval do
           superclass.concerns&.each(&method(:include))
-          prepend Core.const_get(name) if Object.const_defined?("Core::#{name}")
           entity&.model_elements&.each do
             eval it, binding, __FILE__, __LINE__ # rubocop:disable Security/Eval
           end
@@ -73,7 +72,13 @@ module Schematics
 
         unless Object.const_defined?(name)
           Rails.logger.info "Loading #{name}..."
-          eval(entity, binding, __FILE__, __LINE__) # rubocop:disable Security/Eval
+          path = Engine.root.join('app', 'models', 'core', "#{entity.name}.rb")
+
+          if path.exist?
+            load(path)
+          else
+            eval(entity, binding, __FILE__, __LINE__) # rubocop:disable Security/Eval
+          end
         end
 
         const_get(name)

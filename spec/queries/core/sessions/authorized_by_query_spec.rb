@@ -28,7 +28,7 @@ RSpec.describe Core::Sessions::AuthorizedByQuery do
     context 'when access_token does not exist and session has expired' do
       let(:access_token) { nil }
       let(:session_id) { session.id }
-      let(:time) { 15.minutes.ago }
+      let(:time) { Session::ACTIVE_DELAY.ago }
 
       it { is_expected.to be_empty }
     end
@@ -60,7 +60,7 @@ RSpec.describe Core::Sessions::AuthorizedByQuery do
     context 'when access_token is right but session has expired' do
       let(:access_token) { session.id }
       let(:session_id) { session.id }
-      let(:time) { 15.minutes.ago }
+      let(:time) { Session::ACTIVE_DELAY.ago }
 
       it { is_expected.to eq([session]) }
     end

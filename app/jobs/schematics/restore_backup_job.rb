@@ -17,7 +17,7 @@ module Schematics
     end
 
     def perform(backup)
-      ::Core::Backups::Restore.call(backup: backup.file, clean: true)
+      Core::Backups::Restore.call(backup: backup.file, clean: true)
       backup.reload.state_ready!
     end
   end

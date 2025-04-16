@@ -29,7 +29,7 @@ module Schematics
 
       I18n.with_locale(migration.locale) do
         migration.state_generating!
-        migration.update!(Core::Migration::GATEWAY::Chat.call(migration:).to_h.slice(:data))
+        migration.update!(::Migration::GATEWAY::Chat.call(migration:).to_h.slice(:data))
         migration.state_editing!
       end
     end
