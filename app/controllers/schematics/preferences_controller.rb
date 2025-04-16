@@ -10,7 +10,7 @@ module Schematics
 
     def update
       result = Resources::Update.call(resource: current_user, resource_params:)
-      respond_with result, location: edit_preferences_path
+      respond_with result, location: -> { edit_preferences_path }
     end
 
     private

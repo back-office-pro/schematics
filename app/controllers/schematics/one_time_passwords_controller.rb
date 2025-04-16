@@ -54,12 +54,14 @@ module Schematics
 
     def update
       result = OneTimePasswords::Authenticate.call(user: current_user, resource_params:)
-      respond_with result, location: one_time_passwords_path
+      respond_with result, location: -> { one_time_passwords_path }
     end
 
     def destroy
       result = OneTimePasswords::Destroy.call(user: current_user)
-      respond_with result, location: edit_one_time_passwords_path, redirect_on_failure: true
+      respond_with result,
+                   location: -> { edit_one_time_passwords_path },
+                   redirect_on_failure: true
     end
 
     private

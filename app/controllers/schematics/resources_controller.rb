@@ -43,7 +43,7 @@ module Schematics
 
     def archive
       result = Resources::Archive.call(resource: @resource)
-      respond_with result, location: index_path, redirect_on_failure: true
+      respond_with result, location: -> { index_path }, redirect_on_failure: true
     end
 
     def index
@@ -78,7 +78,7 @@ module Schematics
     def duplicate
       @resource = @resource.dup
       result = Resources::Duplicate.call(resource: @resource)
-      respond_with result, location: show_path
+      respond_with result, location: -> { show_path }
     end
 
     def new
@@ -90,17 +90,17 @@ module Schematics
     def create
       @resource = model_class.new(resource_params_with_defaults)
       result = Resources::Create.call(resource: @resource, draft: @draft)
-      respond_with result, location: show_path
+      respond_with result, location: -> { show_path }
     end
 
     def restore
       result = Resources::Restore.call(resource: @resource)
-      respond_with result, location: index_path, redirect_on_failure: true
+      respond_with result, location: -> { index_path }, redirect_on_failure: true
     end
 
     def update
       result = Resources::UpdateAndCache.call(resource: @resource, draft: @draft, resource_params:)
-      respond_with result, location: show_path
+      respond_with result, location: -> { show_path }
     end
 
     def trigger
@@ -115,7 +115,7 @@ module Schematics
 
     def destroy
       result = Resources::Destroy.call(resource: @resource)
-      respond_with result, location: index_path, redirect_on_failure: true
+      respond_with result, location: -> { index_path }, redirect_on_failure: true
     end
 
     def view_assigns = super.merge(human_name_plural:, human_name:, gender:)

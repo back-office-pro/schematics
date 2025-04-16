@@ -20,12 +20,12 @@ module Schematics
 
     def create
       result = PasswordResets::Create.call(resource_params)
-      respond_with result, location: main_app.login_path
+      respond_with result, location: -> { main_app.login_path }
     end
 
     def update
       result = Resources::Update.call(resource: @user, resource_params:)
-      respond_with result, location: main_app.login_path
+      respond_with result, location: -> { main_app.login_path }
     end
 
     private
