@@ -213,6 +213,12 @@ Rails/TableNameAssignment:
   Enabled: true
 Rails/Inquiry:
   Enabled: false
+Rails/UnknownEnv:
+  Environments:
+    - production
+    - development
+    - test
+    - on_premise
 # rubocop-performance
 Performance/MethodObjectAsBlock:
   Enabled: false

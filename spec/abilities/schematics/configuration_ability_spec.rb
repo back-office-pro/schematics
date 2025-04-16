@@ -14,6 +14,14 @@ RSpec.describe Schematics::ConfigurationAbility do
 
   it { is_expected.not_to be_able_to(:show, Configuration) }
   it { is_expected.not_to be_able_to(:update, Configuration) }
+  it { is_expected.not_to be_able_to(:update, Configuration, :gcloud_api_key) }
+  it { is_expected.not_to be_able_to(:update, Configuration, :aws_access_key_id) }
+  it { is_expected.not_to be_able_to(:update, Configuration, :aws_secret_access_key) }
+  it { is_expected.not_to be_able_to(:update, Configuration, :aws_region) }
+  it { is_expected.not_to be_able_to(:update, Configuration, :azure_storage_account_name) }
+  it { is_expected.not_to be_able_to(:update, Configuration, :azure_storage_access_key) }
+  it { is_expected.not_to be_able_to(:update, Configuration, :gcs_private_key_id) }
+  it { is_expected.not_to be_able_to(:update, Configuration, :gcs_private_key) }
 
   context 'when user is admin' do
     let(:role) { admin_role }

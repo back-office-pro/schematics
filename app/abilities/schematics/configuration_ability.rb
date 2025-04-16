@@ -8,6 +8,18 @@ module Schematics
       return unless user.admin?
 
       can %i[show update], ::Configuration
+      return if Rails.env.on_premise?
+
+      cannot :update, ::Configuration, %i[
+        gcloud_api_key
+        aws_access_key_id
+        aws_secret_access_key
+        aws_region
+        azure_storage_account_name
+        azure_storage_access_key
+        gcs_private_key_id
+        gcs_private_key
+      ]
     end
   end
 end
