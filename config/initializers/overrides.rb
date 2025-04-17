@@ -104,7 +104,7 @@ ActiveSupport.on_load(:active_storage_attachment) do
 
   prepend ActiveStorage::Override::Attachment
 
-  def to_s = Rails
+  def blob_url = Rails
     .application
     .routes
     .url_helpers

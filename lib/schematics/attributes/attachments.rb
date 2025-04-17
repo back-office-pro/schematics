@@ -12,7 +12,7 @@ module Schematics
       def default = [super]
 
       def format(values)
-        values.map(&:to_s)
+        values.map(&:blob_url)
       end
 
       def json_default = [super]

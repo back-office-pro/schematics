@@ -77,7 +77,7 @@ module Schematics
         )
 
       def format(value)
-        value.attachment.to_s if value.attached?
+        value.attachment.blob_url if value.attached?
       end
 
       def icon
