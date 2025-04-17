@@ -7,19 +7,21 @@ module Core
       include Interactor
 
       delegate :gcloud_api_key_with_fallback, to: '::Configuration', private: true
-      delegate :translate, to: '::EasyTranslate', private: true
+      delegate :translate, to: :client, private: true
       delegate :text, :locale, to: :context, private: true
       delegate :t, to: '::I18n', private: true
 
       def call
-        context.value = translate(text.humanize, to: locale, key: gcloud_api_key_with_fallback)
+        context.value = translate(text.humanize, to: locale).text
         context.gender = t(gender, scope:, locale:)
-      rescue ::EasyTranslate::EasyTranslateException
+      rescue ::Google::Cloud::Error
         context.value = text.humanize
         context.gender = t(:default, scope:, locale:)
       end
 
       private
+
+      memoize def client = ::Google::Cloud::Translate::V2.new(key: gcloud_api_key_with_fallback)
 
       def gender
         return :f if female?
