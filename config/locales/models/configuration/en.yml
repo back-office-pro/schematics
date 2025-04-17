@@ -15,7 +15,8 @@ en:
         company_name: Company name
         company_registration_number: Company registration number
         company_website: Company website
-        gcloud_api_key: Google Cloud API key
+        gcloud_private_api_key: Google Cloud private API key
+        gcloud_public_api_key: Google Cloud public API key
         gcs_private_key: Google Cloud Storage private key
         gcs_private_key_id: Google Cloud Storage private key ID
         google_sign_in_feature_flag: Enable Google sign in

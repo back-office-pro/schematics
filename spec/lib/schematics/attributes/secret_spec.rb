@@ -5,7 +5,7 @@ describe Schematics::Attributes::Secret do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
   let(:entity) { Schematics::Entities::Entity.new(name: 'entity') }
-  let(:name) { 'gcloud_api_key' }
+  let(:name) { 'gcloud_public_api_key' }
   let(:options) { {} }
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
@@ -27,17 +27,17 @@ describe Schematics::Attributes::Secret do
   it { is_expected.to be_valid }
 
   its(:database_type) { is_expected.to eq('string') }
-  its(:column_name) { is_expected.to eq('gcloud_api_key') }
+  its(:column_name) { is_expected.to eq('gcloud_public_api_key') }
   its(:open_api_body_type) { is_expected.to eq('string') }
   its(:open_api_schema_type) { is_expected.to eq('string') }
   its(:validators) { is_expected.to be_empty }
   its('validators.to_str') { is_expected.to be_blank }
   its(:default) { is_expected.to be_a(String) }
   its(:icon) { is_expected.to eq(:user_secret) }
-  its(:i18n_key) { is_expected.to eq('activerecord.attributes.entity.gcloud_api_key') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.entity.gcloud_public_api_key') }
 
   its(:to_spec) do
-    is_expected.to eq('A entity has a **gcloud api key** attribute of type *secret*')
+    is_expected.to eq('A entity has a **gcloud public api key** attribute of type *secret*')
   end
 
   its(:available_options) do
@@ -54,8 +54,8 @@ describe Schematics::Attributes::Secret do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      encrypts :gcloud_api_key, deterministic: true
-      normalizes :gcloud_api_key, with: -> { it.strip.itself.presence }
+      encrypts :gcloud_public_api_key, deterministic: true
+      normalizes :gcloud_public_api_key, with: -> { it.strip.itself.presence }
     RUBY
   end
 

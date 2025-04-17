@@ -4,7 +4,7 @@
 module Schematics
   module GoogleMap
     class Component < ApplicationComponent
-      delegate :gcloud_api_key_with_fallback, to: '::Configuration', private: true
+      delegate :gcloud_public_api_key_with_fallback, to: '::Configuration', private: true
       option :address
 
       def url = ::URI::HTTPS
@@ -17,7 +17,7 @@ module Schematics
 
       def path = '/maps/embed/v1/place'
 
-      def query = { q: address, key: gcloud_api_key_with_fallback, zoom: }.to_param
+      def query = { q: address, key: gcloud_public_api_key_with_fallback, zoom: }.to_param
 
       def address = CGI.escape(super || ' ')
 

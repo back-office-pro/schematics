@@ -11,7 +11,8 @@ module Schematics
       return if Rails.env.on_premise?
 
       cannot :update, ::Configuration, %i[
-        gcloud_api_key
+        gcloud_public_api_key
+        gcloud_private_api_key
         aws_access_key_id
         aws_secret_access_key
         aws_region

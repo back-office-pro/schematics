@@ -15,7 +15,8 @@ fr:
         company_name: Nom de la société
         company_registration_number: Numéro SIRET de la société
         company_website: Site web de la société
-        gcloud_api_key: Clé API Google Cloud
+        gcloud_private_api_key: Clé API Google Cloud privée
+        gcloud_public_api_key: Clé API Google Cloud publique
         gcs_private_key: Clé privée Google Cloud Storage
         gcs_private_key_id: ID de clé privée Google Cloud Storage
         google_sign_in_feature_flag: Activer la connexion avec le compte Google

@@ -479,7 +479,15 @@
       },
       {
         "id": "b4a2fc76-3ad1-4278-b477-f0f8ecb59a2a",
-        "name": "gcloud_api_key",
+        "name": "gcloud_public_api_key",
+        "type": "secret",
+        "options": {
+          "cached": true,
+          "group": "api_key"
+        }
+      },      {
+        "id": "cdfc32c9-820c-4bdb-bba2-0ef3cdaf61b5",
+        "name": "gcloud_private_api_key",
         "type": "secret",
         "options": {
           "cached": true,

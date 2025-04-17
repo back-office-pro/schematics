@@ -14,7 +14,8 @@ RSpec.describe Schematics::ConfigurationAbility do
 
   it { is_expected.not_to be_able_to(:show, Configuration) }
   it { is_expected.not_to be_able_to(:update, Configuration) }
-  it { is_expected.not_to be_able_to(:update, Configuration, :gcloud_api_key) }
+  it { is_expected.not_to be_able_to(:update, Configuration, :gcloud_public_api_key) }
+  it { is_expected.not_to be_able_to(:update, Configuration, :gcloud_private_api_key) }
   it { is_expected.not_to be_able_to(:update, Configuration, :aws_access_key_id) }
   it { is_expected.not_to be_able_to(:update, Configuration, :aws_secret_access_key) }
   it { is_expected.not_to be_able_to(:update, Configuration, :aws_region) }

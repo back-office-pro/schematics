@@ -20,8 +20,12 @@ class ::Configuration < Schematics::ApplicationRecord
       openai_access_token || Schematics::Engine.credentials.openai&.access_token
     end
 
-    def gcloud_api_key_with_fallback
-      gcloud_api_key || Schematics::Engine.credentials.gcloud&.api_key
+    def gcloud_public_api_key_with_fallback
+      gcloud_public_api_key || Schematics::Engine.credentials.gcloud&.public_api_key
+    end
+
+    def gcloud_private_api_key_with_fallback
+      gcloud_private_api_key || Schematics::Engine.credentials.gcloud&.private_api_key
     end
   end
 

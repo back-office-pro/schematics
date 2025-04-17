@@ -15,7 +15,8 @@ it:
         company_name: Nome dell'azienda
         company_registration_number: Codice fiscale dell'azienda
         company_website: Sito web aziendale
-        gcloud_api_key: Chiave API di Google Cloud
+        gcloud_private_api_key: Chiave API privata di Google Cloud
+        gcloud_public_api_key: Chiave API pubblica di Google Cloud
         gcs_private_key: Chiave privata di Google Cloud Storage
         gcs_private_key_id: ID chiave privata di Google Cloud Storage
         google_sign_in_feature_flag: Attivare l'accesso con l'account Google
