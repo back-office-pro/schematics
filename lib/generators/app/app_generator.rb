@@ -105,6 +105,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     database: 'sqlite3',
     skip_test: true,
     skip_keeps: true,
+    skip_bootsnap: true,
     skip_javascript: true,
     skip_docker: true,
     skip_active_job: true,
