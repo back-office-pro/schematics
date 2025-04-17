@@ -111,5 +111,9 @@ module Schematics
         .map { it.limit(ASSOCIATIONS_LIMIT) }
         .compact_blank
     end
+
+    protected
+
+    def raise_nested_attributes_record_not_found!(*) = nil
   end
 end
