@@ -7,7 +7,7 @@ module Schematics
     # :reek:Attribute
     class Session
       include ::ActiveModel::API
-      delegate :ip, :user_agent, to: :request
+      delegate :remote_ip, :user_agent, to: :request
       attr_accessor :request
 
       def locale = request
@@ -19,7 +19,7 @@ module Schematics
 
       def login!(user)
         PaperTrail.request(enabled: false) do
-          ::Session.create!(ip:, user_agent:, user:)
+          ::Session.create!(ip: remote_ip, user_agent:, user:)
         end
       end
 
