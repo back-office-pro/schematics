@@ -101,6 +101,7 @@ class TenantGenerator < Rails::Generators::NamedBase
   end
 
   def env
+    return 'test'.inquiry if ENV['CI'].present?
     return 'development'.inquiry if Dir.pwd.end_with?('spec/demo')
     return 'on_premise'.inquiry if Dir.pwd.end_with?('on-premise')
 

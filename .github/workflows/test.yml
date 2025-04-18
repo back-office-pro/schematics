@@ -18,7 +18,10 @@ jobs:
           sudo apt-get update
           sudo apt-get -yqq install libvips-dev ffmpeg graphviz
       - name: Install app generator gems
-        run: gem install rails -v 8.0.2
+        run: |
+          gem install rails -v 8.0.2
+          gem install specific_install
+          gem specific_install https://github.com/MaksJS/ratonvirus.git feature/rails-8-upgrade
       - name: Generate test application
         run: ruby bin/schematics
       - name: Generate test tenant
