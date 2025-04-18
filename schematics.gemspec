@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop-performance', '1.25.0'
   spec.add_development_dependency 'rubocop-rails', '2.31.0'
   spec.add_development_dependency 'rubocop-rake', '0.7.1'
-  spec.add_development_dependency 'rubocop-rspec', '3.5.0'
+  spec.add_development_dependency 'rubocop-rspec', '3.6.0'
   spec.add_development_dependency 'rubocop-thread_safety', '0.7.2'
   spec.add_development_dependency 'rubycritic', '4.9.0'
   spec.add_development_dependency 'simplecov', '0.22.0'
