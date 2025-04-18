@@ -60,6 +60,14 @@ describe Schematics::Attributes::Ip do
     )
   end
 
+  describe '#format' do
+    subject { attribute.format(value) }
+
+    let(:value) { '127.0.0.1' }
+
+    it { is_expected.to eq('127.0.0.0') }
+  end
+
   describe '.compatible_types' do
     subject { described_class.compatible_types }
 
