@@ -155,7 +155,7 @@ RSpec.shared_context 'with google translate stub' do
   end
 
   before do
-    stub_request(:post, %r{https://translation.googleapis.com/language/translate/v2})
+    stub_request(:post, %r{https://translate.googleapis.com/language/translate/v2})
       .to_return(body:, status: 200)
   end
 end
