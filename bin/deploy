@@ -4,4 +4,3 @@ bundle cache
 gem build
 gem install --local ./schematics-*.gem
 # systemctl restart puma-*.socket puma-*.service
-# rails tmp:clear
