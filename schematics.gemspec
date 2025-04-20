@@ -39,7 +39,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'active_model_otp', '2.3.4'
   spec.add_dependency 'active_record_doctor', '1.15.0'
   spec.add_dependency 'active_storage_base64', '3.0.0'
-  spec.add_dependency 'active_storage_validations', '2.0.2'
+  spec.add_dependency 'active_storage_validations', '2.0.3'
   spec.add_dependency 'after_commit_everywhere', '1.6.0'
   spec.add_dependency 'aws-sdk-s3', '1.183.0'
   spec.add_dependency 'azure-blob', '0.5.7'
