@@ -4,6 +4,7 @@
 module Schematics
   class RoutingController < ApplicationController
     allow_unauthenticated_access
+    skip_around_action :touch_session!
 
     SINGLETON_CONTROLLERS = %w[
       subscription
