@@ -34,7 +34,8 @@ module Schematics
           .entities
           .reject(&:core?)
 
-        memoize def graph = GraphViz.digraph('schema') do |graph|
+        memoize def graph
+          graph = GraphViz.digraph('schema')
           graph[:bgcolor] = 'transparent'
           graph.node[:shape] = 'plaintext'
           graph.node[:fontname] = 'Helvetica, Arial, sans-serif'
@@ -43,6 +44,7 @@ module Schematics
           graph.node[:fillcolor] = 'gray97'
           graph.edge[:fontname] = 'Helvetica, Arial, sans-serif'
           graph.edge[:fontsize] = 10
+          graph
         end
 
         def add_habtm_edges
