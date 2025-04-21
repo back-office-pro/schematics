@@ -55,7 +55,6 @@ require 'ransack'
 require 'ransack-enum'
 require 'ratonvirus'
 require 'ratonvirus/clamby'
-require 'responders'
 require 'rollbar'
 require 'rouge'
 require 'route_translator'
@@ -166,10 +165,6 @@ module Schematics
     config.view_component.capture_compatibility_patch_enabled = true
     config.view_component.test_controller = 'Schematics::ApplicationController'
     config.view_component.show_previews = false
-
-    # Responders
-    config.responders.error_status = :unprocessable_content
-    config.responders.redirect_status = :see_other
 
     # Active Storage
     config.after_initialize do

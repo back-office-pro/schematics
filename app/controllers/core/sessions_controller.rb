@@ -19,16 +19,20 @@ class SessionsController < Schematics::ResourcesController
       session: current_session,
       ability: current_ability
     )
-    respond_with do |format|
+    respond_to do |format|
       if result.success?
         if result.otp_token
           session[:otp_token] = result.otp_token
           session[:session_remember_me] = resource_params[:remember_me]
-          format.html { redirect_to schematics.new_one_time_passwords_path, notice: t(result.message) } # rubocop:disable Layout/LineLength
           format.json { render json: { otp_token: result.otp_token } }
+          format.html do
+            redirect_to schematics.new_one_time_passwords_path,
+                        status: :see_other,
+                        notice: t(result.message)
+          end
         else
           session[:current_session_id] = result.session.id
-          format.html { redirect_to return_to_path, notice: t(result.message) }
+          format.html { redirect_to return_to_path, status: :see_other, notice: t(result.message) }
           format.json { render json: Schematics::AuthToken.new(result.session) }
         end
       else

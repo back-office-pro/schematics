@@ -13,15 +13,17 @@ module Schematics
       @pagy, @versions = pagy(model_class.timeline(current_ability))
       return unless stale?(@versions)
 
-      respond_with @versions
+      respond_to do |format|
+        format.html
+        format.json { render json: @versions }
+      end
     end
 
     def revert
       result = Versions::Revert.call(version: @version)
       respond_with(
         result,
-        location: -> { resource_path(@version.item) },
-        redirect_on_failure: true,
+        location: resource_path(@version.item),
         flash_interpolation_options: {
           human_name: @version.model_class.human_name,
           gender: @version.model_class.gender
@@ -33,7 +35,10 @@ module Schematics
       return unless stale?(@version)
 
       @previous_item = @version.reify(dup: true)
-      respond_with @version
+      respond_to do |format|
+        format.html
+        format.json { render json: @version }
+      end
     end
 
     private

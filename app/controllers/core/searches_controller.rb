@@ -8,7 +8,10 @@ class SearchesController < Schematics::ResourcesController
   def show
     return unless stale?(@results.flatten)
 
-    respond_with @results
+    respond_to do |format|
+      format.html
+      format.json { render json: @results }
+    end
   end
 
   protected

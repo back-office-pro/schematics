@@ -13,7 +13,7 @@ RSpec.describe 'OneTimePasswords' do
     before { do_request }
 
     it { is_expected.to have_http_status(:success) }
-    its(:body) { is_expected.to eq('null') }
+    its(:body) { is_expected.to be_blank }
   end
 
   describe 'GET #edit' do

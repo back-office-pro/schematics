@@ -7,15 +7,24 @@ module Schematics
     layout 'schematics/jumbotron'
 
     def internal_server_error
-      respond_with nil, status: :internal_server_error
+      respond_to do |format|
+        format.html
+        format.json { head :internal_server_error }
+      end
     end
 
     def maintenance_mode
-      respond_with nil, status: :service_unavailable
+      respond_to do |format|
+        format.html
+        format.json { head :service_unavailable }
+      end
     end
 
     def not_found
-      respond_with nil, status: :not_found
+      respond_to do |format|
+        format.html
+        format.json { head :not_found }
+      end
     end
 
     def offline; end

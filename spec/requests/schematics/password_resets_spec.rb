@@ -19,7 +19,7 @@ RSpec.describe 'PasswordResets' do
       before { do_request }
 
       it { is_expected.to have_http_status(:created) }
-      its(:body) { is_expected.to eq('null') }
+      its(:body) { is_expected.to be_blank }
     end
 
     context 'when email does not exist' do
@@ -28,7 +28,7 @@ RSpec.describe 'PasswordResets' do
       before { do_request }
 
       it { is_expected.to have_http_status(:created) }
-      its(:body) { is_expected.to eq('null') }
+      its(:body) { is_expected.to be_blank }
     end
 
     context 'when enumerating accounts' do

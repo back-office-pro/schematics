@@ -11,7 +11,7 @@ module Schematics
     def update
       result = Resources::Update.call(resource: current_user, resource_params:)
       switch_localization do
-        respond_with result, location: -> { edit_profile_path }
+        respond_with result, location: edit_profile_path
       end
     end
 

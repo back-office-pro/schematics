@@ -24,11 +24,6 @@ module Schematics
     after_action :assign_etag, only: %i[show update]
     after_action :assign_api_version
 
-    responders :flash, ResourceResponder
-    respond_to :html
-    respond_to :json, except: %i[new edit delete]
-    respond_to :svg, :ics, only: :show
-
     prepend_view_path Engine.root.join('app', 'views', 'core')
 
     delegate :human_name, :human_name_plural, :gender, to: :model_class
@@ -43,13 +38,14 @@ module Schematics
 
     def archive
       result = Resources::Archive.call(resource: @resource)
-      respond_with result, location: -> { index_path }, redirect_on_failure: true
+      respond_with result, location: index_path
     end
 
     def index
       return unless stale?(@resources)
 
-      respond_with do |format|
+      respond_to do |format|
+        format.html
         format.json { render json: @resources.to_a, metadata: params.key?(:metadata) }
         format.csv do
           GenerateCSVJob.perform_later(
@@ -67,7 +63,11 @@ module Schematics
     def show
       return unless stale?(@resource)
 
-      respond_with(@resource, ability: current_ability) do |format|
+      respond_to do |format|
+        format.html
+        format.json { render json: @resource, ability: current_ability }
+        format.svg { render svg: @resource }
+        format.ics { render ics: @resource }
         format.pdf do
           GeneratePDFJob.perform_later(current_user, @resource)
           head :accepted
@@ -78,7 +78,7 @@ module Schematics
     def duplicate
       @resource = @resource.dup
       result = Resources::Duplicate.call(resource: @resource)
-      respond_with result, location: -> { show_path }
+      respond_with result, location: show_path
     end
 
     def new
@@ -90,17 +90,17 @@ module Schematics
     def create
       @resource = model_class.new(resource_params_with_defaults)
       result = Resources::Create.call(resource: @resource, draft: @draft)
-      respond_with result, location: -> { show_path }
+      respond_with result, location: show_path
     end
 
     def restore
       result = Resources::Restore.call(resource: @resource)
-      respond_with result, location: -> { index_path }, redirect_on_failure: true
+      respond_with result, location: index_path
     end
 
     def update
       result = Resources::UpdateAndCache.call(resource: @resource, draft: @draft, resource_params:)
-      respond_with result, location: -> { show_path }
+      respond_with result, location: show_path
     end
 
     def trigger
@@ -108,14 +108,13 @@ module Schematics
       authorize! event.name.to_sym, @resource
       result = Resources::Trigger.call(resource: @resource, event:)
       respond_with result,
-                   location: -> { request.referer || show_path },
-                   action: :show,
+                   location: request.referer || show_path,
                    flash_interpolation_options: { event: event.human.downcase }
     end
 
     def destroy
       result = Resources::Destroy.call(resource: @resource)
-      respond_with result, location: -> { index_path }, redirect_on_failure: true
+      respond_with result, location: index_path
     end
 
     def view_assigns = super.merge(human_name_plural:, human_name:, gender:)
@@ -166,6 +165,8 @@ module Schematics
 
     def show_path = resource_path(@resource)
 
-    def flash_interpolation_options = { human_name:, gender: }
+    def i18n_path = "schematics.resources.#{action_name}"
+
+    def flash_interpolations = { human_name:, gender: }
   end
 end

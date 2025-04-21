@@ -12,9 +12,13 @@ module Schematics
 
     def show
       if current_user.otp_enabled?
-        respond_with codes: current_user.otp_backup_codes
+        respond_to do |format|
+          format.json { render json: { codes: current_user.otp_backup_codes } }
+          format.html
+        end
       else
-        respond_with do |format|
+        respond_to do |format|
+          format.json { head :no_content }
           format.html { redirect_to(edit_one_time_passwords_path) }
         end
       end
@@ -37,10 +41,10 @@ module Schematics
         cookies:,
         resource_params:
       )
-      respond_with do |format|
+      respond_to do |format|
         if result.success?
           session[:current_session_id] = result.session.id
-          format.html { redirect_to return_to_path, notice: t(result.message) }
+          format.html { redirect_to return_to_path, status: :see_other, notice: t(result.message) }
           format.json { render json: AuthToken.new(result.session) }
         else
           format.html do
@@ -54,14 +58,12 @@ module Schematics
 
     def update
       result = OneTimePasswords::Authenticate.call(user: current_user, resource_params:)
-      respond_with result, location: -> { one_time_passwords_path }
+      respond_with result, location: one_time_passwords_path
     end
 
     def destroy
       result = OneTimePasswords::Destroy.call(user: current_user)
-      respond_with result,
-                   location: -> { edit_one_time_passwords_path },
-                   redirect_on_failure: true
+      respond_with result, location: edit_one_time_passwords_path
     end
 
     private

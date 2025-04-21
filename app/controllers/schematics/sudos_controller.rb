@@ -9,7 +9,7 @@ module Schematics
 
     def create
       result = Sudos::Create.call(session: current_session, user: current_user, resource_params:)
-      respond_with result, location: -> { return_to_path }
+      respond_with result, location: return_to_path
     end
 
     private
