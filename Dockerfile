@@ -36,6 +36,9 @@ COPY . .
 
 RUN bundle install --jobs=4 --retry=3
 
+RUN gem install specific_install
+RUN gem specific_install https://github.com/MaksJS/ratonvirus.git feature/rails-8-upgrade
+
 RUN rm -rf /schematics/config/credentials/development*
 RUN rm -rf /schematics/config/credentials/production*
 RUN rm -rf /schematics/config/credentials/test*
