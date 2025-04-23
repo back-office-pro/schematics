@@ -22,8 +22,8 @@ module Schematics
         super
         subclass.class_eval do
           superclass.concerns&.each(&method(:include))
-          entity&.model_elements&.each do
-            eval _1, binding, __FILE__, __LINE__ # rubocop:disable Security/Eval
+          entity&.model_elements&.each do |model_element|
+            eval model_element, binding, __FILE__, __LINE__ # rubocop:disable Security/Eval
           end
         end
       end
