@@ -9,7 +9,7 @@ module Schematics
           class Component < Inputs::Component
             def field = object
               .dup
-              .tap { it.name = option_name }
+              .tap { _1.name = option_name }
           end
         end
       end

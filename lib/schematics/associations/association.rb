@@ -42,7 +42,7 @@ module Schematics
           Associations.const_get(type.camelize.to_sym).new(belongs_to:)
         end
 
-        def to_proc = -> { build(**it) }
+        def to_proc = -> { build(**_1) }
       end
 
       def open_api_schema_type = [id: super, descriptor.name.to_sym => super]
@@ -65,8 +65,8 @@ module Schematics
 
       def prefixed? = inverse_entity
         .associations
-        .reject { it.belongs_to == belongs_to }
-        .any? { it.source == source }
+        .reject { _1.belongs_to == belongs_to }
+        .any? { _1.source == source }
 
       def scope_to_str = <<~RUBY
         scope :with_#{name}, -> { includes(#{preload}) }

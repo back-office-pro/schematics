@@ -11,7 +11,7 @@ module Schematics
         .entity
         .has_and_belongs_to_many_associations
         .map(&:name)
-        .each { new_record.public_send(:"#{it}=", public_send(it)) }
+        .each { new_record.public_send(:"#{_1}=", public_send(_1)) }
     end
   end
 end

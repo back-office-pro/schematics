@@ -12,7 +12,7 @@ module Schematics
         def controller = 'dropdown'
 
         def collection = %w[has_many has_one]
-          .map { [I18n.t(it, scope: %i[activemodel attributes schematics/options/wrapper inverse_association_types]), it] } # rubocop:disable Layout/LineLength
+          .map { [I18n.t(_1, scope: %i[activemodel attributes schematics/options/wrapper inverse_association_types]), _1] } # rubocop:disable Layout/LineLength
           .sort
       end
     end

@@ -4,7 +4,7 @@
 require_relative "#{Dir.pwd}/config/environment"
 
 SchemaCache.model_classes.each do
-  RSpec.describe it, type: :routing do
+  RSpec.describe _1, type: :routing do
     include Schematics::Specs::Routing
   end
 end

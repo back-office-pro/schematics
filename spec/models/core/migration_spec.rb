@@ -19,7 +19,7 @@ RSpec.describe Migration do
   end
 
   it 'enqueues a rollback schema job after rollback' do
-    expect { record.tap { it.finalize!(false) }.reload.rollback! }
+    expect { record.tap { _1.finalize!(false) }.reload.rollback! }
       .to have_enqueued_job(Schematics::RollbackSchemaJob)
       .exactly(:once)
       .with(record)

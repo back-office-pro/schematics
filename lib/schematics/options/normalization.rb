@@ -12,7 +12,7 @@ module Schematics
         def multiple? = false
 
         def collection = %w[capitalize upcase downcase]
-          .map { [I18n.t(it, scope: %i[activemodel attributes schematics/options/wrapper normalizations]), it] } # rubocop:disable Layout/LineLength
+          .map { [I18n.t(_1, scope: %i[activemodel attributes schematics/options/wrapper normalizations]), _1] } # rubocop:disable Layout/LineLength
           .sort
       end
     end

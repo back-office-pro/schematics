@@ -16,13 +16,13 @@ module Schematics
         end
       end
 
-      def parser = Regexp.union(token_classes.map { it::REGEX })
+      def parser = Regexp.union(token_classes.map { _1::REGEX })
 
       def token_classes = module_parent
         .constants
         .map(&module_parent.method(:const_get))
         .excluding(self, Token)
-        .sort_by { it::PRECEDENCE }
+        .sort_by { _1::PRECEDENCE }
     end
   end
 end

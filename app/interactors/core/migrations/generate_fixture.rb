@@ -24,7 +24,7 @@ module Core
 
       def io = Tempfile
         .new
-        .tap { it.write(migration.data.to_json) }
+        .tap { _1.write(migration.data.to_json) }
         .tap(&:rewind)
     end
   end

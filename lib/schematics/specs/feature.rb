@@ -177,7 +177,7 @@ module Schematics
         .grep_v(Attributes::User)
 
       def form_elements_for_update
-        form_elements.select { ability.can?(:update, record, it.name.to_sym) }
+        form_elements.select { ability.can?(:update, record, _1.name.to_sym) }
       end
     end
   end

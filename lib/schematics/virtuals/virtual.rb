@@ -31,7 +31,7 @@ module Schematics
           klass(**).new(**)
         end
 
-        def to_proc = -> { build(**it) }
+        def to_proc = -> { build(**_1) }
 
         def klass(entity:, function:, **)
           tokens = Tokens::Tokenizer.tokenize(function, entity.table_name.pluralize)

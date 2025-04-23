@@ -74,7 +74,7 @@ describe Schematics::Attributes::Email do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      normalizes :email, with: -> { it.strip.downcase.presence }
+      normalizes :email, with: -> { _1.strip.downcase.presence }
     RUBY
   end
 

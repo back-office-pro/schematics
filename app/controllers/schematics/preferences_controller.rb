@@ -44,15 +44,15 @@ module Schematics
 
     def dashboard_metrics_preferences = ::Dashboard
       .ids
-      .map { { "dashboard_metrics_#{it}" => [] } }
+      .map { { "dashboard_metrics_#{_1}" => [] } }
 
     def dashboard_charts_preferences = ::Dashboard
       .ids
-      .map { { "dashboard_charts_#{it}" => [] } }
+      .map { { "dashboard_charts_#{_1}" => [] } }
 
     def dashboard_rankings_preferences = ::Dashboard
       .ids
-      .map { { "dashboard_rankings_#{it}" => [] } }
+      .map { { "dashboard_rankings_#{_1}" => [] } }
 
     def timeline_preferences = current_schema
       .entities
@@ -65,11 +65,11 @@ module Schematics
 
     def viewer_preferences = current_schema
       .entities
-      .map { "viewer_#{it.id}" }
+      .map { "viewer_#{_1.id}" }
 
     def viewer_col_preferences = current_schema
       .entities
       .flat_map(&:listable_elements)
-      .map { "col_#{it.entity.id}_#{it.id}" }
+      .map { "col_#{_1.entity.id}_#{_1.id}" }
   end
 end

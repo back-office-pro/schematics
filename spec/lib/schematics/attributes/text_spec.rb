@@ -79,7 +79,7 @@ describe Schematics::Attributes::Text do
     its(:to_str) do
       is_expected.to eq <<~RUBY
         attribute :content, default: -> { "text" }
-        normalizes :content, with: -> { it.strip.itself.presence }
+        normalizes :content, with: -> { _1.strip.itself.presence }
       RUBY
     end
   end
@@ -93,7 +93,7 @@ describe Schematics::Attributes::Text do
     its(:to_str) do
       is_expected.to eq <<~RUBY
         translates :content, type: :text
-        normalizes :content, with: -> { it.strip.itself.presence }
+        normalizes :content, with: -> { _1.strip.itself.presence }
       RUBY
     end
   end

@@ -12,7 +12,7 @@ module Schematics
           .each_with_object(@resource)
           .map(&:new)
           .select(&:content)
-          .each { attachments[it.filename] = it.content }
+          .each { attachments[_1.filename] = _1.content }
       end
       mail_to(recipient, @template.subject)
     end

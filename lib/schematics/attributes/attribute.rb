@@ -27,13 +27,13 @@ module Schematics
           Attributes.const_get(type.camelize.to_sym).new(**)
         end
 
-        def to_proc = -> { build(**it) }
+        def to_proc = -> { build(**_1) }
 
         def collection = attributes_classes
           .excluding(Action, Model, ModelField, Uuid, Locale, Timestamp)
 
         def attribute_ancestors = ancestors
-          .select { it.module_parent == module_parent }
+          .select { _1.module_parent == module_parent }
           .excluding(Attribute)
 
         def compatible_types = attributes_classes

@@ -4,7 +4,7 @@
 require_relative "#{Dir.pwd}/config/environment"
 
 SchemaCache.model_classes.each do
-  RSpec.describe it, type: :model do
+  RSpec.describe _1, type: :model do
     include Schematics::Specs::Model
   end
 end

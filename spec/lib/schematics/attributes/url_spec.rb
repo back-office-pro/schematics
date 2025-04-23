@@ -66,7 +66,7 @@ describe Schematics::Attributes::Url do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      normalizes :url, with: -> { it.strip.downcase.presence }
+      normalizes :url, with: -> { _1.strip.downcase.presence }
     RUBY
   end
 

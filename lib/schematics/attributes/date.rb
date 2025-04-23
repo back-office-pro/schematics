@@ -48,12 +48,12 @@ module Schematics
                     .slice(*::ActiveModel::Validations::Comparability::COMPARE_CHECKS.keys)
                     .to_h
                     .transform_values(&:to_sym)
-                    .tap { it.merge!(allow_blank:) if it.any? }
+                    .tap { _1.merge!(allow_blank:) if _1.any? }
       )
 
       def default = ::Time
         .current
-        .then_tap { it.tomorrow if options.greater_than || options.greater_than_or_equal_to }
+        .then_tap { _1.tomorrow if options.greater_than || options.greater_than_or_equal_to }
         .to_fs(:db)
 
       protected

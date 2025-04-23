@@ -35,7 +35,7 @@ module Schematics
 
       def badge_color = element
         .events
-        .find { it.to == value }
+        .find { _1.to == value }
         .try(:color) || :secondary
 
       def value

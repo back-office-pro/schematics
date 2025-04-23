@@ -14,7 +14,7 @@ module Schematics
       .entity
       .url_attributes
       .map(&:name)
-      .select { public_send(:"#{it}_previously_changed?") }
+      .select { public_send(:"#{_1}_previously_changed?") }
       .filter_map(&method(:public_send))
 
     protected

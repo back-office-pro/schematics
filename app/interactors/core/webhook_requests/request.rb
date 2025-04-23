@@ -41,8 +41,8 @@ module Core
             Net::HTTP
               .const_get(request_method.downcase.camelize)
               .new(uri)
-              .tap { it[HEADER_SIGNATURE_KEY] = secret_key }
-              .tap { it.form_data = body }
+              .tap { _1[HEADER_SIGNATURE_KEY] = secret_key }
+              .tap { _1.form_data = body }
           )
         end
       end

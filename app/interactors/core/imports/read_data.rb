@@ -40,13 +40,13 @@ module Core
       def attributes_translations
         ::I18n
           .t(model.underscore.to_sym, scope: [i18n_scope, :attributes])
-          .transform_values { it.try(:fetch, :other) || it }
+          .transform_values { _1.try(:fetch, :other) || _1 }
       end
 
       def transform_value(key, value) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         return unless value
 
-        case field = fillable_elements.find { it.name == key.to_s }
+        case field = fillable_elements.find { _1.name == key.to_s }
         when Schematics::Associations::HasAndBelongsToMany
           value
             .split(VALUES_SEPARATOR)

@@ -17,7 +17,7 @@ class ::Chart < Schematics::ApplicationRecord
   def col_size = self
     .class
     .sizes
-    .transform_values { it.next * 3 }
+    .transform_values { _1.next * 3 }
     .fetch(size)
 
   def max_col_size = [12, col_size * 2].min
