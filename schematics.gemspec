@@ -112,7 +112,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rollbar', '3.6.2'
   spec.add_dependency 'rouge', '4.5.1'
   spec.add_dependency 'route_translator', '14.2.0'
-  spec.add_dependency 'rqrcode', '2.2.0'
+  spec.add_dependency 'rqrcode', '3.0.0'
   spec.add_dependency 'rspec-rails', '7.1.1'
   spec.add_dependency 'ruby-graphviz', '1.2.5'
   spec.add_dependency 'ruby-openai', '8.1.0'
