@@ -118,7 +118,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'ruby-openai', '8.1.0'
   spec.add_dependency 'ruby-vips', '2.2.3'
   spec.add_dependency 'shoulda-callback-matchers', '1.1.4'
-  spec.add_dependency 'shoulda-matchers', '6.4.0'
+  spec.add_dependency 'shoulda-matchers', '6.5.0'
   spec.add_dependency 'slim', '5.2.1'
   spec.add_dependency 'solid_cable', '3.0.7'
   spec.add_dependency 'solid_cache', '1.0.7'
