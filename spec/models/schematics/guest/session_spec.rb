@@ -15,7 +15,7 @@ RSpec.describe Schematics::Guest::Session do
   it { is_expected.not_to be_sudo }
 
   its(:locale) { is_expected.to eq(:en) }
-  its(:ip) { is_expected.to eq('0.0.0.0') }
+  its(:remote_ip) { is_expected.to eq('0.0.0.0') }
   its(:user_agent) { is_expected.to eq('Rails Testing') }
   its(:touch!) { is_expected.to be_truthy }
 
