@@ -75,14 +75,14 @@ describe Schematics::Attributes::Enum do
 
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
-      validates :state, {inclusion: {in: ["available", "available_soon", "not_available"], allow_blank: true}}
+      validates :state, {:inclusion=>{:in=>["available", "available_soon", "not_available"], :allow_blank=>true}}
     RUBY
   end
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
       enum :state,
-           {available: 0, available_soon: 1, not_available: 2},
+           {:available=>0, :available_soon=>1, :not_available=>2},
            prefix: true,
            validate: { allow_blank: true }
     RUBY
@@ -115,7 +115,7 @@ describe Schematics::Attributes::Enum do
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :state, {presence: true, inclusion: {in: ["available", "available_soon", "not_available"], allow_blank: false}}
+        validates :state, {:presence=>true, :inclusion=>{:in=>["available", "available_soon", "not_available"], :allow_blank=>false}}
       RUBY
     end
   end
@@ -131,7 +131,7 @@ describe Schematics::Attributes::Enum do
     its(:to_str) do
       is_expected.to eq <<~RUBY
         enum :state,
-             {available: 0, available_soon: 1, not_available: 2},
+             {:available=>0, :available_soon=>1, :not_available=>2},
              prefix: true,
              validate: { allow_blank: true },
              default: "available"

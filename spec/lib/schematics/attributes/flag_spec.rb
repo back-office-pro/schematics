@@ -73,13 +73,13 @@ describe Schematics::Attributes::Flag do
 
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
-      validates :states, {inclusion: {in: [:available, :available_soon, :not_available], allow_blank: true}}
+      validates :states, {:inclusion=>{:in=>[:available, :available_soon, :not_available], :allow_blank=>true}}
     RUBY
   end
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      enummer states: {available: 0, available_soon: 1, not_available: 2}, _prefix: true
+      enummer states: {:available=>0, :available_soon=>1, :not_available=>2}, _prefix: true
     RUBY
   end
 
@@ -110,7 +110,7 @@ describe Schematics::Attributes::Flag do
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :states, {presence: true, inclusion: {in: [:available, :available_soon, :not_available], allow_blank: false}}
+        validates :states, {:presence=>true, :inclusion=>{:in=>[:available, :available_soon, :not_available], :allow_blank=>false}}
       RUBY
     end
   end

@@ -65,7 +65,7 @@ describe Schematics::Attributes::Datetime do
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :created_at, {presence: true}
+        validates :created_at, {:presence=>true}
       RUBY
     end
   end
@@ -77,7 +77,7 @@ describe Schematics::Attributes::Datetime do
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :created_at, {comparison: {less_than: :start_at, allow_blank: true}}
+        validates :created_at, {:comparison=>{:less_than=>:start_at, :allow_blank=>true}}
       RUBY
     end
   end
