@@ -14,7 +14,7 @@ module Core
       def call
         context.value = translate(text.humanize, to: locale).text
         context.gender = t(gender, scope:, locale:)
-      rescue ::Google::Cloud::Error
+      rescue StandardError
         context.value = text.humanize
         context.gender = t(:default, scope:, locale:)
       end
