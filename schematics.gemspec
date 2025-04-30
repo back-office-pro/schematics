@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.homepage = 'https://www.back-office.pro'
   spec.summary = 'BackOffice app builder.'
   spec.license = 'Nonstandard'
-  spec.required_ruby_version = '>= 3.4.2'
+  spec.required_ruby_version = '>= 3.2.8'
   spec.metadata['allowed_push_host'] = 'https://www.back-office.pro:9292/private'
   spec.metadata['rubygems_mfa_required'] = 'true'
   spec.files = Dir['.bundle/config', '{app,config,db,lib,rgloader}/**/{*,.*}', 'package.json']
