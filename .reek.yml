@@ -55,5 +55,4 @@ directories:
 exclude_paths:
   - db/migrate
   - db/search_migrate
-  - pkg
   - spec/demo
