@@ -37,6 +37,14 @@ module Schematics
         def toggle
           'dropdown' if dropdown?
         end
+
+        def browser_missing?
+          return false unless extension == :pdf
+
+          !Ferrum::Browser::Command.build(Ferrum::Browser::Options.new, nil)
+        rescue Ferrum::BinaryNotFoundError
+          true
+        end
       end
     end
   end
