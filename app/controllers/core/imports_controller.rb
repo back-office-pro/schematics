@@ -26,7 +26,7 @@ class ImportsController < Schematics::ResourcesController
   def attributes = entity
     .fillable_elements
     .grep_v(Schematics::Attributes::Jsonb)
-    .map { |attribute| attribute.tap { it.options.merge!(required: true) } }
+    .map { |attribute| attribute.tap { _1.options.merge!(required: true) } }
 
   def resource_defaults
     super.merge(model: parent_model_class.to_s)

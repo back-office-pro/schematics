@@ -29,6 +29,6 @@ module Schematics
       .map(&:name)
       .map(&:to_sym)
       .push(:with_deleted)
-      .concat(entity.rangeable_elements.map { { it.name.to_sym => %i[gte lte] } })
+      .concat(entity.rangeable_elements.map { { _1.name.to_sym => %i[gte lte] } })
   end
 end

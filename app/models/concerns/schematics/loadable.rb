@@ -22,8 +22,8 @@ module Schematics
         super
         subclass.class_eval do
           superclass.concerns&.each(&method(:include))
-          entity&.model_elements&.each do
-            eval it, binding, __FILE__, __LINE__ # rubocop:disable Security/Eval
+          entity&.model_elements&.each do |model_element|
+            eval model_element, binding, __FILE__, __LINE__ # rubocop:disable Security/Eval
           end
         end
       end
@@ -57,7 +57,7 @@ module Schematics
       def create_without_validations(resources)
         Array
           .wrap(resources)
-          .map { |attributes| new(**attributes).tap { it.save(validate: false) } }
+          .map { |attributes| new(**attributes).tap { _1.save(validate: false) } }
       end
 
       def preload_all = includes(entity.includes).preload(entity.preload)
@@ -105,10 +105,10 @@ module Schematics
         .class
         .entity
         .association_elements
-        .then_tap { it.grep_v(Associations::HasAndBelongsToMany).select(&:required?) if dependent }
-        .map { public_send(it.name).includes(it.includes).with_string_translations }
-        .map { it.accessible_by(ability).order(created_at: :desc) }
-        .map { it.limit(ASSOCIATIONS_LIMIT) }
+        .then_tap { _1.grep_v(Associations::HasAndBelongsToMany).select(&:required?) if dependent }
+        .map { public_send(_1.name).includes(_1.includes).with_string_translations }
+        .map { _1.accessible_by(ability).order(created_at: :desc) }
+        .map { _1.limit(ASSOCIATIONS_LIMIT) }
         .compact_blank
     end
 

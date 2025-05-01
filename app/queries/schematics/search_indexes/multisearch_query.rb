@@ -11,7 +11,7 @@ module Schematics
           .group_by(&:searchable_type)
           .transform_keys(&:safe_constantize)
           .map { |klass, records| klass&.preload_all&.where(id: [records.map(&:searchable_id)]) }
-          .filter_map { it.accessible_by(ability) }
+          .filter_map { _1.accessible_by(ability) }
           .compact_blank
       end
     end

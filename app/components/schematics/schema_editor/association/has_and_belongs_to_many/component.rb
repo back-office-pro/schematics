@@ -15,7 +15,7 @@ module Schematics
             .map(&:pluralize)
 
           def collection = [Associations::HasAndBelongsToMany]
-            .map { [it.model_name.human, it.type] }
+            .map { [_1.model_name.human, _1.type] }
             .sort
 
           def title = t('.title')

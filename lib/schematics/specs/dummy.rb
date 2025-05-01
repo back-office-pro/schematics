@@ -28,7 +28,7 @@ module Schematics
 
       memoize def file = Tempfile
         .new(filename_array)
-        .tap { it.write(content_type) }
+        .tap { _1.write(content_type) }
         .tap(&:rewind)
 
       memoize def read = File.read(file)

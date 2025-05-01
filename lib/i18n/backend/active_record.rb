@@ -37,7 +37,7 @@ module I18n
         return translations.values.first if translations.size == 1
 
         translations
-          .transform_keys { it.delete_prefix("#{key}.") }
+          .transform_keys { _1.delete_prefix("#{key}.") }
           .flatten_to_nested
       end
 

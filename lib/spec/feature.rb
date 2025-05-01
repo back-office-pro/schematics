@@ -4,8 +4,8 @@
 require_relative "#{Dir.pwd}/config/environment"
 require 'capybara/rspec'
 
-SchemaCache.model_classes.each do
-  RSpec.describe it, type: :feature do
+SchemaCache.model_classes.each do |model_class|
+  RSpec.describe model_class, type: :feature do
     include Schematics::Specs::Feature
   end
 end

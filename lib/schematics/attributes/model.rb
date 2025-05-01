@@ -32,7 +32,7 @@ module Schematics
       def values = entity
         .schema
         .entities
-        .then_tap { it.reject(&:hidden?) unless allow_hidden? }
+        .then_tap { _1.reject(&:hidden?) unless allow_hidden? }
         .map(&:class_name)
         .excluding(exclude)
     end

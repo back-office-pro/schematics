@@ -10,7 +10,7 @@ module Schematics
       def multiple? = true
 
       def collection = @collection
-        .map { [translate(it, scope: %i[activerecord enums permission action]), it] }
+        .map { [translate(_1, scope: %i[activerecord enums permission action]), _1] }
         .sort
     end
   end

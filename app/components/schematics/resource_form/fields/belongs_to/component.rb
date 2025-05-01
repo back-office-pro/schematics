@@ -16,7 +16,7 @@ module Schematics
             .to_a
             .union(Array(value))
             .compact
-            .map { [it.to_s, it.id] }
+            .map { [_1.to_s, _1.id] }
             .sort
 
           def prompt = t('prompt', gender:, attribute_name: attribute_name.downcase)

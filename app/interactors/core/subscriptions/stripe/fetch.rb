@@ -77,7 +77,7 @@ module Core
 
         def subscription = customer
           &.subscriptions
-          &.find { %w[active trialing].include?(it.status) }
+          &.find { %w[active trialing].include?(_1.status) }
 
         def product_id = subscription
           &.plan

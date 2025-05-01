@@ -9,7 +9,7 @@ module Schematics
         preload_all
           .with_string_translations
           .ransack(parse_filter_params(filter_params))
-          .tap { it.sorts = parse_sort_params(sort_params) }
+          .tap { _1.sorts = parse_sort_params(sort_params) }
           .result
           .references(entity.joins)
           .accessible_by(ability)
@@ -20,14 +20,14 @@ module Schematics
       def parse_filter_params(params)
         params
           .deep_flatten
-          .transform_keys { entity.find_field_by_name(it)&.search_query || it }
+          .transform_keys { entity.find_field_by_name(_1)&.search_query || _1 }
       end
 
       # :reek:ControlParameter
       def parse_sort_params(params)
         params
           &.split(',')
-          &.map { it.start_with?('-') ? "#{it[1..]} desc" : "#{it} asc" } ||
+          &.map { _1.start_with?('-') ? "#{_1[1..]} desc" : "#{_1} asc" } ||
           "#{implicit_order_column} desc"
       end
     end

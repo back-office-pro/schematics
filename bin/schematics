@@ -13,8 +13,8 @@ options = {}
 
 OptionParser
   .new do |opts|
-    opts.on('--server', '--server=NAME', 'Generate a new server') { name = it }
-    opts.on('--tenant', '--tenant=NAME', 'Generate a new tenant') { tenant = name = it }
+    opts.on('--server', '--server=NAME', 'Generate a new server') { name = _1 }
+    opts.on('--tenant', '--tenant=NAME', 'Generate a new tenant') { tenant = name = _1 }
     opts.on('--destroy', 'Destroy server or tenant') do
       options[:behavior] = :revoke
       printf "\e[31mAre you sure? Press 'y' to continue: \e[0m"

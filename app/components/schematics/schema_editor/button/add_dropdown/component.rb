@@ -17,7 +17,7 @@ module Schematics
             Attributes::Integer,
             Attributes::String,
             Attributes::Text
-          ].sort_by { it.model_name.human }
+          ].sort_by { _1.model_name.human }
 
           def advanced_collection = Attributes::Attribute
             .collection
@@ -26,7 +26,7 @@ module Schematics
               Attributes::User,
               most_used_collection
             )
-            .sort_by { it.model_name.human }
+            .sort_by { _1.model_name.human }
 
           def title = t('.title')
 
