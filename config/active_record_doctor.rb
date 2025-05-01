@@ -14,6 +14,7 @@ ActiveRecordDoctor.configure do
     ActionText::Record
     PaperTrail::Version
     Schematics::ApplicationRecord
+    Schematics::SearchIndex
     Schematics::Version
     FriendlyId::Slug
     ApplicationRecord
