@@ -22,7 +22,7 @@ class Server
     end
 
     def port
-      DEFAULT_PORT unless Rails.env.production?
+      DEFAULT_PORT unless Rails.env.production? || Rails.env.on_premise?
     end
   end
 end

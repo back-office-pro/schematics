@@ -35,4 +35,13 @@ describe Tenant do
     its(:database_name) { is_expected.to eq('demo') }
     its(:default_url_options) { is_expected.to eq(host: 'localhost', port: 3000) }
   end
+
+  context 'when environment is on_premise' do
+    let(:environment) { 'on_premise' }
+
+    it { is_expected.to be_demo }
+
+    its(:database_name) { is_expected.to eq('demo') }
+    its(:default_url_options) { is_expected.to eq(host: 'back-office.pro') }
+  end
 end

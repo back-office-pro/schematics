@@ -12,7 +12,8 @@ class Tenant
     private
 
     def host
-      return "#{database_name}.#{Server.domain}" if Rails.env.production?
+      return Server.domain if Rails.env.on_premise?
+      return [database_name, Server.domain].join('.') if Rails.env.production?
 
       'localhost'
     end
