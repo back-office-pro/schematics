@@ -8,7 +8,7 @@ module Schematics
       include ::ActiveModel::API
       include Behaviours::Internationalizable
 
-      delegate :entity, :name, to: :enum, private: true
+      delegate :entity, :name, to: :enum
 
       attr_accessor :enum, :value
 

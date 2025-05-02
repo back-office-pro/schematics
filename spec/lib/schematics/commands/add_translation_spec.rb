@@ -12,6 +12,13 @@ describe Schematics::Commands::AddTranslation do
   its(:to_spec) { is_expected.to eq('Add a translation to **client**') }
   its(:weight) { is_expected.to eq(3) }
 
+  context 'when attribute is an enum value' do
+    let(:enum) { Schematics::Attributes::Enum.new(entity:, name: 'state') }
+    let(:attribute) { Schematics::Options::EnumValue.new(enum:, value: 'completed') }
+
+    its(:to_spec) { is_expected.to eq('Add a translation to **client**') }
+  end
+
   describe '#generators' do
     subject { command.generators }
 
