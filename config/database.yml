@@ -10,7 +10,7 @@ postgresql: &postgresql
 sqlite3: &sqlite3
   adapter: sqlite3
   pool: <%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>
-  timeout: 5_000
+  timeout: 5000
 
 development:
   primary:
