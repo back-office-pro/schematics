@@ -1,26 +1,12 @@
 services:
-  clamav:
-    image: clamav/clamav-debian:latest
-    ports:
-      - 3310:3310
-    volumes:
-      - clamav-data:/var/lib/clamav
-  chrome:
-    image: browserless/chrome:latest
-    ports:
-      - 3333:3000
   web:
     build:
       context: .
     ports:
       - 3000:3000
     volumes:
-      - storage-data:/app/storage
-    depends_on:
-      - clamav
-      - chrome
-    environment:
-      - CHROME_URL=http://chrome:3333
+      - storage-data:/app/on-premise/storage
+      - clamav-data:/var/lib/clamav
 volumes:
   clamav-data:
   storage-data:

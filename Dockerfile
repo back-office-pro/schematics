@@ -20,7 +20,7 @@ FROM base AS build
 
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential git libyaml-dev pkg-config libpq-dev node-gyp python-is-python3 && \
-    apt-get install --no-install-recommends -y graphviz pgloader ffmpeg && \
+    apt-get install --no-install-recommends -y graphviz pgloader ffmpeg clamav clamav-daemon clamdscan chromium && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 ARG NODE_VERSION=23.9.0
@@ -33,6 +33,11 @@ RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz
     rm -rf /tmp/node-build-master
 
 COPY . .
+
+RUN freshclam
+
+RUN echo "FollowDirectorySymlinks true" >> /etc/clamav/clamd.conf
+RUN echo "FollowFileSymlinks true" >> /etc/clamav/clamd.conf
 
 RUN bundle install --jobs=4 --retry=3
 
