@@ -12,6 +12,7 @@ module Schematics
       status = %w[create duplicate].include?(action_name) ? :created : :no_content
       if result.success?
         respond_to do |format|
+          format.turbo_stream { redirect_to location, status: :see_other, notice: message }
           format.html { redirect_to location, status: :see_other, notice: message }
           format.json { head status, location: }
         end
