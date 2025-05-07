@@ -8,7 +8,8 @@ module Core
       include Schematics::Progressable
 
       delegate :migration, :fail!, to: :context, private: true
-      delegate :database_name, to: '::Tenant', private: true
+      delegate :root, :env, :configuration, to: '::Rails', private: true
+      delegate :database_configuration, to: :configuration, private: true
       delegate :migrator_clean_commands,
                :migrator_build_commands,
                :persisted?,
@@ -47,9 +48,9 @@ module Core
         update_progress!(@index.value.to_f / total * self.class.progress)
       end
 
-      def migration_files = ::Rails
-        .root
-        .glob("db/#{database_name}/migrate/*")
+      def migration_files = root.glob(
+        database_configuration.dig(env, 'primary', 'migrations_paths').concat('/*')
+      )
 
       def total = migrator_clean_commands
         .concat(migrator_build_commands)

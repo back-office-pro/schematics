@@ -5,15 +5,15 @@ module Core
   module Migrations
     class Copy
       include Interactor
+
       delegate :copy, to: '::ActiveRecord::Migration', private: true
-      delegate :database_name, to: '::Tenant', private: true
+      delegate :root, :env, :configuration, to: '::Rails', private: true
+      delegate :database_configuration, to: :configuration, private: true
 
       def call
-        %w[migrate search_migrate].each do |directory|
-          copy(
-            Rails.root.join('db', database_name, directory),
-            { schematics: Schematics::Engine.root.join('db', directory) }
-          )
+        %w[primary search].each do |database|
+          path = root.join(database_configuration.dig(env, database, 'migrations_paths'))
+          copy path, { schematics: Schematics::Engine.root.join('db', path.basename) }
         end
       end
     end
