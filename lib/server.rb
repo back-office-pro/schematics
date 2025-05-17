@@ -13,13 +13,9 @@ class Server
       .build(host: "www.#{domain}", path:)
       .to_s
 
-    def ssl_path
-      Pathname.new("/etc/letsencrypt/live/#{domain}")
-    end
-
-    def ssl?
-      ssl_path.exist?
-    end
+    def ssl? = Pathname
+      .new("/etc/letsencrypt/live/#{domain}")
+      .exist?
 
     def port
       DEFAULT_PORT unless Rails.env.production? || Rails.env.on_premise?

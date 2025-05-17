@@ -3,10 +3,8 @@ left to right direction
 package "SaaS" {
     actor "Customer *"
     agent "Systemd & Puma server service *"
-    agent "Nginx configuration file *"
     database "4 databases *"
-    "Nginx configuration file *" -> "Systemd & Puma server service *"
-    "4 databases *" -> "Nginx configuration file *"
+    "4 databases *" -> "Systemd & Puma server service *"
     "Customer *" -> "4 databases *"
 }
 package "On-premise" {

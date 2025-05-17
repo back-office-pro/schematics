@@ -8,7 +8,6 @@ SimpleCov.start(:rails) do
   enable_coverage_for_eval
   add_filter %w[
     lib/generators/app
-    lib/generators/nginx
     lib/generators/systemd
     lib/schematics/version.rb
     lib/rubygems_plugin.rb

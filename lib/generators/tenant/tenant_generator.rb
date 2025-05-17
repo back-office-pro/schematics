@@ -63,25 +63,11 @@ class TenantGenerator < Rails::Generators::NamedBase
     rails_command "generate systemd #{name}", env:
   end
 
-  def deploy_nginx_subdomain
-    return unless env.production?
-    return unless generating?
-
-    rails_command "generate nginx #{name}", env:
-  end
-
   def destroy_systemd_service
     return unless destroying?
     return unless env.production?
 
     `RAILS_ENV=#{env} rails destroy systemd #{name}`
-  end
-
-  def destroy_nginx_subdomain
-    return unless destroying?
-    return unless env.production?
-
-    `RAILS_ENV=#{env} rails destroy nginx #{name}`
   end
 
   def drop_database
