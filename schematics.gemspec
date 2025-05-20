@@ -34,7 +34,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubycritic', '4.9.0'
   spec.add_development_dependency 'simplecov', '0.22.0'
   spec.add_development_dependency 'slim_lint', '0.33.0'
-  spec.add_development_dependency 'zeitwerk', '2.7.2'
+  spec.add_development_dependency 'zeitwerk', '2.7.3'
   spec.add_dependency 'aasm', '5.5.0'
   spec.add_dependency 'active_model_otp', '2.3.4'
   spec.add_dependency 'active_record_doctor', '1.15.0'
