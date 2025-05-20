@@ -18,6 +18,7 @@ module Schematics
       'ActiveStorage::BlobsController' => %w[files fichiers],
       'CommentsController' => %w[comments commentaires commenti],
       'ComparisonsController' => %w[comparisons comparaisons confronti],
+      'DraftsController' => %w[drafts brouillons bozze],
       'EmailingsController' => %w[emailings envois-d-e-mails invii-di-e-mail],
       'ImportsController' => %w[imports importations importazioni],
       'MessagesController' => %w[messages messaggi],
