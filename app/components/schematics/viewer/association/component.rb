@@ -6,6 +6,12 @@ module Schematics
     module Association
       class Component < Viewer::Component
         delegate :size, to: :resources, private: true
+        delegate :reflection,
+                 to: :proxy_association,
+                 prefix: :association,
+                 allow_nil: true,
+                 private: true
+
         with_collection_parameter :resources
 
         def initialize(resources:, collapsed: true, highlight_text: nil)
@@ -63,11 +69,11 @@ module Schematics
           end
         end
 
-        private
+        def proxy_association
+          @resources.try(:proxy_association)
+        end
 
-        def association_reflection = @resources
-          .try(:proxy_association)
-          .try(:reflection)
+        private
 
         def default = model_class
           .human_name(count: size)
