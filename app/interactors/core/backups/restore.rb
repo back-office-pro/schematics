@@ -32,7 +32,7 @@ module Core
         end
       end
 
-      def db_path = root.join(database_configuration.dig(env, 'primary', 'database'))
+      def db_path = root.join(database_configuration.dig(env, 'database'))
     end
   end
 end
