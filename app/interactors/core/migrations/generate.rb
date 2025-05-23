@@ -49,7 +49,7 @@ module Core
       end
 
       def migration_files = root.glob(
-        database_configuration.dig(env, 'primary', 'migrations_paths').concat('/*')
+        database_configuration.dig(env, 'migrations_paths').concat('/*')
       )
 
       def total = migrator_clean_commands
