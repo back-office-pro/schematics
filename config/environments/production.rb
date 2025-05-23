@@ -3,8 +3,6 @@
 
 require 'active_support/core_ext/integer/time'
 
-FileUtils.mkdir_p Rails.root.join("log/#{Tenant.database_name}")
-
 Rails.application.configure do
   # Configuration
   config.enable_reloading = false
@@ -34,12 +32,6 @@ Rails.application.configure do
   # Active Job
   config.active_job.queue_adapter = :solid_queue
 
-  # Solid Cache
-  config.solid_cache.connects_to = { database: { writing: :cache } }
-
-  # Solid Queue
-  config.solid_queue.connects_to = { database: { writing: :queue } }
-
   # Cache
   config.cache_store =
     :solid_cache_store,
@@ -68,9 +60,7 @@ Rails.application.configure do
   config.log_level = :info
   config.log_tags = [:request_id]
   config.lograge.enabled = true
-  config.logger = ActiveSupport::TaggedLogging.logger(
-    Rails.root.join("log/#{Tenant.database_name}/production.log")
-  )
+  config.logger = ActiveSupport::TaggedLogging.logger($stdout)
 
   # Health check
   config.silence_healthcheck_path = '/up'
