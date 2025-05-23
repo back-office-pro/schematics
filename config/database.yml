@@ -1,89 +1,24 @@
-postgresql: &postgresql
-  adapter: postgresql
-  encoding: unicode
-  pool: <%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>
-  connect_timeout: 1
-  checkout_timeout: 1
-  variables:
-    statement_timeout: <%= ENV.fetch('STATEMENT_TIMEOUT', '5s') %>
-
 sqlite3: &sqlite3
   adapter: sqlite3
   pool: <%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>
   timeout: 5000
 
 development:
-  primary:
-    <<: *postgresql
-    database: <%= Tenant.database_name %>_development
-    migrations_paths: db/<%= Tenant.database_name %>/migrate
-  search:
-    <<: *sqlite3
-    database: storage/<%= Tenant.database_name %>/development_search.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>/search_migrate
-  cable:
-    <<: *sqlite3
-    database: storage/<%= Tenant.database_name %>/development_cable.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>/cable_migrate
-  cache:
-    <<: *sqlite3
-    database: storage/<%= Tenant.database_name %>/development_cache.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>/cache_migrate
-  queue:
-    <<: *sqlite3
-    database: storage/<%= Tenant.database_name %>/development_queue.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>/queue_migrate
+  <<: *sqlite3
+  database: storage/<%= Tenant.database_name %>/development.sqlite3
+  migrations_paths: db/<%= Tenant.database_name %>/migrate
 
 test:
-  primary:
-    <<: *sqlite3
-    database: storage/<%= Tenant.database_name %>/test.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>/migrate
-  search:
-    <<: *sqlite3
-    database: storage/<%= Tenant.database_name %>/test_search.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>/search_migrate
+  <<: *sqlite3
+  database: storage/<%= Tenant.database_name %>/test.sqlite3
+  migrations_paths: db/<%= Tenant.database_name %>/migrate
 
 production:
-  primary:
-    <<: *postgresql
-    database: <%= Tenant.database_name %>_production
-    migrations_paths: db/<%= Tenant.database_name %>/migrate
-  search:
-    <<: *sqlite3
-    database: storage/<%= Tenant.database_name %>/production_search.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>/search_migrate
-  cable:
-    <<: *sqlite3
-    database: storage/<%= Tenant.database_name %>/production_cable.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>/cable_migrate
-  cache:
-    <<: *sqlite3
-    database: storage/<%= Tenant.database_name %>/production_cache.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>/cache_migrate
-  queue:
-    <<: *sqlite3
-    database: storage/<%= Tenant.database_name %>/production_queue.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>/queue_migrate
+  <<: *sqlite3
+  database: storage/<%= Tenant.database_name %>/production.sqlite3
+  migrations_paths: db/<%= Tenant.database_name %>/migrate
 
 on_premise:
-  primary:
-    <<: *sqlite3
-    database: storage/<%= Tenant.database_name %>/production.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>/migrate
-  search:
-    <<: *sqlite3
-    database: storage/<%= Tenant.database_name %>/production_search.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>/search_migrate
-  cable:
-    <<: *sqlite3
-    database: storage/<%= Tenant.database_name %>/production_cable.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>/cable_migrate
-  cache:
-    <<: *sqlite3
-    database: storage/<%= Tenant.database_name %>/production_cache.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>/cache_migrate
-  queue:
-    <<: *sqlite3
-    database: storage/<%= Tenant.database_name %>/production_queue.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>/queue_migrate
+  <<: *sqlite3
+  database: storage/<%= Tenant.database_name %>/production.sqlite3
+  migrations_paths: db/<%= Tenant.database_name %>/migrate
