@@ -3,7 +3,6 @@
 
 require 'active_support/core_ext/integer/time'
 
-FileUtils.mkdir_p Rails.root.join("log/#{Tenant.database_name}")
 Rails.application.routes.default_url_options = { host: 'localhost', port: Server::DEFAULT_PORT }
 
 Rails.application.configure do
@@ -47,9 +46,4 @@ Rails.application.configure do
 
   # Cache
   config.cache_store = :memory_store
-
-  # Logger
-  config.logger = ActiveSupport::TaggedLogging.logger(
-    Rails.root.join("log/#{Tenant.database_name}/test.log")
-  )
 end
