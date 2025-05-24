@@ -19,7 +19,7 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
     ]
   )
   Configuration.instance.update!(
-    company_name: Tenant.database_name.underscore.humanize,
+    company_name: ENV.fetch('DATABASE', 'demo').underscore.humanize,
     available_locales: [Subscription.default_locale],
     locale: Subscription.default_locale
   )
