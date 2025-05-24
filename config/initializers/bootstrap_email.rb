@@ -4,11 +4,8 @@
 require 'bootstrap-email'
 
 BootstrapEmail.configure do |config|
-  config.sass_cache_location = BootstrapEmail::Config.new.sass_cache_location.join(Tenant.database_name) # rubocop:disable Layout/LineLength
-  config.sass_email_string = lambda {
-    <<~SCSS
-      $primary: #{Configuration.theme_color};
-      @import 'bootstrap-email';
-    SCSS
-  }
+  config.sass_email_string = <<~SCSS
+    $primary: #2c3e50;
+    @import 'bootstrap-email';
+  SCSS
 end
