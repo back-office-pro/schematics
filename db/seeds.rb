@@ -1,6 +1,7 @@
 # Copyright © 2025 Dev & Software. All rights reserved.
 # frozen_string_literal: true
 
+DATABASE = ENV.fetch('DATABASE', 'demo').freeze
 PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
   Role.create!(
     [
@@ -19,7 +20,7 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
     ]
   )
   Configuration.instance.update!(
-    company_name: ENV.fetch('DATABASE', 'demo').underscore.humanize,
+    company_name: DATABASE.underscore.humanize,
     available_locales: [Subscription.default_locale],
     locale: Subscription.default_locale
   )
@@ -27,7 +28,7 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
   Migration.default.save!
   User.create!(
     email: Subscription.email,
-    password: (Schematics::Attributes::Digest::DEFAULT if Tenant.demo? || Rails.env.on_premise?),
+    password: (Schematics::Attributes::Digest::DEFAULT if Rails.env.on_premise? || DATABASE.eql?('demo')),
     role: Role.admin
   )
   Dashboard.create!(

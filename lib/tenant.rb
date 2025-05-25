@@ -7,8 +7,6 @@ class Tenant
 
     def default_url_options = { host:, port: Server.port }.compact
 
-    def demo? = database_name.eql?('demo') && !Rails.env.test?
-
     private
 
     def host
