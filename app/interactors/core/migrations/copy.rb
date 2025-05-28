@@ -7,15 +7,20 @@ module Core
       include Interactor
 
       delegate :copy, to: '::ActiveRecord::Migration', private: true
-      delegate :root, :env, :configuration, to: '::Rails', private: true
-      delegate :database_configuration, to: :configuration, private: true
-      delegate :basename, to: :migrations_path, private: true
+      delegate :migration, to: :context, private: true
+      delegate :current_shard, to: :migration, private: true
 
-      def call = copy(migrations_path, schematics: Schematics::Engine.root.join('db', basename))
+      def call = copy(destination_path, schematics: source_path)
 
       private
 
-      def migrations_path = root.join(database_configuration.dig(env, 'migrations_paths'))
+      def destination_path = Rails
+        .root
+        .join('db', current_shard.to_s, 'migrate')
+
+      def source_path = Schematics::Engine
+        .root
+        .join('db', 'migrate')
     end
   end
 end
