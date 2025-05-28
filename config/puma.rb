@@ -5,4 +5,4 @@ threads ENV.fetch('RAILS_MAX_THREADS', 3)
 
 port ENV.fetch('PORT', ::Server::DEFAULT_PORT) # rubocop:disable Style/RedundantConstantBase
 
-plugin :solid_queue
+plugin :solid_queue if Rails.env.development?
