@@ -61,8 +61,8 @@ RSpec.describe Schematics::ImportJob do
 
     context 'when there is a file not found error' do
       before do
-        allow(import.file)
-          .to receive(:download)
+        allow(CSV)
+          .to receive(:parse)
           .and_raise(ActiveStorage::FileNotFoundError)
       end
 
