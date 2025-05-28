@@ -5,7 +5,6 @@ require 'capybara/cuprite'
 
 Capybara.disable_animation = true
 Capybara.javascript_driver = :cuprite
-Capybara.app_host = 'http://default.localhost.me'
 Capybara.register_driver :cuprite do |app|
   Capybara::Cuprite::Driver.new(
     app,
