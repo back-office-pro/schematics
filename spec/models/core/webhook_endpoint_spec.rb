@@ -7,11 +7,8 @@ RSpec.describe WebhookEndpoint do
   include Schematics::Specs::Model
   include Schematics::ResourcesHelper
 
-  let(:host) { 'default.localhost.me' }
-  let(:port) { Server.port }
-
   context 'when url is malicious and would lead to an infinite loop' do
-    before { record.url = resources_url(User, host:, port:) }
+    before { record.url = resources_url(User, **record.default_url_options) }
 
     it { is_expected.not_to be_valid }
   end
