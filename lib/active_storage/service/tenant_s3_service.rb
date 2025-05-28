@@ -8,7 +8,7 @@ module ActiveStorage
     private
 
     def object_for(key)
-      bucket.object ::File.join(Tenant.database_name, key)
+      bucket.object ::File.join(ENV.fetch('DATABASE', 'demo'), key)
     end
   end
 end
