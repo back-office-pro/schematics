@@ -6,9 +6,11 @@ module Core
     class Create
       include Interactor
 
-      delegate :root, :env, :configuration, to: '::Rails', private: true
-      delegate :database_configuration, to: :configuration, private: true
-      delegate :create_and_upload!, to: '::ActiveStorage::Blob', private: true
+      delegate :root, :env, to: '::Rails', private: true
+      delegate :create_and_upload!,
+               :current_shard,
+               to: '::ActiveStorage::Blob',
+               private: true
       delegate :current_database,
                :adapter_name,
                to: 'ActiveRecord::Base.lease_connection',
@@ -31,7 +33,7 @@ module Core
         end
       end
 
-      def db_path = root.join(database_configuration.dig(env, 'database'))
+      def db_path = root.join('storage', current_shard.to_s, "#{env}.sqlite3")
 
       def tables = Array(context.tables)
 
