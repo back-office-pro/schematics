@@ -6,9 +6,15 @@ module Schematics
     class Create
       include Interactable
       delegate :email, to: :context, private: true
+      delegate :current_shard, to: :user, private: true
 
       def call
-        UserMailer.password_reset(user).deliver_later if user
+        return unless user
+
+        UserMailer
+          .with(shard: current_shard)
+          .password_reset(user.id)
+          .deliver_later
       end
 
       private

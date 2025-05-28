@@ -3,6 +3,7 @@
 
 module Schematics
   class RestoreBackupJob < ApplicationJob
+    include Shardable
     include Quietable
     queue_as :critical
 
@@ -10,13 +11,12 @@ module Schematics
 
     after_discard do |job|
       PaperTrail.request(enabled: false) do
-        suppress(ActiveRecord::RecordNotFound) do
-          job.arguments.first.reload.state_error!
-        end
+        ::Backup.find_by(id: job.arguments.second).try(:state_error!)
       end
     end
 
-    def perform(backup)
+    def perform(_shard, backup_id)
+      backup = ::Backup.find(backup_id)
       Core::Backups::Restore.call(backup: backup.file, clean: true)
       backup.reload.state_ready!
     end

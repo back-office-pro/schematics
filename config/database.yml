@@ -5,20 +5,20 @@ sqlite3: &sqlite3
 
 development:
   <<: *sqlite3
-  database: storage/<%= Tenant.database_name %>/development.sqlite3
-  migrations_paths: db/<%= Tenant.database_name %>/migrate
+  database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/development.sqlite3
+  migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/migrate
 
 test:
   <<: *sqlite3
-  database: storage/<%= Tenant.database_name %>/test.sqlite3
-  migrations_paths: db/<%= Tenant.database_name %>/migrate
+  database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/test.sqlite3
+  migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/migrate
 
 production:
   <<: *sqlite3
-  database: storage/<%= Tenant.database_name %>/production.sqlite3
-  migrations_paths: db/<%= Tenant.database_name %>/migrate
+  database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/production.sqlite3
+  migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/migrate
 
 on_premise:
   <<: *sqlite3
-  database: storage/<%= Tenant.database_name %>/production.sqlite3
-  migrations_paths: db/<%= Tenant.database_name %>/migrate
+  database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/production.sqlite3
+  migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/migrate

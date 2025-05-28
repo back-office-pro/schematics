@@ -82,6 +82,9 @@ ActiveSupport.on_load(:active_storage_record) do
   include Schematics::Translatable
   include Schematics::Routable
 
+  delegate :name, to: :class, prefix: true, private: true
+  delegate :current_shard, to: :class
+
   loadable concerns: [Schematics::SoftDeletable]
 
   scope :with_string_translations, -> { self }
@@ -111,7 +114,7 @@ ActiveSupport.on_load(:active_storage_attachment) do
     .application
     .routes
     .url_helpers
-    .rails_blob_url(self, **Tenant.default_url_options)
+    .rails_blob_url(self, default_url_options)
 end
 
 ActiveSupport.on_load(:active_storage_blob) do
@@ -137,5 +140,11 @@ ActiveSupport.on_load(:active_record_sqlite3adapter) do
   prepend ActiveRecord::Override::ConnectionAdapters::SQLite3Adapter
   ActiveRecord::ConnectionAdapters::SQLite3::TableDefinition.class_eval do
     define_column_methods :jsonb
+  end
+end
+
+ActiveSupport.on_load(:solid_queue_record) do
+  class << self
+    def current_shard = :default
   end
 end

@@ -49,8 +49,10 @@ module Schematics
         format.json { render json: @resources.to_a, metadata: params.key?(:metadata) }
         format.csv do
           GenerateCSVJob.perform_later(
-            current_user,
-            @resources.to_a,
+            current_tenant.subdomain,
+            current_user.id,
+            model_name,
+            @resources.ids,
             params.key?(:all_pages) || @pagy.pages > 1
           )
           head :accepted
@@ -69,7 +71,12 @@ module Schematics
         format.svg { render svg: @resource }
         format.ics { render ics: @resource }
         format.pdf do
-          GeneratePDFJob.perform_later(current_user, @resource)
+          GeneratePDFJob.perform_later(
+            current_tenant.subdomain,
+            current_user.id,
+            model_name,
+            @resource.id
+          )
           head :accepted
         end
       end

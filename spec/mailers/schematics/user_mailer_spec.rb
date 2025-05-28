@@ -6,13 +6,15 @@ require 'rails_helper'
 RSpec.describe Schematics::UserMailer do
   include_context 'with user'
 
+  let(:shard) { :default }
+
   describe '#new_account' do
-    subject(:mail) { described_class.new_account(user) }
+    subject(:mail) { described_class.with(shard:).new_account(user.id) }
 
     let(:expected_subject) { 'Activate your account' }
     let(:expected_body) do
       <<~TEXT.squish
-        Hello DOE John,To set up your password click the link below.http://localhost:3000/passwords
+        Hello DOE John,To set up your password click the link below.http://default.localhost.me:3000/passwords
       TEXT
     end
 
@@ -23,12 +25,12 @@ RSpec.describe Schematics::UserMailer do
   end
 
   describe '#password_reset' do
-    subject(:mail) { described_class.password_reset(user) }
+    subject(:mail) { described_class.with(shard:).password_reset(user.id) }
 
     let(:expected_subject) { 'Password reset' }
     let(:expected_body) do
       <<~TEXT.squish
-        Hello DOE John,To reset your password click the link below.http://localhost:3000/passwords
+        Hello DOE John,To reset your password click the link below.http://default.localhost.me:3000/passwords
       TEXT
     end
 

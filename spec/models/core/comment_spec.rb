@@ -9,13 +9,13 @@ RSpec.describe Comment do
   include_context 'with user'
 
   context 'when there are mentions' do
-    before { allow(record).to receive(:rich_text_mentions).and_return([user]) }
+    before { allow(record).to receive(:rich_text_mentions).and_return([user.id]) }
 
     it 'sends notifications after save' do
       expect { record.save! }
         .to have_enqueued_job(Schematics::NotifyJob)
         .exactly(:once)
-        .with(record, 'mention', user)
+        .with(:default, 'Comment', record.id, 'mention', user.id)
         .on_queue('low')
         .at(:no_wait)
     end

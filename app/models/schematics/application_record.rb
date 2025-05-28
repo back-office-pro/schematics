@@ -18,6 +18,9 @@ module Schematics
     include Attachable
     include Routable
 
+    delegate :name, to: :class, prefix: true, private: true
+    delegate :current_shard, to: :class
+
     loadable concerns: [
       SoftDeletable,
       Multisearchable,

@@ -3,13 +3,12 @@
 
 module Schematics
   class LoadSubscriptionJob < ApplicationJob
+    include MultiShardable
     include Quietable
     queue_as :critical
 
     retry_on Stripe::StripeError, wait: :polynomially_longer, attempts: 5
 
-    def perform = ::Subscription
-      .instance
-      .load!
+    def perform = for_each_shards { ::Subscription.instance.load! }
   end
 end

@@ -6,8 +6,10 @@ require 'rails_helper'
 RSpec.describe Schematics::EmailingMailer do
   include_context 'with user'
 
+  let(:shard) { :default }
+
   describe '#dispatch' do
-    subject { described_class.dispatch(emailing, user) }
+    subject { described_class.with(shard:).dispatch(emailing.id, user.id) }
 
     let(:emailing) do
       Emailing.create!(

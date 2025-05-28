@@ -4,6 +4,7 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::MigrateCoreJob do
+  it { is_expected.to be_a(Schematics::MultiShardable) }
   it { is_expected.to be_a(Schematics::Quietable) }
 
   describe '#perform_later' do

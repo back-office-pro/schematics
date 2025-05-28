@@ -20,7 +20,7 @@ module Schematics
     protected
 
     def generate_link_previews = ::ActiveJob.perform_all_later(
-      changed_link_preview_urls.map(&GenerateLinkPreviewJob.method(:new))
+      changed_link_preview_urls.map { GenerateLinkPreviewJob.new(current_shard, _1) }
     )
   end
 end
