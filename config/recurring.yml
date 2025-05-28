@@ -11,6 +11,6 @@ schematics/load_subscription_job:
 schematics/migrate_core_job:
   class: Schematics::MigrateCoreJob
   schedule: every day at 1am
-schematics/migrate_schema_job:
-  class: Schematics::MigrateSchemaJob
+schematics/migrate_scheduled_schema_job:
+  class: Schematics::MigrateScheduledSchemaJob
   schedule: every day at 2am
