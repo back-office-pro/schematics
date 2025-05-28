@@ -18,7 +18,7 @@ class Server
       .exist?
 
     def port
-      DEFAULT_PORT unless Rails.env.production? || Rails.env.on_premise?
+      DEFAULT_PORT if Rails.env.development?
     end
   end
 end
