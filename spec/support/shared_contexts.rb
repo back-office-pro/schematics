@@ -79,8 +79,6 @@ RSpec.shared_context 'with login' do
 
   before do
     visit login_path
-    page.save_screenshot('screen.png', full: true)
-    puts page.driver.current_url.inspect
     within '.card-body' do
       fill_in 'session[email]', with: user.email
       fill_in 'session[password]', with: user.password
