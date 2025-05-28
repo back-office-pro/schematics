@@ -10,6 +10,12 @@ class MessagesController < Schematics::ResourcesController
   def read!
     return if @resource.recipients.exclude?(current_user)
 
-    Schematics::NotifyJob.perform_later(@resource, 'show', current_user)
+    Schematics::NotifyJob.perform_later(
+      current_tenant.subdomain,
+      model_name,
+      @resource.id,
+      'show',
+      current_user.id
+    )
   end
 end

@@ -49,18 +49,18 @@ class ::Migration < Schematics::ApplicationRecord
   end
 
   def after_migrate_event
-    Schematics::MigrateSchemaJob.perform_later(self)
+    Schematics::MigrateSchemaJob.perform_later(current_shard, id)
   end
 
   def after_rollback_event
-    Schematics::RollbackSchemaJob.perform_later(self)
+    Schematics::RollbackSchemaJob.perform_later(current_shard, id)
   end
 
   def migrator
     if state_rollbacking?
-      Schematics::Migrator.new(Tenant.database_name, previously_migrated_schema, data)
+      Schematics::Migrator.new(current_shard, previously_migrated_schema, data)
     else
-      Schematics::Migrator.new(Tenant.database_name, data, previously_migrated_schema)
+      Schematics::Migrator.new(current_shard, data, previously_migrated_schema)
     end
   end
 
@@ -91,7 +91,7 @@ class ::Migration < Schematics::ApplicationRecord
     .size
 
   def prompt_data
-    Schematics::GenerateSchemaJob.perform_later(self) if prompt_previously_changed?
+    Schematics::GenerateSchemaJob.perform_later(current_shard, id) if prompt_previously_changed?
   end
 
   def previously_migrated_schema = self

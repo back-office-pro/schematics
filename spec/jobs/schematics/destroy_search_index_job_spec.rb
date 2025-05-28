@@ -6,9 +6,13 @@ require 'rails_helper'
 RSpec.describe Schematics::DestroySearchIndexJob do
   include_context 'with user'
 
+  let(:shard) { :default }
+
+  it { is_expected.to be_a(Schematics::Shardable) }
+
   describe '#perform_later' do
     it 'queues the job' do
-      expect { described_class.perform_later(searchable_id: user.id) }
+      expect { described_class.perform_later(shard, searchable_id: user.id) }
         .to have_enqueued_job(described_class)
         .exactly(:once)
         .on_queue('low')
@@ -17,7 +21,7 @@ RSpec.describe Schematics::DestroySearchIndexJob do
   end
 
   describe '#perform_now' do
-    subject(:perform_now) { described_class.perform_now(**params) }
+    subject(:perform_now) { described_class.perform_now(shard, **params) }
 
     context 'when destroying a user' do
       let(:params) { { searchable_id: user.id } }

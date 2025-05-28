@@ -3,10 +3,13 @@
 
 module Schematics
   class GenerateCSVTemplateJob < ApplicationJob
-    limits_concurrency key: ->(user, *) { user }
+    include Shardable
+    limits_concurrency key: ->(shard, user_id, *) { [shard, user_id] }
     queue_as :default
 
-    def perform(user, model_class)
+    def perform(_shard, user_id, model_name)
+      user = ::User.find(user_id)
+      model_class = model_name.constantize
       serializer = CSVTemplateSerializer.new(model_class)
       Resources::GenerateFile.call(user:, serializer:, component_method: :csv_template)
     end

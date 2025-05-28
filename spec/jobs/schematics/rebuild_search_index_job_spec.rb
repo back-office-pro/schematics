@@ -6,23 +6,29 @@ require 'rails_helper'
 RSpec.describe Schematics::RebuildSearchIndexJob do
   include_context 'with user'
 
+  let(:shard) { :default }
+  let(:resource_id) { user.id }
+
+  it { is_expected.to be_a(Schematics::Shardable) }
+
   describe '#perform_later' do
     before { user.create_search_index }
 
     it 'queues the job' do
-      expect { described_class.perform_later(user) }
+      expect { described_class.perform_later(shard, 'User', resource_id) }
         .to have_enqueued_job(described_class)
         .exactly(:once)
+        .with(shard, 'User', resource_id)
         .on_queue('low')
         .at(:no_wait)
     end
   end
 
   describe '#perform_now' do
-    subject(:perform_now) { described_class.perform_now(resource) }
+    subject(:perform_now) { described_class.perform_now(shard, 'User', resource_id) }
 
     context 'when updating a user' do
-      let(:resource) { user }
+      let(:resource_id) { user.id }
 
       before { user.create_search_index }
 
@@ -32,7 +38,7 @@ RSpec.describe Schematics::RebuildSearchIndexJob do
     end
 
     context 'when updating all users' do
-      let(:resource) { User }
+      let(:resource_id) { nil }
       let(:other_user) { User.create!(email: 'jane.doe@nowhere.com', role:) }
 
       before { [user, other_user].each(&:create_search_index) }

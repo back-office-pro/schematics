@@ -10,25 +10,27 @@ RSpec.describe Schematics::GeneratePDFJob do
 
   include_context 'with user'
 
-  let(:resource) { user }
+  let(:shard) { :default }
 
   around do |example|
     freeze_time { example.run }
   end
 
+  it { is_expected.to be_a(Schematics::Shardable) }
+
   describe '#perform_later' do
     it 'queues the job' do
-      expect { described_class.perform_later(user, resource) }
+      expect { described_class.perform_later(shard, user.id, 'User', user.id) }
         .to have_enqueued_job(described_class)
         .exactly(:once)
-        .with(user, resource)
+        .with(shard, user.id, 'User', user.id)
         .on_queue('default')
         .at(:no_wait)
     end
   end
 
   describe '#perform_now' do
-    subject(:perform_now) { described_class.perform_now(user, resource) }
+    subject(:perform_now) { described_class.perform_now(shard, user.id, 'User', user.id) }
 
     let(:stream) do
       capture_turbo_stream_broadcasts([user, :generate_file_in_background]) { perform_now }

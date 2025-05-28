@@ -55,6 +55,7 @@ RSpec.describe Schematics::CleanDataJob do
 
   before { [data_cleanings, imports, meetings] }
 
+  it { is_expected.to be_a(Schematics::MultiShardable) }
   it { is_expected.to be_a(Schematics::Quietable) }
 
   describe '#perform_later' do

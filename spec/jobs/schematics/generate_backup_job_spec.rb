@@ -10,6 +10,9 @@ RSpec.describe Schematics::GenerateBackupJob do
 
   before { travel_to(time) }
 
+  it { is_expected.to be_a(Schematics::MultiShardable) }
+  it { is_expected.to be_a(Schematics::Quietable) }
+
   describe '#perform_later' do
     it 'queues the job' do
       expect { described_class.perform_later }

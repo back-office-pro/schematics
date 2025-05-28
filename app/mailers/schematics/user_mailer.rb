@@ -3,18 +3,16 @@
 
 module Schematics
   class UserMailer < ApplicationMailer
-    delegate :default_url_options, to: '::Tenant'
-
-    def new_account(user)
-      @user = user
-      @token = user.generate_token_for(:new_account)
-      mail_to(user)
+    def new_account(user_id)
+      @user = ::User.find(user_id)
+      @token = @user.generate_token_for(:new_account)
+      mail_to(@user)
     end
 
-    def password_reset(user)
-      @user = user
-      @token = user.generate_token_for(:password_reset)
-      mail_to(user)
+    def password_reset(user_id)
+      @user = ::User.find(user_id)
+      @token = @user.generate_token_for(:password_reset)
+      mail_to(@user)
     end
   end
 end

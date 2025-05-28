@@ -32,8 +32,9 @@ namespace :schematics do
     namespace :migrate do
       desc 'Migrate database from sqlite3 to postgres'
       task postgres: :environment do
-        db_path = Rails.root.join('storage', Tenant.database_name, "#{Rails.env}.sqlite3")
-        db_name = [Tenant.database_name, Rails.env].join('_')
+        database_name = ENV.fetch('DATABASE', 'demo')
+        db_path = Rails.root.join('storage', database_name, "#{Rails.env}.sqlite3")
+        db_name = [database_name, Rails.env].join('_')
         `createdb #{db_name}`
         `pgloader --with "preserve index names" sqlite://#{db_path} postgres://localhost/#{db_name}`
       end

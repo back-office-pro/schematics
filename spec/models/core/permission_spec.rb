@@ -7,9 +7,12 @@ RSpec.describe Permission do
   include Schematics::Specs::Model
   include Schematics::ResourcesHelper
 
+  let(:host) { 'default.localhost.me' }
+  let(:port) { Server.port }
+
   its(:model_class) { is_expected.to eq(User) }
   its(:webhook_event) { is_expected.to start_with('user.') }
-  its(:webhook_url) { is_expected.to eq(resources_url(User)) }
+  its(:webhook_url) { is_expected.to eq(resources_url(User, host:, port:)) }
 
   describe '.create_entities_permissions!' do
     subject(:create_entities_permissions!) do

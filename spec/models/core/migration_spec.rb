@@ -13,7 +13,7 @@ RSpec.describe Migration do
     expect { record.migrate! }
       .to have_enqueued_job(Schematics::MigrateSchemaJob)
       .exactly(:once)
-      .with(record)
+      .with(:default, record.id)
       .on_queue('critical')
       .at(:no_wait)
   end
@@ -22,7 +22,7 @@ RSpec.describe Migration do
     expect { record.tap { _1.finalize!(false) }.reload.rollback! }
       .to have_enqueued_job(Schematics::RollbackSchemaJob)
       .exactly(:once)
-      .with(record)
+      .with(:default, record.id)
       .on_queue('critical')
       .at(:no_wait)
   end
@@ -31,7 +31,7 @@ RSpec.describe Migration do
     expect { record.tap(&:save!).reload.update!(prompt: 'prompt') }
       .to have_enqueued_job(Schematics::GenerateSchemaJob)
       .exactly(:once)
-      .with(record)
+      .with(:default, record.id)
       .on_queue('critical')
       .at(:no_wait)
   end

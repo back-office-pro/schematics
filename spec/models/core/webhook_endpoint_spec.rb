@@ -7,8 +7,11 @@ RSpec.describe WebhookEndpoint do
   include Schematics::Specs::Model
   include Schematics::ResourcesHelper
 
+  let(:host) { 'default.localhost.me' }
+  let(:port) { Server.port }
+
   context 'when url is malicious and would lead to an infinite loop' do
-    before { record.url = resources_url(User) }
+    before { record.url = resources_url(User, host:, port:) }
 
     it { is_expected.not_to be_valid }
   end
@@ -25,7 +28,7 @@ RSpec.describe WebhookEndpoint do
       expect { broadcast_all }
         .to have_enqueued_job(Schematics::TriggerWebhookJob)
         .exactly(:once)
-        .with(WebhookRequest)
+        .with(:default, String)
         .on_queue('low')
         .at(:no_wait)
     end
