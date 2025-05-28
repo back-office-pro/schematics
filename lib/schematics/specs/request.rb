@@ -31,7 +31,7 @@ module Schematics
         let(:access_token) { @session.generate_token_for(:access_token) }
         let(:headers) { { 'Authorization' => "Bearer #{access_token}" } } # rubocop:disable Style/StringHashKeys
         let(:api_key_headers) { { 'x-api-key' => @api_key.access_token } } # rubocop:disable Style/StringHashKeys
-        let(:host) { 'default.localhost.me' }
+        let(:host) { RSpec::Rails::FeatureExampleGroup::DEFAULT_HOST }
         let(:headers_with_referer) { headers.merge('HTTP_REFERER' => edit_profile_url(host:)) } # rubocop:disable Style/StringHashKeys
         let(:ability) { Ability.new(@user) }
         let(:index_path) { resources_path(model_class) }
@@ -47,7 +47,6 @@ module Schematics
         end
 
         before do
-          host!(host)
           allow(ActiveRecord::Base).to receive(:lock_optimistically).and_return(false)
           allow_any_instance_of(ActiveStorageValidations::ContentTypeValidator)
             .to receive(:enable_spoofing_protection?)

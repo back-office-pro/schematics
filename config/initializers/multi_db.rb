@@ -3,5 +3,5 @@
 
 Rails.application.configure do
   config.active_record.shard_selector = { lock: true }
-  config.active_record.shard_resolver = -> { _1.subdomain }
+  config.active_record.shard_resolver = -> { Rails.env.test? ? :default : _1.subdomain }
 end
