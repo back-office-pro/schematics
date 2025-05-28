@@ -9,7 +9,10 @@ RSpec.shared_context 'with unauthenticated user' do
   let(:accept_header) { 'application/json' }
   let(:headers) { { 'Accept' => accept_header } }
 
-  before { user }
+  before do
+    host!('default.localhost.me')
+    user
+  end
 end
 
 RSpec.shared_context 'with authenticated user' do
