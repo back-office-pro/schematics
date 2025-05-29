@@ -15,7 +15,7 @@
     "bootstrap": "5.3.6",
     "crisp-sdk-web": "1.0.25",
     "file-saver-es": "2.0.5",
-    "flag-icons": "7.3.2",
+    "flag-icons": "7.5.0",
     "pluralize-esm": "9.0.5",
     "sortablejs": "1.15.6",
     "swagger-ui-dist": "5.22.0",
@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "standard": "17.1.2",
-    "stylelint": "16.19.1",
+    "stylelint": "16.20.0",
     "stylelint-config-standard": "38.0.0"
   },
   "stylelint": {
