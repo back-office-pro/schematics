@@ -3,11 +3,11 @@
 
 module Schematics
   class CleanDataJob < ApplicationJob
-    include MultiShardable
+    include Shardable
     include Quietable
     queue_as :low
 
-    def perform = for_each_shards do
+    def perform(_shard)
       ::DataCleaning
         .all
         .select(&:model_class)

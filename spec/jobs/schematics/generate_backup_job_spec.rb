@@ -6,16 +6,17 @@ require 'rails_helper'
 RSpec.describe Schematics::GenerateBackupJob do
   include ActiveSupport::Testing::TimeHelpers
 
+  let(:shard) { :default }
   let(:time) { Time.parse('2021/01/01 10:00 +0000') }
 
   before { travel_to(time) }
 
-  it { is_expected.to be_a(Schematics::MultiShardable) }
+  it { is_expected.to be_a(Schematics::Shardable) }
   it { is_expected.to be_a(Schematics::Quietable) }
 
   describe '#perform_later' do
     it 'queues the job' do
-      expect { described_class.perform_later }
+      expect { described_class.perform_later(shard) }
         .to have_enqueued_job(described_class)
         .exactly(:once)
         .on_queue('critical')
@@ -24,7 +25,7 @@ RSpec.describe Schematics::GenerateBackupJob do
   end
 
   describe '#perform_now' do
-    subject(:perform_now) { described_class.perform_now }
+    subject(:perform_now) { described_class.perform_now(shard) }
 
     it 'performs database backup' do
       expect { perform_now }

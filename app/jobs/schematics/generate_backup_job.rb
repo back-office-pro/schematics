@@ -3,13 +3,13 @@
 
 module Schematics
   class GenerateBackupJob < ApplicationJob
-    include MultiShardable
+    include Shardable
     include Quietable
     queue_as :critical
 
     retry_on IOError, wait: :polynomially_longer, attempts: 5
 
-    def perform = for_each_shards do
+    def perform(_shard)
       ::Backup.create!(file: Core::Backups::Create.call.file)
     end
   end
