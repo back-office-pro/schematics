@@ -183,6 +183,7 @@ RSpec/EmptyExampleGroup:
     - spec/*/core/**/*
 RSpec/SpecFilePathFormat:
   Exclude:
+    - spec/lib/active_record/connection_adapters/abstract/connection_handler_spec.rb
     - spec/lib/active_record/connection_adapters/sqlite3_adapter_spec.rb
     - spec/lib/bootstrap-email/config_spec.rb
     - spec/lib/onelogin/ruby-saml/settings_spec.rb
