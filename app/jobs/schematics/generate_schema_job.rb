@@ -16,7 +16,7 @@ module Schematics
 
     after_discard do |job|
       PaperTrail.request(enabled: false) do
-        ::Migration.find_by(id: job.arguments.second).try(:state_no_solution!)
+        ::Migration.find(job.arguments.second).state_no_solution!
       end
     end
 
