@@ -8,7 +8,7 @@ module Core
 
       delegate :copy, to: '::ActiveRecord::Migration', private: true
       delegate :migration, to: :context, private: true
-      delegate :current_shard, to: :migration, private: true
+      delegate :current_shard, to: :migration, allow_nil: true, private: true
 
       def call = copy(destination_path, schematics: source_path)
 
@@ -16,7 +16,7 @@ module Core
 
       def destination_path = Rails
         .root
-        .join('db', current_shard.to_s, 'migrate')
+        .join('db', ENV.fetch('DATABASE', current_shard.to_s), 'migrate')
 
       def source_path = Schematics::Engine
         .root
