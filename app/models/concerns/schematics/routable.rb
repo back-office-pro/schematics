@@ -14,17 +14,18 @@ module Schematics
       .route_params
       .merge(id: to_param)
 
-    def default_url_options
-      { host:, port: ::Server.port }.compact
-    end
+    def default_url_options = { host:, port: }.compact
 
     private
 
     def host
-      return current_shard if Rails.env.on_premise?
-      return "#{current_shard}.localhost.me" if Rails.env.local?
+      return ::Server.domain if Rails.env.on_premise?
 
       "#{current_shard}.#{::Server.domain}"
+    end
+
+    def port
+      ::Server::DEFAULT_PORT if Rails.env.development?
     end
   end
 end

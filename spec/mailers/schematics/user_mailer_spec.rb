@@ -14,7 +14,7 @@ RSpec.describe Schematics::UserMailer do
     let(:expected_subject) { 'Activate your account' }
     let(:expected_body) do
       <<~TEXT.squish
-        Hello DOE John,To set up your password click the link below.http://default.localhost.me/passwords
+        Hello DOE John,To set up your password click the link below.http://default.back-office.pro/passwords
       TEXT
     end
 
@@ -30,7 +30,7 @@ RSpec.describe Schematics::UserMailer do
     let(:expected_subject) { 'Password reset' }
     let(:expected_body) do
       <<~TEXT.squish
-        Hello DOE John,To reset your password click the link below.http://default.localhost.me/passwords
+        Hello DOE John,To reset your password click the link below.http://default.back-office.pro/passwords
       TEXT
     end
 
