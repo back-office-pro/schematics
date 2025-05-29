@@ -1,7 +1,7 @@
 # Copyright © 2025 Dev & Software. All rights reserved.
 # frozen_string_literal: true
 
-require 'active_record/override/connection_adapters/connection_handler'
+require 'active_record/override/connection_adapters/abstract/connection_handler'
 require 'active_record/override/connection_adapters/sqlite3_adapter'
 require 'active_record/override/generators/migration_generator'
 require 'active_storage/override/attachment'
