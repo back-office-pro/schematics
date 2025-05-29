@@ -20,7 +20,7 @@ RSpec.describe Schematics::RecurringJob do
   describe '#perform_now' do
     subject(:perform_now) { described_class.perform_now(job_class) }
 
-    it 'enqueues a load subscription job' do
+    it 'enqueues a load subscription job for default shard' do
       expect { perform_now }
         .to have_enqueued_job(Schematics::LoadSubscriptionJob)
         .exactly(:once)
