@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  class RecurringJob < ApplicationJob
+  class RecurringJob < ApplicationJob # rubocop:disable Obsession/Rails/ServiceName
     queue_as :default
 
     def perform(job_name)
