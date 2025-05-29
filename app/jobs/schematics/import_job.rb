@@ -11,7 +11,7 @@ module Schematics
 
     after_discard do |job|
       PaperTrail.request(enabled: false) do
-        ::Import.find_by(id: job.arguments.second).try(:state_error!)
+        ::Import.find(job.arguments.second).state_error!
       end
     end
 
