@@ -9,6 +9,8 @@ module Schematics
       ::ActiveJob.perform_all_later(shards.map { Schematics.const_get(job_name).new(_1) })
     end
 
+    private
+
     def shards
       return %i[default] if Rails.env.test?
 
