@@ -4,10 +4,14 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::RestoreBackupJob do
-  let(:shard) { :demo }
+  let(:shard) { :default }
   let(:backup) { Backup.create!(file:, state:) }
   let(:state) { Backup::STATE_STATE_RESTORING }
   let(:file) { Core::Backups::Create.call.file }
+
+  around do |example|
+    ActiveRecord::Base.connected_to(shard: :demo) { example.run }
+  end
 
   it { is_expected.to be_a(Schematics::Shardable) }
 

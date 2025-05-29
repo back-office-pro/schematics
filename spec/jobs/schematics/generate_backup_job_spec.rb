@@ -6,10 +6,14 @@ require 'rails_helper'
 RSpec.describe Schematics::GenerateBackupJob do
   include ActiveSupport::Testing::TimeHelpers
 
-  let(:shard) { :default }
+  let(:shard) { :demo }
   let(:time) { Time.parse('2021/01/01 10:00 +0000') }
 
   before { travel_to(time) }
+
+  around do |example|
+    ActiveRecord::Base.connected_to(shard: :demo) { example.run }
+  end
 
   it { is_expected.to be_a(Schematics::Shardable) }
   it { is_expected.to be_a(Schematics::Quietable) }
