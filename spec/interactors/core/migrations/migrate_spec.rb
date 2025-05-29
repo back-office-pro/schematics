@@ -51,6 +51,10 @@ RSpec.describe Core::Migrations::Migrate do
     end
   end
 
+  around do |example|
+    ActiveRecord::Base.connected_to(shard: :demo) { example.run }
+  end
+
   describe '.call' do
     context 'when creating a new entity' do
       let(:data) { initial_data }
