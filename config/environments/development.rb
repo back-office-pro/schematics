@@ -11,7 +11,7 @@ Rails.application.configure do
   config.server_timing = true
 
   # Security
-  config.hosts << '.localhost.me'
+  config.hosts = [Server.domain.dup.prepend('.')]
 
   # File Watcher
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
