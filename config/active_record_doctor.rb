@@ -40,4 +40,8 @@ ActiveRecordDoctor.configure do
   detector :incorrect_length_validation, enabled: false
   detector :table_without_primary_key, enabled: false
   detector :incorrect_dependent_option, enabled: false
+  detector :unindexed_foreign_keys, ignore_columns: [
+    'configurations.aws_access_key_id',
+    'configurations.gcs_private_key_id'
+  ]
 end
