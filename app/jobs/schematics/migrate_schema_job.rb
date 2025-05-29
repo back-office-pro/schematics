@@ -2,13 +2,14 @@
 # frozen_string_literal: true
 
 module Schematics
+  # :reek:ControlParameter
   class MigrateSchemaJob < ApplicationJob
     include Shardable
     include Quietable
     queue_as :critical
 
-    def perform(_shard, migration_id)
-      migration = ::Migration.find(migration_id)
+    def perform(_shard, migration_id = nil)
+      migration = ::Migration.find(migration_id || ::Migration.scheduled&.id)
       return if migration.state_generating?
       return if migration.state_in_progress?
 

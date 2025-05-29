@@ -2,16 +2,12 @@
 # frozen_string_literal: true
 
 module Schematics
-  module MultiShardable
-    extend ActiveSupport::Concern
+  class RecurringJob < ApplicationJob
+    queue_as :default
 
-    def for_each_shards(&)
-      shards.each do |shard|
-        ActiveRecord::Base.connected_to(shard:, &)
-      end
+    def perform(job_name)
+      ::ActiveJob.perform_all_later(shards.map { Schematics.const_get(job_name).new(_1) })
     end
-
-    private
 
     def shards
       return %i[default] if Rails.env.test?
