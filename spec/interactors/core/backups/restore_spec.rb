@@ -9,6 +9,10 @@ RSpec.describe Core::Backups::Restore do
   let(:backup) { Core::Backups::Create.call.file }
   let(:clean) { true }
 
+  around do |example|
+    ActiveRecord::Base.connected_to(shard: :demo) { example.run }
+  end
+
   describe '.call' do
     subject(:call) { described_class.call(backup:, clean:) }
 
