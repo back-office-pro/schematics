@@ -8,7 +8,7 @@ namespace :schematics do
   namespace :copy do
     desc 'Install engine migrations'
     task migrations: :environment do
-      Core::Migrations::Copy.call
+      Core::Migrations::Copy.call(database: ENV.fetch('DATABASE', 'demo'))
     end
   end
 
