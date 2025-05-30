@@ -54,11 +54,7 @@ class ::Subscription < Schematics::ApplicationRecord
     memoize def api_keys_size = APIKey.count
   end
 
-  def load!
-    PaperTrail.request(enabled: false) do
-      update!(GATEWAY::Fetch.call.data)
-    end
-  end
+  def load! = update!(GATEWAY::Fetch.call.data)
 
   def after_enable_event = GATEWAY::Enable.call
 
