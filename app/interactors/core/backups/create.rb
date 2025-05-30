@@ -27,11 +27,13 @@ module Core
         end
       end
 
-      def db_path = root.join('storage', current_shard.to_s, "#{env}.sqlite3")
+      def db_path = root.join('storage', shard.to_s, "#{env}.sqlite3")
+
+      def shard = ENV.fetch('DATABASE', current_shard)
 
       def tables = Array(context.tables)
 
-      def current_database = "#{current_shard}_#{env}"
+      def current_database = "#{shard}_#{env}"
 
       def key = File.join(
         'backups',
