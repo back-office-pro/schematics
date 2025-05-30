@@ -45,11 +45,9 @@ module Core
         memoize def product = product_id && products.retrieve(product_id)
 
         memoize def customer = customers
-          .search(query: "name:'#{customer_name}'", expand: ['data.subscriptions'])
+          .search(query: "name:'#{current_shard}'", expand: ['data.subscriptions'])
           .data
           .first
-
-        def customer_name = ENV.fetch('DATABASE', current_shard)
 
         def data = {
           email: customer_email,

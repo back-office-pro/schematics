@@ -15,7 +15,7 @@ namespace :schematics do
   namespace :db do
     desc 'Perform database backup'
     task backup: :environment do
-      Schematics::GenerateBackupJob.perform_now
+      Schematics::GenerateBackupJob.perform_now ENV.fetch('DATABASE', 'demo')
     end
 
     desc 'Load engine seed'
