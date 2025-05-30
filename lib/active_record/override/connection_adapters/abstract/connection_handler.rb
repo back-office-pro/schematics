@@ -17,7 +17,7 @@ module ActiveRecord
           establish_connection(
             Rails
               .configuration
-              .database_configuration[Rails.env]
+              .database_configuration.dig(Rails.env, 'primary')
               .merge(
                 database: Rails.root.join('storage', shard.to_s, "#{Rails.env}.sqlite3"),
                 migrations_paths: Rails.root.join('db', shard.to_s, 'migrate')

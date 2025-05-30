@@ -36,6 +36,21 @@ class AppGenerator < Rails::Generators::AppGenerator
     chmod 'bin/docker-entrypoint', 0o755 & ~File.umask, verbose: false
   end
 
+  def install_solid_queue
+    return unless generating?
+
+    rails_command('solid_queue:install', env:)
+    remove_file 'config/queue.yml'
+    remove_file 'config/recurring.yml'
+  end
+
+  def install_solid_cable
+    return unless generating?
+
+    rails_command('solid_cable:install', env:)
+    remove_file 'config/cable.yml'
+  end
+
   def remove_unused_files
     remove_file '.github'
     remove_file 'app'
