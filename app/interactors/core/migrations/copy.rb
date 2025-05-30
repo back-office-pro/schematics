@@ -16,7 +16,7 @@ module Core
 
       def destination_path = Rails
         .root
-        .join('db', (shard || current_shard).to_s, 'migrate')
+        .join('db', (database || current_shard).to_s, 'migrate')
 
       def source_path = Schematics::Engine
         .root
