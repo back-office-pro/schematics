@@ -144,6 +144,6 @@ end
 
 ActiveSupport.on_load(:solid_queue_record) do
   class << self
-    def current_shard = :default
+    def current_shard = :queue
   end
 end

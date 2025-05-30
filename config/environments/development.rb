@@ -59,6 +59,9 @@ Rails.application.configure do
   # Assets
   config.assets.quiet = true
 
+  # Solid Queue
+  config.solid_queue.connects_to = { shards: { queue: { writing: :queue } } }
+
   # Cache
   config.cache_store =
     :solid_cache_store,

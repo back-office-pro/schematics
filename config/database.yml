@@ -4,9 +4,18 @@ sqlite3: &sqlite3
   timeout: 5000
 
 development:
-  <<: *sqlite3
-  database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/development.sqlite3
-  migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/migrate
+  primary:
+    <<: *sqlite3
+    database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/development.sqlite3
+    migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/migrate
+  queue:
+    <<: *sqlite3
+    database: storage/development_queue.sqlite3
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *sqlite3
+    database: storage/development_cable.sqlite3
+    migrations_paths: db/cable_migrate
 
 test:
   <<: *sqlite3
@@ -14,11 +23,29 @@ test:
   migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/migrate
 
 production:
-  <<: *sqlite3
-  database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/production.sqlite3
-  migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/migrate
+  primary:
+    <<: *sqlite3
+    database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/production.sqlite3
+    migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/migrate
+  queue:
+    <<: *sqlite3
+    database: storage/production_queue.sqlite3
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *sqlite3
+    database: storage/production_cable.sqlite3
+    migrations_paths: db/cable_migrate
 
 on_premise:
-  <<: *sqlite3
-  database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/production.sqlite3
-  migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/migrate
+  primary:
+    <<: *sqlite3
+    database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/production.sqlite3
+    migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/migrate
+  queue:
+    <<: *sqlite3
+    database: storage/production_queue.sqlite3
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *sqlite3
+    database: storage/production_cable.sqlite3
+    migrations_paths: db/cable_migrate

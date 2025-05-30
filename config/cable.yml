@@ -1,11 +1,19 @@
 development:
   adapter: solid_cable
+  connects_to:
+    shards:
+      cable:
+        writing: cable
 
 test:
   adapter: test
 
 production: &production
   adapter: solid_cable
+  connects_to:
+    shards:
+      cable:
+        writing: cable
 
 on_premise:
   <<: *production
