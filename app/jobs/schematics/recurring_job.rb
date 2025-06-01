@@ -16,7 +16,8 @@ module Schematics
 
       Rails
         .root
-        .glob('storage/*')
+        .glob("storage/*/#{Rails.env}.sqlite3")
+        .map(&:dirname)
         .map(&:basename)
         .map(&:to_s)
         .map(&:to_sym)
