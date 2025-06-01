@@ -51,6 +51,11 @@ Rails.configuration.to_prepare do
       super
     end
   end
+  SolidCable::Record.class_eval do
+    class << self
+      def current_shard = :cable
+    end
+  end
 end
 
 Rails.configuration.to_prepare do
