@@ -18,9 +18,10 @@ development:
     migrations_paths: db/cable_migrate
 
 test:
-  <<: *sqlite3
-  database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/test.sqlite3
-  migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/migrate
+  primary:
+    <<: *sqlite3
+    database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/test.sqlite3
+    migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/migrate
 
 production:
   primary:
