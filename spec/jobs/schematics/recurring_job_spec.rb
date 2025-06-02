@@ -24,7 +24,7 @@ RSpec.describe Schematics::RecurringJob do
       expect { perform_now }
         .to have_enqueued_job(Schematics::LoadSubscriptionJob)
         .exactly(:once)
-        .with(:default)
+        .with(:demo)
         .on_queue('critical')
         .at(:no_wait)
     end
