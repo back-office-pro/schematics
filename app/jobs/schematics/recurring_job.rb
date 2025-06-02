@@ -7,7 +7,7 @@ module Schematics
 
     def perform(job_name)
       ::ActiveJob.perform_all_later(
-        Shards::List.call.shards.map { Schematics.const_get(job_name).new(_1) }
+        Shards::List.call.shards.map(&Schematics.const_get(job_name).method(:new))
       )
     end
   end
