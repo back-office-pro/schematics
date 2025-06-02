@@ -7,7 +7,7 @@ local:
   root: <%= Rails.root.join('storage') %>
 
 amazon:
-  service: S3
+  service: TenantS3
   access_key_id: <%= Schematics::Engine.credentials.aws&.access_key_id %>
   secret_access_key: <%= Schematics::Engine.credentials.aws&.secret_access_key %>
   region: us-east-1
