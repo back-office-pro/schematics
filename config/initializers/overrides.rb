@@ -4,8 +4,12 @@
 require 'active_record/override/connection_adapters/abstract/connection_handler'
 require 'active_record/override/connection_adapters/sqlite3_adapter'
 require 'active_record/override/generators/migration_generator'
+require 'active_storage/override/analyze_job'
 require 'active_storage/override/attachment'
 require 'active_storage/override/blob'
+require 'active_storage/override/preview_image_job'
+require 'active_storage/override/purge_job'
+require 'active_storage/override/transform_job'
 require 'active_support/dependencies'
 require 'arel/override/predications'
 require 'bootstrap-email/config'
@@ -56,6 +60,17 @@ Rails.configuration.to_prepare do
       def current_shard = :cable
     end
   end
+end
+
+Rails.configuration.to_prepare do
+  ActiveStorage::AnalyzeJob.include(Schematics::Shardable)
+  ActiveStorage::AnalyzeJob.prepend(ActiveStorage::Override::AnalyzeJob)
+  ActiveStorage::PreviewImageJob.include(Schematics::Shardable)
+  ActiveStorage::PreviewImageJob.prepend(ActiveStorage::Override::PreviewImageJob)
+  ActiveStorage::PurgeJob.include(Schematics::Shardable)
+  ActiveStorage::PurgeJob.prepend(ActiveStorage::Override::PurgeJob)
+  ActiveStorage::TransformJob.include(Schematics::Shardable)
+  ActiveStorage::TransformJob.prepend(ActiveStorage::Override::TransformJob)
 end
 
 Rails.configuration.to_prepare do
