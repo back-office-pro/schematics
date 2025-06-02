@@ -4,10 +4,6 @@
 module ActiveStorage
   module Override
     module Blob
-      def key
-        self[:key] ||= [current_shard, super].join('/')
-      end
-
       def purge
         really_destroy!
         super
