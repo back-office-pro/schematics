@@ -11,16 +11,12 @@ module Schematics
 
     private
 
-    def shards
-      return %i[default] if Rails.env.test?
-
-      Rails
-        .root
-        .glob("storage/*/#{Rails.env}.sqlite3")
-        .map(&:dirname)
-        .map(&:basename)
-        .map(&:to_s)
-        .map(&:to_sym)
-    end
+    def shards = ::Rails
+      .root
+      .glob("storage/*/#{Rails.env}.sqlite3")
+      .map(&:dirname)
+      .map(&:basename)
+      .map(&:to_s)
+      .map(&:to_sym)
   end
 end
