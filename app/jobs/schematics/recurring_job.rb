@@ -6,17 +6,9 @@ module Schematics
     queue_as :default
 
     def perform(job_name)
-      ::ActiveJob.perform_all_later(shards.map { Schematics.const_get(job_name).new(_1) })
+      ::ActiveJob.perform_all_later(
+        Shards::List.call.shards.map { Schematics.const_get(job_name).new(_1) }
+      )
     end
-
-    private
-
-    def shards = ::Rails
-      .root
-      .glob("storage/*/#{Rails.env}.sqlite3")
-      .map(&:dirname)
-      .map(&:basename)
-      .map(&:to_s)
-      .map(&:to_sym)
   end
 end
