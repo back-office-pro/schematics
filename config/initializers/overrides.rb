@@ -172,5 +172,9 @@ end
 ActiveSupport.on_load(:solid_cache) do
   class << self
     def current_shard = :cache
+
+    def with_shard(_shard)
+      yield
+    end
   end
 end
