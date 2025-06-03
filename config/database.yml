@@ -17,6 +17,10 @@ development:
     <<: *sqlite3
     database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/development.sqlite3
     migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/migrate
+  search:
+    <<: *sqlite3
+    database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/development_search.sqlite3
+    migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/search_migrate
   cable:
     <<: *sqlite3
     database: storage/development_cable.sqlite3
@@ -31,12 +35,20 @@ test:
     <<: *sqlite3
     database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/test.sqlite3
     migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/migrate
+  search:
+    <<: *sqlite3
+    database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/test_search.sqlite3
+    migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/search_migrate
 
 production:
   primary:
     <<: *sqlite3
     database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/production.sqlite3
     migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/migrate
+  search:
+    <<: *sqlite3
+    database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/production_search.sqlite3
+    migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/search_migrate
   cable:
     <<: *sqlite3
     database: storage/production_cable.sqlite3
@@ -51,6 +63,10 @@ on_premise:
     <<: *sqlite3
     database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/production.sqlite3
     migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/migrate
+  search:
+    <<: *sqlite3
+    database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/production_search.sqlite3
+    migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/search_migrate
   cable:
     <<: *sqlite3
     database: storage/production_cable.sqlite3

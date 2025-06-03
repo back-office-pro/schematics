@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  class SearchIndex < ::ActiveRecord::Base # rubocop:disable Rails/ApplicationRecord
+  class SearchIndex < SearchRecord
     self.table_name = :search_indexes # rubocop:disable Rails/TableNameAssignment
 
     class << self
