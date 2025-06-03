@@ -46,7 +46,7 @@ RSpec.describe Schematics::GeneratePDFJob do
       expect { perform_now }
         .to have_enqueued_job(ActiveStorage::PurgeJob)
         .exactly(:once)
-        .with(an_instance_of(ActiveStorage::Blob))
+        .with(shard, String)
         .on_queue('low')
         .at(Schematics::Resources::GenerateFile::PURGE_WAIT.from_now)
     end
