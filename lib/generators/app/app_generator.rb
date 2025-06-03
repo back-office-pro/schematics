@@ -45,10 +45,10 @@ class AppGenerator < Rails::Generators::AppGenerator
   end
 
   def install_solid_cache
-    return unless generating?	
+    return unless generating?
 
-    rails_command('solid_cache:install', env:)	
-    remove_file 'config/cache.yml'	
+    rails_command('solid_cache:install', env:)
+    remove_file 'config/cache.yml'
   end
 
   def install_solid_cable
