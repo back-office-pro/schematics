@@ -32,6 +32,9 @@ Rails.application.configure do
   # Active Job
   config.active_job.queue_adapter = :solid_queue
 
+  # Solid Cache
+  config.solid_cache.connects_to = { shards: { cache: { writing: :cache } } }
+
   # Solid Queue
   config.solid_queue.connects_to = { shards: { queue: { writing: :queue } } }
 
