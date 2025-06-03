@@ -44,18 +44,18 @@ class AppGenerator < Rails::Generators::AppGenerator
     remove_file 'config/recurring.yml'
   end
 
-  def install_solid_cable
-    return unless generating?
-
-    rails_command('solid_cable:install', env:)
-    remove_file 'config/cable.yml'
-  end
-
   def install_solid_cache
     return unless generating?	
 
     rails_command('solid_cache:install', env:)	
     remove_file 'config/cache.yml'	
+  end
+
+  def install_solid_cable
+    return unless generating?
+
+    rails_command('solid_cable:install', env:)
+    remove_file 'config/cable.yml'
   end
 
   def remove_unused_files
