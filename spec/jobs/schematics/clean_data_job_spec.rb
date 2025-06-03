@@ -112,7 +112,7 @@ RSpec.describe Schematics::CleanDataJob do
       expect { perform_now }
         .to have_enqueued_job(ActiveStorage::PurgeJob)
         .exactly(:twice)
-        .with(file)
+        .with(shard, String)
         .on_queue('low')
         .at(:no_wait)
     end
