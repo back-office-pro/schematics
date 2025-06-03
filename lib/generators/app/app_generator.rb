@@ -6,7 +6,7 @@ require 'fileutils'
 require 'rails/generators/rails/app/app_generator'
 
 # :reek:RepeatedConditional
-class AppGenerator < Rails::Generators::AppGenerator
+class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/ClassLength
   source_root superclass.source_root
 
   def initialize(generator, options = {})
