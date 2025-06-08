@@ -25,10 +25,6 @@ development:
     <<: *sqlite3
     database: storage/development_cable.sqlite3
     migrations_paths: db/cable_migrate
-  cache:
-    <<: *sqlite3
-    database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/development_cache.sqlite3
-    migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/cache_migrate
   queue:
     <<: *sqlite3
     database: storage/development_queue.sqlite3
@@ -57,10 +53,6 @@ production:
     <<: *sqlite3
     database: storage/production_cable.sqlite3
     migrations_paths: db/cable_migrate
-  cache:
-    <<: *sqlite3
-    database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/production_cache.sqlite3
-    migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/cache_migrate
   queue:
     <<: *sqlite3
     database: storage/production_queue.sqlite3
@@ -79,10 +71,6 @@ on_premise:
     <<: *sqlite3
     database: storage/production_cable.sqlite3
     migrations_paths: db/cable_migrate
-  cache:
-    <<: *sqlite3
-    database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/production_cache.sqlite3
-    migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/cache_migrate
   queue:
     <<: *sqlite3
     database: storage/production_queue.sqlite3
