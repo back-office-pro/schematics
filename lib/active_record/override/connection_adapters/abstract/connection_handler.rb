@@ -24,6 +24,16 @@ module ActiveRecord
               ),
             shard:
           )
+          establish_connection(
+            Rails
+              .configuration
+              .database_configuration.dig(Rails.env, 'search')
+              .merge(
+                database: Rails.root.join('storage', shard.to_s, "#{Rails.env}_search.sqlite3"),
+                migrations_paths: Rails.root.join('db', shard.to_s, 'search_migrate')
+              ),
+            shard: "#{shard}/search"
+          )
           retry
         end
       end
