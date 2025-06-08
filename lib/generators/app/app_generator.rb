@@ -6,7 +6,7 @@ require 'fileutils'
 require 'rails/generators/rails/app/app_generator'
 
 # :reek:RepeatedConditional
-class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/ClassLength
+class AppGenerator < Rails::Generators::AppGenerator
   source_root superclass.source_root
 
   def initialize(generator, options = {})
@@ -42,13 +42,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     rails_command('solid_queue:install', env:)
     remove_file 'config/queue.yml'
     remove_file 'config/recurring.yml'
-  end
-
-  def install_solid_cache
-    return unless generating?
-
-    rails_command('solid_cache:install', env:)
-    remove_file 'config/cache.yml'
   end
 
   def install_solid_cable
