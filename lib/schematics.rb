@@ -43,7 +43,6 @@ loader.ignore("#{__dir__}/object.rb")
 loader.ignore("#{__dir__}/rubygems_plugin.rb")
 loader.ignore("#{__dir__}/schema_cache.rb")
 loader.ignore("#{__dir__}/server.rb")
-loader.ignore("#{__dir__}/tenant.rb")
 loader.setup
 
 module Schematics
