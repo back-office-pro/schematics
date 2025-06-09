@@ -31,7 +31,7 @@ class ::Migration < Schematics::ApplicationRecord
 
     def scheduled = state_scheduled.last
 
-    def core = new(data: schema.as_json, version: current_version)
+    def core = new(data: SchemaCache.as_json, version: current_version)
 
     def default = new(
       data: ActiveSupport::ConfigurationFile.parse(

@@ -28,10 +28,8 @@ module Schematics
         end
       end
 
-      def schema = ::SchemaCache
-
       def entity
-        schema.find_entity_by_name(name.underscore)
+        SchemaCache.find_entity_by_name(name.underscore)
       end
 
       def filter_attributes = entity
@@ -67,7 +65,7 @@ module Schematics
       end
 
       def load!(name)
-        entity = schema.find_entity_by_name(name.to_s.underscore)
+        entity = SchemaCache.find_entity_by_name(name.to_s.underscore)
         return unless entity
 
         unless Object.const_defined?(name)
