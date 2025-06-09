@@ -49,7 +49,7 @@ module Schematics
         format.json { render json: @resources.to_a, metadata: params.key?(:metadata) }
         format.csv do
           GenerateCSVJob.perform_later(
-            current_tenant.subdomain,
+            model_class.current_shard,
             current_user.id,
             model_name,
             @resources.ids,
@@ -72,7 +72,7 @@ module Schematics
         format.ics { render ics: @resource }
         format.pdf do
           GeneratePDFJob.perform_later(
-            current_tenant.subdomain,
+            model_class.current_shard,
             current_user.id,
             model_name,
             @resource.id

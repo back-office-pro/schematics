@@ -14,7 +14,7 @@ class ImportsController < Schematics::ResourcesController
       format.html
       format.csv do
         Schematics::GenerateCSVTemplateJob.perform_later(
-          current_tenant.subdomain,
+          parent_model_class.current_shard,
           current_user.id,
           parent_model_name
         )

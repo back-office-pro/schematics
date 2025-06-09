@@ -9,7 +9,7 @@ module Schematics
     def create
       authorize!(:archive, parent_model_class)
       BulkActionJob.perform_later(
-        current_tenant.subdomain,
+        parent_model_class.current_shard,
         current_user.id,
         parent_model_name,
         bulk_action_params[:ids]

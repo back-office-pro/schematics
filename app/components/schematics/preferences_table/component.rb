@@ -6,7 +6,7 @@ module Schematics
     class Component < ApplicationComponent
       delegate :preferences_path, :root_path, to: 'Schematics::Engine.routes.url_helpers'
 
-      def model_classes = current_schema
+      def model_classes = ::SchemaCache
         .entities
         .reject(&:hidden?)
         .filter_map(&:model_class)

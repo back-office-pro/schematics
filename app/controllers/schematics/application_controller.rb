@@ -5,7 +5,6 @@ module Schematics
   class ApplicationController < ::ActionController::Base
     include ::Pagy::Backend
     include Reloadable
-    include Tenantable
     include Localizable
     include Authenticable
     include Sudoable
