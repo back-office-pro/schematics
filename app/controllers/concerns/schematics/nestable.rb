@@ -20,7 +20,7 @@ module Schematics
 
     protected
 
-    def parent_model_class = current_schema
+    def parent_model_class = ::SchemaCache
       .entities
       .to_h { [_1.class_name, _1.model_class] }
       .fetch(parent_model_name)

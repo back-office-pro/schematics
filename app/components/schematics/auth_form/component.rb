@@ -5,8 +5,7 @@ module Schematics
   module AuthForm
     class Component < ApplicationComponent
       delegate :new_password_reset_path, to: 'Schematics::Engine.routes.url_helpers'
-      delegate :demo?, to: :current_tenant, private: true
-      delegate :email, to: '::Subscription', private: true
+      delegate :email, :current_shard, to: '::Subscription', private: true
 
       def url = resources_path(::Session)
 
@@ -20,6 +19,12 @@ module Schematics
 
       def value
         Attributes::Digest::DEFAULT if demo?
+      end
+
+      private
+
+      def demo?
+        current_shard == :demo
       end
     end
   end
