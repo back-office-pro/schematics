@@ -55,7 +55,7 @@ module Core
 
       def uri = URI(url)
 
-      def use_ssl
+      def use_ssl # rubocop:disable Naming/PredicateMethod
         uri.scheme == 'https'
       end
     end

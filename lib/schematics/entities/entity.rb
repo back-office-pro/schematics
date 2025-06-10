@@ -300,7 +300,7 @@ module Schematics
 
       def receptor = Receptor.new(self)
 
-      def has_many_and_through_and_belongs_to_many_associations # rubocop:disable Naming/PredicateName
+      def has_many_and_through_and_belongs_to_many_associations # rubocop:disable Naming/PredicatePrefix
         has_many_associations + has_many_through_associations + has_and_belongs_to_many_associations
       end
 

@@ -15,7 +15,7 @@ module Schematics
 
       def available_options = super.push(Options::Acceptance)
 
-      def default = false
+      def default = false # rubocop:disable Naming/PredicateMethod
 
       def icon = :toggle_on
 

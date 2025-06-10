@@ -26,11 +26,11 @@ module Schematics
 
       def otp_enabled? = false
 
-      def update(*) = false
+      def update(*) = false # rubocop:disable Naming/PredicateMethod
 
-      def authenticate(*) = false
+      def authenticate(*) = false # rubocop:disable Naming/PredicateMethod
 
-      def log_search!(*) = false
+      def log_search!(*) = false # rubocop:disable Naming/PredicateMethod
 
       def find_or_create_draft!(*) = nil
 

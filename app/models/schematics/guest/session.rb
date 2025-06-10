@@ -23,7 +23,7 @@ module Schematics
         end
       end
 
-      def touch!(*) = true
+      def touch!(*) = true # rubocop:disable Naming/PredicateMethod
 
       def sudo? = false
 

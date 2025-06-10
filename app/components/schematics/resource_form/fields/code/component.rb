@@ -8,7 +8,7 @@ module Schematics
         class Component < Fields::Component
           delegate :translated?, :language, :readonly?, to: :field
 
-          def wrapper_class = false
+          def wrapper_class = false # rubocop:disable Naming/PredicateMethod
 
           def wrapper_data = {
             controller: 'code-editor',

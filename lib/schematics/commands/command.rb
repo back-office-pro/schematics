@@ -35,7 +35,7 @@ module Schematics
         .concat(entity.enum_attributes.flat_map(&:enum_values))
         .concat(entity.state_machine_attributes.flat_map(&:events))
 
-      def has_and_belongs_to_many_associations = entity # rubocop:disable Naming/PredicateName
+      def has_and_belongs_to_many_associations = entity # rubocop:disable Naming/PredicatePrefix
         .has_and_belongs_to_many_associations
         .reject(&:hidden?)
 

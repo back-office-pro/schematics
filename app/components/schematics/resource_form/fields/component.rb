@@ -27,7 +27,7 @@ module Schematics
           fa_icon(icon)
         end
 
-        def hide_label
+        def hide_label # rubocop:disable Naming/PredicateMethod
           return false unless inline?
 
           true
@@ -39,11 +39,11 @@ module Schematics
           %w[form-control form-control-sm rounded px-2 py-0]
         end
 
-        def include_hidden = false
+        def include_hidden = false # rubocop:disable Naming/PredicateMethod
 
-        def multiple = true
+        def multiple = true # rubocop:disable Naming/PredicateMethod
 
-        def switch = true
+        def switch = true # rubocop:disable Naming/PredicateMethod
 
         def resource = form.object
 

@@ -31,11 +31,11 @@ module Schematics
 
             def colors_collection = Schematics::Options::StateMachineEvent::COLORS
 
-            def floating = true
+            def floating = true # rubocop:disable Naming/PredicateMethod
 
-            def required = true
+            def required = true # rubocop:disable Naming/PredicateMethod
 
-            def multiple = true
+            def multiple = true # rubocop:disable Naming/PredicateMethod
 
             def maxlength = 50
 

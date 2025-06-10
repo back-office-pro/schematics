@@ -44,7 +44,7 @@ module Schematics
           if can?(:show)
             is_expected
               .to route(:get, resource_path(record))
-              .to record_params.merge(action: (record in Singleton) ? :index : :show)
+              .to record_params.merge(action: (record in Singleton) ? :index : :show) # rubocop:disable Style/RedundantParentheses
             is_expected
               .to route(:get, new_comment_resource_path(record))
               .to record_params.merge(controller: :comments, action: :new)

@@ -20,7 +20,7 @@ module Schematics
             end
           end
 
-          def include_hidden = false
+          def include_hidden = false # rubocop:disable Naming/PredicateMethod
 
           def include_blank(name = attribute_name)
             t('prompt', attribute_name: name.downcase.singularize(I18n.locale))
