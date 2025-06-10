@@ -24,16 +24,17 @@ module ActiveRecord
               ),
             shard:
           )
-          establish_connection(
-            Rails
-              .configuration
-              .database_configuration.dig(Rails.env, 'search')
-              .merge(
-                database: Rails.root.join('storage', shard.to_s, "#{Rails.env}_search.sqlite3"),
-                migrations_paths: Rails.root.join('db', shard.to_s, 'search_migrate')
-              ),
-            shard: "#{shard}/search"
-          )
+          %w[search cache].each do |db_name|
+            config = Rails.configuration.database_configuration.dig(Rails.env, db_name)
+            migrations_paths = Rails.root.join('db', shard.to_s, "#{db_name}_migrate")
+            database = Rails.root.join('storage', shard.to_s, "#{Rails.env}_#{db_name}.sqlite3")
+            next unless config
+
+            establish_connection(
+              config.merge(database:, migrations_paths:),
+              shard: [shard, db_name].join('/')
+            )
+          end
           retry
         end
       end
