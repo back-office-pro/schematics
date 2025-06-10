@@ -168,3 +168,9 @@ ActiveSupport.on_load(:solid_queue_record) do
     def current_shard = :queue
   end
 end
+
+ActiveSupport.on_load(:solid_cache) do
+  class << self
+    def current_shard = [super, :cache].join('/')
+  end
+end
