@@ -1,30 +1,6 @@
 {
   "ignored_warnings": [
     {
-      "warning_type": "Dangerous Eval",
-      "warning_code": 13,
-      "fingerprint": "03fab1e594a3e1c3499fd26d2dc305eedd227adaa1876c8fdd7e37211e3f9897",
-      "check_name": "Evaluation",
-      "message": "Dynamic code evaluation",
-      "file": "app/models/concerns/schematics/loadable.rb",
-      "line": 80,
-      "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
-      "code": "eval(schema.find_entity_by_name(name.to_s.underscore), binding, \"app/models/concerns/schematics/loadable.rb\", 80)",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Schematics::Loadable",
-        "method": "load!"
-      },
-      "user_input": null,
-      "confidence": "Weak",
-      "cwe_id": [
-        913,
-        95
-      ],
-      "note": ""
-    },
-    {
       "warning_type": "Remote Code Execution",
       "warning_code": 24,
       "fingerprint": "86350440fe1240806d9dc7ab6a2d4253e8183365d91bdd55b37ec196407ebc6c",
@@ -44,6 +20,30 @@
       "confidence": "Medium",
       "cwe_id": [
         470
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Dangerous Eval",
+      "warning_code": 13,
+      "fingerprint": "8ca39e1aad4a802c53b1b35107692ddc83a433a46bc8ec5e5e694dc07822a3a5",
+      "check_name": "Evaluation",
+      "message": "Dynamic code evaluation",
+      "file": "app/models/concerns/schematics/loadable.rb",
+      "line": 78,
+      "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
+      "code": "eval(SchemaCache.find_entity_by_name(name.to_s.underscore), binding, \"app/models/concerns/schematics/loadable.rb\", 78)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Schematics::Loadable",
+        "method": "load!"
+      },
+      "user_input": null,
+      "confidence": "Weak",
+      "cwe_id": [
+        913,
+        95
       ],
       "note": ""
     },
@@ -78,7 +78,7 @@
       "check_name": "ForgerySetting",
       "message": "`protect_from_forgery` should be configured with `with: :exception`",
       "file": "app/controllers/schematics/application_controller.rb",
-      "line": 24,
+      "line": 23,
       "link": "https://brakemanscanner.org/docs/warning_types/cross-site_request_forgery/",
       "code": "protect_from_forgery(:with => :null_session, :if => (lambda do\n request.format.json?\n end))",
       "render_path": null,
