@@ -17,7 +17,8 @@ module ActiveRecord
           establish_connection(
             Rails
               .configuration
-              .database_configuration.dig(Rails.env, 'primary')
+              .database_configuration
+              .dig(Rails.env, 'primary')
               .merge(
                 database: [shard, Rails.env].join('_'),
                 migrations_paths: Rails.root.join('db', shard.to_s, 'migrate')
