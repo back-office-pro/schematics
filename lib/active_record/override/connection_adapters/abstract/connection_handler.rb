@@ -15,31 +15,50 @@ module ActiveRecord
           super
         rescue ConnectionNotDefined
           if Rails.env.test?
-            connect_to_shard('demo', 'demo/test', 'demo/migrate')
-            connect_to_shard('default/search', 'demo/test_search', 'demo/search_migrate')
+            establish_connection(
+              db_config_for(:primary).merge(
+                database: Rails.root.join('storage/demo/test.sqlite3'),
+                migrations_paths: Rails.root.join('db/demo/migrate')
+              ),
+              shard: :demo
+            )
+            establish_connection(
+              db_config_for(:search).merge(
+                database: Rails.root.join('storage/demo/test_search.sqlite3'),
+                migrations_paths: Rails.root.join('db/demo/search_migrate')
+              ),
+              shard: :'default/search'
+            )
           else
-            connect_to_shard(shard, "#{shard}_#{Rails.env}", "#{shard}/migrate")
-            connect_to_shard("#{shard}/search", "#{shard}/#{Rails.env}_search", "#{shard}/search_migrate") # rubocop:disable Layout/LineLength
-            connect_to_shard("#{shard}/cable", "#{shard}/#{Rails.env}_cable", "#{shard}/cable_migrate") # rubocop:disable Layout/LineLength
+            establish_connection(
+              db_config_for(:primary).merge(
+                database: "#{shard}_#{Rails.env}",
+                migrations_paths: Rails.root.join('db', shard.to_s, 'migrate')
+              ),
+              shard:
+            )
+            establish_connection(
+              db_config_for(:search).merge(
+                database: Rails.root.join('storage', shard.to_s, "#{Rails.env}_search.sqlite3"),
+                migrations_paths: Rails.root.join('db', shard.to_s, 'search_migrate')
+              ),
+              shard: :"#{shard}/search"
+            )
+            establish_connection(
+              db_config_for(:cache).merge(
+                database: Rails.root.join('storage', shard.to_s, "#{Rails.env}_cache.sqlite3"),
+                migrations_paths: Rails.root.join('db', shard.to_s, 'cache_migrate')
+              ),
+              shard: :"#{shard}/cache"
+            )
           end
           retry
         end
 
         private
 
-        # :reek:FeatureEnvy
-        def connect_to_shard(shard, db, migration_path)
-          establish_connection(
-            Rails
-              .configuration
-              .database_configuration
-              .dig(Rails.env, shard.to_s.split('/').second || 'primary')
-              .merge(
-                database: db.include?('/') ? Rails.root.join('storage', "#{db}.sqlite3") : db,
-                migrations_paths: Rails.root.join('db', migration_path)
-              ),
-            shard: shard.to_sym
-          )
+        def db_config_for(database)
+          Rails.configuration.database_configuration.dig(Rails.env, database.to_s).symbolize_keys
         end
       end
     end
