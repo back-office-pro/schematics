@@ -14,29 +14,31 @@ module ActiveRecord
         )
           super
         rescue ConnectionNotDefined
+          if Rails.env.test?
+            connect_to_shard('demo', 'demo/test', 'demo/migrate')
+            connect_to_shard('default/search', 'demo/test_search', 'demo/search_migrate')
+          else
+            connect_to_shard(shard, "#{shard}_#{Rails.env}", "#{shard}/migrate")
+            connect_to_shard("#{shard}/search", "#{shard}/#{Rails.env}_search", "#{shard}/search_migrate") # rubocop:disable Layout/LineLength
+            connect_to_shard("#{shard}/cable", "#{shard}/#{Rails.env}_cable", "#{shard}/cable_migrate") # rubocop:disable Layout/LineLength
+          end
+          retry
+        end
+
+        private
+
+        def connect_to_shard(shard, db, migration_path)
           establish_connection(
             Rails
               .configuration
               .database_configuration
-              .dig(Rails.env, 'primary')
+              .dig(Rails.env, shard.to_s.split('/').second || 'primary')
               .merge(
-                database: [shard, Rails.env].join('_'),
-                migrations_paths: Rails.root.join('db', shard.to_s, 'migrate')
+                database: db.include?('/') ? Rails.root.join('storage', "#{db}.sqlite3") : db,
+                migrations_paths: Rails.root.join('db', migration_path)
               ),
-            shard:
+            shard: shard.to_sym
           )
-          %w[search cache].each do |db_name|
-            config = Rails.configuration.database_configuration.dig(Rails.env, db_name)
-            migrations_paths = Rails.root.join('db', shard.to_s, "#{db_name}_migrate")
-            database = Rails.root.join('storage', shard.to_s, "#{Rails.env}_#{db_name}.sqlite3")
-            next unless config
-
-            establish_connection(
-              config.merge(database:, migrations_paths:),
-              shard: [shard, db_name].join('/')
-            )
-          end
-          retry
         end
       end
     end

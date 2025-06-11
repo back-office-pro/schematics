@@ -6,7 +6,7 @@ module Schematics
     self.abstract_class = true
 
     class << self
-      def current_shard = [super, :search].join('/')
+      def current_shard = :"#{super}/search"
     end
   end
 end
