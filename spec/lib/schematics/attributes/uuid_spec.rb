@@ -4,7 +4,8 @@
 describe Schematics::Attributes::Uuid do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.new(name: 'entity') }
+  let(:schema) { Schematics::Schema.new }
+  let(:entity) { Schematics::Entities::Entity.new(schema:, name: 'entity') }
   let(:name) { 'id' }
   let(:options) { {} }
 
