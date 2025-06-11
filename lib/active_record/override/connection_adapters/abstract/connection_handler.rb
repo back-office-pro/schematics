@@ -27,6 +27,7 @@ module ActiveRecord
 
         private
 
+        # :reek:FeatureEnvy
         def connect_to_shard(shard, db, migration_path)
           establish_connection(
             Rails
