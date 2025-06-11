@@ -169,8 +169,10 @@ ActiveSupport.on_load(:solid_queue_record) do
   end
 end
 
-ActiveSupport.on_load(:solid_cache) do
-  class << self
-    def current_shard = [super, :cache].join('/')
+unless Rails.env.test?
+  ActiveSupport.on_load(:solid_cache) do
+    class << self
+      def current_shard = :"#{super}/cache"
+    end
   end
 end
