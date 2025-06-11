@@ -17,10 +17,10 @@ module ActiveRecord
           if Rails.env.test?
             establish_connection(
               db_config_for(:primary).merge(
-                database: Rails.root.join('storage/demo/test.sqlite3'),
-                migrations_paths: Rails.root.join('db/demo/migrate')
+                database: Rails.root.join('storage', shard.to_s, 'test.sqlite3'),
+                migrations_paths: Rails.root.join('db', shard.to_s, 'migrate')
               ),
-              shard: :demo
+              shard:
             )
             establish_connection(
               db_config_for(:search).merge(
