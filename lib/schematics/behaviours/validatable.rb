@@ -8,7 +8,7 @@ module Schematics
     module Validatable
       delegate :unique?, :required?, :case_insensitive?, to: :options
 
-      def allow_blank = !required?
+      def allow_blank = !required? # rubocop:disable Naming/PredicateMethod
 
       def available_options = [Options::Required]
 
