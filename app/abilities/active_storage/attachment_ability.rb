@@ -11,7 +11,7 @@ module ActiveStorage
           .permissions
           .select { _1.action == action.to_s }
           .map(&:model)
-          .select { _1.safe_constantize }
+          .select(&:safe_constantize)
           .each { |record_type| can(permission, ::ActiveStorage::Attachment, record_type:) }
       end
       cannot :destroy, ::ActiveStorage::Attachment, record_type: 'Import'
