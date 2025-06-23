@@ -4,7 +4,9 @@
 module Schematics
   module Loadable
     extend ActiveSupport::Concern
+
     ASSOCIATIONS_LIMIT = 100
+    SEMAPHORE = Mutex.new.freeze
 
     included do
       include ActiveStorageSupport::SupportForBase64
@@ -29,7 +31,7 @@ module Schematics
       end
 
       def entity
-        SchemaCache.find_entity_by_name(name.underscore)
+        SchemaCache.find_entity_by_name(entity_name)
       end
 
       def filter_attributes = entity
@@ -64,25 +66,17 @@ module Schematics
         print entity.model_elements.map(&:to_str).join # rubocop:disable Rails/Output
       end
 
-      def load!(name)
-        entity = SchemaCache.find_entity_by_name(name.to_s.underscore)
-        return unless entity
-
-        unless Object.const_defined?(name)
-          Rails.logger.info "Loading #{name}..."
-          path = Engine.root.join('app', 'models', 'core', "#{entity.name}.rb")
-
-          if path.exist?
-            load(path)
-          else
-            eval(entity, binding, __FILE__, __LINE__) # rubocop:disable Security/Eval
-          end
+      def model_name
+        SEMAPHORE.synchronize do
+          @model_name ||= ActiveModel::Name.new(self, nil, entity&.core? ? name : name.demodulize)
         end
-
-        const_get(name)
       end
 
       private
+
+      def entity_name = name
+        .demodulize
+        .underscore
 
       def loadable(concerns: [])
         self.concerns = concerns

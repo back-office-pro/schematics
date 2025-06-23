@@ -114,6 +114,10 @@ ActiveSupport.on_load(:active_storage_record) do
     alias_method :finder, :find
 
     def validate_service_configuration(*) = nil
+
+    private
+
+    def entity_name = name.underscore
   end
 
   def paper_trail_versions = Schematics::Version.none
