@@ -8,7 +8,7 @@ module Schematics
       user
         .role
         .permissions
-        .select { Object.const_defined?(_1.model) }
+        .select { _1.model.safe_constantize }
         .each { can _1.action.to_sym, _1.model.constantize }
     end
   end
