@@ -189,9 +189,14 @@ module Schematics
         validatable_elements.filter_map(&:validators)
       end
 
-      def class_name
-        name.camelize
+      def module_name
+        ActiveRecord::Base.current_shard.to_s unless core?
       end
+
+      def class_name = [module_name, name]
+        .compact
+        .map(&:camelize)
+        .join('::')
 
       def model_class
         class_name.safe_constantize

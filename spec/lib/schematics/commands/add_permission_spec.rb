@@ -21,7 +21,7 @@ describe Schematics::Commands::AddPermission do
 
     its([0]) do
       is_expected.to have_attributes(
-        name: 'Client',
+        name: 'Default::Client',
         options: a_hash_including(action: attribute),
         behavior: :invoke
       )

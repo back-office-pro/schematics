@@ -128,7 +128,7 @@ describe Schematics::Commands::CreateEntity do
 
     its([8]) do
       is_expected.to have_attributes(
-        name: 'Assembly',
+        name: 'Default::Assembly',
         options: a_hash_including(action: 'index'),
         behavior:
       )
@@ -136,7 +136,7 @@ describe Schematics::Commands::CreateEntity do
 
     its([9]) do
       is_expected.to have_attributes(
-        name: 'Assembly',
+        name: 'Default::Assembly',
         options: a_hash_including(action: 'show'),
         behavior:
       )
@@ -144,7 +144,7 @@ describe Schematics::Commands::CreateEntity do
 
     its([10]) do
       is_expected.to have_attributes(
-        name: 'Assembly',
+        name: 'Default::Assembly',
         options: a_hash_including(action: 'create'),
         behavior:
       )
@@ -152,7 +152,7 @@ describe Schematics::Commands::CreateEntity do
 
     its([11]) do
       is_expected.to have_attributes(
-        name: 'Assembly',
+        name: 'Default::Assembly',
         options: a_hash_including(action: 'update'),
         behavior:
       )
@@ -160,7 +160,7 @@ describe Schematics::Commands::CreateEntity do
 
     its([12]) do
       is_expected.to have_attributes(
-        name: 'Assembly',
+        name: 'Default::Assembly',
         options: a_hash_including(action: 'destroy'),
         behavior:
       )
@@ -168,7 +168,7 @@ describe Schematics::Commands::CreateEntity do
 
     its([13]) do
       is_expected.to have_attributes(
-        name: 'Assembly',
+        name: 'Default::Assembly',
         options: a_hash_including(action: 'archive'),
         behavior:
       )
@@ -176,7 +176,7 @@ describe Schematics::Commands::CreateEntity do
 
     its([14]) do
       is_expected.to have_attributes(
-        name: 'Assembly',
+        name: 'Default::Assembly',
         options: a_hash_including(action: 'close'),
         behavior:
       )
