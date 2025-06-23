@@ -1,4 +1,4 @@
-- if @dashboards.count > 1
+- if @dashboards.many?
   .nav.nav-underline.nav-justified.mb-3 role='tablist'
     = __dashboard_tab(@dashboards)
 .tab-content
