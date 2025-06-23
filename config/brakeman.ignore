@@ -1,6 +1,30 @@
 {
   "ignored_warnings": [
     {
+      "warning_type": "Dangerous Eval",
+      "warning_code": 13,
+      "fingerprint": "70cfc6731d5989901301d351b1ddd91fc980e295bcee886594df0693f7fddb39",
+      "check_name": "Evaluation",
+      "message": "Dynamic code evaluation",
+      "file": "app/models/concerns/schematics/loadable.rb",
+      "line": 28,
+      "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
+      "code": "eval(model_element, binding, \"app/models/concerns/schematics/loadable.rb\", 28)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Schematics::Loadable",
+        "method": "inherited"
+      },
+      "user_input": null,
+      "confidence": "Weak",
+      "cwe_id": [
+        913,
+        95
+      ],
+      "note": ""
+    },
+    {
       "warning_type": "Remote Code Execution",
       "warning_code": 24,
       "fingerprint": "86350440fe1240806d9dc7ab6a2d4253e8183365d91bdd55b37ec196407ebc6c",
@@ -26,43 +50,15 @@
     {
       "warning_type": "Dangerous Eval",
       "warning_code": 13,
-      "fingerprint": "8ca39e1aad4a802c53b1b35107692ddc83a433a46bc8ec5e5e694dc07822a3a5",
+      "fingerprint": "f217dff63497317c7c1f631498357935dbaf06fae12364c262e0f151f2487229",
       "check_name": "Evaluation",
       "message": "Dynamic code evaluation",
-      "file": "app/models/concerns/schematics/loadable.rb",
-      "line": 78,
+      "file": "config/initializers/const_missing.rb",
+      "line": 16,
       "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
-      "code": "eval(SchemaCache.find_entity_by_name(name.to_s.underscore), binding, \"app/models/concerns/schematics/loadable.rb\", 78)",
+      "code": "eval(SchemaCache.find_entity_by_name(name.to_s.underscore), binding, \"config/initializers/const_missing.rb\", 16)",
       "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Schematics::Loadable",
-        "method": "load!"
-      },
-      "user_input": null,
-      "confidence": "Weak",
-      "cwe_id": [
-        913,
-        95
-      ],
-      "note": ""
-    },
-    {
-      "warning_type": "Dangerous Eval",
-      "warning_code": 13,
-      "fingerprint": "b9ba42546cd69b46bef1eaf435a9ddf5a9797ef7131fed3a2bbb47c7989bf749",
-      "check_name": "Evaluation",
-      "message": "Dynamic code evaluation",
-      "file": "app/models/concerns/schematics/loadable.rb",
-      "line": 26,
-      "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
-      "code": "eval(model_element, binding, \"app/models/concerns/schematics/loadable.rb\", 26)",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Schematics::Loadable",
-        "method": "inherited"
-      },
+      "location": null,
       "user_input": null,
       "confidence": "Weak",
       "cwe_id": [
