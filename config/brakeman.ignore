@@ -50,15 +50,19 @@
     {
       "warning_type": "Dangerous Eval",
       "warning_code": 13,
-      "fingerprint": "f217dff63497317c7c1f631498357935dbaf06fae12364c262e0f151f2487229",
+      "fingerprint": "ab66ab144eebd6c06d5464735caf29db81a25ac8c672bb01270b2f580b860fa3",
       "check_name": "Evaluation",
       "message": "Dynamic code evaluation",
-      "file": "config/initializers/const_missing.rb",
-      "line": 16,
+      "file": "lib/rails/override/module.rb",
+      "line": 18,
       "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
-      "code": "eval(SchemaCache.find_entity_by_name(name.to_s.underscore), binding, \"config/initializers/const_missing.rb\", 16)",
+      "code": "eval(SchemaCache.find_entity_by_name(name.to_s.underscore), binding, \"lib/rails/override/module.rb\", 18)",
       "render_path": null,
-      "location": null,
+      "location": {
+        "type": "method",
+        "class": "Rails::Override::Module",
+        "method": "const_missing"
+      },
       "user_input": null,
       "confidence": "Weak",
       "cwe_id": [
