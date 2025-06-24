@@ -8,6 +8,7 @@ Rails.configuration.to_prepare do
   Rails.configuration.paths['config/database'].unshift Schematics::Engine.root.join('config', 'database.yml') # rubocop:disable Layout/LineLength
   Rails.configuration.paths['config/cable'].unshift Schematics::Engine.root.join('config', 'cable.yml') # rubocop:disable Layout/LineLength
   Rails.configuration.paths['config'].unshift Schematics::Engine.root.join('config')
+  ActiveRecord::Base.default_shard = ENV.fetch('DATABASE', 'default').to_sym
 end
 
 if Rails.env.on_premise?
