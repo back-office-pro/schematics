@@ -22,16 +22,16 @@ development:
     database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/development_search.sqlite3
     migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/search_migrate
   cable:
-    <<: *sqlite3
-    database: storage/development_cable.sqlite3
+    <<: *postgresql
+    database: development_cable
     migrations_paths: db/cable_migrate
   cache:
     <<: *sqlite3
     database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/development_cache.sqlite3
     migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/cache_migrate
   queue:
-    <<: *sqlite3
-    database: storage/development_queue.sqlite3
+    <<: *postgresql
+    database: development_queue
     migrations_paths: db/queue_migrate
 
 test:
@@ -54,16 +54,16 @@ production:
     database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/production_search.sqlite3
     migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/search_migrate
   cable:
-    <<: *sqlite3
-    database: storage/production_cable.sqlite3
+    <<: *postgresql
+    database: production_cable
     migrations_paths: db/cable_migrate
   cache:
     <<: *sqlite3
     database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/production_cache.sqlite3
     migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/cache_migrate
   queue:
-    <<: *sqlite3
-    database: storage/production_queue.sqlite3
+    <<: *postgresql
+    database: production_queue
     migrations_paths: db/queue_migrate
 
 on_premise:
