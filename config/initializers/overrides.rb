@@ -13,8 +13,6 @@ require 'active_storage/override/transform_job'
 require 'active_storage/service/tenant_s3_service'
 require 'active_support/dependencies'
 require 'arel/override/predications'
-require 'bootstrap-email/config'
-require 'bootstrap-email/override/config'
 require 'onelogin/override/ruby-saml/settings'
 require 'onelogin/ruby-saml/settings'
 require 'puma/configuration'
@@ -43,7 +41,6 @@ Puma::Configuration.prepend(Puma::Override::Configuration)
 OneLogin::RubySaml::Settings.prepend(OneLogin::Override::RubySaml::Settings)
 Arel::Predications.prepend(Arel::Override::Predications)
 SolidQueue::Configuration.prepend(SolidQueue::Override::Configuration)
-BootstrapEmail::Config.prepend(BootstrapEmail::Override::Config)
 
 Rails.configuration.to_prepare do
   ActiveStorage.singleton_class.module_eval do
