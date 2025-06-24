@@ -17,9 +17,7 @@ module Core
       def call
         Rails.cache.delete('schema')
         Rails.cache.write('old_and_changed_model_classes', old_and_changed_model_classes)
-        old_and_changed_model_classes
-          .select(&Object.method(:const_defined?))
-          .each(&Object.method(:remove_const))
+        Schematics::Shards::Reload.call(old_and_changed_model_classes:)
         migrator_changed_entities
           .filter_map(&:model_class)
           .each(&:reset_column_information)
@@ -33,7 +31,6 @@ module Core
       def old_and_changed_model_classes = migrator_old_and_changed_entities
         .reject(&:existing?)
         .map(&:class_name)
-        .map(&:to_sym)
     end
   end
 end

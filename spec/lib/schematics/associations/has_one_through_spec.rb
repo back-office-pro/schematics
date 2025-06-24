@@ -46,7 +46,7 @@ describe Schematics::Associations::HasOneThrough do
 
   its(:type) { is_expected.to eq('has_one') }
   its(:name) { is_expected.to eq('user') }
-  its(:class_name) { is_expected.to eq('User') }
+  its(:class_name) { is_expected.to eq('Default::User') }
   its(:column_name) { is_expected.to eq('user_id') }
   its(:source) { is_expected.to eq('user') }
   its(:open_api_schema_type) { is_expected.to eq(id: 'string', full_name: 'string') }
@@ -64,7 +64,7 @@ describe Schematics::Associations::HasOneThrough do
       scope :with_user, -> { includes([{user: :string_translations}]) }
       has_one :user,
               -> { with_deleted },
-              class_name: 'User',
+              class_name: 'Default::User',
               foreign_key: 'user_id',
               through: :entity,
               source: :user,

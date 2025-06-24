@@ -33,7 +33,7 @@ describe Schematics::Attributes::BelongsTo do
   its(:association_type) { is_expected.to eq('user') }
   its(:inverse_association_name) { is_expected.to eq('entity') }
   its(:inverse_association_type) { is_expected.to eq('has_many') }
-  its(:class_name) { is_expected.to eq('User') }
+  its(:class_name) { is_expected.to eq('Default::User') }
   its(:preload) { is_expected.to eq([user: :string_translations]) }
   its(:icon) { is_expected.to eq(:users) }
   its(:to_sql) { is_expected.to eq("(users.last_name || ' ' || users.first_name)") }
@@ -83,7 +83,7 @@ describe Schematics::Attributes::BelongsTo do
       scope :with_user_record_emailings, -> { includes({user: [:record_emailings]}) }
       belongs_to :user,
                  -> { with_deleted },
-                 class_name: 'User',
+                 class_name: 'Default::User',
                  foreign_key: 'user_id',
                  inverse_of: :entities,
                  optional: true,
@@ -121,7 +121,7 @@ describe Schematics::Attributes::BelongsTo do
         scope :with_user_record_emailings, -> { includes({user: [:record_emailings]}) }
         belongs_to :user,
                    -> { with_deleted },
-                   class_name: 'User',
+                   class_name: 'Default::User',
                    foreign_key: 'user_id',
                    inverse_of: :entities,
                    optional: false,

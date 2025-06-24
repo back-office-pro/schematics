@@ -61,7 +61,7 @@ describe Schematics::Associations::HasManyThrough do
 
   its(:type) { is_expected.to eq('has_many') }
   its(:name) { is_expected.to eq('attributes') }
-  its(:class_name) { is_expected.to eq('Attribute') }
+  its(:class_name) { is_expected.to eq('Default::Attribute') }
   its(:column_name) { is_expected.to eq('entity_id') }
   its(:source) { is_expected.to eq('attributes') }
   its(:open_api_schema_type) { is_expected.to eq([id: 'string', name: 'string']) }
@@ -75,7 +75,7 @@ describe Schematics::Associations::HasManyThrough do
       scope :with_attributes, -> { includes([:attributes]) }
       has_many :attributes,
               -> { with_deleted },
-              class_name: 'Attribute',
+              class_name: 'Default::Attribute',
               foreign_key: 'entity_id',
               through: :entities,
               source: :attributes

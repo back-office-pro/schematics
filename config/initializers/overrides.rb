@@ -23,12 +23,15 @@ require 'rails/generators'
 require 'rails/generators/active_record/migration/migration_generator'
 require 'rails/generators/generated_attribute'
 require 'rails/override/generators/generated_attribute'
+require 'rails/override/module'
 require 'solid_queue/configuration'
 require 'solid_queue/override/configuration'
 
 GeneratedAttribute = Rails::Override::Generators::GeneratedAttribute
 MigrationGenerator = ActiveRecord::Override::Generators::MigrationGenerator
 ConnectionHandler = ActiveRecord::Override::ConnectionAdapters::ConnectionHandler
+
+Module.prepend(Rails::Override::Module)
 
 Rails::Generators::GeneratedAttribute.singleton_class.prepend(GeneratedAttribute)
 Rails::Generators::GeneratedAttribute.prepend(GeneratedAttribute)
@@ -114,6 +117,10 @@ ActiveSupport.on_load(:active_storage_record) do
     alias_method :finder, :find
 
     def validate_service_configuration(*) = nil
+
+    private
+
+    def entity_name = name.underscore
   end
 
   def paper_trail_versions = Schematics::Version.none

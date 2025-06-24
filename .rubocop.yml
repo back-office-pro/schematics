@@ -87,6 +87,7 @@ Style/IpAddresses:
     - 127.0.0.0
     - 0.0.0.0
     - '::1'
+    - '::'
 Style/ReturnNil:
   Enabled: true
 Style/Send:
