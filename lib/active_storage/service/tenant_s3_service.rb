@@ -8,7 +8,7 @@ module ActiveStorage
     private
 
     def object_for(key)
-      bucket.object ::File.join(ActiveRecord::Base.current_shard.to_s, key)
+      bucket.object ::File.join(Record.current_shard.to_s, key)
     end
   end
 end
