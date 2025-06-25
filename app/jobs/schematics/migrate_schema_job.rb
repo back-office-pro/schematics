@@ -9,7 +9,8 @@ module Schematics
     queue_as :critical
 
     def perform(_shard, migration_id = nil)
-      migration = ::Migration.find(migration_id || ::Migration.scheduled&.id)
+      migration = ::Migration.find_by(id: migration_id) || ::Migration.scheduled
+      return unless migration
       return if migration.state_generating?
       return if migration.state_in_progress?
 
