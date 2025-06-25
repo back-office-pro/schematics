@@ -3,3 +3,4 @@
 bundle cache
 gem build
 gem install --local ./schematics-*.gem
+# systemctl restart puma-schematics.socket puma-schematics.service
