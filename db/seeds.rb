@@ -29,7 +29,7 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
     Migration.default.save!
     User.create!(
       email: Subscription.email,
-      password: (Schematics::Attributes::Digest::DEFAULT if shard.eql?('demo') || Rails.env.on_premise?), # rubocop:disable Layout/LineLength
+      password: (Schematics::Attributes::Digest::DEFAULT if User.demo? || Rails.env.on_premise?),
       role: Role.admin
     )
     Dashboard.create!(

@@ -8,6 +8,7 @@ module Schematics
     self.implicit_order_column = 'created_at'
     self.inheritance_column = nil
 
+    include Tenantable
     include Loadable
     include Duplicable
     include Serializable
@@ -17,9 +18,6 @@ module Schematics
     include Previewable
     include Attachable
     include Routable
-
-    delegate :name, to: :class, prefix: true, private: true
-    delegate :current_shard, to: :class
 
     loadable concerns: [
       SoftDeletable,

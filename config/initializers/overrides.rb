@@ -96,14 +96,12 @@ end
 ActiveSupport.on_load(:active_storage_record) do
   self.implicit_order_column = 'created_at'
 
+  include Schematics::Tenantable
   include Schematics::Loadable
   include Schematics::Serializable
   include Schematics::Identifiable
   include Schematics::Translatable
   include Schematics::Routable
-
-  delegate :name, to: :class, prefix: true, private: true
-  delegate :current_shard, to: :class
 
   loadable concerns: [Schematics::SoftDeletable]
 

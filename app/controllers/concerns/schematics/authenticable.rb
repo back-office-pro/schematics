@@ -41,7 +41,7 @@ module Schematics
     def current_ability
       @current_ability ||= begin
         ability = Ability.new(current_user, ::SchemaCache)
-        ability.merge(DemoAbility.new) if ApplicationRecord.current_shard.eql?(:demo)
+        ability.merge(DemoAbility.new) if ApplicationRecord.demo?
         ability
       end
     end
