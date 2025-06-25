@@ -118,6 +118,8 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     skip_kamal: true
   }
 
+  def include_all_railties? = true
+
   def generating?
     behavior == :invoke
   end
