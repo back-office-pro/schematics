@@ -10,7 +10,7 @@ module Core
         delegate :secret_key, to: 'Schematics::Engine.credentials.stripe', private: true
         delegate :name, to: :product, allow_nil: true, prefix: true, private: true
         delegate :customers, :products, to: 'client.v1', private: true
-        delegate :current_shard, to: :context, private: true
+        delegate :current_shard, to: '::Subscription', private: true
         delegate :logger, to: '::Rails', private: true
         delegate :id,
                  :email,

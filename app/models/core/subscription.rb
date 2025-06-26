@@ -54,7 +54,7 @@ class ::Subscription < Schematics::ApplicationRecord
     memoize def api_keys_size = APIKey.count
   end
 
-  def load! = update!(GATEWAY::Fetch.call(current_shard:).data)
+  def load! = update!(GATEWAY::Fetch.call.data)
 
   def after_enable_event = GATEWAY::Enable.call
 
