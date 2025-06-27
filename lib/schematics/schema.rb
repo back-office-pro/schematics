@@ -6,7 +6,7 @@ require 'singleton'
 
 module Schematics
   # :reek:InstanceVariableAssumption
-  class Schema
+  class Schema # rubocop:disable Metrics/ClassLength
     include ::ActiveModel::API
     include ::ActiveModel::NestedAttributes
 
@@ -73,6 +73,7 @@ module Schematics
     def add_has_and_belongs_to_many_associations = entities
       .flat_map(&:has_and_belongs_to_many_associations)
       .select(&:inverse_entity)
+      .reject { _1.inverse_entity.core? && !_1.entity.core? }
       .each { _1.inverse_entity.associations << _1.inverse_association }
 
     # :reek:FeatureEnvy
@@ -80,6 +81,7 @@ module Schematics
       .flat_map(&:association_attributes)
       .reject(&:polymorphic?)
       .select(&:inverse_entity)
+      .reject { _1.inverse_entity.core? && !_1.entity.core? }
       .each { _1.inverse_entity.associations << _1.inverse_association }
 
     def add_has_many_through_associations

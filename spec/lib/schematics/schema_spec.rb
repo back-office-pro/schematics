@@ -20,6 +20,7 @@ describe Schematics::Schema do
       [
         {
           name: 'user',
+          options: { core: true },
           attributes: [
             {
               name: 'role',
@@ -29,6 +30,7 @@ describe Schematics::Schema do
         },
         {
           name: 'role',
+          options: { core: true },
           attributes: [
             {
               name: 'name',
@@ -38,6 +40,7 @@ describe Schematics::Schema do
         },
         {
           name: 'message',
+          options: { core: true },
           attributes: [
             {
               name: 'author',
