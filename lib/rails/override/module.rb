@@ -5,6 +5,7 @@ module Rails
   module Override
     module Module
       def const_missing(name)
+        eval(SchemaCache, binding, __FILE__, __LINE__) # rubocop:disable Security/Eval
         entity = SchemaCache.find_entity_by_name(name.to_s.underscore)
         return super unless entity
 

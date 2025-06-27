@@ -8,6 +8,13 @@ describe Schematics::Schema do
 
   it { is_expected.to be_valid }
   its(:model_classes) { is_expected.to be_empty }
+  its(:module_name) { is_expected.to eq('Default') }
+
+  its(:to_str) do
+    is_expected.to eq <<~RUBY
+      module ::Default; end
+    RUBY
+  end
 
   describe '#find_entity_by_name' do
     subject { schema.find_entity_by_name('user') }

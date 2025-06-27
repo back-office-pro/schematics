@@ -53,6 +53,16 @@ module Schematics
       .reject(&:core?)
       .filter_map(&:model_class)
 
+    # :reek:UtilityFunction
+    def module_name = ActiveRecord::Base
+      .current_shard
+      .to_s
+      .camelize
+
+    def to_str = <<~RUBY
+      module ::#{module_name}; end
+    RUBY
+
     private
 
     def core_data = ::JSON

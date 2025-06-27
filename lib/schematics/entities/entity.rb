@@ -190,7 +190,7 @@ module Schematics
       end
 
       def module_name
-        ActiveRecord::Base.current_shard.to_s unless core?
+        schema.module_name unless core?
       end
 
       def class_name = [module_name, name]
