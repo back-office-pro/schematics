@@ -15,20 +15,20 @@ sqlite3: &sqlite3
 development:
   primary:
     <<: *postgresql
-    database: <%= ActiveRecord::Base.current_shard %>_development
-    migrations_paths: db/<%= ActiveRecord::Base.current_shard %>/migrate
+    database: <%= ENV['DATABASE'] %>_development
+    migrations_paths: db/<%= ENV['DATABASE'] %>/migrate
   search:
     <<: *sqlite3
-    database: storage/<%= ActiveRecord::Base.current_shard %>/development_search.sqlite3
-    migrations_paths: db/<%= ActiveRecord::Base.current_shard %>/search_migrate
+    database: storage/<%= ENV['DATABASE'] %>/development_search.sqlite3
+    migrations_paths: db/<%= ENV['DATABASE'] %>/search_migrate
   cable:
     <<: *postgresql
     database: development_cable
     migrations_paths: db/cable_migrate
   cache:
     <<: *sqlite3
-    database: storage/<%= ActiveRecord::Base.current_shard %>/development_cache.sqlite3
-    migrations_paths: db/<%= ActiveRecord::Base.current_shard %>/cache_migrate
+    database: storage/<%= ENV['DATABASE'] %>/development_cache.sqlite3
+    migrations_paths: db/<%= ENV['DATABASE'] %>/cache_migrate
   queue:
     <<: *postgresql
     database: development_queue
@@ -37,30 +37,30 @@ development:
 test:
   primary:
     <<: *sqlite3
-    database: storage/<%= ActiveRecord::Base.current_shard %>/test.sqlite3
-    migrations_paths: db/<%= ActiveRecord::Base.current_shard %>/migrate
+    database: storage/<%= ENV['DATABASE'] %>/test.sqlite3
+    migrations_paths: db/<%= ENV['DATABASE'] %>/migrate
   search:
     <<: *sqlite3
-    database: storage/<%= ActiveRecord::Base.current_shard %>/test_search.sqlite3
-    migrations_paths: db/<%= ActiveRecord::Base.current_shard %>/search_migrate
+    database: storage/<%= ENV['DATABASE'] %>/test_search.sqlite3
+    migrations_paths: db/<%= ENV['DATABASE'] %>/search_migrate
 
 production:
   primary:
     <<: *postgresql
-    database: <%= ActiveRecord::Base.current_shard %>_production
-    migrations_paths: db/<%= ActiveRecord::Base.current_shard %>/migrate
+    database: <%= ENV['DATABASE'] %>_production
+    migrations_paths: db/<%= ENV['DATABASE'] %>/migrate
   search:
     <<: *sqlite3
-    database: storage/<%= ActiveRecord::Base.current_shard %>/production_search.sqlite3
-    migrations_paths: db/<%= ActiveRecord::Base.current_shard %>/search_migrate
+    database: storage/<%= ENV['DATABASE'] %>/production_search.sqlite3
+    migrations_paths: db/<%= ENV['DATABASE'] %>/search_migrate
   cable:
     <<: *postgresql
     database: production_cable
     migrations_paths: db/cable_migrate
   cache:
     <<: *sqlite3
-    database: storage/<%= ActiveRecord::Base.current_shard %>/production_cache.sqlite3
-    migrations_paths: db/<%= ActiveRecord::Base.current_shard %>/cache_migrate
+    database: storage/<%= ENV['DATABASE'] %>/production_cache.sqlite3
+    migrations_paths: db/<%= ENV['DATABASE'] %>/cache_migrate
   queue:
     <<: *postgresql
     database: production_queue
