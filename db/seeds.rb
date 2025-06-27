@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
-  shard = ENV.fetch('DATABASE', 'demo')
+  shard = ENV.fetch('DATABASE')
   ActiveRecord::Base.connected_to(shard:) do # rubocop:disable Metrics/BlockLength
     Role.create!(
       [
