@@ -25,6 +25,30 @@
       "note": ""
     },
     {
+      "warning_type": "Dangerous Eval",
+      "warning_code": 13,
+      "fingerprint": "756eacd46dd67b46b02ef58a68b8f8d46422df340df32272af7ce92cf76cad0c",
+      "check_name": "Evaluation",
+      "message": "Dynamic code evaluation",
+      "file": "lib/rails/override/module.rb",
+      "line": 8,
+      "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
+      "code": "eval(SchemaCache, binding, \"lib/rails/override/module.rb\", 8)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Rails::Override::Module",
+        "method": "const_missing"
+      },
+      "user_input": null,
+      "confidence": "Weak",
+      "cwe_id": [
+        913,
+        95
+      ],
+      "note": ""
+    },
+    {
       "warning_type": "Remote Code Execution",
       "warning_code": 24,
       "fingerprint": "86350440fe1240806d9dc7ab6a2d4253e8183365d91bdd55b37ec196407ebc6c",
@@ -50,13 +74,13 @@
     {
       "warning_type": "Dangerous Eval",
       "warning_code": 13,
-      "fingerprint": "ab66ab144eebd6c06d5464735caf29db81a25ac8c672bb01270b2f580b860fa3",
+      "fingerprint": "b67657a56cb527066e5a2df201f84594adbafad9643ab15b00dda92d9ee307b9",
       "check_name": "Evaluation",
       "message": "Dynamic code evaluation",
       "file": "lib/rails/override/module.rb",
-      "line": 18,
+      "line": 19,
       "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
-      "code": "eval(SchemaCache.find_entity_by_name(name.to_s.underscore), binding, \"lib/rails/override/module.rb\", 18)",
+      "code": "eval(SchemaCache.find_entity_by_name(name.to_s.underscore), binding, \"lib/rails/override/module.rb\", 19)",
       "render_path": null,
       "location": {
         "type": "method",
