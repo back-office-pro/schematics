@@ -57,6 +57,7 @@ module Schematics
     def module_name = ActiveRecord::Base
       .current_shard
       .to_s
+      .underscore
       .camelize
 
     def to_str = <<~RUBY
