@@ -56,10 +56,11 @@ class TenantGenerator < Rails::Generators::NamedBase
     rails_command "db:fixtures:load FIXTURES_PATH='../fixtures' DATABASE=#{name}", env:
   end
 
-  def drop_database
+  def drop_databases
     return unless destroying?
 
-    `RAILS_ENV=#{env} DATABASE=#{name} DISABLE_DATABASE_ENVIRONMENT_CHECK=1 rails db:drop`
+    FileUtils.rm_rf("storage/#{name}")
+    `dropdb #{name}_#{env}`
   end
 
   def destroy_migrations
