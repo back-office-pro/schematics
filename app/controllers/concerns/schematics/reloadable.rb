@@ -6,7 +6,7 @@ module Schematics
     extend ActiveSupport::Concern
 
     included do
-      before_action :reload!
+      prepend_before_action :reload!
     end
 
     private
