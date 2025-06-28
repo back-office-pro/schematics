@@ -25,9 +25,6 @@ module Schematics
         one_time_password
         paper_trail_version
         password_reset
-        schema_cache
-        search_index
-        server
         solid_cable_message
         solid_cache_entry
         solid_queue_blocked_execution
@@ -41,7 +38,6 @@ module Schematics
         solid_queue_pause
         solid_queue_process
         sudo
-        tenant
         token
         user_notification
         version
