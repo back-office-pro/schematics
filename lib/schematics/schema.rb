@@ -59,6 +59,7 @@ module Schematics
       .to_s
       .underscore
       .camelize
+      .prepend('Models::')
 
     def to_str = <<~RUBY
       module ::#{module_name}; end

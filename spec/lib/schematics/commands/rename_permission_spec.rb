@@ -22,7 +22,7 @@ describe Schematics::Commands::RenamePermission do
 
     its([0]) do
       is_expected.to have_attributes(
-        name: 'Default::Client',
+        name: 'Models::Default::Client',
         options: a_hash_including(action: target, rename: attribute),
         behavior: :invoke
       )

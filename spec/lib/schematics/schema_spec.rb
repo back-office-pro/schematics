@@ -8,11 +8,11 @@ describe Schematics::Schema do
 
   it { is_expected.to be_valid }
   its(:model_classes) { is_expected.to be_empty }
-  its(:module_name) { is_expected.to eq('Default') }
+  its(:module_name) { is_expected.to eq('Models::Default') }
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      module ::Default; end
+      module ::Models::Default; end
     RUBY
   end
 
