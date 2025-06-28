@@ -10,7 +10,6 @@ require 'numeric'
 require 'object'
 require 'schema_cache'
 require 'server'
-require 'tenant'
 require 'validators/singular_validator'
 require 'zeitwerk'
 require defined?(Rails::Engine) ? 'schematics/engine' : 'debug/prelude'
@@ -26,7 +25,6 @@ loader.ignore("#{__dir__}/active_model")
 loader.ignore("#{__dir__}/active_record")
 loader.ignore("#{__dir__}/active_storage")
 loader.ignore("#{__dir__}/arel")
-loader.ignore("#{__dir__}/bootstrap-email")
 loader.ignore("#{__dir__}/generators")
 loader.ignore("#{__dir__}/i18n")
 loader.ignore("#{__dir__}/mobility")
@@ -44,7 +42,6 @@ loader.ignore("#{__dir__}/object.rb")
 loader.ignore("#{__dir__}/rubygems_plugin.rb")
 loader.ignore("#{__dir__}/schema_cache.rb")
 loader.ignore("#{__dir__}/server.rb")
-loader.ignore("#{__dir__}/tenant.rb")
 loader.setup
 
 module Schematics

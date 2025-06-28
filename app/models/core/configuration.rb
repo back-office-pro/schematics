@@ -6,7 +6,6 @@ class ::Configuration < Schematics::ApplicationRecord
   attribute :available_locales, default: -> { Rails.configuration.i18n.available_locales.map(&:to_s) } # rubocop:disable Layout/LineLength
   attribute :locale, default: -> { Rails.configuration.i18n.default_locale }
 
-  after_update_commit :clear_bootstrap_email_sass_cache!
   after_update_commit :update_storage_services!
 
   class << self
@@ -30,15 +29,13 @@ class ::Configuration < Schematics::ApplicationRecord
   end
 
   def update_storage_services! # rubocop:disable Obsession/Rails/PrivateCallback
+    return unless Rails.env.on_premise?
+
     ActiveStorage::Blob.services = ActiveStorage::Service::Registry.new(storage_configurations)
     ActiveStorage::Blob.service = ActiveStorage::Blob.services.fetch(storage_service)
   end
 
   private
-
-  def clear_bootstrap_email_sass_cache!
-    BootstrapEmail.clear_sass_cache! if theme_color_previously_changed?
-  end
 
   def storage_configurations = Schematics::Engine # rubocop:disable Metrics/CyclomaticComplexity
     .config_for(:storage)

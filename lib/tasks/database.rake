@@ -8,14 +8,14 @@ namespace :schematics do
   namespace :copy do
     desc 'Install engine migrations'
     task migrations: :environment do
-      Core::Migrations::Copy.call
+      Core::Migrations::Copy.call(database: ENV.fetch('DATABASE'))
     end
   end
 
   namespace :db do
     desc 'Perform database backup'
     task backup: :environment do
-      Schematics::GenerateBackupJob.perform_now
+      Schematics::GenerateBackupJob.perform_now ENV.fetch('DATABASE')
     end
 
     desc 'Load engine seed'
@@ -32,8 +32,9 @@ namespace :schematics do
     namespace :migrate do
       desc 'Migrate database from sqlite3 to postgres'
       task postgres: :environment do
-        db_path = Rails.root.join('storage', Tenant.database_name, "#{Rails.env}.sqlite3")
-        db_name = [Tenant.database_name, Rails.env].join('_')
+        database_name = ENV.fetch('DATABASE')
+        db_path = Rails.root.join('storage', database_name, "#{Rails.env}.sqlite3")
+        db_name = [database_name, Rails.env].join('_')
         `createdb #{db_name}`
         `pgloader --with "preserve index names" sqlite://#{db_path} postgres://localhost/#{db_name}`
       end

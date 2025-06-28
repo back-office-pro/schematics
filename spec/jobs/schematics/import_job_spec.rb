@@ -6,21 +6,24 @@ require 'rails_helper'
 RSpec.describe Schematics::ImportJob do
   include_context 'with import'
 
+  let(:shard) { :default }
+
+  it { is_expected.to be_a(Schematics::Shardable) }
   it { is_expected.to be_a(Schematics::Quietable) }
 
   describe '#perform_later' do
     it 'queues the job' do
-      expect { described_class.perform_later(import) }
+      expect { described_class.perform_later(shard, import.id) }
         .to have_enqueued_job(described_class)
         .exactly(:once)
-        .with(import)
+        .with(shard, import.id)
         .on_queue('default')
         .at(:no_wait)
     end
   end
 
   describe '#perform_now' do
-    subject(:perform_now) { described_class.perform_now(import) }
+    subject(:perform_now) { described_class.perform_now(shard, import.id) }
 
     context 'when there is no import error' do
       it 'imports the resources' do
@@ -58,8 +61,8 @@ RSpec.describe Schematics::ImportJob do
 
     context 'when there is a file not found error' do
       before do
-        allow(import.file)
-          .to receive(:download)
+        allow(CSV)
+          .to receive(:parse)
           .and_raise(ActiveStorage::FileNotFoundError)
       end
 

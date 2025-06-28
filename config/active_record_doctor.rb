@@ -2,6 +2,12 @@
 # frozen_string_literal: true
 
 ActiveRecordDoctor.configure do
+  global :ignore_tables, %w[
+    friendly_id_slugs
+    solid_cache_entries
+    mobility_text_translations
+    mobility_string_translations
+  ]
   global :ignore_models, %w[
     ActionMailbox::Record
     ActionMailbox::InboundEmail

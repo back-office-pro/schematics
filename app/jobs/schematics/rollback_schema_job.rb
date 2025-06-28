@@ -3,10 +3,12 @@
 
 module Schematics
   class RollbackSchemaJob < ApplicationJob # rubocop:disable Obsession/Rails/ServiceName
+    include Shardable
     include Quietable
     queue_as :critical
 
-    def perform(migration)
+    def perform(_shard, migration_id)
+      migration = ::Migration.find(migration_id)
       return if migration.state_generating?
       return if migration.state_in_progress?
 

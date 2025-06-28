@@ -14,7 +14,7 @@ RSpec.describe Import do
     expect { record.save! }
       .to have_enqueued_job(Schematics::ImportJob)
       .exactly(:once)
-      .with(record)
+      .with(:default, record.id)
       .on_queue('default')
       .at(:no_wait)
   end

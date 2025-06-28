@@ -7,7 +7,11 @@ class Server
   DEFAULT_PORT = 3000
 
   class << self
-    def domain = ENV.fetch('HOST', 'back-office.pro')
+    def domain
+      return 'localhost.me' if Rails.env.development?
+
+      ENV.fetch('HOST', 'back-office.pro')
+    end
 
     def url(path: nil) = URI::HTTPS
       .build(host: "www.#{domain}", path:)
@@ -16,9 +20,5 @@ class Server
     def ssl? = Pathname
       .new("/etc/letsencrypt/live/#{domain}")
       .exist?
-
-    def port
-      DEFAULT_PORT unless Rails.env.production? || Rails.env.on_premise?
-    end
   end
 end

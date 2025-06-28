@@ -8,10 +8,13 @@ Rails.configuration.to_prepare do
   Rails.configuration.paths['config/database'].unshift Schematics::Engine.root.join('config', 'database.yml') # rubocop:disable Layout/LineLength
   Rails.configuration.paths['config/cable'].unshift Schematics::Engine.root.join('config', 'cable.yml') # rubocop:disable Layout/LineLength
   Rails.configuration.paths['config'].unshift Schematics::Engine.root.join('config')
+  ActiveRecord::Base.default_shard = ENV.fetch('DATABASE', 'default').to_sym
 end
 
-Rails.configuration.after_initialize do
-  suppress(StandardError) do
-    Configuration.instance.update_storage_services!
+if Rails.env.on_premise?
+  Rails.configuration.after_initialize do
+    suppress(StandardError) do
+      Configuration.instance.update_storage_services!
+    end
   end
 end

@@ -56,28 +56,17 @@ class TenantGenerator < Rails::Generators::NamedBase
     rails_command "db:fixtures:load FIXTURES_PATH='../fixtures' DATABASE=#{name}", env:
   end
 
-  def deploy_systemd_service
-    return unless env.production?
-    return unless generating?
-
-    rails_command "generate systemd #{name}", env:
-  end
-
-  def destroy_systemd_service
-    return unless destroying?
-    return unless env.production?
-
-    `RAILS_ENV=#{env} rails destroy systemd #{name}`
-  end
-
-  def drop_database
+  def drop_databases
     return unless destroying?
 
-    `RAILS_ENV=#{env} DATABASE=#{name} DISABLE_DATABASE_ENVIRONMENT_CHECK=1 rails db:drop`
+    FileUtils.rm_rf("storage/#{name}")
+    `dropdb #{name}_#{env}`
   end
 
   def destroy_migrations
-    FileUtils.rm_rf("db/#{name}") if destroying?
+    return unless destroying?
+
+    FileUtils.rm_rf("db/#{name}")
   end
 
   private

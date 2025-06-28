@@ -5,7 +5,7 @@ module Schematics
   module RouteResolvable
     extend ActiveSupport::Concern
 
-    def resolve_model_name_from_route = current_schema
+    def resolve_model_name_from_route = ::SchemaCache
       .entities
       .filter_map(&:model_class)
       .flat_map(&method(:model_class_localized_routes))

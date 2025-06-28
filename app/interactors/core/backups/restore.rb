@@ -6,14 +6,11 @@ module Core
     class Restore
       include Interactor
 
-      delegate :root, :env, :configuration, to: '::Rails', private: true
-      delegate :database_configuration, to: :configuration, private: true
+      delegate :root, :env, to: '::Rails', private: true
       delegate :backup, :clean, to: :context, private: true
+      delegate :current_shard, to: :backup, private: true
       delegate :disconnect!, to: 'ActiveRecord::Base.connection_pool', private: true
-      delegate :current_database,
-               :adapter_name,
-               to: 'ActiveRecord::Base.lease_connection',
-               private: true
+      delegate :adapter_name, to: 'ActiveRecord::Base.lease_connection', private: true
 
       before :disconnect!
 
@@ -32,7 +29,9 @@ module Core
         end
       end
 
-      def db_path = root.join(database_configuration.dig(env, 'primary', 'database'))
+      def db_path = root.join('storage', current_shard.to_s, "#{env}.sqlite3")
+
+      def current_database = "#{current_shard}_#{env}"
     end
   end
 end

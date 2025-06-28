@@ -132,7 +132,7 @@ describe Schematics::Commands::RenameEntity do
 
     its([8]) do
       is_expected.to have_attributes(
-        name: 'Prospect',
+        name: 'Models::Default::Prospect',
         options: a_hash_including(rename: 'Client'),
         behavior:
       )

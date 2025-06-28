@@ -38,7 +38,7 @@ describe Schematics::Attributes::Model do
   its(:open_api_query_type) { is_expected.to eq('string') }
   its(:input_name) { is_expected.to eq('permission[model]') }
   its(:icon) { is_expected.to eq(:project_diagram) }
-  its(:default) { is_expected.to eq('Permission') }
+  its(:default) { is_expected.to eq('Models::Default::Permission') }
   its(:validators) { is_expected.to be_empty }
   its('validators.to_str') { is_expected.to be_blank }
   its(:weight) { is_expected.to eq(1) }

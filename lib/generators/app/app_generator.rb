@@ -63,7 +63,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     remove_file 'app'
     remove_file 'bin/bundle'
     remove_file 'bin/dev'
-    remove_file 'bin/jobs'
     remove_file 'bin/rake'
     remove_file 'bin/setup'
     remove_file 'config/environments'

@@ -3,9 +3,10 @@
 
 module Schematics
   class DestroySearchIndexJob < ApplicationJob
+    include Shardable
     queue_as :low
 
-    def perform(**)
+    def perform(_shard, **)
       SearchIndex.delete_by(**)
     end
   end

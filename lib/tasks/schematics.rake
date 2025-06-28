@@ -5,7 +5,7 @@ namespace :schematics do
   desc 'Generate schema application'
   task generate: :environment do
     Schematics::Migrator
-      .new(Tenant.database_name)
+      .new(ENV.fetch('DATABASE'))
       .build_commands
       .flat_map(&:generators)
       .each(&:invoke_all)

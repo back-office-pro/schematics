@@ -4,26 +4,29 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::GenerateSchemaJob do
+  let(:shard) { :default }
   let(:migration) { Migration.create! }
+
+  it { is_expected.to be_a(Schematics::Shardable) }
 
   describe '#perform_later' do
     it 'queues the job' do
-      expect { described_class.perform_later(migration) }
+      expect { described_class.perform_later(shard, migration.id) }
         .to have_enqueued_job(described_class)
         .exactly(:once)
-        .with(migration)
+        .with(shard, migration.id)
         .on_queue('critical')
         .at(:no_wait)
     end
   end
 
   describe '#perform_now' do
-    subject(:perform_now) { described_class.perform_now(migration) }
+    subject(:perform_now) { described_class.perform_now(shard, migration.id) }
 
     include_context 'with openai stub'
 
     it 'loads data from gateway' do
-      expect { perform_now }.to change(migration, :data)
+      expect { perform_now }.to(change { migration.reload.data })
     end
 
     context 'when job has retried 5 times because of a record invalid error' do
@@ -42,7 +45,7 @@ RSpec.describe Schematics::GenerateSchemaJob do
 
       it 'changes migration state from editing to no solution after discard' do
         expect { perform_now }
-          .to change(migration, :state)
+          .to change { migration.reload.state }
           .from(Migration::STATE_STATE_EDITING.to_s)
           .to(Migration::STATE_STATE_NO_SOLUTION.to_s)
       end
@@ -64,7 +67,7 @@ RSpec.describe Schematics::GenerateSchemaJob do
 
       it 'changes migration state from editing to no solution after discard' do
         expect { perform_now }
-          .to change(migration, :state)
+          .to change { migration.reload.state }
           .from(Migration::STATE_STATE_EDITING.to_s)
           .to(Migration::STATE_STATE_NO_SOLUTION.to_s)
       end

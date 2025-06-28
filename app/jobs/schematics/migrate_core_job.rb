@@ -3,10 +3,11 @@
 
 module Schematics
   class MigrateCoreJob < ApplicationJob
+    include Shardable
     include Quietable
     queue_as :critical
 
-    def perform
+    def perform(_shard)
       return if ::Documentation.last.core_version == VERSION
 
       Core::Migrations::Migrate.call(migration: ::Migration.core)

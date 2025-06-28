@@ -12,7 +12,7 @@ module Schematics
 
           def title = t('.title')
 
-          def entities_size = current_schema
+          def entities_size = ::SchemaCache
             .model_classes
             .size
 

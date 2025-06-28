@@ -2,16 +2,13 @@
 # frozen_string_literal: true
 
 module Schematics
-  module Tenantable
+  module Shardable
     extend ActiveSupport::Concern
 
     included do
-      helper_method :current_tenant
-      helper_method :current_schema
+      around_perform do |job, block|
+        ActiveRecord::Base.connected_to(shard: job.arguments.first.to_sym) { block.call }
+      end
     end
-
-    def current_tenant = ::Tenant
-
-    def current_schema = ::SchemaCache
   end
 end

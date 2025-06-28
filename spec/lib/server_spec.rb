@@ -14,14 +14,16 @@ describe Server do
 
     it { is_expected.not_to be_ssl }
 
-    its(:domain) { is_expected.to eq('back-office.pro') }
-    its(:url) { is_expected.to eq('https://www.back-office.pro') }
-    its(:port) { is_expected.to eq(3000) }
+    its(:domain) { is_expected.to eq('localhost.me') }
+    its(:url) { is_expected.to eq('https://www.localhost.me') }
   end
 
   context 'when environment is production' do
     let(:environment) { 'production' }
 
-    its(:port) { is_expected.to be_nil }
+    it { is_expected.not_to be_ssl }
+
+    its(:domain) { is_expected.to eq('back-office.pro') }
+    its(:url) { is_expected.to eq('https://www.back-office.pro') }
   end
 end

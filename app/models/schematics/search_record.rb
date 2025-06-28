@@ -5,6 +5,8 @@ module Schematics
   class SearchRecord < ::ActiveRecord::Base # rubocop:disable Rails/ApplicationRecord
     self.abstract_class = true
 
-    connects_to database: { writing: :search, reading: :search }
+    class << self
+      def current_shard = :"#{super}/search"
+    end
   end
 end

@@ -3,14 +3,15 @@
 
 require 'active_support/core_ext/integer/time'
 
-FileUtils.mkdir_p Rails.root.join("log/#{Tenant.database_name}")
-
 Rails.application.configure do
   # Configuration
   config.enable_reloading = true
   config.consider_all_requests_local = true
   config.eager_load = false
   config.server_timing = true
+
+  # Security
+  config.hosts = [Server.domain.dup.prepend('.')]
 
   # File Watcher
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
@@ -58,11 +59,8 @@ Rails.application.configure do
   # Assets
   config.assets.quiet = true
 
-  # Solid Cache
-  config.solid_cache.connects_to = { database: { writing: :cache } }
-
   # Solid Queue
-  config.solid_queue.connects_to = { database: { writing: :queue } }
+  config.solid_queue.connects_to = { shards: { queue: { writing: :queue } } }
 
   # Cache
   config.cache_store =
@@ -75,9 +73,4 @@ Rails.application.configure do
       max_entries: 2000,
       max_size: 1.gigabyte
     }
-
-  # Logger
-  config.logger = ActiveSupport::TaggedLogging.logger(
-    Rails.root.join("log/#{Tenant.database_name}/development.log")
-  )
 end

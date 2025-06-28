@@ -7,7 +7,7 @@ class ::Permission < Schematics::ApplicationRecord
 
   class << self
     def create_entities_permissions!
-      schema.entities.reject(&:hidden?).flat_map do |entity|
+      SchemaCache.entities.reject(&:hidden?).flat_map do |entity|
         entity.actions_with_events.map { |action| create!(model: entity.class_name, action:) }
       end
     end
@@ -25,5 +25,5 @@ class ::Permission < Schematics::ApplicationRecord
     .application
     .routes
     .url_helpers
-    .resources_url(**model_class.route_params, **Tenant.default_url_options)
+    .resources_url(**model_class.route_params, **default_url_options)
 end

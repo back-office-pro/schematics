@@ -8,7 +8,12 @@ module Schematics
 
     def create
       authorize!(:archive, parent_model_class)
-      BulkActionJob.perform_later(current_user.id, parent_model_class, bulk_action_params[:ids])
+      BulkActionJob.perform_later(
+        parent_model_class.current_shard,
+        current_user.id,
+        parent_model_name,
+        bulk_action_params[:ids]
+      )
       flash[:notice] = t('.success')
       head :created, location: resources_path(parent_model_class)
     end

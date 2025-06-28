@@ -39,7 +39,7 @@ describe Schematics::Associations::HasOne do
 
   its(:type) { is_expected.to eq('has_one') }
   its(:name) { is_expected.to eq('entity') }
-  its(:class_name) { is_expected.to eq('Entity') }
+  its(:class_name) { is_expected.to eq('Models::Default::Entity') }
   its(:column_name) { is_expected.to eq('schema_id') }
   its(:inverse_of) { is_expected.to eq('schema') }
   its(:open_api_schema_type) { is_expected.to eq(id: 'string', type: 'string') }
@@ -57,7 +57,7 @@ describe Schematics::Associations::HasOne do
       scope :with_entity, -> { includes([:entity]) }
       has_one :entity,
               -> { with_deleted },
-              class_name: 'Entity',
+              class_name: 'Models::Default::Entity',
               foreign_key: 'schema_id',
               inverse_of: :schema,
               autosave: true

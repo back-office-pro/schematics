@@ -5,7 +5,7 @@ namespace :schematics do
   namespace :subscription do
     desc 'Load subscription from gateway'
     task load: :environment do
-      Schematics::LoadSubscriptionJob.perform_now
+      Schematics::LoadSubscriptionJob.perform_now ENV.fetch('DATABASE')
     end
   end
 end

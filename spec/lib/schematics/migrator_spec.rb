@@ -1550,7 +1550,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to eq(%w[user client]) }
+      it { is_expected.to eq(['client']) }
     end
   end
 
@@ -1613,7 +1613,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to eq(%w[user client]) }
+      it { is_expected.to eq(['client']) }
     end
   end
 

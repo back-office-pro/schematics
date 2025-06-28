@@ -4,9 +4,14 @@
 module Schematics
   class ApplicationMailer < ::ActionMailer::Base
     self.deliver_later_queue_name = :default
+
     default from: "no-reply@#{::Server.domain}"
     layout 'schematics/mailer'
     helper ApplicationHelper
+
+    around_action do |_mailer, block|
+      ActiveRecord::Base.connected_to(shard: params[:shard]) { block.call }
+    end
 
     protected
 

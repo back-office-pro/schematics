@@ -3,18 +3,42 @@
     {
       "warning_type": "Dangerous Eval",
       "warning_code": 13,
-      "fingerprint": "03fab1e594a3e1c3499fd26d2dc305eedd227adaa1876c8fdd7e37211e3f9897",
+      "fingerprint": "70cfc6731d5989901301d351b1ddd91fc980e295bcee886594df0693f7fddb39",
       "check_name": "Evaluation",
       "message": "Dynamic code evaluation",
       "file": "app/models/concerns/schematics/loadable.rb",
-      "line": 80,
+      "line": 28,
       "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
-      "code": "eval(schema.find_entity_by_name(name.to_s.underscore), binding, \"app/models/concerns/schematics/loadable.rb\", 80)",
+      "code": "eval(model_element, binding, \"app/models/concerns/schematics/loadable.rb\", 28)",
       "render_path": null,
       "location": {
         "type": "method",
         "class": "Schematics::Loadable",
-        "method": "load!"
+        "method": "inherited"
+      },
+      "user_input": null,
+      "confidence": "Weak",
+      "cwe_id": [
+        913,
+        95
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Dangerous Eval",
+      "warning_code": 13,
+      "fingerprint": "756eacd46dd67b46b02ef58a68b8f8d46422df340df32272af7ce92cf76cad0c",
+      "check_name": "Evaluation",
+      "message": "Dynamic code evaluation",
+      "file": "lib/rails/override/module.rb",
+      "line": 8,
+      "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
+      "code": "eval(SchemaCache, binding, \"lib/rails/override/module.rb\", 8)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Rails::Override::Module",
+        "method": "const_missing"
       },
       "user_input": null,
       "confidence": "Weak",
@@ -50,18 +74,18 @@
     {
       "warning_type": "Dangerous Eval",
       "warning_code": 13,
-      "fingerprint": "b9ba42546cd69b46bef1eaf435a9ddf5a9797ef7131fed3a2bbb47c7989bf749",
+      "fingerprint": "b67657a56cb527066e5a2df201f84594adbafad9643ab15b00dda92d9ee307b9",
       "check_name": "Evaluation",
       "message": "Dynamic code evaluation",
-      "file": "app/models/concerns/schematics/loadable.rb",
-      "line": 26,
+      "file": "lib/rails/override/module.rb",
+      "line": 19,
       "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
-      "code": "eval(model_element, binding, \"app/models/concerns/schematics/loadable.rb\", 26)",
+      "code": "eval(SchemaCache.find_entity_by_name(name.to_s.underscore), binding, \"lib/rails/override/module.rb\", 19)",
       "render_path": null,
       "location": {
         "type": "method",
-        "class": "Schematics::Loadable",
-        "method": "inherited"
+        "class": "Rails::Override::Module",
+        "method": "const_missing"
       },
       "user_input": null,
       "confidence": "Weak",
@@ -78,7 +102,7 @@
       "check_name": "ForgerySetting",
       "message": "`protect_from_forgery` should be configured with `with: :exception`",
       "file": "app/controllers/schematics/application_controller.rb",
-      "line": 24,
+      "line": 23,
       "link": "https://brakemanscanner.org/docs/warning_types/cross-site_request_forgery/",
       "code": "protect_from_forgery(:with => :null_session, :if => (lambda do\n request.format.json?\n end))",
       "render_path": null,

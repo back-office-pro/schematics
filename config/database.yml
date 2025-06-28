@@ -15,75 +15,75 @@ sqlite3: &sqlite3
 development:
   primary:
     <<: *postgresql
-    database: <%= Tenant.database_name %>_development
-    migrations_paths: db/<%= Tenant.database_name %>/migrate
+    database: <%= ENV.fetch('DATABASE', 'demo') %>_development
+    migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/migrate
   search:
     <<: *sqlite3
-    database: storage/<%= Tenant.database_name %>/development_search.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>/search_migrate
+    database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/development_search.sqlite3
+    migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/search_migrate
   cable:
-    <<: *sqlite3
-    database: storage/<%= Tenant.database_name %>/development_cable.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>/cable_migrate
+    <<: *postgresql
+    database: development_cable
+    migrations_paths: db/cable_migrate
   cache:
     <<: *sqlite3
-    database: storage/<%= Tenant.database_name %>/development_cache.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>/cache_migrate
+    database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/development_cache.sqlite3
+    migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/cache_migrate
   queue:
-    <<: *sqlite3
-    database: storage/<%= Tenant.database_name %>/development_queue.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>/queue_migrate
+    <<: *postgresql
+    database: development_queue
+    migrations_paths: db/queue_migrate
 
 test:
   primary:
     <<: *sqlite3
-    database: storage/<%= Tenant.database_name %>/test.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>/migrate
+    database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/test.sqlite3
+    migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/migrate
   search:
     <<: *sqlite3
-    database: storage/<%= Tenant.database_name %>/test_search.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>/search_migrate
+    database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/test_search.sqlite3
+    migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/search_migrate
 
 production:
   primary:
     <<: *postgresql
-    database: <%= Tenant.database_name %>_production
-    migrations_paths: db/<%= Tenant.database_name %>/migrate
+    database: <%= ENV.fetch('DATABASE', 'demo') %>_production
+    migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/migrate
   search:
     <<: *sqlite3
-    database: storage/<%= Tenant.database_name %>/production_search.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>/search_migrate
+    database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/production_search.sqlite3
+    migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/search_migrate
   cable:
-    <<: *sqlite3
-    database: storage/<%= Tenant.database_name %>/production_cable.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>/cable_migrate
+    <<: *postgresql
+    database: production_cable
+    migrations_paths: db/cable_migrate
   cache:
     <<: *sqlite3
-    database: storage/<%= Tenant.database_name %>/production_cache.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>/cache_migrate
+    database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/production_cache.sqlite3
+    migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/cache_migrate
   queue:
-    <<: *sqlite3
-    database: storage/<%= Tenant.database_name %>/production_queue.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>/queue_migrate
+    <<: *postgresql
+    database: production_queue
+    migrations_paths: db/queue_migrate
 
 on_premise:
   primary:
     <<: *sqlite3
-    database: storage/<%= Tenant.database_name %>/production.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>/migrate
+    database: storage/production.sqlite3
+    migrations_paths: db/migrate
   search:
     <<: *sqlite3
-    database: storage/<%= Tenant.database_name %>/production_search.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>/search_migrate
+    database: storage/production_search.sqlite3
+    migrations_paths: db/search_migrate
   cable:
     <<: *sqlite3
-    database: storage/<%= Tenant.database_name %>/production_cable.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>/cable_migrate
+    database: storage/production_cable.sqlite3
+    migrations_paths: db/cable_migrate
   cache:
     <<: *sqlite3
-    database: storage/<%= Tenant.database_name %>/production_cache.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>/cache_migrate
+    database: storage/production_cache.sqlite3
+    migrations_paths: db/cache_migrate
   queue:
     <<: *sqlite3
-    database: storage/<%= Tenant.database_name %>/production_queue.sqlite3
-    migrations_paths: db/<%= Tenant.database_name %>/queue_migrate
+    database: storage/production_queue.sqlite3
+    migrations_paths: db/queue_migrate
