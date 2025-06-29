@@ -11,7 +11,7 @@ module Rails
 
         unless self.name.constantize.const_defined?(name)
           Rails.logger.info "Loading #{name}..."
-          path = Schematics::Engine.root.join('app', 'models', 'core', "#{entity.name}.rb")
+          path = Rails.root.join('app', 'models', 'core', "#{entity.name}.rb")
 
           if path.exist?
             load(path)
