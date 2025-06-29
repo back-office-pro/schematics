@@ -12,9 +12,7 @@ RSpec.describe Schematics::GenerateCSVTemplateJob do
 
   let(:shard) { :default }
 
-  around do |example|
-    freeze_time { example.run }
-  end
+  before { freeze_time }
 
   it { is_expected.to be_a(Schematics::Shardable) }
 

@@ -7,9 +7,7 @@ RSpec.describe DataCleaning do
   include Schematics::Specs::Model
   include ActiveSupport::Testing::TimeHelpers
 
-  around do |example|
-    freeze_time { example.run }
-  end
+  before { freeze_time }
 
   its(:model_class) { is_expected.to eq(Team) }
   its(:query_method) { is_expected.to eq(:destroy!) }

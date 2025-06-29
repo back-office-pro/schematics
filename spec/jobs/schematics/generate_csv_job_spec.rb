@@ -13,9 +13,7 @@ RSpec.describe Schematics::GenerateCSVJob do
   let(:shard) { :default }
   let(:dropdown) { false }
 
-  around do |example|
-    freeze_time { example.run }
-  end
+  before { freeze_time }
 
   it { is_expected.to be_a(Schematics::Shardable) }
 
