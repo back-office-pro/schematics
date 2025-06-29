@@ -2,8 +2,8 @@
 # frozen_string_literal: true
 
 require 'active_model/nested_attributes'
-require 'active_model/validations/associated'
-require 'active_model/validations/uniqueness'
+require 'active_model/validations/associated_validator'
+require 'active_model/validations/uniqueness_validator'
 require 'array'
 require 'hash'
 require 'numeric'
