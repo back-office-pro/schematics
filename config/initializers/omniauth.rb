@@ -3,8 +3,8 @@
 
 Rails.configuration.middleware.use OmniAuth::Builder do
   provider :google_oauth2,
-           Schematics::Engine.credentials.google_oauth2.client_id,
-           Schematics::Engine.credentials.google_oauth2.client_secret,
+           Rails.application.credentials.google_oauth2.client_id,
+           Rails.application.credentials.google_oauth2.client_secret,
            { prompt: 'select_account' }
   provider :saml,
            sp_entity_id: Server.domain,

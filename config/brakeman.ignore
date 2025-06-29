@@ -74,13 +74,13 @@
     {
       "warning_type": "Dangerous Eval",
       "warning_code": 13,
-      "fingerprint": "b67657a56cb527066e5a2df201f84594adbafad9643ab15b00dda92d9ee307b9",
+      "fingerprint": "b0bd26ab3e3d5af488f9a46f43adb8e02c2e642948347780f02e6a3dbf183003",
       "check_name": "Evaluation",
       "message": "Dynamic code evaluation",
       "file": "lib/rails/override/module.rb",
-      "line": 19,
+      "line": 14,
       "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
-      "code": "eval(SchemaCache.find_entity_by_name(name.to_s.underscore), binding, \"lib/rails/override/module.rb\", 19)",
+      "code": "eval(SchemaCache.find_entity_by_name(name.to_s.underscore), binding, \"lib/rails/override/module.rb\", 14)",
       "render_path": null,
       "location": {
         "type": "method",
@@ -92,28 +92,6 @@
       "cwe_id": [
         913,
         95
-      ],
-      "note": ""
-    },
-    {
-      "warning_type": "Cross-Site Request Forgery",
-      "warning_code": 86,
-      "fingerprint": "f4518f7da0fe3b81962f193b43c4ed13521d0e52c73cf65f5c97aa2c8f70769e",
-      "check_name": "ForgerySetting",
-      "message": "`protect_from_forgery` should be configured with `with: :exception`",
-      "file": "app/controllers/schematics/application_controller.rb",
-      "line": 23,
-      "link": "https://brakemanscanner.org/docs/warning_types/cross-site_request_forgery/",
-      "code": "protect_from_forgery(:with => :null_session, :if => (lambda do\n request.format.json?\n end))",
-      "render_path": null,
-      "location": {
-        "type": "controller",
-        "controller": "Schematics::ApplicationController"
-      },
-      "user_input": null,
-      "confidence": "Medium",
-      "cwe_id": [
-        352
       ],
       "note": ""
     }

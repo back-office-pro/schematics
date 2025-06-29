@@ -15,15 +15,11 @@ require 'active_support/dependencies'
 require 'arel/override/predications'
 require 'onelogin/override/ruby-saml/settings'
 require 'onelogin/ruby-saml/settings'
-require 'puma/configuration'
-require 'puma/override/configuration'
 require 'rails/generators'
 require 'rails/generators/active_record/migration/migration_generator'
 require 'rails/generators/generated_attribute'
 require 'rails/override/generators/generated_attribute'
 require 'rails/override/module'
-require 'solid_queue/configuration'
-require 'solid_queue/override/configuration'
 
 GeneratedAttribute = Rails::Override::Generators::GeneratedAttribute
 MigrationGenerator = ActiveRecord::Override::Generators::MigrationGenerator
@@ -37,10 +33,8 @@ Rails::Generators::GeneratedAttribute.prepend(GeneratedAttribute)
 ActiveRecord::Generators::MigrationGenerator.prepend(MigrationGenerator)
 ActiveRecord::ConnectionAdapters::ConnectionHandler.prepend(ConnectionHandler)
 
-Puma::Configuration.prepend(Puma::Override::Configuration)
 OneLogin::RubySaml::Settings.prepend(OneLogin::Override::RubySaml::Settings)
 Arel::Predications.prepend(Arel::Override::Predications)
-SolidQueue::Configuration.prepend(SolidQueue::Override::Configuration)
 
 Rails.configuration.to_prepare do
   ActiveStorage.singleton_class.module_eval do

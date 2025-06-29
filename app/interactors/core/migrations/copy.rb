@@ -9,7 +9,7 @@ module Core
       delegate :migration, :database, to: :context, private: true
       delegate :current_shard, to: :migration, allow_nil: true, private: true
 
-      def call = Schematics::Engine
+      def call = Rails
         .root
         .glob('db/*migrate')
         .each(&method(:copy_migrations))

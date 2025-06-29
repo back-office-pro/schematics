@@ -4,13 +4,6 @@
 module Schematics
   module InlineJavascript
     class Component < ApplicationComponent
-      delegate :credentials, to: 'Schematics::Engine', private: true
-      delegate :user_notifications_path,
-               :preferences_path,
-               :emojis_path,
-               to: 'Schematics::Engine.routes.url_helpers',
-               private: true
-
       def environment = Rails
         .env
         .to_json
@@ -25,13 +18,17 @@ module Schematics
         .to_json
         .html_safe # rubocop:disable Rails/OutputSafety
 
-      def rollbar_client_key = credentials
+      def rollbar_client_key = Rails
+        .application
+        .credentials
         .rollbar
         .client_key
         .to_json
         .html_safe # rubocop:disable Rails/OutputSafety
 
-      def crisp_client_id = credentials
+      def crisp_client_id = Rails
+        .application
+        .credentials
         .crisp
         .client_id
         .to_json

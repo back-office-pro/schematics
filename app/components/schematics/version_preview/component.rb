@@ -4,7 +4,6 @@
 module Schematics
   module VersionPreview
     class Component < ApplicationComponent
-      delegate :version_path, to: 'Schematics::Engine.routes.url_helpers'
       delegate :user, :item, :created_at, :icon, :object, to: :version
       option :version
 

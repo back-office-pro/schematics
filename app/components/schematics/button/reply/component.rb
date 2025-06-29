@@ -5,7 +5,6 @@ module Schematics
   module Button
     module Reply
       class Component < ApplicationComponent
-        delegate :new_message_reply_path, to: 'Schematics::Engine.routes.url_helpers'
         delegate :class, to: :resource, prefix: :model, private: true
         delegate :entity, to: :model_class, private: true
         option :resource

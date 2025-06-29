@@ -11,10 +11,6 @@ module Schematics
 
       included do
         include ResourcesHelper
-        delegate :root_path,
-                 :edit_profile_path,
-                 :edit_profile_url,
-                 to: 'Schematics::Engine.routes.url_helpers'
         delegate :model_class,
                  :model_classes,
                  :entity,

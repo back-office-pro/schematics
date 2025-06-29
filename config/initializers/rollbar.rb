@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 Rollbar.configure do |config|
-  config.access_token = Schematics::Engine.credentials.rollbar.server_key
+  config.access_token = Rails.application.credentials.rollbar.server_key
   config.enabled = !Rails.env.test?
   config.use_active_job queue: 'low'
   config.environment = Rails.env

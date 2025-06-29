@@ -51,9 +51,9 @@ module ActiveRecord
 
         private
 
-        def templates_path
-          Schematics::Engine.root.join('lib', 'templates', 'active_record', 'migration')
-        end
+        def templates_path = Rails
+          .root
+          .join('lib/templates/active_record/migration')
       end
     end
   end

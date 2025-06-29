@@ -7,7 +7,7 @@ module Core
       class Fetch
         include Interactor
 
-        delegate :secret_key, to: 'Schematics::Engine.credentials.stripe', private: true
+        delegate :secret_key, to: 'Rails.application.credentials.stripe', private: true
         delegate :name, to: :product, allow_nil: true, prefix: true, private: true
         delegate :customers, :products, to: 'client.v1', private: true
         delegate :current_shard, to: '::Subscription', private: true

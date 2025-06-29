@@ -4,7 +4,7 @@
   .card-header.px-1.py-2
     = __card_heading(icon: :unlock, title:)
   .card-body.p-3.pt-1
-    = bootstrap_form_with model: @user, url: schematics.password_reset_path(params[:token]) do |form|
+    = bootstrap_form_with model: @user, url: password_reset_path(params[:token]) do |form|
       = __resource_form_fields_digest(form:, confirm: true)
       = __button_confirm
       = __button_cancel(path: main_app.login_path)

@@ -3,5 +3,7 @@
 # Copyright © 2025 Dev & Software. All rights reserved.
 # frozen_string_literal: true
 
-require_relative '../config/application'
-require 'importmap/commands'
+require_relative '../config/environment'
+require 'solid_queue/cli'
+
+SolidQueue::Cli.start(ARGV)
