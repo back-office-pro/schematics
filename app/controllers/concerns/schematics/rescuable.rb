@@ -25,7 +25,7 @@ module Schematics
         respond_to do |format|
           format.json { head :forbidden }
           format.any do
-            redirect_to schematics.root_path, alert: t('schematics.application.access_denied.alert')
+            redirect_to root_path, alert: t('schematics.application.access_denied.alert')
           end
         end
       end
@@ -50,7 +50,7 @@ module Schematics
       switch_localization do
         respond_to do |format|
           format.html do
-            redirect_back_or_to schematics.root_path,
+            redirect_back_or_to root_path,
                                 alert: t('schematics.application.parameter_missing.alert')
           end
           format.json do
@@ -93,8 +93,7 @@ module Schematics
         respond_to do |format|
           format.json { head :not_acceptable }
           format.any do
-            redirect_to schematics.root_path,
-                        alert: t('schematics.application.unknown_format.alert')
+            redirect_to root_path, alert: t('schematics.application.unknown_format.alert')
           end
         end
       end
@@ -125,7 +124,7 @@ module Schematics
     def storage_error(exception)
       switch_localization do
         respond_to do |format|
-          format.any { redirect_back_or_to schematics.root_path, alert: exception.to_s }
+          format.any { redirect_back_or_to root_path, alert: exception.to_s }
           format.json do
             render json: { errors: [storage: [exception.to_s]] }, status: :bad_request
           end
