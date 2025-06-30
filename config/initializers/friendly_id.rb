@@ -8,7 +8,3 @@ FriendlyId.defaults do |config|
     I18n.available_locales.map { |locale| I18n.t(word, scope: :routes, locale:) }
   end
 end
-
-Rails.configuration.to_prepare do
-  require 'friendly_id/mobility'
-end
