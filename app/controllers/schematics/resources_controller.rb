@@ -24,7 +24,7 @@ module Schematics
     after_action :assign_etag, only: %i[show update]
     after_action :assign_api_version
 
-    prepend_view_path Engine.root.join('app', 'views', 'core')
+    prepend_view_path Rails.root.join('app/views/core')
 
     delegate :human_name, :human_name_plural, :gender, to: :model_class
 
@@ -167,7 +167,7 @@ module Schematics
     def index_path
       return resources_path(model_class) if can?(:index, model_class)
 
-      schematics.root_path
+      root_path
     end
 
     def show_path = resource_path(@resource)
