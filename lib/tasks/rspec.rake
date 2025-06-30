@@ -5,10 +5,7 @@ namespace :schematics do
   namespace :rspec do
     desc 'Run rspec'
     task run: :environment do
-      system(
-        "bundle exec rspec --default-path #{Schematics::Engine.root.join('lib', 'spec')} -P '*.rb'",
-        out: $stdout
-      )
+      system "bundle exec rspec --default-path lib/spec -P '*.rb'", out: $stdout
     end
 
     desc 'Load current migration data'
