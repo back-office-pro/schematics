@@ -1,7 +1,7 @@
 name: Test
 on: [workflow_dispatch]
 env:
-  SCHEMATICS_MASTER_KEY: ${{ secrets.SCHEMATICS_MASTER_KEY }}
+  RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 jobs:
   rspec:
     name: RSpec
@@ -17,15 +17,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get -yqq install libvips-dev ffmpeg graphviz
-      - name: Install app generator gems
-        run: |
-          gem install rails -v 8.0.2
-          gem install specific_install
-          gem specific_install https://github.com/MaksJS/ratonvirus.git feature/rails-8-upgrade
-      - name: Generate test application
-        run: ruby bin/schematics
       - name: Generate test tenant
-        run: cd spec/demo && ruby ../../bin/schematics --tenant demo
+        run: bin/schematics demo
       - name: Run ability tests
         if: always()
         run: bundle exec rspec spec/abilities
