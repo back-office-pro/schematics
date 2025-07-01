@@ -12,37 +12,37 @@ require 'schema_cache'
 require 'server'
 require 'validators/singular_validator'
 require 'zeitwerk'
-require defined?(Rails::Engine) ? 'schematics/engine' : 'debug/prelude'
 
 Regexp.timeout = 1
 $stdin.timeout = 1
 
 Warning[:deprecated] = true
 
-loader = Zeitwerk::Loader.for_gem
-loader.enable_reloading
-loader.ignore("#{__dir__}/active_model")
-loader.ignore("#{__dir__}/active_record")
-loader.ignore("#{__dir__}/active_storage")
-loader.ignore("#{__dir__}/arel")
-loader.ignore("#{__dir__}/generators")
-loader.ignore("#{__dir__}/i18n")
-loader.ignore("#{__dir__}/mobility")
-loader.ignore("#{__dir__}/onelogin")
-loader.ignore("#{__dir__}/open_api")
-loader.ignore("#{__dir__}/puma")
-loader.ignore("#{__dir__}/rails")
-loader.ignore("#{__dir__}/solid_queue")
-loader.ignore("#{__dir__}/spec")
-loader.ignore("#{__dir__}/validators")
-loader.ignore("#{__dir__}/array.rb")
-loader.ignore("#{__dir__}/hash.rb")
-loader.ignore("#{__dir__}/numeric.rb")
-loader.ignore("#{__dir__}/object.rb")
-loader.ignore("#{__dir__}/rubygems_plugin.rb")
-loader.ignore("#{__dir__}/schema_cache.rb")
-loader.ignore("#{__dir__}/server.rb")
-loader.setup
+# loader = Zeitwerk::Loader.for_gem
+# loader.enable_reloading
+# loader.ignore("#{__dir__}/active_model")
+# loader.ignore("#{__dir__}/active_record")
+# loader.ignore("#{__dir__}/active_storage")
+# loader.ignore("#{__dir__}/arel")
+# loader.ignore("#{__dir__}/generators")
+# loader.ignore("#{__dir__}/i18n")
+# loader.ignore("#{__dir__}/mobility")
+# loader.ignore("#{__dir__}/onelogin")
+# loader.ignore("#{__dir__}/open_api")
+# loader.ignore("#{__dir__}/puma")
+# loader.ignore("#{__dir__}/rails")
+# loader.ignore("#{__dir__}/solid_queue")
+# loader.ignore("#{__dir__}/spec")
+# loader.ignore("#{__dir__}/validators")
+# loader.ignore("#{__dir__}/array.rb")
+# loader.ignore("#{__dir__}/hash.rb")
+# loader.ignore("#{__dir__}/numeric.rb")
+# loader.ignore("#{__dir__}/object.rb")
+# loader.ignore("#{__dir__}/rubygems_plugin.rb")
+# loader.ignore("#{__dir__}/schema_cache.rb")
+# loader.ignore("#{__dir__}/server.rb")
+# loader.setup
 
 module Schematics
+  VERSION = '1.0.0'
 end

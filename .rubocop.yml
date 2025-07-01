@@ -8,10 +8,12 @@ plugins:
   - rubocop-thread_safety
   - rubocop-obsession
 AllCops:
+  TargetRubyVersion: 3.2.8
   NewCops: enable
   DisplayStyleGuide: true
   Exclude:
-    - spec/demo/**/*
+    - db/demo/**/*
+    - db/*schema.rb
     - vendor/**/*
 # rubocop
 Layout/LineLength:
@@ -75,8 +77,7 @@ Style/Copyright:
   Exclude:
     - app/components/**/*
     - app/views/**/*
-    - bin/importmap
-    - bin/schematics
+    - bin/*
 Style/DateTime:
   Enabled: true
 Style/ImplicitRuntimeError:
@@ -121,6 +122,7 @@ Style/RequireOrder:
   Enabled: true
   Exclude:
     - spec/**/*
+    - config/boot.rb
     - bin/importmap
     - lib/schematics.rb
     - lib/schematics/commands/*.rb
@@ -161,8 +163,6 @@ Metrics/MethodLength:
     - heredoc
 Metrics/AbcSize:
   Max: 50
-Gemspec/DevelopmentDependencies:
-  EnforcedStyle: gemspec
 # rubocop-rspec
 RSpec/DescribedClassModuleWrapping:
   Enabled: true

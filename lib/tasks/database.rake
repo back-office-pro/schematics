@@ -6,7 +6,7 @@ require 'active_record_doctor/rake/task'
 
 namespace :schematics do
   namespace :copy do
-    desc 'Install engine migrations'
+    desc 'Install migrations'
     task migrations: :environment do
       Core::Migrations::Copy.call(database: ENV.fetch('DATABASE'))
     end
@@ -18,14 +18,9 @@ namespace :schematics do
       Schematics::GenerateBackupJob.perform_now ENV.fetch('DATABASE')
     end
 
-    desc 'Load engine seed'
-    task seed: :environment do
-      Schematics::Engine.load_seed
-    end
-
     ActiveRecordDoctor::Rake::Task.new do |task|
       task.deps = [:environment]
-      task.config_path = Schematics::Engine.root.join('config', 'active_record_doctor.rb')
+      task.config_path = Rails.root.join('config/active_record_doctor.rb')
       task.setup = -> { Rails.application.eager_load! }
     end
 

@@ -2,6 +2,7 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/integer/time'
+require 'server'
 
 Rails.application.configure do
   # Configuration
