@@ -5,5 +5,7 @@ threads ENV.fetch('RAILS_MAX_THREADS', 3)
 
 port ENV.fetch('PORT', ::Server::DEFAULT_PORT) # rubocop:disable Style/RedundantConstantBase
 
+bind ENV.fetch('SOCKET', "unix://#{Rails.root.join('tmp/sockets/puma.sock')}")
+
 plugin :tmp_restart
 plugin :solid_queue if Rails.env.development?
