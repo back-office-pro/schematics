@@ -74,13 +74,13 @@
     {
       "warning_type": "Dangerous Eval",
       "warning_code": 13,
-      "fingerprint": "b0bd26ab3e3d5af488f9a46f43adb8e02c2e642948347780f02e6a3dbf183003",
+      "fingerprint": "b67657a56cb527066e5a2df201f84594adbafad9643ab15b00dda92d9ee307b9",
       "check_name": "Evaluation",
       "message": "Dynamic code evaluation",
       "file": "lib/rails/override/module.rb",
-      "line": 14,
+      "line": 19,
       "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
-      "code": "eval(SchemaCache.find_entity_by_name(name.to_s.underscore), binding, \"lib/rails/override/module.rb\", 14)",
+      "code": "eval(SchemaCache.find_entity_by_name(name.to_s.underscore), binding, \"lib/rails/override/module.rb\", 19)",
       "render_path": null,
       "location": {
         "type": "method",
