@@ -973,7 +973,6 @@ DEPENDENCIES
   dry-initializer
   dry-transformer
   enummer
-  faraday-retry
   ferrum
   friendly_id
   friendly_id-mobility
