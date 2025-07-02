@@ -4,25 +4,39 @@
 source 'https://rubygems.org'
 
 group :development do
+  gem 'brakeman', require: false
+  gem 'bundler-audit', require: false
   gem 'debug'
-  gem 'fuubar'
   gem 'i18n-tasks'
+  gem 'letter_opener'
+  gem 'listen'
   gem 'reek'
-  gem 'rspec-its'
-  gem 'rubocop'
-  gem 'rubocop-capybara'
-  gem 'rubocop-obsession'
-  gem 'rubocop-performance'
-  gem 'rubocop-rails'
-  gem 'rubocop-rake'
-  gem 'rubocop-rspec'
-  gem 'rubocop-rspec_rails'
-  gem 'rubocop-thread_safety'
-  gem 'rubycritic'
-  gem 'simplecov'
+  gem 'rubocop', require: false
+  gem 'rubocop-capybara', require: false
+  gem 'rubocop-obsession', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rake', require: false
+  gem 'rubocop-rspec', require: false
+  gem 'rubocop-rspec_rails', require: false
+  gem 'rubocop-thread_safety', require: false
+  gem 'rubycritic', require: false
   gem 'slim_lint'
   gem 'web-console'
   gem 'zeitwerk'
+end
+
+group :test do
+  gem 'cuprite'
+  gem 'fuubar'
+  gem 'isolator', require: false
+  gem 'rspec-its'
+  gem 'rspec-rails'
+  gem 'shoulda-callback-matchers'
+  gem 'shoulda-matchers'
+  gem 'simplecov', require: false
+  gem 'test-prof'
+  gem 'webmock'
 end
 
 gem 'aasm'
@@ -38,16 +52,13 @@ gem 'bcrypt'
 gem 'bootsnap', require: false
 gem 'bootstrap-email'
 gem 'bootstrap_form'
-gem 'brakeman'
 gem 'browser'
-gem 'bundler-audit'
 gem 'cancancan'
 gem 'capybara'
 gem 'chartkick'
 gem 'chroma'
 gem 'countries'
 gem 'csv'
-gem 'cuprite'
 gem 'dry-initializer'
 gem 'dry-transformer'
 gem 'enummer'
@@ -64,10 +75,7 @@ gem 'image_processing'
 gem 'importmap-rails'
 gem 'inflections'
 gem 'interactor'
-gem 'isolator'
-gem 'letter_opener'
 gem 'liquid'
-gem 'listen'
 gem 'lograge'
 gem 'memery'
 gem 'mission_control-jobs'
@@ -91,7 +99,7 @@ gem 'propshaft'
 gem 'puma'
 gem 'pwned'
 gem 'rack-cors'
-gem 'rack-mini-profiler', require: false
+gem 'rack-mini-profiler'
 gem 'rails'
 gem 'rails-i18n'
 gem 'ransack'
@@ -102,12 +110,9 @@ gem 'rollbar'
 gem 'rouge'
 gem 'route_translator'
 gem 'rqrcode'
-gem 'rspec-rails'
 gem 'ruby-graphviz'
 gem 'ruby-openai'
 gem 'ruby-vips'
-gem 'shoulda-callback-matchers'
-gem 'shoulda-matchers'
 gem 'slim'
 gem 'solid_cable'
 gem 'solid_cache'
@@ -116,9 +121,7 @@ gem 'sqlite3'
 gem 'stimulus-rails'
 gem 'stripe'
 gem 'terser'
-gem 'test-prof'
 gem 'turbo-rails'
 gem 'validate_url'
 gem 'valid_email'
 gem 'view_component'
-gem 'webmock'
