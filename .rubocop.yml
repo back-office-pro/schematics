@@ -12,7 +12,6 @@ AllCops:
   NewCops: enable
   DisplayStyleGuide: true
   Exclude:
-    - db/demo/**/*
     - db/*schema.rb
     - vendor/**/*
 # rubocop
