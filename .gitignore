@@ -8,5 +8,4 @@
 /doc
 /.yardoc
 /storage
-/db/search_schema.rb
-/db/schema.rb
+/db/*schema.rb

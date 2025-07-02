@@ -31,12 +31,6 @@ class TenantGenerator < Rails::Generators::NamedBase
     rails_command "schematics:generate DATABASE=#{name}", env:
   end
 
-  def load_database_schema
-    return unless generating?
-
-    rails_command "db:schema:load DATABASE=#{name}", env:
-  end
-
   def migrate_database
     return unless generating?
 

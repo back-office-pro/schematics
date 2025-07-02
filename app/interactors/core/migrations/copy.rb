@@ -18,7 +18,7 @@ module Core
 
       def copy_migrations(directory)
         ActiveRecord::Migration.copy(
-          Rails.root.join('db', (database || current_shard).to_s, directory.basename),
+          Rails.root.join('storage', (database || current_shard).to_s, directory.basename),
           { directory: }
         )
       end

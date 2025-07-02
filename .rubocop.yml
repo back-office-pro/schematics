@@ -13,6 +13,7 @@ AllCops:
   DisplayStyleGuide: true
   Exclude:
     - db/*schema.rb
+    - storage/**/*
     - vendor/**/*
 # rubocop
 Layout/LineLength:

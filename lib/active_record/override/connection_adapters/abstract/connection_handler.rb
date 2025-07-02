@@ -18,14 +18,14 @@ module ActiveRecord
             establish_connection(
               db_config_for(:primary).merge(
                 database: Rails.root.join('storage', shard.to_s, 'test.sqlite3'),
-                migrations_paths: Rails.root.join('db', shard.to_s, 'migrate')
+                migrations_paths: Rails.root.join('storage', shard.to_s, 'migrate')
               ),
               shard:
             )
             establish_connection(
               db_config_for(:search).merge(
                 database: Rails.root.join('storage/demo/test_search.sqlite3'),
-                migrations_paths: Rails.root.join('db/demo/search_migrate')
+                migrations_paths: Rails.root.join('storage/demo/search_migrate')
               ),
               shard: :'default/search'
             )
@@ -33,21 +33,21 @@ module ActiveRecord
             establish_connection(
               db_config_for(:primary).merge(
                 database: "#{shard}_#{Rails.env}",
-                migrations_paths: Rails.root.join('db', shard.to_s, 'migrate')
+                migrations_paths: Rails.root.join('storage', shard.to_s, 'migrate')
               ),
               shard:
             )
             establish_connection(
               db_config_for(:search).merge(
                 database: Rails.root.join('storage', shard.to_s, "#{Rails.env}_search.sqlite3"),
-                migrations_paths: Rails.root.join('db', shard.to_s, 'search_migrate')
+                migrations_paths: Rails.root.join('storage', shard.to_s, 'search_migrate')
               ),
               shard: :"#{shard}/search"
             )
             establish_connection(
               db_config_for(:cache).merge(
                 database: Rails.root.join('storage', shard.to_s, "#{Rails.env}_cache.sqlite3"),
-                migrations_paths: Rails.root.join('db', shard.to_s, 'cache_migrate')
+                migrations_paths: Rails.root.join('storage', shard.to_s, 'cache_migrate')
               ),
               shard: :"#{shard}/cache"
             )
