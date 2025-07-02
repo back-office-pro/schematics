@@ -16,9 +16,12 @@ module Schematics
           )
         end
 
-        def company_logo(icon:)
+        def company_logo(icon:, cache: true)
           new(
-            attachment: ::Configuration.with_attached_company_logo.company_logo,
+            attachment: ::Configuration
+              .with_attached_company_logo
+              .then_tap { _1.instance unless cache }
+              .company_logo,
             width: 300,
             height: 150,
             replacement: { icon: }

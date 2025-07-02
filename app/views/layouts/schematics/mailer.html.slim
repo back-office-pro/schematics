@@ -8,7 +8,7 @@ html
     .min-vh-100.bg-primary
       .container.my-4
         .text-center.text-white.my-4
-          = __attachment(:company_logo, icon: :building)
+          = __attachment(:company_logo, icon: :building, cache: false)
         .card.shadow-sm.mt-4
           .card-body.p-3
             = yield
