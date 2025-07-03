@@ -16,6 +16,7 @@ module Schematics
           )
         end
 
+        # :reek:ControlParameter
         def company_logo(icon:, cache: true)
           new(
             attachment: ::Configuration
