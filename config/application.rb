@@ -4,13 +4,14 @@
 require_relative 'boot'
 
 require 'rails/all'
+require_relative '../lib/schematics'
 
 Bundler.require(*Rails.groups)
 
 module BackOffice
   class Application < Rails::Application
+    # Rails
     config.load_defaults 8.0
-    config.autoload_lib(ignore: %w[assets tasks])
 
     # Generators
     config.app_generators do |generator|
@@ -59,7 +60,7 @@ module BackOffice
     config.action_mailer.smtp_settings = { open_timeout: 1, read_timeout: 1 }
 
     # Assets
-    config.assets.version = '1.0.0'
+    config.assets.version = Schematics::VERSION
     config.assets.paths << ::Pagy.root.join('javascripts')
     config.assets.paths << root.join('app', 'components', 'schematics')
     config.assets.paths << root.join('node_modules')
