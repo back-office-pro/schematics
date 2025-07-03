@@ -1,4 +1,5 @@
 /log/**/*.log
+/log/*.log
 /pkg
 /coverage
 /config/credentials/*.key
