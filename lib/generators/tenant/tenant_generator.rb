@@ -63,12 +63,6 @@ class TenantGenerator < Rails::Generators::NamedBase
     `dropdb #{name}_#{env}`
   end
 
-  def destroy_migrations
-    return unless destroying?
-
-    FileUtils.rm_rf("db/#{name}")
-  end
-
   private
 
   def generating?
