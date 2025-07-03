@@ -2,7 +2,6 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/integer/time'
-require 'server'
 
 Rails.application.routes.default_url_options = { host: "default.#{Server.domain}" }
 Rails.application.configure do
