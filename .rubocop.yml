@@ -180,7 +180,7 @@ RSpec/MultipleMemoizedHelpers:
   Max: 18
 RSpec/EmptyExampleGroup:
   Exclude:
-    - lib/spec/*
+    - spec/schematics/*
     - spec/*/active_storage/**/*
     - spec/*/core/**/*
 RSpec/SpecFilePathFormat:
