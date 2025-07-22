@@ -37,9 +37,8 @@ class ::Configuration < Schematics::ApplicationRecord
 
   private
 
-  def storage_configurations = Rails # rubocop:disable Metrics/CyclomaticComplexity
-    .application
-    .config_for(:storage)
+  def storage_configurations = ActiveSupport::ConfigurationFile # rubocop:disable Metrics/CyclomaticComplexity
+    .parse(Rails.root.join('config/storage.yml'), symbolize_names: true)
     .tap do |config|
       config[:amazon][:access_key_id] = aws_access_key_id if aws_access_key_id
       config[:amazon][:secret_access_key] = aws_secret_access_key if aws_secret_access_key
