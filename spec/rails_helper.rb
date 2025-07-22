@@ -3,7 +3,6 @@
 
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
-`bin/rails db:test:prepare`
 require File.expand_path('../config/environment', __dir__)
 
 require 'active_storage_validations/matchers'
