@@ -68,9 +68,7 @@ module Schematics
 
     private
 
-    def index_path
-      schematics.root_path
-    end
+    def index_path = root_path
 
     def model_class = ::User
 

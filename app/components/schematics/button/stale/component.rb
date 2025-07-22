@@ -5,7 +5,6 @@ module Schematics
   module Button
     module Stale
       class Component < ApplicationComponent
-        delegate :version_path, to: 'Schematics::Engine.routes.url_helpers'
         option :resource
 
         def data = {

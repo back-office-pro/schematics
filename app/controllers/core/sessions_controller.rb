@@ -26,7 +26,7 @@ class SessionsController < Schematics::ResourcesController
           session[:session_remember_me] = resource_params[:remember_me]
           format.json { render json: { otp_token: result.otp_token } }
           format.html do
-            redirect_to schematics.new_one_time_passwords_path,
+            redirect_to new_one_time_passwords_path,
                         status: :see_other,
                         notice: t(result.message)
           end

@@ -16,74 +16,74 @@ development:
   primary:
     <<: *postgresql
     database: <%= ENV.fetch('DATABASE', 'demo') %>_development
-    migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/migrate
+    migrations_paths: storage/<%= ENV.fetch('DATABASE', 'demo') %>/migrate
   search:
     <<: *sqlite3
     database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/development_search.sqlite3
-    migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/search_migrate
+    migrations_paths: storage/<%= ENV.fetch('DATABASE', 'demo') %>/search_migrate
   cable:
     <<: *postgresql
     database: development_cable
-    migrations_paths: db/cable_migrate
+    migrations_paths: storage/cable_migrate
   cache:
     <<: *sqlite3
     database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/development_cache.sqlite3
-    migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/cache_migrate
+    migrations_paths: storage/<%= ENV.fetch('DATABASE', 'demo') %>/cache_migrate
   queue:
     <<: *postgresql
     database: development_queue
-    migrations_paths: db/queue_migrate
+    migrations_paths: storage/queue_migrate
 
 test:
   primary:
     <<: *sqlite3
     database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/test.sqlite3
-    migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/migrate
+    migrations_paths: storage/<%= ENV.fetch('DATABASE', 'demo') %>/migrate
   search:
     <<: *sqlite3
     database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/test_search.sqlite3
-    migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/search_migrate
+    migrations_paths: storage/<%= ENV.fetch('DATABASE', 'demo') %>/search_migrate
 
 production:
   primary:
     <<: *postgresql
     database: <%= ENV.fetch('DATABASE', 'demo') %>_production
-    migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/migrate
+    migrations_paths: storage/<%= ENV.fetch('DATABASE', 'demo') %>/migrate
   search:
     <<: *sqlite3
     database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/production_search.sqlite3
-    migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/search_migrate
+    migrations_paths: storage/<%= ENV.fetch('DATABASE', 'demo') %>/search_migrate
   cable:
     <<: *postgresql
     database: production_cable
-    migrations_paths: db/cable_migrate
+    migrations_paths: storage/cable_migrate
   cache:
     <<: *sqlite3
     database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/production_cache.sqlite3
-    migrations_paths: db/<%= ENV.fetch('DATABASE', 'demo') %>/cache_migrate
+    migrations_paths: storage/<%= ENV.fetch('DATABASE', 'demo') %>/cache_migrate
   queue:
     <<: *postgresql
     database: production_queue
-    migrations_paths: db/queue_migrate
+    migrations_paths: storage/queue_migrate
 
 on_premise:
   primary:
     <<: *sqlite3
     database: storage/production.sqlite3
-    migrations_paths: db/migrate
+    migrations_paths: storage/migrate
   search:
     <<: *sqlite3
     database: storage/production_search.sqlite3
-    migrations_paths: db/search_migrate
+    migrations_paths: storage/search_migrate
   cable:
     <<: *sqlite3
     database: storage/production_cable.sqlite3
-    migrations_paths: db/cable_migrate
+    migrations_paths: storage/cable_migrate
   cache:
     <<: *sqlite3
     database: storage/production_cache.sqlite3
-    migrations_paths: db/cache_migrate
+    migrations_paths: storage/cache_migrate
   queue:
     <<: *sqlite3
     database: storage/production_queue.sqlite3
-    migrations_paths: db/queue_migrate
+    migrations_paths: storage/queue_migrate

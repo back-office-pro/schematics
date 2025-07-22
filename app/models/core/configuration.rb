@@ -16,15 +16,15 @@ class ::Configuration < Schematics::ApplicationRecord
     end
 
     def openai_access_token_with_fallback
-      openai_access_token || Schematics::Engine.credentials.openai&.access_token
+      openai_access_token || Rails.application.credentials.openai&.access_token
     end
 
     def gcloud_public_api_key_with_fallback
-      gcloud_public_api_key || Schematics::Engine.credentials.gcloud&.public_api_key
+      gcloud_public_api_key || Rails.application.credentials.gcloud&.public_api_key
     end
 
     def gcloud_private_api_key_with_fallback
-      gcloud_private_api_key || Schematics::Engine.credentials.gcloud&.private_api_key
+      gcloud_private_api_key || Rails.application.credentials.gcloud&.private_api_key
     end
   end
 
@@ -37,8 +37,8 @@ class ::Configuration < Schematics::ApplicationRecord
 
   private
 
-  def storage_configurations = Schematics::Engine # rubocop:disable Metrics/CyclomaticComplexity
-    .config_for(:storage)
+  def storage_configurations = ActiveSupport::ConfigurationFile # rubocop:disable Metrics/CyclomaticComplexity
+    .parse(Rails.root.join('config/storage.yml'), symbolize_names: true)
     .tap do |config|
       config[:amazon][:access_key_id] = aws_access_key_id if aws_access_key_id
       config[:amazon][:secret_access_key] = aws_secret_access_key if aws_secret_access_key

@@ -26,7 +26,7 @@ module OpenAPI
       .deep_symbolize_keys
       .dig(locale, :open_api)
 
-    def open_api_data_path = Schematics::Engine
+    def open_api_data_path = Rails
       .root
       .join('config', 'locales', 'open_api', "#{locale}.yml")
 

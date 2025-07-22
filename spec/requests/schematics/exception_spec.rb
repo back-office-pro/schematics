@@ -4,7 +4,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Exception' do
-  include Schematics::Engine.routes.url_helpers
   include_context 'with unauthenticated user'
 
   describe '404' do

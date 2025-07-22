@@ -49,7 +49,7 @@ module Core
 
       def migration_files = ::Rails
         .root
-        .glob("db/#{current_shard}/migrate/*")
+        .glob("storage/#{current_shard}/migrate/*")
 
       def total = migrator_clean_commands
         .concat(migrator_build_commands)

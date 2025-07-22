@@ -9,7 +9,7 @@ module Core
       delegate :migration, :database, to: :context, private: true
       delegate :current_shard, to: :migration, allow_nil: true, private: true
 
-      def call = Schematics::Engine
+      def call = Rails
         .root
         .glob('db/*migrate')
         .each(&method(:copy_migrations))
@@ -18,8 +18,8 @@ module Core
 
       def copy_migrations(directory)
         ActiveRecord::Migration.copy(
-          Rails.root.join('db', (database || current_shard).to_s, directory.basename),
-          { schematics: directory }
+          Rails.root.join('storage', (database || current_shard).to_s, directory.basename),
+          { directory: }
         )
       end
     end

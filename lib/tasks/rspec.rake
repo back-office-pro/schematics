@@ -3,14 +3,6 @@
 
 namespace :schematics do
   namespace :rspec do
-    desc 'Run rspec'
-    task run: :environment do
-      system(
-        "bundle exec rspec --default-path #{Schematics::Engine.root.join('lib', 'spec')} -P '*.rb'",
-        out: $stdout
-      )
-    end
-
     desc 'Load current migration data'
     task prepare: :environment do
       data = ActiveStorage::Blob.services.fetch(:local).download('backups/migration.json')

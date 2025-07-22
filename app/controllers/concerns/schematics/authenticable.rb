@@ -73,7 +73,7 @@ module Schematics
     end
 
     def return_to_path = session
-      .fetch(:return_to, schematics.root_path)
+      .fetch(:return_to, root_path)
       .tap { session.delete(:return_to) }
   end
 end

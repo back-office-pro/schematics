@@ -3,8 +3,8 @@
 
 module Schematics
   module ApplicationHelper
-    COMPONENTS_DIRECTORY = Engine.root.join('app', 'components', 'schematics').freeze
-    ASSETS_DIRECTORY = Engine.root.join('app', 'assets', 'stylesheets').freeze
+    COMPONENTS_DIRECTORY = Rails.root.join('app/components/schematics').freeze
+    ASSETS_DIRECTORY = Rails.root.join('app/assets/stylesheets').freeze
     COMPONENTS_PATH = %r{#{COMPONENTS_DIRECTORY}/(.*)/component\.rb}
     ASSETS_PATH = %r{#{ASSETS_DIRECTORY}/(.*)\.\w+}
 

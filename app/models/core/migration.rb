@@ -35,7 +35,7 @@ class ::Migration < Schematics::ApplicationRecord
 
     def default = new(
       data: ActiveSupport::ConfigurationFile.parse(
-        Schematics::Engine.root.join('db', 'seeds', 'migrations', "#{business_sector}.yml")
+        Rails.root.join('db', 'seeds', 'migrations', "#{business_sector}.yml")
       )
     )
 

@@ -4,23 +4,18 @@
 # frozen_string_literal: true
 
 require 'optparse'
-require_relative '../lib/generators/app/app_generator'
 require_relative '../lib/generators/tenant/tenant_generator'
 
-tenant = false
-name = 'spec/demo'
+name = ARGV.first
 options = {}
 
-OptionParser
-  .new do |opts|
-    opts.on('--server', '--server=NAME', 'Generate a new server') { name = _1 }
-    opts.on('--tenant', '--tenant=NAME', 'Generate a new tenant') { tenant = name = _1 }
-    opts.on('--destroy', 'Destroy server or tenant') do
-      options[:behavior] = :revoke
-      printf "\e[31mAre you sure? Press 'y' to continue: \e[0m"
-      exit unless $stdin.gets.chomp == 'y'
-    end
-  end.parse!
+OptionParser.new do |opts|
+  opts.on('--destroy', 'Destroy tenant') do
+    options[:behavior] = :revoke
+    printf "\e[31mAre you sure? Press 'y' to continue: \e[0m"
+    exit unless $stdin.gets.chomp == 'y'
+  end
+end.parse!
 
 if ENV['CI'].blank?
   FileUtils.mkdir_p("log/#{name}")
@@ -29,11 +24,7 @@ if ENV['CI'].blank?
   $stderr.reopen($stdout)
 end
 
-if tenant
-  TenantGenerator.new([name], [], **options).invoke_all
-else
-  AppGenerator.new([name], **options).invoke_all
-end
+TenantGenerator.new([name], [], **options).invoke_all
 
 $stdout = STDOUT
 $stderr = STDERR

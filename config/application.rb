@@ -1,95 +1,17 @@
 # Copyright © 2025 Dev & Software. All rights reserved.
 # frozen_string_literal: true
 
-require 'aasm'
-require 'action_controller'
-require 'active_model_otp'
-require 'active_storage_base64'
-require 'active_storage_validations'
-require 'aws-sdk-s3'
-require 'azure_blob'
-require 'based_uuid'
-require 'bootstrap_form'
-require 'cancancan'
-require 'chartkick'
-require 'chroma'
-require 'csv'
-require 'dry-initializer'
-require 'dry/transformer'
-require 'enummer'
-require 'ferrum'
-require 'friendly_id'
-require 'google-cloud-storage'
-require 'google/cloud/translate/v2'
-require 'groupdate'
-require 'i18n-inflector'
-require 'i18n/beginning_of_week'
-require 'icalendar'
-require 'importmap-rails'
-require 'inflections'
-require 'interactor'
-require 'json'
-require 'letter_opener'
-require 'liquid'
-require 'lograge'
-require 'mission_control/jobs'
-require 'mobility'
-require 'mobility/ransack'
-require 'nokogiri'
-require 'omniauth'
-require 'omniauth-google-oauth2'
-require 'omniauth-saml'
-require 'omniauth/rails_csrf_protection'
-require 'openai'
-require 'pagy'
-require 'paper_trail'
-require 'paranoia'
-require 'phonelib'
-require 'propshaft'
-require 'puma'
-require 'rack/cors'
-require 'rails'
-require 'rails-i18n'
-require 'ransack'
-require 'ransack-enum'
-require 'ratonvirus'
-require 'ratonvirus/clamby'
-require 'rollbar'
-require 'rouge'
-require 'route_translator'
-require 'rqrcode'
-require 'ruby-graphviz'
-require 'ruby-vips'
-require 'schematics/version'
-require 'slim'
-require 'solid_cable'
-require 'solid_cache'
-require 'solid_queue'
-require 'stimulus-rails'
-require 'terser'
-require 'turbo-rails'
-require 'valid_email'
-require 'validate_url'
-require 'view_component'
+require_relative 'boot'
 
-module Schematics
-  class Engine < ::Rails::Engine
-    isolate_namespace Schematics
+require 'rails/all'
+require_relative '../lib/schematics'
 
-    class << self
-      def config_for(name)
-        ActiveSupport::ConfigurationFile
-          .parse(root.join('config', "#{name}.yml"))
-          .deep_symbolize_keys
-      end
+Bundler.require(*Rails.groups)
 
-      def credentials = ActiveSupport::EncryptedConfiguration.new(
-        config_path: root.join('config', 'credentials', "#{Rails.env}.yml.enc"),
-        key_path: root.join('config', 'credentials', "#{Rails.env}.key"),
-        env_key: 'SCHEMATICS_MASTER_KEY',
-        raise_if_missing_key: true
-      )
-    end
+module BackOffice
+  class Application < Rails::Application
+    # Rails
+    config.load_defaults 8.0
 
     # Generators
     config.app_generators do |generator|
@@ -138,7 +60,7 @@ module Schematics
     config.action_mailer.smtp_settings = { open_timeout: 1, read_timeout: 1 }
 
     # Assets
-    config.assets.version = VERSION
+    config.assets.version = Schematics::VERSION
     config.assets.paths << ::Pagy.root.join('javascripts')
     config.assets.paths << root.join('app', 'components', 'schematics')
     config.assets.paths << root.join('node_modules')

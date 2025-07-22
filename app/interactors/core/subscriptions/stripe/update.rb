@@ -7,7 +7,7 @@ module Core
       class Update
         include Interactor
 
-        delegate :secret_key, to: 'Schematics::Engine.credentials.stripe', private: true
+        delegate :secret_key, to: 'Rails.application.credentials.stripe', private: true
         delegate :id, :params, :fail!, to: :context, private: true
         delegate :subscriptions, to: 'client.v1', private: true
 

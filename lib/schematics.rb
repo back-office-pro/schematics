@@ -1,23 +1,20 @@
 # Copyright © 2025 Dev & Software. All rights reserved.
 # frozen_string_literal: true
 
-require 'active_model/nested_attributes'
-require 'active_model/validations/associated_validator'
-require 'active_model/validations/uniqueness_validator'
-require 'array'
-require 'hash'
-require 'numeric'
-require 'object'
-require 'schema_cache'
-require 'server'
-require 'validators/singular_validator'
+require_relative 'active_model/nested_attributes'
+require_relative 'active_model/validations/associated_validator'
+require_relative 'active_model/validations/uniqueness_validator'
+require_relative 'array'
+require_relative 'hash'
+require_relative 'numeric'
+require_relative 'object'
+require_relative 'schema_cache'
+require_relative 'server'
+require_relative 'validators/singular_validator'
 require 'zeitwerk'
-require defined?(Rails::Engine) ? 'schematics/engine' : 'debug/prelude'
 
 Regexp.timeout = 1
 $stdin.timeout = 1
-
-Warning[:deprecated] = true
 
 loader = Zeitwerk::Loader.for_gem
 loader.enable_reloading

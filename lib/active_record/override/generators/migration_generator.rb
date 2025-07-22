@@ -42,7 +42,7 @@ module ActiveRecord
         end
 
         def configured_migrate_path
-          File.join('db', options[:database], 'migrate') if options[:database]
+          File.join('storage', options[:database], 'migrate') if options[:database]
         end
 
         def validate_file_name! = file_name
@@ -51,9 +51,9 @@ module ActiveRecord
 
         private
 
-        def templates_path
-          Schematics::Engine.root.join('lib', 'templates', 'active_record', 'migration')
-        end
+        def templates_path = Rails
+          .root
+          .join('lib/templates/active_record/migration')
       end
     end
   end

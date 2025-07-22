@@ -4,7 +4,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin' do
-  include Schematics::Engine.routes.url_helpers
   include_context 'with authenticated user'
 
   let(:accept_header) { 'text/html' }

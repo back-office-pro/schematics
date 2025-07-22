@@ -4,7 +4,6 @@
 require 'rails_helper'
 
 RSpec.describe 'UserNotifications' do
-  include Schematics::Engine.routes.url_helpers
   include_context 'with authenticated user'
 
   describe 'PUT #update' do

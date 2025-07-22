@@ -4,7 +4,7 @@
 ARG RUBY_VERSION=3.2.8
 FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 
-WORKDIR /schematics
+WORKDIR /app
 
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y curl libjemalloc2 libvips sqlite3 postgresql-client && \
@@ -40,26 +40,13 @@ RUN echo "FollowFileSymlinks true" >> /etc/clamav/clamd.conf
 
 RUN bundle install --jobs=4 --retry=3
 
-RUN gem install specific_install
-RUN gem specific_install https://github.com/MaksJS/ratonvirus.git feature/rails-8-upgrade
-
 RUN rm -rf /schematics/config/credentials/development*
 RUN rm -rf /schematics/config/credentials/production*
 RUN rm -rf /schematics/config/credentials/test*
 
-RUN /schematics/bin/deploy
-
-WORKDIR /app
-
-RUN rm -rf /schematics
-
-RUN schematics --server on-premise
-
-WORKDIR /app/on-premise
-
 RUN schematics --tenant on-premise
 
-ENTRYPOINT ["/app/on-premise/bin/docker-entrypoint"]
+ENTRYPOINT ["/app/bin/docker-entrypoint"]
 
 CMD ["bin/rails", "server", "-b", "0.0.0.0"]
 

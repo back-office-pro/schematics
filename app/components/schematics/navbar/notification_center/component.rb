@@ -6,7 +6,6 @@ module Schematics
     module NotificationCenter
       class Component < ApplicationComponent
         LIMIT = 10
-        delegate :versions_path, to: 'Schematics::Engine.routes.url_helpers'
         delegate :read_notifications_at, to: :current_user
 
         def display_count

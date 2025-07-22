@@ -11,8 +11,8 @@ pin 'Chart.bundle', to: 'Chart.bundle.js'
 
 pin 'schematics/application'
 
-pin_all_from Rails.root.join('app/javascript/controllers'), under: 'controllers'
-pin_all_from Schematics::Engine.root.join('app', 'assets', 'javascripts', 'schematics', 'controllers'), # rubocop:disable Layout/LineLength
+pin_all_from 'app/javascript/controllers', under: 'controllers'
+pin_all_from 'app/assets/javascripts/schematics/controllers',
              under: 'controllers',
              to: 'schematics/controllers'
 

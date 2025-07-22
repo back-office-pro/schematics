@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+# Copyright © 2025 Dev & Software. All rights reserved.
+# frozen_string_literal: true
+
+APP_PATH = File.expand_path('../config/application', __dir__).freeze
+require_relative '../config/boot'
+require 'rails/commands'

@@ -3,7 +3,7 @@
 
 require 'active_support/core_ext/string/inquiry'
 require 'fileutils'
-require 'rails/generators/named_base'
+require 'rails/generators'
 
 class TenantGenerator < Rails::Generators::NamedBase
   def install_migrations
@@ -31,6 +31,12 @@ class TenantGenerator < Rails::Generators::NamedBase
     rails_command "schematics:generate DATABASE=#{name}", env:
   end
 
+  def load_database_schema
+    return unless generating?
+
+    rails_command "db:schema:load DATABASE=#{name}", env:
+  end
+
   def migrate_database
     return unless generating?
 
@@ -46,7 +52,7 @@ class TenantGenerator < Rails::Generators::NamedBase
   def seed_database
     return unless generating?
 
-    rails_command "schematics:db:seed DATABASE=#{name}", env:
+    rails_command "db:seed DATABASE=#{name}", env:
   end
 
   def load_fixtures
@@ -63,12 +69,6 @@ class TenantGenerator < Rails::Generators::NamedBase
     `dropdb #{name}_#{env}`
   end
 
-  def destroy_migrations
-    return unless destroying?
-
-    FileUtils.rm_rf("db/#{name}")
-  end
-
   private
 
   def generating?
@@ -77,7 +77,7 @@ class TenantGenerator < Rails::Generators::NamedBase
 
   def env
     return 'test'.inquiry if ENV['CI'].present?
-    return 'development'.inquiry if Dir.pwd.end_with?('spec/demo')
+    return 'development'.inquiry if Dir.pwd.end_with?('schematics')
     return 'on_premise'.inquiry if Dir.pwd.end_with?('on-premise')
 
     'production'.inquiry
