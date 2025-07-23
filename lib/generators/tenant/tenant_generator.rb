@@ -59,7 +59,7 @@ class TenantGenerator < Rails::Generators::NamedBase
     return unless env.development?
     return unless generating?
 
-    rails_command "db:fixtures:load FIXTURES_PATH='../fixtures' DATABASE=#{name}", env:
+    rails_command "db:fixtures:load FIXTURES_PATH='spec/fixtures' DATABASE=#{name}", env:
   end
 
   def drop_databases
