@@ -4,7 +4,7 @@
 module Schematics
   class GenerateCSVTemplateJob < ApplicationJob
     include Shardable
-    limits_concurrency key: ->(shard, user_id, *) { [shard, user_id] }
+    limits_concurrency key: ->(*args) { args }, on_conflict: :discard
     queue_as :default
 
     def perform(_shard, user_id, model_name)

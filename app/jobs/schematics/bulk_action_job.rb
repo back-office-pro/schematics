@@ -4,7 +4,7 @@
 module Schematics
   class BulkActionJob < ApplicationJob
     include Shardable
-    limits_concurrency key: ->(shard, whodunnit, *) { [shard, whodunnit] }
+    limits_concurrency key: ->(*args) { args }, on_conflict: :discard
     queue_as :default
 
     def perform(_shard, whodunnit, model_name, ids)
