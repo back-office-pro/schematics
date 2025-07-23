@@ -2,7 +2,6 @@
 # frozen_string_literal: true
 
 root 'home#index'
-get 'robots.txt', to: 'robots#index', as: :robots
 get 'emojis.json', to: 'emojis#index', as: :emojis
 get 'sudo', to: 'sudos#new', as: :sudo
 get 'admin', to: 'admin#index', as: :admin
