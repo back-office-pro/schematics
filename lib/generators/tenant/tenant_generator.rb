@@ -77,10 +77,10 @@ class TenantGenerator < Rails::Generators::NamedBase
 
   def env
     return 'test'.inquiry if ENV['CI'].present?
-    return 'development'.inquiry if Dir.pwd.end_with?('schematics')
+    return 'production'.inquiry if ENV['RAILS_ENV'] == 'production'
     return 'on_premise'.inquiry if Dir.pwd.end_with?('on-premise')
 
-    'production'.inquiry
+    'development'.inquiry
   end
 
   def destroying?
