@@ -77,7 +77,7 @@ module BackOffice
     config.solid_cache.encrypt = true
 
     # MissionControl
-    config.mission_control.jobs.base_controller_class = 'Schematics::RobotsController'
+    config.mission_control.jobs.base_controller_class = 'Schematics::RoutingController'
     config.mission_control.jobs.show_console_help = false
 
     # ViewComponent
