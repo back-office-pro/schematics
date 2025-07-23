@@ -66,7 +66,6 @@ module BackOffice
     config.assets.paths << root.join('node_modules')
 
     # Importmap
-    config.importmap.paths << root.join('config', 'importmap.rb')
     config.importmap.cache_sweepers << root.join('app', 'assets', 'javascripts')
 
     # i18n
