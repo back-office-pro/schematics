@@ -32,7 +32,7 @@ export default class extends ApplicationController {
   suggestionTemplate ({ _metadata: { descriptor, icon, url } }) {
     return `
       <li class="list-group-item list-group-item-action p-2 text-start text-truncate" data-action="mousedown->search-bar#selectItem" data-search-bar-url-param="${url}" role="button">
-        <i class="fa fa-${icon} text-secondary fa-fw me-2"></i>
+        <i class="fa fa-${icon} text-secondary me-2"></i>
         ${this.highlight(descriptor, this.inputTarget.value)}
       </li>
     `
@@ -41,7 +41,7 @@ export default class extends ApplicationController {
   notFoundTemplate () {
     return `
       <li class="list-group-item disabled p-2 text-start text-truncate">
-        <i class="fa fa-exclamation-triangle text-secondary fa-fw me-2"></i>
+        <i class="fa fa-exclamation-triangle text-secondary me-2"></i>
         ${I18n.typeahead.notFound}
       </li>
     `
@@ -50,7 +50,7 @@ export default class extends ApplicationController {
   pendingTemplate () {
     return `
       <li class="list-group-item disabled p-2 text-start text-truncate">
-        <i class="fa fa-spinner fa-spin text-secondary fa-fw me-2"></i>
+        <i class="fa fa-spinner fa-spin text-secondary me-2"></i>
         ${I18n.typeahead.pending}
       </li>
     `

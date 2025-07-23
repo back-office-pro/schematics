@@ -30,10 +30,6 @@ module Schematics
 
           def url = trigger_resource_path(resource, event)
 
-          def icon_class
-            'fa-fw' if compact?
-          end
-
           def data = {
             turbo_method: :patch,
             turbo_frame: '_top',

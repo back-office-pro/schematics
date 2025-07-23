@@ -15,7 +15,7 @@ export default class extends SearchBarController {
   suggestionTemplate (result) {
     return `
       <li class="list-group-item list-group-item-action p-2 text-start text-truncate" data-action="mousedown->typeahead#selectItem" data-typeahead-value-param="${result}" role="button">
-        <i class="fa fa-search text-secondary fa-fw me-2"></i>
+        <i class="fa fa-search text-secondary me-2"></i>
         ${this.highlight(result, this.inputTarget.value)}
       </li>
     `

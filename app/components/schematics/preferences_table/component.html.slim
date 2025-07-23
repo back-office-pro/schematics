@@ -10,7 +10,7 @@
         - model_classes.each do |model_class|
           tr
             td.text-nowrap
-              = fa_icon model_class.entity.icon, class: 'fa-fw me-2 text-body-secondary'
+              = fa_icon model_class.entity.icon, class: 'me-2 text-body-secondary'
               = model_class.human_name_plural.humanize
             - events.each_key do |action|
               td

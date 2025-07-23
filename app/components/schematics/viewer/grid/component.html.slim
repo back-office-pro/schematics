@@ -26,7 +26,7 @@
                               - elements.each do |element|
                                 tr.animate__slideInRight class=col_preference_class(element)
                                   th.text-nowrap.col-4
-                                    = fa_icon element.icon, class: 'fa-fw me-2 text-body-secondary'
+                                    = fa_icon element.icon, class: 'me-2 text-body-secondary'
                                     = model_class.human_attribute_name(element.name)
                                   td.text-truncate
                                     = __resource_details_element(resource:, element:)

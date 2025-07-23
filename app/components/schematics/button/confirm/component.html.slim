@@ -1,5 +1,5 @@
 = button_tag data:, class: css_classes, title: do
-  span.icon = fa_icon :check, class: icon_class
-  span.icon.d-none = fa_icon :spinner, class: icon_class, animation: 'spin'
+  span.icon = fa_icon :check
+  span.icon.d-none = fa_icon :spinner, animation: 'spin'
   span.text = title unless compact?
   span.text.d-none = t('schematics.application.button.loading') unless compact?

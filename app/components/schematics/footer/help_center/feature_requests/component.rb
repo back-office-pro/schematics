@@ -18,7 +18,7 @@ module Schematics
 
           def rel = 'noreferrer'
 
-          def icon_css_classes = %w[fa-fw me-3]
+          def icon_css_classes = %w[me-3]
 
           def wrapper_css_classes = %w[dropdown-item]
 

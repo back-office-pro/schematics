@@ -11,7 +11,7 @@ module Schematics
         class << self
           def dropdown_item = new(
             wrapper_css_classes: 'dropdown-item',
-            icon_css_classes: 'fa-fw me-3'
+            icon_css_classes: 'me-3'
           )
         end
       end

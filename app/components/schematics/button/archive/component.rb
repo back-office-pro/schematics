@@ -20,8 +20,6 @@ module Schematics
 
         def css_classes = %w[btn btn-danger btn-sm]
 
-        def icon_class = 'fa-fw'
-
         def render?
           can?(:archive, resource)
         end

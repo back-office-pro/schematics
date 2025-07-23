@@ -1,8 +1,8 @@
 - @element.options.each do |(key, value)|
   li.list-group-item
     - @indent.times do
-      = fa_icon @icon, class: 'fa-fw invisible me-2'
-    = fa_icon @icon, class: 'fa-fw me-2'
+      = fa_icon @icon, class: 'invisible me-2'
+    = fa_icon @icon, class: 'me-2'
     - case [key, value]
     - in [*, TrueClass]
       = human_attribute_name(key)
@@ -11,8 +11,8 @@
       - @element.events.each do |event|
         li.list-group-item
           - @indent.next.times do
-            = fa_icon :repeat, class: 'fa-fw invisible me-2'
-          = fa_icon :repeat, class: 'fa-fw me-2'
+            = fa_icon :repeat, class: 'invisible me-2'
+          = fa_icon :repeat, class: 'me-2'
           == interpolate(event)
     - in [*, Array]
       = human_attribute_name(key)

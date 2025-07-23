@@ -42,11 +42,11 @@ export default class extends ApplicationController {
       createFilter: this.createFilterValue,
       render: {
         no_results: () => `<div class="option opacity-100 text-body-secondary">
-          <i class="fa fa-exclamation-triangle text-secondary fa-fw me-2"></i>
+          <i class="fa fa-exclamation-triangle text-secondary me-2"></i>
           ${I18n.typeahead.notFound}
         </div>`,
         loading: () => `<div class="option opacity-100 text-body-secondary">
-          <i class="fa fa-spinner fa-spin text-secondary fa-fw me-2"></i>
+          <i class="fa fa-spinner fa-spin text-secondary me-2"></i>
           ${I18n.typeahead.pending}
         </div>`,
         option_create: (data, escape) => `<div class="create option opacity-100">

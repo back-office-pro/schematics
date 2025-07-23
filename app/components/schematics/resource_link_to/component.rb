@@ -55,7 +55,6 @@ module Schematics
       end
 
       def icon_css_classes = [
-        'fa-fw',
         'text-primary',
         "me-#{margin_size}"
       ]

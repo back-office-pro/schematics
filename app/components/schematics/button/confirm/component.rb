@@ -22,10 +22,6 @@ module Schematics
           'mx-1': compact?
         )
 
-        def icon_class
-          'fa-fw' if compact?
-        end
-
         def title = t('schematics.application.button.confirm')
       end
     end

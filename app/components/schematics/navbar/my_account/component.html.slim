@@ -24,21 +24,21 @@ li.nav-item.dropdown.d-flex.align-items-center.ps-2.ms-2
     h5.dropdown-header.rounded-top.bg-body-tertiary.fw-bold
       = t('.title')
     = link_to edit_profile_path, class: 'dropdown-item' do
-      = fa_icon :user, class: 'fa-fw me-3'
+      = fa_icon :user, class: 'me-3'
       = t('.edit_profile')
     = link_to edit_preferences_path, class: 'dropdown-item' do
-      = fa_icon :bell, class: 'fa-fw me-3'
+      = fa_icon :bell, class: 'me-3'
       = t('.edit_preferences')
     = link_to one_time_passwords_path, class: 'dropdown-item' do
-      = fa_icon :mobile_screen, class: 'fa-fw me-3'
+      = fa_icon :mobile_screen, class: 'me-3'
       = t('.one_time_passwords')
     button.dropdown-item data-bs-toggle='modal' data-bs-target='#hotkeys-modal'
-      = fa_icon :keyboard, class: 'fa-fw me-3'
+      = fa_icon :keyboard, class: 'me-3'
       = t('.hotkeys')
     - if can?(:index, :admin)
       = link_to admin_path, class: 'dropdown-item text-danger' do
-        = fa_icon :shield_alt, class: 'fa-fw me-3'
+        = fa_icon :shield_alt, class: 'me-3'
         = t('.admin_zone')
     = link_to logout_path, data: { turbo_method: :delete }, class: 'dropdown-item' do
-      = fa_icon :right_from_bracket, class: 'fa-fw me-3'
+      = fa_icon :right_from_bracket, class: 'me-3'
       = t('.logout')

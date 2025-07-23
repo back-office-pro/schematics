@@ -20,10 +20,6 @@ module Schematics
           'ms-1': !compact?
         )
 
-        def icon_class
-          'fa-fw' if compact?
-        end
-
         def data = {
           turbo_frame: '_top',
           controller: 'tooltip',

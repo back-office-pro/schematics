@@ -10,7 +10,7 @@ module Schematics
 
         def title = t('.text')
 
-        def icon_class = 'fa-fw fa-lg'
+        def icon_class = 'fa-lg'
 
         def render?
           can?(:create, ::Comparison) && can?(:show, model_class)

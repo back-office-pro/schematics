@@ -24,10 +24,6 @@ module Schematics
           'btn-icon-split': !compact?
         )
 
-        def icon_class
-          'fa-fw' if compact?
-        end
-
         def title = t('.title')
       end
     end

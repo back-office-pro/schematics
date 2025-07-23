@@ -20,7 +20,7 @@
             data-nested-form-index-param=index
             role='button'
           }
-            = fa_icon constant.new(entity:).icon, class: 'fa-fw me-2'
+            = fa_icon constant.new(entity:).icon, class: 'me-2'
             = t('.add_attribute', type: constant.model_name.human.downcase)
         .dropdown-divider
       .dropdown-item {
@@ -30,7 +30,7 @@
         data-nested-form-index-param=index
         role='button'
       }
-        = fa_icon :plus, class: 'fa-fw me-2'
+        = fa_icon :plus, class: 'me-2'
         = t('.add_virtual')
       .dropdown-divider
       .dropdown-item {
@@ -40,7 +40,7 @@
         data-nested-form-index-param=index
         role='button'
       }
-        = fa_icon :atom, class: 'fa-fw me-2'
+        = fa_icon :atom, class: 'me-2'
         = t('.add_trigger')
       .dropdown-divider
       .dropdown-item {
@@ -50,7 +50,7 @@
         data-nested-form-index-param=index
         role='button'
       }
-        = fa_icon :link, class: 'fa-fw me-2'
+        = fa_icon :link, class: 'me-2'
         = t('.add_belongs_to_has_one')
       .dropdown-item {
         data-action='click->nested-form#add:prevent'
@@ -59,7 +59,7 @@
         data-nested-form-index-param=index
         role='button'
       }
-        = fa_icon :link, class: 'fa-fw me-2'
+        = fa_icon :link, class: 'me-2'
         = t('.add_belongs_to_has_many')
       .dropdown-item {
         data-action='click->nested-form#add:prevent'
@@ -68,7 +68,7 @@
         data-nested-form-index-param=index
         role='button'
       }
-        = fa_icon :link, class: 'fa-fw me-2'
+        = fa_icon :link, class: 'me-2'
         = t('.add_habtm_association')
       .dropdown-item {
         data-action='click->nested-form#add:prevent'
@@ -77,5 +77,5 @@
         data-nested-form-index-param=index
         role='button'
       }
-        = fa_icon :users, class: 'fa-fw me-2'
+        = fa_icon :users, class: 'me-2'
         = t('.add_user_association')

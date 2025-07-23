@@ -23,10 +23,6 @@ module Schematics
           'ms-1': !compact?
         )
 
-        def icon_class
-          'fa-fw' if compact?
-        end
-
         def title = t('schematics.application.button.destroy')
 
         def render?
