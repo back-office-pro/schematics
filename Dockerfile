@@ -39,12 +39,14 @@ RUN echo "FollowDirectorySymlinks true" >> /etc/clamav/clamd.conf
 RUN echo "FollowFileSymlinks true" >> /etc/clamav/clamd.conf
 
 RUN bundle install --jobs=4 --retry=3
+RUN yarn install
+RUN rails assets:precompile
 
 RUN rm -rf /schematics/config/credentials/development*
 RUN rm -rf /schematics/config/credentials/production*
 RUN rm -rf /schematics/config/credentials/test*
 
-RUN schematics --tenant on-premise
+RUN bin/schematics on-premise
 
 ENTRYPOINT ["/app/bin/docker-entrypoint"]
 
