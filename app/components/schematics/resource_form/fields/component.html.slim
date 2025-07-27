@@ -49,6 +49,8 @@
   = __resource_form_fields_secret(form:, field:)
 - when Schematics::Attributes::Digest
   = __resource_form_fields_digest(form:, field:, autocomplete: 'new-password')
+- when Schematics::Attributes::OneTimePassword
+  = __resource_form_fields_one_time_password(form:, field:)
 - when Schematics::Attributes::Boolean
   = __resource_form_fields_boolean(form:, field:)
 - when Schematics::Behaviours::Numerable

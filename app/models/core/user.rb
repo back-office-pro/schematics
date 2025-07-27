@@ -17,6 +17,7 @@ class ::User < Schematics::ApplicationRecord
   validate :secure_password_challenge
 
   delegate :admin?, to: :role
+  delegate :chars, to: :otp_code, prefix: true
 
   after_create_commit :deliver_new_account_mailer
 

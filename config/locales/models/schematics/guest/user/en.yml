@@ -3,4 +3,4 @@ en:
   activemodel:
     attributes:
       schematics/guest/user:
-        otp_attempt: Code
+        otp_attempt_digits: Code

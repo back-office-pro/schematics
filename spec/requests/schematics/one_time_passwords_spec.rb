@@ -28,13 +28,13 @@ RSpec.describe 'OneTimePasswords' do
     include_context 'with unauthenticated user'
 
     let(:do_request) { post(one_time_passwords_path, params:, headers:) }
-    let(:params) { { user: { otp_token:, otp_attempt:, remember_me: } } }
+    let(:params) { { user: { otp_token:, otp_attempt_digits:, remember_me: } } }
 
     before { do_request }
 
     context 'when attempt is correct' do
       let(:otp_token) { user.generate_token_for(:one_time_password) }
-      let(:otp_attempt) { user.otp_code }
+      let(:otp_attempt_digits) { user.otp_code_chars }
       let(:remember_me) { true }
       let(:expected_response) do
         {
@@ -54,7 +54,7 @@ RSpec.describe 'OneTimePasswords' do
 
     context 'when attempt is wrong' do
       let(:otp_token) { user.generate_token_for(:one_time_password) }
-      let(:otp_attempt) { 'abcd' }
+      let(:otp_attempt_digits) { %w[abcd] }
       let(:remember_me) { false }
 
       it { is_expected.to have_http_status(:unauthorized) }
@@ -65,19 +65,19 @@ RSpec.describe 'OneTimePasswords' do
 
   describe 'PUT #update' do
     let(:do_request) { put(one_time_passwords_path, params:, headers:) }
-    let(:params) { { user: { otp_attempt: } } }
+    let(:params) { { user: { otp_attempt_digits: } } }
 
     before { do_request }
 
     context 'when attempt is correct' do
-      let(:otp_attempt) { user.otp_code }
+      let(:otp_attempt_digits) { user.otp_code_chars }
 
       it { is_expected.to have_http_status(:no_content) }
       its(:body) { is_expected.to be_blank }
     end
 
     context 'when attempt is wrong' do
-      let(:otp_attempt) { 'abcd' }
+      let(:otp_attempt_digits) { %w[abcd] }
       let(:expected_response) do
         {
           'errors' => [

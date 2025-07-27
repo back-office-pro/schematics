@@ -25,7 +25,7 @@ fr:
           one: Message reçu
           other: Messages reçus
           zero: Aucun message reçu
-        otp_attempt: Code
+        otp_attempt_digits: Code
         otp_enabled: Double authentification
         password: Mot de passe
         password_challenge: Mot de passe actuel

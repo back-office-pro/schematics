@@ -10,6 +10,7 @@ module Schematics
 
       included do
         include ResourcesHelper
+
         delegate :t, to: '::I18n'
         delegate :available_locales, to: '::Configuration'
         delegate :entity,
@@ -39,13 +40,18 @@ module Schematics
             role:
           )
         end
+        let(:fill_in_otp) do
+          user.otp_code_chars.each_with_index do |digit, index|
+            all(:fillable_field, 'user[otp_attempt_digits][]')[index].set(digit)
+          end
+        end
         let(:login_with_2fa) do
           visit login_path
           fill_in 'session[email]', with: user.email
           fill_in 'session[password]', with: user.password
           click_button t('schematics.application.button.confirm')
           is_expected.to have_text t('sessions.create.challenge')
-          fill_in 'user[otp_attempt]', with: user.otp_code
+          fill_in_otp
           click_button t('schematics.application.button.confirm')
           is_expected.to have_text t('schematics.one_time_passwords.create.success')
         end

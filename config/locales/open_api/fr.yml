@@ -553,18 +553,22 @@ fr:
                   properties:
                     user:
                       properties:
-                        otp_attempt:
-                          type: string
+                        otp_attempt_digits:
+                          items:
+                            type: number
+                          type: array
                       required:
-                      - otp_attempt
+                      - otp_attempt_digits
                       type: object
                   type: object
               multipart/form-data:
                 schema:
                   properties:
-                    user[otp_attempt]:
+                    user[otp_attempt_digits]:
+                      items:
+                        type: number
                       required: true
-                      type: string
+                      type: array
                   type: object
             description: ''
             required: false
@@ -613,23 +617,27 @@ fr:
                   properties:
                     user:
                       properties:
-                        otp_attempt:
-                          type: string
+                        otp_attempt_digits:
+                          items:
+                            type: number
+                          type: array
                         otp_token:
                           type: string
                         remember_me:
                           type: boolean
                       required:
                       - otp_token
-                      - otp_attempt
+                      - otp_attempt_digits
                       type: object
                   type: object
               multipart/form-data:
                 schema:
                   properties:
-                    user[otp_attempt]:
+                    user[otp_attempt_digits]:
+                      items:
+                        type: number
                       required: true
-                      type: string
+                      type: array
                     user[otp_token]:
                       required: true
                       type: string
@@ -686,18 +694,22 @@ fr:
                   properties:
                     user:
                       properties:
-                        otp_attempt:
-                          type: string
+                        otp_attempt_digits:
+                          items:
+                            type: number
+                          type: array
                       required:
-                      - otp_attempt
+                      - otp_attempt_digits
                       type: object
                   type: object
               multipart/form-data:
                 schema:
                   properties:
-                    user[otp_attempt]:
+                    user[otp_attempt_digits]:
+                      items:
+                        type: number
                       required: true
-                      type: string
+                      type: array
                   type: object
             description: ''
             required: false

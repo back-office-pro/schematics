@@ -5,6 +5,7 @@ module Schematics
   module OneTimePasswords
     class Authenticate
       include Interactable
+
       delegate :user, :resource_params, to: :context, private: true
 
       def call
@@ -13,7 +14,9 @@ module Schematics
 
       private
 
-      def otp_attempt = resource_params[:otp_attempt]
+      def otp_attempt
+        resource_params[:otp_attempt_digits].join
+      end
     end
   end
 end
