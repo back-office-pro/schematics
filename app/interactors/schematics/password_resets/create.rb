@@ -5,6 +5,7 @@ module Schematics
   module PasswordResets
     class Create
       include Interactable
+
       delegate :email, to: :context, private: true
       delegate :current_shard, to: :user, private: true
 

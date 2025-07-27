@@ -4,6 +4,7 @@
 module Schematics
   class NotifyJob < ApplicationJob
     include Shardable
+
     queue_as :low
 
     def perform(_shard, model_name, resource_id, event, user_id)

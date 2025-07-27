@@ -5,6 +5,7 @@ module Core
   module Sessions
     class Impersonate
       include Schematics::Interactable
+
       delegate :cannot?, to: :ability, private: true
       delegate :ability, :resource_params, to: :context, private: true
 

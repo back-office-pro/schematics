@@ -11,6 +11,7 @@ module Schematics
 
       included do
         include ResourcesHelper
+
         delegate :model_class,
                  :model_classes,
                  :entity,

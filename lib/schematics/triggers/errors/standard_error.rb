@@ -8,6 +8,7 @@ module Schematics
     module Errors
       class StandardError < ::StandardError
         include Behaviours::Renderable
+
         delegate_missing_to :@exception
 
         class << self

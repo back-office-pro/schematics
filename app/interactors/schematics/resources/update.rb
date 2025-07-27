@@ -5,6 +5,7 @@ module Schematics
   module Resources
     class Update
       include Interactable
+
       delegate :resource, :resource_params, :draft, to: :context, private: true
       delegate :really_destroy!,
                to: 'draft&.unstale',

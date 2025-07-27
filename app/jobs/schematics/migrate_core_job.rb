@@ -5,6 +5,7 @@ module Schematics
   class MigrateCoreJob < ApplicationJob
     include Shardable
     include Quietable
+
     queue_as :critical
 
     def perform(_shard)

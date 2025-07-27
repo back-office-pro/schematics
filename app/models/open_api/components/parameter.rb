@@ -6,6 +6,7 @@ module OpenAPI
     # :reek:Attribute
     class Parameter
       include ::ActiveModel::API
+
       attr_accessor :name, :in, :type, :description
 
       class << self

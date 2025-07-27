@@ -5,6 +5,7 @@ module Schematics
   class ImportJob < ApplicationJob
     include Shardable
     include Quietable
+
     queue_as :default
 
     discard_on ActiveStorage::FileNotFoundError

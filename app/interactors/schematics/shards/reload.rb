@@ -5,6 +5,7 @@ module Schematics
   module Shards
     class Reload
       include Interactor
+
       delegate :old_and_changed_model_classes, to: :context, private: true
 
       def call

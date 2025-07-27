@@ -6,6 +6,7 @@ module OpenAPI
     # :reek:Attribute
     class Response
       include ::ActiveModel::API
+
       attr_accessor :code, :description, :headers, :data
 
       class << self

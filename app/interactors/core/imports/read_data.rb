@@ -5,6 +5,7 @@ module Core
   module Imports
     class ReadData
       include Schematics::Progressable
+
       VALUES_SEPARATOR = ';'
 
       delegate :import, to: :context, private: true

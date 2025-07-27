@@ -11,6 +11,7 @@ module Schematics
     included do
       include ActiveStorageSupport::SupportForBase64
       include AASM
+
       attribute_method_suffix '_formatted'
       attribute :lock_version, default: 0
       broadcasts_refreshes

@@ -5,6 +5,7 @@ module Schematics
   module Attributes
     class Code < Text
       include Behaviours::Unnormalizable
+
       delegate :language, to: :options
 
       def available_options = super.push(Options::Language)

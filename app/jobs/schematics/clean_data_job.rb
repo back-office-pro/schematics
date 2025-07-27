@@ -5,6 +5,7 @@ module Schematics
   class CleanDataJob < ApplicationJob
     include Shardable
     include Quietable
+
     queue_as :low
 
     def perform(_shard)

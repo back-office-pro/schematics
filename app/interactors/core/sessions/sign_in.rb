@@ -5,6 +5,7 @@ module Core
   module Sessions
     class SignIn
       include Schematics::Interactable
+
       delegate :user, :otp_token, :cookies, :resource_params, to: :context, private: true
 
       def call

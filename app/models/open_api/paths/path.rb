@@ -7,6 +7,7 @@ module OpenAPI
     class Path
       include ::ActiveModel::API
       include ::ActionView::Helpers::TranslationHelper
+
       attr_accessor :entity
 
       delegate :searchable_elements,

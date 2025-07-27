@@ -5,6 +5,7 @@ module Core
   module LinkPreviews
     class Upsert
       include Interactor
+
       delegate :url, :title, :description, :image, to: :context, private: true
 
       def call = ::LinkPreview

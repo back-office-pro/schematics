@@ -7,6 +7,7 @@ module Schematics
     class Url < String
       include Behaviours::Untranslatable
       include Behaviours::Unnormalizable
+
       delegate :schemes, to: :options
 
       def available_options = super

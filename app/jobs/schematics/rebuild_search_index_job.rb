@@ -4,6 +4,7 @@
 module Schematics
   class RebuildSearchIndexJob < ApplicationJob
     include Shardable
+
     queue_as :low
 
     def perform(_shard, model_name, resource_id = nil)

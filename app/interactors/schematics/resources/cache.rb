@@ -5,6 +5,7 @@ module Schematics
   module Resources
     class Cache
       include Interactor
+
       delegate :resource, to: :context, private: true
       delegate :cache_key, to: :resource, private: true
       delegate :cached_attributes, to: 'resource.class', private: true

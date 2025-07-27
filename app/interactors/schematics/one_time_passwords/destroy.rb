@@ -5,6 +5,7 @@ module Schematics
   module OneTimePasswords
     class Destroy
       include Interactable
+
       delegate :user, to: :context, private: true
 
       def call

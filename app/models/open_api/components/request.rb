@@ -6,6 +6,7 @@ module OpenAPI
     # :reek:Attribute
     class Request
       include ::ActiveModel::API
+
       attr_accessor :entity
 
       delegate :fillable_elements, :open_api_body, to: :entity, private: true

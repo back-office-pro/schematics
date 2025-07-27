@@ -10,6 +10,7 @@ module Schematics
 
       included do
         include ResourcesHelper
+
         delegate :model_class,
                  :controller,
                  :locale,

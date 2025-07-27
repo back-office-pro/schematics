@@ -4,6 +4,7 @@
 module Schematics
   class GenerateCSVJob < ApplicationJob
     include Shardable
+
     limits_concurrency key: ->(*args) { args }, on_conflict: :discard
     queue_as :default
 

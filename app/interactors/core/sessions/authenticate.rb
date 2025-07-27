@@ -5,6 +5,7 @@ module Core
   module Sessions
     class Authenticate
       include Schematics::Interactable
+
       delegate :resource_params, to: :context, private: true
       delegate :otp_enabled?, :generate_token_for, to: :user, allow_nil: true, private: true
 

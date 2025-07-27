@@ -5,6 +5,7 @@ module Schematics
   module Resources
     class GenerateFile
       include Interactor
+
       PURGE_WAIT = 5.minutes.freeze
 
       delegate :user, :serializer, :dropdown, :component_method, to: :context, private: true

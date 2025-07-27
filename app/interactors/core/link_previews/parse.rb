@@ -5,6 +5,7 @@ module Core
   module LinkPreviews
     class Parse
       include Interactor
+
       delegate :url, to: :context, private: true
       delegate :css, to: :document, private: true
 

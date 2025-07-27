@@ -6,6 +6,7 @@ module OpenAPI
     # :reek:Attribute
     class Type
       include ::ActiveModel::API
+
       attr_accessor :value
 
       def to_h(type = value) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity

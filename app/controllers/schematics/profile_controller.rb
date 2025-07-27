@@ -4,6 +4,7 @@
 module Schematics
   class ProfileController < ApplicationController
     include Fillable
+
     helper_method :attributes
 
     def edit; end

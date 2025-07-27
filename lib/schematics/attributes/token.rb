@@ -9,6 +9,7 @@ module Schematics
       include Behaviours::Migratable
       include Behaviours::Renderable
       include Behaviours::Encryptable
+
       LENGTH = 32
 
       def available_options = super.excluding(Options::Encrypted)

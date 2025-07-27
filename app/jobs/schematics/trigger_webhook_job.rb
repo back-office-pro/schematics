@@ -5,6 +5,7 @@ module Schematics
   class TriggerWebhookJob < ApplicationJob
     include Shardable
     include Quietable
+
     queue_as :low
 
     retry_on StandardError, wait: :polynomially_longer, attempts: 5

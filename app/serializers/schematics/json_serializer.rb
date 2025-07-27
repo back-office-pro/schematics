@@ -4,6 +4,7 @@
 module Schematics
   class JSONSerializer
     include ResourcesHelper
+
     delegate :class, to: :@resource, prefix: :model, private: true
     delegate :attachable_sgid, to: :@resource, private: true
     delegate :entity, to: :model_class, private: true

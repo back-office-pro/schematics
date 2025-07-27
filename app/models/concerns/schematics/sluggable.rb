@@ -24,12 +24,14 @@ module Schematics
 
     included do
       extend Mobility
+
       translates :slug,
                  type: :string,
                  column_fallback: false,
                  fallbacks: false
 
       extend FriendlyId
+
       friendly_id entity.descriptor.field_name || :to_param
 
       scope :with_string_translations, -> { includes(:string_translations) }

@@ -5,6 +5,7 @@ module Schematics
   module Versions
     class Revert
       include Interactable
+
       delegate :version, to: :context, private: true
 
       before do

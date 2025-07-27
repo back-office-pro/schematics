@@ -6,6 +6,7 @@ module Schematics
     class Digest < Attribute
       include Behaviours::Migratable
       include Behaviours::Fillable
+
       DEFAULT = '&z%4^~+FS0TQxL8'
       REGEX = /
         (?=.*\d)           # contain at least one number

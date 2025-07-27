@@ -5,6 +5,7 @@ module Schematics
   module Resources
     class Archive
       include Interactable
+
       delegate :resource, to: :context, private: true
 
       before { resource.paper_trail_event = :archive }

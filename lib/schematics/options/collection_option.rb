@@ -6,6 +6,7 @@ module Schematics
     # :reek:Attribute
     class CollectionOption < Option
       include ::ActiveModel::API
+
       attr_accessor :collection
 
       def input_type = :select

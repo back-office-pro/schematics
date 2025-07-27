@@ -5,6 +5,7 @@ module Schematics
   module Resources
     class Destroy
       include Interactable
+
       delegate :resource, to: :context, private: true
 
       def call

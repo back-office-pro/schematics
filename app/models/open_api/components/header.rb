@@ -6,6 +6,7 @@ module OpenAPI
     # :reek:Attribute
     class Header
       include ::ActiveModel::API
+
       attr_accessor :name, :type, :description
 
       def to_h = { name.to_sym => { description:, schema: } }

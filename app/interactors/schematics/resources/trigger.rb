@@ -5,6 +5,7 @@ module Schematics
   module Resources
     class Trigger
       include Interactable
+
       delegate :resource, :event, to: :context, private: true
       delegate :name, :suffixed_name, to: :event, prefix: true, private: true
 

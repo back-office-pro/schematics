@@ -5,6 +5,7 @@ module Core
   module Migrations
     class GenerateFixture
       include Schematics::Progressable
+
       delegate :migration, to: :context, private: true
 
       progressable migration: 100

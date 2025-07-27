@@ -7,6 +7,7 @@ module Schematics
     # :reek:Attribute
     class Session
       include ::ActiveModel::API
+
       delegate :remote_ip, :user_agent, to: :request
       attr_accessor :request
 

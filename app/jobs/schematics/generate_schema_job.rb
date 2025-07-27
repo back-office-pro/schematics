@@ -5,6 +5,7 @@ module Schematics
   class GenerateSchemaJob < ApplicationJob
     include Shardable
     include Quietable
+
     queue_as :critical
 
     discard_on Faraday::UnauthorizedError

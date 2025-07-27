@@ -5,6 +5,7 @@ module Schematics
   class RestoreBackupJob < ApplicationJob
     include Shardable
     include Quietable
+
     queue_as :critical
 
     discard_on ActiveStorage::FileNotFoundError

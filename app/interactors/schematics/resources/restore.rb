@@ -5,6 +5,7 @@ module Schematics
   module Resources
     class Restore
       include Interactable
+
       delegate :resource, to: :context, private: true
 
       before { resource.paper_trail_event = :restore }

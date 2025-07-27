@@ -5,6 +5,7 @@ module Schematics
   module Resources
     class Create
       include Interactable
+
       delegate :resource, :draft, to: :context, private: true
       delegate :really_destroy!,
                to: 'draft&.unstale',
