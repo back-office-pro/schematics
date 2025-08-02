@@ -6,7 +6,7 @@ module Schematics
     module Settings
       class Component < ApplicationComponent
         delegate :listable_elements, :table_name, :model_class, to: :entity
-        use_helpers :viewers, :viewer
+        delegate :viewers, :viewer, to: :helpers, private: true
         option :entity
 
         def title = t('.title')

@@ -7,7 +7,7 @@ module Schematics
       class Component < ApplicationComponent
         delegate :class, to: :resource, prefix: :model, private: true
         delegate :entity, to: :model_class, private: true
-        use_helpers :viewers
+        delegate :viewers, to: :helpers, private: true
         option :resource
 
         def data = {

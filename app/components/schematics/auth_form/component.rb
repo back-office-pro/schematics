@@ -5,6 +5,7 @@ module Schematics
   module AuthForm
     class Component < ApplicationComponent
       delegate :email, :demo?, to: '::Subscription', private: true
+      delegate :bootstrap_form_with, to: :helpers
 
       def url = resources_path(::Session)
 

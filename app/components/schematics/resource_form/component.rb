@@ -5,7 +5,10 @@ module Schematics
   module ResourceForm
     class Component < ApplicationComponent
       delegate :persisted?, to: :@resource, private: true
-      use_helpers :rich_textarea_tag, :turbo_frame_request?
+      delegate :rich_textarea_tag,
+               :turbo_frame_request?,
+               :bootstrap_form_with,
+               to: :helpers
 
       def initialize(resource:, url: nil, cancel_path: nil, attributes: nil)
         super

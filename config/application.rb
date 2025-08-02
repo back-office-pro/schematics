@@ -81,8 +81,6 @@ module BackOffice
     config.mission_control.jobs.show_console_help = false
 
     # ViewComponent
-    config.view_component.capture_compatibility_patch_enabled = true
-    config.view_component.test_controller = 'Schematics::ApplicationController'
     config.view_component.show_previews = false
 
     # Active Storage

@@ -6,6 +6,7 @@ module Schematics
     class Component < ApplicationComponent
       delegate :new_record?, :errors, to: :resource
       delegate :collection, to: 'Schematics::Attributes::Attribute', prefix: :attributes
+      delegate :bootstrap_form_with, to: :helpers
       option :resource
 
       def data = { 'auto-save-target': 'form', 'bs-parent': '#selector' }

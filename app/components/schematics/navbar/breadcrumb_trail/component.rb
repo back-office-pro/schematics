@@ -5,7 +5,7 @@ module Schematics
   module Navbar
     module BreadcrumbTrail
       class Component < ApplicationComponent
-        use_helpers :breadcrumb_trail
+        delegate :breadcrumb_trail, to: :helpers
 
         def title = 'Control+h'
 

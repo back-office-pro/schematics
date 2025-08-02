@@ -3,14 +3,14 @@
     .card-header.px-1.py-2
       = __card_heading(icon:, title: @chart)
     .card-body.p-3.pt-1.pb-2
-      = public_send type,
-                    resource_path(@chart, format: :json),
-                    id: css_id,
-                    xtitle:,
-                    ytitle:,
-                    suffix:,
-                    colors:,
-                    empty:,
-                    height: '300px',
-                    download: { filename: },
-                    dataset: { borderWidth: border_width }
+      = helpers.public_send type,
+                            resource_path(@chart, format: :json),
+                            id: css_id,
+                            xtitle:,
+                            ytitle:,
+                            suffix:,
+                            colors:,
+                            empty:,
+                            height: '300px',
+                            download: { filename: },
+                            dataset: { borderWidth: border_width }

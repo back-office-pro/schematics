@@ -5,6 +5,7 @@ module Schematics
   module OneTimePasswordForm
     class Component < ApplicationComponent
       delegate :company_name, to: '::Configuration', private: true
+      delegate :bootstrap_form_with, to: :helpers
 
       alias model current_user
 
