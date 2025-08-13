@@ -4,7 +4,7 @@
 Rails.configuration.exceptions_app = Rails.application.routes
 
 Rails.application.routes.draw do
-  direct(:website) { Server.url }
+  direct(:website) { |kwargs| URI::HTTPS.build(host: 'www.back-office.pro', **kwargs).to_s }
   mount MissionControl::Jobs::Engine, at: '/internal/jobs'
   scope module: :schematics do
     localized do

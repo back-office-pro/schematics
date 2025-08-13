@@ -15,7 +15,6 @@ describe Server do
     it { is_expected.not_to be_ssl }
 
     its(:domain) { is_expected.to eq('localhost.me') }
-    its(:url) { is_expected.to eq('https://www.localhost.me') }
   end
 
   context 'when environment is production' do
@@ -24,6 +23,5 @@ describe Server do
     it { is_expected.not_to be_ssl }
 
     its(:domain) { is_expected.to eq('back-office.pro') }
-    its(:url) { is_expected.to eq('https://www.back-office.pro') }
   end
 end

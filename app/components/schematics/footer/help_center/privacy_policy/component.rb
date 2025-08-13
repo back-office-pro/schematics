@@ -6,8 +6,6 @@ module Schematics
     module HelpCenter
       module PrivacyPolicy
         class Component < ApplicationComponent
-          delegate :url, to: '::Server'
-
           def title = t('.text')
 
           def icon = :user_secret
