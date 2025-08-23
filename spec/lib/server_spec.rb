@@ -14,7 +14,7 @@ describe Server do
 
     it { is_expected.not_to be_ssl }
 
-    its(:domain) { is_expected.to eq('localhost.me') }
+    its(:domain) { is_expected.to eq('localhost') }
   end
 
   context 'when environment is production' do

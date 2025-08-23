@@ -10,9 +10,6 @@ Rails.application.configure do
   config.eager_load = false
   config.server_timing = true
 
-  # Security
-  config.hosts = [Server.domain.dup.prepend('.')]
-
   # File Watcher
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
@@ -62,8 +59,11 @@ Rails.application.configure do
   # Assets
   config.assets.quiet = true
 
+  # Solid Cache
+  config.solid_cache.connects_to = { database: { writing: :cache } }
+
   # Solid Queue
-  config.solid_queue.connects_to = { shards: { queue: { writing: :queue } } }
+  config.solid_queue.connects_to = { database: { writing: :queue } }
 
   # Cache
   config.cache_store =

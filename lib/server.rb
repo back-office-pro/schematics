@@ -5,11 +5,7 @@ class Server
   DEFAULT_PORT = 3000
 
   class << self
-    def domain
-      return 'localhost.me' if Rails.env.development?
-
-      ENV.fetch('HOST', 'back-office.pro')
-    end
+    def domain = ENV.fetch('HOST', 'localhost')
 
     def ssl? = Pathname
       .new("/etc/letsencrypt/live/#{domain}")

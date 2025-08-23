@@ -4,13 +4,11 @@
 module Schematics
   class UserMailerPreview < ActionMailer::Preview
     def new_account
-      user = ::User.take
-      UserMailer.new_account(user.current_shard, user.id)
+      UserMailer.new_account(::User.take)
     end
 
     def password_reset
-      user = ::User.take
-      UserMailer.password_reset(user.current_shard, user.id)
+      UserMailer.password_reset(::User.take)
     end
   end
 end

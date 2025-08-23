@@ -4,9 +4,7 @@
 module Schematics
   class EmailingMailerPreview < ActionMailer::Preview
     def dispatch
-      emailing = ::Emailing.take
-      user = ::User.take
-      EmailingMailer.dispatch(emailing.current_shard, emailing.id, user.id)
+      EmailingMailer.dispatch(::Emailing.take, ::User.take)
     end
   end
 end

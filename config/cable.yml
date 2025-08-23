@@ -1,9 +1,8 @@
 development:
   adapter: solid_cable
   connects_to:
-    shards:
-      cable:
-        writing: cable
+    database:
+      writing: cable
 
 test:
   adapter: test
@@ -11,6 +10,5 @@ test:
 production:
   adapter: solid_cable
   connects_to:
-    shards:
-      cable:
-        writing: cable
+    database:
+      writing: cable

@@ -3,7 +3,6 @@
 
 module Schematics
   class ImportJob < ApplicationJob
-    include Shardable
     include Quietable
 
     queue_as :default
@@ -12,12 +11,13 @@ module Schematics
 
     after_discard do |job|
       PaperTrail.request(enabled: false) do
-        ::Import.find(job.arguments.second).state_error!
+        suppress(ActiveRecord::RecordNotFound) do
+          job.arguments.first.reload.state_error!
+        end
       end
     end
 
-    def perform(_shard, import_id)
-      import = ::Import.find(import_id)
+    def perform(import)
       return unless import.state_pending?
 
       I18n.with_locale(import.locale) do

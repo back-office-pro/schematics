@@ -25,6 +25,8 @@ module Schematics
         one_time_password
         paper_trail_version
         password_reset
+        schema_cache
+        server
         solid_cable_message
         solid_cache_entry
         solid_queue_blocked_execution
@@ -185,14 +187,9 @@ module Schematics
         validatable_elements.filter_map(&:validators)
       end
 
-      def module_name
-        schema.module_name unless core?
+      def class_name
+        name.camelize
       end
-
-      def class_name = [module_name, name]
-        .compact
-        .map(&:camelize)
-        .join('::')
 
       def model_class
         class_name.safe_constantize

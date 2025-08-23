@@ -6,8 +6,7 @@ module Core
     class Rollback
       include Interactor::Organizer
 
-      organize Copy,
-               Generate,
+      organize Generate,
                MigrateDatabase,
                RestoreBackup,
                CleanSearchIndexes,

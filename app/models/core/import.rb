@@ -32,6 +32,6 @@ class ::Import < Schematics::ApplicationRecord
   private
 
   def perform_import_job
-    Schematics::ImportJob.perform_later(current_shard, id)
+    Schematics::ImportJob.perform_later(self)
   end
 end

@@ -6,9 +6,13 @@ module Core
     class Create
       include Interactor
 
-      delegate :root, :env, to: '::Rails', private: true
-      delegate :create_and_upload!, :current_shard, to: '::ActiveStorage::Blob', private: true
-      delegate :adapter_name, to: 'ActiveRecord::Base.lease_connection', private: true
+      delegate :root, :env, :configuration, to: '::Rails', private: true
+      delegate :database_configuration, to: :configuration, private: true
+      delegate :create_and_upload!, to: '::ActiveStorage::Blob', private: true
+      delegate :current_database,
+               :adapter_name,
+               to: 'ActiveRecord::Base.lease_connection',
+               private: true
 
       def call
         IO.popen(command.compact.join(' ')) do |io|
@@ -27,11 +31,9 @@ module Core
         end
       end
 
-      def db_path = root.join('storage', current_shard.to_s, "#{env}.sqlite3")
+      def db_path = root.join(database_configuration.dig(env, 'primary', 'database'))
 
       def tables = Array(context.tables)
-
-      def current_database = "#{current_shard}_#{env}"
 
       def key = File.join(
         'backups',

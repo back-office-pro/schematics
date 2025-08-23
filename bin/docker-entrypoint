@@ -1,5 +1,12 @@
 #!/bin/bash -e
 
+RUN bin/rails schematics:db:encryption:init
+RUn bin/rails db:create
+RUN bin/rails schematics:generate
+RUN bin/rails db:schema:load
+RUN bin/rails db:migrate
+RUN bin/rails db:seed
+
 service clamav-freshclam start
 service clamav-daemon start
 

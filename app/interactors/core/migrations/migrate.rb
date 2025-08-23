@@ -6,8 +6,7 @@ module Core
     class Migrate
       include Interactor::Organizer
 
-      organize Copy,
-               Generate,
+      organize Generate,
                GenerateBackup,
                MigrateDatabase,
                CleanSearchIndexes,

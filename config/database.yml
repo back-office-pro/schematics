@@ -1,67 +1,58 @@
-postgresql: &postgresql
-  adapter: postgresql
-  encoding: unicode
-  max_connections: <%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>
-  connect_timeout: 1
-  checkout_timeout: 1
-  variables:
-    statement_timeout: <%= ENV.fetch('STATEMENT_TIMEOUT', '5s') %>
-
-sqlite3: &sqlite3
+default: &default
   adapter: sqlite3
   max_connections: <%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>
   timeout: 5000
 
 development:
   primary:
-    <<: *postgresql
-    database: <%= ENV.fetch('DATABASE', 'demo') %>_development
-    migrations_paths: storage/<%= ENV.fetch('DATABASE', 'demo') %>/migrate
+    <<: *default
+    database: storage/development.sqlite3
+    migrations_paths: storage/migrate
   search:
-    <<: *sqlite3
-    database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/development_search.sqlite3
-    migrations_paths: storage/<%= ENV.fetch('DATABASE', 'demo') %>/search_migrate
+    <<: *default
+    database: storage/development_search.sqlite3
+    migrations_paths: storage/search_migrate
   cable:
-    <<: *postgresql
-    database: development_cable
+    <<: *default
+    database: storage/development_cable.sqlite3
     migrations_paths: storage/cable_migrate
   cache:
-    <<: *sqlite3
-    database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/development_cache.sqlite3
-    migrations_paths: storage/<%= ENV.fetch('DATABASE', 'demo') %>/cache_migrate
+    <<: *default
+    database: storage/development_cache.sqlite3
+    migrations_paths: storage/cache_migrate
   queue:
-    <<: *postgresql
-    database: development_queue
+    <<: *default
+    database: storage/development_queue.sqlite3
     migrations_paths: storage/queue_migrate
 
 test:
   primary:
-    <<: *sqlite3
-    database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/test.sqlite3
-    migrations_paths: storage/<%= ENV.fetch('DATABASE', 'demo') %>/migrate
+    <<: *default
+    database: storage/test.sqlite3
+    migrations_paths: storage/migrate
   search:
-    <<: *sqlite3
-    database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/test_search.sqlite3
-    migrations_paths: storage/<%= ENV.fetch('DATABASE', 'demo') %>/search_migrate
+    <<: *default
+    database: storage/test_search.sqlite3
+    migrations_paths: storage/search_migrate
 
 production:
   primary:
-    <<: *postgresql
-    database: <%= ENV.fetch('DATABASE', 'demo') %>_production
-    migrations_paths: storage/<%= ENV.fetch('DATABASE', 'demo') %>/migrate
+    <<: *default
+    database: storage/production.sqlite3
+    migrations_paths: storage/migrate
   search:
-    <<: *sqlite3
-    database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/production_search.sqlite3
-    migrations_paths: storage/<%= ENV.fetch('DATABASE', 'demo') %>/search_migrate
+    <<: *default
+    database: storage/production_search.sqlite3
+    migrations_paths: storage/search_migrate
   cable:
-    <<: *postgresql
-    database: production_cable
+    <<: *default
+    database: storage/production_cable.sqlite3
     migrations_paths: storage/cable_migrate
   cache:
-    <<: *sqlite3
-    database: storage/<%= ENV.fetch('DATABASE', 'demo') %>/production_cache.sqlite3
-    migrations_paths: storage/<%= ENV.fetch('DATABASE', 'demo') %>/cache_migrate
+    <<: *default
+    database: storage/production_cache.sqlite3
+    migrations_paths: storage/cache_migrate
   queue:
-    <<: *postgresql
-    database: production_queue
+    <<: *default
+    database: storage/production_queue.sqlite3
     migrations_paths: storage/queue_migrate

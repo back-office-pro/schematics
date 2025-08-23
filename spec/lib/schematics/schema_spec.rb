@@ -8,13 +8,6 @@ describe Schematics::Schema do
 
   it { is_expected.to be_valid }
   its(:model_classes) { is_expected.to be_empty }
-  its(:module_name) { is_expected.to eq('Models::Default') }
-
-  its(:to_str) do
-    is_expected.to eq <<~RUBY
-      module ::Models::Default; end
-    RUBY
-  end
 
   describe '#find_entity_by_name' do
     subject { schema.find_entity_by_name('user') }
@@ -27,7 +20,6 @@ describe Schematics::Schema do
       [
         {
           name: 'user',
-          options: { core: true },
           attributes: [
             {
               name: 'role',
@@ -37,7 +29,6 @@ describe Schematics::Schema do
         },
         {
           name: 'role',
-          options: { core: true },
           attributes: [
             {
               name: 'name',
@@ -47,7 +38,6 @@ describe Schematics::Schema do
         },
         {
           name: 'message',
-          options: { core: true },
           attributes: [
             {
               name: 'author',

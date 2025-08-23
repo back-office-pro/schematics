@@ -31,7 +31,7 @@ RSpec.describe Schematics::Version do
     expect { version.save! }
       .to have_enqueued_job(Schematics::TriggerWebhookJob)
       .exactly(:once)
-      .with(:default, String)
+      .with(WebhookRequest)
       .on_queue('low')
       .at(:no_wait)
   end

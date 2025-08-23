@@ -6,8 +6,17 @@ require 'rails_helper'
 RSpec.describe Configuration do
   include Schematics::Specs::Model
 
+  before do
+    allow(BootstrapEmail).to receive(:clear_sass_cache!).and_return(nil)
+  end
+
   after do
     ActiveStorage::Blob.service = ActiveStorage::Blob.services.fetch(:test)
+  end
+
+  it 'clears bootstrap email cache after update' do
+    record.tap(&:save!).update!(theme_color: '#ffffff')
+    expect(BootstrapEmail).to have_received(:clear_sass_cache!)
   end
 
   it 'updates the storage service after update' do

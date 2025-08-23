@@ -48,13 +48,6 @@ module BackOffice
     config.active_record.encryption.extend_queries = true
     config.active_record.queues.destroy = :low
 
-    # Active Record Encryption
-    if credentials.active_record_encryption
-      config.active_record.encryption.primary_key = credentials.active_record_encryption.primary_key
-      config.active_record.encryption.deterministic_key = credentials.active_record_encryption.deterministic_key # rubocop:disable Layout/LineLength
-      config.active_record.encryption.key_derivation_salt = credentials.active_record_encryption.key_derivation_salt # rubocop:disable Layout/LineLength
-    end
-
     # Mailer
     config.action_mailer.preview_paths << root.join('spec', 'mailers', 'previews')
     config.action_mailer.smtp_settings = { open_timeout: 1, read_timeout: 1 }

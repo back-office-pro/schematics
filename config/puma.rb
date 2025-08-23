@@ -8,4 +8,4 @@ port ENV.fetch('PORT', ::Server::DEFAULT_PORT) # rubocop:disable Style/Redundant
 bind ENV.fetch('SOCKET', "unix://#{Rails.root.join('tmp/sockets/puma.sock')}")
 
 plugin :tmp_restart
-plugin :solid_queue if Rails.env.development?
+plugin :solid_queue

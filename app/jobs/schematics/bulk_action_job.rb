@@ -3,15 +3,12 @@
 
 module Schematics
   class BulkActionJob < ApplicationJob
-    include Shardable
-
     limits_concurrency key: ->(*args) { args }, on_conflict: :discard
     queue_as :default
 
-    def perform(_shard, whodunnit, model_name, ids)
+    def perform(whodunnit, model_class, ids)
       PaperTrail.request(whodunnit:) do
-        model_name
-          .constantize
+        model_class
           .preload_all
           .where(id: ids)
           .find_each { |resource| Resources::Archive.call(resource:) }

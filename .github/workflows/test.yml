@@ -17,10 +17,11 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get -yqq install libvips-dev ffmpeg graphviz
-      - name: Install app generator gems
-        run: gem install rails -v 8.0.2
       - name: Generate test tenant
-        run: bin/schematics demo
+        run: |
+          bin/rails db:create
+          bin/rails schematics:generate
+          bin/rails db:migrate
       - name: Run ability tests
         if: always()
         run: bundle exec rspec spec/abilities

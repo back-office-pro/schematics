@@ -1,21 +1,16 @@
 ---
 schematics/clean_data_job:
-  class: Schematics::RecurringJob
-  args: CleanDataJob
+  class: Schematics::CleanDataJob
   schedule: every hour
 schematics/generate_backup_job:
-  class: Schematics::RecurringJob
-  args: GenerateBackupJob
+  class: Schematics::GenerateBackupJob
   schedule: every day at midnight
 schematics/load_subscription_job:
-  class: Schematics::RecurringJob
-  args: LoadSubscriptionJob
+  class: Schematics::LoadSubscriptionJob
   schedule: every day at midnight
 schematics/migrate_core_job:
-  class: Schematics::RecurringJob
-  args: MigrateCoreJob
+  class: Schematics::MigrateCoreJob
   schedule: every day at 1am
 schematics/migrate_schema_job:
-  class: Schematics::RecurringJob
-  args: MigrateSchemaJob
+  class: Schematics::MigrateSchemaJob
   schedule: every day at 2am

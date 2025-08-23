@@ -1,5 +1,4 @@
-/log/**/*.log
-/log/**/*.log.*
+/log/*
 /pkg
 /coverage
 /config/credentials/*.key
@@ -8,7 +7,7 @@
 /tmp
 /doc
 /.yardoc
-/storage
+/storage/*
 /db/search_schema.rb
 /db/schema.rb
 /public/assets

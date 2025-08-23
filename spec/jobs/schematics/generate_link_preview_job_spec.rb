@@ -4,7 +4,6 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::GenerateLinkPreviewJob do
-  let(:shard) { :default }
   let(:url) { 'https://www.anywhere.com' }
   let(:body) do
     <<~HTML
@@ -20,22 +19,21 @@ RSpec.describe Schematics::GenerateLinkPreviewJob do
 
   before { stub_request(:get, url).to_return(body:, status: 200) }
 
-  it { is_expected.to be_a(Schematics::Shardable) }
   it { is_expected.to be_a(Schematics::Quietable) }
 
   describe '#perform_later' do
     it 'queues the job' do
-      expect { described_class.perform_later(shard, url) }
+      expect { described_class.perform_later(url) }
         .to have_enqueued_job(described_class)
         .exactly(:once)
-        .with(shard, url)
+        .with(url)
         .on_queue('low')
         .at(:no_wait)
     end
   end
 
   describe '#perform_now' do
-    subject(:perform_now) { described_class.perform_now(shard, url) }
+    subject(:perform_now) { described_class.perform_now(url) }
 
     it 'creates the link preview' do
       expect { perform_now }

@@ -45,10 +45,7 @@ RUN yarn install
 RUN rails assets:precompile
 
 RUN rm -rf /schematics/config/credentials/development*
-RUN rm -rf /schematics/config/credentials/production*
 RUN rm -rf /schematics/config/credentials/test*
-
-RUN bin/schematics on-premise
 
 ENTRYPOINT ["/app/bin/docker-entrypoint"]
 

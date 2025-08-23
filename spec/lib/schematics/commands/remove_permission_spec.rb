@@ -21,7 +21,7 @@ describe Schematics::Commands::RemovePermission do
 
     its([0]) do
       is_expected.to have_attributes(
-        name: 'Models::Default::Client',
+        name: 'Client',
         options: a_hash_including(action: attribute),
         behavior: :revoke
       )

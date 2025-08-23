@@ -14,7 +14,7 @@ RSpec.describe WebhookRequest do
     expect { record.retry! }
       .to have_enqueued_job(Schematics::TriggerWebhookJob)
       .exactly(:once)
-      .with(:default, record.id)
+      .with(record)
       .on_queue('low')
       .at(:no_wait)
   end
