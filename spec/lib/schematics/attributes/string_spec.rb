@@ -87,7 +87,7 @@ describe Schematics::Attributes::String do
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :last_name, {uniqueness_with_deleted: {case_sensitive: true, allow_blank: true}}
+        validates :last_name, {:uniqueness_with_deleted=>{:case_sensitive=>true, :allow_blank=>true}}
       RUBY
     end
   end
@@ -100,7 +100,7 @@ describe Schematics::Attributes::String do
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :last_name, {presence: true}
+        validates :last_name, {:presence=>true}
       RUBY
     end
   end

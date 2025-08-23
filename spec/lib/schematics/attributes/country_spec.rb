@@ -64,7 +64,7 @@ describe Schematics::Attributes::Country do
 
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
-      validates :country, {inclusion: {in: ["FR"], allow_blank: true}}
+      validates :country, {:inclusion=>{:in=>["FR"], :allow_blank=>true}}
     RUBY
   end
 
@@ -79,7 +79,7 @@ describe Schematics::Attributes::Country do
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :country, {presence: true, inclusion: {in: ["FR"], allow_blank: false}}
+        validates :country, {:presence=>true, :inclusion=>{:in=>["FR"], :allow_blank=>false}}
       RUBY
     end
   end

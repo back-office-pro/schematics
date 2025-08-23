@@ -39,7 +39,7 @@ describe Schematics::Entities::Entity do
   its(:joins) { is_expected.to be_empty }
   its(:includes) { is_expected.to eq([rich_text_content: [embeds_attachments: :blob]]) }
   its(:preload) { is_expected.to eq([record: :string_translations]) }
-  its(:digest) { is_expected.to eq('33a807f4ffb50300d5ab2226fbf75527') }
+  its(:digest) { is_expected.to eq('950d5abb604834b4815b3c40634a63ee') }
   its(:to_spec) { is_expected.to eq('We manage **discussions**') }
 
   its(:available_options) do

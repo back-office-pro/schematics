@@ -39,7 +39,7 @@ describe Schematics::Validators do
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        validates :avatar, {attached: true, size: {less_than: 2097152}}
+        validates :avatar, {:attached=>true, :size=>{:less_than=>2097152}}
       RUBY
     end
   end

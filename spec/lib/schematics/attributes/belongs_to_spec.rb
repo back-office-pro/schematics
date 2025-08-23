@@ -64,23 +64,23 @@ describe Schematics::Attributes::BelongsTo do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      scope :with_user, -> { includes([{user: :string_translations}]) }
-      scope :with_user_avatar, -> { includes({user: [{avatar_attachment: [{blob: :variant_records}]}]}) }
-      scope :with_user_role, -> { includes({user: [{role: :string_translations}]}) }
-      scope :with_user_teams, -> { includes({user: [:teams]}) }
-      scope :with_user_sent_messages, -> { includes({user: [:sent_messages]}) }
-      scope :with_user_imports, -> { includes({user: [:imports]}) }
-      scope :with_user_searches, -> { includes({user: [:searches]}) }
-      scope :with_user_user_drafts, -> { includes({user: [:user_drafts]}) }
-      scope :with_user_sessions, -> { includes({user: [:sessions]}) }
-      scope :with_user_migrations, -> { includes({user: [:migrations]}) }
-      scope :with_user_author_comments, -> { includes({user: [:author_comments]}) }
-      scope :with_user_requested_tasks, -> { includes({user: [:requested_tasks]}) }
-      scope :with_user_created_meetings, -> { includes({user: [:created_meetings]}) }
-      scope :with_user_sent_emails, -> { includes({user: [:sent_emails]}) }
-      scope :with_user_record_drafts, -> { includes({user: [:record_drafts]}) }
-      scope :with_user_record_comments, -> { includes({user: [:record_comments]}) }
-      scope :with_user_record_emailings, -> { includes({user: [:record_emailings]}) }
+      scope :with_user, -> { includes([{:user=>:string_translations}]) }
+      scope :with_user_avatar, -> { includes({:user=>[{:avatar_attachment=>[{:blob=>:variant_records}]}]}) }
+      scope :with_user_role, -> { includes({:user=>[{:role=>:string_translations}]}) }
+      scope :with_user_teams, -> { includes({:user=>[:teams]}) }
+      scope :with_user_sent_messages, -> { includes({:user=>[:sent_messages]}) }
+      scope :with_user_imports, -> { includes({:user=>[:imports]}) }
+      scope :with_user_searches, -> { includes({:user=>[:searches]}) }
+      scope :with_user_user_drafts, -> { includes({:user=>[:user_drafts]}) }
+      scope :with_user_sessions, -> { includes({:user=>[:sessions]}) }
+      scope :with_user_migrations, -> { includes({:user=>[:migrations]}) }
+      scope :with_user_author_comments, -> { includes({:user=>[:author_comments]}) }
+      scope :with_user_requested_tasks, -> { includes({:user=>[:requested_tasks]}) }
+      scope :with_user_created_meetings, -> { includes({:user=>[:created_meetings]}) }
+      scope :with_user_sent_emails, -> { includes({:user=>[:sent_emails]}) }
+      scope :with_user_record_drafts, -> { includes({:user=>[:record_drafts]}) }
+      scope :with_user_record_comments, -> { includes({:user=>[:record_comments]}) }
+      scope :with_user_record_emailings, -> { includes({:user=>[:record_emailings]}) }
       belongs_to :user,
                  -> { with_deleted },
                  class_name: 'Models::Default::User',
@@ -102,23 +102,23 @@ describe Schematics::Attributes::BelongsTo do
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        scope :with_user, -> { includes([{user: :string_translations}]) }
-        scope :with_user_avatar, -> { includes({user: [{avatar_attachment: [{blob: :variant_records}]}]}) }
-        scope :with_user_role, -> { includes({user: [{role: :string_translations}]}) }
-        scope :with_user_teams, -> { includes({user: [:teams]}) }
-        scope :with_user_sent_messages, -> { includes({user: [:sent_messages]}) }
-        scope :with_user_imports, -> { includes({user: [:imports]}) }
-        scope :with_user_searches, -> { includes({user: [:searches]}) }
-        scope :with_user_user_drafts, -> { includes({user: [:user_drafts]}) }
-        scope :with_user_sessions, -> { includes({user: [:sessions]}) }
-        scope :with_user_migrations, -> { includes({user: [:migrations]}) }
-        scope :with_user_author_comments, -> { includes({user: [:author_comments]}) }
-        scope :with_user_requested_tasks, -> { includes({user: [:requested_tasks]}) }
-        scope :with_user_created_meetings, -> { includes({user: [:created_meetings]}) }
-        scope :with_user_sent_emails, -> { includes({user: [:sent_emails]}) }
-        scope :with_user_record_drafts, -> { includes({user: [:record_drafts]}) }
-        scope :with_user_record_comments, -> { includes({user: [:record_comments]}) }
-        scope :with_user_record_emailings, -> { includes({user: [:record_emailings]}) }
+        scope :with_user, -> { includes([{:user=>:string_translations}]) }
+        scope :with_user_avatar, -> { includes({:user=>[{:avatar_attachment=>[{:blob=>:variant_records}]}]}) }
+        scope :with_user_role, -> { includes({:user=>[{:role=>:string_translations}]}) }
+        scope :with_user_teams, -> { includes({:user=>[:teams]}) }
+        scope :with_user_sent_messages, -> { includes({:user=>[:sent_messages]}) }
+        scope :with_user_imports, -> { includes({:user=>[:imports]}) }
+        scope :with_user_searches, -> { includes({:user=>[:searches]}) }
+        scope :with_user_user_drafts, -> { includes({:user=>[:user_drafts]}) }
+        scope :with_user_sessions, -> { includes({:user=>[:sessions]}) }
+        scope :with_user_migrations, -> { includes({:user=>[:migrations]}) }
+        scope :with_user_author_comments, -> { includes({:user=>[:author_comments]}) }
+        scope :with_user_requested_tasks, -> { includes({:user=>[:requested_tasks]}) }
+        scope :with_user_created_meetings, -> { includes({:user=>[:created_meetings]}) }
+        scope :with_user_sent_emails, -> { includes({:user=>[:sent_emails]}) }
+        scope :with_user_record_drafts, -> { includes({:user=>[:record_drafts]}) }
+        scope :with_user_record_comments, -> { includes({:user=>[:record_comments]}) }
+        scope :with_user_record_emailings, -> { includes({:user=>[:record_emailings]}) }
         belongs_to :user,
                    -> { with_deleted },
                    class_name: 'Models::Default::User',
@@ -144,7 +144,7 @@ describe Schematics::Attributes::BelongsTo do
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        scope :with_user, -> { preload([{user: :string_translations}]) }
+        scope :with_user, -> { preload([{:user=>:string_translations}]) }
         belongs_to :user,
                    -> { with_deleted },
                    foreign_key: 'user_id',
