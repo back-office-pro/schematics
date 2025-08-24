@@ -100,7 +100,7 @@ ActiveSupport.on_load(:active_storage_attachment) do
     .application
     .routes
     .url_helpers
-    .rails_blob_url(self)
+    .rails_blob_url(self, **default_url_options)
 end
 
 ActiveSupport.on_load(:active_storage_blob) do
