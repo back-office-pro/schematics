@@ -7,6 +7,7 @@ RSpec.describe Schematics::BulkActionJob do
   include_context 'with user'
 
   let(:model_class) { User }
+  let(:ids) { [user.id] }
 
   describe '#perform_later' do
     it 'queues the job' do
