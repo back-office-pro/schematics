@@ -35,7 +35,7 @@ class ::Configuration < Schematics::ApplicationRecord
     private
 
     def port
-      3000 if Rails.env.development?
+      3000 if Rails.env.local?
     end
   end
 
@@ -50,7 +50,7 @@ class ::Configuration < Schematics::ApplicationRecord
     BootstrapEmail.clear_sass_cache! if theme_color_previously_changed?
   end
 
-  def storage_configurations = ActiveSupport::ConfigurationFile # rubocop:disable Metrics/CyclomaticComplexity
+  def storage_configurations = ActiveSupport::ConfigurationFile # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     .parse(Rails.root.join('config/storage.yml'), symbolize_names: true)
     .tap do |config|
       config[:amazon][:bucket] = aws_bucket if aws_bucket
@@ -63,7 +63,7 @@ class ::Configuration < Schematics::ApplicationRecord
       config[:google][:credentials][:private_key] = gcs_private_key if gcs_private_key
     end
 
-  def storage_service # rubocop:disable Metrics/CyclomaticComplexity
+  def storage_service # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     return :amazon if aws_bucket && aws_access_key_id && aws_secret_access_key && aws_region
     return :microsoft if azure_storage_account_name && azure_storage_access_key
     return :google if gcs_private_key_id && gcs_private_key
