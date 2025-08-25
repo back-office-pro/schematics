@@ -5,8 +5,7 @@ module Schematics
   class PDFSerializer
     delegate :render, to: :renderer, private: true
     delegate :human_name, :route_params, to: :model_class, private: true
-    delegate :default_url_options, to: :@resource, private: true
-    delegate :ssl?, to: '::Server', private: true
+    delegate :company_website, to: ::Configuration, private: true
     delegate :key_generator, to: '::Rails.application', private: true
 
     def initialize(resource)
@@ -16,7 +15,7 @@ module Schematics
 
     memoize def content
       page = browser.create_page
-      page.content = template.gsub(%r{/assets/}, "#{assets_url}/assets/")
+      page.content = template.gsub(%r{/assets/}, "#{company_website}/assets/")
       page.network.wait_for_idle(timeout: 30)
       page.pdf(**pdf_options)
     ensure
@@ -44,11 +43,6 @@ module Schematics
     def model_class
       @resource.class
     end
-
-    def assets_url = URI
-      .const_get(ssl? ? :HTTPS : :HTTP)
-      .build(**default_url_options)
-      .to_s
 
     def controller_name = "::#{model_name.pluralize}Controller"
 

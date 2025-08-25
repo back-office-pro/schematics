@@ -1,13 +1,10 @@
 #!/bin/bash -e
 
-bin/rails schematics:db:encryption:init
+bin/rails db:drop
 bin/rails db:create
+rm -rf db/migrate/20*.rb
 bin/rails schematics:generate
 bin/rails db:schema:load
 bin/rails db:migrate
 bin/rails db:seed
-
-service clamav-freshclam start
-service clamav-daemon start
-
-exec "${@}"
+bin/rails db:fixtures:load FIXTURES_PATH='spec/fixtures'

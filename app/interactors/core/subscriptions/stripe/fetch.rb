@@ -10,7 +10,6 @@ module Core
         delegate :secret_key, to: 'Rails.application.credentials.stripe', private: true
         delegate :name, to: :product, allow_nil: true, prefix: true, private: true
         delegate :customers, :products, to: 'client.v1', private: true
-        delegate :current_shard, to: '::Subscription', private: true
         delegate :logger, to: '::Rails', private: true
         delegate :id,
                  :email,
@@ -45,7 +44,7 @@ module Core
         memoize def product = product_id && products.retrieve(product_id)
 
         memoize def customer = customers
-          .search(query: "name:'#{current_shard}'", expand: ['data.subscriptions'])
+          .search(query: "name:'demo'", expand: ['data.subscriptions'])
           .data
           .first
 

@@ -5,6 +5,7 @@ en:
       configuration:
         available_locales: Available locales
         aws_access_key_id: Amazon Web Services access key ID
+        aws_bucket: Amazon Web Services bucket
         aws_region: Amazon Web Services region
         aws_secret_access_key: Amazon Web Services secret access key
         azure_storage_access_key: Microsoft Azure storage access key

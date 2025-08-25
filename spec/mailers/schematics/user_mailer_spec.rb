@@ -17,7 +17,7 @@ RSpec.describe Schematics::UserMailer do
     end
 
     its(:to) { is_expected.to eq(['john.doe@nowhere.com']) }
-    its(:from) { is_expected.to eq(['no-reply@back-office.pro']) }
+    its(:from) { is_expected.to eq(['no-reply@localhost']) }
     its(:subject) { is_expected.to eq(expected_subject) }
     its('text_part.body.encoded') { is_expected.to start_with(expected_body) }
   end
@@ -33,7 +33,7 @@ RSpec.describe Schematics::UserMailer do
     end
 
     its(:to) { is_expected.to eq(['john.doe@nowhere.com']) }
-    its(:from) { is_expected.to eq(['no-reply@back-office.pro']) }
+    its(:from) { is_expected.to eq(['no-reply@localhost']) }
     its(:subject) { is_expected.to eq(expected_subject) }
     its('text_part.body.encoded') { is_expected.to start_with(expected_body) }
   end

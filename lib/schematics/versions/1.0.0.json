@@ -495,6 +495,14 @@
         }
       },
       {
+        "id": "ba75b2b2-cf49-426c-8752-4c0d601cee17",
+        "name": "aws_bucket",
+        "type": "secret",
+        "options": {
+          "group": "api_key"
+        }
+      },
+      {
         "id": "0dc3d06f-5fcc-411b-8919-c85b00cca458",
         "name": "aws_access_key_id",
         "type": "secret",

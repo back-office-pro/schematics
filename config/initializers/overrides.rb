@@ -26,6 +26,7 @@ ActiveRecord::Generators::MigrationGenerator.prepend(MigrationGenerator)
 
 OneLogin::RubySaml::Settings.prepend(OneLogin::Override::RubySaml::Settings)
 Arel::Predications.prepend(Arel::Override::Predications)
+BootstrapEmail::Config.prepend(BootstrapEmail::Override::Config)
 
 Rails.configuration.to_prepare do
   ActiveStorage.singleton_class.module_eval do
@@ -100,7 +101,7 @@ ActiveSupport.on_load(:active_storage_attachment) do
     .application
     .routes
     .url_helpers
-    .rails_blob_url(self, **default_url_options)
+    .rails_blob_url(self, **Configuration.default_url_options)
 end
 
 ActiveSupport.on_load(:active_storage_blob) do
