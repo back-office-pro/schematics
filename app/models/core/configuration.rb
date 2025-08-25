@@ -35,7 +35,7 @@ class ::Configuration < Schematics::ApplicationRecord
     private
 
     def port
-      3000 if Rails.env.local?
+      3000 if Rails.env.development?
     end
   end
 

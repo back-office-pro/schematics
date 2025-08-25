@@ -9,7 +9,7 @@ RSpec.describe Permission do
 
   its(:model_class) { is_expected.to eq(User) }
   its(:webhook_event) { is_expected.to start_with('user.') }
-  its(:webhook_url) { is_expected.to eq(resources_url(User)) }
+  its(:webhook_url) { is_expected.to eq(resources_url(User, host: 'localhost')) }
 
   describe '.create_entities_permissions!' do
     subject(:create_entities_permissions!) do
