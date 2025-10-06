@@ -32,7 +32,7 @@
   "devDependencies": {
     "standard": "17.1.2",
     "stylelint": "16.23.1",
-    "stylelint-config-standard": "39.0.0"
+    "stylelint-config-standard": "39.0.1"
   },
   "stylelint": {
     "extends": "stylelint-config-standard",
