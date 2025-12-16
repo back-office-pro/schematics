@@ -533,7 +533,7 @@ GEM
       timeout
     net-smtp (0.5.1)
       net-protocol
-    nio4r (2.7.4)
+    nio4r (2.7.5)
     nokogiri (1.18.10-aarch64-linux-gnu)
       racc (~> 1.4)
     nokogiri (1.18.10-aarch64-linux-musl)
@@ -620,7 +620,7 @@ GEM
       date
       stringio
     public_suffix (7.0.0)
-    puma (6.6.1)
+    puma (7.1.0)
       nio4r (~> 2.0)
     pwned (2.4.1)
     raabro (1.4.0)
