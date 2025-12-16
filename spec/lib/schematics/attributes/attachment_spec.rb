@@ -84,7 +84,7 @@ describe Schematics::Attributes::Attachment do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      has_one_base64_attached :avatar
+      has_one_base64_attached :avatar, strict_loading: true
       accepts_nested_attributes_for :avatar_attachment,
                                     allow_destroy: true,
                                     reject_if: :all_blank

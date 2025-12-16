@@ -107,7 +107,7 @@ module Schematics
         end
 
         attachments_attributes.each do |attribute|
-          it { is_expected.to have_many_attached(attribute.name.to_sym) }
+          it { is_expected.to have_many_attached(attribute.name.to_sym).strict_loading }
           it do
             if attribute.options.min
               is_expected
@@ -125,7 +125,7 @@ module Schematics
         attachment_attributes
           .grep_v(Attributes::Attachments)
           .each do |attribute|
-            it { is_expected.to have_one_attached(attribute.name.to_sym) }
+            it { is_expected.to have_one_attached(attribute.name.to_sym).strict_loading }
           end
 
         attachment_attributes.each do |attribute|

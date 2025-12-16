@@ -47,7 +47,7 @@ module Schematics
       def to_sql = 'active_storage_blobs.filename'
 
       def to_str = <<~RUBY
-        #{attached_method} :#{name}
+        #{attached_method} :#{name}, strict_loading: true
         accepts_nested_attributes_for :#{association_name},
                                       allow_destroy: true,
                                       reject_if: :all_blank
