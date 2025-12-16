@@ -11,6 +11,8 @@ module Schematics
         preferences_theme || preferred_theme
       end
 
+      def css_classes = class_names('dark-mode': theme == 'dark')
+
       private
 
       def preferred_theme = request

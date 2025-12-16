@@ -11,16 +11,12 @@ import Rollbar from 'rollbar'
 /* global matchMedia, environment, crispClientId, mapsAPIKey, rollbarClientKey, Chartkick, I18n, Trix, Pagy */
 
 const setTheme = () => {
-  document
-    .documentElement
-    .setAttribute('data-bs-theme', matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+  document.documentElement.classList.toggle('dark-mode')
+  document.documentElement.setAttribute('data-bs-theme', matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
 }
 
 const setNavbarScrolled = () => {
-  document
-    .querySelector('nav.navbar')
-    ?.classList
-    .toggle('bg-opacity-75', window.scrollY > 25)
+  document.querySelector('nav.navbar')?.classList.toggle('bg-opacity-75', window.scrollY > 25)
 }
 
 const startViewTransition = ({ detail }) => {

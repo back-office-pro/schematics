@@ -1,4 +1,4 @@
-[data-bs-theme="dark"] {
+[data-="dark"] {
   .navbar-nav {
     .nav-link.switch-theme.dark {
       display: none;
@@ -16,9 +16,5 @@
   pre,
   .monaco-editor {
     filter: invert(90%);
-  }
-
-  .swagger-ui .dialog-ux .modal-ux {
-    background-color: var(--bs-dark);
   }
 }
