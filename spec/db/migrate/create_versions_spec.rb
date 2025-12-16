@@ -8,5 +8,5 @@ describe 'PaperTrail versions migration file' do
   it_behaves_like 'an overridden file',
                   :paper_trail,
                   '/lib/generators/paper_trail/install/templates/create_versions.rb.erb',
-                  'dc30da1fea142fc1b23daeb6a807144feae8fcba7246b73fd8cefc0c8b521a48'
+                  '1b57f85e084cbe57e089b966f52581ea50dd21d1aa454c28fabedd56e871a819'
 end
