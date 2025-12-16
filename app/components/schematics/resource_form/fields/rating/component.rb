@@ -6,6 +6,8 @@ module Schematics
     module Fields
       module Rating
         class Component < Fields::Component
+          def control_class = 'form-range'
+
           def step = 0.5
 
           def min = 0

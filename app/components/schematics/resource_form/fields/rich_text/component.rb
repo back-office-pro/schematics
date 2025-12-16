@@ -6,13 +6,13 @@ module Schematics
     module Fields
       module RichText
         class Component < Fields::Component
-          delegate :rich_text_area, to: :form, private: true
+          delegate :rich_textarea, to: :form, private: true
           delegate :translated?, to: :field
 
-          def required_rich_text_area(name, **)
-            return rich_text_area(name, **) unless required?
+          def required_rich_textarea(name, **)
+            return rich_textarea(name, **) unless required?
 
-            rich_text_area(name, **)
+            rich_textarea(name, **)
               .gsub(
                 '<input type="hidden"',
                 '<input type="text" required="required" class="trix-editor-hidden-input"'

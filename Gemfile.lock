@@ -143,9 +143,9 @@ GEM
       nokogiri (~> 1.6)
       premailer (~> 1.7)
       sass-embedded (~> 1.53)
-    bootstrap_form (5.4.0)
-      actionpack (>= 6.1)
-      activemodel (>= 6.1)
+    bootstrap_form (5.5.0)
+      actionpack (>= 7.2)
+      activemodel (>= 7.2)
     brakeman (7.1.1)
       racc
     browser (6.2.0)
