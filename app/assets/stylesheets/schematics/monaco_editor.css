@@ -1,3 +1,8 @@
+@font-face {
+  font-family: codicon;
+  src: url('/monaco-editor/esm/vs/base/browser/ui/codicons/codicon/codicon.ttf') format('truetype');
+}
+
 .monaco-editor {
   --vscode-editor-background: transparent !important;
   --vscode-editorGutter-background: transparent !important; /* stylelint-disable-line custom-property-pattern */
