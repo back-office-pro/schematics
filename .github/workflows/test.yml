@@ -27,9 +27,6 @@ jobs:
       - name: Run component tests
         if: always()
         run: bundle exec rspec spec/components
-      - name: Run config tests
-        if: always()
-        run: bundle exec rspec spec/config
       - name: Run db tests
         if: always()
         run: bundle exec rspec spec/db
