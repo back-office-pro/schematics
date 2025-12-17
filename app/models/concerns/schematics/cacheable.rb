@@ -11,6 +11,8 @@ module Schematics
           Rails.cache.fetch("#{model_name.singular}/#{attribute}") do
             instance.public_send(attribute)
           end
+        rescue ActiveRecord::NoDatabaseError # cache database not yet available
+          instance.public_send(attribute)
         end
       end
     end
