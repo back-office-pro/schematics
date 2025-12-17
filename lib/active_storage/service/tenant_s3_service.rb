@@ -4,7 +4,7 @@
 require 'active_storage/service/s3_service'
 
 module ActiveStorage
-  class Service::TenantS3Service < Service::S3Service # rubocop:disable Style/ClassAndModuleChildren
+  class Service::TenantS3Service < Service::S3Service
     private
 
     def object_for(key)
