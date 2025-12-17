@@ -63,7 +63,6 @@ class TenantGenerator < Rails::Generators::NamedBase
   end
 
   def drop_database_schemas
-    return unless env.development?
     return unless destroying?
 
     FileUtils.rm_rf %w[db/schema.rb db/search_schema.rb]
