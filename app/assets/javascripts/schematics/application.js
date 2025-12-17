@@ -11,8 +11,13 @@ import Rollbar from 'rollbar'
 /* global matchMedia, environment, crispClientId, mapsAPIKey, rollbarClientKey, Chartkick, I18n, Trix, Pagy */
 
 const setTheme = () => {
-  document.documentElement.classList.toggle('dark-mode')
-  document.documentElement.setAttribute('data-bs-theme', matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+  if (matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.classList.add('dark-mode')
+    document.documentElement.setAttribute('data-bs-theme', 'dark')
+  } else {
+    document.documentElement.classList.remove('dark-mode')
+    document.documentElement.setAttribute('data-bs-theme', 'light')
+  }
 }
 
 const setNavbarScrolled = () => {
