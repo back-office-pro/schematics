@@ -1,4 +1,4 @@
-[data-="dark"] {
+[data-bs-theme="dark"] {
   .navbar-nav {
     .nav-link.switch-theme.dark {
       display: none;
