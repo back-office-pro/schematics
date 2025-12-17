@@ -1,8 +1,6 @@
 # Copyright © 2025 Dev & Software. All rights reserved.
 # frozen_string_literal: true
 
-OmniAuth.config.request_validation_phase = OmniAuth::AuthenticityTokenProtection.new(key: :_csrf_token) # rubocop:disable Layout/LineLength
-
 Rails.configuration.middleware.use OmniAuth::Builder do
   provider :google_oauth2,
            Rails.application.credentials.google_oauth2.client_id,
