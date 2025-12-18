@@ -1,10 +1,5 @@
 #!/bin/bash -e
 
-if [ -z "${LD_PRELOAD+x}" ]; then
-  LD_PRELOAD=$(find /usr/lib -name libjemalloc.so.2 -print -quit)
-  export LD_PRELOAD
-fi
-
 service clamav-freshclam start
 service clamav-daemon start
 

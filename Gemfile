@@ -50,6 +50,7 @@ gem 'aws-sdk-s3'
 gem 'azure-blob', require: 'azure_blob'
 gem 'based_uuid'
 gem 'bcrypt'
+gem 'benchmark'
 gem 'bootsnap', require: false
 gem 'bootstrap-email'
 gem 'bootstrap_form'

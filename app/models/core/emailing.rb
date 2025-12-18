@@ -13,11 +13,12 @@ class ::Emailing < Schematics::ApplicationRecord
   private
 
   def deliver_emails
-    recipients.each do |recipient|
-      Schematics::EmailingMailer
-        .with(shard: current_shard)
-        .dispatch(id, recipient.id)
-        .deliver_later
-    end
+    ActionMailer.deliver_all_later(
+      recipients.map do |recipient|
+        Schematics::EmailingMailer
+          .with(shard: current_shard)
+          .dispatch(id, recipient.id)
+      end
+    )
   end
 end

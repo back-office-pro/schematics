@@ -47,6 +47,9 @@ Rails.application.configure do
   config.action_controller.enable_fragment_cache_logging = true
   config.action_controller.raise_on_missing_callback_actions = true
 
+  # Action Dispatch
+  config.action_dispatch.verbose_redirect_logs = true
+
   # i18n
   config.i18n.raise_on_missing_translations = true
 

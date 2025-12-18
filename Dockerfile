@@ -8,12 +8,14 @@ WORKDIR /app
 
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y curl libjemalloc2 libvips sqlite3 postgresql-client && \
+    ln -s /usr/lib/$(uname -m)-linux-gnu/libjemalloc.so.2 /usr/local/lib/libjemalloc.so && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 ENV MALLOC_ARENA_MAX=2
 ENV RUBY_YJIT_ENABLE=1
 ENV WEB_CONCURRENCY=auto
 ENV RAILS_ENV=on_premise
+ENV LD_PRELOAD="/usr/local/lib/libjemalloc.so"
 
 FROM base AS build
 

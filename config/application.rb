@@ -11,7 +11,7 @@ Bundler.require(*Rails.groups)
 module BackOffice
   class Application < Rails::Application
     # Rails
-    config.load_defaults 8.0
+    config.load_defaults 8.1
 
     # Generators
     config.app_generators do |generator|
