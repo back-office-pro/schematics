@@ -61,7 +61,7 @@ module BackOffice
 
     # Assets
     config.assets.version = Schematics::VERSION
-    config.assets.paths << ::Pagy.root.join('javascripts')
+    config.assets.paths << ::Pagy::ROOT.join('javascripts')
     config.assets.paths << root.join('app', 'components', 'schematics')
     config.assets.paths << root.join('node_modules')
 

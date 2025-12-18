@@ -1,17 +1,8 @@
 # Copyright © 2025 Dev & Software. All rights reserved.
 # frozen_string_literal: true
 
-require 'pagy/extras/bootstrap'
-require 'pagy/extras/calendar'
-require 'pagy/extras/headers'
-require 'pagy/extras/i18n'
-require 'pagy/extras/limit'
-require 'pagy/extras/overflow'
-
-module LocalizePagyCalendar
-  def localize(time, opts)
-    ::I18n.l(time, **opts)
-  end
+Rails.configuration.after_initialize do
+  Pagy.options[:client_max_limit] = 100
+  Pagy.translate_with_the_slower_i18n_gem!
+  Pagy::Calendar.localize_with_rails_i18n_gem(*Rails.configuration.i18n.available_locales)
 end
-
-Pagy::Calendar.prepend(LocalizePagyCalendar)

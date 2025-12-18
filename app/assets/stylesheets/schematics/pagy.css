@@ -1,14 +1,15 @@
-.pagy-bootstrap.nav .pagination {
+.pagy-bootstrap.series-nav .pagination {
   margin-bottom: 0;
 }
 
-.pagy.limit-selector-js input {
+.pagy.limit-tag-js input {
   background-color: transparent;
   border-width: 0;
   color: var(--bs-secondary);
   font-weight: 700;
 }
 
-.pagy-bootstrap.nav {
+.pagy-bootstrap.series-nav {
   box-shadow: var(--bs-box-shadow-sm);
+  border-radius: 0.5rem;
 }

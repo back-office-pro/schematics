@@ -5,7 +5,7 @@ module Schematics
   module Viewer
     module Pagination
       class Component < ApplicationComponent
-        delegate :pages, to: :pagy
+        delegate :pages, :limit_tag_js, :info_tag, :series_nav, to: :pagy
         option :pagy
         option :calendar, optional: true
         option :human_name_plural, optional: true

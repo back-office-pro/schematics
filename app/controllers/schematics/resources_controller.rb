@@ -147,10 +147,11 @@ module Schematics
       @resources = model_class.list(filter_params, current_ability, params[:sort])
       return if params.key?(:all_pages)
 
-      @calendar, @pagy, @resources = pagy_calendar(
+      @calendar, @pagy, @resources = pagy(
+        :calendar,
         @resources,
         month: { format: t('date.formats.month') },
-        active: viewer == :calendar
+        disabled: viewer != :calendar
       )
     end
 

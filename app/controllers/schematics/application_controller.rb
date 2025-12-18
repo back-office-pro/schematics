@@ -3,7 +3,7 @@
 
 module Schematics
   class ApplicationController < ::ActionController::Base
-    include ::Pagy::Backend
+    include ::Pagy::Method
     include Reloadable
     include Localizable
     include Authenticable
@@ -18,7 +18,7 @@ module Schematics
 
     before_action { Rack::MiniProfiler.authorize_request unless Rails.env.test? }
     before_action :set_paper_trail_whodunnit
-    after_action { pagy_headers_merge(@pagy) if @pagy }
+    after_action :merge_pagy_headers
 
     protect_from_forgery with: :null_session, if: -> { request.format.json? }
     allow_browser versions: :modern, block: :unsupported_browser
@@ -34,6 +34,10 @@ module Schematics
       render 'schematics/exception/unsupported_browser',
              status: :not_acceptable,
              layout: 'schematics/jumbotron'
+    end
+
+    def merge_pagy_headers
+      response.headers.merge!(@pagy.headers_hash) if @pagy
     end
   end
 end

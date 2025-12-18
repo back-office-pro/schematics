@@ -3,8 +3,7 @@
 
 module Schematics
   class ApplicationComponent < ::ViewComponent::Base
-    include ::Pagy::Backend
-    include ::Pagy::Frontend
+    include ::Pagy::Method
     include ::Turbo::StreamsHelper
     include ::Turbo::FramesHelper
     include ::Turbo::DriveHelper
