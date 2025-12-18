@@ -13,6 +13,7 @@ module Schematics
       rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
       rescue_from ActiveRecord::StaleObjectError, with: :stale_object_error
       rescue_from ActionController::UnknownFormat, with: :unknown_format
+      rescue_from ActionController::TooManyRequests, with: :too_many_requests
       rescue_from ActiveSupport::MessageVerifier::InvalidSignature, with: :invalid_token
       rescue_from Triggers::Errors::StandardError, with: :trigger_error
       rescue_from Aws::S3::Errors::ServiceError, with: :storage_error
@@ -127,6 +128,18 @@ module Schematics
           format.any { redirect_back_or_to root_path, alert: exception.to_s }
           format.json do
             render json: { errors: [storage: [exception.to_s]] }, status: :bad_request
+          end
+        end
+      end
+    end
+
+    def too_many_requests
+      switch_localization do
+        respond_to do |format|
+          format.json { head :too_many_requests }
+          format.any do
+            redirect_back_or_to root_path,
+                                alert: t('schematics.application.too_many_requests.alert')
           end
         end
       end

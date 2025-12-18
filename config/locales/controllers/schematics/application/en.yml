@@ -16,5 +16,7 @@ en:
         alert: The %{human_name} was not found
       stale_object_error:
         alert: A change has occurred while you were editing
+      too_many_requests:
+        alert: Too many requests
       unknown_format:
         alert: Unknown format

@@ -16,5 +16,7 @@ it:
         alert: "@{f:La |m:Il |fv:L'|mv:L'}%{human_name} non è stato trovat@{f:a|m:o|fv:a|mv:o}"
       stale_object_error:
         alert: Si è verificata una modifica durante la modifica
+      too_many_requests:
+        alert: Troppe richieste
       unknown_format:
         alert: Formato sconosciuto
