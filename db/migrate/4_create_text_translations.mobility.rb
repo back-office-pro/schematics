@@ -1,7 +1,7 @@
 # Copyright © 2025 Dev & Software. All rights reserved.
 # frozen_string_literal: true
 
-class CreateTextTranslations < ActiveRecord::Migration[8.0]
+class CreateTextTranslations < ActiveRecord::Migration[8.1]
   def change
     create_table :mobility_text_translations do |t|
       t.string :locale, null: false

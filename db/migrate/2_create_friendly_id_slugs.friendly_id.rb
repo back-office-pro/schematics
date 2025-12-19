@@ -1,7 +1,7 @@
 # Copyright © 2025 Dev & Software. All rights reserved.
 # frozen_string_literal: true
 
-class CreateFriendlyIdSlugs < ActiveRecord::Migration[8.0]
+class CreateFriendlyIdSlugs < ActiveRecord::Migration[8.1]
   def change
     create_table :friendly_id_slugs do |t|
       t.string     :slug, null: false

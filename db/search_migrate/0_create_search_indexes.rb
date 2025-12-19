@@ -1,7 +1,7 @@
 # Copyright © 2025 Dev & Software. All rights reserved.
 # frozen_string_literal: true
 
-class CreateSearchIndexes < ActiveRecord::Migration[8.0]
+class CreateSearchIndexes < ActiveRecord::Migration[8.1]
   def change
     create_virtual_table :search_indexes,
                          :fts5,
