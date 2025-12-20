@@ -9,7 +9,6 @@ module Schematics
       rescue_from CanCan::AccessDenied, with: :access_denied
       rescue_from AASM::InvalidTransition, with: :invalid_transition
       rescue_from ActionController::ParameterMissing, with: :parameter_missing
-      rescue_from ActiveRecord::NoDatabaseError, with: :no_database_error
       rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
       rescue_from ActiveRecord::StaleObjectError, with: :stale_object_error
       rescue_from ActionController::UnknownFormat, with: :unknown_format
@@ -143,10 +142,6 @@ module Schematics
           end
         end
       end
-    end
-
-    def no_database_error
-      head :service_unavailable
     end
   end
 end
