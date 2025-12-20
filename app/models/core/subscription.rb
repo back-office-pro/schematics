@@ -28,12 +28,6 @@ class ::Subscription < Schematics::ApplicationRecord
       Rails.cache.fetch('prompts').to_i >= quota_prompts
     end
 
-    def email_support? = !live_support?
-
-    def live_support? = quota
-      .support
-      .eql?(2)
-
     def quota_storage = quota
       .storage
       .gigabytes
@@ -41,7 +35,7 @@ class ::Subscription < Schematics::ApplicationRecord
     private
 
     def quota = Data
-      .define(:entities, :storage, :users, :api_keys, :prompts, :support)
+      .define(:entities, :storage, :users, :api_keys, :prompts)
       .new(**metadata)
 
     memoize def storage_size = ActiveStorage::Blob

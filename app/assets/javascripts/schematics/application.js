@@ -5,10 +5,9 @@ import 'controllers'
 import 'chartkick'
 import 'Chart.bundle'
 import { application } from 'controllers/application'
-import { Crisp } from 'crisp-sdk-web'
 import Rollbar from 'rollbar'
 
-/* global matchMedia, environment, crispClientId, mapsAPIKey, rollbarClientKey, Chartkick, I18n, Trix, Pagy */
+/* global matchMedia, environment, mapsAPIKey, rollbarClientKey, Chartkick, I18n, Trix, Pagy */
 
 const setTheme = () => {
   if (matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -54,7 +53,6 @@ application.handleError = (error, message, detail = {}) => {
   rollbar.error(error)
 }
 
-Crisp.configure(crispClientId, { autoload: false })
 Chartkick.configure({ language: document.documentElement.lang, mapsAPIKey })
 
 document.addEventListener('turbo:load', Pagy.init)

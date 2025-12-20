@@ -1725,8 +1725,7 @@
             "api_keys": 3,
             "storage": 1,
             "entities": 10,
-            "prompts": 100,
-            "support": 0
+            "prompts": 100
           }
         }
       }

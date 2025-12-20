@@ -26,14 +26,6 @@ module Schematics
         .to_json
         .html_safe # rubocop:disable Rails/OutputSafety
 
-      def crisp_client_id = Rails
-        .application
-        .credentials
-        .crisp
-        .client_id
-        .to_json
-        .html_safe # rubocop:disable Rails/OutputSafety
-
       def routes = {
         autocompletions: t('routes.autocompletions'),
         bulkActions: t('routes.bulk_actions'),
