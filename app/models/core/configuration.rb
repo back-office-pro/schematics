@@ -15,16 +15,8 @@ class ::Configuration < Schematics::ApplicationRecord
       time_zone || LOCALE_TO_TIME_ZONE[locale&.to_sym]
     end
 
-    def openai_access_token_with_fallback
-      openai_access_token || Rails.application.credentials.openai&.access_token
-    end
-
     def gcloud_public_api_key_with_fallback
       gcloud_public_api_key || Rails.application.credentials.gcloud&.public_api_key
-    end
-
-    def gcloud_private_api_key_with_fallback
-      gcloud_private_api_key || Rails.application.credentials.gcloud&.private_api_key
     end
   end
 

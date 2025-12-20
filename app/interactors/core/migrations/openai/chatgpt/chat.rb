@@ -13,7 +13,7 @@ module Core
           delegate :logger, :env, :cache, to: '::Rails', private: true
           delegate :root, to: '::Rails.application', private: true
           delegate :parse, to: '::ActiveSupport::ConfigurationFile', private: true
-          delegate :openai_access_token_with_fallback, to: '::Configuration', private: true
+          delegate :openai_access_token, to: '::Configuration', private: true
 
           after :log_data
 
@@ -24,7 +24,7 @@ module Core
           private
 
           memoize def client = ::OpenAI::Client.new(
-            access_token: openai_access_token_with_fallback,
+            access_token: openai_access_token,
             request_timeout: 240,
             log_errors: env.local?
           )

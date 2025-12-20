@@ -7,12 +7,12 @@ module Schematics
       module Selector
         module ResourceForm
           class Component < ApplicationComponent
-            delegate :openai_access_token_with_fallback, to: '::Configuration', private: true
+            delegate :openai_access_token, to: '::Configuration', private: true
 
             def icon = :brain
 
             def title
-              t('.missing_openai_access_token') unless openai_access_token_with_fallback
+              t('.missing_openai_access_token') unless openai_access_token
             end
 
             def css_classes = class_names(disabled: title.present?)

@@ -6,7 +6,7 @@ module Core
     class Translate
       include Interactor
 
-      delegate :gcloud_private_api_key_with_fallback, to: '::Configuration', private: true
+      delegate :gcloud_private_api_key, to: '::Configuration', private: true
       delegate :translate, to: :client, private: true
       delegate :text, :locale, to: :context, private: true
       delegate :t, to: '::I18n', private: true
@@ -21,9 +21,7 @@ module Core
 
       private
 
-      memoize def client = ::Google::Cloud::Translate::V2.new(
-        key: gcloud_private_api_key_with_fallback
-      )
+      memoize def client = ::Google::Cloud::Translate::V2.new(key: gcloud_private_api_key)
 
       def gender
         return :f if female?
