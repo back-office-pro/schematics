@@ -25,5 +25,5 @@ class ::Permission < Schematics::ApplicationRecord
     .application
     .routes
     .url_helpers
-    .resources_url(**model_class.route_params, **default_url_options)
+    .resources_url(**model_class.route_params, **::Configuration.default_url_options)
 end

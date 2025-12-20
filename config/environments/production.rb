@@ -13,6 +13,7 @@ Rails.application.configure do
   config.assume_ssl = true
   config.force_ssl = true
   config.sandbox_by_default = true
+  config.require_master_key = true
 
   # Assets
   config.assets.compile = false
@@ -26,13 +27,16 @@ Rails.application.configure do
   config.public_file_server.headers = { 'cache-control' => "public, max-age=#{1.year.to_i}" } # rubocop:disable Style/StringHashKeys
 
   # Active Storage
-  config.active_storage.service = :amazon
+  config.active_storage.service = :local
 
   # Active Job
   config.active_job.queue_adapter = :solid_queue
 
+  # Solid Cache
+  config.solid_cache.connects_to = { database: { writing: :cache } }
+
   # Solid Queue
-  config.solid_queue.connects_to = { shards: { queue: { writing: :queue } } }
+  config.solid_queue.connects_to = { database: { writing: :queue } }
 
   # Cache
   config.cache_store =

@@ -10,7 +10,7 @@ RSpec.describe Backup do
     expect { record.restore_database! }
       .to have_enqueued_job(Schematics::RestoreBackupJob)
       .exactly(:once)
-      .with(:default, record.id)
+      .with(record)
       .on_queue('critical')
       .at(:no_wait)
   end

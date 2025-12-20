@@ -8,7 +8,7 @@ RSpec.describe WebhookEndpoint do
   include Schematics::ResourcesHelper
 
   context 'when url is malicious and would lead to an infinite loop' do
-    before { record.url = resources_url(User) }
+    before { record.url = resources_url(User, host: 'localhost') }
 
     it { is_expected.not_to be_valid }
   end
@@ -25,7 +25,7 @@ RSpec.describe WebhookEndpoint do
       expect { broadcast_all }
         .to have_enqueued_job(Schematics::TriggerWebhookJob)
         .exactly(:once)
-        .with(:default, String)
+        .with(WebhookRequest)
         .on_queue('low')
         .at(:no_wait)
     end

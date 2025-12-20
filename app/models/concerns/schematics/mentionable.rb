@@ -19,13 +19,12 @@ module Schematics
       .map(&:attachables)
       .flatten
       .grep(::User)
-      .map(&:id)
       .uniq
 
     protected
 
     def notify_mentions = ::ActiveJob.perform_all_later(
-      rich_text_mentions.map { NotifyJob.new(current_shard, class_name, id, 'mention', _1) }
+      rich_text_mentions.map { NotifyJob.new(self, 'mention', _1) }
     )
   end
 end

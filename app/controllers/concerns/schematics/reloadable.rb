@@ -6,7 +6,7 @@ module Schematics
     extend ActiveSupport::Concern
 
     included do
-      before_action :reload!
+      prepend_before_action :reload!
     end
 
     private
@@ -16,7 +16,9 @@ module Schematics
       return unless old_and_changed_model_classes
 
       Rails.cache.delete('old_and_changed_model_classes')
-      Shards::Reload.call(old_and_changed_model_classes:)
+      old_and_changed_model_classes
+        .select(&Object.method(:const_defined?))
+        .each(&Object.method(:remove_const))
     end
   end
 end

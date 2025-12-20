@@ -1,0 +1,9 @@
+#!/bin/bash -e
+
+bin/rails db:drop
+bin/rails db:create
+rm -rf db/migrate/20*.rb db/schema.rb db/search_schema.rb
+bin/rails schematics:generate
+bin/rails db:migrate
+bin/rails db:seed
+bin/rails db:fixtures:load FIXTURES_PATH='spec/fixtures'

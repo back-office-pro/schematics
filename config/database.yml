@@ -1,67 +1,58 @@
-postgresql: &postgresql
-  adapter: postgresql
-  encoding: unicode
-  max_connections: <%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>
-  connect_timeout: 1
-  checkout_timeout: 1
-  variables:
-    statement_timeout: <%= ENV.fetch('STATEMENT_TIMEOUT', '5s') %>
-
-sqlite3: &sqlite3
+default: &default
   adapter: sqlite3
   max_connections: <%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>
   timeout: 5000
 
 development:
   primary:
-    <<: *postgresql
-    database: <%= ENV.fetch('DATABASE', 'demo') %>_development
+    <<: *default
+    database: storage/development.sqlite3
     migrations_paths: db/migrate
   search:
-    <<: *sqlite3
+    <<: *default
     database: storage/development_search.sqlite3
     migrations_paths: db/search_migrate
   cable:
-    <<: *postgresql
-    database: development_cable
-    migrations_paths: storage/cable_migrate
+    <<: *default
+    database: storage/development_cable.sqlite3
+    migrations_paths: db/cable_migrate
   cache:
-    <<: *sqlite3
+    <<: *default
     database: storage/development_cache.sqlite3
     migrations_paths: db/cache_migrate
   queue:
-    <<: *postgresql
-    database: development_queue
-    migrations_paths: storage/queue_migrate
+    <<: *default
+    database: storage/development_queue.sqlite3
+    migrations_paths: db/queue_migrate
 
 test:
   primary:
-    <<: *sqlite3
+    <<: *default
     database: storage/test.sqlite3
     migrations_paths: db/migrate
   search:
-    <<: *sqlite3
+    <<: *default
     database: storage/test_search.sqlite3
     migrations_paths: db/search_migrate
 
 production:
   primary:
-    <<: *postgresql
-    database: <%= ENV.fetch('DATABASE', 'demo') %>_production
+    <<: *default
+    database: storage/production.sqlite3
     migrations_paths: db/migrate
   search:
-    <<: *sqlite3
+    <<: *default
     database: storage/production_search.sqlite3
     migrations_paths: db/search_migrate
   cable:
-    <<: *postgresql
-    database: production_cable
-    migrations_paths: storage/cable_migrate
+    <<: *default
+    database: storage/production_cable.sqlite3
+    migrations_paths: db/cable_migrate
   cache:
-    <<: *sqlite3
+    <<: *default
     database: storage/production_cache.sqlite3
     migrations_paths: db/cache_migrate
   queue:
-    <<: *postgresql
-    database: production_queue
-    migrations_paths: storage/queue_migrate
+    <<: *default
+    database: storage/production_queue.sqlite3
+    migrations_paths: db/queue_migrate

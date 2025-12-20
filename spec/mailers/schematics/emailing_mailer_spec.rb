@@ -6,10 +6,8 @@ require 'rails_helper'
 RSpec.describe Schematics::EmailingMailer do
   include_context 'with user'
 
-  let(:shard) { :default }
-
   describe '#dispatch' do
-    subject { described_class.with(shard:).dispatch(emailing.id, user.id) }
+    subject { described_class.dispatch(emailing, user) }
 
     let(:emailing) do
       Emailing.create!(
@@ -29,7 +27,7 @@ RSpec.describe Schematics::EmailingMailer do
     end
 
     its(:to) { is_expected.to eq(['john.doe@nowhere.com']) }
-    its(:from) { is_expected.to eq(['no-reply@back-office.pro']) }
+    its(:from) { is_expected.to eq(['no-reply@localhost']) }
     its(:subject) { is_expected.to eq('Welcome!') }
     its('body.encoded') { is_expected.to match('Welcome DOE John') }
     its('attachments.size') { is_expected.to eq(2) }

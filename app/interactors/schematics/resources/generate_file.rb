@@ -14,7 +14,7 @@ module Schematics
       def call
         ::ActiveStorage::PurgeJob
           .set(wait: PURGE_WAIT)
-          .perform_later(blob.current_shard, blob.id)
+          .perform_later(blob)
         ::Turbo::StreamsChannel.broadcast_replace_to(
           user,
           :generate_file_in_background,

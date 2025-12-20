@@ -5,7 +5,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - storage-data:/app/on-premise/storage
+      - storage-data:/app/storage
       - clamav-data:/var/lib/clamav
 volumes:
   clamav-data:

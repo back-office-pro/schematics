@@ -13,11 +13,7 @@ class ImportsController < Schematics::ResourcesController
     respond_to do |format|
       format.html
       format.csv do
-        Schematics::GenerateCSVTemplateJob.perform_later(
-          parent_model_class.current_shard,
-          current_user.id,
-          parent_model_name
-        )
+        Schematics::GenerateCSVTemplateJob.perform_later(current_user, parent_model_class)
         head :accepted
       end
     end

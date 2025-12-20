@@ -11,7 +11,7 @@ RSpec.describe Emailing do
   it 'sends a mail after create' do
     expect { record.save! }
       .to have_enqueued_mail(Schematics::EmailingMailer, :dispatch)
-      .with(params: { shard: :default }, args: [record.id, record.recipients.first.id])
+      .with(record, record.recipients.first)
       .on_queue('default')
   end
 end

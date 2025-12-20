@@ -47,15 +47,15 @@ module Schematics
     private
 
     def create_search_index_async
-      CreateSearchIndexJob.perform_later(current_shard, class_name, id)
+      CreateSearchIndexJob.perform_later(self)
     end
 
     def rebuild_search_index_async
-      RebuildSearchIndexJob.perform_later(current_shard, class_name, id)
+      RebuildSearchIndexJob.perform_later(self)
     end
 
     def destroy_search_index_async
-      DestroySearchIndexJob.perform_later(current_shard, searchable_id: id)
+      DestroySearchIndexJob.perform_later(searchable_id: id)
     end
   end
 end

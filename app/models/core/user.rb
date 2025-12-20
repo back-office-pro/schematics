@@ -58,7 +58,6 @@ class ::User < Schematics::ApplicationRecord
   end
 
   def deliver_new_account_mailer = Schematics::UserMailer
-    .with(shard: current_shard)
-    .new_account(id)
+    .new_account(self)
     .deliver_later
 end

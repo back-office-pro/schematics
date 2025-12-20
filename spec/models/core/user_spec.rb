@@ -12,7 +12,7 @@ RSpec.describe User do
   it 'sends a mail after create' do
     expect { record.save! }
       .to have_enqueued_mail(Schematics::UserMailer, :new_account)
-      .with(params: { shard: :default }, args: [record.id])
+      .with(record)
       .on_queue('default')
   end
 

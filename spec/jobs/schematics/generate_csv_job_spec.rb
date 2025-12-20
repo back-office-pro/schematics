@@ -10,28 +10,24 @@ RSpec.describe Schematics::GenerateCSVJob do
 
   include_context 'with user'
 
-  let(:shard) { :default }
+  let(:resources) { [user] }
   let(:dropdown) { false }
 
   before { freeze_time }
 
-  it { is_expected.to be_a(Schematics::Shardable) }
-
   describe '#perform_later' do
     it 'queues the job' do
-      expect { described_class.perform_later(shard, user.id, 'User', [user.id], dropdown) }
+      expect { described_class.perform_later(user, resources, dropdown) }
         .to have_enqueued_job(described_class)
         .exactly(:once)
-        .with(shard, user.id, 'User', [user.id], dropdown)
+        .with(user, resources, dropdown)
         .on_queue('default')
         .at(:no_wait)
     end
   end
 
   describe '#perform_now' do
-    subject(:perform_now) do
-      described_class.perform_now(shard, user.id, 'User', [user.id], dropdown)
-    end
+    subject(:perform_now) { described_class.perform_now(user, resources, dropdown) }
 
     let(:stream) do
       capture_turbo_stream_broadcasts([user, :generate_file_in_background]) { perform_now }
@@ -47,7 +43,7 @@ RSpec.describe Schematics::GenerateCSVJob do
       expect { perform_now }
         .to have_enqueued_job(ActiveStorage::PurgeJob)
         .exactly(:once)
-        .with(shard, String)
+        .with(an_instance_of(ActiveStorage::Blob))
         .on_queue('low')
         .at(Schematics::Resources::GenerateFile::PURGE_WAIT.from_now)
     end

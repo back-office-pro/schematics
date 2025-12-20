@@ -6,15 +6,11 @@ require 'rails_helper'
 RSpec.describe Schematics::CreateSearchIndexJob do
   include_context 'with user'
 
-  let(:shard) { :default }
-
-  it { is_expected.to be_a(Schematics::Shardable) }
-
   describe '#perform_later' do
     before { user.create_search_index }
 
     it 'queues the job' do
-      expect { described_class.perform_later(shard, 'User', user.id) }
+      expect { described_class.perform_later(user) }
         .to have_enqueued_job(described_class)
         .exactly(:once)
         .on_queue('low')
@@ -23,7 +19,7 @@ RSpec.describe Schematics::CreateSearchIndexJob do
   end
 
   describe '#perform_now' do
-    subject(:perform_now) { described_class.perform_now(shard, 'User', user.id) }
+    subject(:perform_now) { described_class.perform_now(user) }
 
     it 'creates the search index' do
       expect { perform_now }

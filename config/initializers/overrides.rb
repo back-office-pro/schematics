@@ -1,39 +1,32 @@
 # Copyright © 2025 Dev & Software. All rights reserved.
 # frozen_string_literal: true
 
-require 'active_record/override/connection_adapters/abstract/connection_handler'
 require 'active_record/override/connection_adapters/sqlite3_adapter'
 require 'active_record/override/generators/migration_generator'
-require 'active_storage/override/analyze_job'
 require 'active_storage/override/attachment'
 require 'active_storage/override/blob'
-require 'active_storage/override/preview_image_job'
-require 'active_storage/override/purge_job'
-require 'active_storage/override/transform_job'
 require 'active_support/dependencies'
 require 'arel/override/predications'
+require 'bootstrap-email/config'
+require 'bootstrap-email/override/config'
 require 'onelogin/override/ruby-saml/settings'
 require 'onelogin/ruby-saml/settings'
 require 'rails/generators'
 require 'rails/generators/active_record/migration/migration_generator'
 require 'rails/generators/generated_attribute'
 require 'rails/override/generators/generated_attribute'
-require 'rails/override/module'
 
 GeneratedAttribute = Rails::Override::Generators::GeneratedAttribute
 MigrationGenerator = ActiveRecord::Override::Generators::MigrationGenerator
-ConnectionHandler = ActiveRecord::Override::ConnectionAdapters::ConnectionHandler
-
-Module.prepend(Rails::Override::Module)
 
 Rails::Generators::GeneratedAttribute.singleton_class.prepend(GeneratedAttribute)
 Rails::Generators::GeneratedAttribute.prepend(GeneratedAttribute)
 
 ActiveRecord::Generators::MigrationGenerator.prepend(MigrationGenerator)
-ActiveRecord::ConnectionAdapters::ConnectionHandler.prepend(ConnectionHandler)
 
 OneLogin::RubySaml::Settings.prepend(OneLogin::Override::RubySaml::Settings)
 Arel::Predications.prepend(Arel::Override::Predications)
+BootstrapEmail::Config.prepend(BootstrapEmail::Override::Config)
 
 Rails.configuration.to_prepare do
   ActiveStorage.singleton_class.module_eval do
@@ -49,22 +42,6 @@ Rails.configuration.to_prepare do
       super
     end
   end
-  SolidCable::Record.class_eval do
-    class << self
-      def current_shard = :cable
-    end
-  end
-end
-
-Rails.configuration.to_prepare do
-  ActiveStorage::AnalyzeJob.include(Schematics::Shardable)
-  ActiveStorage::AnalyzeJob.prepend(ActiveStorage::Override::AnalyzeJob)
-  ActiveStorage::PreviewImageJob.include(Schematics::Shardable)
-  ActiveStorage::PreviewImageJob.prepend(ActiveStorage::Override::PreviewImageJob)
-  ActiveStorage::PurgeJob.include(Schematics::Shardable)
-  ActiveStorage::PurgeJob.prepend(ActiveStorage::Override::PurgeJob)
-  ActiveStorage::TransformJob.include(Schematics::Shardable)
-  ActiveStorage::TransformJob.prepend(ActiveStorage::Override::TransformJob)
 end
 
 Rails.configuration.to_prepare do
@@ -89,7 +66,6 @@ end
 ActiveSupport.on_load(:active_storage_record) do
   self.implicit_order_column = 'created_at'
 
-  include Schematics::Tenantable
   include Schematics::Loadable
   include Schematics::Serializable
   include Schematics::Identifiable
@@ -105,10 +81,6 @@ ActiveSupport.on_load(:active_storage_record) do
     alias_method :finder, :find
 
     def validate_service_configuration(*) = nil
-
-    private
-
-    def entity_name = name.underscore
   end
 
   def paper_trail_versions = Schematics::Version.none
@@ -129,7 +101,7 @@ ActiveSupport.on_load(:active_storage_attachment) do
     .application
     .routes
     .url_helpers
-    .rails_blob_url(self, default_url_options)
+    .rails_blob_url(self, **Configuration.default_url_options)
 end
 
 ActiveSupport.on_load(:active_storage_blob) do
@@ -156,19 +128,5 @@ ActiveSupport.on_load(:active_record_sqlite3adapter) do
 
   ActiveRecord::ConnectionAdapters::SQLite3::TableDefinition.class_eval do
     define_column_methods :jsonb
-  end
-end
-
-ActiveSupport.on_load(:solid_queue_record) do
-  class << self
-    def current_shard = :queue
-  end
-end
-
-unless Rails.env.test?
-  ActiveSupport.on_load(:solid_cache) do
-    class << self
-      def current_shard = :"#{super}/cache"
-    end
   end
 end

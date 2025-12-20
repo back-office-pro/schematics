@@ -4,20 +4,13 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::RestoreBackupJob do
-  let(:shard) { :default }
   let(:backup) { Backup.create!(file:, state:) }
   let(:state) { Backup::STATE_STATE_RESTORING }
   let(:file) { Core::Backups::Create.call.file }
 
-  around do |example|
-    ActiveRecord::Base.connected_to(shard: :demo) { example.run }
-  end
-
-  it { is_expected.to be_a(Schematics::Shardable) }
-
   describe '#perform_later' do
     it 'queues the job' do
-      expect { described_class.perform_later(shard, backup.id) }
+      expect { described_class.perform_later(backup) }
         .to have_enqueued_job(described_class)
         .exactly(:once)
         .on_queue('critical')
@@ -26,7 +19,7 @@ RSpec.describe Schematics::RestoreBackupJob do
   end
 
   describe '#perform_now' do
-    subject(:perform_now) { described_class.perform_now(shard, backup.id) }
+    subject(:perform_now) { described_class.perform_now(backup) }
 
     it 'restores the database backup' do
       expect { perform_now }.not_to change(backup, :state)
@@ -44,7 +37,7 @@ RSpec.describe Schematics::RestoreBackupJob do
 
       it 'changes backup state from restoring to error after discard' do
         expect { perform_now }
-          .to change { backup.reload.state }
+          .to change(backup, :state)
           .from(Backup::STATE_STATE_RESTORING.to_s)
           .to(Backup::STATE_STATE_ERROR.to_s)
       end

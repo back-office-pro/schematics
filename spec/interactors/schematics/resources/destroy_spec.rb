@@ -158,7 +158,7 @@ RSpec.describe Schematics::Resources::Destroy do
         expect { call }
           .to have_enqueued_job(ActiveStorage::PurgeJob)
           .exactly(:once)
-          .with(:default, file.id)
+          .with(file)
           .on_queue('low')
           .at(:no_wait)
       end

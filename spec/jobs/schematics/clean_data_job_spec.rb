@@ -6,7 +6,6 @@ require 'rails_helper'
 RSpec.describe Schematics::CleanDataJob do
   include_context 'with import'
 
-  let(:shard) { :default }
   let(:permissions) { [Permission.create!(action: 'index', model: 'User')] }
   let(:api_keys) do
     APIKey.create!(
@@ -56,12 +55,11 @@ RSpec.describe Schematics::CleanDataJob do
 
   before { [data_cleanings, imports, meetings] }
 
-  it { is_expected.to be_a(Schematics::Shardable) }
   it { is_expected.to be_a(Schematics::Quietable) }
 
   describe '#perform_later' do
     it 'queues the job' do
-      expect { described_class.perform_later(shard) }
+      expect { described_class.perform_later }
         .to have_enqueued_job(described_class)
         .exactly(:once)
         .on_queue('low')
@@ -70,7 +68,7 @@ RSpec.describe Schematics::CleanDataJob do
   end
 
   describe '#perform_now' do
-    subject(:perform_now) { described_class.perform_now(shard) }
+    subject(:perform_now) { described_class.perform_now }
 
     context 'when API keys are active' do
       let(:expires_at) { nil }
@@ -112,7 +110,7 @@ RSpec.describe Schematics::CleanDataJob do
       expect { perform_now }
         .to have_enqueued_job(ActiveStorage::PurgeJob)
         .exactly(:twice)
-        .with(shard, String)
+        .with(file)
         .on_queue('low')
         .at(:no_wait)
     end

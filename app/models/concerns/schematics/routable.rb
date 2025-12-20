@@ -13,7 +13,5 @@ module Schematics
       .class
       .route_params
       .merge(id: to_param)
-
-    def default_url_options = { host:, port: }.compact
   end
 end

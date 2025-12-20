@@ -3,7 +3,6 @@
 
 module Schematics
   class GenerateSchemaJob < ApplicationJob
-    include Shardable
     include Quietable
 
     queue_as :critical
@@ -17,12 +16,13 @@ module Schematics
 
     after_discard do |job|
       PaperTrail.request(enabled: false) do
-        ::Migration.find(job.arguments.second).state_no_solution!
+        suppress(ActiveRecord::RecordNotFound) do
+          job.arguments.first.reload.state_no_solution!
+        end
       end
     end
 
-    def perform(_shard, migration_id)
-      migration = ::Migration.find(migration_id)
+    def perform(migration)
       return if migration.state_pending?
       return if migration.state_in_progress?
       return if migration.state_rollbacking?
