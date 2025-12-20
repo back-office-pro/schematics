@@ -8,7 +8,7 @@ class ::Subscription < Schematics::ApplicationRecord
   attribute :default_locale, default: -> { Rails.configuration.i18n.default_locale }
 
   class << self
-    delegate :entities, :users, :api_keys, :prompts, to: :quota, prefix: true
+    delegate :entities, :users, :api_keys, to: :quota, prefix: true
 
     def quota_storage_will_be_exceeded?(size)
       storage_size + size.bytes >= quota_storage
@@ -22,12 +22,6 @@ class ::Subscription < Schematics::ApplicationRecord
       api_keys_size >= quota_api_keys
     end
 
-    def quota_prompts_exceeded?
-      return false if ::Configuration.openai_access_token
-
-      Rails.cache.fetch('prompts').to_i >= quota_prompts
-    end
-
     def quota_storage = quota
       .storage
       .gigabytes
@@ -35,7 +29,7 @@ class ::Subscription < Schematics::ApplicationRecord
     private
 
     def quota = Data
-      .define(:entities, :storage, :users, :api_keys, :prompts)
+      .define(:entities, :storage, :users, :api_keys)
       .new(**metadata)
 
     memoize def storage_size = ActiveStorage::Blob

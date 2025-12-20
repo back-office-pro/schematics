@@ -1724,8 +1724,7 @@
             "users": 3,
             "api_keys": 3,
             "storage": 1,
-            "entities": 10,
-            "prompts": 100
+            "entities": 10
           }
         }
       }
