@@ -3,7 +3,6 @@
 
 require 'active_support/core_ext/integer/time'
 
-Rails.application.routes.default_url_options = { host: "default.#{Server.domain}" }
 Rails.application.configure do
   # Configuration
   config.enable_reloading = false

@@ -10,9 +10,8 @@ Rails.application.configure do
   config.eager_load = true
 
   # Security
-  config.assume_ssl = Server.ssl?
-  config.force_ssl = Server.ssl?
-  config.hosts = [Server.domain.dup.prepend('.')] if Server.ssl?
+  config.assume_ssl = true
+  config.force_ssl = true
   config.sandbox_by_default = true
 
   # Assets

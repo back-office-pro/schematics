@@ -6,7 +6,6 @@ module Schematics
     delegate :render, to: :renderer, private: true
     delegate :human_name, :route_params, to: :model_class, private: true
     delegate :default_url_options, to: :@resource, private: true
-    delegate :ssl?, to: '::Server', private: true
     delegate :key_generator, to: '::Rails.application', private: true
 
     def initialize(resource)
@@ -45,8 +44,7 @@ module Schematics
       @resource.class
     end
 
-    def assets_url = URI
-      .const_get(ssl? ? :HTTPS : :HTTP)
+    def assets_url = URI::HTTPS
       .build(**default_url_options)
       .to_s
 

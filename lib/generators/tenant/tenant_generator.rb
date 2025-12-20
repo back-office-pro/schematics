@@ -6,12 +6,6 @@ require 'fileutils'
 require 'rails/generators'
 
 class TenantGenerator < Rails::Generators::NamedBase
-  def install_migrations
-    return unless generating?
-
-    rails_command "schematics:copy:migrations DATABASE=#{name}", env:
-  end
-
   def create_database
     return unless generating?
 

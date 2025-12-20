@@ -10,9 +10,6 @@ Rails.application.configure do
   config.eager_load = false
   config.server_timing = true
 
-  # Security
-  config.hosts = [Server.domain.dup.prepend('.')]
-
   # File Watcher
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
