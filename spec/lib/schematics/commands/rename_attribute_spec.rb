@@ -2,11 +2,10 @@
 # frozen_string_literal: true
 
 describe Schematics::Commands::RenameAttribute do
-  subject(:command) { described_class.new(database:, entity:, attribute:, target:) }
+  subject(:command) { described_class.new(entity:, attribute:, target:) }
 
   include_context 'with custom generated attribute'
 
-  let(:database) { 'primary' }
   let(:entity) { Schematics::Entities::Entity.new(name: 'client') }
   let(:attribute) { Schematics::Attributes::Attribute.build(entity:, type:, name: 'first_name') }
   let(:target) { Schematics::Attributes::Attribute.build(entity:, type:, name: 'name') }

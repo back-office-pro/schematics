@@ -55,8 +55,7 @@ module Schematics
       def old_class_name = old_name.camelize
 
       def migration_generator = Rails::Generators::MigrationGenerator.new(
-        ["rename_#{old_table_name.pluralize}_to_#{table_name.pluralize}"],
-        ["--database=#{database}"]
+        ["rename_#{old_table_name.pluralize}_to_#{table_name.pluralize}"]
       )
 
       def old_table_name = old_name.tr('/', '_')
@@ -72,7 +71,7 @@ module Schematics
               'to',
               association.join_table
             ].join('_')
-          ], ["--database=#{database}"]
+          ]
         )
       end
 
@@ -88,7 +87,7 @@ module Schematics
               'in',
               association.join_table
             ].join('_')
-          ], ["--database=#{database}"]
+          ]
         )
       end
     end

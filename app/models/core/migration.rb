@@ -58,9 +58,9 @@ class ::Migration < Schematics::ApplicationRecord
 
   def migrator
     if state_rollbacking?
-      Schematics::Migrator.new(current_shard, previously_migrated_schema, data)
+      Schematics::Migrator.new(previously_migrated_schema, data)
     else
-      Schematics::Migrator.new(current_shard, data, previously_migrated_schema)
+      Schematics::Migrator.new(data, previously_migrated_schema)
     end
   end
 

@@ -2,11 +2,10 @@
 # frozen_string_literal: true
 
 describe Schematics::Commands::AddAssociation do
-  subject(:command) { described_class.new(database:, entity:, attribute:) }
+  subject(:command) { described_class.new(entity:, attribute:) }
 
   include_context 'with custom generated attribute'
 
-  let(:database) { 'primary' }
   let(:schema) { Schematics::Schema.new }
   let(:entity) { Schematics::Entities::Entity.new(schema:, name: 'client') }
   let(:attribute) do

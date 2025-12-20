@@ -15,7 +15,7 @@ module Schematics
         when Behaviours::Migratable
           Rails::Generators::MigrationGenerator.new(
             ["remove_#{attribute.name}_from_#{table_name.pluralize}", attribute.to_s],
-            ['--primary_key_type=string', "--database=#{database}"]
+            ['--primary_key_type=string']
           )
         end
       end

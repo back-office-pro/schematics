@@ -21,7 +21,7 @@ module Schematics
                :schema,
                to: :entity,
                private: true
-      attr_accessor :database, :entity, :attribute, :target
+      attr_accessor :entity, :attribute, :target
 
       def generators = []
 

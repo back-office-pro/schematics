@@ -15,7 +15,7 @@ module Schematics
           "drop_join_table_#{attribute.join_table}",
           table_name.pluralize,
           attribute.name
-        ], ["--database=#{database}"]
+        ]
       )
 
       def translation_generator

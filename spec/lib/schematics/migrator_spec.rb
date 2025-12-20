@@ -2,9 +2,8 @@
 # frozen_string_literal: true
 
 describe Schematics::Migrator do
-  subject(:migration) { described_class.new(database, new_schema, current_schema) }
+  subject(:migration) { described_class.new(new_schema, current_schema) }
 
-  let(:database) { 'primary' }
   let(:new_schema) { Schematics::Schema.new(data: new_data) }
   let(:current_schema) { Schematics::Schema.new(data: current_data) }
 
