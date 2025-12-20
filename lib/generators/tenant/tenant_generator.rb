@@ -12,13 +12,6 @@ class TenantGenerator < Rails::Generators::NamedBase
     rails_command "schematics:copy:migrations DATABASE=#{name}", env:
   end
 
-  def encrypt_database
-    return unless env.on_premise?
-    return unless generating?
-
-    rails_command 'schematics:db:encryption:init', env:
-  end
-
   def create_database
     return unless generating?
 
@@ -84,7 +77,6 @@ class TenantGenerator < Rails::Generators::NamedBase
   def env
     return 'test'.inquiry if ENV['CI'].present?
     return 'production'.inquiry if ENV['RAILS_ENV'] == 'production'
-    return 'on_premise'.inquiry if ENV['RAILS_ENV'] == 'on_premise'
 
     'development'.inquiry
   end

@@ -6,10 +6,6 @@ require 'rails_helper'
 RSpec.describe Configuration do
   include Schematics::Specs::Model
 
-  before do
-    allow(Rails.env).to receive(:on_premise?).and_return(true)
-  end
-
   after do
     ActiveStorage::Blob.service = ActiveStorage::Blob.services.fetch(:test)
   end

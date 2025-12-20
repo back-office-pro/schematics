@@ -14,7 +14,7 @@ RUN apt-get update -qq && \
 ENV MALLOC_ARENA_MAX=2
 ENV RUBY_YJIT_ENABLE=1
 ENV WEB_CONCURRENCY=auto
-ENV RAILS_ENV=on_premise
+ENV RAILS_ENV=production
 ENV LD_PRELOAD="/usr/local/lib/libjemalloc.so"
 
 FROM base AS build

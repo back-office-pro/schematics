@@ -220,7 +220,6 @@ Rails/UnknownEnv:
     - production
     - development
     - test
-    - on_premise
 # rubocop-performance
 Performance/MethodObjectAsBlock:
   Enabled: false

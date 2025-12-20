@@ -65,25 +65,3 @@ production:
     <<: *postgresql
     database: production_queue
     migrations_paths: storage/queue_migrate
-
-on_premise:
-  primary:
-    <<: *sqlite3
-    database: storage/on-premise/production.sqlite3
-    migrations_paths: storage/migrate
-  search:
-    <<: *sqlite3
-    database: storage/on-premise/production_search.sqlite3
-    migrations_paths: storage/search_migrate
-  cable:
-    <<: *sqlite3
-    database: storage/production_cable.sqlite3
-    migrations_paths: storage/cable_migrate
-  cache:
-    <<: *sqlite3
-    database: storage/on-premise/production_cache.sqlite3
-    migrations_paths: storage/cache_migrate
-  queue:
-    <<: *sqlite3
-    database: storage/production_queue.sqlite3
-    migrations_paths: storage/queue_migrate

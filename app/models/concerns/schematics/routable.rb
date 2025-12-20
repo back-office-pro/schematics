@@ -19,8 +19,6 @@ module Schematics
     private
 
     def host
-      return ::Server.domain if Rails.env.on_premise?
-
       "#{current_shard}.#{::Server.domain}"
     end
 

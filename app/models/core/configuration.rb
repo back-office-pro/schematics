@@ -21,8 +21,6 @@ class ::Configuration < Schematics::ApplicationRecord
   end
 
   def update_storage_services! # rubocop:disable Obsession/Rails/PrivateCallback
-    return unless Rails.env.on_premise?
-
     ActiveStorage::Blob.services = ActiveStorage::Service::Registry.new(storage_configurations)
     ActiveStorage::Blob.service = ActiveStorage::Blob.services.fetch(storage_service)
   end

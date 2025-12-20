@@ -8,12 +8,9 @@ development:
 test:
   adapter: test
 
-production: &production
+production:
   adapter: solid_cable
   connects_to:
     shards:
       cable:
         writing: cable
-
-on_premise:
-  <<: *production
