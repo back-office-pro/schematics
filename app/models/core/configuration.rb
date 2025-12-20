@@ -21,7 +21,7 @@ class ::Configuration < Schematics::ApplicationRecord
     end
 
     def host
-      URI(company_website.to_s).host || 'localhost'
+      URI(company_website.to_s).host&.delete_prefix('www.') || 'localhost'
     end
 
     def default_url_options
