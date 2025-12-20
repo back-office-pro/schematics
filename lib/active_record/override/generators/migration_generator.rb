@@ -41,10 +41,6 @@ module ActiveRecord
           super(templates_path.join(source), destination)
         end
 
-        def configured_migrate_path
-          File.join('storage', options[:database], 'migrate') if options[:database]
-        end
-
         def validate_file_name! = file_name
           .concat('_')
           .concat(SecureRandom.uuid.underscore)

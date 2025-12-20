@@ -14,10 +14,6 @@ describe ActiveRecord::Generators::MigrationGenerator do
                   '3730db7c5782c1f774ec18fa878b923c5b8561182c598e52b6b6f24a75df3db5'
 
   it_behaves_like 'a monkey patched instance method',
-                  :configured_migrate_path,
-                  '36ff6347d832ab90187f9c175fbc629a0eab2e0e31ff68639d75a432b95402bb'
-
-  it_behaves_like 'a monkey patched instance method',
                   :validate_file_name!,
                   'eca51b54e08b64a898d97ade83038160e2b689ecfb29fa1c3310f8030192fbf8'
 end
