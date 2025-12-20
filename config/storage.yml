@@ -7,11 +7,11 @@ local:
   root: <%= Rails.root.join('storage') %>
 
 amazon:
-  service: TenantS3
-  access_key_id: <%= Rails.application.credentials.aws&.access_key_id %>
-  secret_access_key: <%= Rails.application.credentials.aws&.secret_access_key %>
-  region: us-east-1
-  bucket: <%= Server.domain %>
+  service: S3
+  access_key_id:
+  secret_access_key:
+  region:
+  bucket:
   http_open_timeout: 1
   http_read_timeout: 1
 
@@ -19,12 +19,12 @@ microsoft:
   service: AzureBlob
   storage_account_name:
   storage_access_key:
-  container: <%= Server.domain %>
+  container:
 
 google:
   service: GCS
-  project: <%= Server.domain %>
-  bucket: <%= Server.domain %>
+  project:
+  bucket:
   credentials:
     type: service_account
     project_id:
