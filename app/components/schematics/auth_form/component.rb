@@ -4,22 +4,13 @@
 module Schematics
   module AuthForm
     class Component < ApplicationComponent
-      delegate :email, :demo?, to: '::Subscription', private: true
       delegate :bootstrap_form_with, to: :helpers
 
       def url = resources_path(::Session)
 
       def scope = :session
 
-      def model
-        return ::User.new unless demo?
-
-        ::User.new(email:)
-      end
-
-      def value
-        Attributes::Digest::DEFAULT if demo?
-      end
+      def model = ::User.new
     end
   end
 end

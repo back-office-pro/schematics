@@ -2,7 +2,6 @@
   span data-controller='password'
     = form.password_field index.zero? ? name : :"#{name}_confirmation",
                           required: required?,
-                          value:,
                           autocomplete:,
                           'data-password-target': 'input',
                           prepend: fa_icon(icon),

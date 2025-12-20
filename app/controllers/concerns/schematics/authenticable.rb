@@ -39,11 +39,7 @@ module Schematics
     end
 
     def current_ability
-      @current_ability ||= begin
-        ability = Ability.new(current_user, ::SchemaCache)
-        ability.merge(DemoAbility.new) if ApplicationRecord.demo?
-        ability
-      end
+      @current_ability ||= Ability.new(current_user, ::SchemaCache)
     end
 
     def current_session

@@ -8,7 +8,6 @@ module Schematics
         class Component < ApplicationComponent
           option :form
           option :field, optional: true
-          option :value, optional: true
           option :name, default: -> { :password }
           option :icon, default: -> { :key }
           option :required, default: -> { true }

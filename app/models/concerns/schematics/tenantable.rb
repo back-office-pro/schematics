@@ -9,11 +9,5 @@ module Schematics
       delegate :name, to: :class, prefix: true, private: true
       delegate :current_shard, to: :class
     end
-
-    class_methods do
-      def demo? = current_shard
-        .to_sym
-        .eql?(:demo)
-    end
   end
 end
