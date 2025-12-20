@@ -7,7 +7,7 @@
 /tmp
 /doc
 /.yardoc
-/storage/*
+/storage
 /db/migrate/20*
 /db/search_schema.rb
 /db/schema.rb
