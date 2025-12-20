@@ -5,13 +5,6 @@ require 'active_record_doctor'
 require 'active_record_doctor/rake/task'
 
 namespace :schematics do
-  namespace :copy do
-    desc 'Install migrations'
-    task migrations: :environment do
-      Core::Migrations::Copy.call(database: ENV.fetch('DATABASE'))
-    end
-  end
-
   namespace :db do
     desc 'Perform database backup'
     task backup: :environment do
