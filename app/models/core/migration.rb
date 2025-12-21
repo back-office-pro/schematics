@@ -9,8 +9,7 @@ class ::Migration < Schematics::ApplicationRecord
   attribute :data, default: -> { current_data || [] }
 
   validates_associated :data
-  validate :quota_entities_cannot_be_exceeded
-  delegate :quota_entities, to: '::Subscription', private: true
+
   delegate :build_commands,
            :clean_commands,
            :old_entities,
@@ -77,18 +76,6 @@ class ::Migration < Schematics::ApplicationRecord
   end
 
   private
-
-  def quota_entities_cannot_be_exceeded
-    return unless data
-    return if data_size <= quota_entities
-
-    errors.add(:base, :too_many_entities, data_size:, quota_entities:)
-  end
-
-  def data_size = data
-    .entities
-    .reject(&:core?) # rubocop:disable Performance/Count
-    .size
 
   def prompt_data
     Schematics::GenerateSchemaJob.perform_later(self) if prompt_previously_changed?

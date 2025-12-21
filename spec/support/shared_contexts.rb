@@ -93,8 +93,7 @@ RSpec.shared_context 'with stripe stubs' do
     {
       users: 1000,
       api_keys: 100,
-      storage: 100,
-      entities: 100
+      storage: 100
     }
   end
   let(:search_body) do

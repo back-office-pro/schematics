@@ -8,7 +8,7 @@ class ::Subscription < Schematics::ApplicationRecord
   attribute :default_locale, default: -> { Rails.configuration.i18n.default_locale }
 
   class << self
-    delegate :entities, :users, :api_keys, to: :quota, prefix: true
+    delegate :users, :api_keys, to: :quota, prefix: true
 
     def quota_storage_will_be_exceeded?(size)
       storage_size + size.bytes >= quota_storage
@@ -29,7 +29,7 @@ class ::Subscription < Schematics::ApplicationRecord
     private
 
     def quota = Data
-      .define(:entities, :storage, :users, :api_keys)
+      .define(:storage, :users, :api_keys)
       .new(**metadata)
 
     memoize def storage_size = ActiveStorage::Blob
