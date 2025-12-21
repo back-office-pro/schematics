@@ -1692,33 +1692,15 @@
       {
         "id": "6ee822eb-a6b4-4fa1-9980-2c14299f717b",
         "name": "state",
-        "type": "state_machine",
+        "type": "enum",
         "options": {
-          "direct_assignment": true,
+          "required": true,
+          "readonly": true,
           "default": "active",
           "values": [
             "active",
             "canceled",
             "inactive"
-          ],
-          "events": [
-            {
-              "id": "5afbe15d-3fa0-4485-8ab6-8600eed525a1",
-              "name": "cancel",
-              "icon": "ban",
-              "color": "danger",
-              "confirm": true,
-              "from": "active",
-              "to": "canceled"
-            },
-            {
-              "id": "d6c55457-49e0-46af-9ee7-05a9cb8f53a3",
-              "name": "enable",
-              "icon": "check",
-              "color": "success",
-              "from": "canceled",
-              "to": "active"
-            }
           ]
         }
       },

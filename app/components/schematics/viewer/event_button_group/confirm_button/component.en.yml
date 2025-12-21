@@ -6,5 +6,3 @@ en:
   migration:
     migrate: This action may result in data loss regarding ongoing actions
     rollback: This action may result in data loss regarding ongoing actions
-  subscription:
-    cancel: You can reactivate your subscription at any time before the current expiry date

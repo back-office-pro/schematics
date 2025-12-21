@@ -28,7 +28,6 @@ module Schematics
     def initialize(ability)
       super
       return if MODEL_CLASSES.all? { ability.cannot?(:index, _1.constantize) } &&
-                ability.cannot?(:cancel, ::Subscription) &&
                 ability.cannot?(:update, ::Configuration) &&
                 ability.cannot?(:show, ::Chart.api)
 

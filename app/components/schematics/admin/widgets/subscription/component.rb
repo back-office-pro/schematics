@@ -10,10 +10,6 @@ module Schematics
           delegate :state_inactive?, to: :resource
 
           memoize def resource = ::Subscription.instance
-
-          def render?
-            can?(:cancel, ::Subscription)
-          end
         end
       end
     end

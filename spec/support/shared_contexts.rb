@@ -126,17 +126,12 @@ RSpec.shared_context 'with stripe stubs' do
       metadata: new_metadata
     }
   end
-  let(:subscription_stub_request) do
-    stub_request(:post, 'https://api.stripe.com/v1/subscriptions/sub_1')
-      .to_return(status: 200)
-  end
 
   before do
     stub_request(:get, %r{https://api.stripe.com/v1/customers/search})
       .to_return(body: search_body.to_json, status: 200)
     stub_request(:get, 'https://api.stripe.com/v1/products/prod_1')
       .to_return(body: product_body.to_json, status: 200)
-    subscription_stub_request
   end
 end
 

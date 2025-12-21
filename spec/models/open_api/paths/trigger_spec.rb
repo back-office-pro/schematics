@@ -7,14 +7,22 @@ RSpec.describe OpenAPI::Paths::Trigger do
   subject { described_class.new(entity:, event:) }
 
   let(:schema) { Schematics::Schema.new }
-  let(:entity) { schema.find_entity_by_name('subscription') }
-  let(:event) { entity.find_event_by_name('cancel') }
+  let(:entity) { schema.find_entity_by_name('backup') }
+  let(:event) { entity.find_event_by_name('restore_database') }
   let(:expected_hash) do
     {
-      '/subscription/state/cancel': {
+      '/backups/{id}/state/restore_database': {
         patch: {
-          operationId: 'Subscription_Cancel',
+          operationId: 'Backup_Restore_database',
           parameters: [
+            {
+              in: 'path',
+              name: 'id',
+              required: false,
+              schema: {
+                type: 'string'
+              }
+            },
             {
               description: 'Inflect payload keys. Possible values are camel, dash, snake or pascal.', # rubocop:disable Layout/LineLength
               in: 'header',
@@ -78,13 +86,13 @@ RSpec.describe OpenAPI::Paths::Trigger do
               description: 'Action not authorized'
             }
           },
-          summary: 'Cancel subscription Subscription',
-          tags: %w[Subscription]
+          summary: 'Restore database Backup',
+          tags: %w[Backups]
         }
       }
     }
   end
 
-  its(:tag) { is_expected.to eq('Subscription') }
+  its(:tag) { is_expected.to eq('Backups') }
   its(:to_h) { is_expected.to eq(expected_hash) }
 end

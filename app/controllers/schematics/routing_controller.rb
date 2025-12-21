@@ -7,7 +7,6 @@ module Schematics
     skip_around_action :touch_session!
 
     SINGLETON_CONTROLLERS = %w[
-      subscription
       abonnement
       abbonamento
       configuration
@@ -25,7 +24,6 @@ module Schematics
       'MigrationsController' => %w[migrations migrazioni],
       'SearchesController' => %w[searches recherches ricerche],
       'SessionsController' => %w[sessions sessioni],
-      'SubscriptionsController' => %w[subscription abonnement abbonamento],
       'UsersController' => %w[users utilisateurs utenti]
     }.freeze
     # rubocop:enable Style/StringHashKeys

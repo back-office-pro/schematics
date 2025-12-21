@@ -6,5 +6,3 @@ fr:
   migration:
     migrate: Cette action peut entraîner des pertes de données concernant les actions en cours
     rollback: Cette action peut entraîner des pertes de données concernant les actions en cours
-  subscription:
-    cancel: Vous pouvez réactiver votre abonnement à tout moment avant l'échéance en cours

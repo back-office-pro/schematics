@@ -20,16 +20,6 @@ RSpec.describe Subscription do
     record.metadata = metadata
   end
 
-  it 'sends a gateway request after enable' do
-    record.tap(&:cancel!).enable!
-    expect(subscription_stub_request).to have_been_requested.twice
-  end
-
-  it 'sends a gateway request after cancel' do
-    record.cancel!
-    expect(subscription_stub_request).to have_been_requested.once
-  end
-
   describe '#load!' do
     subject(:load!) { record.load! }
 

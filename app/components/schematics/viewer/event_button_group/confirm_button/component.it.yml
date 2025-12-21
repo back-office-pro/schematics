@@ -6,5 +6,3 @@ it:
   migration:
     migrate: Questa azione può comportare la perdita di dati relativi alle azioni in corso
     rollback: Questa azione può comportare la perdita di dati relativi alle azioni in corso
-  subscription:
-    cancel: Puo riattivare il suo abbonamento in qualsiasi momento prima della data di scadenza corrente

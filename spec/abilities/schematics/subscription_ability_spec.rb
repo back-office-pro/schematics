@@ -5,22 +5,7 @@ require 'rails_helper'
 require 'cancan/matchers'
 
 RSpec.describe Schematics::SubscriptionAbility do
-  subject(:ability) { described_class.new(user) }
-
-  include_context 'with admin role'
-
-  let(:role) { Role.new }
-  let(:user) { User.new(role:) }
-
-  it { is_expected.not_to be_able_to(:cancel, Subscription) }
-  it { is_expected.not_to be_able_to(:enable, Subscription) }
-
-  context 'when user is admin' do
-    let(:role) { admin_role }
-
-    it { is_expected.to be_able_to(:cancel, Subscription) }
-    it { is_expected.to be_able_to(:enable, Subscription) }
-  end
+  subject(:ability) { described_class.new }
 
   context 'when users quota is exceeded' do
     before { allow(User).to receive(:count).and_return(100) }

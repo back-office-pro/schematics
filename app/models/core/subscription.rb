@@ -43,8 +43,4 @@ class ::Subscription < Schematics::ApplicationRecord
   end
 
   def load! = update!(GATEWAY::Fetch.call.data)
-
-  def after_enable_event = GATEWAY::Enable.call
-
-  def after_cancel_event = GATEWAY::Cancel.call
 end

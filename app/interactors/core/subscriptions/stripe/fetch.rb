@@ -63,10 +63,10 @@ module Core
           &.slice(0, 2)
 
         def subscription_state
-          return ::Subscription::STATE_STATE_INACTIVE unless subscription_id
-          return ::Subscription::STATE_STATE_CANCELED if subscription_cancel_at_period_end
+          return :inactive unless subscription_id
+          return :canceled if subscription_cancel_at_period_end
 
-          ::Subscription::STATE_STATE_ACTIVE
+          :active
         end
 
         def product_metadata = product
