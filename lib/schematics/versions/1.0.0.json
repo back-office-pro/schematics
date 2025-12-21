@@ -1634,7 +1634,6 @@
     "name": "subscription",
     "type": "singleton",
     "options": {
-      "descriptor": "plan",
       "icon": "id_badge",
       "hidden": true,
       "actions": []
@@ -1685,20 +1684,6 @@
         }
       },
       {
-        "id": "b810d540-09a8-4cdd-8fea-13d304434513",
-        "name": "plan",
-        "type": "enum",
-        "options": {
-          "readonly": true,
-          "default": "basic",
-          "values": [
-            "basic",
-            "pro",
-            "premium"
-          ]
-        }
-      },
-      {
         "id": "6ee822eb-a6b4-4fa1-9980-2c14299f717b",
         "name": "state",
         "type": "enum",
@@ -1711,19 +1696,6 @@
             "canceled",
             "inactive"
           ]
-        }
-      },
-      {
-        "id": "1464fc93-a61e-4482-8b22-80d1ec999039",
-        "name": "metadata",
-        "type": "jsonb",
-        "options": {
-          "readonly": true,
-          "cached": true,
-          "default": {
-            "users": 3,
-            "api_keys": 3
-          }
         }
       }
     ]

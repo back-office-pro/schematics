@@ -23,8 +23,10 @@ RSpec.describe Schematics::LoadSubscriptionJob do
 
     include_context 'with stripe stubs'
 
+    before { subscription.state_inactive! }
+
     it 'loads subscription from gateway' do
-      expect { perform_now }.to(change { subscription.reload.metadata })
+      expect { perform_now }.to(change { subscription.reload.state })
     end
   end
 end

@@ -8,56 +8,16 @@ RSpec.describe Subscription do
 
   include_context 'with stripe stubs'
 
-  let(:metadata) do
-    {
-      users: 3,
-      api_keys: 2
-    }
-  end
-
-  before do
-    record.metadata = metadata
-  end
-
   describe '#load!' do
     subject(:load!) { record.load! }
 
-    it 'updates subscription metadata' do
+    before { record.state_inactive! }
+
+    it 'updates subscription state' do
       expect { load! }
-        .to change(record, :metadata)
-        .from(metadata.stringify_keys)
-        .to(new_metadata.stringify_keys)
+        .to change(record, :state)
+        .from('inactive')
+        .to('active')
     end
-
-    it 'updates subscription plan' do
-      expect { load! }
-        .to change(record, :plan)
-        .from('basic')
-        .to('premium')
-    end
-  end
-
-  describe '.quota_api_keys_exceeded?' do
-    subject { described_class.quota_api_keys_exceeded? }
-
-    it { is_expected.to be_falsy }
-  end
-
-  describe '.quota_users_exceeded?' do
-    subject { described_class.quota_users_exceeded? }
-
-    it { is_expected.to be_falsy }
-  end
-
-  describe '.quota_users' do
-    subject { described_class.quota_users }
-
-    it { is_expected.to eq(3) }
-  end
-
-  describe '.quota_api_keys' do
-    subject { described_class.quota_api_keys }
-
-    it { is_expected.to eq(3) }
   end
 end

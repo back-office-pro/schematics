@@ -89,13 +89,7 @@ RSpec.shared_context 'with login' do
 end
 
 RSpec.shared_context 'with stripe stubs' do
-  let(:new_metadata) do
-    {
-      users: 1000,
-      api_keys: 100
-    }
-  end
-  let(:search_body) do
+  let(:body) do
     {
       data: [
         {
@@ -117,20 +111,12 @@ RSpec.shared_context 'with stripe stubs' do
           ]
         }
       ]
-    }
-  end
-  let(:product_body) do
-    {
-      name: 'premium',
-      metadata: new_metadata
-    }
+    }.to_json
   end
 
   before do
     stub_request(:get, %r{https://api.stripe.com/v1/customers/search})
-      .to_return(body: search_body.to_json, status: 200)
-    stub_request(:get, 'https://api.stripe.com/v1/products/prod_1')
-      .to_return(body: product_body.to_json, status: 200)
+      .to_return(body:, status: 200)
   end
 end
 

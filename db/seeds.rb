@@ -56,15 +56,11 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
       {
         aggregate: 'count',
         model: 'User',
-        comparator: 'greater_than_or_equal_to',
-        threshold: Subscription.quota_users,
         dashboards: [Dashboard.first]
       },
       {
         aggregate: 'count',
         model: 'APIKey',
-        comparator: 'greater_than_or_equal_to',
-        threshold: Subscription.quota_api_keys,
         dashboards: [Dashboard.first]
       },
       {

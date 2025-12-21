@@ -6,8 +6,6 @@ en:
         business_sector: Business sector
         default_locale: Default locale
         email: Email
-        metadata: Metadata
-        plan: Plan
         state: State
     enums:
       subscription:
@@ -25,18 +23,10 @@ en:
           retail: Retail
           technology: Technology
           transportation: Transportation
-        plan:
-          basic: Basic plan
-          premium: Premium plan
-          pro: Pro plan
         state:
           active: Active
           canceled: Canceled
           inactive: Inactive
-    events:
-      subscription:
-        cancel: Cancel subscription
-        enable: Enable back subscription
     models:
       subscription:
         gender: female

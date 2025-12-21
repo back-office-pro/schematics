@@ -6,8 +6,6 @@ it:
         business_sector: Settore di attività
         default_locale: Lingua predefinita
         email: E-mail
-        metadata: Metadati
-        plan: Piano
         state: Stato
     enums:
       subscription:
@@ -25,18 +23,10 @@ it:
           retail: Commercio al dettaglio
           technology: Tecnologia
           transportation: Trasporto
-        plan:
-          basic: Abbonamento di base
-          premium: Abbonamento premium
-          pro: Abbonamento pro
         state:
           active: Attiva
           canceled: Cancellata
           inactive: Inattiva
-    events:
-      subscription:
-        cancel: Annullare abbonamento
-        enable: Riattivare abbonamento
     models:
       subscription:
         gender: male

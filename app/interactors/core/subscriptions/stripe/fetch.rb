@@ -8,8 +8,7 @@ module Core
         include Interactor
 
         delegate :secret_key, to: 'Rails.application.credentials.stripe', private: true
-        delegate :name, to: :product, allow_nil: true, prefix: true, private: true
-        delegate :customers, :products, to: 'client.v1', private: true
+        delegate :customers, to: 'client.v1', private: true
         delegate :logger, to: '::Rails', private: true
         delegate :id,
                  :email,
@@ -41,8 +40,6 @@ module Core
 
         memoize def client = ::Stripe::StripeClient.new(secret_key)
 
-        memoize def product = product_id && products.retrieve(product_id)
-
         memoize def customer = customers
           .search(query: "name:'demo'", expand: ['data.subscriptions'])
           .data
@@ -52,9 +49,7 @@ module Core
           email: customer_email,
           default_locale: customer_locale,
           business_sector: customer_metadata_business_sector,
-          state: subscription_state,
-          plan: product_name,
-          metadata: product_metadata
+          state: subscription_state
         }.compact
 
         def customer_locale = customer
@@ -69,18 +64,9 @@ module Core
           :active
         end
 
-        def product_metadata = product
-          &.metadata
-          &.to_h
-          &.transform_values(&:to_i)
-
         def subscription = customer
           &.subscriptions
           &.find { %w[active trialing].include?(_1.status) }
-
-        def product_id = subscription
-          &.plan
-          &.product
 
         def log_data = logger
           .tagged('Stripe')
