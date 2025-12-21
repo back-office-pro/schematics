@@ -297,6 +297,7 @@
         "type": "string",
         "options": {
           "cached": true,
+          "default": "BackOffice",
           "limit": 25,
           "group": "company"
         }
