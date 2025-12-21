@@ -267,14 +267,14 @@ GEM
     ffi (1.17.2-x86_64-darwin)
     ffi (1.17.2-x86_64-linux-gnu)
     ffi (1.17.2-x86_64-linux-musl)
-    flay (2.14.0)
+    flay (2.14.1)
       erubi (~> 1.10)
       path_expander (~> 2.0)
-      prism (~> 1.5)
+      prism (~> 1.7)
       sexp_processor (~> 4.0)
-    flog (4.9.0)
+    flog (4.9.1)
       path_expander (~> 2.0)
-      prism (~> 1.5)
+      prism (~> 1.7)
       sexp_processor (~> 4.8)
     friendly_id (5.4.2)
       activerecord (>= 4.0.0)
@@ -589,6 +589,7 @@ GEM
     omniauth-saml (2.2.4)
       omniauth (~> 2.1)
       ruby-saml (~> 1.18)
+    openssl (4.0.0)
     os (1.1.4)
     ostruct (0.6.3)
     pagy (43.2.2)
@@ -806,7 +807,7 @@ GEM
     ruby-vips (2.3.0)
       ffi (~> 1.12)
       logger
-    ruby_parser (3.21.1)
+    ruby_parser (3.22.0)
       racc (~> 1.5)
       sexp_processor (~> 4.16)
     rubycritic (4.11.0)
@@ -1034,6 +1035,7 @@ DEPENDENCIES
   omniauth-google-oauth2
   omniauth-rails_csrf_protection
   omniauth-saml
+  openssl
   pagy
   paper_trail
   paranoia
