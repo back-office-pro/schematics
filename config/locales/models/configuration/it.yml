@@ -27,6 +27,7 @@ it:
         origins: Domini API consentiti
         sso_cert_fingerprint: Impronta digitale del certificato SSO
         sso_service_url: URL del provider di identità SSO
+        storage_quota: Quota di archiviazione
         tasks_feature_flag: Attivare i compiti
         theme_color: Colore del tema
         time_zone: Fuso orario
@@ -82,6 +83,7 @@ it:
         locale: Lingua
         security: Sicurezza
         sso: SSO
+        storage: Archiviazione
     models:
       configuration:
         gender: female

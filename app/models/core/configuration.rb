@@ -32,7 +32,17 @@ class ::Configuration < Schematics::ApplicationRecord
       .push(company_website)
       .compact
 
+    def storage_quota_will_be_exceeded?(size)
+      return false unless storage_quota
+
+      storage_size.bytes + size.bytes >= storage_quota.gigabytes
+    end
+
     private
+
+    memoize def storage_size = ActiveStorage::Blob
+      .with_deleted
+      .sum(&:byte_size)
 
     def port
       3000 if Rails.env.development?

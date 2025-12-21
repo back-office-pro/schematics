@@ -11,8 +11,7 @@ RSpec.describe Subscription do
   let(:metadata) do
     {
       users: 3,
-      api_keys: 2,
-      storage: 1
+      api_keys: 2
     }
   end
 
@@ -38,22 +37,6 @@ RSpec.describe Subscription do
     end
   end
 
-  describe '.quota_storage_will_be_exceeded?' do
-    subject { described_class.quota_storage_will_be_exceeded?(size) }
-
-    context 'when size is greater than storage quota' do
-      let(:size) { 2.gigabytes }
-
-      it { is_expected.to be_truthy }
-    end
-
-    context 'when size is lower than storage quota' do
-      let(:size) { 2.bytes }
-
-      it { is_expected.to be_falsy }
-    end
-  end
-
   describe '.quota_api_keys_exceeded?' do
     subject { described_class.quota_api_keys_exceeded? }
 
@@ -76,11 +59,5 @@ RSpec.describe Subscription do
     subject { described_class.quota_api_keys }
 
     it { is_expected.to eq(3) }
-  end
-
-  describe '.quota_storage' do
-    subject { described_class.quota_storage }
-
-    it { is_expected.to eq(1.gigabyte) }
   end
 end

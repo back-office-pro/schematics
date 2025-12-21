@@ -10,10 +10,6 @@ class ::Subscription < Schematics::ApplicationRecord
   class << self
     delegate :users, :api_keys, to: :quota, prefix: true
 
-    def quota_storage_will_be_exceeded?(size)
-      storage_size + size.bytes >= quota_storage
-    end
-
     def quota_users_exceeded?
       users_size >= quota_users
     end
@@ -22,20 +18,11 @@ class ::Subscription < Schematics::ApplicationRecord
       api_keys_size >= quota_api_keys
     end
 
-    def quota_storage = quota
-      .storage
-      .gigabytes
-
     private
 
     def quota = Data
-      .define(:storage, :users, :api_keys)
+      .define(:users, :api_keys)
       .new(**metadata)
-
-    memoize def storage_size = ActiveStorage::Blob
-      .with_deleted
-      .sum(&:byte_size)
-      .bytes
 
     memoize def users_size = User.count
 

@@ -2,10 +2,10 @@
 # frozen_string_literal: true
 
 class StorageQuotaValidator < ActiveModel::EachValidator
-  delegate :quota_storage_will_be_exceeded?, to: 'Subscription', private: true
+  delegate :storage_quota_will_be_exceeded?, to: '::Configuration', private: true
 
   def validate_each(record, attribute, value)
-    return unless quota_storage_will_be_exceeded? Array(value).sum(&:byte_size)
+    return unless storage_quota_will_be_exceeded? Array(value).sum(&:byte_size).bytes
 
     record.errors.add(attribute, :storage_quota)
   end

@@ -49,4 +49,12 @@ RSpec.describe Configuration do
 
     it { is_expected.to be_empty }
   end
+
+  describe '.storage_quota_will_be_exceeded?' do
+    subject { described_class.storage_quota_will_be_exceeded?(size) }
+
+    let(:size) { 2_000 }
+
+    it { is_expected.to be_falsy }
+  end
 end

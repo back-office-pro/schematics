@@ -70,8 +70,6 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
         aggregate: 'sum',
         model: 'ActiveStorage::Blob',
         field: 'ActiveStorage::Blob#byte_size',
-        comparator: 'greater_than_or_equal_to',
-        threshold: Subscription.quota_storage,
         dashboards: [Dashboard.first]
       }
     ]
