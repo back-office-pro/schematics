@@ -3,7 +3,6 @@ en:
   activerecord:
     attributes:
       subscription:
-        default_locale: Default locale
         state: State
     enums:
       subscription:

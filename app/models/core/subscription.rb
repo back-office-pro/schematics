@@ -5,7 +5,5 @@
 class ::Subscription < Schematics::ApplicationRecord
   GATEWAY = ::Core::Subscriptions::Stripe
 
-  attribute :default_locale, default: -> { Rails.configuration.i18n.default_locale }
-
   def load! = update!(GATEWAY::Fetch.call.data)
 end

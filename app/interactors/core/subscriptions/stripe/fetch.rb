@@ -39,10 +39,7 @@ module Core
           .data
           .first
 
-        def data = {
-          default_locale: customer_locale,
-          state: subscription_state
-        }.compact
+        def data = { state: subscription_state }.compact
 
         def customer_locale = customer
           &.preferred_locales

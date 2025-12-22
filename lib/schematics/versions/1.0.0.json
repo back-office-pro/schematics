@@ -1665,15 +1665,6 @@
     },
     "attributes": [
       {
-        "id": "7944825a-473a-4a87-911f-e9d169807655",
-        "name": "default_locale",
-        "type": "locale",
-        "options": {
-          "readonly": true,
-          "cached": true
-        }
-      },
-      {
         "id": "6ee822eb-a6b4-4fa1-9980-2c14299f717b",
         "name": "state",
         "type": "enum",
