@@ -88,35 +88,6 @@ RSpec.shared_context 'with login' do
   end
 end
 
-RSpec.shared_context 'with stripe stubs' do
-  let(:body) do
-    {
-      data: [
-        {
-          id: 'cus_1',
-          email: 'john.doe@nowhere.com',
-          preferred_locales: [],
-          subscriptions: [
-            {
-              id: 'sub_1',
-              status: 'active',
-              cancel_at_period_end: false,
-              plan: {
-                product: 'prod_1'
-              }
-            }
-          ]
-        }
-      ]
-    }.to_json
-  end
-
-  before do
-    stub_request(:get, %r{https://api.stripe.com/v1/customers/search})
-      .to_return(body:, status: 200)
-  end
-end
-
 RSpec.shared_context 'with google translate stub' do
   let(:body) do
     {

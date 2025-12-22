@@ -21,8 +21,6 @@ RSpec.describe Schematics::LoadSubscriptionJob do
   describe '#perform_now' do
     subject(:perform_now) { described_class.perform_now }
 
-    include_context 'with stripe stubs'
-
     before { subscription.state_inactive! }
 
     it 'loads subscription from gateway' do
