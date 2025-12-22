@@ -4,7 +4,7 @@
 require 'rails_helper'
 require 'cancan/matchers'
 
-RSpec.describe Schematics::SubscriptionAbility do
+RSpec.describe Schematics::LicenseAbility do
   subject(:ability) { described_class.new }
 
   context 'when subscription is inactive' do
