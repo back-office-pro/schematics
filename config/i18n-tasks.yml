@@ -24,7 +24,6 @@ ignore_missing:
   - open_api.*
   - schematics.*
   - sessions.*
-  - subscriptions.*
   - javascript.*
   - pagy.*
   - date.*
@@ -45,7 +44,6 @@ ignore_unused:
   - open_api.*
   - schematics.*
   - sessions.*
-  - subscriptions.*
   - javascript.*
   - pagy.*
   - date.*

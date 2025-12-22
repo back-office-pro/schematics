@@ -11,10 +11,7 @@ RSpec.describe 'Admin' do
   describe 'GET #index' do
     let(:do_request) { get(admin_path, headers:) }
 
-    before do
-      Subscription.instance.save!
-      do_request
-    end
+    before { do_request }
 
     it { is_expected.to have_http_status(:success) }
   end
