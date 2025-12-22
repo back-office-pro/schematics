@@ -21,7 +21,7 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
   Configuration.instance.save!
   Documentation.create!
   User.create!(
-    email: Subscription.email,
+    email: 'support@back-office.pro',
     password: Schematics::Attributes::Digest::DEFAULT,
     role: Role.admin
   )

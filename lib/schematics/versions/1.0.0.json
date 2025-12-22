@@ -1665,16 +1665,6 @@
     },
     "attributes": [
       {
-        "id": "90decead-8b55-499f-b7a1-30c0fc3849ad",
-        "name": "email",
-        "type": "email",
-        "options": {
-          "readonly": true,
-          "cached": true,
-          "default": "support@back-office.pro"
-        }
-      },
-      {
         "id": "7944825a-473a-4a87-911f-e9d169807655",
         "name": "default_locale",
         "type": "locale",

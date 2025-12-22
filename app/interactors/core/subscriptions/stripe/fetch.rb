@@ -11,7 +11,6 @@ module Core
         delegate :customers, to: 'client.v1', private: true
         delegate :logger, to: '::Rails', private: true
         delegate :id,
-                 :email,
                  :metadata,
                  to: :customer,
                  allow_nil: true,
@@ -41,7 +40,6 @@ module Core
           .first
 
         def data = {
-          email: customer_email,
           default_locale: customer_locale,
           state: subscription_state
         }.compact

@@ -4,7 +4,6 @@ it:
     attributes:
       subscription:
         default_locale: Lingua predefinita
-        email: E-mail
         state: Stato
     enums:
       subscription:
