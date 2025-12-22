@@ -87,10 +87,10 @@ RSpec.describe Migration do
     it { is_expected.to eq(record) }
   end
 
-  describe '.default' do
-    subject { described_class.default }
+  describe '.default_data' do
+    subject { described_class.default_data }
 
-    it { is_expected.to be_a(described_class) }
+    it { is_expected.to be_an(Array) }
   end
 
   describe '.default_prompt' do

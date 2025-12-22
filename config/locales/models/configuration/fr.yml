@@ -11,6 +11,7 @@ fr:
         azure_storage_account_name: Nom du compte de stockage Microsoft Azure
         comments_feature_flag: Activer les commentaires
         company_address: Adresse de la société
+        company_business_sector: Secteur d'activité de la société
         company_logo: Logo de la société
         company_name: Nom de la société
         company_registration_number: Numéro SIRET de la société
@@ -70,6 +71,20 @@ fr:
           us-gov-west-1: AWS GovCloud (USA Ouest)
           us-west-1: USA Ouest (Californie du Nord)
           us-west-2: USA Ouest (Oregon)
+        company_business_sector:
+          agriculture: Agriculture
+          construction: Bâtiment
+          education: Education
+          energy: Energie
+          finance: Finance
+          healthcare: Santé
+          hospitality: Hôtellerie
+          insurance: Assurance
+          manufacturing: Fabrication
+          other: Autre
+          retail: Vente au détail
+          technology: Technologie
+          transportation: Transport
         locale:
           en: Anglais
           fr: Français

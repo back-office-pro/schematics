@@ -3,26 +3,11 @@ en:
   activerecord:
     attributes:
       subscription:
-        business_sector: Business sector
         default_locale: Default locale
         email: Email
         state: State
     enums:
       subscription:
-        business_sector:
-          agriculture: Agriculture
-          construction: Construction
-          education: Education
-          energy: Energy
-          finance: Finance
-          healthcare: Healthcare
-          hospitality: Hospitality
-          insurance: Insurance
-          manufacturing: Manufacturing
-          other: Other
-          retail: Retail
-          technology: Technology
-          transportation: Transportation
         state:
           active: Active
           canceled: Canceled

@@ -6,7 +6,7 @@ class ::Migration < Schematics::ApplicationRecord
   GATEWAY = ::Core::Migrations::OpenAI::ChatGPT
 
   serialize :data, coder: Schematics::Schema
-  attribute :data, default: -> { current_data || [] }
+  attribute :data, default: -> { current_data || default_data }
 
   validates_associated :data
 
@@ -24,7 +24,7 @@ class ::Migration < Schematics::ApplicationRecord
 
   class << self
     delegate :version, :data, to: :current, prefix: true, allow_nil: true
-    delegate :business_sector, to: '::Subscription', private: true
+    delegate :company_business_sector, to: '::Configuration', private: true
 
     def current = state_finished.last
 
@@ -32,17 +32,15 @@ class ::Migration < Schematics::ApplicationRecord
 
     def core = new(data: SchemaCache.as_json, version: current_version)
 
-    def default = new(
-      data: ActiveSupport::ConfigurationFile.parse(
-        Rails.root.join('db', 'seeds', 'migrations', "#{business_sector}.yml")
-      )
+    def default_data = ActiveSupport::ConfigurationFile.parse(
+      Rails.root.join('db', 'seeds', 'migrations', "#{company_business_sector}.yml")
     )
 
     def default_prompt = I18n.t(
       'migrations.openai.chatgpt.user',
-      business_sector: Subscription
+      business_sector: ::Configuration
         .instance
-        .business_sector_formatted
+        .company_business_sector_formatted
         .downcase
     )
   end

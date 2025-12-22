@@ -303,6 +303,31 @@
         }
       },
       {
+        "id": "8f589671-7d82-48fb-8cda-cbb95207c597",
+        "name": "company_business_sector",
+        "type": "enum",
+        "options": {
+          "cached": true,
+          "default": "other",
+          "group": "company",
+          "values": [
+            "healthcare",
+            "construction",
+            "manufacturing",
+            "education",
+            "energy",
+            "technology",
+            "finance",
+            "transportation",
+            "insurance",
+            "retail",
+            "agriculture",
+            "hospitality",
+            "other"
+          ]
+        }
+      },
+      {
         "id": "4f70ad5b-4888-4bcd-ad3c-a67f6a540c2f",
         "name": "company_address",
         "type": "address",
@@ -1656,31 +1681,6 @@
         "options": {
           "readonly": true,
           "cached": true
-        }
-      },
-      {
-        "id": "8f589671-7d82-48fb-8cda-cbb95207c597",
-        "name": "business_sector",
-        "type": "enum",
-        "options": {
-          "readonly": true,
-          "cached": true,
-          "default": "other",
-          "values": [
-            "healthcare",
-            "construction",
-            "manufacturing",
-            "education",
-            "energy",
-            "technology",
-            "finance",
-            "transportation",
-            "insurance",
-            "retail",
-            "agriculture",
-            "hospitality",
-            "other"
-          ]
         }
       },
       {

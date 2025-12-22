@@ -20,7 +20,6 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
   )
   Configuration.instance.save!
   Documentation.create!
-  Migration.default.save!
   User.create!(
     email: Subscription.email,
     password: Schematics::Attributes::Digest::DEFAULT,

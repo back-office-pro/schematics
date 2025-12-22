@@ -3,26 +3,11 @@ fr:
   activerecord:
     attributes:
       subscription:
-        business_sector: Secteur d'activité
         default_locale: Langue par défaut
         email: E-mail
         state: Statut
     enums:
       subscription:
-        business_sector:
-          agriculture: Agriculture
-          construction: Bâtiment
-          education: Education
-          energy: Energie
-          finance: Finance
-          healthcare: Santé
-          hospitality: Hôtellerie
-          insurance: Assurance
-          manufacturing: Fabrication
-          other: Autre
-          retail: Vente au détail
-          technology: Technologie
-          transportation: Transport
         state:
           active: Active
           canceled: Annulée

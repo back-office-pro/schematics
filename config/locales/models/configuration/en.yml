@@ -12,6 +12,7 @@ en:
         azure_storage_account_name: Microsoft Azure storage account name
         comments_feature_flag: Enable comments
         company_address: Company address
+        company_business_sector: Company business sector
         company_logo: Company Logo
         company_name: Company name
         company_registration_number: Company registration number
@@ -71,6 +72,20 @@ en:
           us-gov-west-1: AWS GovCloud (US-West)
           us-west-1: US West (N. California)
           us-west-2: US West (Oregon)
+        company_business_sector:
+          agriculture: Agriculture
+          construction: Construction
+          education: Education
+          energy: Energy
+          finance: Finance
+          healthcare: Healthcare
+          hospitality: Hospitality
+          insurance: Insurance
+          manufacturing: Manufacturing
+          other: Other
+          retail: Retail
+          technology: Technology
+          transportation: Transportation
         locale:
           en: English
           fr: French

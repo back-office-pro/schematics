@@ -96,9 +96,6 @@ RSpec.shared_context 'with stripe stubs' do
           id: 'cus_1',
           email: 'john.doe@nowhere.com',
           preferred_locales: [],
-          metadata: {
-            business_sector: 'construction'
-          },
           subscriptions: [
             {
               id: 'sub_1',
