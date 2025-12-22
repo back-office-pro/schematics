@@ -292,6 +292,15 @@
     },
     "attributes": [
       {
+        "id": "50df4cd0-2a82-479c-9ebf-a65665c1203b",
+        "name": "license_key",
+        "type": "text",
+        "options": {
+          "cached": true,
+          "group": "license"
+        }
+      },
+      {
         "id": "a421f50f-6d4c-4ef9-9191-59537db9d05b",
         "name": "company_name",
         "type": "string",
@@ -1651,33 +1660,6 @@
         "options": {
           "readonly": true,
           "unit": "ms"
-        }
-      }
-    ]
-  },
-  {
-    "id": "b08023c8-ff1f-4e3e-b1f6-a6b149fab14b",
-    "name": "subscription",
-    "type": "singleton",
-    "options": {
-      "icon": "id_badge",
-      "hidden": true,
-      "actions": []
-    },
-    "attributes": [
-      {
-        "id": "6ee822eb-a6b4-4fa1-9980-2c14299f717b",
-        "name": "state",
-        "type": "enum",
-        "options": {
-          "required": true,
-          "readonly": true,
-          "default": "active",
-          "values": [
-            "active",
-            "canceled",
-            "inactive"
-          ]
         }
       }
     ]
