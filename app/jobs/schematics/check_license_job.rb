@@ -2,13 +2,11 @@
 # frozen_string_literal: true
 
 module Schematics
-  class LoadSubscriptionJob < ApplicationJob
-    include Quietable
-
+  class CheckLicenseJob < ApplicationJob
     queue_as :critical
 
-    def perform = ::Subscription
-      .instance
-      .state_active!
+    def perform
+      # TODO
+    end
   end
 end

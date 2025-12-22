@@ -3,11 +3,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Schematics::LoadSubscriptionJob do
-  let(:subscription) { Subscription.instance.tap(&:save!) }
-
-  it { is_expected.to be_a(Schematics::Quietable) }
-
+RSpec.describe Schematics::CheckLicenseJob do
   describe '#perform_later' do
     it 'queues the job' do
       expect { described_class.perform_later }
@@ -21,10 +17,6 @@ RSpec.describe Schematics::LoadSubscriptionJob do
   describe '#perform_now' do
     subject(:perform_now) { described_class.perform_now }
 
-    before { subscription.state_inactive! }
-
-    it 'loads subscription from gateway' do
-      expect { perform_now }.to(change { subscription.reload.state })
-    end
+    # TODO
   end
 end
