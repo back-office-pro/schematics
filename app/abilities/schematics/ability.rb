@@ -27,7 +27,7 @@ module Schematics
       merge RoleAbility.new
       merge AdminAbility.new(self)
       merge FeatureFlagAbility.new
-      merge SubscriptionAbility.new
+      merge LicenseAbility.new
       merge SessionAbility.new(user)
       merge TeamAbility.new(user, schema)
     end
