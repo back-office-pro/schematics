@@ -450,6 +450,7 @@
         "type": "byte",
         "options": {
           "cached": true,
+          "greater_than": 0,
           "group": "storage"
         }
       },
