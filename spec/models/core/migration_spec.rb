@@ -90,7 +90,18 @@ RSpec.describe Migration do
   describe '.default_data' do
     subject { described_class.default_data }
 
-    it { is_expected.to be_an(Array) }
+    its([0]) do
+      is_expected.to match(
+        'id' => String,
+        'name' => 'customer',
+        'options' => {
+          'icon' => 'user_tie',
+          'descriptor' => 'full_name'
+        },
+        'attributes' => Array,
+        'virtuals' => Array
+      )
+    end
   end
 
   describe '.default_prompt' do
