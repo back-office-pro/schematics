@@ -3,7 +3,7 @@
 
 # :reek:MissingSafeMethod
 class ::Configuration < Schematics::ApplicationRecord
-  attribute :available_locales, default: -> { Rails.configuration.i18n.available_locales.map(&:to_s) } # rubocop:disable Layout/LineLength
+  attribute :available_locales, default: -> { [Rails.configuration.i18n.default_locale] }
   attribute :locale, default: -> { Rails.configuration.i18n.default_locale }
 
   after_update_commit :clear_bootstrap_email_sass_cache!
