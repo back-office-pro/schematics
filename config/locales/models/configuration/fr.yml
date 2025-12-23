@@ -21,7 +21,7 @@ fr:
         gcs_private_key: Clé privée Google Cloud Storage
         gcs_private_key_id: ID de clé privée Google Cloud Storage
         google_sign_in_feature_flag: Activer la connexion avec le compte Google
-        license_key: Clé de licence
+        license_file: Fichier de licence
         locale: Langue
         meetings_feature_flag: Activer les réunions
         messages_feature_flag: Activer la messagerie interne
