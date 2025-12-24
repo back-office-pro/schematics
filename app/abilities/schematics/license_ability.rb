@@ -5,7 +5,9 @@ module Schematics
   class LicenseAbility < ApplicationAbility
     def initialize
       super
-      cannot %i[create restore update], :all unless License.active?
+      return if ::Configuration.license_active?
+
+      cannot :manage, :all
     end
   end
 end
