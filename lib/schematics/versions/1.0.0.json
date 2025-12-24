@@ -292,15 +292,6 @@
     },
     "attributes": [
       {
-        "id": "50df4cd0-2a82-479c-9ebf-a65665c1203b",
-        "name": "license_key",
-        "type": "text",
-        "options": {
-          "cached": true,
-          "group": "license"
-        }
-      },
-      {
         "id": "a421f50f-6d4c-4ef9-9191-59537db9d05b",
         "name": "company_name",
         "type": "string",
@@ -511,6 +502,18 @@
           "cached": true,
           "default": true,
           "group": "feature_flag"
+        }
+      },
+      {
+        "id": "50df4cd0-2a82-479c-9ebf-a65665c1203b",
+        "name": "license_file",
+        "type": "attachment",
+        "options": {
+          "cached": true,
+          "content_type": [
+            "application/json"
+          ],
+          "group": "license"
         }
       },
       {
