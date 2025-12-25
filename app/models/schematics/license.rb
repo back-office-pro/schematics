@@ -2,6 +2,7 @@
 # frozen_string_literal: true
 
 module Schematics
+  # :reek:Attribute
   class License
     include ::ActiveModel::API
 
