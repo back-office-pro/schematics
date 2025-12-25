@@ -6,7 +6,6 @@ module Schematics
     def initialize(user, schema = Schema.new)
       super
       merge PermissionAbility.new(user)
-      merge LicenseAbility.new
       merge ActiveStorage::AttachmentAbility.new(user)
       merge ActiveStorage::BlobAbility.new
       merge VersionAbility.new(user)

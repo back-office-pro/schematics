@@ -9,5 +9,7 @@ RSpec.describe Schematics::PermissionAbility do
 
   include_context 'with user'
 
+  before { allow(Configuration).to receive(:license_active?).and_return(true) }
+
   it { is_expected.to be_able_to(:index, Import) }
 end
