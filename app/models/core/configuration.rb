@@ -11,7 +11,7 @@ class ::Configuration < Schematics::ApplicationRecord
 
   class << self
     LOCALE_TO_TIME_ZONE = { en: 'UTC', fr: 'Paris', it: 'Rome' }.freeze
-    delegate :active?, to: :license, prefix: true
+    delegate :active?, :signature, to: :license, prefix: true
 
     def time_zone_with_fallback
       time_zone || LOCALE_TO_TIME_ZONE[locale&.to_sym]

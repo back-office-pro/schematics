@@ -7,6 +7,7 @@ module Schematics
       include Interactable
 
       delegate :website_url, to: 'Rails.application.routes.url_helpers', private: true
+      delegate :license_signature, to: '::Configuration', private: true
 
       def call = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
         http.request(request)
@@ -15,15 +16,15 @@ module Schematics
       private
 
       def uri
-        URI website_url(path: 'license')
+        URI website_url(path: '/license_hearbeat')
       end
 
       def request = Net::HTTP::Post
         .new(uri)
-        .tap { _1.form_data = payload }
+        .tap { _1.form_data = payload.to_json }
 
       def payload = {
-        signature: ::Configuration.license.signature,
+        signature: license_signature,
         fingerprint: MacAddress.address
       }
     end
