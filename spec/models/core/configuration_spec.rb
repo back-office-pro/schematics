@@ -15,12 +15,12 @@ RSpec.describe Configuration do
   end
 
   it 'clears bootstrap email cache after update' do
-    record.tap(&:save!).update!(theme_color: '#ffffff')
+    record.tap(&:save!).reload.update!(theme_color: '#ffffff')
     expect(BootstrapEmail).to have_received(:clear_sass_cache!)
   end
 
   it 'updates the storage service after update' do
-    expect { record.tap(&:save!).update!(aws_bucket: 'test') }
+    expect { record.tap(&:save!).reload.update!(aws_bucket: 'test') }
       .to change { ActiveStorage::Blob.service.name }
       .from(:test)
       .to(:amazon)
@@ -54,6 +54,18 @@ RSpec.describe Configuration do
     subject { described_class.storage_quota_will_be_exceeded?(size) }
 
     let(:size) { 2_000 }
+
+    it { is_expected.to be_falsy }
+  end
+
+  describe '.license_file' do
+    subject { described_class.license_file }
+
+    it { is_expected.to be_nil }
+  end
+
+  describe '.license_active?' do
+    subject { described_class.license_active? }
 
     it { is_expected.to be_falsy }
   end

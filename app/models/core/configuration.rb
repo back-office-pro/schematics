@@ -11,6 +11,7 @@ class ::Configuration < Schematics::ApplicationRecord
 
   class << self
     LOCALE_TO_TIME_ZONE = { en: 'UTC', fr: 'Paris', it: 'Rome' }.freeze
+    delegate :active?, to: :license, prefix: true
 
     def time_zone_with_fallback
       time_zone || LOCALE_TO_TIME_ZONE[locale&.to_sym]
@@ -38,7 +39,13 @@ class ::Configuration < Schematics::ApplicationRecord
       storage_size.bytes + size.bytes >= storage_quota.gigabytes
     end
 
+    def license_file = Rails
+      .cache
+      .fetch('configuration/license_file') { instance.license_file.download }
+
     private
+
+    def license = Schematics::License.build(license_file)
 
     memoize def storage_size = ActiveStorage::Blob
       .with_deleted
