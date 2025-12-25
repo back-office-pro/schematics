@@ -13,10 +13,4 @@ RSpec.describe Schematics::CheckLicenseJob do
         .at(:no_wait)
     end
   end
-
-  describe '#perform_now' do
-    subject(:perform_now) { described_class.perform_now }
-
-    # TODO
-  end
 end
