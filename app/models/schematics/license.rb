@@ -5,6 +5,12 @@ module Schematics
   class License
     include ::ActiveModel::API
 
+    class << self
+      def build(data)
+        new JSON.parse(data || {})
+      end
+    end
+
     delegate :verify, to: :public_key, private: true
     attr_accessor :email, :expires_at, :signature
 
