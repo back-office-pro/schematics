@@ -6,7 +6,7 @@ module Schematics
     queue_as :critical
 
     def perform
-      # TODO
+      Licenses::Heartbeat.call
     end
   end
 end
