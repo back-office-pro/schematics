@@ -3,13 +3,13 @@
     {
       "warning_type": "Dangerous Eval",
       "warning_code": 13,
-      "fingerprint": "70cfc6731d5989901301d351b1ddd91fc980e295bcee886594df0693f7fddb39",
+      "fingerprint": "3ad5d4249d0f07c94212cc1936cfd5a3c45815ef75abf42a5b7c779f5647172d",
       "check_name": "Evaluation",
       "message": "Dynamic code evaluation",
       "file": "app/models/concerns/schematics/loadable.rb",
-      "line": 28,
+      "line": 37,
       "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
-      "code": "eval(model_element, binding, \"app/models/concerns/schematics/loadable.rb\", 28)",
+      "code": "eval(model_element, binding, \"app/models/concerns/schematics/loadable.rb\", 37)",
       "render_path": null,
       "location": {
         "type": "method",
@@ -27,13 +27,13 @@
     {
       "warning_type": "Dangerous Eval",
       "warning_code": 13,
-      "fingerprint": "a26eb0f4c2c8bb67b5c51e554874970fe4e4b42c57aa628cc943ebcf69580d42",
+      "fingerprint": "b1ca7fedb6fb97815225f07807d230cf4c694c5f174de12460fcb8033efbf76e",
       "check_name": "Evaluation",
       "message": "Dynamic code evaluation",
       "file": "app/models/concerns/schematics/loadable.rb",
-      "line": 80,
+      "line": 89,
       "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
-      "code": "eval(SchemaCache.find_entity_by_name(name.to_s.underscore), binding, \"app/models/concerns/schematics/loadable.rb\", 80)",
+      "code": "eval(SchemaCache.find_entity_by_name(name.to_s.underscore), binding, \"app/models/concerns/schematics/loadable.rb\", 89)",
       "render_path": null,
       "location": {
         "type": "method",
@@ -55,7 +55,7 @@
       "check_name": "UnsafeReflection",
       "message": "Unsafe reflection method `constantize` called on parameter value",
       "file": "app/controllers/schematics/routing_controller.rb",
-      "line": 47,
+      "line": 56,
       "link": "https://brakemanscanner.org/docs/warning_types/remote_code_execution/",
       "code": "{ \"ActiveStorage::BlobsController\" => ([\"files\", \"fichiers\"]), \"CommentsController\" => ([\"comments\", \"commentaires\", \"commenti\"]), \"ComparisonsController\" => ([\"comparisons\", \"comparaisons\", \"confronti\"]), \"DraftsController\" => ([\"drafts\", \"brouillons\", \"bozze\"]), \"EmailingsController\" => ([\"emailings\", \"envois-d-e-mails\", \"invii-di-e-mail\"]), \"ImportsController\" => ([\"imports\", \"importations\", \"importazioni\"]), \"MessagesController\" => ([\"messages\", \"messaggi\"]), \"MigrationsController\" => ([\"migrations\", \"migrazioni\"]), \"SearchesController\" => ([\"searches\", \"recherches\", \"ricerche\"]), \"SessionsController\" => ([\"sessions\", \"sessioni\"]), \"UsersController\" => ([\"users\", \"utilisateurs\", \"utenti\"]) }.invert.select do\n _1.include?(params[:resource])\n end.values.first.constantize",
       "render_path": null,
@@ -72,5 +72,5 @@
       "note": ""
     }
   ],
-  "brakeman_version": "7.1.1"
+  "brakeman_version": "7.1.2"
 }
