@@ -16,7 +16,7 @@ module Schematics
       include Interactable
 
       delegate :website_url, to: 'Rails.application.routes.url_helpers', private: true
-      delegate :license_signature, to: '::Configuration', private: true
+      delegate :email, :signature, to: '::Configuration.license', private: true
 
       def call = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
         http.request(request)
@@ -32,10 +32,9 @@ module Schematics
         .new(uri)
         .tap { _1.form_data = payload.to_json }
 
-      def payload = {
-        signature: license_signature,
-        fingerprint: MacAddress.address
-      }
+      def payload = { email:, signature:, fingerprint: }
+
+      def fingerprint = [`hostname`, MacAddress.address].join('|')
     end
   end
 end
