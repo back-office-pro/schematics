@@ -67,15 +67,15 @@ RSpec.describe Configuration do
     it { is_expected.to be_falsy }
   end
 
+  describe '.license' do
+    subject { described_class.license }
+
+    it { is_expected.to be_a(Schematics::License) }
+  end
+
   describe '.license_file' do
     subject { described_class.license_file }
 
     it { is_expected.to be_nil }
-  end
-
-  describe '.license_active?' do
-    subject { described_class.license_active? }
-
-    it { is_expected.to be_falsy }
   end
 end
