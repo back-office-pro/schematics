@@ -12,8 +12,12 @@
 
 module Schematics
   class PermissionAbility < ApplicationAbility
+    delegate :active?, to: '::Configuration.license', prefix: :license, private: true
+
     def initialize(user)
       super
+      return unless license_active?
+
       user
         .role
         .permissions

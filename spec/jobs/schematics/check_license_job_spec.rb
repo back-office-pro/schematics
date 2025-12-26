@@ -10,17 +10,24 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Admin
-    module Widgets
-      module Subscription
-        class Component < ApplicationComponent
-          delegate :icon, to: '::Subscription.entity'
-          delegate :state_inactive?, to: :resource
+require 'rails_helper'
 
-          memoize def resource = ::Subscription.instance
-        end
-      end
+RSpec.describe Schematics::CheckLicenseJob do
+  describe '#perform_later' do
+    it 'queues the job' do
+      expect { described_class.perform_later }
+        .to have_enqueued_job(described_class)
+        .exactly(:once)
+        .on_queue('critical')
+        .at(:no_wait)
+    end
+  end
+
+  describe '#perform_now' do
+    subject(:perform_now) { described_class.perform_now }
+
+    it 'loads subscription from gateway' do
+      expect { perform_now }.not_to(change(Configuration, :license))
     end
   end
 end

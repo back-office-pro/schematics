@@ -490,6 +490,8 @@ GEM
     loofah (2.25.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
+    mac-address (1.6.3)
+      systemu (~> 2.5.0)
     mail (2.9.0)
       logger
       mini_mime (>= 0.1.1)
@@ -898,6 +900,7 @@ GEM
       railties (>= 6.0.0)
     stringio (3.2.0)
     strscan (3.1.6)
+    systemu (2.5.2)
     temple (0.10.4)
     terminal-table (4.0.0)
       unicode-display_width (>= 1.1.1, < 4)
@@ -1021,6 +1024,7 @@ DEPENDENCIES
   liquid
   listen
   lograge
+  mac-address
   memery
   method_source
   mission_control-jobs

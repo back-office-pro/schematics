@@ -10,13 +10,14 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  class SubscriptionAbility < ApplicationAbility
-    delegate :state_inactive?, to: '::Subscription.instance', private: true
+require 'rails_helper'
 
-    def initialize
-      super
-      cannot %i[create restore update], :all if state_inactive?
-    end
-  end
+RSpec.describe Schematics::License do
+  subject(:license) { described_class.new(email:, expires_at:, signature:) }
+
+  let(:email) { 'support@back-office.pro' }
+  let(:expires_at) { 1_798_062_114 }
+  let(:signature) { 'test' }
+
+  it { is_expected.not_to be_active }
 end

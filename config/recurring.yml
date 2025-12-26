@@ -5,8 +5,8 @@ schematics/clean_data_job:
 schematics/generate_backup_job:
   class: Schematics::GenerateBackupJob
   schedule: every day at midnight
-schematics/load_subscription_job:
-  class: Schematics::LoadSubscriptionJob
+schematics/check_license_job:
+  class: Schematics::CheckLicenseJob
   schedule: every day at midnight
 schematics/migrate_core_job:
   class: Schematics::MigrateCoreJob

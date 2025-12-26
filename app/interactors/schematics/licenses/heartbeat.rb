@@ -11,23 +11,29 @@
 # frozen_string_literal: true
 
 module Schematics
-  module Resources
-    class Cache
-      include Interactor
+  module Licenses
+    class Heartbeat
+      include Interactable
 
-      delegate :resource, to: :context, private: true
-      delegate :cache_key, to: :resource, private: true
+      delegate :website_url, to: 'Rails.application.routes.url_helpers', private: true
+      delegate :email, :signature, to: '::Configuration.license', private: true
+      delegate :start, to: 'Net::HTTP', private: true
 
-      def call = resource
-        .class
-        .cached_attributes
-        .each(&method(:delete_from_cache))
+      def call = start(uri.hostname, uri.port, use_ssl: true) { _1.request(request) }
 
       private
 
-      def delete_from_cache(attribute)
-        Rails.cache.delete("#{cache_key}/#{attribute}")
+      def uri
+        URI website_url(path: '/license_heartbeat')
       end
+
+      def request = Net::HTTP::Post
+        .new(uri)
+        .tap { _1.form_data = payload.to_json }
+
+      def payload = { email:, signature:, fingerprint: }
+
+      def fingerprint = [`hostname`, MacAddress.address].join('|')
     end
   end
 end

@@ -47,6 +47,12 @@ class ::Configuration < Schematics::ApplicationRecord
       storage_size.bytes + size.bytes >= storage_quota.gigabytes
     end
 
+    def license = Schematics::License.build(license_file)
+
+    def license_file = Rails
+      .cache
+      .fetch('configuration/license_file') { instance.license_file.download }
+
     private
 
     memoize def storage_size = ActiveStorage::Blob

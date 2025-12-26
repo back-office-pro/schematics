@@ -505,6 +505,18 @@
         }
       },
       {
+        "id": "50df4cd0-2a82-479c-9ebf-a65665c1203b",
+        "name": "license_file",
+        "type": "attachment",
+        "options": {
+          "cached": true,
+          "content_type": [
+            "application/json"
+          ],
+          "group": "license"
+        }
+      },
+      {
         "id": "b40047e7-e1a0-4a01-86ca-cce4d53f2e53",
         "name": "openai_access_token",
         "type": "secret",
@@ -1651,33 +1663,6 @@
         "options": {
           "readonly": true,
           "unit": "ms"
-        }
-      }
-    ]
-  },
-  {
-    "id": "b08023c8-ff1f-4e3e-b1f6-a6b149fab14b",
-    "name": "subscription",
-    "type": "singleton",
-    "options": {
-      "icon": "id_badge",
-      "hidden": true,
-      "actions": []
-    },
-    "attributes": [
-      {
-        "id": "6ee822eb-a6b4-4fa1-9980-2c14299f717b",
-        "name": "state",
-        "type": "enum",
-        "options": {
-          "required": true,
-          "readonly": true,
-          "default": "active",
-          "values": [
-            "active",
-            "canceled",
-            "inactive"
-          ]
         }
       }
     ]

@@ -15,6 +15,7 @@ module ActiveStorage
     def initialize
       super
       cannot :read, ::ActiveStorage::Blob, filename: 'db.dump'
+      cannot :read, ::ActiveStorage::Blob, filename: 'license.json'
       cannot :read, ::ActiveStorage::Blob, attachments: { name: 'preview_image' }
       cannot :read, ::ActiveStorage::Blob, attachments: { record_type: 'Backup' }
       cannot :read, ::ActiveStorage::Blob, attachments: { record_type: 'LinkPreview' }

@@ -22,6 +22,7 @@ en:
         gcs_private_key: Google Cloud Storage private key
         gcs_private_key_id: Google Cloud Storage private key ID
         google_sign_in_feature_flag: Enable Google sign in
+        license_file: License file
         locale: Locale
         meetings_feature_flag: Enable meetings
         messages_feature_flag: Enable internal messaging
@@ -96,6 +97,7 @@ en:
         appareance: Appareance
         company: Company
         feature_flag: Features
+        license: License
         locale: Locale
         security: Security
         sso: SSO
