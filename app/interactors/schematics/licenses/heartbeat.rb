@@ -17,10 +17,9 @@ module Schematics
 
       delegate :website_url, to: 'Rails.application.routes.url_helpers', private: true
       delegate :email, :signature, to: '::Configuration.license', private: true
+      delegate :start, to: 'Net::HTTP', private: true
 
-      def call = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
-        http.request(request)
-      end
+      def call = start(uri.hostname, uri.port, use_ssl: true) { _1.request(request) }
 
       private
 
