@@ -24,7 +24,7 @@ module Schematics
       private
 
       def uri
-        URI website_url(path: '/license_hearbeat')
+        URI website_url(path: '/license_heartbeat')
       end
 
       def request = Net::HTTP::Post
