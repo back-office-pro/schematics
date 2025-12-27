@@ -21,7 +21,7 @@ FROM base AS build
 
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential git libyaml-dev pkg-config libpq-dev node-gyp python-is-python3 && \
-    apt-get install --no-install-recommends -y graphviz pgloader ffmpeg file clamav clamav-daemon clamdscan chromium && \
+    apt-get install --no-install-recommends -y graphviz pgloader ffmpeg file clamav clamav-daemon clamdscan chromium postfix && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 ARG NODE_VERSION=23.9.0
@@ -42,10 +42,8 @@ RUN echo "FollowFileSymlinks true" >> /etc/clamav/clamd.conf
 
 RUN bundle install --jobs=4 --retry=3
 RUN yarn install
-RUN rails assets:precompile
-
-RUN rm -rf /schematics/config/credentials/development*
-RUN rm -rf /schematics/config/credentials/test*
+RUN bundle exec bootsnap precompile -j 1 app/ lib/
+RUN bin/rails assets:precompile
 
 ENTRYPOINT ["/app/bin/docker-entrypoint"]
 
