@@ -60,7 +60,7 @@ class ::Configuration < Schematics::ApplicationRecord
       .sum(&:byte_size)
 
     def port
-      3000 if Rails.env.development?
+      3000 unless company_website
     end
   end
 

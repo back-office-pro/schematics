@@ -50,7 +50,7 @@ RSpec.describe Configuration do
   describe '.default_url_options' do
     subject { described_class.default_url_options }
 
-    it { is_expected.to eq(host: 'localhost') }
+    it { is_expected.to eq(host: 'localhost', port: 3000) }
   end
 
   describe '.allowed_sources' do
