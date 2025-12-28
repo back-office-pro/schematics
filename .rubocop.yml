@@ -84,8 +84,6 @@ Style/Copyright:
     IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
     LIABILITY ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.
   Exclude:
-    - app/components/**/*
-    - app/views/**/*
     - bin/*
 Style/DateTime:
   Enabled: true
