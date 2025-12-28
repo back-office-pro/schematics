@@ -44,6 +44,8 @@ RUN bundle install --jobs=4 --retry=3
 RUN yarn install
 RUN bundle exec bootsnap precompile -j 1 app/ lib/
 RUN bin/rails assets:precompile
+RUN bin/rails schematics:db:encryption:init
+RUN bin/rails schematics:generate
 
 ENTRYPOINT ["/app/bin/docker-entrypoint"]
 
