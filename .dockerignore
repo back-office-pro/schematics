@@ -2,6 +2,8 @@
 /.gitignore
 /config/credentials/development*
 /config/credentials/test*
+/config/brakeman.ignore
+/config/i18n-tasks.yml
 /log/*
 /tmp
 /storage
