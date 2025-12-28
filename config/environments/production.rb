@@ -19,8 +19,6 @@ Rails.application.configure do
   config.eager_load = true
 
   # Security
-  config.assume_ssl = true
-  config.force_ssl = true
   config.sandbox_by_default = true
   config.require_master_key = true
 
