@@ -19,4 +19,11 @@ namespace :schematics do
       .flat_map(&:generators)
       .each(&:invoke_all)
   end
+
+  desc 'Generate application secret key base'
+  task secret_key_base: :environment do
+    secret = "secret_key_base: #{`rails secret`}"
+    credentials = Rails.application.credentials
+    credentials.write(credentials.read + secret) unless credentials.secret_key_base
+  end
 end

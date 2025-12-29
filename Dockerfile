@@ -43,6 +43,7 @@ RUN echo "FollowFileSymlinks true" >> /etc/clamav/clamd.conf
 RUN bundle install --jobs=4 --retry=3
 RUN yarn install
 RUN bundle exec bootsnap precompile -j 1 app/ lib/
+RUN SECRET_KEY_BASE_DUMMY=1 bin/rails schematics:secret_key_base
 RUN bin/rails assets:precompile
 RUN bin/rails schematics:db:encryption:init
 RUN bin/rails schematics:generate
