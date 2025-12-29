@@ -4,6 +4,10 @@
 /config/credentials/test*
 /config/brakeman.ignore
 /config/i18n-tasks.yml
+/config/active_record_doctor.rb
+/config/ci.rb
+/config/environments/development.rb
+/config/environments/test.rb
 /log/*
 /tmp
 /storage
