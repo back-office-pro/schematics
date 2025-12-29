@@ -17,7 +17,9 @@ module Schematics
 
       def database_type = 'datetime'
 
-      def default = ::Time.current.to_fs(:db)
+      def default = ::Time
+        .current
+        .to_fs(:db)
 
       def icon = :clock
 
