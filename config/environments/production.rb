@@ -70,9 +70,8 @@ Rails.application.configure do
   config.active_record.attributes_for_inspect = %i[id]
 
   # Logger
-  config.log_level = :info
+  config.log_level = :fatal
   config.log_tags = [:request_id]
-  config.lograge.enabled = true
   config.logger = ActiveSupport::TaggedLogging.logger($stdout)
 
   # Health check
