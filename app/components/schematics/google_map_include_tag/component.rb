@@ -13,7 +13,7 @@
 module Schematics
   module GoogleMapIncludeTag
     class Component < ApplicationComponent
-      delegate :gcloud_public_api_key_with_fallback, to: '::Configuration', private: true
+      delegate :gcloud_public_api_key, to: '::Configuration', private: true
 
       def url = ::URI::HTTPS
         .build(host:, path:, query:)
@@ -26,7 +26,7 @@ module Schematics
       def path = '/maps/api/js'
 
       def query = {
-        key: gcloud_public_api_key_with_fallback,
+        key: gcloud_public_api_key,
         loading:,
         libraries:,
         callback:

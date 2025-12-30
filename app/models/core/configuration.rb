@@ -25,10 +25,6 @@ class ::Configuration < Schematics::ApplicationRecord
       time_zone || LOCALE_TO_TIME_ZONE[locale&.to_sym]
     end
 
-    def gcloud_public_api_key_with_fallback
-      gcloud_public_api_key || Rails.application.credentials.gcloud&.public_api_key
-    end
-
     def host
       URI(company_website.to_s).host&.delete_prefix('www.') || 'localhost'
     end

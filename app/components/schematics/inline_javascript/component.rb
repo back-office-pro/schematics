@@ -23,7 +23,7 @@ module Schematics
         .html_safe
 
       def maps_api_key = ::Configuration
-        .gcloud_public_api_key_with_fallback
+        .gcloud_public_api_key
         .to_json
         .html_safe # rubocop:disable Rails/OutputSafety
 

@@ -41,12 +41,6 @@ RSpec.describe Configuration do
     it { is_expected.to eq('UTC') }
   end
 
-  describe '.gcloud_public_api_key_with_fallback' do
-    subject { described_class.gcloud_public_api_key_with_fallback }
-
-    it { is_expected.to be_a(String) }
-  end
-
   describe '.default_url_options' do
     subject { described_class.default_url_options }
 
