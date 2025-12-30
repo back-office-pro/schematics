@@ -39,7 +39,7 @@ namespace :schematics do
     namespace :encryption do
       desc 'Generate database encryption credentials'
       task init: :environment do
-        config = `rails db:encryption:init | tail -n +2`
+        config = `rails db:encryption:init | tail -n +3`
         credentials = Rails.application.credentials
         credentials.write(credentials.read + config) unless credentials.active_record_encryption
       end
