@@ -19,6 +19,6 @@
           - if expires_at
             .text-body-secondary.text-truncate
               span.me-1 = t('.expires_on')
-              span = l(Time.zone.at(expires_at), format: :long)
+              span = expires_at_formatted
           - else
             = __button_trial

@@ -36,6 +36,10 @@ module Schematics
 
             %w[p-3 m-1]
           end
+
+          def expires_at_formatted
+            I18n.l(Time.zone.at(expires_at), format: :long)
+          end
         end
       end
     end
