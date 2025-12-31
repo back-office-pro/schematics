@@ -8,7 +8,8 @@
 / IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
 / LIABILITY ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.
 
-- if gcloud_public_api_key
-  iframe.google-map.rounded src=url width='300' height='300'
-- else
-  = __google_map_missing_api_key
+.row.justify-content-center
+  .card.bg-body-tertiary.google-map-placeholder
+    .card-body.d-flex.align-items-center.justify-content-center.text-danger
+      = fa_icon icon, size: '3x'
+      = title

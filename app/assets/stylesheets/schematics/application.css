@@ -25,6 +25,7 @@
 @import url('/attachment/component.css');
 @import url('/admin/widgets/component.css');
 @import url('/resource_form/fields/one_time_password/component.css');
+@import url('/google_map/missing_api_key/component.css');
 
 /* Layout */
 

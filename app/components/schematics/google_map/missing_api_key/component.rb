@@ -12,25 +12,12 @@
 
 module Schematics
   module GoogleMap
-    class Component < ApplicationComponent
-      delegate :gcloud_public_api_key, to: '::Configuration'
-      option :address
+    module MissingAPIKey
+      class Component < ApplicationComponent
+        def icon = :triangle_exclamation
 
-      def url = ::URI::HTTPS
-        .build(host:, path:, query:)
-        .to_s
-
-      private
-
-      def host = 'www.google.com'
-
-      def path = '/maps/embed/v1/place'
-
-      def query = { q: address, key: gcloud_public_api_key, zoom: }.to_param
-
-      def address = CGI.escape(super || ' ')
-
-      def zoom = 6
+        def title = t('.title')
+      end
     end
   end
 end
