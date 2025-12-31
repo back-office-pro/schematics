@@ -25,7 +25,6 @@ module Schematics
     include Versionable
     include RouteResolvable
 
-    before_action { Rack::MiniProfiler.authorize_request unless Rails.env.test? }
     before_action :set_paper_trail_whodunnit
     after_action :merge_pagy_headers
 

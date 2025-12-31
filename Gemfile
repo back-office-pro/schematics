@@ -13,12 +13,14 @@
 source 'https://rubygems.org'
 
 group :development do
+  gem 'active_record_doctor'
   gem 'brakeman', require: false
   gem 'bundler-audit', require: false
   gem 'debug'
   gem 'i18n-tasks'
   gem 'letter_opener'
   gem 'listen'
+  gem 'rack-mini-profiler'
   gem 'reek'
   gem 'rubocop', require: false
   gem 'rubocop-capybara', require: false
@@ -51,7 +53,6 @@ end
 
 gem 'aasm'
 gem 'active_model_otp'
-gem 'active_record_doctor'
 gem 'active_storage_base64'
 gem 'active_storage_validations'
 gem 'after_commit_everywhere'
@@ -111,7 +112,6 @@ gem 'propshaft'
 gem 'puma'
 gem 'pwned'
 gem 'rack-cors'
-gem 'rack-mini-profiler'
 gem 'rails'
 gem 'rails-i18n'
 gem 'ransack'
