@@ -18,6 +18,8 @@ require 'active_support/dependencies'
 require 'arel/override/predications'
 require 'bootstrap-email/config'
 require 'bootstrap-email/override/config'
+require 'omniauth/key_store'
+require 'omniauth/override/key_store'
 require 'onelogin/override/ruby-saml/settings'
 require 'onelogin/ruby-saml/settings'
 require 'rails/generators'
@@ -34,6 +36,7 @@ Rails::Generators::GeneratedAttribute.prepend(GeneratedAttribute)
 ActiveRecord::Generators::MigrationGenerator.prepend(MigrationGenerator)
 
 OneLogin::RubySaml::Settings.prepend(OneLogin::Override::RubySaml::Settings)
+OmniAuth::KeyStore.prepend(OmniAuth::Override::KeyStore)
 Arel::Predications.prepend(Arel::Override::Predications)
 BootstrapEmail::Config.prepend(BootstrapEmail::Override::Config)
 
