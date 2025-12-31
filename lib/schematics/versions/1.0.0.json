@@ -544,6 +544,24 @@
         }
       },
       {
+        "id": "91290a32-ac8a-4e73-9e6b-79503f636a39",
+        "name": "google_oauth_client_id",
+        "type": "secret",
+        "options": {
+          "cached": true,
+          "group": "api_key"
+        }
+      },
+      {
+        "id": "df3b0d75-25d7-457e-889f-5db1874fd755",
+        "name": "google_oauth_client_secret",
+        "type": "secret",
+        "options": {
+          "cached": true,
+          "group": "api_key"
+        }
+      },
+      {
         "id": "ba75b2b2-cf49-426c-8752-4c0d601cee17",
         "name": "aws_bucket",
         "type": "secret",

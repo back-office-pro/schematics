@@ -21,6 +21,8 @@ en:
         gcloud_public_api_key: Google Cloud public API key
         gcs_private_key: Google Cloud Storage private key
         gcs_private_key_id: Google Cloud Storage private key ID
+        google_oauth_client_id: Google OAuth consent screen client ID
+        google_oauth_client_secret: Google OAuth consent screen client secret
         google_sign_in_feature_flag: Enable Google sign in
         license_file: License file
         locale: Locale

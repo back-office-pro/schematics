@@ -4,10 +4,10 @@ fr:
     attributes:
       configuration:
         available_locales: Langues disponibles
-        aws_access_key_id: ID de la clé d’accès Amazon Web Services
+        aws_access_key_id: ID de la clé d'accès Amazon Web Services
         aws_region: Région Amazon Web Services
-        aws_secret_access_key: Clé d’accès secrète Amazon Web Services
-        azure_storage_access_key: Clé d’accès au stockage Microsoft Azure
+        aws_secret_access_key: Clé d'accès secrète Amazon Web Services
+        azure_storage_access_key: Clé d'accès au stockage Microsoft Azure
         azure_storage_account_name: Nom du compte de stockage Microsoft Azure
         comments_feature_flag: Activer les commentaires
         company_address: Adresse de la société
@@ -20,6 +20,8 @@ fr:
         gcloud_public_api_key: Clé API Google Cloud publique
         gcs_private_key: Clé privée Google Cloud Storage
         gcs_private_key_id: ID de clé privée Google Cloud Storage
+        google_oauth_client_id: ID client de l'écran de consentement OAuth de Google
+        google_oauth_client_secret: Secret client de l'écran de consentement OAuth de Google
         google_sign_in_feature_flag: Activer la connexion avec le compte Google
         license_file: Fichier de licence
         locale: Langue
