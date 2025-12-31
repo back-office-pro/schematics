@@ -318,7 +318,7 @@ fr:
                   schema:
                     type: object
               description: Non autorisé
-          summary: Créer un jeton d’accès
+          summary: Créer un jeton d'accès
           tags:
           - Jetons
       "/messages/{id}/reponses":
@@ -500,7 +500,7 @@ fr:
                   schema:
                     type: object
               description: Non autorisé
-          summary: Supprimer la configuration 2FA de l’utilisateur actuel
+          summary: Supprimer la configuration 2FA de l'utilisateur actuel
           tags:
           - Mots de passe uniques
         get:
@@ -533,7 +533,7 @@ fr:
                   schema:
                     type: object
               description: Non autorisé
-          summary: Obtenir les codes de récupération 2FA de l’utilisateur actuel
+          summary: Obtenir les codes de récupération 2FA de l'utilisateur actuel
           tags:
           - Mots de passe uniques
         patch:
@@ -597,7 +597,7 @@ fr:
                   schema:
                     type: object
               description: Contenu non traitable
-          summary: Mettre à jour la configuration 2FA de l’utilisateur actuel
+          summary: Mettre à jour la configuration 2FA de l'utilisateur actuel
           tags:
           - Mots de passe uniques
         post:
@@ -738,7 +738,7 @@ fr:
                   schema:
                     type: object
               description: Contenu non traitable
-          summary: Mettre à jour la configuration 2FA de l’utilisateur actuel
+          summary: Mettre à jour la configuration 2FA de l'utilisateur actuel
           tags:
           - Mots de passe uniques
       "/mots-de-passe/{jeton}":
@@ -804,7 +804,7 @@ fr:
                   schema:
                     type: object
               description: Contenu non traitable
-          summary: Mettre à jour le mot de passe de l’utilisateur
+          summary: Mettre à jour le mot de passe de l'utilisateur
           tags:
           - Mots de passe
         put:
@@ -869,7 +869,7 @@ fr:
                   schema:
                     type: object
               description: Contenu non traitable
-          summary: Mettre à jour le mot de passe de l’utilisateur
+          summary: Mettre à jour le mot de passe de l'utilisateur
           tags:
           - Mots de passe
       "/preferences":
@@ -922,7 +922,7 @@ fr:
                   schema:
                     type: object
               description: Non autorisé
-          summary: Mettre à jour les préférences de l’utilisateur actuel
+          summary: Mettre à jour les préférences de l'utilisateur actuel
           tags:
           - Préférences
         put:
@@ -974,7 +974,7 @@ fr:
                   schema:
                     type: object
               description: Non autorisé
-          summary: Mettre à jour les préférences de l’utilisateur actuel
+          summary: Mettre à jour les préférences de l'utilisateur actuel
           tags:
           - Préférences
       "/profil":
@@ -1063,7 +1063,7 @@ fr:
                   schema:
                     type: object
               description: Contenu non traitable
-          summary: Mettre à jour le profil de l’utilisateur actuel
+          summary: Mettre à jour le profil de l'utilisateur actuel
           tags:
           - Profil
         put:
@@ -1151,7 +1151,7 @@ fr:
                   schema:
                     type: object
               description: Contenu non traitable
-          summary: Mettre à jour le profil de l’utilisateur actuel
+          summary: Mettre à jour le profil de l'utilisateur actuel
           tags:
           - Profil
       "/sessions":
