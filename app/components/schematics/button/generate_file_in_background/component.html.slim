@@ -9,10 +9,7 @@
 / LIABILITY ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.
 
 - if browser_missing?
-  span data-controller='tooltip' data-bs-title=t('.browser_missing')
-    a#generate-file-in-background-button.btn.btn-sm.btn-icon-split.bg-body-tertiary.ms-1.disabled
-      span.icon = fa_icon(icon)
-      span.text.d-none.d-lg-inline = title
+  = __button_generate_file_in_background_browser_missing
 - else
   = turbo_frame_tag 'generate_file_in_background' do
     .dropdown.d-inline-block {

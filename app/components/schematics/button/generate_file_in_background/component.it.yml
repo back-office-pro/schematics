@@ -1,7 +1,6 @@
 ---
 it:
   all_pages: Tutte le pagine
-  browser_missing: Si prega di configurare il browser
   current_page: Pagina corrente
   download_as_csv: Scarica come CSV
   download_csv_template: Scarica il modello CSV

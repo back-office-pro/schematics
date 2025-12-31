@@ -1,7 +1,6 @@
 ---
 en:
   all_pages: All pages
-  browser_missing: Please configure the browser
   current_page: Current page
   download_as_csv: Download as CSV
   download_csv_template: Download CSV template

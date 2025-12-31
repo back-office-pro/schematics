@@ -47,7 +47,7 @@ module Schematics
           'dropdown' if dropdown?
         end
 
-        def browser_missing?
+        memoize def browser_missing?
           return false unless extension == :pdf
 
           !Ferrum::Browser::Command.build(Ferrum::Browser::Options.new, nil)
