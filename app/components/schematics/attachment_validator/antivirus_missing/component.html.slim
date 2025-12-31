@@ -8,9 +8,6 @@
 / IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
 / LIABILITY ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.
 
-- if antivirus_missing?
-  = __attachment_validator_antivirus_missing
-- else
-  .mt-1
-    = fa_icon icon, class: 'me-1'
-    = @validator
+.mt-1.text-danger
+  = fa_icon icon, class: 'me-1'
+  = title

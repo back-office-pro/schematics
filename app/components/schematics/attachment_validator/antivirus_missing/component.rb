@@ -12,24 +12,11 @@
 
 module Schematics
   module AttachmentValidator
-    class Component < ApplicationComponent
-      with_collection_parameter :validator
+    module AntivirusMissing
+      class Component < ApplicationComponent
+        def title = t('.title')
 
-      def initialize(validator:)
-        super
-        @validator = validator
-      end
-
-      def icon = :info_circle
-
-      memoize def antivirus_missing?
-        antivirus? && !Clamby::Command.new.run(Clamby::Command.scan_executable, '--ping 0')
-      end
-
-      private
-
-      def antivirus?
-        @validator == Validators.human_attribute_name('antivirus')
+        def icon = :triangle_exclamation
       end
     end
   end
