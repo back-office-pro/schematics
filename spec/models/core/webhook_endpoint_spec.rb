@@ -17,7 +17,7 @@ RSpec.describe WebhookEndpoint do
   include Schematics::ResourcesHelper
 
   context 'when url is malicious and would lead to an infinite loop' do
-    before { record.url = resources_url(User, host: 'localhost') }
+    before { record.url = resources_url(User, host: 'localhost', port: 3000) }
 
     it { is_expected.not_to be_valid }
   end
