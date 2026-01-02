@@ -18,6 +18,8 @@ module Schematics
     class << self
       def build(data)
         new JSON.parse(data || {})
+      rescue JSON::ParserError
+        new
       end
     end
 
