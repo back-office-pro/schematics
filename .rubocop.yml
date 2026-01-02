@@ -127,6 +127,8 @@ Style/HashEachMethods:
     - attribute
 Style/EndlessMethod:
   EnforcedStyle: allow_always
+Style/FormatStringToken:
+  Mode: conservative
 Style/RequireOrder:
   Enabled: true
   Exclude:

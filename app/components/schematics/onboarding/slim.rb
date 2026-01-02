@@ -10,21 +10,13 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::Onboarding::SLIM = <<~SLIM
+  .col-xl-6.col-md-12
+    .card.animate__animated.animate__zoomIn
+      .card-body.p-3.m-1
+        .row.g-1.align-items-center
+          .col-auto
+            = __card_heading(icon:, title:)
+          .col
+            = __button_add(model_class:)
+SLIM

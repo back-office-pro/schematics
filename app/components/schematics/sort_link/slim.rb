@@ -10,21 +10,9 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::SortLink::SLIM = <<~SLIM
+  .row.g-0
+    .col
+      = fa_icon icon, class: "text-\#{icon_text_class}"
+      = link_to attribute_name, resources_path(model_class, **link_params), class: 'ms-2'
+SLIM

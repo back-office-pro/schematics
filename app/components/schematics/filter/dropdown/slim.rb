@@ -10,21 +10,12 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::Filter::Dropdown::SLIM = <<~SLIM
+  .input-group.flex-nowrap
+    = select_tag filter_name,
+                 options_for_select(collection, value),
+                 prompt: t('.prompt', attribute_name:),
+                 data:,
+                 form:,
+                 class: css_classes
+SLIM

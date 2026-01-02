@@ -10,21 +10,17 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::Button::Comment::SLIM = <<~SLIM
+  button.btn.btn-primary.btn-sm.btn-icon-split.ms-1.position-relative {
+    data-controller='tooltip'
+    data-bs-toggle='offcanvas'
+    data-bs-target='#comments'
+    data-bs-title=title
+    data-bs-custom-class='responsive-button-tooltip-xxl'
+  }
+    - if count.positive?
+      .badge.bg-danger.rounded-pill.position-absolute.top-0.start-100.translate-middle.animate__animated.animate__zoomIn
+        = display_count
+    span.icon = fa_icon(icon)
+    span.text.d-none.d-xxl-inline = title
+SLIM

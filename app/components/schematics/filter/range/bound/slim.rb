@@ -10,21 +10,15 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::Filter::Range::Bound::SLIM = <<~SLIM
+  = public_send field_tag,
+                filter_name,
+                value,
+                placeholder: t(".placeholder.\#{comparison}"),
+                data:,
+                form:,
+                class: css_classes
+  - if unit
+    .input-group-text.bg-transparent.p-0.ps-2
+      = unit
+SLIM

@@ -10,21 +10,12 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::Viewer::ActionButtonGroup::SLIM = <<~SLIM
+  .btn-group
+    - if deleted?
+      = __button_restore(resource:)
+    - else
+      = __button_edit(resource:)
+      = __viewer_event_button_group(resource:)
+      = __button_archive(resource:)
+SLIM

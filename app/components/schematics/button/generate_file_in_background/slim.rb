@@ -1,0 +1,52 @@
+# Copyright © 2025 Dev & Software. All rights reserved.
+
+# THIS SOFTWARE IS PROPRIETARY AND CONFIDENTIAL. UNAUTHORIZED COPYING, DISTRIBUTION, MODIFICATION,
+# REVERSE ENGINEERING, OR DISCLOSURE IS STRICTLY PROHIBITED.
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+# NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND
+# NONINFRINGEMENT.
+# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+# LIABILITY ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.
+
+# frozen_string_literal: true
+
+Schematics::Button::GenerateFileInBackground::SLIM = <<~SLIM
+  - if browser_missing?
+    = __button_generate_file_in_background_browser_missing
+  - else
+    = turbo_frame_tag 'generate_file_in_background' do
+      .dropdown.d-inline-block {
+          data-controller='generate-file-in-background tooltip'
+          data-generate-file-in-background-extension-value=extension
+          data-generate-file-in-background-url-value=url
+          data-bs-custom-class='responsive-button-tooltip-lg'
+          data-bs-title=title
+      }
+        a#generate-file-in-background-button.btn.btn-sm.btn-icon-split.bg-body-tertiary.ms-1 {
+          data-generate-file-in-background-target='button'
+          data-action=action
+          data-bs-toggle=toggle
+          aria-expanded='false'
+          role='button'
+        }
+          span.icon = fa_icon(icon)
+          span.icon.d-none = fa_icon :spinner, animation: 'spin'
+          span.text.d-none.d-lg-inline = title
+          span.text.d-none data-generate-file-in-background-target='loading' = t('.loading')
+        .dropdown-menu.w-100.shadow-sm.animate__animated.animate__zoomIn.mt-0 {
+          aria-labelledby='generate-file-in-background-button'
+        }
+          .dropdown-item {
+            data-action='click->generate-file-in-background#run'
+            role='button'
+          }
+            = fa_icon :table, class: 'me-3'
+            = t('.current_page')
+          .dropdown-item {
+            data-action='click->generate-file-in-background#run'
+            data-generate-file-in-background-all-pages-param='true'
+            role='button'
+          }
+            = fa_icon :file_export, class: 'me-3'
+            = t('.all_pages')
+SLIM

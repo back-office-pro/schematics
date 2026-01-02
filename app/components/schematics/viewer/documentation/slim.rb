@@ -10,21 +10,11 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::Viewer::Documentation::SLIM = <<~SLIM
+  #documentation.offcanvas.offcanvas-end data-controller='offcanvas' tabindex='-1' data-bs-scroll='true'
+    .offcanvas-header.ps-1
+      = __card_heading(icon:, title:)
+      button.btn-close.text-reset.ms-2 aria-label='Close' data-bs-dismiss='offcanvas' type='button'
+    .offcanvas-body.p-0
+      = __viewer_specifications_entity(entity:)
+SLIM

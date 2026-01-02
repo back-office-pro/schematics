@@ -10,21 +10,12 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::ResourceForm::Fields::HasMany::Button::Add::SLIM = <<~SLIM
+  button.btn.btn-sm.btn-icon-split.bg-body-tertiary.mb-3 {
+    data-action='click->nested-form#add:prevent'
+    data-nested-form-template-id-param=template_id
+    data-nested-form-target-id-param=target_id
+  }
+    span.icon = fa_icon :plus
+    span.text = t('schematics.application.button.add', human_name:, gender:)
+SLIM

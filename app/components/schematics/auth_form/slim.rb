@@ -10,21 +10,14 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::AuthForm::SLIM = <<~SLIM
+  = bootstrap_form_with model:, scope:, url: do |form|
+    = form.email_field :email,
+                       autocomplete: 'username',
+                       autofocus: true,
+                       prepend: fa_icon(:envelope)
+    = __resource_form_fields_digest(form:)
+    = form.checkbox :remember_me, switch: true
+    = __button_confirm
+    = link_to t('.password_lost?'), new_password_reset_path, class: 'btn btn-link btn-sm text-decoration-none'
+SLIM

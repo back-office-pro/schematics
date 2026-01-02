@@ -10,21 +10,11 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::PDFFooter::SLIM = <<~SLIM
+  .text.left style=style
+    = company_website
+  .text.center style=style
+    = company_address
+  .text.right style=style
+    = company_registration_number
+SLIM

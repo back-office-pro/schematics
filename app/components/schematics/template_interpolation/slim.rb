@@ -10,21 +10,14 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::TemplateInterpolation::SLIM = <<~SLIM
+  .container-fluid
+    == interpolation
+    - if interpolation_errors.any?
+      ul.list-group.list-group-striped
+        li.list-group-item.text-danger = t('.warning')
+        - interpolation_errors.each do |error|
+          li.list-group-item.text-danger
+            = fa_icon :triangle_exclamation, class: 'me-2'
+            = error.to_s(false)
+SLIM

@@ -10,21 +10,8 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::Navbar::SearchBar::SLIM = <<~SLIM
+  li.nav-item.d-flex.align-items-center.px-2.ms-2.bg-body-secondary.rounded.btn-transparent
+    .nav-link
+      = fa_icon :magnifying_glass, class: 'fa-lg', data:, title:, role: 'button'
+SLIM

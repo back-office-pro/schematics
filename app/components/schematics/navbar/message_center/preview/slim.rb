@@ -10,21 +10,16 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::Navbar::MessageCenter::Preview::SLIM = <<~SLIM
+  .dropdown-item
+    .row {
+      data-action='click->application#visit'
+      data-application-href-param=href
+      role='button'
+    }
+      .col-auto.align-self-center
+        = __avatar(user: author)
+      .col.text-truncate
+        div class=css_class = subject
+        .text-body-tertiary data-controller='timeago' datetime=created_at
+SLIM

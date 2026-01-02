@@ -10,21 +10,14 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::Footer::Network::SLIM = <<~SLIM
+  span.mx-1 data-controller='network'
+    = fa_icon :wifi,
+              data: { controller: 'tooltip', 'network-target': 'online' },
+              class: 'text-primary',
+              title: t('.online')
+    = fa_icon :wifi,
+              data: { controller: 'tooltip', 'network-target': 'offline' },
+              class: offline_css_classes,
+              title: t('.offline')
+SLIM

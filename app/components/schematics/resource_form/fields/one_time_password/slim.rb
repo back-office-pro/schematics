@@ -10,21 +10,20 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::ResourceForm::Fields::OneTimePassword::SLIM = <<~SLIM
+  .mb-3
+    = form.label attribute_name, class: label_css_classes
+    .input-group data-controller='one-time-password'
+      - digits.times
+        = form.text_field name,
+                          hide_label:,
+                          required:,
+                          inputmode:,
+                          control_class:,
+                          autocomplete:,
+                          multiple:,
+                          wrapper_class:,
+                          pattern:,
+                          maxlength:,
+                          data:
+SLIM

@@ -10,21 +10,8 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::Button::Stale::SLIM = <<~SLIM
+  = link_to version_path(last_version), data:, class: css_classes, title: do
+    span.icon = fa_icon :triangle_exclamation
+    span.text.d-none.d-lg-inline = title
+SLIM

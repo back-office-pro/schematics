@@ -10,21 +10,12 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::SchemaEditor::Button::Remove::SLIM = <<~SLIM
+  button.btn.btn-sm.btn-danger {
+    data-action='click->nested-form#remove:prevent'
+    data-nested-form-wrapper-param=wrapper
+    data-controller='tooltip'
+    data-bs-title=title
+  }
+    = fa_icon :trash
+SLIM

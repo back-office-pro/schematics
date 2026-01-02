@@ -10,21 +10,11 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::Sidebar::Item::SLIM = <<~SLIM
+  li.nav-item.text-center.mw-100.mb-2
+    = link_to path, class: css_classes, title:, data: do
+      = fa_icon icon, size: '2x'
+      .mt-2.mx-3.d-none.text-truncate class=toggled_class = human_name_plural.humanize
+  = __sidebar_segment(enum_attributes, model_class: @model_class)
+  li.nav-item.mb-2
+SLIM

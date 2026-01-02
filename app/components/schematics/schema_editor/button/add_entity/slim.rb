@@ -10,21 +10,15 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::SchemaEditor::Button::AddEntity::SLIM = <<~SLIM
+  button.btn.btn-sm.btn-primary.btn-icon-split.ms-1.schema-editor.collapse.collapse-horizontal.show {
+    data-action='click->nested-form#add:prevent'
+    data-nested-form-template-id-param='schema-editor-entity'
+    data-nested-form-target-id-param='entities'
+    data-controller='tooltip'
+    data-bs-custom-class='responsive-button-tooltip-lg'
+    data-bs-title=title
+  }
+    span.icon = fa_icon :plus
+    span.text.text-nowrap.d-none.d-lg-inline = title
+SLIM

@@ -10,21 +10,14 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::OneTimePasswordForm::SLIM = <<~SLIM
+  - if qr_code
+    .alert.alert-secondary
+      = fa_icon :circle_info, class: 'me-3'
+      = t('.info')
+  = bootstrap_form_with model:, url:, scope: do |form|
+    .text-center == qr_code&.as_svg(module_size: 4)
+    = __resource_form_fields_one_time_password(form:, name: :otp_attempt_digits)
+    = __button_confirm
+    = __button_cancel(path: root_path)
+SLIM

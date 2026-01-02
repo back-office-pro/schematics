@@ -10,21 +10,10 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::Viewer::EventButtonGroup::Button::SLIM = <<~SLIM
+  = link_to url, title: event.human, data:, role: 'button', class: button_css_classes do
+    span.icon = fa_icon event.icon
+    span.icon.d-none = fa_icon :spinner, animation: 'spin'
+    span.text.d-none.d-xxl-inline = event.human unless compact?
+    span.text.d-none = t('schematics.application.button.loading') unless compact?
+SLIM

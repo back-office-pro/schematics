@@ -10,21 +10,13 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::Dashboard::Panel::SLIM = <<~SLIM
+  .tab-pane.fade role='tabpanel' id=id class=css_classes
+    .row.g-3 data=data('metrics')
+      = __onboarding
+      = __metric(metrics)
+    .row.g-3.pt-3 data=data('charts')
+      = __chart(charts, id:)
+    .row.g-3.pt-3 data=data('rankings')
+      = __ranking(rankings)
+SLIM

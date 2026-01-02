@@ -10,21 +10,9 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::Button::GenerateFileInBackground::BrowserMissing::SLIM = <<~SLIM
+  span data-controller='tooltip' data-bs-title=t('.title')
+    a#generate-file-in-background-button.btn.btn-sm.btn-icon-split.bg-body-tertiary.ms-1.disabled
+      span.icon = fa_icon(icon)
+      span.text.d-none.d-lg-inline = title
+SLIM

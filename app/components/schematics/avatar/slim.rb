@@ -10,21 +10,10 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::Avatar::SLIM = <<~SLIM
+  .position-relative.d-inline-block
+    = __resource_link_to(resource: user) do |c|
+      - c.with_body do
+        = __attachment(:avatar, user:, title: user, **kwargs)
+    .badge.rounded-circle.animate__animated.animate__zoomIn.d-block.p-1.position-absolute.top-0.end-0 class=badge_css_class
+SLIM

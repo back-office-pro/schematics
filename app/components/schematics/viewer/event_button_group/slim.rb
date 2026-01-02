@@ -10,21 +10,10 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::Viewer::EventButtonGroup::SLIM = <<~SLIM
+  - events.each do |event|
+    - if event.confirm
+      = __viewer_event_button_group_confirm_button(resource:, event:, compact:, last: events.last)
+    - else
+      = __viewer_event_button_group_button(resource:, event:, compact:, last: events.last)
+SLIM

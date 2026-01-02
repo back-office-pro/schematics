@@ -10,21 +10,10 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::GoogleMap::MissingAPIKey::SLIM = <<~SLIM
+  .row.justify-content-center
+    .card.bg-body-tertiary.google-map-placeholder
+      .card-body.d-flex.align-items-center.justify-content-center.text-danger
+        = fa_icon icon, size: '3x'
+        = title
+SLIM

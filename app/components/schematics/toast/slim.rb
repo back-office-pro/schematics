@@ -10,21 +10,19 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::Toast::SLIM = <<~SLIM
+  .fixed-top.p-3
+    .toast.shadow-sm {
+      data-controller='toast'
+      aria-atomic='true'
+      aria-live='assertive'
+      role='alert'
+    }
+      .toast-header.text-white class="bg-\#{css_class}"
+        span
+          = fa_icon :bell
+        strong.me-auto.ms-2.align-middle = t(".\#{type}")
+        button.ms-2.mb-1.btn-close.btn-close-white aria-label='Close' data-bs-dismiss='toast' type='button'
+      .toast-body
+        = message
+SLIM

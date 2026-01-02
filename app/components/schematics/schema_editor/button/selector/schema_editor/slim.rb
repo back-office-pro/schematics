@@ -10,21 +10,11 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::SchemaEditor::Button::Selector::SchemaEditor::SLIM = <<~SLIM
+  button.btn.btn-sm.btn-primary.btn-icon-split.ms-1.resource-form.collapse.collapse-horizontal {
+    data-bs-toggle='collapse'
+    data-bs-target='.schema-editor'
+  }
+    span.icon = fa_icon(icon)
+    span.text.text-nowrap.d-none.d-lg-inline = title
+SLIM

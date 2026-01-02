@@ -10,21 +10,8 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::PreferencesTable::Toggle::SLIM = <<~SLIM
+  .form-check.form-switch
+    = checkbox 'user[preferences]', preference, { class: 'form-check-input', checked: checked? }, 'true', 'false'
+    = label_tag preference, '', class: 'form-check-label', for: "user_preferences_\#{preference}"
+SLIM

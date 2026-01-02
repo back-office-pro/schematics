@@ -10,21 +10,17 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::Button::DestroyAttachment::SLIM = <<~SLIM
+  = form_with model: record, url: do |f|
+    = f.fields_for attributes_param_key do |fields|
+      = fields.hidden_field :id, value: attachment.id
+      = fields.hidden_field :_destroy, value: true
+    = __confirm_dialog(target:)
+  button.btn.btn-danger.btn-sm.float-end {
+    data-bs-toggle='modal'
+    data-bs-target="#\#{target}"
+    data-controller='tooltip'
+    data-bs-placement='left'
+    data-bs-title=title
+  } = fa_icon :trash
+SLIM

@@ -10,21 +10,7 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::Metric::Trend::SLIM = <<~SLIM
+  span class=css_class = fa_icon(icon)
+  span.count-up.ms-1 class=css_class data-controller='count-up' data-count-up-percentage-value=percentage
+SLIM

@@ -10,21 +10,9 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::EditInPlace::SLIM = <<~SLIM
+  = form_with model: resource, url:, data: { turbo_frame: frame_id } do
+    = turbo_frame_tag frame_id do
+      = link_to edit_resource_path(resource), class: 'edit-in-place text-decoration-none' do
+        = __resource(resource:, element:, enable_buttons: true)
+SLIM

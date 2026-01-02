@@ -1,5 +1,5 @@
 # Copyright © 2025 Dev & Software. All rights reserved.
-
+#
 # THIS SOFTWARE IS PROPRIETARY AND CONFIDENTIAL. UNAUTHORIZED COPYING, DISTRIBUTION, MODIFICATION,
 # REVERSE ENGINEERING, OR DISCLOSURE IS STRICTLY PROHIBITED.
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
@@ -10,21 +10,7 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::ChartPlaceholder::SLIM = <<~SLIM
+  .chart id='%{id}' style='height: %{height}; width: %{width};'
+    = __placeholder
+SLIM

@@ -10,21 +10,12 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::SudoForm::SLIM = <<~SLIM
+  .alert.alert-danger
+    = fa_icon :triangle_exclamation, class: 'me-3'
+    = t('.warning')
+  = bootstrap_form_with model:, url: do |form|
+    = __resource_form_fields_digest(form:)
+    = __button_confirm
+    = __button_cancel(path: root_path)
+SLIM

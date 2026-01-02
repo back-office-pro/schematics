@@ -10,21 +10,10 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::Navbar::BreadcrumbTrail::SLIM = <<~SLIM
+  nav.d-none.d-xl-block.text-truncate aria-label='breadcrumb'
+    ol.breadcrumb.ps-3.mb-0.flex-nowrap
+      li.breadcrumb-item
+        = link_to fa_icon(:house, class: 'fa-lg'), root_path, title:, data:
+      = __navbar_breadcrumb_trail_breadcrumb(breadcrumb_trail)
+SLIM

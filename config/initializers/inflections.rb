@@ -18,6 +18,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.acronym 'JSON'
   inflect.acronym 'OpenAI'
   inflect.acronym 'OpenAPI'
+  inflect.acronym 'OTP'
   inflect.acronym 'PDF'
   inflect.acronym 'SLIM'
   inflect.acronym 'SSO'

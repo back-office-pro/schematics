@@ -10,21 +10,11 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::AttachmentValidator::SLIM = <<~SLIM
+  - if antivirus_missing?
+    = __attachment_validator_antivirus_missing
+  - else
+    .mt-1
+      = fa_icon icon, class: 'me-1'
+      = @validator
+SLIM

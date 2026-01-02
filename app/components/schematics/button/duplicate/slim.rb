@@ -10,21 +10,10 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::Button::Duplicate::SLIM = <<~SLIM
+  = button_to duplicate_resource_path(resource), method: :post, data:, class: css_classes, title:, form: do
+    span.icon = fa_icon :clone
+    span.icon.d-none = fa_icon :spinner, animation: 'spin'
+    span.text.d-none.d-xxl-inline = title
+    span.text.d-none = t('schematics.application.button.loading')
+SLIM

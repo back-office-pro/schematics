@@ -10,21 +10,8 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::Viewer::SwitchButtonGroup::SLIM = <<~SLIM
+  .form-check.form-switch.w-0.mb-0.align-self-center
+    = checkbox_tag id, '', false, data:, class: 'form-check-input'
+    = label_tag id, '', class: 'form-check-label'
+SLIM

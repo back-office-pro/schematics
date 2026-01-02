@@ -10,21 +10,10 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::Viewer::Specifications::Entity::SLIM = <<~SLIM
+  ul.list-group.list-group-striped
+    = __viewer_specifications_section(element: @entity, options: true)
+    = __viewer_specifications_section(fields, indent: 1, options: true)
+    = __viewer_specifications_section(associations, indent: 1, options: true)
+    = __viewer_specifications_section(triggers, icon: :atom, indent: 1)
+SLIM

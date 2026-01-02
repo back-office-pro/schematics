@@ -10,21 +10,16 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::Button::RestoreDraft::SLIM = <<~SLIM
+  button.btn.btn-primary.btn-sm.btn-icon-split.ms-1 {
+    data-auto-save-target='restoreButton'
+    data-action='click->auto-save#restore'
+    data-controller='tooltip'
+    data-bs-custom-class='responsive-button-tooltip-lg'
+    data-bs-title=title
+  }
+    span.icon = fa_icon(icon)
+    span.text.d-none.d-lg-inline
+      = title
+      span.ms-1 data-controller='timeago' datetime=updated_at
+SLIM

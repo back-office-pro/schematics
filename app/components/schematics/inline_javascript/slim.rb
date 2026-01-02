@@ -10,21 +10,11 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::InlineJavascript::SLIM = <<~SLIM
+  javascript [nonce=content_security_policy_nonce]:
+    window.environment = \#{environment}
+    window.mapsAPIKey = \#{maps_api_key}
+    window.rollbarClientKey = \#{rollbar_client_key}
+    window.I18n = \#{i18n}
+    window.routes = \#{routes}
+SLIM

@@ -10,21 +10,13 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::Button::BulkAction::SLIM = <<~SLIM
+  button.btn.text-danger.btn-sm.pe-1.d-none {
+    data-controller='tooltip'
+    data-bulk-action-target='button'
+    data-action='click->bulk-action#submit'
+    title=title
+  }
+    span.icon = fa_icon :box_archive, class: icon_class
+    span.icon.d-none = fa_icon :spinner, class: icon_class, animation: 'spin'
+SLIM

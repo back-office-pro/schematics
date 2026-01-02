@@ -10,21 +10,10 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::Button::DestroyOTP::SLIM = <<~SLIM
+  = button_to one_time_passwords_path, method: :delete, data:, class: css_classes, title:, form: do
+    span.icon = fa_icon :toggle_off
+    span.icon.d-none = fa_icon :spinner, animation: 'spin'
+    span.text.d-none.d-lg-inline = title
+    span.text.d-none = t('schematics.application.button.loading')
+SLIM

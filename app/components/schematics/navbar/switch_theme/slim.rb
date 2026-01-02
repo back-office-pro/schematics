@@ -10,21 +10,18 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::Navbar::SwitchTheme::SLIM = <<~SLIM
+  li.nav-item.d-flex.align-items-center.px-2.ms-2.bg-body-secondary.rounded.btn-transparent data-controller='switch-theme'
+    a.nav-link.switch-theme.dark {
+      role='button'
+      data-action='click->switch-theme#switchTheme:stop'
+      data-switch-theme-theme-param='dark'
+    }
+      = fa_icon :moon, class: 'fa-lg'
+    a.nav-link.switch-theme.light {
+      role='button'
+      data-action='click->switch-theme#switchTheme:stop'
+      data-switch-theme-theme-param='light'
+    }
+      = fa_icon :lightbulb, class: 'fa-lg'
+SLIM

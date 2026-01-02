@@ -10,21 +10,10 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::ResourceForm::Fields::RichText::SLIM = <<~SLIM
+  - if translated?
+    - available_locales.each do |locale|
+      == required_rich_textarea :"\#{name}_\#{locale}", label: i18n_label(locale), data:, required:
+  - else
+    == required_rich_textarea name.to_sym, data:
+SLIM

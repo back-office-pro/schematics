@@ -10,21 +10,13 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::Viewer::Pagination::SLIM = <<~SLIM
+  .row.pt-3
+    .col.d-none.d-xl-flex.text-secondary.ms-2.align-items-center.align-self-start
+      == limit_tag_js(item_name: human_name_plural) if human_name_plural
+    .col.d-flex.align-items-center.flex-column
+      div class=css_classes == series_nav(:bootstrap) if pages?
+      == calendar[:month].series_nav(:bootstrap) if calendar?
+    .col.d-none.d-xl-flex.text-secondary.me-2.align-items-center.justify-content-end.align-self-start
+      == info_tag(item_name: human_name_plural) if human_name_plural
+SLIM

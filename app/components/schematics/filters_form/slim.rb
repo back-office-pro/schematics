@@ -10,21 +10,9 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module DestroyOTP
-      class Component < ApplicationComponent
-        def data = {
-          controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip-lg'
-        }
-
-        def title = t('.text')
-
-        def css_classes = %w[btn btn-danger btn-sm btn-icon-split]
-
-        def form = { class: 'd-inline' }
-      end
-    end
-  end
-end
+Schematics::FiltersForm::SLIM = <<~SLIM
+  = form_with url:, method:, id:, data:, class: css_classes do
+    = submit_tag nil, name: nil, class: 'd-none'
+    - query_params.each do |query|
+      = hidden_field_tag query, params[query]
+SLIM
