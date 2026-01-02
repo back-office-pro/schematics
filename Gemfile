@@ -39,6 +39,7 @@ group :development do
 end
 
 group :test do
+  gem 'capybara'
   gem 'cuprite'
   gem 'fuubar'
   gem 'isolator', require: false
@@ -67,7 +68,6 @@ gem 'bootstrap-email'
 gem 'bootstrap_form'
 gem 'browser'
 gem 'cancancan'
-gem 'capybara'
 gem 'chartkick'
 gem 'chroma'
 gem 'countries'
