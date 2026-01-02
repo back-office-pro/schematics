@@ -20,5 +20,6 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.acronym 'OpenAPI'
   inflect.acronym 'PDF'
   inflect.acronym 'SLIM'
+  inflect.acronym 'SSO'
   inflect.acronym 'SVG'
 end
