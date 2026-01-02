@@ -31,7 +31,7 @@ module Schematics
         .application
         .credentials
         .rollbar
-        .client_key
+        &.client_key
         .to_json
         .html_safe # rubocop:disable Rails/OutputSafety
 
