@@ -1,0 +1,39 @@
+# Copyright © 2025 Dev & Software. All rights reserved.
+
+# THIS SOFTWARE IS PROPRIETARY AND CONFIDENTIAL. UNAUTHORIZED COPYING, DISTRIBUTION, MODIFICATION,
+# REVERSE ENGINEERING, OR DISCLOSURE IS STRICTLY PROHIBITED.
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+# NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND
+# NONINFRINGEMENT.
+# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+# LIABILITY ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.
+
+# frozen_string_literal: true
+
+Schematics::Admin::Grid::SLIM = <<~SLIM
+  - breadcrumb title, admin_path
+  .row.g-3
+    = __admin_widgets_license
+    = __admin_widgets_backups
+    = __admin_widgets_data_cleanings
+    = __admin_widgets_configuration
+    = __admin_widgets_migrations
+    = __admin_widgets_sessions
+    = __admin_widgets_translations
+    = __admin_widgets_documentation
+    = __admin_widgets_api_requests
+    = __admin_widgets_api_keys
+    = __admin_widgets_api_chart
+    = __admin_widgets_users
+    = __admin_widgets_teams
+    = __admin_widgets_roles
+    = __admin_widgets_permissions
+    = __admin_widgets_dashboards
+    = __admin_widgets_charts
+    = __admin_widgets_metrics
+    = __admin_widgets_rankings
+    = __admin_widgets_webhook_endpoints
+    = __admin_widgets_webhook_requests
+    = __admin_widgets_pdf_templates
+    = __admin_widgets_email_templates
+SLIM

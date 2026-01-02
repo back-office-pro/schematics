@@ -11,12 +11,11 @@
 # frozen_string_literal: true
 
 module Schematics
-  class AdminController < ApplicationController
-    before_action :require_sudo!, only: :index
-
-    def index
-      authorize! :index, :admin
-      render Admin::Grid::Component.new
+  module Admin
+    module Grid
+      class Component < ApplicationComponent
+        delegate :title, :breadcrumb, to: :helpers
+      end
     end
   end
 end
