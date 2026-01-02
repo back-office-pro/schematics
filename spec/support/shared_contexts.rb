@@ -120,6 +120,12 @@ RSpec.shared_context 'with password pwned stub' do
   end
 end
 
+RSpec.shared_context 'with AWS stub' do
+  before do
+    stub_request(:put, %r{https://s3.af-south-1.amazonaws.com}).to_return(status: 200)
+  end
+end
+
 RSpec.shared_context 'with openai stub' do
   before do
     stub_request(:post, 'https://api.openai.com/v1/chat/completions')
@@ -129,4 +135,18 @@ RSpec.shared_context 'with openai stub' do
         status: 200
       )
   end
+end
+
+RSpec.shared_context 'with active license' do
+  let(:license) do
+    instance_double(
+      Schematics::License,
+      active?: true,
+      email: 'support@back-office.pro',
+      signature: nil,
+      expires_at: nil
+    )
+  end
+
+  before { allow(Configuration).to receive(:license).and_return(license) }
 end

@@ -17,6 +17,7 @@ RSpec.describe Configuration do
 
   before do
     allow(BootstrapEmail).to receive(:clear_sass_cache!).and_return(nil)
+    allow(described_class).to receive(:license).and_call_original
   end
 
   after do
