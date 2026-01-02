@@ -21,6 +21,15 @@ module Schematics
     include ResourcesHelper
     extend ::Dry::Initializer
 
+    class << self
+      def inherited(subclass)
+        super
+        subclass.class_eval do
+          slim_template module_parent::SLIM if module_parent.const_defined?(:SLIM)
+        end
+      end
+    end
+
     delegate :current_user,
              :current_ability,
              :can?,
