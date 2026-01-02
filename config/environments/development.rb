@@ -85,4 +85,9 @@ Rails.application.configure do
       max_entries: 2000,
       max_size: 1.gigabyte
     }
+
+  # Mission Control
+  config.mission_control.jobs.base_controller_class = 'Schematics::RoutingController'
+  config.mission_control.jobs.http_basic_auth_enabled = false
+  config.mission_control.jobs.show_console_help = false
 end
