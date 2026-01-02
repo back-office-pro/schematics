@@ -17,5 +17,7 @@ RSpec.describe Schematics::GoogleMap::Component, type: :component do
 
   let(:address) { '2 Rue Emile Verhaeren' }
 
+  before { Configuration.instance.update!(gcloud_public_api_key: 'test') }
+
   it { is_expected.to have_css('iframe') }
 end
