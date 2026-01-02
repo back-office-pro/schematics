@@ -11,14 +11,11 @@
 # frozen_string_literal: true
 
 module Schematics
-  class HomeController < ApplicationController
-    def index
-      render Dashboard::Component.new
-    end
-
-    def destroy
-      logout_user!
-      redirect_to main_app.login_path, status: :see_other, notice: t('.success')
+  module Dashboard
+    class Component < ApplicationComponent
+      memoize def dashboards = ::Dashboard
+        .preload_all
+        .accessible_by_role(current_user.role)
     end
   end
 end
