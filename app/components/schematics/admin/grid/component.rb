@@ -14,7 +14,6 @@ module Schematics
   module Admin
     module Grid
       class Component < ApplicationComponent
-        delegate :title, :breadcrumb, to: :helpers
       end
     end
   end

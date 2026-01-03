@@ -11,7 +11,6 @@
 # frozen_string_literal: true
 
 Schematics::Admin::Grid::SLIM = <<~SLIM
-  - breadcrumb title, admin_path
   .row.g-3
     = __admin_widgets_license
     = __admin_widgets_backups
