@@ -25,6 +25,29 @@
       "note": ""
     },
     {
+      "warning_type": "Dynamic Render Path",
+      "warning_code": 15,
+      "fingerprint": "8c82f48e676972e6ce32949fb24ef99217cc7c3075e934ee958dfdcad1bca3d4",
+      "check_name": "Render",
+      "message": "Render path contains parameter value",
+      "file": "app/controllers/schematics/versions_controller.rb",
+      "line": 49,
+      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
+      "code": "render(action => VersionsComparison::Component.new(:version => model_class.with_user.load_async.find(params[:id])), { :locals => ({ :\"versionscomparison::component\" => VersionsComparison::Component.new(:version => model_class.with_user.load_async.find(params[:id])) }) })",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Schematics::VersionsController",
+        "method": "show"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
+      "note": ""
+    },
+    {
       "warning_type": "Dangerous Eval",
       "warning_code": 13,
       "fingerprint": "b1ca7fedb6fb97815225f07807d230cf4c694c5f174de12460fcb8033efbf76e",
