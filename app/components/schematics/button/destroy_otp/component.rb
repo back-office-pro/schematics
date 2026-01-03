@@ -12,7 +12,7 @@
 
 module Schematics
   module Button
-    module DestroyOtp
+    module DestroyOTP
       class Component < ApplicationComponent
         def data = {
           controller: 'tooltip',

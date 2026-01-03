@@ -127,6 +127,9 @@ Style/HashEachMethods:
     - attribute
 Style/EndlessMethod:
   EnforcedStyle: allow_always
+Style/FormatStringToken:
+  Exclude:
+    - app/components/schematics/chart_placeholder/slim.rb
 Style/RequireOrder:
   Enabled: true
   Exclude:

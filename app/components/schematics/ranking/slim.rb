@@ -1,0 +1,29 @@
+# Copyright © 2025 Dev & Software. All rights reserved.
+
+# THIS SOFTWARE IS PROPRIETARY AND CONFIDENTIAL. UNAUTHORIZED COPYING, DISTRIBUTION, MODIFICATION,
+# REVERSE ENGINEERING, OR DISCLOSURE IS STRICTLY PROHIBITED.
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+# NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND
+# NONINFRINGEMENT.
+# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+# LIABILITY ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.
+
+# frozen_string_literal: true
+
+Schematics::Ranking::SLIM = <<~SLIM
+  .col-xl-3.col-md-6.cursor-grab data-id=id
+    .card.shadow-sm.animate__animated.animate__zoomIn
+      .card-header.p-1
+        = __card_heading(icon:, title: @ranking)
+      .card-body.p-0
+        - if resources.empty?
+          = __empty_resource
+        - else
+          table.table.mb-0.table-striped.table-borderless
+            tbody
+              - resources.each.with_index(1) do |resource, rank|
+                tr
+                  th.text-center.text-primary.col-2 = rank
+                  td.text-truncate.w-100.mw-0 = __resource_link_to(resource:)
+                  td.text-center.text-nowrap = resource.public_send(field_name_formatted)
+SLIM

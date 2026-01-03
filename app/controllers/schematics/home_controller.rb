@@ -13,9 +13,7 @@
 module Schematics
   class HomeController < ApplicationController
     def index
-      @dashboards = ::Dashboard
-                    .preload_all
-                    .accessible_by_role(current_user.role)
+      render Dashboard::Component.new
     end
 
     def destroy

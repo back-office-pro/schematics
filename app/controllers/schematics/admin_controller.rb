@@ -16,6 +16,8 @@ module Schematics
 
     def index
       authorize! :index, :admin
+      breadcrumb title, admin_path
+      render Admin::Grid::Component.new
     end
   end
 end

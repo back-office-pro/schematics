@@ -1,0 +1,29 @@
+# Copyright © 2025 Dev & Software. All rights reserved.
+
+# THIS SOFTWARE IS PROPRIETARY AND CONFIDENTIAL. UNAUTHORIZED COPYING, DISTRIBUTION, MODIFICATION,
+# REVERSE ENGINEERING, OR DISCLOSURE IS STRICTLY PROHIBITED.
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+# NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND
+# NONINFRINGEMENT.
+# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+# LIABILITY ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.
+
+# frozen_string_literal: true
+
+Schematics::ResourceForm::Fields::Code::SLIM = <<~SLIM
+  - if translated?
+    - available_locales.each do |locale|
+      .mb-3.w-100 data=wrapper_data
+        = form.textarea :"\#{name}_\#{locale}",
+                        label: i18n_label(locale),
+                        hide_label:,
+                        wrapper_class:,
+                        control_class:,
+                        data:,
+                        required:
+        .form-control data-code-editor-target='container'
+  - else
+    .mb-3.w-100 data=wrapper_data
+      = form.textarea name.to_sym, hide_label:, wrapper_class:, control_class:, data:
+      .form-control data-code-editor-target='container'
+SLIM

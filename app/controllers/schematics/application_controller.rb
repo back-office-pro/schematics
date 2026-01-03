@@ -39,8 +39,8 @@ module Schematics
     protected
 
     def unsupported_browser
-      render 'schematics/exception/unsupported_browser',
-             status: :not_acceptable,
+      render Exception::UnsupportedBrowser::Component.new,
+             status: :upgrade_required,
              layout: 'schematics/jumbotron'
     end
 

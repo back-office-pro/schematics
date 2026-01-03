@@ -1,0 +1,23 @@
+# Copyright © 2025 Dev & Software. All rights reserved.
+
+# THIS SOFTWARE IS PROPRIETARY AND CONFIDENTIAL. UNAUTHORIZED COPYING, DISTRIBUTION, MODIFICATION,
+# REVERSE ENGINEERING, OR DISCLOSURE IS STRICTLY PROHIBITED.
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+# NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND
+# NONINFRINGEMENT.
+# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+# LIABILITY ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.
+
+# frozen_string_literal: true
+
+Schematics::Viewer::Comments::SLIM = <<~SLIM
+  #comments.offcanvas.offcanvas-end data-controller='offcanvas' tabindex='-1' data-bs-scroll='true'
+    .offcanvas-header.ps-2
+      = __card_heading(icon:, title:)
+      = __button_add(model_class:, resource:)
+      button.btn-close.text-reset.pe-4 aria-label='Close' data-bs-dismiss='offcanvas' type='button'
+    .offcanvas-body.pt-0
+      = turbo_frame_tag 'comments', data: { turbo_action: 'advance' } do
+        = __comment_preview(@comments)
+        = __viewer_pagination(pagy: @pagy)
+SLIM

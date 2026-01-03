@@ -1,0 +1,22 @@
+# Copyright © 2025 Dev & Software. All rights reserved.
+
+# THIS SOFTWARE IS PROPRIETARY AND CONFIDENTIAL. UNAUTHORIZED COPYING, DISTRIBUTION, MODIFICATION,
+# REVERSE ENGINEERING, OR DISCLOSURE IS STRICTLY PROHIBITED.
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+# NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND
+# NONINFRINGEMENT.
+# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+# LIABILITY ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.
+
+# frozen_string_literal: true
+
+Schematics::Viewer::Pagination::SLIM = <<~SLIM
+  .row.pt-3
+    .col.d-none.d-xl-flex.text-secondary.ms-2.align-items-center.align-self-start
+      == limit_tag_js(item_name: human_name_plural) if human_name_plural
+    .col.d-flex.align-items-center.flex-column
+      div class=css_classes == series_nav(:bootstrap) if pages?
+      == calendar[:month].series_nav(:bootstrap) if calendar?
+    .col.d-none.d-xl-flex.text-secondary.me-2.align-items-center.justify-content-end.align-self-start
+      == info_tag(item_name: human_name_plural) if human_name_plural
+SLIM

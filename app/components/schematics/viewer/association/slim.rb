@@ -1,0 +1,51 @@
+# Copyright © 2025 Dev & Software. All rights reserved.
+
+# THIS SOFTWARE IS PROPRIETARY AND CONFIDENTIAL. UNAUTHORIZED COPYING, DISTRIBUTION, MODIFICATION,
+# REVERSE ENGINEERING, OR DISCLOSURE IS STRICTLY PROHIBITED.
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+# NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND
+# NONINFRINGEMENT.
+# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+# LIABILITY ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.
+
+# frozen_string_literal: true
+
+Schematics::Viewer::Association::SLIM = <<~SLIM
+  .accordion.shadow-sm.mt-3.animate__animated.animate__zoomIn.rounded-bottom
+    .accordion-item.rounded-bottom
+      .accordion-header
+        button.accordion-button.py-1.pe-3.ps-1.rounded-bottom {
+          type='button'
+          data-bs-toggle='collapse'
+          data-bs-target="#\#{id}"
+          aria-expanded='true'
+          aria-controls=id
+          class=header_button_css_class
+        }
+          = __card_heading(icon:, title:)
+          = __viewer_association_button(proxy_association:)
+          .badge.bg-primary.text-white.p-2.me-3 = display_count
+    .accordion-collapse.collapse class=collapse_css_class id=id
+      .accordion-body.p-0
+        .table-responsive.rounded-bottom
+          table.table.mb-0.table-striped.table-hover.table-borderless
+            thead
+              tr
+                th.text-nowrap.text-center.align-middle
+                - entity.listable_elements.stable_sort_by(&:weight).each do |element|
+                  th.text-nowrap.text-center.align-middle class=col_preference_class(element)
+                    = fa_icon element.icon, class: 'me-2 text-secondary'
+                    = model_class.human_attribute_name(element.name)
+            tbody
+              - @resources.each do |resource|
+                = __viewer_resource_link(resource:, tag_name: :tr) do |c|
+                  - c.with_body do
+                    td.text-nowrap.px-2.py-0.align-middle.start-0.sticky-top
+                      .btn-group
+                        = __button_edit(resource:)
+                        = __button_archive(resource:)
+                        = __button_destroy_attachment(attachment: resource)
+                    - entity.listable_elements.stable_sort_by(&:weight).each do |element|
+                      td.text-truncate.text-center.align-middle class=col_preference_class(element)
+                        = __resource(resource:, element:, highlight_text: @highlight_text)
+SLIM

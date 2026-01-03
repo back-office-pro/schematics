@@ -12,7 +12,7 @@
 
 module Schematics
   module Button
-    module SsoSignIn
+    module SSOSignIn
       class Component < ApplicationComponent
         delegate :sso_service_url,
                  :sso_cert_fingerprint,
