@@ -1,3 +1,4 @@
 ---
 en:
+  missing_oauth_credentials: Google OAuth not configured
   text: Sign in with Google

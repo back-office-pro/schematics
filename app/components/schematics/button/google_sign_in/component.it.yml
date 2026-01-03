@@ -1,3 +1,4 @@
 ---
 it:
+  missing_oauth_credentials: Google OAuth non configurato
   text: Accedere con Google

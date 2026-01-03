@@ -1,3 +1,4 @@
 ---
 fr:
+  missing_oauth_credentials: Google OAuth non configuré
   text: Se connecter avec Google
