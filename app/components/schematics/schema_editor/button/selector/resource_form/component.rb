@@ -24,7 +24,7 @@ module Schematics
               t('.missing_openai_access_token') unless openai_access_token
             end
 
-            def css_classes = class_names(disabled: title.present?)
+            def css_classes = class_names(disabled: openai_access_token.blank?)
           end
         end
       end
