@@ -22,8 +22,9 @@ module Schematics
       @pagy, @versions = pagy(model_class.timeline(current_ability))
       return unless stale?(@versions)
 
+      breadcrumb title, versions_path
       respond_to do |format|
-        format.html
+        format.html { render VersionsTimeline::Component.new(versions: @versions, pagy: @pagy) }
         format.json { render json: @versions }
       end
     end
@@ -43,9 +44,9 @@ module Schematics
     def show
       return unless stale?(@version)
 
-      @previous_item = @version.reify(dup: true)
+      breadcrumb title, versions_path
       respond_to do |format|
-        format.html
+        format.html { render VersionsComparison::Component.new(version: @version) }
         format.json { render json: @version }
       end
     end
