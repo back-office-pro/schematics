@@ -22,6 +22,5 @@ Rails.configuration.content_security_policy do |policy|
 end
 
 Rails.configuration.content_security_policy_nonce_directives = %w[script-src]
-Rails.configuration.content_security_policy_report_only = Rails.env.development?
 Rails.configuration.content_security_policy_nonce_generator = -> { _1.session.id.to_s }
 Rails.configuration.content_security_policy_nonce_auto = true
