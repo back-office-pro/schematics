@@ -1,3 +1,4 @@
 ---
 it:
+  missing_sso_credentials: Accesso SSO non configurato
   text: Accedere con SSO

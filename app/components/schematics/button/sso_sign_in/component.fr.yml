@@ -1,3 +1,4 @@
 ---
 fr:
+  missing_sso_credentials: Connexion SSO non configurée
   text: Se connecter avec SSO

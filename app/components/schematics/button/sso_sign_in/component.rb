@@ -19,7 +19,13 @@ module Schematics
                  to: '::Configuration',
                  private: true
 
-        def css_classes = %w[btn btn-primary btn-sm btn-icon-split]
+        def css_classes = class_names(
+          'btn',
+          'btn-primary',
+          'btn-sm',
+          'btn-icon-split',
+          disabled: disabled?
+        )
 
         def data = {
           controller: 'tooltip',
@@ -35,8 +41,14 @@ module Schematics
 
         def form = { class: 'd-inline' }
 
-        def render?
-          sso_service_url.present? && sso_cert_fingerprint.present?
+        def tooltip_title
+          t('.missing_sso_credentials') if disabled?
+        end
+
+        private
+
+        def disabled?
+          sso_service_url.blank? || sso_cert_fingerprint.blank?
         end
       end
     end

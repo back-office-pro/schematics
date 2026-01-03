@@ -1,3 +1,4 @@
 ---
 en:
+  missing_sso_credentials: SSO sign in not configured
   text: Sign in with SSO
