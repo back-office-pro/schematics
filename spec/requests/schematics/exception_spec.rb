@@ -41,4 +41,12 @@ RSpec.describe 'Exception' do
     it { is_expected.to have_http_status(:service_unavailable) }
     its(:body) { is_expected.to be_blank }
   end
+
+  describe 'GET #offline' do
+    let(:do_request) { get(offline_path, headers:) }
+
+    before { do_request }
+
+    it { is_expected.to have_http_status(:success) }
+  end
 end
