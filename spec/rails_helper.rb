@@ -23,7 +23,6 @@ require 'validate_url/rspec_matcher'
 
 require 'support/cache'
 require 'support/capybara'
-require 'support/isolator'
 require 'support/routes'
 require 'support/shared_contexts'
 require 'support/shoulda_matchers'

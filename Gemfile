@@ -42,7 +42,6 @@ group :test do
   gem 'capybara'
   gem 'cuprite'
   gem 'fuubar'
-  gem 'isolator', require: false
   gem 'method_source', require: false
   gem 'rspec-its'
   gem 'rspec-rails'
