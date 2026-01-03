@@ -505,6 +505,16 @@
         }
       },
       {
+        "id": "8bfbf0d5-7590-4e0d-a908-130886699d8b",
+        "name": "sso_sign_in_feature_flag",
+        "type": "boolean",
+        "options": {
+          "cached": true,
+          "default": true,
+          "group": "feature_flag"
+        }
+      },
+      {
         "id": "50df4cd0-2a82-479c-9ebf-a65665c1203b",
         "name": "license_file",
         "type": "attachment",

@@ -32,6 +32,7 @@ en:
         origins: Authorized API domains
         sso_cert_fingerprint: SSO certificate fingerprint
         sso_service_url: SSO identity provider URL
+        sso_sign_in_feature_flag: Enable SSO sign in
         storage_quota: Storage quota
         tasks_feature_flag: Enable tasks
         theme_color: Theme color

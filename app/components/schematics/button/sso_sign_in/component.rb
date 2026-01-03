@@ -14,7 +14,8 @@ module Schematics
   module Button
     module SSOSignIn
       class Component < ApplicationComponent
-        delegate :sso_service_url,
+        delegate :sso_sign_in_feature_flag,
+                 :sso_service_url,
                  :sso_cert_fingerprint,
                  to: '::Configuration',
                  private: true
@@ -44,6 +45,8 @@ module Schematics
         def tooltip_title
           t('.missing_sso_credentials') if disabled?
         end
+
+        def render? = sso_sign_in_feature_flag
 
         private
 

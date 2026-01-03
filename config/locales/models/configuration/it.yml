@@ -31,6 +31,7 @@ it:
         origins: Domini API consentiti
         sso_cert_fingerprint: Impronta digitale del certificato SSO
         sso_service_url: URL del provider di identità SSO
+        sso_sign_in_feature_flag: Attivare l'accesso con SSO
         storage_quota: Quota di archiviazione
         tasks_feature_flag: Attivare i compiti
         theme_color: Colore del tema
