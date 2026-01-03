@@ -14,4 +14,8 @@ require 'rails_helper'
 
 RSpec.describe Configuration do
   include Schematics::Specs::Routing
+
+  after do
+    ActiveStorage::Blob.service = ActiveStorage::Blob.services.fetch(:test)
+  end
 end

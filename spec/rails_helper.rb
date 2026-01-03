@@ -37,5 +37,4 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   config.include_context 'with active license'
   config.include_context 'with password pwned stub'
-  config.include_context 'with AWS stub'
 end

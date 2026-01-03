@@ -120,7 +120,7 @@ RSpec.shared_context 'with password pwned stub' do
   end
 end
 
-RSpec.shared_context 'with AWS stub' do
+RSpec.shared_context 'with aws stub' do
   before do
     stub_request(:put, %r{https://s3.af-south-1.amazonaws.com}).to_return(status: 200)
   end
