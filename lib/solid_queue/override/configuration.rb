@@ -13,34 +13,48 @@
 module SolidQueue
   module Override
     module Configuration
-      def processes_config
-        super.tap { _1[:workers][0][:queues] = %w[critical default low] }
-      end
-
-      def recurring_tasks_config
-        @recurring_tasks_config ||= {
-          clean_data: {
-            class: 'Schematics::CleanDataJob',
-            schedule: 'every hour'
-          },
-          generate_backup: {
-            class: 'Schematics::GenerateBackupJob',
-            schedule: 'every day at midnight'
-          },
-          check_license: {
-            class: 'Schematics::CheckLicenseJob',
-            schedule: 'every day at midnight'
-          },
-          migrate_core: {
-            class: 'Schematics::MigrateCoreJob',
-            schedule: 'every day at 1am'
-          },
-          migrate_schema: {
-            class: 'Schematics::MigrateSchemaJob',
-            schedule: 'every day at 2am'
+      # :reek:UtilityFunction
+      def processes_config = {
+        dispatchers: [
+          {
+            batch_size: 500,
+            polling_interval: 1,
+            concurrency_maintenance: true,
+            concurrency_maintenance_interval: 600
           }
+        ],
+        workers: [
+          {
+            queues: %w[critical default low],
+            threads: 3,
+            polling_interval: 0.1,
+            processes: ENV.fetch('JOB_CONCURRENCY', 1)
+          }
+        ]
+      }
+
+      def recurring_tasks_config = {
+        clean_data: {
+          class: 'Schematics::CleanDataJob',
+          schedule: 'every hour'
+        },
+        generate_backup: {
+          class: 'Schematics::GenerateBackupJob',
+          schedule: 'every day at midnight'
+        },
+        check_license: {
+          class: 'Schematics::CheckLicenseJob',
+          schedule: 'every day at midnight'
+        },
+        migrate_core: {
+          class: 'Schematics::MigrateCoreJob',
+          schedule: 'every day at 1am'
+        },
+        migrate_schema: {
+          class: 'Schematics::MigrateSchemaJob',
+          schedule: 'every day at 2am'
         }
-      end
+      }
     end
   end
 end
