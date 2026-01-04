@@ -206,7 +206,7 @@ svg {
 }
 
 .bg-pattern-primary {
-  background: linear-gradient(to bottom, rgb(0 0 0 / 0%), var(--bs-primary-darken)), url('/schematics/bg-pattern.png') var(--bs-primary);
+  background: linear-gradient(to bottom, rgb(0 0 0 / 0%), var(--bs-primary-darken)), url('/bg-pattern.png') var(--bs-primary);
   background-attachment: fixed;
 }
 

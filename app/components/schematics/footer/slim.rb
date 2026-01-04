@@ -23,5 +23,5 @@ Schematics::Footer::SLIM = <<~SLIM
         .d-none.d-sm-inline
           span.ms-1 = t('.powered_by')
         = link_to website_url, class: 'ms-1', target: '_blank', rel: 'noreferrer' do
-          = image_tag 'schematics/logo.svg'
+          = image_tag 'logo.svg'
 SLIM

@@ -16,7 +16,7 @@ module Schematics
       def path
         return rails_blob_path(company_logo) if company_logo.attached?
 
-        asset_path('schematics/logo.svg')
+        asset_path('logo.svg')
       end
 
       def type

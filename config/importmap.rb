@@ -10,20 +10,14 @@
 
 # frozen_string_literal: true
 
+pin 'application'
 pin '@rails/actiontext', to: 'actiontext.esm.js'
 pin '@hotwired/turbo-rails', to: 'turbo.js'
 pin '@hotwired/stimulus', to: 'stimulus.js'
 pin '@hotwired/stimulus-loading', to: 'stimulus-loading.js'
-
 pin 'chartkick', to: 'chartkick.js'
 pin 'Chart.bundle', to: 'Chart.bundle.js'
-
-pin 'schematics/application'
-
 pin_all_from 'app/javascript/controllers', under: 'controllers'
-pin_all_from 'app/assets/javascripts/schematics/controllers',
-             under: 'controllers',
-             to: 'schematics/controllers'
 
 pin '@fortawesome/fontawesome-free', to: '@fortawesome/fontawesome-free/js/fontawesome.js'
 pin '@github/hotkey', to: '@github/hotkey/dist/index.js'

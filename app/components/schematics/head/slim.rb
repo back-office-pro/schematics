@@ -28,7 +28,7 @@ Schematics::Head::SLIM = <<~SLIM
     = csp_meta_tag
     = __favicon
     == stylesheet_link_tags
-    = javascript_importmap_tags 'schematics/application'
+    = javascript_importmap_tags
     = javascript_include_tag 'pagy'
     = javascript_include_tag 'https://www.gstatic.com/charts/loader.js'
     = __google_map_include_tag
