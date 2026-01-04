@@ -8,7 +8,7 @@
 /config/ci.rb
 /config/environments/development.rb
 /config/environments/test.rb
-/log/*
+/log
 /tmp
 /storage
 /node_modules
