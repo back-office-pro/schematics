@@ -13,6 +13,10 @@
 module SolidQueue
   module Override
     module Configuration
+      def processes_config
+        super.tap { _1[:workers][0][:queues] = %w[critical default low] }
+      end
+
       def recurring_tasks_config
         @recurring_tasks_config ||= {
           clean_data: {
