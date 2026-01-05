@@ -67,9 +67,6 @@ module BackOffice
     config.assets.paths << root.join('app', 'components', 'schematics')
     config.assets.paths << root.join('node_modules')
 
-    # Importmap
-    config.importmap.cache_sweepers << root.join('app', 'assets', 'javascripts')
-
     # i18n
     config.i18n.default_locale = :en
     config.i18n.available_locales = %i[en fr it]
