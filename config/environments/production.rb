@@ -24,7 +24,6 @@ Rails.application.configure do
 
   # Assets
   config.assets.compile = false
-  config.assets.js_compressor = :terser
 
   # Action Controller
   config.action_controller.perform_caching = true
