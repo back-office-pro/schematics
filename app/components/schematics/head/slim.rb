@@ -27,7 +27,7 @@ Schematics::Head::SLIM = <<~SLIM
     = csrf_meta_tags
     = csp_meta_tag
     = __favicon
-    == stylesheet_link_tags
+    = stylesheet_link_tag :app, 'data-turbo-track': 'reload'
     = javascript_importmap_tags
     = javascript_include_tag 'pagy'
     = javascript_include_tag 'https://www.gstatic.com/charts/loader.js'

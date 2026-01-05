@@ -13,9 +13,7 @@
 module Schematics
   module ApplicationHelper
     COMPONENTS_DIRECTORY = Rails.root.join('app/components/schematics').freeze
-    ASSETS_DIRECTORY = Rails.root.join('app/assets/stylesheets').freeze
     COMPONENTS_PATH = %r{#{COMPONENTS_DIRECTORY}/(.*)/component\.rb}
-    ASSETS_PATH = %r{#{ASSETS_DIRECTORY}/(.*)\.\w+}
 
     # :reek:UnusedParameters
     # :reek:LongParameterList
@@ -28,13 +26,6 @@ module Schematics
         **
       )
     end
-
-    def stylesheet_link_tags = Dir
-      .glob(ASSETS_DIRECTORY.join('**', '*.css'))
-      .map { _1[ASSETS_PATH, 1] }
-      .each_with_object(media: 'all', 'data-turbo-track': 'reload')
-      .map(&method(:stylesheet_link_tag))
-      .join
 
     Dir
       .glob(COMPONENTS_DIRECTORY.join('**', 'component.rb'))
