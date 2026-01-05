@@ -10,9 +10,6 @@
 
 # frozen_string_literal: true
 
-require 'active_record_doctor'
-require 'active_record_doctor/rake/task'
-
 namespace :schematics do
   namespace :db do
     desc 'Perform database backup'
@@ -20,10 +17,12 @@ namespace :schematics do
       Schematics::GenerateBackupJob.perform_now
     end
 
-    ActiveRecordDoctor::Rake::Task.new do |task|
-      task.deps = [:environment]
-      task.config_path = Rails.root.join('config/active_record_doctor.rb')
-      task.setup = -> { Rails.application.eager_load! }
+    if Rails.env.development?
+      ActiveRecordDoctor::Rake::Task.new do |task|
+        task.deps = [:environment]
+        task.config_path = Rails.root.join('config/active_record_doctor.rb')
+        task.setup = -> { Rails.application.eager_load! }
+      end
     end
 
     namespace :migrate do
