@@ -19,10 +19,9 @@ module Core
 
           delegate :migration, to: :context, private: true
           delegate :prompt, to: :migration, private: true
-          delegate :logger, :env, :cache, to: '::Rails', private: true
-          delegate :root, to: '::Rails.application', private: true
-          delegate :parse, to: '::ActiveSupport::ConfigurationFile', private: true
+          delegate :logger, :env, to: '::Rails', private: true
           delegate :openai_access_token, to: '::Configuration', private: true
+          delegate :structured_output_schema, to: '::OpenAI', private: true
 
           after :log_data
 
@@ -51,7 +50,7 @@ module Core
                 type: 'function',
                 function: {
                   name: 'schema',
-                  parameters: parse(root.join('lib', 'schema.yml')),
+                  parameters: structured_output_schema,
                   strict: true
                 }
               }
