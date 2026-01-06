@@ -14,6 +14,7 @@ AllCops:
   Exclude:
     - db/migrate/20*
     - db/*schema.rb
+    - rgloader/*
     - vendor/**/*
 # rubocop
 Layout/LineLength:
