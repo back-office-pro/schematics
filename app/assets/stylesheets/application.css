@@ -1,3 +1,15 @@
+/*
+ * Copyright © 2025 Dev & Software. All rights reserved.
+ *
+ * THIS SOFTWARE IS PROPRIETARY AND CONFIDENTIAL. UNAUTHORIZED COPYING, DISTRIBUTION, MODIFICATION,
+ * REVERSE ENGINEERING, OR DISCLOSURE IS STRICTLY PROHIBITED.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+ * NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND
+ * NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+ * LIABILITY ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.
+ */
+
 @import url('/flag-icons/css/flag-icons.css');
 @import url('/@fortawesome/fontawesome-free/css/fontawesome.css');
 @import url('/@fortawesome/fontawesome-free/css/brands.css');
@@ -6,212 +18,36 @@
 @import url('/bootstrap/dist/css/bootstrap.css');
 @import url('/tom-select/dist/css/tom-select.bootstrap5.css');
 @import url('/rails_bootstrap_forms.css');
-@import url('/avatar/component.css');
-@import url('/navbar/component.css');
-@import url('/footer/component.css');
-@import url('/sidebar/component.css');
-@import url('/navbar/notification_center/component.css');
-@import url('/navbar/message_center/component.css');
-@import url('/navbar/task_center/component.css');
-@import url('/navbar/meeting_center/component.css');
-@import url('/navbar/online_users_center/component.css');
-@import url('/viewer/calendar/component.css');
-@import url('/viewer/kanban/component.css');
-@import url('/viewer/grid/carousel/component.css');
-@import url('/edit_in_place/component.css');
-@import url('/placeholder/component.css');
-@import url('/schema_editor/button/add_dropdown/component.css');
-@import url('/metric/trend/component.css');
-@import url('/attachment/component.css');
+@import url('/themes/dark.css');
+@import url('/themes/light.css');
+@import url('/custom/action_text.css');
+@import url('/custom/active_storage.css');
+@import url('/custom/application.css');
+@import url('/custom/monaco_editor.css');
+@import url('/custom/pagy.css');
+@import url('/custom/swagger.css');
+@import url('/custom/timeline.css');
+@import url('/custom/tom_select.css');
+@import url('/custom/tribute.css');
+@import url('/custom/turbo.css');
+@import url('/custom/variables.css');
 @import url('/admin/widgets/component.css');
-@import url('/resource_form/fields/one_time_password/component.css');
+@import url('/attachment/component.css');
+@import url('/avatar/component.css');
+@import url('/edit_in_place/component.css');
+@import url('/footer/component.css');
 @import url('/google_map/missing_api_key/component.css');
-
-/* Layout */
-
-html,
-body {
-  height: 100%;
-}
-
-.content {
-  flex: 0 0 calc(100% - 12rem);
-  max-width: calc(100% - 12rem);
-  transition: ease-in-out .3s;
-
-  .container-fluid {
-    min-height: calc(100vh - 3.5rem - 2.5rem - .5rem);
-  }
-
-  &.toggled {
-    flex: 0 0 calc(100% - 6rem);
-    max-width: calc(100% - 6rem);
-  }
-}
-
-@media (width <= 768px) {
-  .content {
-    flex: 0 0 calc(100% - 6rem);
-    max-width: calc(100% - 6rem);
-  }
-}
-
-/* Buttons */
-
-.btn-icon-split {
-  align-items: stretch;
-  display: inline-flex;
-  justify-content: center;
-  padding: 0;
-
-  .icon {
-    background: rgb(0 0 0 / 15%);
-    border-radius: .25rem;
-    display: inline-block;
-    padding: .375rem .75rem;
-  }
-
-  .text {
-    display: inline-block;
-    padding: .375rem .75rem;
-  }
-}
-
-.btn-transparent:hover {
-  background: transparent !important;
-}
-
-/* Tooltips */
-
-@media (width > 992px) {
-  .responsive-button-tooltip-lg {
-    display: none;
-  }
-}
-
-@media (width > 1200px) {
-  .responsive-button-tooltip-xl {
-    display: none;
-  }
-}
-
-@media (width > 1400px) {
-  .responsive-button-tooltip-xxl {
-    display: none;
-  }
-}
-
-/* Forms */
-
-input[type='search']::-webkit-search-decoration:hover,
-input[type='search']::-webkit-search-cancel-button:hover {
-  cursor: pointer;
-}
-
-.input-group .form-control,
-.input-group .form-select {
-  z-index: initial !important;
-}
-
-button[disabled] .icon:not(.d-none),
-button[disabled] .text,
-a[role="button"].disabled .icon:not(.d-none),
-a[role="button"].disabled .text {
-  display: none !important;
-}
-
-button[disabled] .icon.d-none,
-button[disabled]:not(:has(.d-lg-inline), :has(.d-xl-inline), :has(.d-xxl-inline)) .text.d-none,
-a[role="button"].disabled .icon.d-none,
-a[role="button"].disabled:not(:has(.d-lg-inline), :has(.d-xl-inline), :has(.d-xxl-inline)) .text.d-none {
-  display: initial !important;
-}
-
-@media (width > 992px) {
-  button[disabled]:has(.d-lg-inline) .text.d-none:not(.d-lg-inline),
-  a[role="button"].disabled:has(.d-lg-inline) .text.d-none:not(.d-lg-inline) {
-    display: initial !important;
-  }
-}
-
-@media (width > 1200px) {
-  button[disabled]:has(.d-xl-inline) .text.d-none:not(.d-xl-inline),
-  a[role="button"].disabled:has(.d-xl-inline) .text.d-none:not(.d-xl-inline) {
-    display: initial !important;
-  }
-}
-
-@media (width > 1400px) {
-  button[disabled]:has(.d-xxl-inline) .text.d-none:not(.d-xxl-inline),
-  a[role="button"].disabled:has(.d-xxl-inline) .text.d-none:not(.d-xxl-inline) {
-    display: initial !important;
-  }
-}
-
-form label.required::after {
-  content: ' *';
-}
-
-.form-check-input:checked {
-  background-color: var(--bs-primary);
-  border-color: var(--bs-primary);
-}
-
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus {
-  box-shadow: 0 0 0 30px var(--bs-tertiary-bg) inset;
-  -webkit-text-fill-color: var(--bs-body-color);
-  transition: background-color 5000s ease-in-out 0s;
-}
-
-/* List groups */
-
-.list-group.list-group-striped li:nth-of-type(even) {
-  background-color: var(--bs-tertiary-bg);
-}
-
-/* Progress bars */
-
-.progress {
-  height: 1.5rem;
-}
-
-/* SVG responsiveness */
-
-svg {
-  max-width: 100%;
-}
-
-/* Utils */
-
-.w-0 {
-  width: 0;
-}
-
-.mw-0 {
-  max-width: 0;
-}
-
-.mb-none {
-  margin-bottom: 0 !important;
-}
-
-.z-1 {
-  z-index: 1;
-}
-
-.cursor-grab {
-  cursor: grab;
-}
-
-.bg-pattern-primary {
-  background: linear-gradient(to bottom, rgb(0 0 0 / 0%), var(--bs-primary-darken)), url('/bg-pattern.png') var(--bs-primary);
-  background-attachment: fixed;
-}
-
-/* Overrides */
-
-.fixed-top {
-  left: initial;
-}
+@import url('/metric/trend/component.css');
+@import url('/navbar/component.css');
+@import url('/navbar/meeting_center/component.css');
+@import url('/navbar/message_center/component.css');
+@import url('/navbar/notification_center/component.css');
+@import url('/navbar/online_users_center/component.css');
+@import url('/navbar/task_center/component.css');
+@import url('/placeholder/component.css');
+@import url('/resource_form/fields/one_time_password/component.css');
+@import url('/schema_editor/button/add_dropdown/component.css');
+@import url('/sidebar/component.css');
+@import url('/viewer/calendar/component.css');
+@import url('/viewer/grid/carousel/component.css');
+@import url('/viewer/kanban/component.css');
