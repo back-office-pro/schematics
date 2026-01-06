@@ -11,6 +11,7 @@
 # frozen_string_literal: true
 
 pin 'application'
+pin 'controllers', to: 'controllers/index.js'
 pin '@rails/actiontext', to: 'actiontext.esm.js'
 pin '@hotwired/turbo-rails', to: 'turbo.js'
 pin '@hotwired/stimulus', to: 'stimulus.js'
@@ -43,7 +44,6 @@ pin 'controllers/dropdown_controller'
 pin 'controllers/filters_controller'
 pin 'controllers/generate_file_in_background_controller'
 pin 'controllers/hotkey_controller'
-pin 'controllers', to: 'controllers/index.js'
 pin 'controllers/kanban_controller'
 pin 'controllers/mentions_controller'
 pin 'controllers/modal_controller'
