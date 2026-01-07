@@ -73,4 +73,4 @@ COPY --from=build /back-office /back-office
 ENTRYPOINT ["/back-office/bin/docker-entrypoint"]
 
 EXPOSE 3000
-CMD ["./bin/rails", "server"]
+CMD ["./bin/puma", "-C", "config/puma.rb", "--silent"]
