@@ -5,8 +5,10 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - storage-data:/back-office/storage
-      - clamav-data:/var/lib/clamav
+      - credentials:/back-office/config/credentials
+      - storage:/back-office/storage
+      - clamav:/var/lib/clamav
 volumes:
-  clamav-data:
-  storage-data:
+  credentials:
+  storage:
+  clamav:
