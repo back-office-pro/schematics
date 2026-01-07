@@ -130,7 +130,7 @@ RSpec.shared_context 'with openai stub' do
   before do
     stub_request(:post, 'https://api.openai.com/v1/chat/completions')
       .to_return(
-        body: file_fixture('open_ai.json').read,
+        body: file_fixture('openai.json').read,
         headers: { 'Content-Type' => 'application/json' },
         status: 200
       )

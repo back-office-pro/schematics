@@ -12,13 +12,13 @@
 
 require 'rails_helper'
 
-RSpec.describe Core::OpenAiMapper do
+RSpec.describe Core::OpenAIMapper do
   subject(:mapper) { described_class.new }
 
   describe '#call' do
     subject { mapper.call(params) }
 
-    let(:params) { JSON.parse(file_fixture('open_ai.json').read) }
+    let(:params) { JSON.parse(file_fixture('openai.json').read) }
     let(:expected_output) do
       {
         data: [

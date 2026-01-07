@@ -11,7 +11,7 @@
 # frozen_string_literal: true
 
 module Core
-  class OpenAiMapper < Dry::Transformer::Pipe
+  class OpenAIMapper < Dry::Transformer::Pipe
     import Dry::Transformer::ArrayTransformations
     import Dry::Transformer::HashTransformations
     import Dry::Transformer::Conditional
