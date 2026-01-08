@@ -532,7 +532,7 @@
         "type": "secret",
         "options": {
           "cached": true,
-          "group": "api_key"
+          "group": "ai_api_key"
         }
       },
       {
@@ -541,7 +541,7 @@
         "type": "secret",
         "options": {
           "cached": true,
-          "group": "api_key"
+          "group": "gcloud_api_key"
         }
       },
       {
@@ -550,7 +550,7 @@
         "type": "secret",
         "options": {
           "cached": true,
-          "group": "api_key"
+          "group": "gcloud_api_key"
         }
       },
       {
@@ -559,7 +559,7 @@
         "type": "secret",
         "options": {
           "cached": true,
-          "group": "api_key"
+          "group": "oauth_api_key"
         }
       },
       {
@@ -568,7 +568,7 @@
         "type": "secret",
         "options": {
           "cached": true,
-          "group": "api_key"
+          "group": "oauth_api_key"
         }
       },
       {
@@ -576,7 +576,7 @@
         "name": "aws_bucket",
         "type": "secret",
         "options": {
-          "group": "api_key"
+          "group": "storage_api_key"
         }
       },
       {
@@ -584,7 +584,7 @@
         "name": "aws_access_key_id",
         "type": "secret",
         "options": {
-          "group": "api_key"
+          "group": "storage_api_key"
         }
       },
       {
@@ -592,7 +592,7 @@
         "name": "aws_secret_access_key",
         "type": "secret",
         "options": {
-          "group": "api_key"
+          "group": "storage_api_key"
         }
       },
       {
@@ -600,7 +600,7 @@
         "name": "aws_region",
         "type": "enum",
         "options": {
-          "group": "api_key",
+          "group": "storage_api_key",
           "values": [
             "af-south-1",
             "ap-east-1",
@@ -642,7 +642,7 @@
         "name": "azure_storage_account_name",
         "type": "secret",
         "options": {
-          "group": "api_key"
+          "group": "storage_api_key"
         }
       },
       {
@@ -650,7 +650,7 @@
         "name": "azure_storage_access_key",
         "type": "secret",
         "options": {
-          "group": "api_key"
+          "group": "storage_api_key"
         }
       },
       {
@@ -658,7 +658,7 @@
         "name": "gcs_private_key_id",
         "type": "secret",
         "options": {
-          "group": "api_key"
+          "group": "storage_api_key"
         }
       },
       {
@@ -666,7 +666,7 @@
         "name": "gcs_private_key",
         "type": "secret",
         "options": {
-          "group": "api_key"
+          "group": "storage_api_key"
         }
       }
     ]

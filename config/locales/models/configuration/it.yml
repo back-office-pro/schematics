@@ -95,15 +95,20 @@ it:
           it: Italiano
     groups:
       configuration:
+        ai_api_key: Chiavi API AI
         api_key: Chiavi API
         appareance: Apparenza
         company: Azienda
         feature_flag: Funzionalità
+        gcloud_api_key: Chiavi API di Google Cloud
         license: Licenza
         locale: Lingua
+        mailer_api_key: Chiavi API del servizio di invio email
+        oauth_api_key: Chiavi API OAuth
         security: Sicurezza
         sso: SSO
         storage: Archiviazione
+        storage_api_key: Chiavi API di archiviazione
     models:
       configuration:
         gender: female

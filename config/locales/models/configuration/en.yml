@@ -96,15 +96,19 @@ en:
           it: Italian
     groups:
       configuration:
-        api_key: API keys
+        ai_api_key: AI API keys
         appareance: Appareance
         company: Company
         feature_flag: Features
+        gcloud_api_key: Google Cloud API keys
         license: License
         locale: Locale
+        mailer_api_key: Email delivery service API keys
+        oauth_api_key: OAuth API keys
         security: Security
         sso: SSO
         storage: Storage
+        storage_api_key: Storage API keys
     models:
       configuration:
         gender: female
