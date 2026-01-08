@@ -42,6 +42,12 @@ RSpec.describe Configuration do
     it { is_expected.to eq('UTC') }
   end
 
+  describe '.host' do
+    subject { described_class.host }
+
+    it { is_expected.to eq('localhost') }
+  end
+
   describe '.default_url_options' do
     subject { described_class.default_url_options }
 
