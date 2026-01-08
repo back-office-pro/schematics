@@ -5,10 +5,12 @@ services:
     ports:
       - 3000:3000
     volumes:
+      - migrate:/back-office/db/migrate
       - credentials:/back-office/config/credentials
       - storage:/back-office/storage
       - clamav:/var/lib/clamav
 volumes:
+  migrate:
   credentials:
   storage:
   clamav:
