@@ -31,11 +31,7 @@ module Schematics
         friendly_id_slug
         mobility_string_translation
         mobility_text_translation
-        one_time_password
         paper_trail_version
-        password_reset
-        schema_cache
-        server
         solid_cable_message
         solid_cache_entry
         solid_queue_blocked_execution
@@ -44,14 +40,11 @@ module Schematics
         solid_queue_job
         solid_queue_ready_execution
         solid_queue_recurring_execution
+        solid_queue_recurring_task
         solid_queue_scheduled_execution
         solid_queue_semaphore
         solid_queue_pause
         solid_queue_process
-        sudo
-        token
-        user_notification
-        version
       ].freeze
 
       accepts_nested_attributes_for :attributes
