@@ -8,7 +8,7 @@ WORKDIR /back-office
 
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y curl libjemalloc2 libvips sqlite3 postgresql-client && \
-    apt-get install --no-install-recommends -y graphviz pgloader ffmpeg file clamav clamav-daemon clamdscan chromium mailutils postfix && \
+    apt-get install --no-install-recommends -y graphviz pgloader ffmpeg file clamav clamav-daemon clamdscan chromium mailutils && \
     ln -s /usr/lib/$(uname -m)-linux-gnu/libjemalloc.so.2 /usr/local/lib/libjemalloc.so && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
