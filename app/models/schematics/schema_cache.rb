@@ -1,0 +1,50 @@
+# Copyright © 2025 Dev & Software. All rights reserved.
+
+# THIS SOFTWARE IS PROPRIETARY AND CONFIDENTIAL. UNAUTHORIZED COPYING, DISTRIBUTION, MODIFICATION,
+# REVERSE ENGINEERING, OR DISCLOSURE IS STRICTLY PROHIBITED.
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+# NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND
+# NONINFRINGEMENT.
+# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+# LIABILITY ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.
+
+# frozen_string_literal: true
+
+module Schematics
+  class SchemaCache
+    class << self
+      delegate_missing_to :cache
+      delegate :as_json, to: :cache
+
+      private
+
+      def cache
+        Rails
+          .cache
+          .fetch('schema') { Schema.new(data:, version:) }
+      rescue StandardError
+        Schema.new(data:, version:)
+      end
+
+      def version
+        ActiveRecord::Base
+          .lease_connection
+          .execute('SELECT core_version FROM documentations ORDER BY created_at DESC LIMIT 1')
+          .first
+          .fetch('core_version')
+      rescue StandardError
+        VERSION
+      end
+
+      def data
+        JSON.parse ActiveRecord::Base
+          .lease_connection
+          .execute('SELECT data FROM migrations WHERE state IN (3, 4) ORDER BY created_at DESC LIMIT 1') # rubocop:disable Layout/LineLength
+          .first
+          .fetch('data')
+      rescue StandardError
+        []
+      end
+    end
+  end
+end

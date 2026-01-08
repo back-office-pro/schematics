@@ -48,7 +48,7 @@ module Schematics
     end
 
     def current_ability
-      @current_ability ||= Ability.new(current_user, ::SchemaCache)
+      @current_ability ||= Ability.new(current_user, SchemaCache)
     end
 
     def current_session

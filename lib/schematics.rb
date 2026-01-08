@@ -18,7 +18,6 @@ require_relative 'hash'
 require_relative 'numeric'
 require_relative 'object'
 require_relative 'openai'
-require_relative 'schema_cache'
 require_relative 'validators/singular_validator'
 require 'zeitwerk'
 
@@ -45,7 +44,6 @@ loader.ignore("#{__dir__}/hash.rb")
 loader.ignore("#{__dir__}/numeric.rb")
 loader.ignore("#{__dir__}/object.rb")
 loader.ignore("#{__dir__}/openai.rb")
-loader.ignore("#{__dir__}/schema_cache.rb")
 loader.setup
 
 module Schematics

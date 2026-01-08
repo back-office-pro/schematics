@@ -13,7 +13,7 @@
 module Schematics
   module PreferencesTable
     class Component < ApplicationComponent
-      def model_classes = ::SchemaCache
+      def model_classes = SchemaCache
         .entities
         .reject(&:hidden?)
         .filter_map(&:model_class)

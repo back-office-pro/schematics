@@ -39,7 +39,7 @@ class ::Migration < Schematics::ApplicationRecord
 
     def scheduled = state_scheduled.last
 
-    def core = new(data: SchemaCache.as_json, version: current_version)
+    def core = new(data: Schematics::SchemaCache.as_json, version: current_version)
 
     def default_data = ActiveSupport::ConfigurationFile.parse(
       Rails.root.join('db', 'seeds', 'migrations', "#{company_business_sector}.yml")

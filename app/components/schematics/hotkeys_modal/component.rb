@@ -21,7 +21,7 @@ module Schematics
 
       def title = t('.title')
 
-      def groups = ::SchemaCache
+      def groups = SchemaCache
         .model_classes
         .push(::Import, ::ActiveStorage::Blob, ::Emailing)
         .select { can?(:index, _1) }

@@ -16,7 +16,7 @@ class ::Permission < Schematics::ApplicationRecord
 
   class << self
     def create_entities_permissions!
-      SchemaCache.entities.reject(&:hidden?).flat_map do |entity|
+      Schematics::SchemaCache.entities.reject(&:hidden?).flat_map do |entity|
         entity.actions_with_events.map { |action| create!(model: entity.class_name, action:) }
       end
     end
