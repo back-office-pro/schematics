@@ -26,7 +26,7 @@ module Core
           after :log_data
 
           def call
-            context.data = OpenAiMapper.new.call(responses).fetch(:data)
+            context.data = OpenAIMapper.new.call(responses).fetch(:data)
           end
 
           private
