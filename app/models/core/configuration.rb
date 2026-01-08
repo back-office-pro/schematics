@@ -15,6 +15,8 @@ class ::Configuration < Schematics::ApplicationRecord
   attribute :available_locales, default: -> { [Rails.configuration.i18n.default_locale] }
   attribute :locale, default: -> { Rails.configuration.i18n.default_locale }
 
+  delegate :service, :service_configurations, to: :storage, prefix: true, private: true
+
   after_update_commit :clear_bootstrap_email_sass_cache!
   after_update_commit :update_storage_services!
 
@@ -61,7 +63,7 @@ class ::Configuration < Schematics::ApplicationRecord
   end
 
   def update_storage_services! # rubocop:disable Obsession/Rails/PrivateCallback
-    ActiveStorage::Blob.services = ActiveStorage::Service::Registry.new(storage_configurations)
+    ActiveStorage::Blob.services = ActiveStorage::Service::Registry.new(storage_service_configurations)
     ActiveStorage::Blob.service = ActiveStorage::Blob.services.fetch(storage_service)
   end
 
@@ -71,24 +73,5 @@ class ::Configuration < Schematics::ApplicationRecord
     BootstrapEmail.clear_sass_cache! if theme_color_previously_changed?
   end
 
-  def storage_configurations = ActiveSupport::ConfigurationFile # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
-    .parse(Rails.root.join('config/storage.yml'), symbolize_names: true)
-    .tap do |config|
-      config[:amazon][:bucket] = aws_bucket if aws_bucket
-      config[:amazon][:access_key_id] = aws_access_key_id if aws_access_key_id
-      config[:amazon][:secret_access_key] = aws_secret_access_key if aws_secret_access_key
-      config[:amazon][:region] = aws_region if aws_region
-      config[:microsoft][:storage_account_name] = azure_storage_account_name if azure_storage_account_name # rubocop:disable Layout/LineLength
-      config[:microsoft][:storage_access_key] = azure_storage_access_key if azure_storage_access_key
-      config[:google][:credentials][:private_key_id] = gcs_private_key_id if gcs_private_key_id
-      config[:google][:credentials][:private_key] = gcs_private_key if gcs_private_key
-    end
-
-  def storage_service # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
-    return :amazon if aws_bucket && aws_access_key_id && aws_secret_access_key && aws_region
-    return :microsoft if azure_storage_account_name && azure_storage_access_key
-    return :google if gcs_private_key_id && gcs_private_key
-
-    Rails.configuration.active_storage.service
-  end
+  def storage = Schematics::Storage.new(self)
 end

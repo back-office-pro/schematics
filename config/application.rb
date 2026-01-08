@@ -79,6 +79,11 @@ module BackOffice
     config.view_component.show_previews = false
 
     # Active Storage
+    config.active_storage.service_configurations = {
+      test: { service: 'Disk', root: root.join('tmp/storage') },
+      local: { service: 'Disk', root: root.join('storage') }
+    }
+
     config.after_initialize do
       config.active_storage.queues.purge = :low
       config.active_storage.track_variants = false
