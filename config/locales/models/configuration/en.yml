@@ -26,10 +26,14 @@ en:
         google_sign_in_feature_flag: Enable Google sign in
         license_file: License file
         locale: Locale
+        mailgun_api_key: Mailgun API key
+        mailjet_api_key: Mailjet API key
+        mailjet_secret_key: Mailjet secret key
         meetings_feature_flag: Enable meetings
         messages_feature_flag: Enable internal messaging
         openai_access_token: OpenAI access token
         origins: Authorized API domains
+        postmark_api_token: Postmark API token
         sso_cert_fingerprint: SSO certificate fingerprint
         sso_service_url: SSO identity provider URL
         sso_sign_in_feature_flag: Enable SSO sign in

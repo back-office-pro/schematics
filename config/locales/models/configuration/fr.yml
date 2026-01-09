@@ -25,10 +25,14 @@ fr:
         google_sign_in_feature_flag: Activer la connexion avec le compte Google
         license_file: Fichier de licence
         locale: Langue
+        mailgun_api_key: Clé API Mailgun
+        mailjet_api_key: Clé API Mailjet
+        mailjet_secret_key: Clé secrète Mailjet
         meetings_feature_flag: Activer les réunions
         messages_feature_flag: Activer la messagerie interne
         openai_access_token: Jeton d'accès OpenAI
         origins: Domaines API autorisés
+        postmark_api_token: Jeton API Postmark
         sso_cert_fingerprint: Empreinte digitale du certificat SSO
         sso_service_url: URL du fournisseur d'identité SSO
         sso_sign_in_feature_flag: Activer la connexion avec le SSO

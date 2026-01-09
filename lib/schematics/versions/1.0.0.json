@@ -668,6 +668,38 @@
         "options": {
           "group": "storage_api_key"
         }
+      },
+      {
+        "id": "1a60685d-e16d-48ce-a2e6-997806ce744d",
+        "name": "postmark_api_token",
+        "type": "secret",
+        "options": {
+          "group": "mailer_api_key"
+        }
+      },
+      {
+        "id": "b67053de-33fd-4519-a744-223e59a20c40",
+        "name": "mailgun_api_key",
+        "type": "secret",
+        "options": {
+          "group": "mailer_api_key"
+        }
+      },
+      {
+        "id": "8338debe-e7d6-493c-b187-99ed0008f10b",
+        "name": "mailjet_api_key",
+        "type": "secret",
+        "options": {
+          "group": "mailer_api_key"
+        }
+      },
+      {
+        "id": "13b35648-bca6-43b8-b8ce-39d3b8534967",
+        "name": "mailjet_secret_key",
+        "type": "secret",
+        "options": {
+          "group": "mailer_api_key"
+        }
       }
     ]
   },
