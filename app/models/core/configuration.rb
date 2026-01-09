@@ -73,5 +73,5 @@ class ::Configuration < Schematics::ApplicationRecord
     BootstrapEmail.clear_sass_cache! if theme_color_previously_changed?
   end
 
-  def storage = Schematics::Storage.new(self)
+  memoize def storage = Schematics::Configuration::Storage.new(self)
 end

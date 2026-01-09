@@ -12,7 +12,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Schematics::Storage do
+RSpec.describe Schematics::Configuration::Storage do
   subject(:license) { described_class.new(configuration) }
 
   let(:configuration) do
