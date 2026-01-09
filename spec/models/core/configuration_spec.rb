@@ -22,6 +22,7 @@ RSpec.describe Configuration do
 
   after do
     ActiveStorage::Blob.service = ActiveStorage::Blob.services.fetch(:test)
+    Rails.configuration.action_mailer.delivery_method = :test
   end
 
   it 'clears bootstrap email cache after update' do
@@ -34,6 +35,13 @@ RSpec.describe Configuration do
       .to change { ActiveStorage::Blob.service.name }
       .from(:test)
       .to(:amazon)
+  end
+
+  it 'updates the mailer delivery method after update' do
+    expect { record.tap(&:save!).reload.update!(postmark_api_token: 'test') }
+      .to change { Rails.configuration.action_mailer.delivery_method }
+      .from(:test)
+      .to(:postmark)
   end
 
   describe '.time_zone_with_fallback' do

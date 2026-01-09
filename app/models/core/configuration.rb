@@ -16,9 +16,11 @@ class ::Configuration < Schematics::ApplicationRecord
   attribute :locale, default: -> { Rails.configuration.i18n.default_locale }
 
   delegate :service, :service_configurations, to: :storage, prefix: true, private: true
+  delegate :delivery_method, :settings, to: :mailer, prefix: true, private: true
 
   after_update_commit :clear_bootstrap_email_sass_cache!
   after_update_commit :update_storage_services!
+  after_update_commit :update_mailer_settings!
 
   class << self
     LOCALE_TO_TIME_ZONE = { en: 'UTC', fr: 'Paris', it: 'Rome' }.freeze
@@ -67,6 +69,11 @@ class ::Configuration < Schematics::ApplicationRecord
     ActiveStorage::Blob.service = ActiveStorage::Blob.services.fetch(storage_service)
   end
 
+  def update_mailer_settings! # rubocop:disable Obsession/Rails/PrivateCallback
+    Rails.configuration.action_mailer.delivery_method = mailer_delivery_method
+    Rails.configuration.action_mailer.merge!(mailer_settings)
+  end
+
   private
 
   def clear_bootstrap_email_sass_cache!
@@ -74,4 +81,6 @@ class ::Configuration < Schematics::ApplicationRecord
   end
 
   memoize def storage = Schematics::Configuration::Storage.new(self)
+
+  memoize def mailer = Schematics::Configuration::Mailer.new(self)
 end

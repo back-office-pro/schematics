@@ -20,5 +20,6 @@ RSpec.describe Configuration do
 
   after do
     ActiveStorage::Blob.service = ActiveStorage::Blob.services.fetch(:test)
+    Rails.configuration.action_mailer.delivery_method = :test
   end
 end
