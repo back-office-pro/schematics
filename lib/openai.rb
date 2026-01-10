@@ -357,7 +357,7 @@ module OpenAI # rubocop:disable Metrics/ModuleLength
         properties: {
           precision: {
             type: 'number',
-            descripion: 'The number of digits in the number'
+            description: 'The number of digits in the number'
           }
         }
       },
