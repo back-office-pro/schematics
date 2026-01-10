@@ -87,4 +87,28 @@ RSpec.describe Configuration do
 
     it { is_expected.to be_nil }
   end
+
+  describe '.openai_configured?' do
+    subject { described_class.openai_configured? }
+
+    it { is_expected.to be_falsy }
+  end
+
+  describe '.openai_access_token' do
+    subject { described_class.openai_access_token }
+
+    it { is_expected.to be_nil }
+  end
+
+  describe '.openai_uri_base' do
+    subject { described_class.openai_uri_base }
+
+    it { is_expected.to be_nil }
+  end
+
+  describe '.openai_model' do
+    subject { described_class.openai_model }
+
+    it { is_expected.to be_nil }
+  end
 end

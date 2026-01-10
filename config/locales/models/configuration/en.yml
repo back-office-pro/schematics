@@ -10,6 +10,7 @@ en:
         aws_secret_access_key: Amazon Web Services secret access key
         azure_storage_access_key: Microsoft Azure storage access key
         azure_storage_account_name: Microsoft Azure storage account name
+        chatgpt_access_token: ChatGPT access token
         comments_feature_flag: Enable comments
         company_address: Company address
         company_business_sector: Company business sector
@@ -33,7 +34,6 @@ en:
         mailjet_secret_key: Mailjet secret key
         meetings_feature_flag: Enable meetings
         messages_feature_flag: Enable internal messaging
-        openai_access_token: OpenAI access token
         origins: Authorized API domains
         postmark_api_token: Postmark API token
         sso_cert_fingerprint: SSO certificate fingerprint

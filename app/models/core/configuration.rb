@@ -25,6 +25,8 @@ class ::Configuration < Schematics::ApplicationRecord
   class << self
     LOCALE_TO_TIME_ZONE = { en: 'UTC', fr: 'Paris', it: 'Rome' }.freeze
 
+    delegate :access_token, :uri_base, :model, :configured?, to: :openai, prefix: true
+
     def time_zone_with_fallback
       time_zone || LOCALE_TO_TIME_ZONE[locale&.to_sym]
     end
@@ -54,6 +56,8 @@ class ::Configuration < Schematics::ApplicationRecord
       .fetch('configuration/license_file') { instance.license_file.download }
 
     private
+
+    memoize def openai = Schematics::Configuration::OpenAI.new(self)
 
     memoize def storage_size = ActiveStorage::Blob
       .with_deleted

@@ -16,15 +16,15 @@ module Schematics
       module Selector
         module ResourceForm
           class Component < ApplicationComponent
-            delegate :openai_access_token, to: '::Configuration', private: true
+            delegate :openai_configured?, to: '::Configuration', private: true
 
             def icon = :brain
 
             def title
-              t('.missing_openai_access_token') unless openai_access_token
+              t('.missing_access_token') unless openai_configured?
             end
 
-            def css_classes = class_names(disabled: openai_access_token.blank?)
+            def css_classes = class_names(disabled: !openai_configured?)
           end
         end
       end

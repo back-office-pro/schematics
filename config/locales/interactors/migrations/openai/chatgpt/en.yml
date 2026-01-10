@@ -2,6 +2,5 @@
 en:
   migrations:
     openai:
-      chatgpt:
-        system: You will create a domain model of at least three entities according to user needs
-        user: Create a web application in the %{business_sector} business sector
+      system: You will create a domain model of at least three entities according to user needs
+      user: Create a web application in the %{business_sector} business sector

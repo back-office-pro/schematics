@@ -12,8 +12,6 @@
 
 # :reek:MissingSafeMethod
 class ::Migration < Schematics::ApplicationRecord
-  GATEWAY = ::Core::Migrations::OpenAI::ChatGPT
-
   serialize :data, coder: Schematics::Schema
   attribute :data, default: -> { current_data || default_data }
 
@@ -46,7 +44,7 @@ class ::Migration < Schematics::ApplicationRecord
     )
 
     def default_prompt = I18n.t(
-      'migrations.openai.chatgpt.user',
+      'migrations.openai.user',
       business_sector: ::Configuration
         .instance
         .company_business_sector_formatted

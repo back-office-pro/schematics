@@ -9,6 +9,7 @@ fr:
         aws_secret_access_key: Clé d'accès secrète Amazon Web Services
         azure_storage_access_key: Clé d'accès au stockage Microsoft Azure
         azure_storage_account_name: Nom du compte de stockage Microsoft Azure
+        chatgpt_access_token: Jeton d'accès ChatGPT
         comments_feature_flag: Activer les commentaires
         company_address: Adresse de la société
         company_business_sector: Secteur d'activité de la société
@@ -32,7 +33,6 @@ fr:
         mailjet_secret_key: Clé secrète Mailjet
         meetings_feature_flag: Activer les réunions
         messages_feature_flag: Activer la messagerie interne
-        openai_access_token: Jeton d'accès OpenAI
         origins: Domaines API autorisés
         postmark_api_token: Jeton API Postmark
         sso_cert_fingerprint: Empreinte digitale du certificat SSO

@@ -1,4 +1,4 @@
 ---
 fr:
-  missing_openai_access_token: Jeton d'accès OpenAI non configuré
+  missing_access_token: Jeton d'accès IA non configuré
   title: Générateur d'application par IA

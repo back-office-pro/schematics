@@ -528,7 +528,7 @@
       },
       {
         "id": "b40047e7-e1a0-4a01-86ca-cce4d53f2e53",
-        "name": "openai_access_token",
+        "name": "chatgpt_access_token",
         "type": "secret",
         "options": {
           "cached": true,
