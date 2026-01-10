@@ -13,7 +13,7 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::Configuration::Storage do
-  subject(:license) { described_class.new(configuration) }
+  subject { described_class.new(configuration) }
 
   let(:configuration) do
     Configuration.new(
