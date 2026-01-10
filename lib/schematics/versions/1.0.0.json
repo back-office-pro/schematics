@@ -536,6 +536,24 @@
         }
       },
       {
+        "id": "77127f82-0663-4070-9dbc-7c54ab70e6bc",
+        "name": "gemini_access_token",
+        "type": "secret",
+        "options": {
+          "cached": true,
+          "group": "ai_api_key"
+        }
+      },
+      {
+        "id": "6f8f574b-2a06-485a-9d9a-22bee089e6e4",
+        "name": "deepseek_access_token",
+        "type": "secret",
+        "options": {
+          "cached": true,
+          "group": "ai_api_key"
+        }
+      },
+      {
         "id": "b4a2fc76-3ad1-4278-b477-f0f8ecb59a2a",
         "name": "gcloud_public_api_key",
         "type": "secret",

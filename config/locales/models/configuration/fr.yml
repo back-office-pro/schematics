@@ -16,10 +16,12 @@ fr:
         company_name: Nom de la société
         company_registration_number: Numéro SIRET de la société
         company_website: Site web de la société
+        deepseek_access_token: Jeton d'accès Deepseek
         gcloud_private_api_key: Clé API Google Cloud privée
         gcloud_public_api_key: Clé API Google Cloud publique
         gcs_private_key: Clé privée Google Cloud Storage
         gcs_private_key_id: ID de clé privée Google Cloud Storage
+        gemini_access_token: Jeton d'accès Gemini
         google_oauth_client_id: ID client de l'écran de consentement OAuth de Google
         google_oauth_client_secret: Secret client de l'écran de consentement OAuth de Google
         google_sign_in_feature_flag: Activer la connexion avec le compte Google

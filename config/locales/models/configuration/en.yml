@@ -17,10 +17,12 @@ en:
         company_name: Company name
         company_registration_number: Company registration number
         company_website: Company website
+        deepseek_access_token: Deepseek access token
         gcloud_private_api_key: Google Cloud private API key
         gcloud_public_api_key: Google Cloud public API key
         gcs_private_key: Google Cloud Storage private key
         gcs_private_key_id: Google Cloud Storage private key ID
+        gemini_access_token: Gemini access token
         google_oauth_client_id: Google OAuth consent screen client ID
         google_oauth_client_secret: Google OAuth consent screen client secret
         google_sign_in_feature_flag: Enable Google sign in
