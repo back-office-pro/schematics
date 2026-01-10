@@ -38,6 +38,8 @@ module Schematics
              :content_security_policy?,
              to: :helpers
 
+    def format = :html
+
     def to_html = ApplicationController
       .new
       .view_context
