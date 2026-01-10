@@ -24,6 +24,10 @@ module Schematics
         @configuration = configuration
       end
 
+      def configured?
+        postmark_api_token || mailgun_api_key || (mailjet_api_key && mailjet_secret_key)
+      end
+
       def delivery_method
         return :postmark if postmark_api_token
         return :mailgun if mailgun_api_key

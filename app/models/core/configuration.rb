@@ -16,6 +16,7 @@ class ::Configuration < Schematics::ApplicationRecord
   attribute :locale, default: -> { Rails.configuration.i18n.default_locale }
 
   delegate :service, :service_configurations, to: :storage, prefix: true, private: true
+  delegate :mailer, to: :class, private: true
   delegate :delivery_method, :settings, to: :mailer, prefix: true, private: true
 
   after_update_commit :clear_bootstrap_email_sass_cache!
@@ -26,6 +27,7 @@ class ::Configuration < Schematics::ApplicationRecord
     LOCALE_TO_TIME_ZONE = { en: 'UTC', fr: 'Paris', it: 'Rome' }.freeze
 
     delegate :access_token, :uri_base, :model, :configured?, to: :openai, prefix: true
+    delegate :configured?, to: :mailer, prefix: true
 
     def time_zone_with_fallback
       time_zone || LOCALE_TO_TIME_ZONE[locale&.to_sym]
@@ -54,6 +56,8 @@ class ::Configuration < Schematics::ApplicationRecord
     def license_file = Rails
       .cache
       .fetch('configuration/license_file') { instance.license_file.download }
+
+    memoize def mailer = Schematics::Configuration::Mailer.new(self)
 
     private
 
@@ -85,6 +89,4 @@ class ::Configuration < Schematics::ApplicationRecord
   end
 
   memoize def storage = Schematics::Configuration::Storage.new(self)
-
-  memoize def mailer = Schematics::Configuration::Mailer.new(self)
 end

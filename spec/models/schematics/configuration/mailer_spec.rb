@@ -30,6 +30,8 @@ RSpec.describe Schematics::Configuration::Mailer do
     let(:mailjet_api_key) { nil }
     let(:mailjet_secret_key) { nil }
 
+    it { is_expected.not_to be_configured }
+
     its(:delivery_method) { is_expected.to eq(:test) }
     its(:settings) { is_expected.to be_empty }
   end
@@ -39,6 +41,8 @@ RSpec.describe Schematics::Configuration::Mailer do
     let(:mailgun_api_key) { nil }
     let(:mailjet_api_key) { nil }
     let(:mailjet_secret_key) { nil }
+
+    it { is_expected.to be_configured }
 
     its(:delivery_method) { is_expected.to eq(:postmark) }
     its(:settings) { is_expected.to eq(postmark_settings: { api_token: 'test' }) }
@@ -50,6 +54,8 @@ RSpec.describe Schematics::Configuration::Mailer do
     let(:mailjet_api_key) { nil }
     let(:mailjet_secret_key) { nil }
 
+    it { is_expected.to be_configured }
+
     its(:delivery_method) { is_expected.to eq(:mailgun) }
     its(:settings) { is_expected.to eq(mailgun_settings: { api_key: 'test' }) }
   end
@@ -59,6 +65,8 @@ RSpec.describe Schematics::Configuration::Mailer do
     let(:mailgun_api_key) { nil }
     let(:mailjet_api_key) { 'test' }
     let(:mailjet_secret_key) { 'test' }
+
+    it { is_expected.to be_configured }
 
     its(:delivery_method) { is_expected.to eq(:mailjet) }
     its(:settings) { is_expected.to eq(mailjet_settings: { api_key: 'test', secret_key: 'test' }) }

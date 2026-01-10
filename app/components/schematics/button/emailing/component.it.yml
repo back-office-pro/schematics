@@ -1,3 +1,4 @@
 ---
 it:
+  missing_mailer_configuration: Servizio di invio email non configurato
   text: Inviare via e-mail

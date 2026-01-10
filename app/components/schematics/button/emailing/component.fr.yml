@@ -1,3 +1,4 @@
 ---
 fr:
+  missing_mailer_configuration: Service de livraison d'e-mails non configuré
   text: Envoyer par e-mail

@@ -692,6 +692,7 @@
         "name": "postmark_api_token",
         "type": "secret",
         "options": {
+          "cached": true,
           "group": "mailer_api_key"
         }
       },
@@ -700,6 +701,7 @@
         "name": "mailgun_api_key",
         "type": "secret",
         "options": {
+          "cached": true,
           "group": "mailer_api_key"
         }
       },
@@ -708,6 +710,7 @@
         "name": "mailjet_api_key",
         "type": "secret",
         "options": {
+          "cached": true,
           "group": "mailer_api_key"
         }
       },
@@ -716,6 +719,7 @@
         "name": "mailjet_secret_key",
         "type": "secret",
         "options": {
+          "cached": true,
           "group": "mailer_api_key"
         }
       }
