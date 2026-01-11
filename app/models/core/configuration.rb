@@ -23,6 +23,8 @@ class ::Configuration < Schematics::ApplicationRecord
   after_update_commit :update_storage_services!
   after_update_commit :update_mailer_settings!
 
+  validate :active_license
+
   class << self
     LOCALE_TO_TIME_ZONE = { en: 'UTC', fr: 'Paris', it: 'Rome' }.freeze
 
@@ -86,6 +88,15 @@ class ::Configuration < Schematics::ApplicationRecord
 
   def clear_bootstrap_email_sass_cache!
     BootstrapEmail.clear_sass_cache! if theme_color_previously_changed?
+  end
+
+  def active_license
+    return unless attachment_changes['license_file']
+
+    content = attachment_changes['license_file'].attachable.tap(&:rewind).read
+    return if Schematics::License.build(content).active?
+
+    errors.add(:license_file)
   end
 
   memoize def storage = Schematics::Configuration::Storage.new(self)

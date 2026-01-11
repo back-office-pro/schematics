@@ -148,5 +148,8 @@ RSpec.shared_context 'with active license' do
     )
   end
 
-  before { allow(Configuration).to receive(:license).and_return(license) }
+  before do
+    allow(Configuration).to receive(:license).and_return(license)
+    allow_any_instance_of(Configuration).to receive(:active_license).and_return(true) # rubocop:disable RSpec/AnyInstance
+  end
 end
