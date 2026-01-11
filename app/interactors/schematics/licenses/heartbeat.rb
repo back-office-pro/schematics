@@ -15,25 +15,28 @@ module Schematics
     class Heartbeat
       include Interactable
 
+      TIMEOUT_OPTIONS = {
+        open_timeout: 5,
+        read_timeout: 5,
+        write_timeout: 5,
+        max_retries: 0
+      }.freeze
+
       delegate :website_url, to: 'Rails.application.routes.url_helpers', private: true
-      delegate :email, :signature, to: '::Configuration.license', private: true
+      delegate :license, to: '::Configuration', private: true
       delegate :start, to: 'Net::HTTP', private: true
 
-      def call = start(uri.hostname, uri.port, use_ssl: true) { _1.request(request) }
+      def call = start(uri.hostname, uri.port, **TIMEOUT_OPTIONS, use_ssl: true) do |http|
+        http.request(request)
+      end
 
       private
 
-      def uri
-        URI website_url(path: '/license_heartbeat')
-      end
+      def uri = URI(website_url(path: '/license_heartbeat'))
 
       def request = Net::HTTP::Post
         .new(uri)
-        .tap { _1.form_data = payload.to_json }
-
-      def payload = { email:, signature:, fingerprint: }
-
-      def fingerprint = [`hostname`, MacAddress.address].join('|')
+        .tap { _1.form_data = license.as_json }
     end
   end
 end
