@@ -26,8 +26,16 @@ RSpec.describe Schematics::CheckLicenseJob do
   describe '#perform_now' do
     subject(:perform_now) { described_class.perform_now }
 
-    it 'loads subscription from gateway' do
-      expect { perform_now }.not_to(change(Configuration, :license))
+    let(:license_heartbeat_stub_request) do
+      stub_request(:post, 'https://www.back-office.pro/license_heartbeat')
+        .to_return(status: 200)
+    end
+
+    before { license_heartbeat_stub_request }
+
+    it 'sends the license data to the server' do
+      perform_now
+      expect(license_heartbeat_stub_request).to have_been_requested.once
     end
   end
 end
