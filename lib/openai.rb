@@ -1446,7 +1446,6 @@ module OpenAI # rubocop:disable Metrics/ModuleLength
           type: {
             type: 'string',
             description: 'An attribute which represents a URL',
-            pattern: URI::DEFAULT_PARSER.make_regexp,
             enum: %w[url]
           },
           name: { '$ref': '#/$defs/name' },
