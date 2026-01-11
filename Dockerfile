@@ -58,6 +58,8 @@ RUN bin/rails assets:precompile
 RUN bin/rails schematics:db:encryption:init
 RUN bin/rails schematics:generate
 
+RUN chmod 444 config/credentials/production.yml.enc
+
 RUN rm -rf app/assets/images
 RUN rm -rf app/assets/stylesheets/custom
 RUN rm -rf app/assets/stylesheets/themes
