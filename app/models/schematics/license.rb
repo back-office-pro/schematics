@@ -24,10 +24,12 @@ module Schematics
     end
 
     delegate :verify, to: :public_key, private: true
-    attr_accessor :email, :expires_at, :signature
+    delegate :secret_key_base, to: '::Rails.configuration', private: true
+
+    attr_accessor :expires_at, :fingerprint, :signature
 
     def active?
-      verify(digest, decoded_signature, payload) && !expired?
+      verify(digest, decoded_signature, payload) && !expired? && valid_fingerprint?
     end
 
     private
@@ -41,17 +43,25 @@ module Schematics
     end
 
     def payload
-      { email:, expires_at: }.to_json
-    end
-
-    def public_key
-      OpenSSL::PKey::RSA.new(Rails.application.credentials.license.public_key)
+      { expires_at:, fingerprint: }.to_json
     end
 
     def expired?
       return false unless expires_at
 
       expires_at < Time.current.to_i
+    end
+
+    def valid_fingerprint?
+      decoded_fingerprint == secret_key_base
+    end
+
+    def decoded_fingerprint
+      Base64.strict_decode64(fingerprint.to_s)
+    end
+
+    def public_key
+      OpenSSL::PKey::RSA.new(Rails.application.credentials.license.public_key)
     end
   end
 end

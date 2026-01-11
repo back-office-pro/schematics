@@ -142,7 +142,7 @@ RSpec.shared_context 'with active license' do
     instance_double(
       Schematics::License,
       active?: true,
-      email: 'support@back-office.pro',
+      fingerprint: nil,
       signature: nil,
       expires_at: nil
     )
