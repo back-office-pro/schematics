@@ -20,14 +20,4 @@ RSpec.describe Schematics::License do
   let(:signature) { 'test' }
 
   it { is_expected.not_to be_active }
-
-  its(:as_json) do
-    is_expected.to match(
-      'expires_at' => expires_at,
-      'fingerprint' => fingerprint,
-      'signature' => signature,
-      'hostname' => String,
-      'mac_address' => String
-    )
-  end
 end

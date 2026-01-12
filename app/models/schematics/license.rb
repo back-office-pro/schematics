@@ -32,11 +32,6 @@ module Schematics
       verify(digest, decoded_signature, payload) && !expired? && valid_fingerprint?
     end
 
-    def as_json = super.merge(
-      'hostname' => Socket.gethostname, # rubocop:disable Style/StringHashKeys
-      'mac_address' => MacAddress.address # rubocop:disable Style/StringHashKeys
-    )
-
     private
 
     def digest
