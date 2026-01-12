@@ -22,7 +22,7 @@ namespace :schematics do
 
   desc 'Generate application secret key base'
   task secret_key_base: :environment do
-    secret = "secret_key_base: #{`rails secret`}"
+    secret = "secret_key_base: #{SecureRandom.hex(64)}"
     credentials = Rails.application.credentials
     credentials.write(credentials.read + secret) unless credentials.secret_key_base
   end
