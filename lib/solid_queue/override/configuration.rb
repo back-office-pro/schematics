@@ -44,7 +44,7 @@ module SolidQueue
         },
         check_license: {
           class: 'Schematics::CheckLicenseJob',
-          schedule: 'every day at midnight'
+          schedule: 'every hour'
         },
         migrate_core: {
           class: 'Schematics::MigrateCoreJob',
