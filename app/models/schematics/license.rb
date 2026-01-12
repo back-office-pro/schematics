@@ -52,13 +52,9 @@ module Schematics
       expires_at < Time.current.to_i
     end
 
-    def valid_fingerprint?
-      decoded_fingerprint == secret_key_base
-    end
-
-    def decoded_fingerprint
-      Base64.strict_decode64(fingerprint.to_s)
-    end
+    def valid_fingerprint? = Base64
+      .strict_decode64(fingerprint.to_s)
+      .eql?(secret_key_base)
 
     def public_key
       OpenSSL::PKey::RSA.new(Rails.application.credentials.license.public_key)
