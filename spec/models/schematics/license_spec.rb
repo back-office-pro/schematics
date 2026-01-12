@@ -26,7 +26,8 @@ RSpec.describe Schematics::License do
       'expires_at' => expires_at,
       'fingerprint' => fingerprint,
       'signature' => signature,
-      'server' => String
+      'hostname' => String,
+      'mac_address' => String
     )
   end
 end

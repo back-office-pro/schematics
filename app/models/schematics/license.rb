@@ -32,9 +32,10 @@ module Schematics
       verify(digest, decoded_signature, payload) && !expired? && valid_fingerprint?
     end
 
-    def as_json
-      super.merge('server' => server) # rubocop:disable Style/StringHashKeys
-    end
+    def as_json = super.merge(
+      'hostname' => Socket.gethostname, # rubocop:disable Style/StringHashKeys
+      'mac_address' => MacAddress.address # rubocop:disable Style/StringHashKeys
+    )
 
     private
 
@@ -67,7 +68,5 @@ module Schematics
     def public_key
       OpenSSL::PKey::RSA.new(Rails.application.credentials.license.public_key)
     end
-
-    def server = [`hostname`, MacAddress.address].join('|')
   end
 end
