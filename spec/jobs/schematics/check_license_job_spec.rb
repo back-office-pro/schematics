@@ -27,15 +27,34 @@ RSpec.describe Schematics::CheckLicenseJob do
     subject(:perform_now) { described_class.perform_now }
 
     let(:license_heartbeat_stub_request) do
-      stub_request(:post, 'https://www.back-office.pro/license_heartbeat')
-        .to_return(status: 200)
+      stub_request(:post, 'https://www.back-office.pro/license_heartbeat').to_return(status:)
     end
 
-    before { license_heartbeat_stub_request }
+    before do
+      allow(Configuration).to receive(:license).and_call_original
+      license_heartbeat_stub_request
+    end
 
-    it 'sends the license data to the server' do
-      perform_now
-      expect(license_heartbeat_stub_request).to have_been_requested.once
+    context 'when the server responds to a valid license' do
+      let(:status) { 200 }
+
+      it 'sends license data to the server' do
+        perform_now
+        expect(license_heartbeat_stub_request).to have_been_requested.once
+      end
+    end
+
+    context 'when the server responds to an invalid license' do
+      let(:status) { 401 }
+
+      it 'sends license data to the server' do
+        perform_now
+        expect(license_heartbeat_stub_request).to have_been_requested.once
+      end
+
+      it 'invalidates the license' do
+        expect { perform_now }.to change(Configuration, :license)
+      end
     end
   end
 end

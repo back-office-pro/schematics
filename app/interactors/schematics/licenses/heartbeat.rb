@@ -12,31 +12,27 @@
 
 module Schematics
   module Licenses
-    class Heartbeat
-      include Interactable
-
-      TIMEOUT_OPTIONS = {
-        open_timeout: 5,
-        read_timeout: 5,
-        write_timeout: 5,
-        max_retries: 0
-      }.freeze
-
+    class Heartbeat < ::Core::WebhookRequests::Request
       delegate :website_url, to: 'Rails.application.routes.url_helpers', private: true
-      delegate :license, to: '::Configuration', private: true
-      delegate :start, to: 'Net::HTTP', private: true
 
-      def call = start(uri.hostname, uri.port, **TIMEOUT_OPTIONS, use_ssl: true) do |http|
-        http.request(request)
+      def call
+        return unless response.is_a?(Net::HTTPUnauthorized)
+
+        ::Configuration.instance.license_file.purge
+        Rails.cache.delete('configuration/license_file')
       end
 
       private
 
-      def uri = URI(website_url(path: '/license_heartbeat'))
+      def body = ::Configuration
+        .license
+        .as_json
 
-      def request = Net::HTTP::Post
-        .new(uri)
-        .tap { _1.form_data = license.as_json }
+      def url = website_url(path: '/license_heartbeat')
+
+      def request_method = 'POST'
+
+      def secret_key = [Socket.gethostname, MacAddress.address].join('|')
     end
   end
 end
