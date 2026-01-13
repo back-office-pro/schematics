@@ -64,17 +64,23 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
       {
         aggregate: 'count',
         model: 'User',
+        comparator: 'greater_than_or_equal_to',
+        threshold: Schematics::License::QUOTA[:USERS],
         dashboards: [Dashboard.first]
       },
       {
         aggregate: 'count',
         model: 'APIKey',
+        comparator: 'greater_than_or_equal_to',
+        threshold: Schematics::License::QUOTA[:API_KEYS],
         dashboards: [Dashboard.first]
       },
       {
         aggregate: 'sum',
         model: 'ActiveStorage::Blob',
         field: 'ActiveStorage::Blob#byte_size',
+        comparator: 'greater_than_or_equal_to',
+        threshold: Schematics::License::QUOTA[:STORAGE],
         dashboards: [Dashboard.first]
       }
     ]
