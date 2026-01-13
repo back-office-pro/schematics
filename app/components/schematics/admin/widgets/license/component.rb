@@ -19,16 +19,10 @@ module Schematics
 
           def icon = :id_badge
 
-          def text_css_class
-            return 'text-success' if active?
-
-            'text-danger'
-          end
-
           def text
-            return t('.active') if active?
+            return t('.pro') if active?
 
-            t('.inactive')
+            t('.free')
           end
 
           def col_css_classes

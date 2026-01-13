@@ -17,12 +17,12 @@ Schematics::Admin::Widgets::License::SLIM = <<~SLIM
         .row.g-0.align-items-center
           .col.text-center class=col_css_classes
             = fa_icon icon, size: '3x', class: 'd-inline-block text-primary'
-            h5.text-primary.my-4 class=text_css_class
+            h5.text-primary.my-4
               = text
             - if expires_at
               .text-body-secondary.text-truncate
                 span.me-1 = t('.expires_on')
                 span = expires_at_formatted
             - else
-              = __button_trial
+              = __button_buy_license
 SLIM

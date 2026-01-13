@@ -1,5 +1,5 @@
 ---
 en:
-  active: Active license
   expires_on: Expires on
-  inactive: Inactive license
+  free: Free license
+  pro: Professional license

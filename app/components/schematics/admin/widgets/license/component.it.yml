@@ -1,5 +1,5 @@
 ---
 it:
-  active: Licenza attiva
   expires_on: Scade il
-  inactive: Licenza inattiva
+  free: Licenza gratuita
+  pro: Licenza professionale
