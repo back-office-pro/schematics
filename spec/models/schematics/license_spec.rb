@@ -20,4 +20,25 @@ RSpec.describe Schematics::License do
   let(:signature) { 'test' }
 
   it { is_expected.not_to be_active }
+  it { is_expected.not_to be_users_quota_exceeded }
+  it { is_expected.not_to be_webhooks_quota_exceeded }
+  it { is_expected.not_to be_api_keys_quota_exceeded }
+  it { is_expected.not_to be_roles_quota_exceeded }
+  it { is_expected.not_to be_teams_quota_exceeded }
+
+  describe '.storage_quota_will_be_exceeded?' do
+    subject { license.storage_quota_will_be_exceeded?(size) }
+
+    context 'when size is greater than storage quota' do
+      let(:size) { 2.gigabytes }
+
+      it { is_expected.to be_truthy }
+    end
+
+    context 'when size is lower than storage quota' do
+      let(:size) { 2.bytes }
+
+      it { is_expected.to be_falsy }
+    end
+  end
 end

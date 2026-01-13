@@ -15,6 +15,8 @@ module Schematics
   class License
     include ::ActiveModel::API
 
+    QUOTA = { USERS: 1, WEBHOOKS: 1, API_KEYS: 1, ROLES: 2, TEAMS: 2, STORAGE: 1.gigabyte }.freeze
+
     class << self
       def build(data)
         new JSON.parse(data || {})
@@ -30,6 +32,42 @@ module Schematics
 
     def active?
       verify(digest, decoded_signature, payload) && !expired? && valid_fingerprint?
+    end
+
+    def storage_quota_will_be_exceeded?(size)
+      return false if active?
+
+      storage_size.bytes + size.bytes >= QUOTA[:STORAGE]
+    end
+
+    def users_quota_exceeded?
+      return false if active?
+
+      ::User.count >= QUOTA[:USERS]
+    end
+
+    def webhooks_quota_exceeded?
+      return false if active?
+
+      ::WebhookEndpoint.count >= QUOTA[:WEBHOOKS]
+    end
+
+    def api_keys_quota_exceeded?
+      return false if active?
+
+      ::APIKey.count >= QUOTA[:API_KEYS]
+    end
+
+    def roles_quota_exceeded?
+      return false if active?
+
+      ::Role.count >= QUOTA[:ROLES]
+    end
+
+    def teams_quota_exceeded?
+      return false if active?
+
+      ::Team.count >= QUOTA[:TEAMS]
     end
 
     private
@@ -59,5 +97,9 @@ module Schematics
     def public_key
       OpenSSL::PKey::RSA.new(Rails.application.credentials.license.public_key)
     end
+
+    memoize def storage_size = ::ActiveStorage::Blob
+      .with_deleted
+      .sum(&:byte_size)
   end
 end

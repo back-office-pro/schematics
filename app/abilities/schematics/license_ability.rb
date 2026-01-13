@@ -11,15 +11,23 @@
 # frozen_string_literal: true
 
 module Schematics
-  class PermissionAbility < ApplicationAbility
-    def initialize(user)
+  class LicenseAbility < ApplicationAbility
+    delegate :users_quota_exceeded?,
+             :webhooks_quota_exceeded?,
+             :api_keys_quota_exceeded?,
+             :roles_quota_exceeded?,
+             :teams_quota_exceeded?,
+             to: '::Configuration.license',
+             private: true
+
+    def initialize
       super
 
-      user
-        .role
-        .permissions
-        .select { Object.const_defined?(_1.model) }
-        .each { can _1.action.to_sym, _1.model.constantize }
+      cannot %i[create restore], ::User if users_quota_exceeded?
+      cannot %i[create restore], ::WebhookEndpoint if webhooks_quota_exceeded?
+      cannot %i[create restore], ::APIKey if api_keys_quota_exceeded?
+      cannot %i[create restore], ::Role if roles_quota_exceeded?
+      cannot %i[create restore], ::Team if teams_quota_exceeded?
     end
   end
 end
