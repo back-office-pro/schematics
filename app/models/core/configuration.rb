@@ -47,12 +47,6 @@ class ::Configuration < Schematics::ApplicationRecord
       .push(company_website)
       .compact
 
-    def storage_quota_will_be_exceeded?(size)
-      return false unless storage_quota
-
-      storage_size.bytes + size.bytes >= storage_quota.gigabytes
-    end
-
     def license = Schematics::License.build(license_file)
 
     def license_file = Rails
@@ -64,10 +58,6 @@ class ::Configuration < Schematics::ApplicationRecord
     private
 
     memoize def openai = Schematics::Configuration::OpenAI.new(self)
-
-    memoize def storage_size = ActiveStorage::Blob
-      .with_deleted
-      .sum(&:byte_size)
 
     def port
       3000 unless company_website

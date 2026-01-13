@@ -38,7 +38,6 @@ it:
         sso_cert_fingerprint: Impronta digitale del certificato SSO
         sso_service_url: URL del provider di identità SSO
         sso_sign_in_feature_flag: Attivare l'accesso con SSO
-        storage_quota: Quota di archiviazione
         tasks_feature_flag: Attivare i compiti
         theme_color: Colore del tema
         time_zone: Fuso orario
@@ -113,7 +112,6 @@ it:
         oauth_api_key: Chiavi API OAuth
         security: Sicurezza
         sso: SSO
-        storage: Archiviazione
         storage_api_key: Chiavi API di archiviazione
     models:
       configuration:

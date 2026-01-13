@@ -445,16 +445,6 @@
         }
       },
       {
-        "id": "be89a5ff-8be6-44c1-8630-d67af385e163",
-        "name": "storage_quota",
-        "type": "byte",
-        "options": {
-          "cached": true,
-          "greater_than": 0,
-          "group": "storage"
-        }
-      },
-      {
         "id": "0243413d-251d-4b40-a81a-930871d7959f",
         "name": "messages_feature_flag",
         "type": "boolean",
