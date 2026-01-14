@@ -12,6 +12,6 @@
 
 Schematics::EmptyResource::SLIM = <<~SLIM
   .text-center.text-primary
-    = fa_icon :database, size: '6x'
-    h4.mt-4 = t('schematics.application.resource.empty')
+    = fa_icon :database, size: '4x'
+    h5.mt-3 = t('schematics.application.resource.empty')
 SLIM

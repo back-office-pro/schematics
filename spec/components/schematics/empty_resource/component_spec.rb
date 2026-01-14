@@ -17,5 +17,5 @@ RSpec.describe Schematics::EmptyResource::Component, type: :component do
 
   let(:text) { I18n.t('schematics.application.resource.empty') }
 
-  it { is_expected.to have_css('h4', text:) }
+  it { is_expected.to have_css('h5', text:) }
 end
