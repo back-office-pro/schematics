@@ -8,7 +8,7 @@ plugins:
   - rubocop-thread_safety
   - rubocop-obsession
 AllCops:
-  TargetRubyVersion: 3.2.8
+  TargetRubyVersion: 3.2.10
   NewCops: enable
   DisplayStyleGuide: true
   Exclude:
