@@ -15,7 +15,15 @@ module Schematics
   class License
     include ::ActiveModel::API
 
-    QUOTA = { USERS: 1, WEBHOOKS: 1, API_KEYS: 1, ROLES: 2, TEAMS: 2, STORAGE: 1.gigabyte }.freeze
+    QUOTA = {
+      USERS: 1,
+      WEBHOOKS: 1,
+      API_KEYS: 1,
+      ROLES: 2,
+      TEAMS: 2,
+      ENTITIES: 10,
+      STORAGE: 1.gigabyte
+    }.freeze
 
     class << self
       def build(data)
@@ -37,7 +45,13 @@ module Schematics
     def storage_quota_will_be_exceeded?(size)
       return false if active?
 
-      storage_size.bytes + size.bytes >= QUOTA[:STORAGE]
+      storage_size.bytes + size.bytes > QUOTA[:STORAGE]
+    end
+
+    def entities_quota_will_be_exceeded?(size)
+      return false if active?
+
+      size > QUOTA[:ENTITIES]
     end
 
     def users_quota_exceeded?

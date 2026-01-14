@@ -41,4 +41,20 @@ RSpec.describe Schematics::License do
       it { is_expected.to be_falsy }
     end
   end
+
+  describe '.entities_quota_will_be_exceeded?' do
+    subject { license.entities_quota_will_be_exceeded?(size) }
+
+    context 'when size is greater than entities quota' do
+      let(:size) { 20 }
+
+      it { is_expected.to be_truthy }
+    end
+
+    context 'when size is lower than entities quota' do
+      let(:size) { 2 }
+
+      it { is_expected.to be_falsy }
+    end
+  end
 end

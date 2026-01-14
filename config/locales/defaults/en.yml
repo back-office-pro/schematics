@@ -28,6 +28,7 @@ en:
       password: must contain at least one number, one lowercase letter, one uppercase letter and a special character
       singular: is not singular
       storage_quota: storage capacity is exceeded
+      too_many_entities: The schema contains more entities than your license allows (%{data_size}/%{quota})
     triggers:
       name: "%{name} is not defined"
       nil: a variable does not have value

@@ -16,7 +16,9 @@ class ::Migration < Schematics::ApplicationRecord
   attribute :data, default: -> { current_data || default_data }
 
   validates_associated :data
+  validate :entities_quota_cannot_be_exceeded
 
+  delegate :entities_quota_will_be_exceeded?, to: '::Configuration.license', private: true
   delegate :build_commands,
            :clean_commands,
            :old_entities,
@@ -81,6 +83,18 @@ class ::Migration < Schematics::ApplicationRecord
   end
 
   private
+
+  def entities_quota_cannot_be_exceeded
+    return unless data
+    return unless entities_quota_will_be_exceeded?(data_size)
+
+    errors.add(:base, :too_many_entities, data_size:, quota: Schematics::License::QUOTA[:ENTITIES])
+  end
+
+  def data_size = data
+    .entities
+    .reject(&:core?) # rubocop:disable Performance/Count
+    .size
 
   def prompt_data
     Schematics::GenerateSchemaJob.perform_later(self) if prompt_previously_changed?

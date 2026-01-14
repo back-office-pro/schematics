@@ -33,6 +33,7 @@ it:
       pwned_error: non è stato possibile verificarle rispetto alle violazioni dei dati passate
       singular: non è singolare
       storage_quota: la capacità di archiviazione è stata superata
+      too_many_entities: Lo schema contiene più entità di quelle consentite dalla licenza (%{data_size}/%{quota})
     triggers:
       name: "%{name} non è definito"
       nil: una variabile non ha valore
