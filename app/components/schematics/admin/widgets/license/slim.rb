@@ -24,5 +24,5 @@ Schematics::Admin::Widgets::License::SLIM = <<~SLIM
                 span.me-1 = t('.expires_on')
                 span = expires_at_formatted
             - else
-              = __button_buy_license
+              = __button_license_comparison
 SLIM

@@ -10,30 +10,8 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Button
-    module BuyLicense
-      class Component < ApplicationComponent
-        delegate :secret_key_base, to: '::Rails.configuration', private: true
-
-        def title = t('.text')
-
-        def icon = :cart_shopping
-
-        def path = "/buy/#{token}"
-
-        def target = '_blank'
-
-        def rel = 'noreferrer'
-
-        def wrapper_css_classes = %w[btn btn-primary btn-sm btn-icon-split]
-
-        private
-
-        def token
-          Base64.strict_encode64(secret_key_base)
-        end
-      end
-    end
-  end
-end
+Schematics::Button::LicenseComparison::SLIM = <<~SLIM
+  .btn.btn-primary.btn-sm.btn-icon-split data-bs-toggle='modal' data-bs-target=target
+    span.icon = fa_icon icon
+    span.text = title
+SLIM
