@@ -26,6 +26,8 @@ RSpec.describe Schematics::License do
   it { is_expected.not_to be_roles_quota_exceeded }
   it { is_expected.not_to be_teams_quota_exceeded }
 
+  its(:expires_at_formatted) { is_expected.to eq('Wednesday 23 December, 2026 at 21:41') }
+
   describe '.storage_quota_will_be_exceeded?' do
     subject { license.storage_quota_will_be_exceeded?(size) }
 

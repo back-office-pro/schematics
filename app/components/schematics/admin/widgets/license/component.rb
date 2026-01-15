@@ -15,7 +15,7 @@ module Schematics
     module Widgets
       module License
         class Component < ApplicationComponent
-          delegate :active?, :expires_at, to: '::Configuration.license'
+          delegate :active?, :expires_at, :expires_at_formatted, to: '::Configuration.license'
 
           def icon = :id_badge
 
@@ -29,10 +29,6 @@ module Schematics
             return %w[p-4] if active?
 
             %w[p-3 m-1]
-          end
-
-          def expires_at_formatted
-            I18n.l(Time.zone.at(expires_at), format: :long)
           end
         end
       end

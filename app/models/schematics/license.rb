@@ -84,6 +84,10 @@ module Schematics
       ::Team.count >= QUOTA[:TEAMS]
     end
 
+    def expires_at_formatted
+      I18n.l(Time.zone.at(expires_at), format: :long)
+    end
+
     private
 
     def digest
