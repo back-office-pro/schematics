@@ -1,0 +1,8 @@
+---
+fr:
+  activemodel:
+    attributes:
+      schematics/license:
+        expires_at: Expire le
+    models:
+      schematics/license: Licence

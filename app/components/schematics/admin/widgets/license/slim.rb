@@ -21,7 +21,7 @@ Schematics::Admin::Widgets::License::SLIM = <<~SLIM
               = text
             - if expires_at
               .text-body-secondary.text-truncate
-                span.me-1 = t('.expires_on')
+                span.me-1 = Schematics::License.human_attribute_name('expires_at')
                 span = expires_at_formatted
             - else
               = __button_license_comparison

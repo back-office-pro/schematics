@@ -1,0 +1,8 @@
+---
+it:
+  activemodel:
+    attributes:
+      schematics/license:
+        expires_at: Scade il
+    models:
+      schematics/license: Licenza
