@@ -14,6 +14,8 @@ module Schematics
   module Button
     module GenerateFileInBackground
       class Component < ApplicationComponent
+        delegate :active?, to: '::Configuration.license', private: true
+
         option :extension
         option :text
         option :url, optional: true
@@ -53,6 +55,10 @@ module Schematics
           !Ferrum::Browser::Command.build(Ferrum::Browser::Options.new, nil)
         rescue Ferrum::BinaryNotFoundError
           true
+        end
+
+        def disabled?
+          !active? && text == :download_as_csv
         end
       end
     end

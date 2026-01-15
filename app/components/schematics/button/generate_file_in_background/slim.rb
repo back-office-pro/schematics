@@ -13,6 +13,8 @@
 Schematics::Button::GenerateFileInBackground::SLIM = <<~SLIM
   - if browser_missing?
     = __button_generate_file_in_background_browser_missing
+  - elsif disabled?
+    = __button_generate_file_in_background_disabled
   - else
     = turbo_frame_tag 'generate_file_in_background' do
       .dropdown.d-inline-block {
