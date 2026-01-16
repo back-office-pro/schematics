@@ -41,7 +41,7 @@ module Schematics
         when :postmark
           { postmark_settings: { api_token: postmark_api_token } }
         when :mailgun
-          { mailgun_settings: { api_key: mailgun_api_key } }
+          { mailgun_settings: { api_key: mailgun_api_key, timeout: 5 } }
         when :mailjet
           { mailjet_settings: { api_key: mailjet_api_key, secret_key: mailjet_secret_key } }
         else

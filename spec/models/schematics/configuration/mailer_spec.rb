@@ -57,7 +57,7 @@ RSpec.describe Schematics::Configuration::Mailer do
     it { is_expected.to be_configured }
 
     its(:delivery_method) { is_expected.to eq(:mailgun) }
-    its(:settings) { is_expected.to eq(mailgun_settings: { api_key: 'test' }) }
+    its(:settings) { is_expected.to eq(mailgun_settings: { api_key: 'test', timeout: 5 }) }
   end
 
   context 'when mailjet is configured' do
