@@ -23,7 +23,9 @@ module Schematics
       def icon = :info_circle
 
       memoize def antivirus_missing?
-        antivirus? && !Clamby::Command.new.run(Clamby::Command.scan_executable, '--ping 0')
+        antivirus? &&
+          !ENV.key?('CLAMAV_HOST') &&
+          !Clamby::Command.new.run(Clamby::Command.scan_executable, '--ping 0')
       end
 
       private

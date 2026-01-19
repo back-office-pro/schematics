@@ -16,7 +16,7 @@
 /.github
 /.dockerignore
 /Dockerfile*
-/docker-compose.yml
+/docker
 /CHANGELOG.md
 /README.md
 /db/schema.rb

@@ -6,13 +6,22 @@ FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 
 WORKDIR /back-office
 
+ARG CORE=false
+
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y curl libjemalloc2 libvips sqlite3 postgresql-client && \
-    apt-get install --no-install-recommends -y graphviz pgloader ffmpeg file clamav clamav-daemon clamdscan chromium mailutils && \
-    ln -s /usr/lib/$(uname -m)-linux-gnu/libjemalloc.so.2 /usr/local/lib/libjemalloc.so && \
+    apt-get install --no-install-recommends -y graphviz pgloader ffmpeg file clamav mailutils
+
+RUN if [ "$CORE" = "false" ]; then \
+    apt-get install --no-install-recommends -y clamav-daemon clamdscan chromium; \
+fi
+
+RUN ln -s /usr/lib/$(uname -m)-linux-gnu/libjemalloc.so.2 /usr/local/lib/libjemalloc.so && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-RUN freshclam
+RUN if [ "$CORE" = "false" ]; then \
+    freshclam; \
+fi
 
 RUN echo "FollowDirectorySymlinks true" >> /etc/clamav/clamd.conf
 RUN echo "FollowFileSymlinks true" >> /etc/clamav/clamd.conf
@@ -40,7 +49,8 @@ RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz
     npm install -g yarn@$YARN_VERSION && \
     rm -rf /tmp/node-build-master
 
-COPY Gemfile Gemfile.lock vendor ./
+COPY vendor/* ./vendor/
+COPY Gemfile Gemfile.lock ./
 
 RUN bundle install --jobs=4 --retry=3 && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \

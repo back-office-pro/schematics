@@ -12,7 +12,7 @@
 
 bin/rails db:prepare
 
-service clamav-freshclam start
-service clamav-daemon start
+service clamav-freshclam start || true
+service clamav-daemon start || true
 
 exec "${@}"

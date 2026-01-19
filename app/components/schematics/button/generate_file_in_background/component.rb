@@ -51,6 +51,7 @@ module Schematics
 
         memoize def browser_missing?
           return false unless extension == :pdf
+          return false if ENV.key?('CHROMIUM_URL')
 
           !Ferrum::Browser::Command.build(Ferrum::Browser::Options.new, nil)
         rescue Ferrum::BinaryNotFoundError

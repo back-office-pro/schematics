@@ -90,6 +90,7 @@ module Schematics
     }
 
     memoize def browser = Ferrum::Browser.new(
+      ws_url: ENV.fetch('CHROMIUM_URL', nil),
       browser_options:,
       timeout: 30,
       process_timeout: 30
