@@ -24,7 +24,7 @@ module Schematics
 
       memoize def antivirus_missing?
         antivirus? &&
-          !ENV.key?('CLAMAV_HOST') &&
+          ENV['CLAMAV_HOST'].blank? &&
           !Clamby::Command.new.run(Clamby::Command.scan_executable, '--ping 0')
       end
 
