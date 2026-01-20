@@ -101,14 +101,14 @@ RSpec.describe Migration do
 
     its([0]) do
       is_expected.to match(
-        'id' => String,
-        'name' => 'customer',
-        'options' => {
-          'icon' => 'user_tie',
-          'descriptor' => 'full_name'
+        id: String,
+        name: 'customer',
+        options: {
+          icon: 'user_tie',
+          descriptor: 'full_name'
         },
-        'attributes' => Array,
-        'virtuals' => Array
+        attributes: Array,
+        virtuals: Array
       )
     end
   end
