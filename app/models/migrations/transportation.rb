@@ -11,7 +11,7 @@
 # frozen_string_literal: true
 
 module Migrations
-  module Transporation # rubocop:disable Metrics/ModuleLength
+  module Transportation # rubocop:disable Metrics/ModuleLength
     module_function
 
     def data = [
