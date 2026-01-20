@@ -41,9 +41,9 @@ class ::Migration < Schematics::ApplicationRecord
 
     def core = new(data: Schematics::SchemaCache.as_json, version: current_version)
 
-    def default_data = ActiveSupport::ConfigurationFile.parse(
-      Rails.root.join('db', 'seeds', 'migrations', "#{company_business_sector}.yml")
-    )
+    def default_data = Migrations
+      .const_get(company_business_sector.camelize)
+      .data
 
     def default_prompt = I18n.t(
       'migrations.openai.user',

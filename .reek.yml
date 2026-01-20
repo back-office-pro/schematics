@@ -12,7 +12,10 @@ detectors:
   TooManyInstanceVariables:
     max_instance_variables: 9
   DuplicateMethodCall:
-    max_calls: 13
+    max_calls: 5
+    allow_calls:
+      - SecureRandom.uuid
+      - element
   RepeatedConditional:
     max_ifs: 15
   TooManyMethods:
