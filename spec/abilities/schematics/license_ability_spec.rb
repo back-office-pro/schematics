@@ -16,8 +16,6 @@ require 'cancan/matchers'
 RSpec.describe Schematics::LicenseAbility do
   subject(:ability) { described_class.new }
 
-  before { allow(Configuration).to receive(:license).and_call_original }
-
   context 'when users quota is exceeded' do
     before { allow(User).to receive(:count).and_return(100) }
 
