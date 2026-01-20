@@ -38,9 +38,7 @@ RSpec.describe Schematics::GenerateCSVJob do
   describe '#perform_now' do
     subject(:perform_now) { described_class.perform_now(user, resources, dropdown) }
 
-    let(:stream) do
-      capture_turbo_stream_broadcasts([user, :generate_file_in_background]) { perform_now }
-    end
+    let(:stream) { capture_turbo_stream_broadcasts([user, :generate_file_in_background]) }
 
     it 'uploads a blob' do
       expect { perform_now }
@@ -58,10 +56,12 @@ RSpec.describe Schematics::GenerateCSVJob do
     end
 
     it 'broadcasts replace to user' do
+      perform_now
       expect(stream.first['action']).to eq('replace')
     end
 
     it 'broadcasts to user target' do
+      perform_now
       expect(stream.first['target']).to eq('generate_file_in_background')
     end
   end
