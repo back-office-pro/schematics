@@ -142,6 +142,7 @@ RSpec.shared_context 'with active license' do
     instance_double(
       Schematics::License,
       active?: true,
+      expires_at: nil,
       storage_quota_will_be_exceeded?: false,
       entities_quota_will_be_exceeded?: false,
       users_quota_exceeded?: false,
