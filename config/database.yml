@@ -3,6 +3,15 @@ default: &default
   max_connections: <%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>
   timeout: 5000
 
+postgresql: &postgresql
+  adapter: postgresql
+  encoding: unicode
+  max_connections: <%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>
+  connect_timeout: 1
+  checkout_timeout: 1
+  variables:
+    statement_timeout: <%= ENV.fetch('STATEMENT_TIMEOUT', '5s') %>
+
 development:
   primary:
     <<: *default
@@ -37,8 +46,14 @@ test:
 
 production:
   primary:
+    <% if ENV['DATABASE_URL'].present? %>
+    <<: *postgresql
+    url: <%= ENV['DATABASE_URL'] %>
+    database: production
+    <% else %>
     <<: *default
     database: storage/production.sqlite3
+    <% end %>
     migrations_paths: db/migrate
   search:
     <<: *default
