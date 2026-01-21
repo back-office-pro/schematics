@@ -21,7 +21,6 @@
 /README.md
 /db/schema.rb
 /db/search_schema.rb
-/db/migrate/20*
 /coverage
 /spec
 /bin/ci

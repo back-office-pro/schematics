@@ -12,9 +12,9 @@ AllCops:
   NewCops: enable
   DisplayStyleGuide: true
   Exclude:
-    - db/migrate/20*
     - db/*schema.rb
     - rgloader/*
+    - storage/migrate/*
     - vendor/**/*
 # rubocop
 Layout/LineLength:

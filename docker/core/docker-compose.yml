@@ -19,7 +19,6 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - migrate:/back-office/db/migrate
       - credentials:/back-office/config/credentials
       - storage:/back-office/storage
     depends_on:
@@ -29,7 +28,6 @@ services:
       - CHROMIUM_URL=ws://chromium:3333
       - CLAMAV_HOST=clamav
 volumes:
-  migrate:
   credentials:
   storage:
   clamav:

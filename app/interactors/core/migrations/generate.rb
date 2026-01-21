@@ -21,7 +21,6 @@ module Core
       delegate :database_configuration, to: :configuration, private: true
       delegate :migrator_clean_commands,
                :migrator_build_commands,
-               :persisted?,
                to: :migration,
                private: true
 
@@ -52,13 +51,11 @@ module Core
       def invoke(generator)
         generator.invoke_all
         @index.increment
-        return unless persisted?
-
         update_progress!(@index.value.to_f / total * self.class.progress)
       end
 
       def migration_files = root.glob(
-        database_configuration.dig(env, 'primary', 'migrations_paths').concat('/*')
+        database_configuration.dig(env, 'primary', 'migrations_paths').second.concat('/*')
       )
 
       def total = migrator_clean_commands

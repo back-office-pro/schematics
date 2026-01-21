@@ -10,10 +10,9 @@
 # IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
 # LIABILITY ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.
 
+rm -rf storage/migrate db/schema.rb db/search_schema.rb
+
 bin/rails db:drop
-bin/rails db:create
-rm -rf db/migrate/20*.rb db/schema.rb db/search_schema.rb
 bin/rails schematics:generate
-bin/rails db:migrate
-bin/rails db:seed
+bin/rails db:prepare
 bin/rails db:fixtures:load FIXTURES_PATH='spec/fixtures'
