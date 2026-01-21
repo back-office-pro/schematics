@@ -46,10 +46,6 @@ module SolidQueue
           class: 'Schematics::CheckLicenseJob',
           schedule: 'every hour'
         },
-        migrate_core: {
-          class: 'Schematics::MigrateCoreJob',
-          schedule: 'every day at 1am'
-        },
         migrate_schema: {
           class: 'Schematics::MigrateSchemaJob',
           schedule: 'every day at 2am'
