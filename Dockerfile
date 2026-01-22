@@ -67,6 +67,7 @@ RUN SECRET_KEY_BASE_DUMMY=1 bin/rails schematics:secret_key_base
 RUN bin/rails assets:precompile
 RUN bin/rails schematics:db:encryption:init
 RUN bin/rails schematics:generate
+RUN bin/rails schematics:update
 
 RUN chmod 444 config/credentials/production.yml.enc
 

@@ -11,13 +11,24 @@
 # frozen_string_literal: true
 
 namespace :schematics do
-  desc 'Generate schema application'
+  desc 'Generate core application'
   task generate: :environment do
-    Schematics::Migrator
-      .new
-      .build_commands
-      .flat_map(&:generators)
-      .each(&:invoke_all)
+    unless Migration.table_exists?
+      Schematics::Migrator
+        .new
+        .build_commands
+        .flat_map(&:generators)
+        .each(&:invoke_all)
+    end
+  end
+
+  desc 'Update core application'
+  task update: :environment do
+    if Schematics::SchemaCache.outdated?
+      PaperTrail.request(enabled: false) do
+        Core::Migrations::Migrate.call(migration: Migration.core)
+      end
+    end
   end
 
   desc 'Generate application secret key base'
