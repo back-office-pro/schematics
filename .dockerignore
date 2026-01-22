@@ -8,6 +8,7 @@
 /config/ci.rb
 /config/environments/development.rb
 /config/environments/test.rb
+/config/initializers/rack_profiler.rb
 /log
 /tmp
 /storage
