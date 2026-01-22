@@ -50,6 +50,8 @@ module ActiveRecord
           super(templates_path.join(source), destination)
         end
 
+        def db_migrate_path = 'storage/migrate'
+
         def validate_file_name! = file_name
           .concat('_')
           .concat(SecureRandom.uuid.underscore)
