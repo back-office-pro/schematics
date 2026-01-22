@@ -12,6 +12,11 @@
 
 namespace :schematics do
   namespace :rspec do
+    desc 'Dump current migration data'
+    task dump: :environment do
+      Core::Migrations::GenerateFixture.call
+    end
+
     desc 'Load current migration data'
     task prepare: :environment do
       data = ActiveStorage::Blob.services.fetch(:local).download('backups/migration.json')

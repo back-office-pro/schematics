@@ -13,11 +13,9 @@
 module Core
   module Migrations
     class GenerateFixture
-      include Schematics::Progressable
+      include Interactor
 
-      delegate :migration, to: :context, private: true
-
-      progressable migration: 100
+      delegate :current_data, to: '::Migration', private: true
 
       def call
         ::ActiveStorage::Blob.find_by(key:).try(:purge)
@@ -34,7 +32,7 @@ module Core
 
       def io = Tempfile
         .new
-        .tap { _1.write(migration.data.to_json) }
+        .tap { _1.write(current_data.to_json) }
         .tap(&:rewind)
     end
   end
