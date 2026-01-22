@@ -17,6 +17,11 @@ namespace :schematics do
       Schematics::GenerateBackupJob.perform_now
     end
 
+    desc 'Dump current migration data'
+    task dump: :environment do
+      Core::Migrations::GenerateFixture.call
+    end
+
     if Rails.env.development?
       ActiveRecordDoctor::Rake::Task.new do |task|
         task.deps = [:environment]

@@ -10,19 +10,14 @@
 
 # frozen_string_literal: true
 
-namespace :schematics do
-  namespace :rspec do
-    desc 'Dump current migration data'
-    task dump: :environment do
-      Core::Migrations::GenerateFixture.call
-    end
-
-    desc 'Load current migration data'
-    task prepare: :environment do
-      data = ActiveStorage::Blob.services.fetch(:local).download('backups/migration.json')
-      PaperTrail.request(enabled: false) do
-        Migration.create!(state: Migration::STATE_STATE_FINISHED, data: JSON.parse(data))
-      end
-    end
+def load_current_schema
+  PaperTrail.request(enabled: false) do
+    Migration.create!(
+      state: Migration::STATE_STATE_FINISHED,
+      data: JSON.parse(
+        ActiveStorage::Blob.services.fetch(:local).download('backups/migration.json')
+      )
+    )
+    Rails.cache.delete('schema')
   end
 end
