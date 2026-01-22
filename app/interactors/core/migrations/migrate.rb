@@ -21,8 +21,7 @@ module Core
                CleanSearchIndexes,
                Reload,
                RebuildSearchIndexes,
-               GenerateDocumentation,
-               GenerateFixture
+               GenerateDocumentation
     end
   end
 end
