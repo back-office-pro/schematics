@@ -16,6 +16,10 @@ module Schematics
       delegate_missing_to :cache
       delegate :as_json, to: :cache
 
+      def outdated?
+        version != VERSION
+      end
+
       private
 
       def cache
