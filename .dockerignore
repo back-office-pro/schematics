@@ -27,3 +27,7 @@
 /bin/dev
 /bin/importmap
 /public/assets
+/lib/tasks/meetings.rake
+/lib/tasks/messages.rake
+/lib/tasks/rspec.rake
+/lib/tasks/tasks.rake
