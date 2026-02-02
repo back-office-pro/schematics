@@ -106,7 +106,7 @@ GEM
       activesupport
     ast (2.4.3)
     aws-eventstream (1.4.0)
-    aws-partitions (1.1210.0)
+    aws-partitions (1.1211.0)
     aws-sdk-core (3.241.4)
       aws-eventstream (~> 1, >= 1.3.0)
       aws-partitions (~> 1, >= 1.992.0)
@@ -118,7 +118,7 @@ GEM
     aws-sdk-kms (1.121.0)
       aws-sdk-core (~> 3, >= 3.241.4)
       aws-sigv4 (~> 1.5)
-    aws-sdk-s3 (1.212.0)
+    aws-sdk-s3 (1.213.0)
       aws-sdk-core (~> 3, >= 3.241.4)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.5)
@@ -138,7 +138,7 @@ GEM
     benchmark (0.5.0)
     bigdecimal (4.0.1)
     bindex (0.8.1)
-    bootsnap (1.21.1)
+    bootsnap (1.22.0)
       msgpack (~> 1.2)
     bootstrap-email (1.5.2)
       htmlbeautifier (~> 1.3)
@@ -149,7 +149,7 @@ GEM
     bootstrap_form (5.6.0)
       actionpack (>= 7.2)
       activemodel (>= 7.2)
-    brakeman (7.1.2)
+    brakeman (8.0.1)
       racc
     browser (6.2.0)
     builder (3.3.0)
@@ -492,7 +492,7 @@ GEM
       net-imap
       net-pop
       net-smtp
-    mailgun-ruby (1.4.1)
+    mailgun-ruby (1.4.2)
       faraday (~> 2.1)
       faraday-multipart (< 2)
       mini_mime
@@ -759,7 +759,7 @@ GEM
       rspec-expectations (~> 3.13)
       rspec-mocks (~> 3.13)
       rspec-support (~> 3.13)
-    rspec-support (3.13.6)
+    rspec-support (3.13.7)
     rubocop (1.84.0)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
@@ -872,7 +872,7 @@ GEM
     slim (5.2.1)
       temple (~> 0.10.0)
       tilt (>= 2.1.0)
-    slim_lint (0.33.0)
+    slim_lint (0.34.0)
       rexml (~> 3.2)
       rubocop (>= 1.0, < 2.0)
       slim (>= 3.0, < 6.0)
@@ -921,7 +921,7 @@ GEM
     trailblazer-option (0.1.2)
     tsort (0.2.0)
     tty-which (0.5.0)
-    turbo-rails (2.0.21)
+    turbo-rails (2.0.23)
       actionpack (>= 7.1.0)
       railties (>= 7.1.0)
     tzinfo (2.0.6)
