@@ -23,6 +23,7 @@ describe Schematics::Attributes::Text do
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Documentable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Generatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -53,6 +54,7 @@ describe Schematics::Attributes::Text do
   its(:preload) { is_expected.to be_empty }
   its(:to_spec) { is_expected.to eq('A entity has a **content** attribute of type *text*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.entity.content') }
+  its(:openai_description) { is_expected.to eq('An attribute which represents a text') }
 
   its(:available_options) do
     is_expected.to contain_exactly(
@@ -67,6 +69,38 @@ describe Schematics::Attributes::Text do
       Schematics::Options::Min,
       Schematics::Options::Limit,
       Schematics::Options::Length
+    )
+  end
+
+  its(:to_openai_schema) do
+    is_expected.to eq(
+      text: {
+        type: 'object',
+        additionalProperties: false,
+        required: %w[name type options],
+        properties: {
+          type: {
+            type: 'string',
+            description: 'An attribute which represents a text',
+            enum: %w[text]
+          },
+          name: { '$ref': '#/$defs/name' },
+          options: {
+            type: 'object',
+            additionalProperties: false,
+            anyOf: [
+              { '$ref': '#/$defs/required' },
+              { '$ref': '#/$defs/default' },
+              { '$ref': '#/$defs/readonly' },
+              { '$ref': '#/$defs/translated' },
+              { '$ref': '#/$defs/normalization' },
+              { '$ref': '#/$defs/min' },
+              { '$ref': '#/$defs/limit' },
+              { '$ref': '#/$defs/length' }
+            ]
+          }
+        }
+      }
     )
   end
 

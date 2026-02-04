@@ -22,6 +22,8 @@ module Schematics
         .join
         .prepend('+3306')
 
+      def openai_description = 'An attribute which represents a phone number'
+
       def icon = :phone
 
       def validators = super.merge(

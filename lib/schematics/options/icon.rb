@@ -23,6 +23,12 @@ module Schematics
         def collection = YAML
           .load_file(File.expand_path('../../icons.yml', __dir__))
           .map(&:to_sym)
+
+        def openai_type = 'string'
+
+        def openai_description = 'An icon which represents the entity or event'
+
+        def openai_enum = { enum: collection.map(&:to_s).sample(250).sort }
       end
     end
   end

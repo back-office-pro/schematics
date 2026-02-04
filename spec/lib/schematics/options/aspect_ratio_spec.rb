@@ -18,6 +18,8 @@ describe Schematics::Options::AspectRatio do
   its(:option_name) { is_expected.to eq(:aspect_ratio) }
   its(:input_type) { is_expected.to eq(:select) }
   its(:controller) { is_expected.to eq('dropdown') }
+  its(:openai_description) { is_expected.to eq('The aspect ratios of the image') }
+  its(:openai_type) { is_expected.to eq('array') }
 
   its(:collection) do
     is_expected.to eq(
@@ -27,6 +29,26 @@ describe Schematics::Options::AspectRatio do
         %w[Landscape landscape],
         %w[Square square]
       ]
+    )
+  end
+
+  its(:to_openai_schema) do
+    is_expected.to eq(
+      aspect_ratio: {
+        type: 'object',
+        additionalProperties: false,
+        required: %w[aspect_ratio],
+        properties: {
+          aspect_ratio: {
+            type: 'array',
+            description: 'The aspect ratios of the image',
+            items: {
+              type: 'string',
+              enum: %w[is_16_9 is_4_3 landscape square]
+            }
+          }
+        }
+      }
     )
   end
 end

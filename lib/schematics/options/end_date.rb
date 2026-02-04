@@ -15,6 +15,8 @@ module Schematics
     class EndDate < Option
       class << self
         def input_type = :boolean
+
+        def openai_description = 'Is the date the end of a calendar range'
       end
     end
   end

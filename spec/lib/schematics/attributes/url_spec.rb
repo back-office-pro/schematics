@@ -19,6 +19,7 @@ describe Schematics::Attributes::Url do
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Documentable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Generatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -50,6 +51,7 @@ describe Schematics::Attributes::Url do
   its(:to_s) { is_expected.to eq('url:string:index') }
   its(:to_spec) { is_expected.to eq('A user has a **url** attribute of type *url*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.user.url') }
+  its(:openai_description) { is_expected.to eq('An attribute which represents a URL') }
 
   its(:available_options) do
     is_expected.to contain_exactly(
@@ -77,6 +79,38 @@ describe Schematics::Attributes::Url do
     is_expected.to eq <<~RUBY
       normalizes :url, with: -> { _1.strip.downcase.presence }
     RUBY
+  end
+
+  its(:to_openai_schema) do
+    is_expected.to eq(
+      url: {
+        type: 'object',
+        additionalProperties: false,
+        required: %w[name type options],
+        properties: {
+          type: {
+            type: 'string',
+            description: 'An attribute which represents a URL',
+            enum: %w[url]
+          },
+          name: { '$ref': '#/$defs/name' },
+          options: {
+            type: 'object',
+            additionalProperties: false,
+            anyOf: [
+              { '$ref': '#/$defs/required' },
+              { '$ref': '#/$defs/default' },
+              { '$ref': '#/$defs/readonly' },
+              { '$ref': '#/$defs/min' },
+              { '$ref': '#/$defs/limit' },
+              { '$ref': '#/$defs/length' },
+              { '$ref': '#/$defs/unique' },
+              { '$ref': '#/$defs/schemes' }
+            ]
+          }
+        }
+      }
+    )
   end
 
   context 'when url is unique' do

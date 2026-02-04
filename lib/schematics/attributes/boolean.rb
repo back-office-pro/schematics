@@ -45,6 +45,8 @@ module Schematics
           attribute :#{name}, default: -> { false }
         RUBY
       end
+
+      def openai_description = 'An attribute which represents a boolean'
     end
   end
 end

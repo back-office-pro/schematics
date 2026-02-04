@@ -19,6 +19,7 @@ describe Schematics::Attributes::Attachment do
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Documentable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Generatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -50,6 +51,7 @@ describe Schematics::Attributes::Attachment do
   its(:search_query) { is_expected.to eq(:avatar_i_cont) }
   its(:to_spec) { is_expected.to eq('A user has a **avatar** attribute of type *attachment*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.user.avatar') }
+  its(:openai_description) { is_expected.to eq('An attribute which represents an attachment') }
   it { is_expected.not_to be_image }
 
   its(:available_options) do
@@ -98,6 +100,37 @@ describe Schematics::Attributes::Attachment do
                                     allow_destroy: true,
                                     reject_if: :all_blank
     RUBY
+  end
+
+  its(:to_openai_schema) do
+    is_expected.to eq(
+      attachment: {
+        type: 'object',
+        additionalProperties: false,
+        required: %w[name type options],
+        properties: {
+          type: {
+            type: 'string',
+            description: 'An attribute which represents an attachment',
+            enum: %w[attachment]
+          },
+          name: { '$ref': '#/$defs/name' },
+          options: {
+            type: 'object',
+            additionalProperties: false,
+            anyOf: [
+              { '$ref': '#/$defs/required' },
+              { '$ref': '#/$defs/readonly' },
+              { '$ref': '#/$defs/size' },
+              { '$ref': '#/$defs/aspect_ratio' },
+              { '$ref': '#/$defs/width' },
+              { '$ref': '#/$defs/height' },
+              { '$ref': '#/$defs/content_type' }
+            ]
+          }
+        }
+      }
+    )
   end
 
   context 'when attachment is required' do

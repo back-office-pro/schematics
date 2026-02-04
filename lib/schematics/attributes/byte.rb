@@ -21,6 +21,8 @@ module Schematics
         value && number_to_human_size(value, **{ precision:, separator: }.compact)
       end
 
+      def openai_description = 'An attribute which represents a byte'
+
       def icon = :weight_hanging
     end
   end

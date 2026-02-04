@@ -19,6 +19,7 @@ describe Schematics::Attributes::RichText do
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Documentable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Generatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -47,6 +48,7 @@ describe Schematics::Attributes::RichText do
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:summary_i_cont) }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.entity.summary') }
+  its(:openai_description) { is_expected.to eq('An attribute which represents a Rich Text') }
 
   its(:to_spec) do
     is_expected.to eq('A entity has a **summary** attribute of type *rich text editor*')
@@ -67,6 +69,33 @@ describe Schematics::Attributes::RichText do
     is_expected.to eq <<~RUBY
       has_rich_text :summary, store_if_blank: false
     RUBY
+  end
+
+  its(:to_openai_schema) do
+    is_expected.to eq(
+      rich_text: {
+        type: 'object',
+        additionalProperties: false,
+        required: %w[name type options],
+        properties: {
+          type: {
+            type: 'string',
+            description: 'An attribute which represents a Rich Text',
+            enum: %w[rich_text]
+          },
+          name: { '$ref': '#/$defs/name' },
+          options: {
+            type: 'object',
+            additionalProperties: false,
+            anyOf: [
+              { '$ref': '#/$defs/required' },
+              { '$ref': '#/$defs/readonly' },
+              { '$ref': '#/$defs/translated' }
+            ]
+          }
+        }
+      }
+    )
   end
 
   context 'when translated' do

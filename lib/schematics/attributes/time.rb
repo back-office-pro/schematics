@@ -22,6 +22,8 @@ module Schematics
         value && localize(value, format: :time)
       end
 
+      def openai_description = 'An attribute which represents a time'
+
       def icon = :clock
     end
   end

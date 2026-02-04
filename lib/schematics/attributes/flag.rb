@@ -30,6 +30,8 @@ module Schematics
           .join(', ')
       end
 
+      def openai_description = 'An attribute which represents an enumeration with multiple choices'
+
       def to_str
         <<~RUBY
           enummer #{name}: #{to_h}, _prefix: true

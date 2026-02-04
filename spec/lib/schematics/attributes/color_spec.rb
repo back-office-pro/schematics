@@ -19,6 +19,7 @@ describe Schematics::Attributes::Color do
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Documentable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Generatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -46,6 +47,10 @@ describe Schematics::Attributes::Color do
   its(:to_spec) { is_expected.to eq('A entity has a **color** attribute of type *color*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.entity.color') }
 
+  its(:openai_description) do
+    is_expected.to eq('An attribute which represents an hexadecimal color')
+  end
+
   its(:available_options) do
     is_expected.to contain_exactly(
       Schematics::Options::Group,
@@ -64,6 +69,38 @@ describe Schematics::Attributes::Color do
 
   its(:validators) do
     is_expected.to eq(allow_blank: true, format: { with: described_class::REGEX, message: :color })
+  end
+
+  its(:to_openai_schema) do
+    is_expected.to eq(
+      color: {
+        type: 'object',
+        additionalProperties: false,
+        required: %w[name type options],
+        properties: {
+          type: {
+            type: 'string',
+            description: 'An attribute which represents an hexadecimal color',
+            enum: %w[color]
+          },
+          name: { '$ref': '#/$defs/name' },
+          options: {
+            type: 'object',
+            additionalProperties: false,
+            anyOf: [
+              { '$ref': '#/$defs/required' },
+              { '$ref': '#/$defs/default' },
+              { '$ref': '#/$defs/readonly' },
+              { '$ref': '#/$defs/min' },
+              { '$ref': '#/$defs/limit' },
+              { '$ref': '#/$defs/length' },
+              { '$ref': '#/$defs/unique' },
+              { '$ref': '#/$defs/case_insensitive' }
+            ]
+          }
+        }
+      }
+    )
   end
 
   describe '.compatible_types' do

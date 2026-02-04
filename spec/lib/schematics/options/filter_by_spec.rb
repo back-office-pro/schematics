@@ -17,4 +17,5 @@ describe Schematics::Options::FilterBy do
 
   its(:option_name) { is_expected.to eq(:filter_by) }
   its(:input_type) { is_expected.to eq(:string) }
+  its(:openai_type) { is_expected.to eq('string') }
 end

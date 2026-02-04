@@ -17,4 +17,5 @@ describe Schematics::Options::Encrypted do
 
   its(:option_name) { is_expected.to eq(:encrypted) }
   its(:input_type) { is_expected.to eq(:boolean) }
+  its(:openai_type) { is_expected.to eq('boolean') }
 end

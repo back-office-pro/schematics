@@ -23,6 +23,12 @@ module Schematics
         def collection = %w[has_many has_one]
           .map { [I18n.t(_1, scope: %i[activemodel attributes schematics/options/wrapper inverse_association_types]), _1] } # rubocop:disable Layout/LineLength
           .sort
+
+        def openai_type = 'string'
+
+        def openai_description = 'The inverse type of the association'
+
+        def openai_enum = { enum: collection.map(&:second) }
       end
     end
   end

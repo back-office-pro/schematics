@@ -15,6 +15,10 @@ module Schematics
     class Default < Option
       class << self
         def input_type = :polymorphic
+
+        def openai_type = 'string'
+
+        def openai_description = 'Default value of the attribute'
       end
     end
   end

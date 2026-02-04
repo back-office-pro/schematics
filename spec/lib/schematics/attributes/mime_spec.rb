@@ -21,6 +21,7 @@ describe Schematics::Attributes::Mime do
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Documentable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Generatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -51,6 +52,7 @@ describe Schematics::Attributes::Mime do
   its(:collection) { is_expected.to eq([['PNG', 'image/png']]) }
   its(:normalization) { is_expected.to be_nil }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.active_storage/attachment.content_type') } # rubocop:disable Layout/LineLength
+  its(:openai_description) { is_expected.to eq('An attribute which represents a MIME type') }
 
   its(:to_spec) do
     is_expected.to eq <<~TEXT.chomp
@@ -78,6 +80,34 @@ describe Schematics::Attributes::Mime do
     is_expected.to eq <<~RUBY
       validates :content_type, {:inclusion=>{:in=>["image/png"], :allow_blank=>true}}
     RUBY
+  end
+
+  its(:to_openai_schema) do
+    is_expected.to eq(
+      mime: {
+        type: 'object',
+        additionalProperties: false,
+        required: %w[name type options],
+        properties: {
+          type: {
+            type: 'string',
+            description: 'An attribute which represents a MIME type',
+            enum: %w[mime]
+          },
+          name: { '$ref': '#/$defs/name' },
+          options: {
+            type: 'object',
+            additionalProperties: false,
+            anyOf: [
+              { '$ref': '#/$defs/required' },
+              { '$ref': '#/$defs/default' },
+              { '$ref': '#/$defs/readonly' },
+              { '$ref': '#/$defs/unique' }
+            ]
+          }
+        }
+      }
+    )
   end
 
   describe '#format' do

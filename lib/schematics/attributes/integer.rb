@@ -29,6 +29,8 @@ module Schematics
 
       def default = super.to_i
 
+      def openai_description = 'An attribute which represents an integer'
+
       def open_api_schema_type = 'integer'
 
       def precision = 0

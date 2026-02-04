@@ -22,6 +22,8 @@ module Schematics
         .excluding(Options::Readonly)
         .push(Options::Events, Options::DirectAssignment)
 
+      def openai_description = 'An attribute which represents a state machine'
+
       def icon = :recycle
 
       def readonly? = true

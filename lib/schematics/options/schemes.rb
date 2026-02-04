@@ -21,6 +21,12 @@ module Schematics
         def multiple? = true
 
         def collection = %w[http https]
+
+        def openai_type = 'array'
+
+        def openai_description = 'The URL schemes'
+
+        def openai_enum = { items: { type: 'string', enum: collection } }
       end
     end
   end

@@ -25,6 +25,12 @@ module Schematics
         def collection = ::Mime::LOOKUP
           .keys
           .sort
+
+        def openai_type = 'array'
+
+        def openai_description = 'The content types of the attachment'
+
+        def openai_enum = { items: { type: 'string', enum: collection } }
       end
     end
   end

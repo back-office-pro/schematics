@@ -28,6 +28,8 @@ module Schematics
         value&.to_plain_text
       end
 
+      def openai_description = 'An attribute which represents a Rich Text'
+
       def icon = :align_justify
 
       def preload = [association_name => [embeds_attachments: :blob]]

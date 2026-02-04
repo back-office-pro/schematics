@@ -23,6 +23,7 @@ describe Schematics::Attributes::TimeZone do
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Documentable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Generatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -57,6 +58,7 @@ describe Schematics::Attributes::TimeZone do
   its(:normalization) { is_expected.to be_nil }
   its(:to_spec) { is_expected.to eq('A user has a **time zone** attribute of type *time zone*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.user.time_zone') }
+  its(:openai_description) { is_expected.to eq('An attribute which represents a time zone') }
 
   its(:available_options) do
     is_expected.to contain_exactly(
@@ -78,6 +80,34 @@ describe Schematics::Attributes::TimeZone do
     is_expected.to eq <<~RUBY
       validates :time_zone, {:inclusion=>{:in=>["Paris"], :allow_blank=>true}}
     RUBY
+  end
+
+  its(:to_openai_schema) do
+    is_expected.to eq(
+      time_zone: {
+        type: 'object',
+        additionalProperties: false,
+        required: %w[name type options],
+        properties: {
+          type: {
+            type: 'string',
+            description: 'An attribute which represents a time zone',
+            enum: %w[time_zone]
+          },
+          name: { '$ref': '#/$defs/name' },
+          options: {
+            type: 'object',
+            additionalProperties: false,
+            anyOf: [
+              { '$ref': '#/$defs/required' },
+              { '$ref': '#/$defs/default' },
+              { '$ref': '#/$defs/readonly' },
+              { '$ref': '#/$defs/unique' }
+            ]
+          }
+        }
+      }
+    )
   end
 
   context 'when time_zone is required' do

@@ -29,6 +29,8 @@ module Schematics
       def collection = super.sort
 
       def values = ::Mime::LOOKUP.keys
+
+      def openai_description = 'An attribute which represents a MIME type'
     end
   end
 end

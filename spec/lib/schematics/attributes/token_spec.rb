@@ -19,6 +19,7 @@ describe Schematics::Attributes::Token do
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Documentable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Generatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -42,6 +43,7 @@ describe Schematics::Attributes::Token do
   its(:to_s) { is_expected.to eq('access_token:string:uniq') }
   its(:to_spec) { is_expected.to eq('A entity has a **access token** attribute of type *token*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.entity.access_token') }
+  its(:openai_description) { is_expected.to eq('An attribute which represents a token') }
 
   its(:validators) do
     is_expected.to eq(uniqueness_with_deleted: { case_sensitive: true, allow_blank: true })
@@ -66,6 +68,31 @@ describe Schematics::Attributes::Token do
       encrypts :access_token, deterministic: true
       has_secure_token :access_token, length: 32
     RUBY
+  end
+
+  its(:to_openai_schema) do
+    is_expected.to eq(
+      token: {
+        type: 'object',
+        additionalProperties: false,
+        required: %w[name type options],
+        properties: {
+          type: {
+            type: 'string',
+            description: 'An attribute which represents a token',
+            enum: %w[token]
+          },
+          name: { '$ref': '#/$defs/name' },
+          options: {
+            type: 'object',
+            additionalProperties: false,
+            anyOf: [
+              { '$ref': '#/$defs/required' }
+            ]
+          }
+        }
+      }
+    )
   end
 
   describe '.compatible_types' do

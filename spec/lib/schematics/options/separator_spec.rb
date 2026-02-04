@@ -19,4 +19,23 @@ describe Schematics::Options::Separator do
   its(:input_type) { is_expected.to eq(:select) }
   its(:controller) { is_expected.to eq('dropdown') }
   its(:collection) { is_expected.to eq(%w[, .]) }
+  its(:openai_description) { is_expected.to eq('The number separator') }
+  its(:openai_type) { is_expected.to eq('string') }
+
+  its(:to_openai_schema) do
+    is_expected.to eq(
+      separator: {
+        type: 'object',
+        additionalProperties: false,
+        required: %w[separator],
+        properties: {
+          separator: {
+            type: 'string',
+            description: 'The number separator',
+            enum: %w[, .]
+          }
+        }
+      }
+    )
+  end
 end

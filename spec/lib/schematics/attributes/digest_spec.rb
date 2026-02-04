@@ -19,6 +19,7 @@ describe Schematics::Attributes::Digest do
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Documentable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Generatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -41,6 +42,7 @@ describe Schematics::Attributes::Digest do
   its(:icon) { is_expected.to eq(:key) }
   its(:to_spec) { is_expected.to eq('A entity has a **password** attribute of type *password*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.entity.password') }
+  its(:openai_description) { is_expected.to eq('An attribute which represents a password') }
 
   its(:available_options) do
     is_expected.to contain_exactly(
@@ -70,6 +72,35 @@ describe Schematics::Attributes::Digest do
     is_expected.to eq <<~RUBY
       has_secure_password :password, validations: false
     RUBY
+  end
+
+  its(:to_openai_schema) do
+    is_expected.to eq(
+      digest: {
+        type: 'object',
+        additionalProperties: false,
+        required: %w[name type options],
+        properties: {
+          type: {
+            type: 'string',
+            description: 'An attribute which represents a password',
+            enum: %w[digest]
+          },
+          name: { '$ref': '#/$defs/name' },
+          options: {
+            type: 'object',
+            additionalProperties: false,
+            anyOf: [
+              { '$ref': '#/$defs/required' },
+              { '$ref': '#/$defs/default' },
+              { '$ref': '#/$defs/readonly' },
+              { '$ref': '#/$defs/confirm' },
+              { '$ref': '#/$defs/min' }
+            ]
+          }
+        }
+      }
+    )
   end
 
   context 'when digest needs to be confirmed' do

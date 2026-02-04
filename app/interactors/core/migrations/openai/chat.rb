@@ -19,7 +19,6 @@ module Core
         delegate :migration, to: :context, private: true
         delegate :prompt, to: :migration, private: true
         delegate :logger, :env, to: '::Rails', private: true
-        delegate :structured_output_schema, to: '::OpenAI', private: true
         delegate :openai_access_token,
                  :openai_uri_base,
                  :openai_model,
@@ -54,7 +53,7 @@ module Core
               type: 'function',
               function: {
                 name: 'schema',
-                parameters: structured_output_schema,
+                parameters: ::OpenAI::StructuredOutput.new.to_h,
                 strict: true
               }
             }

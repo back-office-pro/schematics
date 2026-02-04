@@ -19,6 +19,7 @@ describe Schematics::Attributes::ResponseCode do
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Documentable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Generatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -44,6 +45,10 @@ describe Schematics::Attributes::ResponseCode do
   its(:icon) { is_expected.to eq(:hashtag) }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.api_request.status') }
 
+  its(:openai_description) do
+    is_expected.to eq('An attribute which represents a HTTP response code')
+  end
+
   its(:to_spec) do
     is_expected.to eq('A api request has a **status** attribute of type *response code*')
   end
@@ -62,6 +67,39 @@ describe Schematics::Attributes::ResponseCode do
       Schematics::Options::LessThan,
       Schematics::Options::LessThanOrEqualTo,
       Schematics::Options::OtherThan
+    )
+  end
+
+  its(:to_openai_schema) do
+    is_expected.to eq(
+      response_code: {
+        type: 'object',
+        additionalProperties: false,
+        required: %w[name type options],
+        properties: {
+          type: {
+            type: 'string',
+            description: 'An attribute which represents a HTTP response code',
+            enum: %w[response_code]
+          },
+          name: { '$ref': '#/$defs/name' },
+          options: {
+            type: 'object',
+            additionalProperties: false,
+            anyOf: [
+              { '$ref': '#/$defs/required' },
+              { '$ref': '#/$defs/default' },
+              { '$ref': '#/$defs/readonly' },
+              { '$ref': '#/$defs/greater_than' },
+              { '$ref': '#/$defs/greater_than_or_equal_to' },
+              { '$ref': '#/$defs/equal_to' },
+              { '$ref': '#/$defs/less_than' },
+              { '$ref': '#/$defs/less_than_or_equal_to' },
+              { '$ref': '#/$defs/other_than' }
+            ]
+          }
+        }
+      }
     )
   end
 

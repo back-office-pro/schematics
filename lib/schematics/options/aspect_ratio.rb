@@ -23,6 +23,12 @@ module Schematics
         def collection = %w[landscape square is_16_9 is_4_3]
           .map { [I18n.t(_1, scope: %i[activemodel attributes schematics/options/wrapper aspect_ratios]), _1] } # rubocop:disable Layout/LineLength
           .sort
+
+        def openai_type = 'array'
+
+        def openai_description = 'The aspect ratios of the image'
+
+        def openai_enum = { items: { type: 'string', enum: collection.map(&:second) } }
       end
     end
   end

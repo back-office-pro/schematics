@@ -25,6 +25,8 @@ module Schematics
           .join(' ')
       end
 
+      def openai_description = 'An attribute which represents a HTTP response code'
+
       def icon = :hashtag
     end
   end

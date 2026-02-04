@@ -23,6 +23,8 @@ module Schematics
 
       def icon = :table
 
+      def openai_description = 'An attribute which represents a JSON value'
+
       def open_api_schema_type = 'object'
 
       def permitted_params = { super => {} }

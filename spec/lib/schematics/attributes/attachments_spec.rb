@@ -19,6 +19,7 @@ describe Schematics::Attributes::Attachments do
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Documentable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Generatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -51,6 +52,10 @@ describe Schematics::Attributes::Attachments do
   its(:to_spec) { is_expected.to eq('A directory has a **files** attribute of type *attachments*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.directory.files') }
   it { is_expected.not_to be_image }
+
+  its(:openai_description) do
+    is_expected.to eq('An attribute which represents a set of attachments')
+  end
 
   its(:available_options) do
     is_expected.to contain_exactly(
@@ -100,6 +105,39 @@ describe Schematics::Attributes::Attachments do
                                     allow_destroy: true,
                                     reject_if: :all_blank
     RUBY
+  end
+
+  its(:to_openai_schema) do
+    is_expected.to eq(
+      attachments: {
+        type: 'object',
+        additionalProperties: false,
+        required: %w[name type options],
+        properties: {
+          type: {
+            type: 'string',
+            description: 'An attribute which represents a set of attachments',
+            enum: %w[attachments]
+          },
+          name: { '$ref': '#/$defs/name' },
+          options: {
+            type: 'object',
+            additionalProperties: false,
+            anyOf: [
+              { '$ref': '#/$defs/required' },
+              { '$ref': '#/$defs/readonly' },
+              { '$ref': '#/$defs/size' },
+              { '$ref': '#/$defs/aspect_ratio' },
+              { '$ref': '#/$defs/width' },
+              { '$ref': '#/$defs/height' },
+              { '$ref': '#/$defs/content_type' },
+              { '$ref': '#/$defs/min' },
+              { '$ref': '#/$defs/max' }
+            ]
+          }
+        }
+      }
+    )
   end
 
   context 'when attachment is required' do

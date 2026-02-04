@@ -19,6 +19,7 @@ describe Schematics::Attributes::OneTimePassword do
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Documentable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Generatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -45,6 +46,10 @@ describe Schematics::Attributes::OneTimePassword do
     is_expected.to eq('A user has a **otp secret** attribute of type *one-time password*')
   end
 
+  its(:openai_description) do
+    is_expected.to eq('An attribute which represents a One Time Password')
+  end
+
   its(:available_options) do
     is_expected.to contain_exactly(
       Schematics::Options::Required,
@@ -60,6 +65,31 @@ describe Schematics::Attributes::OneTimePassword do
                             after_column_name: :otp_last_at,
                             one_time_backup_codes: true
     RUBY
+  end
+
+  its(:to_openai_schema) do
+    is_expected.to eq(
+      one_time_password: {
+        type: 'object',
+        additionalProperties: false,
+        required: %w[name type options],
+        properties: {
+          type: {
+            type: 'string',
+            description: 'An attribute which represents a One Time Password',
+            enum: %w[one_time_password]
+          },
+          name: { '$ref': '#/$defs/name' },
+          options: {
+            type: 'object',
+            additionalProperties: false,
+            anyOf: [
+              { '$ref': '#/$defs/required' }
+            ]
+          }
+        }
+      }
+    )
   end
 
   describe '.compatible_types' do

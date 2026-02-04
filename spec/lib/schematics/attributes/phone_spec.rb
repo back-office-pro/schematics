@@ -19,6 +19,7 @@ describe Schematics::Attributes::Phone do
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Documentable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Generatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -52,6 +53,7 @@ describe Schematics::Attributes::Phone do
   its(:normalization) { is_expected.to be_nil }
   its(:to_spec) { is_expected.to eq('A user has a **phone** attribute of type *phone number*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.user.phone') }
+  its(:openai_description) { is_expected.to eq('An attribute which represents a phone number') }
 
   its(:available_options) do
     is_expected.to contain_exactly(
@@ -73,6 +75,38 @@ describe Schematics::Attributes::Phone do
     is_expected.to eq <<~RUBY
       validates :phone, {:phone=>{:allow_blank=>true}}
     RUBY
+  end
+
+  its(:to_openai_schema) do
+    is_expected.to eq(
+      phone: {
+        type: 'object',
+        additionalProperties: false,
+        required: %w[name type options],
+        properties: {
+          type: {
+            type: 'string',
+            description: 'An attribute which represents a phone number',
+            enum: %w[phone]
+          },
+          name: { '$ref': '#/$defs/name' },
+          options: {
+            type: 'object',
+            additionalProperties: false,
+            anyOf: [
+              { '$ref': '#/$defs/required' },
+              { '$ref': '#/$defs/default' },
+              { '$ref': '#/$defs/readonly' },
+              { '$ref': '#/$defs/min' },
+              { '$ref': '#/$defs/limit' },
+              { '$ref': '#/$defs/length' },
+              { '$ref': '#/$defs/unique' },
+              { '$ref': '#/$defs/case_insensitive' }
+            ]
+          }
+        }
+      }
+    )
   end
 
   context 'when phone is unique' do

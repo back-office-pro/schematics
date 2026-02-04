@@ -24,6 +24,8 @@ module Schematics
 
       def default = nil
 
+      def openai_description = 'An attribute which represents a One Time Password'
+
       def icon = :mobile_screen
 
       def to_str = super + <<~RUBY

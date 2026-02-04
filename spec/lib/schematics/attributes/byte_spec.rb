@@ -19,6 +19,7 @@ describe Schematics::Attributes::Byte do
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Documentable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Generatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -44,6 +45,7 @@ describe Schematics::Attributes::Byte do
   its(:validators) { is_expected.to eq(numericality: { allow_blank: true }) }
   its(:icon) { is_expected.to eq(:weight_hanging) }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.active_storage/attachment.byte_size') } # rubocop:disable Layout/LineLength
+  its(:openai_description) { is_expected.to eq('An attribute which represents a byte') }
 
   its(:to_spec) do
     is_expected.to eq('A active storage/attachment has a **byte size** attribute of type *byte*')
@@ -65,6 +67,41 @@ describe Schematics::Attributes::Byte do
       Schematics::Options::OtherThan,
       Schematics::Options::Precision,
       Schematics::Options::Separator
+    )
+  end
+
+  its(:to_openai_schema) do
+    is_expected.to eq(
+      byte: {
+        type: 'object',
+        additionalProperties: false,
+        required: %w[name type options],
+        properties: {
+          type: {
+            type: 'string',
+            description: 'An attribute which represents a byte',
+            enum: %w[byte]
+          },
+          name: { '$ref': '#/$defs/name' },
+          options: {
+            type: 'object',
+            additionalProperties: false,
+            anyOf: [
+              { '$ref': '#/$defs/required' },
+              { '$ref': '#/$defs/default' },
+              { '$ref': '#/$defs/readonly' },
+              { '$ref': '#/$defs/greater_than' },
+              { '$ref': '#/$defs/greater_than_or_equal_to' },
+              { '$ref': '#/$defs/equal_to' },
+              { '$ref': '#/$defs/less_than' },
+              { '$ref': '#/$defs/less_than_or_equal_to' },
+              { '$ref': '#/$defs/other_than' },
+              { '$ref': '#/$defs/precision' },
+              { '$ref': '#/$defs/separator' }
+            ]
+          }
+        }
+      }
     )
   end
 

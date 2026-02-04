@@ -23,6 +23,7 @@ describe Schematics::Attributes::Code do
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Documentable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Generatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -52,6 +53,7 @@ describe Schematics::Attributes::Code do
   its(:search_query) { is_expected.to eq(:content_i_cont) }
   its(:preload) { is_expected.to be_empty }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.template.content') }
+  its(:openai_description) { is_expected.to eq('An attribute which represents a source code') }
 
   its(:to_spec) do
     is_expected.to eq('A template has a **content** attribute of type *code editor*')
@@ -70,6 +72,38 @@ describe Schematics::Attributes::Code do
       Schematics::Options::Limit,
       Schematics::Options::Length,
       Schematics::Options::Language
+    )
+  end
+
+  its(:to_openai_schema) do
+    is_expected.to eq(
+      code: {
+        type: 'object',
+        additionalProperties: false,
+        required: %w[name type options],
+        properties: {
+          type: {
+            type: 'string',
+            description: 'An attribute which represents a source code',
+            enum: %w[code]
+          },
+          name: { '$ref': '#/$defs/name' },
+          options: {
+            type: 'object',
+            additionalProperties: false,
+            anyOf: [
+              { '$ref': '#/$defs/required' },
+              { '$ref': '#/$defs/default' },
+              { '$ref': '#/$defs/readonly' },
+              { '$ref': '#/$defs/translated' },
+              { '$ref': '#/$defs/min' },
+              { '$ref': '#/$defs/limit' },
+              { '$ref': '#/$defs/length' },
+              { '$ref': '#/$defs/language' }
+            ]
+          }
+        }
+      }
     )
   end
 

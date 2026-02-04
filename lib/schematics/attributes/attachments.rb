@@ -52,6 +52,8 @@ module Schematics
         }
       )
 
+      def openai_description = 'An attribute which represents a set of attachments'
+
       private
 
       def attached_method = :has_many_base64_attached

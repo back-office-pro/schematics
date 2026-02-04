@@ -23,6 +23,8 @@ module Schematics
 
       def default = "#{SecureRandom.base58}@#{SecureRandom.base58}.com"
 
+      def openai_description = 'An attribute which represents an email address'
+
       def icon = :envelope
 
       def normalization = :downcase

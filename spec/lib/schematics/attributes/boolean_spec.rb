@@ -19,6 +19,7 @@ describe Schematics::Attributes::Boolean do
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Documentable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Generatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -44,6 +45,7 @@ describe Schematics::Attributes::Boolean do
   its(:search_query) { is_expected.to eq(:toggle_true) }
   its(:to_spec) { is_expected.to eq('A entity has a **toggle** attribute of type *boolean*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.entity.toggle') }
+  its(:openai_description) { is_expected.to eq('An attribute which represents a boolean') }
 
   its(:available_options) do
     is_expected.to contain_exactly(
@@ -61,6 +63,34 @@ describe Schematics::Attributes::Boolean do
     is_expected.to eq <<~RUBY
       attribute :toggle, default: -> { false }
     RUBY
+  end
+
+  its(:to_openai_schema) do
+    is_expected.to eq(
+      boolean: {
+        type: 'object',
+        additionalProperties: false,
+        required: %w[name type options],
+        properties: {
+          type: {
+            type: 'string',
+            description: 'An attribute which represents a boolean',
+            enum: %w[boolean]
+          },
+          name: { '$ref': '#/$defs/name' },
+          options: {
+            type: 'object',
+            additionalProperties: false,
+            anyOf: [
+              { '$ref': '#/$defs/required' },
+              { '$ref': '#/$defs/default' },
+              { '$ref': '#/$defs/readonly' },
+              { '$ref': '#/$defs/acceptance' }
+            ]
+          }
+        }
+      }
+    )
   end
 
   context 'when true is the default value' do

@@ -112,6 +112,12 @@ module Schematics
           xml
           yaml
         ]
+
+        def openai_type = 'string'
+
+        def openai_description = 'The language of the code editor'
+
+        def openai_enum = { enum: collection }
       end
     end
   end

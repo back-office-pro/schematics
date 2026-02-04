@@ -30,6 +30,8 @@ module Schematics
         .build(host: "www.#{SecureRandom.base58}.com")
         .to_s
 
+      def openai_description = 'An attribute which represents a URL'
+
       def icon = :wifi
 
       def normalization = :downcase

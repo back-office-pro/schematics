@@ -31,6 +31,8 @@ module Schematics
 
       def default = SecureRandom.base58(LENGTH)
 
+      def openai_description = 'An attribute which represents a token'
+
       def icon = :passport
 
       def to_str = super + <<~RUBY

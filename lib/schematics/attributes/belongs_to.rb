@@ -26,6 +26,8 @@ module Schematics
 
         Associations::HasManyNested.new(belongs_to: self)
       end
+
+      def openai_description = 'A one-to-many association'
     end
   end
 end

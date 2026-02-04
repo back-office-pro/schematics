@@ -21,6 +21,12 @@ module Schematics
         def multiple? = false
 
         def collection = %w[, .]
+
+        def openai_type = 'string'
+
+        def openai_description = 'The number separator'
+
+        def openai_enum = { enum: collection }
       end
     end
   end

@@ -19,6 +19,7 @@ describe Schematics::Attributes::Duration do
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Documentable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Generatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -44,6 +45,7 @@ describe Schematics::Attributes::Duration do
   its(:icon) { is_expected.to eq(:hourglass) }
   its(:to_spec) { is_expected.to eq('A movie has a **duration** attribute of type *duration*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.movie.duration') }
+  its(:openai_description) { is_expected.to eq('An attribute which represents a duration') }
 
   its(:available_options) do
     is_expected.to contain_exactly(
@@ -60,6 +62,40 @@ describe Schematics::Attributes::Duration do
       Schematics::Options::LessThanOrEqualTo,
       Schematics::Options::OtherThan,
       Schematics::Options::Unit
+    )
+  end
+
+  its(:to_openai_schema) do
+    is_expected.to eq(
+      duration: {
+        type: 'object',
+        additionalProperties: false,
+        required: %w[name type options],
+        properties: {
+          type: {
+            type: 'string',
+            description: 'An attribute which represents a duration',
+            enum: %w[duration]
+          },
+          name: { '$ref': '#/$defs/name' },
+          options: {
+            type: 'object',
+            additionalProperties: false,
+            anyOf: [
+              { '$ref': '#/$defs/required' },
+              { '$ref': '#/$defs/default' },
+              { '$ref': '#/$defs/readonly' },
+              { '$ref': '#/$defs/greater_than' },
+              { '$ref': '#/$defs/greater_than_or_equal_to' },
+              { '$ref': '#/$defs/equal_to' },
+              { '$ref': '#/$defs/less_than' },
+              { '$ref': '#/$defs/less_than_or_equal_to' },
+              { '$ref': '#/$defs/other_than' },
+              { '$ref': '#/$defs/unit' }
+            ]
+          }
+        }
+      }
     )
   end
 

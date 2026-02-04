@@ -41,6 +41,8 @@ module Schematics
         values.map { |value| Options::EnumValue.new(enum: self, value:) }
       end
 
+      def openai_description = 'An attribute which represents an enumeration'
+
       def icon = :list_ol
 
       def to_str

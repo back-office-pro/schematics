@@ -16,6 +16,8 @@ module Schematics
     class Address < String
       include Behaviours::Untranslatable
 
+      def openai_description = 'An attribute which represents a postal address'
+
       def icon = :location_dot
     end
   end

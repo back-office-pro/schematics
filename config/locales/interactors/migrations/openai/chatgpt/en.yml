@@ -2,5 +2,5 @@
 en:
   migrations:
     openai:
-      system: You will create a domain model of at least three entities according to user needs
+      system: You will create a domain model of at least five entities according to user needs
       user: Create a web application in the %{business_sector} business sector

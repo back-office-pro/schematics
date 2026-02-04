@@ -15,6 +15,8 @@ module Schematics
     class Translated < Option
       class << self
         def input_type = :boolean
+
+        def openai_description = 'Is the text translated or not'
       end
     end
   end

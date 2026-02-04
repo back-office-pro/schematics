@@ -65,6 +65,8 @@ module Schematics
         .then_tap { _1.tomorrow if options.greater_than || options.greater_than_or_equal_to }
         .to_fs(:db)
 
+      def openai_description = 'An attribute which represents a date without time'
+
       protected
 
       def collection = entity

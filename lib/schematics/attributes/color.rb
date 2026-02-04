@@ -21,6 +21,8 @@ module Schematics
 
       def default = '#000000'
 
+      def openai_description = 'An attribute which represents an hexadecimal color'
+
       def icon = :palette
 
       def validators = super.merge(

@@ -38,6 +38,8 @@ module Schematics
 
       def icon = :key
 
+      def openai_description = 'An attribute which represents a password'
+
       def open_api_schema_type = 'password'
 
       def permitted_params = [name.to_sym, :"#{name}_confirmation"]

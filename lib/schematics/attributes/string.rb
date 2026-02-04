@@ -25,6 +25,8 @@ module Schematics
 
       def translatable_type = 'string'
 
+      def openai_description = 'An attribute which represents a string'
+
       def icon = :align_justify
     end
   end

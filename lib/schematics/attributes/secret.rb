@@ -29,6 +29,8 @@ module Schematics
 
       def default = SecureRandom.base58
 
+      def openai_description = 'An attribute which represents a secret'
+
       def icon = :user_secret
     end
   end

@@ -15,6 +15,8 @@ module Schematics
     class AutoIncrement < Option
       class << self
         def input_type = :boolean
+
+        def openai_description = 'Is the number auto incrementable or not'
       end
     end
   end

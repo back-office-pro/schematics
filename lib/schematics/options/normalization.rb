@@ -23,6 +23,12 @@ module Schematics
         def collection = %w[capitalize upcase downcase]
           .map { [I18n.t(_1, scope: %i[activemodel attributes schematics/options/wrapper normalizations]), _1] } # rubocop:disable Layout/LineLength
           .sort
+
+        def openai_type = 'string'
+
+        def openai_description = 'The text formatting'
+
+        def openai_enum = { enum: collection.map(&:second) }
       end
     end
   end

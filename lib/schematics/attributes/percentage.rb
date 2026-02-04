@@ -21,6 +21,8 @@ module Schematics
         value && number_to_percentage(value, **{ precision:, separator: }.compact)
       end
 
+      def openai_description = 'An attribute which represents a percentage'
+
       def icon = :percent
 
       def unit = '%'

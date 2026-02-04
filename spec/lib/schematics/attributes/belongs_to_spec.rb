@@ -20,6 +20,7 @@ describe Schematics::Attributes::BelongsTo do
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Documentable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Generatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -56,6 +57,7 @@ describe Schematics::Attributes::BelongsTo do
   its(:search_query) { is_expected.to eq(:user_i_cont) }
   its(:to_spec) { is_expected.to eq('A entity has a **user** attribute of type *association*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.entity.user') }
+  its(:openai_description) { is_expected.to eq('A one-to-many association') }
 
   its(:available_options) do
     is_expected.to contain_exactly(
@@ -98,6 +100,33 @@ describe Schematics::Attributes::BelongsTo do
                  optional: true,
                  autosave: true
     RUBY
+  end
+
+  its(:to_openai_schema) do
+    is_expected.to eq(
+      belongs_to: {
+        type: 'object',
+        additionalProperties: false,
+        required: %w[name type options],
+        properties: {
+          type: {
+            type: 'string',
+            description: 'A one-to-many association',
+            enum: %w[belongs_to]
+          },
+          name: { '$ref': '#/$defs/name' },
+          options: {
+            type: 'object',
+            additionalProperties: false,
+            anyOf: [
+              { '$ref': '#/$defs/required' },
+              { '$ref': '#/$defs/readonly' },
+              { '$ref': '#/$defs/inverse_association_type' }
+            ]
+          }
+        }
+      }
+    )
   end
 
   context 'when belongs_to is required' do

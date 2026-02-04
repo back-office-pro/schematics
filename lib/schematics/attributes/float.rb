@@ -33,6 +33,8 @@ module Schematics
 
       def default = super.to_f
 
+      def openai_description = 'An attribute which represents a float number'
+
       def open_api_schema_type = 'float'
     end
   end

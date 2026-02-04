@@ -17,4 +17,5 @@ describe Schematics::Options::Cached do
 
   its(:option_name) { is_expected.to eq(:cached) }
   its(:input_type) { is_expected.to eq(:boolean) }
+  its(:openai_type) { is_expected.to eq('boolean') }
 end

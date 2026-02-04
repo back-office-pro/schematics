@@ -14,7 +14,7 @@ module Schematics
   module SchemaEditor
     module Options
       module Inputs
-        module Integer
+        module Number
           class Component < Inputs::Component
             delegate :min, to: :option
           end

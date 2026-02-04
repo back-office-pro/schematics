@@ -17,6 +17,8 @@ module Schematics
 
       def available_options = super.excluding(Options::Unit)
 
+      def openai_description = 'An attribute which represents a rating'
+
       def icon = :star
 
       def validators = super.merge(

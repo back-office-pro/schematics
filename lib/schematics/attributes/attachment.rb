@@ -136,6 +136,8 @@ module Schematics
         .join('_')
         .to_sym
 
+      def openai_description = 'An attribute which represents an attachment'
+
       protected
 
       memoize def dummy = Specs::Dummy.new(extension)

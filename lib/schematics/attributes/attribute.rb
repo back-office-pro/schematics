@@ -22,6 +22,7 @@ module Schematics
       include Behaviours::Nameable
       include Behaviours::Validatable
       include Behaviours::Documentable
+      include Behaviours::Generatable
       include Behaviours::Internationalizable
 
       delegate :cached?, to: :options

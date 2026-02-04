@@ -15,6 +15,8 @@ module Schematics
     class Unit < Option
       class << self
         def input_type = :string
+
+        def openai_description = 'The number unit'
       end
     end
   end

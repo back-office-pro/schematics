@@ -26,4 +26,23 @@ describe Schematics::Options::Icon do
   its(:input_type) { is_expected.to eq(:select) }
   its(:collection) { is_expected.to eq(%i[box users]) }
   its(:controller) { is_expected.to eq('dropdowns--fa-icons-dropdown') }
+  its(:openai_description) { is_expected.to eq('An icon which represents the entity or event') }
+  its(:openai_type) { is_expected.to eq('string') }
+
+  its(:to_openai_schema) do
+    is_expected.to eq(
+      icon: {
+        type: 'object',
+        additionalProperties: false,
+        required: %w[icon],
+        properties: {
+          icon: {
+            type: 'string',
+            description: 'An icon which represents the entity or event',
+            enum: %w[box users]
+          }
+        }
+      }
+    )
+  end
 end

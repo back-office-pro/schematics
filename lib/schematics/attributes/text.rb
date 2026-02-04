@@ -36,6 +36,8 @@ module Schematics
 
       def database_type = 'text'
 
+      def openai_description = 'An attribute which represents a text'
+
       def icon = :font
 
       def format(value)

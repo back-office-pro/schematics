@@ -35,6 +35,8 @@ module Schematics
       def format(values)
         values&.join(', ')
       end
+
+      def openai_description = 'An attribute which represents an array of values'
     end
   end
 end

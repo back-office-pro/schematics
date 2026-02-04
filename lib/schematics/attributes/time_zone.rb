@@ -20,6 +20,8 @@ module Schematics
       include Behaviours::Untranslatable
       include Behaviours::Unnormalizable
 
+      def openai_description = 'An attribute which represents a time zone'
+
       def icon = :clock
 
       def format(value)

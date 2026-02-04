@@ -20,6 +20,8 @@ module Schematics
       include Behaviours::Untranslatable
       include Behaviours::Unnormalizable
 
+      def openai_description = 'An attribute which represents a country name'
+
       def icon = :earth_europe
 
       # :reek:FeatureEnvy

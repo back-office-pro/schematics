@@ -19,6 +19,8 @@ module Schematics
       include Behaviours::Untranslatable
       include Behaviours::Unnormalizable
 
+      def openai_description = 'An attribute which represents a user agent'
+
       def icon = :computer
 
       def format(value)

@@ -19,6 +19,7 @@ describe Schematics::Attributes::Secret do
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Documentable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Generatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -44,6 +45,7 @@ describe Schematics::Attributes::Secret do
   its(:default) { is_expected.to be_a(String) }
   its(:icon) { is_expected.to eq(:user_secret) }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.entity.gcloud_public_api_key') }
+  its(:openai_description) { is_expected.to eq('An attribute which represents a secret') }
 
   its(:to_spec) do
     is_expected.to eq('A entity has a **gcloud public api key** attribute of type *secret*')
@@ -66,6 +68,34 @@ describe Schematics::Attributes::Secret do
       encrypts :gcloud_public_api_key, deterministic: true
       normalizes :gcloud_public_api_key, with: -> { _1.strip.itself.presence }
     RUBY
+  end
+
+  its(:to_openai_schema) do
+    is_expected.to eq(
+      secret: {
+        type: 'object',
+        additionalProperties: false,
+        required: %w[name type options],
+        properties: {
+          type: {
+            type: 'string',
+            description: 'An attribute which represents a secret',
+            enum: %w[secret]
+          },
+          name: { '$ref': '#/$defs/name' },
+          options: {
+            type: 'object',
+            additionalProperties: false,
+            anyOf: [
+              { '$ref': '#/$defs/required' },
+              { '$ref': '#/$defs/default' },
+              { '$ref': '#/$defs/readonly' },
+              { '$ref': '#/$defs/normalization' }
+            ]
+          }
+        }
+      }
+    )
   end
 
   describe '.compatible_types' do

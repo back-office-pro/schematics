@@ -31,6 +31,7 @@ describe Schematics::Attributes::User do
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Documentable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Generatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -64,6 +65,7 @@ describe Schematics::Attributes::User do
   its(:to_spec) { is_expected.to eq('A entity has a **user** attribute of type *current user*') }
   its(:to_s) { is_expected.to eq('user:belongs_to:index') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.entity.user') }
+  its(:openai_description) { is_expected.to eq('An attribute which represents the current user') }
 
   its(:available_options) do
     is_expected.to contain_exactly(
@@ -106,6 +108,33 @@ describe Schematics::Attributes::User do
                  optional: true,
                  autosave: true
     RUBY
+  end
+
+  its(:to_openai_schema) do
+    is_expected.to eq(
+      user: {
+        type: 'object',
+        additionalProperties: false,
+        required: %w[name type options],
+        properties: {
+          type: {
+            type: 'string',
+            description: 'An attribute which represents the current user',
+            enum: %w[user]
+          },
+          name: { '$ref': '#/$defs/name' },
+          options: {
+            type: 'object',
+            additionalProperties: false,
+            anyOf: [
+              { '$ref': '#/$defs/required' },
+              { '$ref': '#/$defs/readonly' },
+              { '$ref': '#/$defs/inverse_association_type' }
+            ]
+          }
+        }
+      }
+    )
   end
 
   context 'when association is required' do

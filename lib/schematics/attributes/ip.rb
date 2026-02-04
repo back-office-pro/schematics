@@ -22,6 +22,8 @@ module Schematics
 
       def default = '::1'
 
+      def openai_description = 'An attribute which represents an IP address'
+
       def icon = :network_wired
 
       def format(value)
