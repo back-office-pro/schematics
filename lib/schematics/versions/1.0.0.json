@@ -1267,7 +1267,7 @@
             "in_progress",
             "finished",
             "rollbacking",
-            "generating",
+            "reasoning",
             "error",
             "no_solution"
           ],

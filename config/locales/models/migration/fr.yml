@@ -16,10 +16,10 @@ fr:
           editing: Mode édition
           error: Erreur
           finished: Terminée
-          generating: Génération en cours
           in_progress: En cours
           no_solution: Pas de solution
           pending: En attente
+          reasoning: Raisonnement en cours
           rollbacking: Retour en arrière en cours
           scheduled: Programmée
     events:

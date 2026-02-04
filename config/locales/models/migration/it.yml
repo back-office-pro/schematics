@@ -16,10 +16,10 @@ it:
           editing: Modalità di modifica
           error: Errore
           finished: Finita
-          generating: Generazione in corso
           in_progress: In corso
           no_solution: Nessuna soluzione
           pending: In sospeso
+          reasoning: Ragionamento in corso
           rollbacking: Rollback in corso
           scheduled: Programmata
     events:

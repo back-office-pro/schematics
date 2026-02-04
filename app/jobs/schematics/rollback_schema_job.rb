@@ -17,7 +17,7 @@ module Schematics
     queue_as :critical
 
     def perform(migration)
-      return if migration.state_generating?
+      return if migration.state_reasoning?
       return if migration.state_in_progress?
 
       migration.finalize!(Core::Migrations::Rollback.call(migration:).failure?)

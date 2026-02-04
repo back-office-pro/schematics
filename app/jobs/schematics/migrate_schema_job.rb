@@ -18,7 +18,7 @@ module Schematics
 
     def perform(migration = ::Migration.scheduled)
       return unless migration
-      return if migration.state_generating?
+      return if migration.state_reasoning?
       return if migration.state_in_progress?
 
       migration.state_in_progress!
