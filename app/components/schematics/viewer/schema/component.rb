@@ -105,7 +105,7 @@ module Schematics
           <<~HTML.squish
             <tr>
               <td align='left'>
-                + #{attribute.name} :<i>#{attribute.type}</i>
+                + #{attribute.name}: <i>#{attribute.type}</i>
               </td>
             </tr>
           HTML
@@ -115,7 +115,7 @@ module Schematics
           <<~HTML.squish
             <tr>
               <td align='left'>
-                - #{virtual.name} :<i>#{virtual.type}</i>
+                - #{virtual.name}: <i>#{virtual.type}</i>
               </td>
             </tr>
           HTML
