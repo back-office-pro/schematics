@@ -30,9 +30,9 @@ class ComparisonsController < Schematics::ResourcesController
 
   def set_resources
     @resources = parent_model_class
-                 .preload_all
-                 .where(id: @resource.ids)
-                 .accessible_by(current_ability)
-                 .load_async
+      .preload_all
+      .where(id: @resource.ids)
+      .accessible_by(current_ability)
+      .load_async
   end
 end

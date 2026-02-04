@@ -14,8 +14,8 @@ module Schematics
   module HotkeysModal
     class Component < ApplicationComponent
       ALPHABET = [*'1'..'9', *'a'..'z']
-                 .without('h', 's')
-                 .freeze
+        .without('h', 's')
+        .freeze
 
       def icon = :keyboard
 

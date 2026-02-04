@@ -50,6 +50,8 @@ Layout/MultilineHashKeyLineBreaks:
   Enabled: true
 Layout/MultilineMethodParameterLineBreaks:
   Enabled: true
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
 Layout/SingleLineBlockChain:
   Enabled: true
   Exclude:

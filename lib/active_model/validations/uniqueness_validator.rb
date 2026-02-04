@@ -17,10 +17,10 @@ module ActiveModel
     class UniquenessValidator < ActiveModel::EachValidator
       def validate_each(record, attribute, value)
         return if Array(options[:scope])
-                  .reduce(record, :public_send)
-                  .excluding(record)
-                  .map(&attribute)
-                  .exclude?(value)
+          .reduce(record, :public_send)
+          .excluding(record)
+          .map(&attribute)
+          .exclude?(value)
 
         record.errors.add(attribute, :taken, **options.except(:scope), value:)
       end

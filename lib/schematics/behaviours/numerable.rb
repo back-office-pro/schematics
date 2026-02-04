@@ -69,9 +69,9 @@ module Schematics
 
       def validators = super.merge(
         numericality: options
-                      .slice(*::ActiveModel::Validations::Comparability::COMPARE_CHECKS.keys)
-                      .to_h
-                      .merge(allow_blank:)
+          .slice(*::ActiveModel::Validations::Comparability::COMPARE_CHECKS.keys)
+          .to_h
+          .merge(allow_blank:)
       )
     end
   end

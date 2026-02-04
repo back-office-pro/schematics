@@ -44,9 +44,9 @@ module Schematics
 
     def entities=(entities)
       @entities = entities
-                  .each_with_object(schema: self)
-                  .map(&:merge)
-                  .map(&Entities::Entity)
+        .each_with_object(schema: self)
+        .map(&:merge)
+        .map(&Entities::Entity)
       add_associations_and_check_for_name_collisions
     end
 

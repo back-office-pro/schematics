@@ -77,30 +77,30 @@ module Schematics
 
       def attributes=(attributes)
         @attributes = attributes
-                      .each_with_object(entity: self)
-                      .map(&:merge)
-                      .map(&Attributes::Attribute)
+          .each_with_object(entity: self)
+          .map(&:merge)
+          .map(&Attributes::Attribute)
       end
 
       def virtuals=(virtuals)
         @virtuals = virtuals
-                    .each_with_object(entity: self)
-                    .map(&:merge)
-                    .map(&Virtuals::Virtual)
+          .each_with_object(entity: self)
+          .map(&:merge)
+          .map(&Virtuals::Virtual)
       end
 
       def triggers=(triggers)
         @triggers = triggers
-                    .each_with_object(entity: self)
-                    .map(&:merge)
-                    .map(&Triggers::Trigger)
+          .each_with_object(entity: self)
+          .map(&:merge)
+          .map(&Triggers::Trigger)
       end
 
       def associations=(associations)
         @associations = associations
-                        .each_with_object(entity: self)
-                        .map(&:merge)
-                        .map(&Associations::Association)
+          .each_with_object(entity: self)
+          .map(&:merge)
+          .map(&Associations::Association)
       end
 
       def descriptor

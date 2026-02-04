@@ -55,9 +55,9 @@ module Schematics
 
     def set_version
       @version = model_class
-                 .with_user
-                 .load_async
-                 .find(params[:id])
+        .with_user
+        .load_async
+        .find(params[:id])
     end
 
     def model_class = Version

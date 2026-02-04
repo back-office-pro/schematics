@@ -15,8 +15,8 @@ module Schematics
     module Item
       class Component < ApplicationComponent
         ALPHABET = [*'1'..'9', *'a'..'z']
-                   .without('h', 's')
-                   .freeze
+          .without('h', 's')
+          .freeze
 
         delegate :preferences_sidebar_toggled, to: :current_user, private: true
         delegate :human_name, :human_name_plural, :entity, to: :@model_class

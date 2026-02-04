@@ -54,10 +54,10 @@ module Schematics
 
       def validators = super.merge(
         comparison: options
-                    .slice(*::ActiveModel::Validations::Comparability::COMPARE_CHECKS.keys)
-                    .to_h
-                    .transform_values(&:to_sym)
-                    .tap { _1.merge!(allow_blank:) if _1.any? }
+          .slice(*::ActiveModel::Validations::Comparability::COMPARE_CHECKS.keys)
+          .to_h
+          .transform_values(&:to_sym)
+          .tap { _1.merge!(allow_blank:) if _1.any? }
       )
 
       def default = ::Time
