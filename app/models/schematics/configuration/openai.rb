@@ -39,7 +39,7 @@ module Schematics
       end
 
       def model
-        return 'gpt-5.2-2025-12-11' if chatgpt_access_token
+        return 'gpt-4o-2024-11-20' if chatgpt_access_token
         return 'gemini-2.5-flash' if gemini_access_token
 
         'deepseek-chat' if deepseek_access_token

@@ -44,7 +44,7 @@ RSpec.describe Schematics::Configuration::OpenAI do
 
     its(:access_token) { is_expected.to eq('test') }
     its(:uri_base) { is_expected.to eq('https://api.openai.com/') }
-    its(:model) { is_expected.to eq('gpt-5.2-2025-12-11') }
+    its(:model) { is_expected.to eq('gpt-4o-2024-11-20') }
   end
 
   context 'when gemini is configured' do
