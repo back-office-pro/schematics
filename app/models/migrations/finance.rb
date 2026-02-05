@@ -122,6 +122,15 @@ module Migrations
         virtuals: [
           {
             id: SecureRandom.uuid,
+            name: 'amount',
+            function: '$quantity * $instrument.price',
+            options: {
+              precision: 2,
+              unit: '$'
+            }
+          },
+          {
+            id: SecureRandom.uuid,
             name: 'share',
             function: '$amount / $portfolio.amount * 100',
             options: {
@@ -149,13 +158,12 @@ module Migrations
           },
           {
             id: SecureRandom.uuid,
-            name: 'amount',
-            type: 'currency',
+            name: 'quantity',
+            type: 'float',
             options: {
               required: true,
               greater_than: 0,
-              precision: 2,
-              unit: '$'
+              precision: 2
             }
           }
         ]
