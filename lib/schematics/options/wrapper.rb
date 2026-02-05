@@ -16,7 +16,17 @@ module Schematics
     class Wrapper
       include ::ActiveModel::API
 
-      delegate :slice, :fetch, :dig, :key?, :keys, :merge!, :include?, :each, to: :options
+      delegate :slice,
+               :fetch,
+               :dig,
+               :key?,
+               :keys,
+               :merge!,
+               :include?,
+               :each,
+               :delete,
+               to: :options
+
       attr_writer :options
 
       def method_missing(method_name, *, &)
