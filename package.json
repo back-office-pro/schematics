@@ -30,6 +30,9 @@
     "workbox-strategies": "7.4.0"
   },
   "devDependencies": {
+    "brace-expansion": "4.0.1",
+    "cross-spawn": "7.0.6",
+    "js-yaml": "4.1.1",
     "standard": "17.1.2",
     "stylelint": "17.1.1",
     "stylelint-config-standard": "40.0.0"
