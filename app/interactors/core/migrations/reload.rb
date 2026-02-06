@@ -42,7 +42,6 @@ module Core
       def old_and_changed_model_classes = migrator_old_and_changed_entities
         .reject(&:existing?)
         .map(&:class_name)
-        .map(&:to_sym)
     end
   end
 end
