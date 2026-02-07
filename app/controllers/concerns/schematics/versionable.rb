@@ -21,11 +21,11 @@ module Schematics
     private
 
     def assign_api_core_version
-      response.headers['x-api-core-version'] = VERSION
+      response.headers['x-backoffice-api-core-version'] = VERSION
     end
 
     def assign_api_version
-      response.headers['x-api-version'] = ::Migration.current_version
+      response.headers['x-backoffice-api-version'] = ::Migration.current_version
     end
   end
 end
