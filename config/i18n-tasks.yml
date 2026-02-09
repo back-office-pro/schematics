@@ -24,16 +24,12 @@ ignore_missing:
   - open_api.*
   - schematics.*
   - sessions.*
-  - javascript.*
   - pagy.*
   - date.*
-  - time.*
   - i18n.inflections.gender.*
   - 'true'
   - 'false'
-  - line
-  - by
-  - of
+  - number.currency.format
 ignore_unused:
   - activerecord.*
   - activemodel.*
@@ -51,6 +47,3 @@ ignore_unused:
   - i18n.inflections.gender.*
   - 'true'
   - 'false'
-  - line
-  - by
-  - of
