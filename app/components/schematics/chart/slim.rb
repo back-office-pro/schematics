@@ -22,9 +22,13 @@ Schematics::Chart::SLIM = <<~SLIM
                               xtitle:,
                               ytitle:,
                               suffix:,
+                              prefix:,
                               colors:,
+                              decimal:,
+                              precision:,
+                              bytes:,
                               empty:,
-                              height: '300px',
+                              height:,
                               download: { filename: },
                               dataset: { borderWidth: border_width }
 SLIM
