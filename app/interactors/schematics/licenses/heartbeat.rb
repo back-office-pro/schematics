@@ -16,7 +16,7 @@ module Schematics
       delegate :website_url, to: 'Rails.application.routes.url_helpers', private: true
 
       def call
-        return unless response.is_a?(Net::HTTPUnauthorized)
+        return unless response in Net::HTTPUnauthorized
 
         ::Configuration.instance.license_file.purge
         Rails.cache.delete('configuration/license_file')
