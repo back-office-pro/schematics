@@ -13,7 +13,8 @@
 class ::Ranking < Schematics::ApplicationRecord
   include Schematics::Measurable
 
-  delegate :to_sql, :name, to: :entity_field, allow_nil: true, private: true
+  delegate :to_sql, to: :entity_field, allow_nil: true, private: true
+  delegate :name, to: :entity_field, allow_nil: true, prefix: true
 
   memoize def resources(ability)
     model_class
@@ -26,8 +27,6 @@ class ::Ranking < Schematics::ApplicationRecord
     []
   end
 
-  def field_name_formatted = :"#{name}_formatted"
-
   def to_s
     title || I18n.t('errors.triggers.name', name: model)
   end
@@ -38,7 +37,7 @@ class ::Ranking < Schematics::ApplicationRecord
     return unless model_class
 
     [
-      (model_class.human_attribute_name(name) if entity_field),
+      (model_class.human_attribute_name(entity_field_name) if entity_field),
       (I18n.t('of') if entity_field),
       model_class.human_name_plural,
       period_title
