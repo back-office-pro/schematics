@@ -26,7 +26,8 @@ module Schematics
       def available_options = super.push(
         Options::Unit,
         Options::Precision,
-        Options::Separator
+        Options::Separator,
+        Options::Delimiter
       )
 
       def database_type = 'float'

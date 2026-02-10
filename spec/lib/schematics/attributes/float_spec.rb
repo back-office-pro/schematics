@@ -70,6 +70,7 @@ describe Schematics::Attributes::Float do
       Schematics::Options::Unit,
       Schematics::Options::Precision,
       Schematics::Options::Separator,
+      Schematics::Options::Delimiter,
       Schematics::Options::AutoIncrement
     )
   end
@@ -103,7 +104,8 @@ describe Schematics::Attributes::Float do
               { '$ref': '#/$defs/auto_increment' },
               { '$ref': '#/$defs/unit' },
               { '$ref': '#/$defs/precision' },
-              { '$ref': '#/$defs/separator' }
+              { '$ref': '#/$defs/separator' },
+              { '$ref': '#/$defs/delimiter' }
             ]
           }
         }

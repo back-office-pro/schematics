@@ -19,6 +19,7 @@ en:
         content_type: Content type
         core: Core
         default: Default value
+        delimiter: Delimiter
         depends_on: Depends on
         descriptor: Descriptor
         direct_assignment: Direct assignment

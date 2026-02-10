@@ -19,7 +19,8 @@ module Schematics
       def available_options = [
         Options::Unit,
         Options::Precision,
-        Options::Separator
+        Options::Separator,
+        Options::Delimiter
       ]
 
       def icon = :square_root_alt

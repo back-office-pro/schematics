@@ -154,6 +154,18 @@ RSpec.describe OpenAI::StructuredOutput do
             }
           }
         },
+        delimiter: {
+          type: 'object',
+          additionalProperties: false,
+          required: %w[delimiter],
+          properties: {
+            delimiter: {
+              type: 'string',
+              description: 'The number thousands separator',
+              enum: %w[, .]
+            }
+          }
+        },
         end_date: {
           type: 'object',
           additionalProperties: false,
@@ -531,7 +543,7 @@ RSpec.describe OpenAI::StructuredOutput do
           properties: {
             separator: {
               type: 'string',
-              description: 'The number separator',
+              description: 'The number decimal separator',
               enum: %w[, .]
             }
           }
@@ -801,7 +813,8 @@ RSpec.describe OpenAI::StructuredOutput do
                 { '$ref': '#/$defs/less_than_or_equal_to' },
                 { '$ref': '#/$defs/other_than' },
                 { '$ref': '#/$defs/precision' },
-                { '$ref': '#/$defs/separator' }
+                { '$ref': '#/$defs/separator' },
+                { '$ref': '#/$defs/delimiter' }
               ],
               additionalProperties: false
             }
@@ -909,7 +922,8 @@ RSpec.describe OpenAI::StructuredOutput do
                 { '$ref': '#/$defs/other_than' },
                 { '$ref': '#/$defs/unit' },
                 { '$ref': '#/$defs/precision' },
-                { '$ref': '#/$defs/separator' }
+                { '$ref': '#/$defs/separator' },
+                { '$ref': '#/$defs/delimiter' }
               ],
               additionalProperties: false
             }
@@ -1002,7 +1016,8 @@ RSpec.describe OpenAI::StructuredOutput do
                 { '$ref': '#/$defs/unit' },
                 { '$ref': '#/$defs/precision' },
                 { '$ref': '#/$defs/scale' },
-                { '$ref': '#/$defs/separator' }
+                { '$ref': '#/$defs/separator' },
+                { '$ref': '#/$defs/delimiter' }
               ],
               additionalProperties: false
             }
@@ -1159,7 +1174,8 @@ RSpec.describe OpenAI::StructuredOutput do
                 { '$ref': '#/$defs/auto_increment' },
                 { '$ref': '#/$defs/unit' },
                 { '$ref': '#/$defs/precision' },
-                { '$ref': '#/$defs/separator' }
+                { '$ref': '#/$defs/separator' },
+                { '$ref': '#/$defs/delimiter' }
               ],
               additionalProperties: false
             }
@@ -1312,7 +1328,8 @@ RSpec.describe OpenAI::StructuredOutput do
                 { '$ref': '#/$defs/less_than_or_equal_to' },
                 { '$ref': '#/$defs/other_than' },
                 { '$ref': '#/$defs/precision' },
-                { '$ref': '#/$defs/separator' }
+                { '$ref': '#/$defs/separator' },
+                { '$ref': '#/$defs/delimiter' }
               ],
               additionalProperties: false
             }
@@ -1369,7 +1386,8 @@ RSpec.describe OpenAI::StructuredOutput do
                 { '$ref': '#/$defs/less_than_or_equal_to' },
                 { '$ref': '#/$defs/other_than' },
                 { '$ref': '#/$defs/precision' },
-                { '$ref': '#/$defs/separator' }
+                { '$ref': '#/$defs/separator' },
+                { '$ref': '#/$defs/delimiter' }
               ],
               additionalProperties: false
             }

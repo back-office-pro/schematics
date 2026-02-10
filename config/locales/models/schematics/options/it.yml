@@ -19,6 +19,7 @@ it:
         content_type: Tipo di contenuto
         core: Nucleo
         default: Valore predefinito
+        delimiter: Delimitatore
         depends_on: Dipende di
         descriptor: Descrittore
         direct_assignment: Assegnazione diretta

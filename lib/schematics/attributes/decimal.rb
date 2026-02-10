@@ -29,7 +29,8 @@ module Schematics
         Options::Unit,
         Options::Precision,
         Options::Scale,
-        Options::Separator
+        Options::Separator,
+        Options::Delimiter
       )
 
       def bound

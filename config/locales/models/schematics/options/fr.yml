@@ -19,6 +19,7 @@ fr:
         content_type: Type de contenu
         core: Noyau
         default: Valeur par défaut
+        delimiter: Délimiteur
         depends_on: Dépend de
         descriptor: Descripteur
         direct_assignment: Affectation directe

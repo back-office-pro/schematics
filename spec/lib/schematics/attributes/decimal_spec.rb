@@ -69,6 +69,7 @@ describe Schematics::Attributes::Decimal do
       Schematics::Options::Unit,
       Schematics::Options::Precision,
       Schematics::Options::Separator,
+      Schematics::Options::Delimiter,
       Schematics::Options::Scale,
       Schematics::Options::Default,
       Schematics::Options::AutoIncrement
@@ -105,7 +106,8 @@ describe Schematics::Attributes::Decimal do
               { '$ref': '#/$defs/unit' },
               { '$ref': '#/$defs/precision' },
               { '$ref': '#/$defs/scale' },
-              { '$ref': '#/$defs/separator' }
+              { '$ref': '#/$defs/separator' },
+              { '$ref': '#/$defs/delimiter' }
             ]
           }
         }

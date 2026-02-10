@@ -74,7 +74,8 @@ describe Schematics::Virtuals::Calculation do
     is_expected.to contain_exactly(
       Schematics::Options::Unit,
       Schematics::Options::Precision,
-      Schematics::Options::Separator
+      Schematics::Options::Separator,
+      Schematics::Options::Delimiter
     )
   end
 

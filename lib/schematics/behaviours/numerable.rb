@@ -18,6 +18,7 @@ module Schematics
       delegate :unit,
                :precision,
                :separator,
+               :delimiter,
                :greater_than,
                :greater_than_or_equal_to,
                :less_than,
@@ -52,13 +53,13 @@ module Schematics
         else
           case unit
           when 'bytes'
-            number_to_human_size(value, **{ precision:, separator: }.compact)
+            number_to_human_size(value, **{ precision:, separator:, delimiter: }.compact)
           when '%'
-            number_to_percentage(value, **{ precision:, separator: }.compact)
+            number_to_percentage(value, **{ precision:, separator:, delimiter: }.compact)
           when '€', '$', '£', '¥'
-            number_to_currency(value, **{ unit:, precision:, separator: }.compact)
+            number_to_currency(value, **{ unit:, precision:, separator:, delimiter: }.compact)
           else
-            [number_with_precision(value, **{ precision:, separator: }.compact), unit]
+            [number_with_precision(value, **{ precision:, separator:, delimiter: }.compact), unit]
               .compact
               .join(' ')
           end

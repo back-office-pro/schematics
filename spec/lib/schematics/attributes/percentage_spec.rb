@@ -64,7 +64,8 @@ describe Schematics::Attributes::Percentage do
       Schematics::Options::LessThanOrEqualTo,
       Schematics::Options::OtherThan,
       Schematics::Options::Precision,
-      Schematics::Options::Separator
+      Schematics::Options::Separator,
+      Schematics::Options::Delimiter
     )
   end
 
@@ -95,7 +96,8 @@ describe Schematics::Attributes::Percentage do
               { '$ref': '#/$defs/less_than_or_equal_to' },
               { '$ref': '#/$defs/other_than' },
               { '$ref': '#/$defs/precision' },
-              { '$ref': '#/$defs/separator' }
+              { '$ref': '#/$defs/separator' },
+              { '$ref': '#/$defs/delimiter' }
             ]
           }
         }

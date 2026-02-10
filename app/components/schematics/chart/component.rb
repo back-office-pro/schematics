@@ -77,6 +77,10 @@ module Schematics
         entity_y_field.try(:precision) || default_number_format[:precision]
       end
 
+      def thousands
+        entity_y_field.try(:delimiter) || default_number_format[:delimiter]
+      end
+
       def render?
         can?(:show, @chart)
       end

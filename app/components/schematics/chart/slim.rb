@@ -25,6 +25,7 @@ Schematics::Chart::SLIM = <<~SLIM
                               prefix:,
                               colors:,
                               decimal:,
+                              thousands:,
                               precision:,
                               bytes:,
                               empty:,

@@ -64,7 +64,8 @@ describe Schematics::Attributes::Currency do
       Schematics::Options::OtherThan,
       Schematics::Options::Unit,
       Schematics::Options::Precision,
-      Schematics::Options::Separator
+      Schematics::Options::Separator,
+      Schematics::Options::Delimiter
     )
   end
 
@@ -96,7 +97,8 @@ describe Schematics::Attributes::Currency do
               { '$ref': '#/$defs/other_than' },
               { '$ref': '#/$defs/unit' },
               { '$ref': '#/$defs/precision' },
-              { '$ref': '#/$defs/separator' }
+              { '$ref': '#/$defs/separator' },
+              { '$ref': '#/$defs/delimiter' }
             ]
           }
         }

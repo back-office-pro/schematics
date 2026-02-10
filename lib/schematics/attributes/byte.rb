@@ -18,7 +18,7 @@ module Schematics
       def available_options = super.excluding(Options::Unit)
 
       def format(value)
-        value && number_to_human_size(value, **{ precision:, separator: }.compact)
+        value && number_to_human_size(value, **{ precision:, separator:, delimiter: }.compact)
       end
 
       def openai_description = 'An attribute which represents a byte'
