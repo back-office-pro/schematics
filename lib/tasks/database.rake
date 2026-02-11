@@ -30,16 +30,6 @@ namespace :schematics do
       end
     end
 
-    namespace :migrate do
-      desc 'Migrate database from sqlite3 to postgres'
-      task postgres: :environment do
-        db_path = Rails.root.join('db', "#{Rails.env}.sqlite3")
-        db_name = Rais.env
-        `createdb #{db_name}`
-        `pgloader --with "preserve index names" sqlite://#{db_path} postgres://localhost/#{db_name}`
-      end
-    end
-
     namespace :encryption do
       desc 'Generate database encryption credentials'
       task init: :environment do
