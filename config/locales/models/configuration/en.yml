@@ -3,6 +3,7 @@ en:
   activerecord:
     attributes:
       configuration:
+        app_url: Application URL
         available_locales: Available locales
         aws_access_key_id: Amazon Web Services access key ID
         aws_bucket: Amazon Web Services bucket

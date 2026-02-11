@@ -417,6 +417,15 @@
         }
       },
       {
+        "id": "0931a7a7-9623-46d1-9901-6a6399db43b7",
+        "name": "app_url",
+        "type": "url",
+        "options": {
+          "cached": true,
+          "group": "security"
+        }
+      },
+      {
         "id": "d2d42519-f8f9-48a5-8b23-de269e92a655",
         "name": "origins",
         "type": "array",

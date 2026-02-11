@@ -3,6 +3,7 @@ fr:
   activerecord:
     attributes:
       configuration:
+        app_url: URL de l'application
         available_locales: Langues disponibles
         aws_access_key_id: ID de la clé d'accès Amazon Web Services
         aws_region: Région Amazon Web Services

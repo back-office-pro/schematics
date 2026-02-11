@@ -36,7 +36,7 @@ class ::Configuration < Schematics::ApplicationRecord
     end
 
     def host
-      URI(company_website.to_s).host&.delete_prefix('www.') || 'localhost'
+      URI(app_url.to_s).host&.delete_prefix('www.') || 'localhost'
     end
 
     def default_url_options
@@ -44,7 +44,7 @@ class ::Configuration < Schematics::ApplicationRecord
     end
 
     def allowed_sources = origins
-      .push(company_website)
+      .push(app_url)
       .compact
 
     def license = Schematics::License.build(license_file)
@@ -60,7 +60,7 @@ class ::Configuration < Schematics::ApplicationRecord
     memoize def openai = Schematics::Configuration::OpenAI.new(self)
 
     def port
-      3000 unless company_website
+      3000 unless app_url
     end
   end
 
