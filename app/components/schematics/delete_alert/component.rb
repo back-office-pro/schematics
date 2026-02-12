@@ -11,16 +11,13 @@
 # frozen_string_literal: true
 
 module Schematics
-  module ConfirmDialog
+  module DeleteAlert
     class Component < ApplicationComponent
-      option :target
-      option :text, optional: true
-
       def title = t('.title')
 
-      def text
-        super || t('.text')
-      end
+      def text = t('.text')
+
+      def icon = :triangle_exclamation
     end
   end
 end

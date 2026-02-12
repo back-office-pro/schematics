@@ -6,8 +6,6 @@ it:
         add: Aggiungere @{f:una nuova|m:un nuovo|fv:una nuova|mv:un nuovo} %{human_name}
         remove: Eliminare @{f:la |m:il |fv:l''|mv:l''}%{human_name}
       delete:
-        subtitle: Quest'azione è irreversibile
-        title: È sicuro?
         warning: 'Eliminare @{f:la |m:il |fv:l''|mv:l''}%{human_name} %{resource} comporterà anche la rimozione permanente di quanto segue:'
       resource_form:
         field:

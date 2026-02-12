@@ -6,8 +6,6 @@ en:
         add: Add a new %{human_name}
         remove: Remove the %{human_name}
       delete:
-        subtitle: This action is irreversible
-        title: Are you sure?
         warning: 'Removing the %{human_name} %{resource} will also result in the permanent removal of the following:'
       resource_form:
         field:

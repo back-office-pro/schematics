@@ -10,17 +10,10 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module ConfirmDialog
-    class Component < ApplicationComponent
-      option :target
-      option :text, optional: true
-
-      def title = t('.title')
-
-      def text
-        super || t('.text')
-      end
-    end
-  end
-end
+Schematics::DeleteAlert::SLIM = <<~SLIM
+  .alert.alert-danger
+    h5.alert-heading
+      = fa_icon icon, class: 'me-3'
+      = title
+    = text
+SLIM

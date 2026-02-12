@@ -13,15 +13,8 @@
   .card-header.px-1.py-2
     = __card_heading(icon: :trash, title:)
   .card-body.p-3.pt-1
-    .alert.alert-danger
-      h5.alert-heading
-        = fa_icon :triangle_exclamation, class: 'me-3'
-        = t('schematics.application.delete.title')
-      = t('schematics.application.delete.subtitle')
-    - associations = @resource.associations(current_ability, dependent: true)
-    - if associations.any?
-      .text-secondary = t('schematics.application.delete.warning', human_name: @human_name, gender: @gender, resource: @resource)
-      = __viewer_association(associations)
+    = __delete_alert
+    = __delete_associations_warning(resource: @resource)
     = form_with model: @resource, url: resource_path(@resource), method: :delete, class: 'mt-3' do
       = __button_confirm
       = __button_cancel(path: resource_path(@resource))
