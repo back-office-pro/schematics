@@ -33,7 +33,7 @@ module Schematics
           super || url
         end
 
-        def empty = t('schematics.application.resource.empty')
+        def empty = t('.empty')
 
         def type = :"#{kind}_chart"
 

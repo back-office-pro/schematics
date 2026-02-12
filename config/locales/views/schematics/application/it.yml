@@ -12,8 +12,6 @@ it:
         subtitle: Quest'azione è irreversibile
         title: È sicuro?
         warning: 'Eliminare @{f:la |m:il |fv:l''|mv:l''}%{human_name} %{resource} comporterà anche la rimozione permanente di quanto segue:'
-      resource:
-        empty: Nessuna data disponibile
       resource_form:
         field:
           en: "%{attribute_name} in inglese"
