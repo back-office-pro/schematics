@@ -31,7 +31,7 @@ module Schematics
           'mx-1': compact?
         )
 
-        def title = t('schematics.application.button.confirm')
+        def title = t('.title')
       end
     end
   end

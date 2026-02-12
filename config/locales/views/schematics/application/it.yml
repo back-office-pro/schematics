@@ -4,7 +4,6 @@ it:
     application:
       button:
         add: Aggiungere @{f:una nuova|m:un nuovo|fv:una nuova|mv:un nuovo} %{human_name}
-        confirm: Convalidare
         destroy: Eliminare definitivamente
         loading: Carico...
         remove: Eliminare @{f:la |m:il |fv:l''|mv:l''}%{human_name}

@@ -58,10 +58,10 @@ module Schematics
           visit login_path
           fill_in 'session[email]', with: user.email
           fill_in 'session[password]', with: user.password
-          click_button t('schematics.application.button.confirm')
+          click_button 'Confirm'
           is_expected.to have_text t('sessions.create.challenge')
           fill_in_otp
-          click_button t('schematics.application.button.confirm')
+          click_button 'Confirm'
           is_expected.to have_text t('schematics.one_time_passwords.create.success')
         end
 
@@ -90,7 +90,7 @@ module Schematics
               login_with_2fa
               visit new_resource_path(model_class)
               fill_form form_elements
-              click_button t('schematics.application.button.confirm')
+              click_button 'Confirm'
               is_expected.to have_text t('schematics.resources.create.success', human_name:)
             end
           end
@@ -103,7 +103,7 @@ module Schematics
               login_with_2fa
               visit edit_resource_path(record)
               fill_form form_elements_for_update
-              click_button t('schematics.application.button.confirm')
+              click_button 'Confirm'
               is_expected.to have_text t('schematics.resources.update.success', human_name:)
             end
           end
