@@ -29,8 +29,8 @@ module Schematics
 
         def id = dom_id(*[chart, dashboard_id].compact)
 
-        def data
-          super || url
+        def data_source
+          data || url
         end
 
         def empty = t('.empty')

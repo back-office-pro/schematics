@@ -12,7 +12,7 @@
 
 Schematics::Chart::Helper::SLIM = <<~SLIM
   = helpers.public_send type,
-                        data,
+                        data_source,
                         id:,
                         xtitle:,
                         ytitle:,
