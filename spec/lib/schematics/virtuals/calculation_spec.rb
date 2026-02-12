@@ -24,7 +24,7 @@ describe Schematics::Virtuals::Calculation do
         { name: 'category', type: 'belongs_to' }
       ],
       virtuals: [
-        { name: 'discount_price', function: '$price - 10' }
+        name: 'discount_price', function: '$price - 10'
       ]
     )
   end

@@ -48,7 +48,7 @@ module Schematics
                                 alert: t('schematics.application.invalid_transition.alert')
           end
           format.json do
-            render json: { errors: [{ exception.state_machine_name => [exception.message] }] },
+            render json: { errors: [exception.state_machine_name => [exception.message]] },
                    status: :method_not_allowed
           end
         end
@@ -63,7 +63,7 @@ module Schematics
                                 alert: t('schematics.application.parameter_missing.alert')
           end
           format.json do
-            render json: { errors: [{ exception.param => ['parameter is required'] }] },
+            render json: { errors: [exception.param => ['parameter is required']] },
                    status: :bad_request
           end
         end

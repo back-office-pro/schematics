@@ -49,13 +49,11 @@ module Core
           presence_penalty: 0,
           tool_choice: 'required',
           tools: [
-            {
-              type: 'function',
-              function: {
-                name: 'schema',
-                parameters: ::OpenAI::StructuredOutput.new.to_h,
-                strict: true
-              }
+            type: 'function',
+            function: {
+              name: 'schema',
+              parameters: ::OpenAI::StructuredOutput.new.to_h,
+              strict: true
             }
           ],
           messages: [

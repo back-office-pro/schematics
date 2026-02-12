@@ -23,11 +23,9 @@ module Migrations
           descriptor: 'full_name'
         },
         virtuals: [
-          {
-            id: SecureRandom.uuid,
-            name: 'full_name',
-            function: '$first_name $last_name'
-          }
+          id: SecureRandom.uuid,
+          name: 'full_name',
+          function: '$first_name $last_name'
         ],
         attributes: [
           {
@@ -83,13 +81,11 @@ module Migrations
           descriptor: 'number'
         },
         attributes: [
-          {
-            id: SecureRandom.uuid,
-            name: 'number',
-            type: 'integer',
-            options: {
-              required: true
-            }
+          id: SecureRandom.uuid,
+          name: 'number',
+          type: 'integer',
+          options: {
+            required: true
           }
         ]
       },

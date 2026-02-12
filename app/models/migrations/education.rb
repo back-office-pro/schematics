@@ -23,11 +23,9 @@ module Migrations
           descriptor: 'full_name'
         },
         virtuals: [
-          {
-            id: SecureRandom.uuid,
-            name: 'full_name',
-            function: '$first_name $last_name'
-          }
+          id: SecureRandom.uuid,
+          name: 'full_name',
+          function: '$first_name $last_name'
         ],
         attributes: [
           {
@@ -120,14 +118,12 @@ module Migrations
           icon: 'cart_shopping'
         },
         virtuals: [
-          {
-            id: SecureRandom.uuid,
-            name: 'income',
-            function: '$training.price * ((100 - $discount_code.percentage) / 100)',
-            options: {
-              precision: 2,
-              unit: '$'
-            }
+          id: SecureRandom.uuid,
+          name: 'income',
+          function: '$training.price * ((100 - $discount_code.percentage) / 100)',
+          options: {
+            precision: 2,
+            unit: '$'
           }
         ],
         attributes: [

@@ -15,66 +15,62 @@ module Migrations
     module_function
 
     def data = [
-      {
+      id: SecureRandom.uuid,
+      name: 'customer',
+      options: {
+        icon: 'user_tie',
+        descriptor: 'full_name'
+      },
+      virtuals: [
         id: SecureRandom.uuid,
-        name: 'customer',
-        options: {
-          icon: 'user_tie',
-          descriptor: 'full_name'
+        name: 'full_name',
+        function: '$first_name $last_name'
+      ],
+      attributes: [
+        {
+          id: SecureRandom.uuid,
+          name: 'email',
+          type: 'email',
+          options: {
+            unique: true,
+            required: true
+          }
         },
-        virtuals: [
-          {
-            id: SecureRandom.uuid,
-            name: 'full_name',
-            function: '$first_name $last_name'
+        {
+          id: SecureRandom.uuid,
+          name: 'first_name',
+          type: 'string',
+          options: {
+            required: true,
+            normalization: 'capitalize'
           }
-        ],
-        attributes: [
-          {
-            id: SecureRandom.uuid,
-            name: 'email',
-            type: 'email',
-            options: {
-              unique: true,
-              required: true
-            }
-          },
-          {
-            id: SecureRandom.uuid,
-            name: 'first_name',
-            type: 'string',
-            options: {
-              required: true,
-              normalization: 'capitalize'
-            }
-          },
-          {
-            id: SecureRandom.uuid,
-            name: 'last_name',
-            type: 'string',
-            options: {
-              required: true,
-              normalization: 'upcase'
-            }
-          },
-          {
-            id: SecureRandom.uuid,
-            name: 'address',
-            type: 'address',
-            options: {
-              required: true
-            }
-          },
-          {
-            id: SecureRandom.uuid,
-            name: 'phone',
-            type: 'phone',
-            options: {
-              required: true
-            }
+        },
+        {
+          id: SecureRandom.uuid,
+          name: 'last_name',
+          type: 'string',
+          options: {
+            required: true,
+            normalization: 'upcase'
           }
-        ]
-      }
+        },
+        {
+          id: SecureRandom.uuid,
+          name: 'address',
+          type: 'address',
+          options: {
+            required: true
+          }
+        },
+        {
+          id: SecureRandom.uuid,
+          name: 'phone',
+          type: 'phone',
+          options: {
+            required: true
+          }
+        }
+      ]
     ]
   end
 end

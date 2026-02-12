@@ -23,11 +23,9 @@ module Migrations
           descriptor: 'full_name'
         },
         virtuals: [
-          {
-            id: SecureRandom.uuid,
-            name: 'full_name',
-            function: '$first_name $last_name'
-          }
+          id: SecureRandom.uuid,
+          name: 'full_name',
+          function: '$first_name $last_name'
         ],
         attributes: [
           {

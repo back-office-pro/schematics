@@ -23,11 +23,9 @@ module Migrations
           descriptor: 'full_name'
         },
         virtuals: [
-          {
-            id: SecureRandom.uuid,
-            name: 'full_name',
-            function: '$first_name $last_name'
-          }
+          id: SecureRandom.uuid,
+          name: 'full_name',
+          function: '$first_name $last_name'
         ],
         attributes: [
           {
@@ -83,14 +81,12 @@ module Migrations
           descriptor: 'type'
         },
         virtuals: [
-          {
-            id: SecureRandom.uuid,
-            name: 'amount',
-            function: 'SUM($investments.amount)',
-            options: {
-              precision: 2,
-              unit: '$'
-            }
+          id: SecureRandom.uuid,
+          name: 'amount',
+          function: 'SUM($investments.amount)',
+          options: {
+            precision: 2,
+            unit: '$'
           }
         ],
         attributes: [

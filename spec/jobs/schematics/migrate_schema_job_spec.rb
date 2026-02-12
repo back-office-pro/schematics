@@ -17,15 +17,11 @@ RSpec.describe Schematics::MigrateSchemaJob do
   let(:state) { Migration::STATE_STATE_IN_PROGRESS }
   let(:data) do
     [
-      {
-        name: 'prospect',
-        attributes: [
-          {
-            name: 'name',
-            type: 'string'
-          }
-        ]
-      }
+      name: 'prospect',
+      attributes: [
+        name: 'name',
+        type: 'string'
+      ]
     ]
   end
 

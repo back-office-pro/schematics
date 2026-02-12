@@ -81,7 +81,7 @@ module Schematics
 
     def model_class = ::User
 
-    def permitted_params = [:remember_me, :otp_token, { otp_attempt_digits: [] }]
+    def permitted_params = [:remember_me, :otp_token, otp_attempt_digits: []]
 
     def resource_defaults = {
       otp_token: session[:otp_token],

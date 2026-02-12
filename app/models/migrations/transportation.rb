@@ -23,11 +23,9 @@ module Migrations
           descriptor: 'full_name'
         },
         virtuals: [
-          {
-            id: SecureRandom.uuid,
-            name: 'full_name',
-            function: '$first_name $last_name'
-          }
+          id: SecureRandom.uuid,
+          name: 'full_name',
+          function: '$first_name $last_name'
         ],
         attributes: [
           {
@@ -74,13 +72,11 @@ module Migrations
           icon: 'box'
         },
         attributes: [
-          {
-            id: SecureRandom.uuid,
-            name: 'location',
-            type: 'address',
-            options: {
-              required: true
-            }
+          id: SecureRandom.uuid,
+          name: 'location',
+          type: 'address',
+          options: {
+            required: true
           }
         ]
       },
@@ -91,12 +87,10 @@ module Migrations
           icon: 'truck'
         },
         associations: [
-          {
-            name: 'parcels',
-            type: 'has_and_belongs_to_many',
-            options: {
-              required: true
-            }
+          name: 'parcels',
+          type: 'has_and_belongs_to_many',
+          options: {
+            required: true
           }
         ],
         attributes: [

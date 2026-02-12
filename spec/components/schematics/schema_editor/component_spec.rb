@@ -18,91 +18,83 @@ RSpec.describe Schematics::SchemaEditor::Component, type: :component do
   let(:resource) { Migration.new(data:) }
   let(:data) do
     [
-      {
-        id: '7a90edf6-4a7f-4f08-8686-5b0d44ff445b',
-        name: 'client',
-        options: {
-          descriptor: 'full_name',
-          icon: 'user_tie'
+      id: '7a90edf6-4a7f-4f08-8686-5b0d44ff445b',
+      name: 'client',
+      options: {
+        descriptor: 'full_name',
+        icon: 'user_tie'
+      },
+      attributes: [
+        {
+          id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+          name: 'first_name',
+          type: 'string',
+          options: {
+            required: true
+          }
         },
-        attributes: [
-          {
-            id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-            name: 'first_name',
-            type: 'string',
-            options: {
-              required: true
-            }
-          },
-          {
-            id: '2bc432df-7a51-49e7-8fa2-c13ea437d6ff',
-            name: 'state',
-            type: 'state_machine',
-            options: {
-              default: 'pending',
-              values: %w[
-                pending
-                closed
-                refused
-              ],
-              events: [
-                {
-                  id: '11356c14-46af-4f69-b910-6b04c12acf7a',
-                  name: 'close',
-                  from: 'pending',
-                  to: 'closed',
-                  icon: 'check',
-                  color: 'success',
-                  callback: '$in_stock = false'
-                },
-                {
-                  id: '701c443e-0c8b-4aa1-b9bd-aa264ea11045',
-                  name: 'refuse',
-                  from: 'pending',
-                  to: 'refused',
-                  icon: 'user',
-                  color: 'danger',
-                  confirm: true
-                },
-                {
-                  id: '407ac568-dc72-45c5-83d4-f6207e5db604',
-                  name: 'reopen',
-                  from: %w[
-                    closed
-                    refused
-                  ],
-                  to: 'pending',
-                  icon: 'users',
-                  color: 'warning'
-                }
-              ]
-            }
+        {
+          id: '2bc432df-7a51-49e7-8fa2-c13ea437d6ff',
+          name: 'state',
+          type: 'state_machine',
+          options: {
+            default: 'pending',
+            values: %w[
+              pending
+              closed
+              refused
+            ],
+            events: [
+              {
+                id: '11356c14-46af-4f69-b910-6b04c12acf7a',
+                name: 'close',
+                from: 'pending',
+                to: 'closed',
+                icon: 'check',
+                color: 'success',
+                callback: '$in_stock = false'
+              },
+              {
+                id: '701c443e-0c8b-4aa1-b9bd-aa264ea11045',
+                name: 'refuse',
+                from: 'pending',
+                to: 'refused',
+                icon: 'user',
+                color: 'danger',
+                confirm: true
+              },
+              {
+                id: '407ac568-dc72-45c5-83d4-f6207e5db604',
+                name: 'reopen',
+                from: %w[
+                  closed
+                  refused
+                ],
+                to: 'pending',
+                icon: 'users',
+                color: 'warning'
+              }
+            ]
           }
-        ],
-        virtuals: [
-          {
-            id: '9c464a01-9b47-405a-ba24-c02880921604',
-            name: 'full_name',
-            function: '$first_name $last_name'
-          }
-        ],
-        triggers: [
-          {
-            id: '83cca8ab-7268-45b2-a0c9-9b6be158e331',
-            action: 'after_save',
-            callback: '$error.foo = true'
-          }
-        ],
-        associations: [
-          {
-            name: 'users',
-            type: 'has_and_belongs_to_many',
-            options: {
-              required: true
-            }
-          }
-        ]
-      }
+        }
+      ],
+      virtuals: [
+        id: '9c464a01-9b47-405a-ba24-c02880921604',
+        name: 'full_name',
+        function: '$first_name $last_name'
+      ],
+      triggers: [
+        id: '83cca8ab-7268-45b2-a0c9-9b6be158e331',
+        action: 'after_save',
+        callback: '$error.foo = true'
+      ],
+      associations: [
+        name: 'users',
+        type: 'has_and_belongs_to_many',
+        options: {
+          required: true
+        }
+      ]
     ]
   end
 

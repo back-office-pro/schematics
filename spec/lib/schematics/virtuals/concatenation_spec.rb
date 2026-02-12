@@ -25,7 +25,7 @@ describe Schematics::Virtuals::Concatenation do
         { name: 'profile', type: 'belongs_to' }
       ],
       virtuals: [
-        { name: 'name', function: '$first_name $last_name' }
+        name: 'name', function: '$first_name $last_name'
       ]
     )
   end

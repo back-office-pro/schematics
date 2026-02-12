@@ -102,7 +102,7 @@ RSpec.shared_context 'with google translate stub' do
     {
       data: {
         translations: [
-          { translatedText: 'Subtitle' }
+          translatedText: 'Subtitle'
         ]
       }
     }.to_json

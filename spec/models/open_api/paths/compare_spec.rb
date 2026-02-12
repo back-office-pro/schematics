@@ -23,15 +23,13 @@ RSpec.describe OpenAPI::Paths::Compare do
         post: {
           operationId: 'Team_Compare',
           parameters: [
-            {
+            description: 'Inflect payload keys. Possible values are camel, dash, snake or pascal.',
+            in: 'header',
+            name: 'x-api-inflection',
+            required: false,
+            schema: {
               description: 'Inflect payload keys. Possible values are camel, dash, snake or pascal.', # rubocop:disable Layout/LineLength
-              in: 'header',
-              name: 'x-api-inflection',
-              required: false,
-              schema: {
-                description: 'Inflect payload keys. Possible values are camel, dash, snake or pascal.', # rubocop:disable Layout/LineLength
-                type: 'string'
-              }
+              type: 'string'
             }
           ],
           requestBody: {

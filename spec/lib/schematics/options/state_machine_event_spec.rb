@@ -19,11 +19,9 @@ describe Schematics::Options::StateMachineEvent do
     {
       values: %w[pending in_progress completed aborted],
       events: [
-        {
-          name: 'process',
-          from: 'pending',
-          to: 'in_progress'
-        }
+        name: 'process',
+        from: 'pending',
+        to: 'in_progress'
       ]
     }
   end

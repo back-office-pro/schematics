@@ -37,7 +37,7 @@ module Schematics
 
       def permitted_params = [
         super,
-        { attributes_param_key => %i[id _destroy] }
+        attributes_param_key => %i[id _destroy]
       ]
 
       def permitted_json_params = [

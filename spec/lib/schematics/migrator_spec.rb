@@ -20,16 +20,12 @@ describe Schematics::Migrator do
     let(:current_data) { [] }
     let(:new_data) do
       [
-        {
-          name: 'client',
-          attributes: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'first_name',
-              type: 'string'
-            }
-          ]
-        }
+        name: 'client',
+        attributes: [
+          id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+          name: 'first_name',
+          type: 'string'
+        ]
       ]
     end
 
@@ -69,32 +65,24 @@ describe Schematics::Migrator do
   context 'when renaming an entity' do
     let(:current_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'prospect',
-          attributes: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'first_name',
-              type: 'string'
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'prospect',
+        attributes: [
+          id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+          name: 'first_name',
+          type: 'string'
+        ]
       ]
     end
     let(:new_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          attributes: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'first_name',
-              type: 'string'
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        attributes: [
+          id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+          name: 'first_name',
+          type: 'string'
+        ]
       ]
     end
 
@@ -140,37 +128,31 @@ describe Schematics::Migrator do
   context 'when adding a new attribute' do
     let(:current_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          attributes: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'first_name',
-              type: 'string'
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        attributes: [
+          id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+          name: 'first_name',
+          type: 'string'
+        ]
       ]
     end
     let(:new_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          attributes: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'first_name',
-              type: 'string'
-            },
-            {
-              id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
-              name: 'last_name',
-              type: 'string'
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        attributes: [
+          {
+            id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+            name: 'first_name',
+            type: 'string'
+          },
+          {
+            id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
+            name: 'last_name',
+            type: 'string'
+          }
+        ]
       ]
     end
 
@@ -216,42 +198,38 @@ describe Schematics::Migrator do
   context 'when renaming an attribute' do
     let(:current_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          attributes: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'first_name',
-              type: 'string'
-            },
-            {
-              id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
-              name: 'last_name',
-              type: 'string'
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        attributes: [
+          {
+            id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+            name: 'first_name',
+            type: 'string'
+          },
+          {
+            id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
+            name: 'last_name',
+            type: 'string'
+          }
+        ]
       ]
     end
     let(:new_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          attributes: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'first_name',
-              type: 'string'
-            },
-            {
-              id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
-              name: 'surname',
-              type: 'string'
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        attributes: [
+          {
+            id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+            name: 'first_name',
+            type: 'string'
+          },
+          {
+            id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
+            name: 'surname',
+            type: 'string'
+          }
+        ]
       ]
     end
 
@@ -298,42 +276,38 @@ describe Schematics::Migrator do
   context 'when changing attribute type' do
     let(:current_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          attributes: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'first_name',
-              type: 'string'
-            },
-            {
-              id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
-              name: 'last_name',
-              type: 'string'
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        attributes: [
+          {
+            id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+            name: 'first_name',
+            type: 'string'
+          },
+          {
+            id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
+            name: 'last_name',
+            type: 'string'
+          }
+        ]
       ]
     end
     let(:new_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          attributes: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'first_name',
-              type: 'text'
-            },
-            {
-              id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
-              name: 'last_name',
-              type: 'text'
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        attributes: [
+          {
+            id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+            name: 'first_name',
+            type: 'text'
+          },
+          {
+            id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
+            name: 'last_name',
+            type: 'text'
+          }
+        ]
       ]
     end
 
@@ -389,42 +363,38 @@ describe Schematics::Migrator do
   context 'with a more complex scenario' do
     let(:current_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          attributes: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'first_name',
-              type: 'string'
-            },
-            {
-              id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
-              name: 'last_name',
-              type: 'string'
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        attributes: [
+          {
+            id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+            name: 'first_name',
+            type: 'string'
+          },
+          {
+            id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
+            name: 'last_name',
+            type: 'string'
+          }
+        ]
       ]
     end
     let(:new_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'prospect',
-          attributes: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'first_name',
-              type: 'string'
-            },
-            {
-              id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
-              name: 'surname',
-              type: 'string'
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'prospect',
+        attributes: [
+          {
+            id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+            name: 'first_name',
+            type: 'string'
+          },
+          {
+            id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
+            name: 'surname',
+            type: 'string'
+          }
+        ]
       ]
     end
 
@@ -479,17 +449,13 @@ describe Schematics::Migrator do
   context 'when removing an entity' do
     let(:current_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          attributes: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'first_name',
-              type: 'string'
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        attributes: [
+          id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+          name: 'first_name',
+          type: 'string'
+        ]
       ]
     end
     let(:new_data) { [] }
@@ -530,37 +496,31 @@ describe Schematics::Migrator do
   context 'when removing an attribute' do
     let(:current_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          attributes: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'first_name',
-              type: 'string'
-            },
-            {
-              id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
-              name: 'last_name',
-              type: 'string'
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        attributes: [
+          {
+            id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+            name: 'first_name',
+            type: 'string'
+          },
+          {
+            id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
+            name: 'last_name',
+            type: 'string'
+          }
+        ]
       ]
     end
     let(:new_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          attributes: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'first_name',
-              type: 'string'
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        attributes: [
+          id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+          name: 'first_name',
+          type: 'string'
+        ]
       ]
     end
 
@@ -606,23 +566,19 @@ describe Schematics::Migrator do
   context 'when adding a new action' do
     let(:current_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          options: {
-            actions: ['show']
-          }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        options: {
+          actions: ['show']
         }
       ]
     end
     let(:new_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          options: {
-            actions: %w[show create]
-          }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        options: {
+          actions: %w[show create]
         }
       ]
     end
@@ -669,23 +625,19 @@ describe Schematics::Migrator do
   context 'when removing an action' do
     let(:current_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          options: {
-            actions: %w[show create]
-          }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        options: {
+          actions: %w[show create]
         }
       ]
     end
     let(:new_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          options: {
-            actions: ['show']
-          }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        options: {
+          actions: ['show']
         }
       ]
     end
@@ -732,54 +684,44 @@ describe Schematics::Migrator do
   context 'when adding a new event' do
     let(:current_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          attributes: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'state',
-              type: 'state_machine',
-              options: {
-                values: %w[
-                  pending
-                  closed
-                  refused
-                ]
-              }
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        attributes: [
+          id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+          name: 'state',
+          type: 'state_machine',
+          options: {
+            values: %w[
+              pending
+              closed
+              refused
+            ]
+          }
+        ]
       ]
     end
     let(:new_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          attributes: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'state',
-              type: 'state_machine',
-              options: {
-                values: %w[
-                  pending
-                  closed
-                  refused
-                ],
-                events: [
-                  {
-                    id: '3cdbd211-8786-4ef0-a3a6-15b29b117654',
-                    name: 'close',
-                    from: 'pending',
-                    to: 'closed'
-                  }
-                ]
-              }
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        attributes: [
+          id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+          name: 'state',
+          type: 'state_machine',
+          options: {
+            values: %w[
+              pending
+              closed
+              refused
+            ],
+            events: [
+              id: '3cdbd211-8786-4ef0-a3a6-15b29b117654',
+              name: 'close',
+              from: 'pending',
+              to: 'closed'
+            ]
+          }
+        ]
       ]
     end
 
@@ -833,54 +775,44 @@ describe Schematics::Migrator do
   context 'when removing an event' do
     let(:current_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          attributes: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'state',
-              type: 'state_machine',
-              options: {
-                values: %w[
-                  pending
-                  closed
-                  refused
-                ],
-                events: [
-                  {
-                    id: '3cdbd211-8786-4ef0-a3a6-15b29b117654',
-                    name: 'close',
-                    from: 'pending',
-                    to: 'closed'
-                  }
-                ]
-              }
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        attributes: [
+          id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+          name: 'state',
+          type: 'state_machine',
+          options: {
+            values: %w[
+              pending
+              closed
+              refused
+            ],
+            events: [
+              id: '3cdbd211-8786-4ef0-a3a6-15b29b117654',
+              name: 'close',
+              from: 'pending',
+              to: 'closed'
+            ]
+          }
+        ]
       ]
     end
     let(:new_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          attributes: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'state',
-              type: 'state_machine',
-              options: {
-                values: %w[
-                  pending
-                  closed
-                  refused
-                ]
-              }
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        attributes: [
+          id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+          name: 'state',
+          type: 'state_machine',
+          options: {
+            values: %w[
+              pending
+              closed
+              refused
+            ]
+          }
+        ]
       ]
     end
 
@@ -934,62 +866,50 @@ describe Schematics::Migrator do
   context 'when renaming an event' do
     let(:current_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          attributes: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'state',
-              type: 'state_machine',
-              options: {
-                values: %w[
-                  pending
-                  closed
-                  refused
-                ],
-                events: [
-                  {
-                    id: '3cdbd211-8786-4ef0-a3a6-15b29b117654',
-                    name: 'close',
-                    from: 'pending',
-                    to: 'closed'
-                  }
-                ]
-              }
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        attributes: [
+          id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+          name: 'state',
+          type: 'state_machine',
+          options: {
+            values: %w[
+              pending
+              closed
+              refused
+            ],
+            events: [
+              id: '3cdbd211-8786-4ef0-a3a6-15b29b117654',
+              name: 'close',
+              from: 'pending',
+              to: 'closed'
+            ]
+          }
+        ]
       ]
     end
     let(:new_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          attributes: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'state',
-              type: 'state_machine',
-              options: {
-                values: %w[
-                  pending
-                  closed
-                  refused
-                ],
-                events: [
-                  {
-                    id: '3cdbd211-8786-4ef0-a3a6-15b29b117654',
-                    name: 'cancel',
-                    from: 'pending',
-                    to: 'closed'
-                  }
-                ]
-              }
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        attributes: [
+          id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+          name: 'state',
+          type: 'state_machine',
+          options: {
+            values: %w[
+              pending
+              closed
+              refused
+            ],
+            events: [
+              id: '3cdbd211-8786-4ef0-a3a6-15b29b117654',
+              name: 'cancel',
+              from: 'pending',
+              to: 'closed'
+            ]
+          }
+        ]
       ]
     end
 
@@ -1045,45 +965,37 @@ describe Schematics::Migrator do
   context 'when adding a new enum value' do
     let(:current_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          attributes: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'state',
-              type: 'enum',
-              options: {
-                values: %w[
-                  pending
-                  closed
-                ]
-              }
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        attributes: [
+          id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+          name: 'state',
+          type: 'enum',
+          options: {
+            values: %w[
+              pending
+              closed
+            ]
+          }
+        ]
       ]
     end
     let(:new_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          attributes: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'state',
-              type: 'enum',
-              options: {
-                values: %w[
-                  pending
-                  closed
-                  refused
-                ]
-              }
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        attributes: [
+          id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+          name: 'state',
+          type: 'enum',
+          options: {
+            values: %w[
+              pending
+              closed
+              refused
+            ]
+          }
+        ]
       ]
     end
 
@@ -1129,45 +1041,37 @@ describe Schematics::Migrator do
   context 'when removing an enum value' do
     let(:current_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          attributes: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'state',
-              type: 'enum',
-              options: {
-                values: %w[
-                  pending
-                  closed
-                  refused
-                ]
-              }
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        attributes: [
+          id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+          name: 'state',
+          type: 'enum',
+          options: {
+            values: %w[
+              pending
+              closed
+              refused
+            ]
+          }
+        ]
       ]
     end
     let(:new_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          attributes: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'state',
-              type: 'enum',
-              options: {
-                values: %w[
-                  pending
-                  closed
-                ]
-              }
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        attributes: [
+          id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+          name: 'state',
+          type: 'enum',
+          options: {
+            values: %w[
+              pending
+              closed
+            ]
+          }
+        ]
       ]
     end
 
@@ -1213,42 +1117,34 @@ describe Schematics::Migrator do
   context 'when renaming an enum value' do
     let(:current_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          attributes: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'state',
-              type: 'enum',
-              options: {
-                values: %w[
-                  pending
-                ]
-              }
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        attributes: [
+          id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+          name: 'state',
+          type: 'enum',
+          options: {
+            values: %w[
+              pending
+            ]
+          }
+        ]
       ]
     end
     let(:new_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          attributes: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'state',
-              type: 'enum',
-              options: {
-                values: %w[
-                  closed
-                ]
-              }
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        attributes: [
+          id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+          name: 'state',
+          type: 'enum',
+          options: {
+            values: %w[
+              closed
+            ]
+          }
+        ]
       ]
     end
 
@@ -1302,25 +1198,19 @@ describe Schematics::Migrator do
   context 'when adding a new virtual' do
     let(:current_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client'
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client'
       ]
     end
     let(:new_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          virtuals: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'full_name',
-              function: '$last_name $first_name'
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        virtuals: [
+          id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+          name: 'full_name',
+          function: '$last_name $first_name'
+        ]
       ]
     end
 
@@ -1366,25 +1256,19 @@ describe Schematics::Migrator do
   context 'when removing a virtual' do
     let(:current_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          virtuals: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'full_name',
-              function: '$last_name $first_name'
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        virtuals: [
+          id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+          name: 'full_name',
+          function: '$last_name $first_name'
+        ]
       ]
     end
     let(:new_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client'
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client'
       ]
     end
 
@@ -1430,32 +1314,24 @@ describe Schematics::Migrator do
   context 'when renaming a virtual' do
     let(:current_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          virtuals: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'full_name',
-              function: '$last_name $first_name'
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        virtuals: [
+          id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+          name: 'full_name',
+          function: '$last_name $first_name'
+        ]
       ]
     end
     let(:new_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          virtuals: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'full_client_name',
-              function: '$last_name $first_name'
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        virtuals: [
+          id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+          name: 'full_client_name',
+          function: '$last_name $first_name'
+        ]
       ]
     end
 
@@ -1502,24 +1378,18 @@ describe Schematics::Migrator do
   context 'when adding a new association' do
     let(:current_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client'
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client'
       ]
     end
     let(:new_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          associations: [
-            {
-              name: 'users',
-              type: 'has_and_belongs_to_many'
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        associations: [
+          name: 'users',
+          type: 'has_and_belongs_to_many'
+        ]
       ]
     end
 
@@ -1565,24 +1435,18 @@ describe Schematics::Migrator do
   context 'when removing an association' do
     let(:current_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          associations: [
-            {
-              name: 'users',
-              type: 'has_and_belongs_to_many'
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        associations: [
+          name: 'users',
+          type: 'has_and_belongs_to_many'
+        ]
       ]
     end
     let(:new_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client'
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client'
       ]
     end
 
@@ -1628,35 +1492,27 @@ describe Schematics::Migrator do
   context 'when changing attribute uniqueness' do
     let(:current_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          attributes: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'first_name',
-              type: 'string'
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        attributes: [
+          id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+          name: 'first_name',
+          type: 'string'
+        ]
       ]
     end
     let(:new_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          attributes: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'first_name',
-              type: 'string',
-              options: {
-                unique: true
-              }
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        attributes: [
+          id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+          name: 'first_name',
+          type: 'string',
+          options: {
+            unique: true
+          }
+        ]
       ]
     end
 
@@ -1702,35 +1558,27 @@ describe Schematics::Migrator do
   context 'when changing attribute mandatoriness' do
     let(:current_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          attributes: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'first_name',
-              type: 'string'
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        attributes: [
+          id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+          name: 'first_name',
+          type: 'string'
+        ]
       ]
     end
     let(:new_data) do
       [
-        {
-          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-          name: 'client',
-          attributes: [
-            {
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'first_name',
-              type: 'string',
-              options: {
-                required: true
-              }
-            }
-          ]
-        }
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'client',
+        attributes: [
+          id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+          name: 'first_name',
+          type: 'string',
+          options: {
+            required: true
+          }
+        ]
       ]
     end
 

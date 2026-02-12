@@ -17,15 +17,11 @@ RSpec.describe Schematics::RollbackSchemaJob do
   let(:state) { Migration::STATE_STATE_ROLLBACKING }
   let(:data) do
     [
-      {
-        name: 'prospect',
-        attributes: [
-          {
-            name: 'name',
-            type: 'string'
-          }
-        ]
-      }
+      name: 'prospect',
+      attributes: [
+        name: 'name',
+        type: 'string'
+      ]
     ]
   end
 

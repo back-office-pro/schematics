@@ -84,7 +84,7 @@ describe Schematics::Attributes::OneTimePassword do
             type: 'object',
             additionalProperties: false,
             anyOf: [
-              { '$ref': '#/$defs/required' }
+              '$ref': '#/$defs/required'
             ]
           }
         }

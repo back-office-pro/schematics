@@ -108,6 +108,8 @@ Style/Send:
   Enabled: true
 Style/SingleLineBlockParams:
   Enabled: true
+Style/HashAsLastArrayItem:
+  EnforcedStyle: no_braces
 Style/StringHashKeys:
   Enabled: true
   Exclude:

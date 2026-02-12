@@ -37,11 +37,9 @@ describe Schematics::Commands::CreateEntity do
         options: {
           values: %w[pending closed],
           events: [
-            {
-              name: 'close',
-              from: 'pending',
-              to: 'closed'
-            }
+            name: 'close',
+            from: 'pending',
+            to: 'closed'
           ]
         }
       }
@@ -49,10 +47,8 @@ describe Schematics::Commands::CreateEntity do
   end
   let(:associations) do
     [
-      {
-        type: 'has_and_belongs_to_many',
-        name: 'users'
-      }
+      type: 'has_and_belongs_to_many',
+      name: 'users'
     ]
   end
 

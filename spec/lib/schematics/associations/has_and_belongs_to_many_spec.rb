@@ -29,10 +29,10 @@ describe Schematics::Associations::HasAndBelongsToMany do
         descriptor: 'name'
       },
       associations: [
-        { name: 'users', type: 'has_and_belongs_to_many' }
+        name: 'users', type: 'has_and_belongs_to_many'
       ],
       attributes: [
-        { name: 'name', type: 'string' }
+        name: 'name', type: 'string'
       ]
     )
   end

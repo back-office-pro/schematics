@@ -23,7 +23,7 @@ describe Schematics::Associations::HasManyThrough do
           descriptor: 'type'
         },
         attributes: [
-          { name: 'type', type: 'string' }
+          name: 'type', type: 'string'
         ]
       },
       {
@@ -32,7 +32,7 @@ describe Schematics::Associations::HasManyThrough do
           descriptor: 'name'
         },
         attributes: [
-          { name: 'name', type: 'string' }
+          name: 'name', type: 'string'
         ]
       },
       {
@@ -49,7 +49,7 @@ describe Schematics::Associations::HasManyThrough do
         descriptor: 'name'
       },
       attributes: [
-        { name: 'name', type: 'string' }
+        name: 'name', type: 'string'
       ]
     )
   end

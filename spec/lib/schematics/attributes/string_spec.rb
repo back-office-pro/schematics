@@ -20,10 +20,10 @@ describe Schematics::Attributes::String do
         descriptor: 'full_name'
       },
       attributes: [
-        { name: 'first_name', type: 'string' }
+        name: 'first_name', type: 'string'
       ],
       virtuals: [
-        { name: 'full_name', function: '$first_name $last_name' }
+        name: 'full_name', function: '$first_name $last_name'
       ]
     )
   end

@@ -23,14 +23,12 @@ module Migrations
           icon: 'helmet_safety'
         },
         virtuals: [
-          {
-            id: SecureRandom.uuid,
-            name: 'cost',
-            function: 'SUM($stock_movements.cost)',
-            options: {
-              precision: 2,
-              unit: '$'
-            }
+          id: SecureRandom.uuid,
+          name: 'cost',
+          function: 'SUM($stock_movements.cost)',
+          options: {
+            precision: 2,
+            unit: '$'
           }
         ],
         attributes: [
@@ -60,12 +58,10 @@ module Migrations
           icon: 'person_digging'
         },
         associations: [
-          {
-            name: 'users',
-            type: 'has_and_belongs_to_many',
-            options: {
-              required: true
-            }
+          name: 'users',
+          type: 'has_and_belongs_to_many',
+          options: {
+            required: true
           }
         ],
         attributes: [
@@ -158,14 +154,12 @@ module Migrations
           }
         ],
         virtuals: [
-          {
-            id: SecureRandom.uuid,
-            name: 'cost',
-            function: '$part.price * $quantity',
-            options: {
-              precision: 2,
-              unit: '$'
-            }
+          id: SecureRandom.uuid,
+          name: 'cost',
+          function: '$part.price * $quantity',
+          options: {
+            precision: 2,
+            unit: '$'
           }
         ],
         attributes: [
@@ -216,14 +210,12 @@ module Migrations
           }
         ],
         virtuals: [
-          {
-            id: SecureRandom.uuid,
-            name: 'cost',
-            function: '$part.price * $quantity',
-            options: {
-              precision: 2,
-              unit: '$'
-            }
+          id: SecureRandom.uuid,
+          name: 'cost',
+          function: '$part.price * $quantity',
+          options: {
+            precision: 2,
+            unit: '$'
           }
         ],
         attributes: [

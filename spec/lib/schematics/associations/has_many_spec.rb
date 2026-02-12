@@ -28,7 +28,7 @@ describe Schematics::Associations::HasMany do
           descriptor: 'type'
         },
         attributes: [
-          { name: 'type', type: 'string' }
+          name: 'type', type: 'string'
         ]
       },
       {

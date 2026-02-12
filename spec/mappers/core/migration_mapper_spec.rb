@@ -96,74 +96,64 @@ RSpec.describe Core::MigrationMapper do
     let(:expected_output) do
       {
         data: [
-          {
-            id: '7fd48606-93fd-4820-9f5a-88d813a16b85',
-            name: 'product',
-            options: {
-              descriptor: 'price',
-              actions: [
-                'index'
-              ],
-              icon: 'box'
+          id: '7fd48606-93fd-4820-9f5a-88d813a16b85',
+          name: 'product',
+          options: {
+            descriptor: 'price',
+            actions: [
+              'index'
+            ],
+            icon: 'box'
+          },
+          attributes: [
+            {
+              id: '16124c81-4abe-414d-ad28-55b36957db72',
+              name: 'foo',
+              type: 'string',
+              options: {
+                required: true,
+                min: 50
+              }
             },
-            attributes: [
-              {
-                id: '16124c81-4abe-414d-ad28-55b36957db72',
-                name: 'foo',
-                type: 'string',
-                options: {
-                  required: true,
-                  min: 50
-                }
-              },
-              {
-                id: '523d8d58-ffe9-43ab-8cb7-868ac4d0ae75',
-                name: 'state',
-                type: 'state_machine',
-                options: {
-                  values: %w[
-                    pending
-                    closed
-                  ],
-                  events: [
-                    {
-                      id: '76667a46-7392-4c38-a81c-836d4efcd72b',
-                      name: 'close',
-                      from: 'pending',
-                      to: 'closed'
-                    }
-                  ]
-                }
+            {
+              id: '523d8d58-ffe9-43ab-8cb7-868ac4d0ae75',
+              name: 'state',
+              type: 'state_machine',
+              options: {
+                values: %w[
+                  pending
+                  closed
+                ],
+                events: [
+                  id: '76667a46-7392-4c38-a81c-836d4efcd72b',
+                  name: 'close',
+                  from: 'pending',
+                  to: 'closed'
+                ]
               }
-            ],
-            virtuals: [
-              {
-                id: '54d26529-8f7e-44ee-bc3c-e0d2933fa481',
-                name: 'price',
-                function: '$foo',
-                options: {
-                  unit: '$',
-                  precision: 2
-                }
-              }
-            ],
-            triggers: [
-              {
-                id: '7380ee01-9c06-4591-a894-677bf4952dde',
-                action: 'after_save',
-                callback: '$foo = true'
-              }
-            ],
-            associations: [
-              {
-                name: 'products',
-                type: 'has_and_belongs_to_many',
-                options: {
-                  required: true
-                }
-              }
-            ]
-          }
+            }
+          ],
+          virtuals: [
+            id: '54d26529-8f7e-44ee-bc3c-e0d2933fa481',
+            name: 'price',
+            function: '$foo',
+            options: {
+              unit: '$',
+              precision: 2
+            }
+          ],
+          triggers: [
+            id: '7380ee01-9c06-4591-a894-677bf4952dde',
+            action: 'after_save',
+            callback: '$foo = true'
+          ],
+          associations: [
+            name: 'products',
+            type: 'has_and_belongs_to_many',
+            options: {
+              required: true
+            }
+          ]
         ]
       }
     end

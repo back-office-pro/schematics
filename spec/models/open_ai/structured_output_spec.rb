@@ -1298,7 +1298,7 @@ RSpec.describe OpenAI::StructuredOutput do
             options: {
               type: 'object',
               anyOf: [
-                { '$ref': '#/$defs/required' }
+                '$ref': '#/$defs/required'
               ],
               additionalProperties: false
             }
@@ -1610,7 +1610,7 @@ RSpec.describe OpenAI::StructuredOutput do
             options: {
               type: 'object',
               anyOf: [
-                { '$ref': '#/$defs/required' }
+                '$ref': '#/$defs/required'
               ],
               additionalProperties: false
             }

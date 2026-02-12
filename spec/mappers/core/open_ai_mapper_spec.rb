@@ -95,10 +95,8 @@ RSpec.describe Core::OpenAIMapper do
               icon: 'tasks'
             },
             associations: [
-              {
-                type: 'has_and_belongs_to_many',
-                name: 'projects'
-              }
+              type: 'has_and_belongs_to_many',
+              name: 'projects'
             ],
             attributes: [
               {
@@ -148,10 +146,8 @@ RSpec.describe Core::OpenAIMapper do
               icon: 'shapes'
             },
             associations: [
-              {
-                type: 'has_and_belongs_to_many',
-                name: 'projects'
-              }
+              type: 'has_and_belongs_to_many',
+              name: 'projects'
             ],
             attributes: [
               {

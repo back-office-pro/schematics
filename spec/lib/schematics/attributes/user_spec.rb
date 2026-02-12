@@ -22,7 +22,7 @@ describe Schematics::Attributes::User do
         descriptor: 'type'
       },
       attributes: [
-        { name: 'type', type: 'string' }
+        name: 'type', type: 'string'
       ]
     )
   end

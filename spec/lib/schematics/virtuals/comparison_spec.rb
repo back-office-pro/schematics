@@ -25,7 +25,7 @@ describe Schematics::Virtuals::Comparison do
         { name: 'sold_at', type: 'datetime' }
       ],
       virtuals: [
-        { name: 'discount_price', function: '$price - 10' }
+        name: 'discount_price', function: '$price - 10'
       ]
     )
   end

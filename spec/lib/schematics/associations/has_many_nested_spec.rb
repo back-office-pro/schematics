@@ -28,7 +28,7 @@ describe Schematics::Associations::HasManyNested do
           descriptor: 'type'
         },
         attributes: [
-          { name: 'type', type: 'string' }
+          name: 'type', type: 'string'
         ]
       },
       {

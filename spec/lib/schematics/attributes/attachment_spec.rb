@@ -79,7 +79,7 @@ describe Schematics::Attributes::Attachment do
     is_expected.to eq(
       [
         :avatar,
-        { avatar_attachment_attributes: %i[id _destroy] }
+        avatar_attachment_attributes: %i[id _destroy]
       ]
     )
   end

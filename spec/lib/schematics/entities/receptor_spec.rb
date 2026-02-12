@@ -17,21 +17,17 @@ describe Schematics::Entities::Receptor do
   let(:name) { 'discussion' }
   let(:associations) do
     [
-      {
-        name: 'participants',
-        type: 'has_and_belongs_to_many',
-        options: {
-          type: 'user'
-        }
+      name: 'participants',
+      type: 'has_and_belongs_to_many',
+      options: {
+        type: 'user'
       }
     ]
   end
   let(:virtuals) do
     [
-      {
-        name: 'preview',
-        function: '$subject'
-      }
+      name: 'preview',
+      function: '$subject'
     ]
   end
   let(:attributes) do

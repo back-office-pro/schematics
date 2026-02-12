@@ -22,7 +22,7 @@ describe Schematics::Associations::HasOneThrough do
         descriptor: 'name'
       },
       attributes: [
-        { name: 'name', type: 'string' }
+        name: 'name', type: 'string'
       ]
     )
   end
@@ -34,7 +34,7 @@ describe Schematics::Associations::HasOneThrough do
         descriptor: 'type'
       },
       attributes: [
-        { name: 'type', type: 'string' }
+        name: 'type', type: 'string'
       ]
     )
   end

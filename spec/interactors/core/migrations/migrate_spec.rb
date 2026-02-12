@@ -26,21 +26,17 @@ RSpec.describe Core::Migrations::Migrate do
   let(:rollback_user_transaction) { [User, Role, Team].each(&:delete_all) }
   let(:initial_data) do
     [
-      {
-        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-        name: 'prospect',
-        associations: [
-          type: 'has_and_belongs_to_many',
-          name: 'users'
-        ],
-        attributes: [
-          {
-            id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-            name: 'first_name',
-            type: 'string'
-          }
-        ]
-      }
+      id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+      name: 'prospect',
+      associations: [
+        type: 'has_and_belongs_to_many',
+        name: 'users'
+      ],
+      attributes: [
+        id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+        name: 'first_name',
+        type: 'string'
+      ]
     ]
   end
   let(:migrate_prospect_entity) do
@@ -90,21 +86,17 @@ RSpec.describe Core::Migrations::Migrate do
     context 'when renaming an entity' do
       let(:data) do
         [
-          {
-            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-            name: 'client',
-            associations: [
-              type: 'has_and_belongs_to_many',
-              name: 'users'
-            ],
-            attributes: [
-              {
-                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-                name: 'first_name',
-                type: 'string'
-              }
-            ]
-          }
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'client',
+          associations: [
+            type: 'has_and_belongs_to_many',
+            name: 'users'
+          ],
+          attributes: [
+            id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+            name: 'first_name',
+            type: 'string'
+          ]
         ]
       end
 
@@ -175,26 +167,24 @@ RSpec.describe Core::Migrations::Migrate do
     context 'when adding a new attribute' do
       let(:data) do
         [
-          {
-            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-            name: 'prospect',
-            associations: [
-              type: 'has_and_belongs_to_many',
-              name: 'users'
-            ],
-            attributes: [
-              {
-                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-                name: 'first_name',
-                type: 'string'
-              },
-              {
-                id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
-                name: 'last_name',
-                type: 'string'
-              }
-            ]
-          }
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'prospect',
+          associations: [
+            type: 'has_and_belongs_to_many',
+            name: 'users'
+          ],
+          attributes: [
+            {
+              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+              name: 'first_name',
+              type: 'string'
+            },
+            {
+              id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
+              name: 'last_name',
+              type: 'string'
+            }
+          ]
         ]
       end
 
@@ -226,14 +216,12 @@ RSpec.describe Core::Migrations::Migrate do
     context 'when removing an attribute' do
       let(:data) do
         [
-          {
-            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-            name: 'prospect',
-            associations: [
-              type: 'has_and_belongs_to_many',
-              name: 'users'
-            ]
-          }
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'prospect',
+          associations: [
+            type: 'has_and_belongs_to_many',
+            name: 'users'
+          ]
         ]
       end
 
@@ -265,26 +253,24 @@ RSpec.describe Core::Migrations::Migrate do
     context 'when adding a new belongs_to association' do
       let(:data) do
         [
-          {
-            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-            name: 'prospect',
-            associations: [
-              type: 'has_and_belongs_to_many',
-              name: 'users'
-            ],
-            attributes: [
-              {
-                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-                name: 'first_name',
-                type: 'string'
-              },
-              {
-                id: 'fbd1feaa-f83d-4618-8cd0-1e2ad0b95491',
-                name: 'user',
-                type: 'belongs_to'
-              }
-            ]
-          }
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'prospect',
+          associations: [
+            type: 'has_and_belongs_to_many',
+            name: 'users'
+          ],
+          attributes: [
+            {
+              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+              name: 'first_name',
+              type: 'string'
+            },
+            {
+              id: 'fbd1feaa-f83d-4618-8cd0-1e2ad0b95491',
+              name: 'user',
+              type: 'belongs_to'
+            }
+          ]
         ]
       end
 
@@ -316,27 +302,23 @@ RSpec.describe Core::Migrations::Migrate do
     context 'when adding a new habtm association' do
       let(:data) do
         [
-          {
-            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-            name: 'prospect',
-            associations: [
-              {
-                name: 'users',
-                type: 'has_and_belongs_to_many'
-              },
-              {
-                name: 'teams',
-                type: 'has_and_belongs_to_many'
-              }
-            ],
-            attributes: [
-              {
-                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-                name: 'first_name',
-                type: 'string'
-              }
-            ]
-          }
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'prospect',
+          associations: [
+            {
+              name: 'users',
+              type: 'has_and_belongs_to_many'
+            },
+            {
+              name: 'teams',
+              type: 'has_and_belongs_to_many'
+            }
+          ],
+          attributes: [
+            id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+            name: 'first_name',
+            type: 'string'
+          ]
         ]
       end
 
@@ -369,17 +351,13 @@ RSpec.describe Core::Migrations::Migrate do
       let(:prospect) { Prospect.create!(first_name: 'John', users: [user]) }
       let(:data) do
         [
-          {
-            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-            name: 'prospect',
-            attributes: [
-              {
-                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-                name: 'first_name',
-                type: 'string'
-              }
-            ]
-          }
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'prospect',
+          attributes: [
+            id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+            name: 'first_name',
+            type: 'string'
+          ]
         ]
       end
 
@@ -412,23 +390,17 @@ RSpec.describe Core::Migrations::Migrate do
     context 'when renaming an attribute' do
       let(:data) do
         [
-          {
-            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-            name: 'prospect',
-            associations: [
-              {
-                name: 'users',
-                type: 'has_and_belongs_to_many'
-              }
-            ],
-            attributes: [
-              {
-                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-                name: 'surname',
-                type: 'string'
-              }
-            ]
-          }
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'prospect',
+          associations: [
+            name: 'users',
+            type: 'has_and_belongs_to_many'
+          ],
+          attributes: [
+            id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+            name: 'surname',
+            type: 'string'
+          ]
         ]
       end
 
@@ -462,23 +434,17 @@ RSpec.describe Core::Migrations::Migrate do
     context 'when changing attribute type' do
       let(:data) do
         [
-          {
-            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-            name: 'prospect',
-            associations: [
-              {
-                name: 'users',
-                type: 'has_and_belongs_to_many'
-              }
-            ],
-            attributes: [
-              {
-                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-                name: 'first_name',
-                type: 'text'
-              }
-            ]
-          }
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'prospect',
+          associations: [
+            name: 'users',
+            type: 'has_and_belongs_to_many'
+          ],
+          attributes: [
+            id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+            name: 'first_name',
+            type: 'text'
+          ]
         ]
       end
 
@@ -508,26 +474,20 @@ RSpec.describe Core::Migrations::Migrate do
     context 'when changing attribute uniqueness' do
       let(:data) do
         [
-          {
-            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-            name: 'prospect',
-            associations: [
-              {
-                name: 'users',
-                type: 'has_and_belongs_to_many'
-              }
-            ],
-            attributes: [
-              {
-                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-                name: 'first_name',
-                type: 'string',
-                options: {
-                  unique: true
-                }
-              }
-            ]
-          }
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'prospect',
+          associations: [
+            name: 'users',
+            type: 'has_and_belongs_to_many'
+          ],
+          attributes: [
+            id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+            name: 'first_name',
+            type: 'string',
+            options: {
+              unique: true
+            }
+          ]
         ]
       end
 
@@ -557,23 +517,17 @@ RSpec.describe Core::Migrations::Migrate do
     context 'with a more complex scenario' do
       let(:data) do
         [
-          {
-            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-            name: 'client',
-            associations: [
-              {
-                name: 'users',
-                type: 'has_and_belongs_to_many'
-              }
-            ],
-            attributes: [
-              {
-                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-                name: 'surname',
-                type: 'string'
-              }
-            ]
-          }
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'client',
+          associations: [
+            name: 'users',
+            type: 'has_and_belongs_to_many'
+          ],
+          attributes: [
+            id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+            name: 'surname',
+            type: 'string'
+          ]
         ]
       end
 

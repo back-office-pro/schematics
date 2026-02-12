@@ -30,19 +30,15 @@ describe Schematics::Schema do
         {
           name: 'user',
           attributes: [
-            {
-              name: 'role',
-              type: 'belongs_to'
-            }
+            name: 'role',
+            type: 'belongs_to'
           ]
         },
         {
           name: 'role',
           attributes: [
-            {
-              name: 'name',
-              type: 'string'
-            }
+            name: 'name',
+            type: 'string'
           ]
         },
         {
@@ -78,15 +74,11 @@ describe Schematics::Schema do
   context 'when there are dangerous attributes' do
     let(:data) do
       [
-        {
-          name: 'import',
-          attributes: [
-            {
-              name: 'errors',
-              type: 'jsonb'
-            }
-          ]
-        }
+        name: 'import',
+        attributes: [
+          name: 'errors',
+          type: 'jsonb'
+        ]
       ]
     end
 
@@ -99,19 +91,15 @@ describe Schematics::Schema do
         {
           name: 'category',
           attributes: [
-            {
-              name: 'sub_category',
-              type: 'belongs_to'
-            }
+            name: 'sub_category',
+            type: 'belongs_to'
           ]
         },
         {
           name: 'sub_category',
           attributes: [
-            {
-              name: 'category',
-              type: 'belongs_to'
-            }
+            name: 'category',
+            type: 'belongs_to'
           ]
         }
       ]
@@ -126,28 +114,22 @@ describe Schematics::Schema do
         {
           name: 'category',
           attributes: [
-            {
-              name: 'sub_category',
-              type: 'belongs_to'
-            }
+            name: 'sub_category',
+            type: 'belongs_to'
           ]
         },
         {
           name: 'sub_category',
           attributes: [
-            {
-              name: 'product',
-              type: 'belongs_to'
-            }
+            name: 'product',
+            type: 'belongs_to'
           ]
         },
         {
           name: 'product',
           attributes: [
-            {
-              name: 'category',
-              type: 'belongs_to'
-            }
+            name: 'category',
+            type: 'belongs_to'
           ]
         }
       ]
@@ -162,10 +144,8 @@ describe Schematics::Schema do
         {
           name: 'category',
           attributes: [
-            {
-              name: 'sub_category',
-              type: 'belongs_to'
-            }
+            name: 'sub_category',
+            type: 'belongs_to'
           ]
         },
         {
@@ -184,10 +164,8 @@ describe Schematics::Schema do
         {
           name: 'product',
           attributes: [
-            {
-              name: 'sub_category',
-              type: 'belongs_to'
-            }
+            name: 'sub_category',
+            type: 'belongs_to'
           ]
         }
       ]
@@ -202,19 +180,15 @@ describe Schematics::Schema do
         {
           name: 'category',
           associations: [
-            {
-              name: 'sub_categories',
-              type: 'has_and_belongs_to_many'
-            }
+            name: 'sub_categories',
+            type: 'has_and_belongs_to_many'
           ]
         },
         {
           name: 'sub_category',
           associations: [
-            {
-              name: 'categories',
-              type: 'has_and_belongs_to_many'
-            }
+            name: 'categories',
+            type: 'has_and_belongs_to_many'
           ]
         }
       ]
