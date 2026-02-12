@@ -7,7 +7,7 @@
     "stylelint": "./node_modules/.bin/stylelint app/**/*.css"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "7.1.0",
+    "@fortawesome/fontawesome-free": "7.2.0",
     "@github/hotkey": "3.1.1",
     "@popperjs/core": "2.11.8",
     "animate.css": "4.1.1",
@@ -17,7 +17,7 @@
     "flag-icons": "7.5.0",
     "monaco-editor": "0.55.1",
     "pluralize-esm": "9.0.5",
-    "sortablejs": "1.15.6",
+    "sortablejs": "1.15.7",
     "swagger-ui-dist": "5.31.0",
     "swagger-ui-themes": "3.0.1",
     "timeago.js": "4.0.2",
