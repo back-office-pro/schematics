@@ -39,7 +39,7 @@ module Schematics
 
         def target = "confirm-dialog-#{resource.id}"
 
-        def title = t('schematics.application.button.destroy')
+        def title = t('.title')
 
         def render?
           can?(:destroy, resource)

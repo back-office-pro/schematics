@@ -27,7 +27,7 @@ module Schematics
 
         def target = "confirm-dialog-#{record.id}-#{attachment.id}"
 
-        def title = t('schematics.application.button.destroy')
+        def title = t('.title')
 
         def render?
           can?(:destroy, attachment) && attachment in ::ActiveStorage::Attachment

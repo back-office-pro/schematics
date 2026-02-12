@@ -4,7 +4,6 @@ fr:
     application:
       button:
         add: Ajouter @{f:une nouvelle|m:un nouveau|fv:une nouvelle|mv:un nouvel} %{human_name}
-        destroy: Supprimer définitivement
         loading: Chargement...
         remove: Supprimer @{f:la |m:le |fv:l''|mv:l''}%{human_name}
       delete:

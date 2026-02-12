@@ -4,7 +4,6 @@ en:
     application:
       button:
         add: Add a new %{human_name}
-        destroy: Delete permanently
         loading: Processing...
         remove: Remove the %{human_name}
       delete:
