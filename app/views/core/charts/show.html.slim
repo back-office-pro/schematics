@@ -22,15 +22,6 @@
         = __button_duplicate(resource: @resource)
         = __button_destroy(resource: @resource, compact: false)
   .card-body.p-3.pt-1.pb-2
-    = public_send @resource.type,
-                  resource_path(@resource, format: :json),
-                  xtitle: @resource.xtitle,
-                  ytitle: @resource.ytitle,
-                  suffix: @resource.suffix,
-                  colors: @resource.colors,
-                  empty: t('schematics.application.resource.empty'),
-                  height: '600px',
-                  download: { filename: @resource.filename },
-                  dataset: { borderWidth: @resource.border_width }
+    = __chart_helper(chart: @resource, height: '600px')
 = __viewer_comments(resource: @resource)
 = __viewer_timeline(resource: @resource)

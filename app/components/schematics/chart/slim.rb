@@ -16,20 +16,5 @@ Schematics::Chart::SLIM = <<~SLIM
       .card-header.px-1.py-2
         = __card_heading(icon:, title: @chart)
       .card-body.p-3.pt-1.pb-2
-        = helpers.public_send type,
-                              resource_path(@chart, format: :json),
-                              id: css_id,
-                              xtitle:,
-                              ytitle:,
-                              suffix:,
-                              prefix:,
-                              colors:,
-                              decimal:,
-                              thousands:,
-                              precision:,
-                              bytes:,
-                              empty:,
-                              height:,
-                              download: { filename: },
-                              dataset: { borderWidth: border_width }
+        = __chart_helper(chart: @chart, dashboard_id: @dashboard_id)
 SLIM

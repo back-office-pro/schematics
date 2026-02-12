@@ -8,12 +8,4 @@
 / IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
 / LIABILITY ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.
 
-= public_send @resource.type,
-              @resource.serialized_json,
-              xtitle: @resource.xtitle,
-              ytitle: @resource.ytitle,
-              suffix: @resource.suffix,
-              colors: @resource.colors,
-              empty: t('schematics.application.resource.empty'),
-              dataset: { borderWidth: @resource.border_width },
-              library: { animation: false }
+= __chart_helper(chart: @resource, data: @resource.serialized_json, animation: false)
