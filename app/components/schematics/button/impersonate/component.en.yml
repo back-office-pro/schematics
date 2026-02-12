@@ -1,3 +1,4 @@
 ---
 en:
+  loading: Processing...
   text: Login as %{user}

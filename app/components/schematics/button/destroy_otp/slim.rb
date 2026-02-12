@@ -15,5 +15,5 @@ Schematics::Button::DestroyOTP::SLIM = <<~SLIM
     span.icon = fa_icon :toggle_off
     span.icon.d-none = fa_icon :spinner, animation: 'spin'
     span.text.d-none.d-lg-inline = title
-    span.text.d-none = t('schematics.application.button.loading')
+    span.text.d-none = t('.loading')
 SLIM

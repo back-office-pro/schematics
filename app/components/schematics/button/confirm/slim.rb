@@ -15,5 +15,5 @@ Schematics::Button::Confirm::SLIM = <<~SLIM
     span.icon = fa_icon :check
     span.icon.d-none = fa_icon :spinner, animation: 'spin'
     span.text = title unless compact?
-    span.text.d-none = t('schematics.application.button.loading') unless compact?
+    span.text.d-none = t('.loading') unless compact?
 SLIM

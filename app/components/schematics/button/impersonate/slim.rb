@@ -15,5 +15,5 @@ Schematics::Button::Impersonate::SLIM = <<~SLIM
     span.icon = fa_icon :people_arrows_left_right
     span.icon.d-none = fa_icon :spinner, animation: 'spin'
     span.text.d-none.d-xxl-inline = title
-    span.text.d-none = t('schematics.application.button.loading')
+    span.text.d-none = t('.loading')
 SLIM
