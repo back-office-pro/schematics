@@ -6,6 +6,7 @@ it:
         app_url: URL dell'applicazione
         available_locales: Lingue disponibili
         aws_access_key_id: ID chiave di accesso Amazon Web Services
+        aws_bucket: Bucket di Amazon Web Services
         aws_region: Regione di Amazon Web Services
         aws_secret_access_key: Chiave di accesso segreta di Amazon Web Services
         azure_storage_access_key: Chiave di accesso all'archiviazione di Microsoft Azure
@@ -102,7 +103,6 @@ it:
     groups:
       configuration:
         ai_api_key: Chiavi API AI
-        api_key: Chiavi API
         appareance: Apparenza
         company: Azienda
         feature_flag: Funzionalità

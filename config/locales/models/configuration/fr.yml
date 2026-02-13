@@ -6,6 +6,7 @@ fr:
         app_url: URL de l'application
         available_locales: Langues disponibles
         aws_access_key_id: ID de la clé d'accès Amazon Web Services
+        aws_bucket: Compartiment Amazon Web Services
         aws_region: Région Amazon Web Services
         aws_secret_access_key: Clé d'accès secrète Amazon Web Services
         azure_storage_access_key: Clé d'accès au stockage Microsoft Azure
@@ -102,11 +103,10 @@ fr:
     groups:
       configuration:
         ai_api_key: Clés API d'IA
-        api_key: Clés API
         appareance: Apparence
         company: Société
         feature_flag: Fonctionnalités
-        gcloud_api_key: Clés API de Google Cloud
+        gcloud_api_key: Clés API Google Cloud
         license: Licence
         locale: Langue
         mailer_api_key: Clés API de service de livraison d'e-mails
