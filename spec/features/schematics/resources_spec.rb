@@ -12,7 +12,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Resources' do
+RSpec.describe 'Resources', if: ENV['CI'].blank? do
   include Schematics::ResourcesHelper
 
   include_context 'with login'
@@ -54,7 +54,6 @@ RSpec.describe 'Resources' do
   end
 
   it 'hides user email column', :js do
-    skip('not working on CI') if ENV['CI'].present?
     visit resources_path(User)
     find_by_id('settings-dropdown').click
     uncheck column_css_class

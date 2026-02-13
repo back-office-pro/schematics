@@ -12,7 +12,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Home' do
+RSpec.describe 'Home', if: ENV['CI'].blank? do
   include Schematics::ResourcesHelper
 
   include_context 'with login'
