@@ -1,0 +1,4 @@
+---
+en:
+  missing_mailer_configuration: Email delivery service not configured
+  text: Password lost?
