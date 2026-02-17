@@ -28,7 +28,7 @@ module Schematics
         .license
         .as_json
 
-      def url = website_url(path: '/license_heartbeat')
+      def url = website_url(path: '/license/heartbeat')
 
       def request_method = 'POST'
 

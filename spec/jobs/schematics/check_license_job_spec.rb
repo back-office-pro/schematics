@@ -27,7 +27,7 @@ RSpec.describe Schematics::CheckLicenseJob do
     subject(:perform_now) { described_class.perform_now }
 
     let(:license_heartbeat_stub_request) do
-      stub_request(:post, 'https://www.back-office.pro/license_heartbeat').to_return(status:)
+      stub_request(:post, 'https://www.back-office.pro/license/heartbeat').to_return(status:)
     end
 
     before do
