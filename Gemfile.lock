@@ -106,7 +106,7 @@ GEM
       activesupport
     ast (2.4.3)
     aws-eventstream (1.4.0)
-    aws-partitions (1.1214.0)
+    aws-partitions (1.1216.0)
     aws-sdk-core (3.242.0)
       aws-eventstream (~> 1, >= 1.3.0)
       aws-partitions (~> 1, >= 1.992.0)
@@ -730,7 +730,7 @@ GEM
       uber (< 0.2.0)
     request_store (1.7.0)
       rack (>= 1.4)
-    retriable (3.1.2)
+    retriable (3.2.0)
     rexml (3.4.4)
     rollbar (3.7.0)
     rotp (6.3.0)
