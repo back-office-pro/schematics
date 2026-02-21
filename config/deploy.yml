@@ -1,0 +1,20 @@
+service: back-office
+image: back-office.pro/back-office
+servers:
+  web:
+    - <%= ENV.fetch('SERVER_HOST', '127.0.0.1') %>
+proxy:
+  ssl: <%= ENV.fetch('ENABLE_SSL', false) %>
+  host: <%= ENV.fetch('PROXY_HOST', 'localhost') %>
+  app_port: 3000
+registry:
+  server: localhost:5555
+volumes:
+  - credentials:/back-office/config/credentials
+  - storage:/back-office/storage
+  - clamav:/var/lib/clamav
+asset_path: /back-office/public/assets
+builder:
+  arch: amd64
+ssh:
+  user: <%= ENV.fetch('SSH_USER', 'root') %>

@@ -15,4 +15,4 @@
 require 'bundler/setup'
 require 'rubygems'
 
-load Gem.bin_path('puma', 'puma')
+load Gem.bin_path('thruster', 'thrust')
