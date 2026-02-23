@@ -1,6 +1,9 @@
 ---
 fr:
   javascript:
+    softwareUpdate:
+      outdated: Mise à jour requise
+      upToDate: Logiciel à jour
     trix:
       GB: Go
       KB: Ko

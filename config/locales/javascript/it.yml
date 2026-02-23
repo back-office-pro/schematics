@@ -1,6 +1,9 @@
 ---
 it:
   javascript:
+    softwareUpdate:
+      outdated: Aggiornamento richiesto
+      upToDate: Software aggiornato
     trix:
       GB: GB
       KB: KB

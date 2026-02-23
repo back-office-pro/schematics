@@ -12,6 +12,7 @@
 
 Schematics::Admin::Grid::SLIM = <<~SLIM
   .row.g-3
+    = __admin_widgets_software_update
     = __admin_widgets_license
     = __admin_widgets_backups
     = __admin_widgets_data_cleanings
