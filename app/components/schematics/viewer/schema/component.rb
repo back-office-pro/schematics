@@ -13,13 +13,15 @@
 module Schematics
   module Viewer
     module Schema
-      class Component < ApplicationComponent
+      class Component < ApplicationComponent # rubocop:disable Metrics/ClassLength
         option :schema
 
         def before_render
           add_association_edges
           add_habtm_edges
+          add_enum_edges
           add_entity_nodes
+          add_enum_nodes
           add_state_machine_clusters
         end
 
@@ -31,17 +33,23 @@ module Schematics
 
         private
 
-        def add_association_edges
-          entities.each do |entity|
-            entity.association_attributes.each do |association|
-              graph.add_edges(association.entity.name, association.inverse_entity.name)
-            end
-          end
-        end
+        def add_association_edges = entities
+          .flat_map(&:association_attributes)
+          .each { graph.add_edges(_1.entity.name, _1.inverse_entity.name) }
 
         def entities = schema
           .entities
           .reject(&:core?)
+
+        def add_habtm_edges = entities
+          .flat_map(&:has_and_belongs_to_many_associations)
+          .reject(&:hidden?)
+          .each { graph.add_edges(_1.entity.name, _1.association_type, dir: 'both') }
+
+        def add_enum_edges = entities
+          .flat_map(&:enum_attributes)
+          .grep_v(Attributes::StateMachine)
+          .each { graph.add_edges(_1.entity.name, _1.to_sql, arrowhead: 'none', style: 'dashed') }
 
         memoize def graph
           graph = GraphViz.digraph('schema')
@@ -56,19 +64,8 @@ module Schematics
           graph
         end
 
-        def add_habtm_edges
-          entities.each do |entity|
-            entity
-              .has_and_belongs_to_many_associations
-              .reject(&:hidden?)
-              .each do |association|
-                graph.add_edges(association.entity.name, association.association_type, dir: 'both')
-              end
-          end
-        end
-
-        def add_entity_nodes
-          entities.each do |entity|
+        def add_entity_nodes = entities
+          .each do |entity|
             graph.add_nodes entity.name, label: <<~HTML
               <<table border='0' cellborder='0' cellspacing='0'>
                 <tr>
@@ -81,25 +78,38 @@ module Schematics
               </table>>
             HTML
           end
-        end
 
-        def add_state_machine_clusters
-          entities
-            .flat_map(&:state_machine_attributes)
-            .each_with_index do |attribute, index|
-              graph.public_send(:"cluster_#{index}") do |subgraph|
-                subgraph[:label] = "<<b>#{attribute.entity.name.humanize} #{attribute.name} *</b>>"
-                subgraph[:fontname] = 'Helvetica, Arial, sans-serif'
-                subgraph[:fontsize] = 10
-                subgraph[:color] = 'transparent'
-                subgraph.node[:shape] = 'oval'
-                subgraph.node[:color] = 'transparent'
-                attribute.events.each do |event|
-                  subgraph.add_edges(event.from, event.to, label: event.name)
-                end
+        def add_enum_nodes = entities
+          .flat_map(&:enum_attributes)
+          .grep_v(Attributes::StateMachine)
+          .each do |enum|
+            graph.add_nodes enum.to_sql, label: <<~HTML
+              <<table border='0' cellborder='0' cellspacing='0'>
+                <tr>
+                  <td>
+                    <b>#{enum.entity.name.humanize} (#{enum.name.humanize})</b>
+                  </td>
+                </tr>
+                #{enum.values.map(&method(:enum_value_template)).join}
+              </table>>
+            HTML
+          end
+
+        def add_state_machine_clusters = entities
+          .flat_map(&:state_machine_attributes)
+          .each do |attribute|
+            graph.public_send(:"cluster_#{attribute.to_sql}") do |subgraph|
+              subgraph[:label] = "<<b>#{attribute.entity.name.humanize} (#{attribute.name.humanize})</b>>" # rubocop:disable Layout/LineLength
+              subgraph[:fontname] = 'Helvetica, Arial, sans-serif'
+              subgraph[:fontsize] = 10
+              subgraph[:color] = 'transparent'
+              subgraph.node[:shape] = 'oval'
+              subgraph.node[:color] = 'transparent'
+              attribute.events.each do |event|
+                subgraph.add_edges(event.from, event.to, label: event.name)
               end
             end
-        end
+          end
 
         def attribute_template(attribute)
           <<~HTML.squish
@@ -116,6 +126,16 @@ module Schematics
             <tr>
               <td align='left'>
                 - #{virtual.name}: <i>#{virtual.type}</i>
+              </td>
+            </tr>
+          HTML
+        end
+
+        def enum_value_template(value)
+          <<~HTML.squish
+            <tr>
+              <td align='left'>
+                #{value}
               </td>
             </tr>
           HTML
