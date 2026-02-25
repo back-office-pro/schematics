@@ -82,6 +82,7 @@ describe Schematics::Attributes::StateMachine do
   its(:to_spec) { is_expected.to eq('A order has a **state** attribute of type *state machine*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.order.state') }
   its(:openai_description) { is_expected.to eq('An attribute which represents a state machine') }
+  its(:enum_type) { is_expected.to eq('OrderState') }
 
   its(:available_options) do
     is_expected.to contain_exactly(

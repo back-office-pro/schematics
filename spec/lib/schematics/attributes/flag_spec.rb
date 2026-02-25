@@ -50,6 +50,7 @@ describe Schematics::Attributes::Flag do
   its(:permitted_params) { is_expected.to eq(states: []) }
   its(:to_spec) { is_expected.to eq('A product has a **states** attribute of type *flag*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.product.states') }
+  its(:enum_type) { is_expected.to eq('ProductStates') }
 
   its(:openai_description) do
     is_expected.to eq('An attribute which represents an enumeration with multiple choices')

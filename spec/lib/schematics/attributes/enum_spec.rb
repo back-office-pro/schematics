@@ -50,6 +50,7 @@ describe Schematics::Attributes::Enum do
   its(:to_spec) { is_expected.to eq('A product has a **state** attribute of type *enumeration*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.product.state') }
   its(:openai_description) { is_expected.to eq('An attribute which represents an enumeration') }
+  its(:enum_type) { is_expected.to eq('ProductState') }
 
   its(:available_options) do
     is_expected.to contain_exactly(
