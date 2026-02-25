@@ -35,7 +35,7 @@ module Schematics
 
         def add_association_edges = entities
           .flat_map(&:association_attributes)
-          .each { graph.add_edges(_1.entity.name, _1.inverse_entity.name) }
+          .each { graph.add_edges(_1.entity.name, _1.inverse_entity.name, arrowhead: 'none') }
 
         def entities = schema
           .entities
@@ -49,7 +49,7 @@ module Schematics
         def add_enum_edges = entities
           .flat_map(&:enum_attributes)
           .grep_v(Attributes::StateMachine)
-          .each { graph.add_edges(_1.entity.name, _1.to_sql, arrowhead: 'none', style: 'dashed') }
+          .each { graph.add_edges(_1.entity.name, _1.to_sql, label: "  #{_1.name}", arrowhead: 'none', style: 'dashed') } # rubocop:disable Layout/LineLength
 
         memoize def graph
           graph = GraphViz.digraph('schema')
@@ -87,7 +87,7 @@ module Schematics
               <<table border='0' cellborder='0' cellspacing='0'>
                 <tr>
                   <td>
-                    <b>#{enum.entity.name.humanize} (#{enum.name.humanize})</b>
+                    <b>#{enum.enum_type}</b>
                   </td>
                 </tr>
                 #{enum.values.map(&method(:enum_value_template)).join}
@@ -99,26 +99,37 @@ module Schematics
           .flat_map(&:state_machine_attributes)
           .each do |attribute|
             graph.public_send(:"cluster_#{attribute.to_sql}") do |subgraph|
-              subgraph[:label] = "<<b>#{attribute.entity.name.humanize} (#{attribute.name.humanize})</b>>" # rubocop:disable Layout/LineLength
+              subgraph[:label] = "<<b>#{attribute.enum_type}</b>>"
               subgraph[:fontname] = 'Helvetica, Arial, sans-serif'
               subgraph[:fontsize] = 10
               subgraph[:color] = 'transparent'
               subgraph.node[:shape] = 'oval'
               subgraph.node[:color] = 'transparent'
               attribute.events.each do |event|
-                subgraph.add_edges(event.from, event.to, label: event.name)
+                subgraph.add_edges(event.from, event.to, label: "  #{event.name}", style: 'dashed')
               end
             end
           end
 
         def attribute_template(attribute)
-          <<~HTML.squish
-            <tr>
-              <td align='left'>
-                + #{attribute.name}: <i>#{attribute.type}</i>
-              </td>
-            </tr>
-          HTML
+          case attribute
+          when Attributes::Enum
+            <<~HTML.squish
+              <tr>
+                <td align='left'>
+                  + #{attribute.name}: <i>#{attribute.enum_type}</i>
+                </td>
+              </tr>
+            HTML
+          else
+            <<~HTML.squish
+              <tr>
+                <td align='left'>
+                  + #{attribute.name}: <i>#{attribute.type}</i>
+                </td>
+              </tr>
+            HTML
+          end
         end
 
         def virtual_template(virtual)
