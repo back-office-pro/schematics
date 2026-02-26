@@ -19,7 +19,7 @@ module Schematics
 
           def data = { 'software-update-target': 'icon' }
 
-          def url = 'https://hub.docker.com/r/back-office.pro/back-office/tags'
+          def url = 'https://hub.docker.com/r/backofficeapp/back-office/tags'
 
           def version = VERSION
         end

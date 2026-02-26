@@ -1,5 +1,5 @@
 service: back-office
-image: back-office.pro/back-office
+image: backofficeapp/back-office
 servers:
   web:
     - <%= ENV.fetch('SERVER_HOST', '127.0.0.1') %>
