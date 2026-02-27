@@ -62,12 +62,7 @@ RUN yarn install --immutable --immutable-cache --check-cache --production
 COPY . .
 
 RUN bundle exec bootsnap precompile -j 1 app/ lib/
-
-RUN SECRET_KEY_BASE_DUMMY=1 bin/rails schematics:secret_key_base
-RUN bin/rails assets:precompile
-RUN bin/rails schematics:db:encryption:init
-RUN bin/rails schematics:generate
-RUN bin/rails schematics:update
+RUN SECRET_KEY_BASE_DUMMY=1 bin/rails assets:precompile
 
 RUN chmod 444 config/credentials/production.yml.enc
 

@@ -10,6 +10,10 @@
 # IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
 # LIABILITY ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.
 
+SECRET_KEY_BASE_DUMMY=1 bin/rails schematics:secret_key_base
+bin/rails schematics:db:encryption:init
+bin/rails schematics:generate
+bin/rails schematics:update
 bin/rails db:prepare
 
 service clamav-freshclam start || true
