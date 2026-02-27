@@ -636,7 +636,7 @@ RSpec.describe OpenAI::StructuredOutput do
         name: {
           type: 'string',
           description: <<~TEXT.squish
-            The name is unique, in snake case, in english and without id suffix. The name must not be among #{ActiveRecord::AttributeMethods.dangerous_attribute_methods.dup.merge(Schematics::Behaviours::Nameable::NAME_DENYLIST).merge(Schematics::Trackable::DENYLIST).to_a.map(&:to_s).to_sentence}
+            The name is unique, in snake case, in english and without id suffix. The name must not be among #{ActiveRecord::AttributeMethods.dangerous_attribute_methods.dup.merge(Schematics::Behaviours::Nameable::NAME_DENYLIST).merge(Schematics::Trackable::DENYLIST).map(&:to_s).to_sentence}
           TEXT
         },
         address: {

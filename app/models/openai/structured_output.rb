@@ -109,7 +109,6 @@ module OpenAI
       .dup
       .merge(Schematics::Behaviours::Nameable::NAME_DENYLIST)
       .merge(Schematics::Trackable::DENYLIST)
-      .to_a
       .map(&:to_s)
       .to_sentence
   end
