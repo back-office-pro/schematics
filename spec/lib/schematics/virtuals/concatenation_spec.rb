@@ -13,8 +13,10 @@
 describe Schematics::Virtuals::Concatenation do
   subject(:virtual) { described_class.new(entity:, name:, function:, options:) }
 
+  let(:schema) { Schematics::Schema.new }
   let(:entity) do
     Schematics::Entities::Entity.new(
+      schema:,
       name: 'user',
       options: {
         descriptor: 'full_name'

@@ -13,7 +13,16 @@
 describe Schematics::Entities::Receptor do
   subject(:receptor) { described_class.new(entity) }
 
-  let(:entity) { Schematics::Entities::Entity.new(name:, associations:, attributes:, virtuals:) }
+  let(:schema) { Schematics::Schema.new }
+  let(:entity) do
+    Schematics::Entities::Entity.new(
+      schema:,
+      name:,
+      associations:,
+      attributes:,
+      virtuals:
+    )
+  end
   let(:name) { 'discussion' }
   let(:associations) do
     [

@@ -13,7 +13,8 @@
 describe Schematics::Attributes::Time do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.new(name: 'message') }
+  let(:schema) { Schematics::Schema.new }
+  let(:entity) { Schematics::Entities::Entity.new(schema:, name: 'message') }
   let(:name) { 'hour' }
   let(:options) { {} }
 

@@ -13,8 +13,10 @@
 describe Schematics::Virtuals::Comparison do
   subject(:virtual) { described_class.new(entity:, name:, function:, options:) }
 
+  let(:schema) { Schematics::Schema.new }
   let(:entity) do
     Schematics::Entities::Entity.new(
+      schema:,
       name: 'product',
       options: {
         descriptor: 'full_name'

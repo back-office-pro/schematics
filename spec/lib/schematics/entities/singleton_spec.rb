@@ -11,8 +11,9 @@
 # frozen_string_literal: true
 
 describe Schematics::Entities::Singleton do
-  subject(:entity) { described_class.new(name:, attributes:) }
+  subject(:entity) { described_class.new(schema:, name:, attributes:) }
 
+  let(:schema) { Schematics::Schema.new }
   let(:name) { 'configuration' }
   let(:attributes) do
     [
