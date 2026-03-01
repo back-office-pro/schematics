@@ -15,7 +15,8 @@ describe Schematics::Commands::ChangeAttributeUniqueness do
 
   include_context 'with custom generated attribute'
 
-  let(:entity) { Schematics::Entities::Entity.new(name: 'client') }
+  let(:schema) { Schematics::Schema.new }
+  let(:entity) { Schematics::Entities::Entity.new(schema:, name: 'client') }
   let(:attribute) { Schematics::Attributes::Attribute.build(entity:, type:, name: 'first_name') }
   let(:type) { 'string' }
 

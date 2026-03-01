@@ -13,7 +13,8 @@
 describe Schematics::Commands::RenameTranslation do
   subject(:command) { described_class.new(entity:, attribute:, target:) }
 
-  let(:entity) { Schematics::Entities::Entity.new(name: 'client') }
+  let(:schema) { Schematics::Schema.new }
+  let(:entity) { Schematics::Entities::Entity.new(schema:, name: 'client') }
   let(:attribute) { Schematics::Attributes::String.new(entity:, name: 'surname') }
   let(:target) { Schematics::Attributes::String.new(entity:, name: 'name') }
 
