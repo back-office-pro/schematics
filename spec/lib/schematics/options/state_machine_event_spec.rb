@@ -13,7 +13,8 @@
 describe Schematics::Options::StateMachineEvent do
   subject { described_class.new(state_machine:, name:, icon:, color:, from:, to:) }
 
-  let(:entity) { Schematics::Entities::Entity.new(name: 'task') }
+  let(:schema) { Schematics::Schema.new }
+  let(:entity) { Schematics::Entities::Entity.new(schema:, name: 'task') }
   let(:state_machine) { Schematics::Attributes::StateMachine.new(entity:, name: 'state', options:) }
   let(:options) do
     {

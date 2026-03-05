@@ -13,7 +13,8 @@
 describe Schematics::Attributes::Url do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.new(name: 'user') }
+  let(:schema) { Schematics::Schema.new }
+  let(:entity) { Schematics::Entities::Entity.new(schema:, name: 'user') }
   let(:name) { 'url' }
   let(:options) { {} }
 

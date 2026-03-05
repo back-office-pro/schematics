@@ -13,7 +13,8 @@
 describe Schematics::Attributes::Byte do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.new(name: 'active_storage/attachment') }
+  let(:schema) { Schematics::Schema.new }
+  let(:entity) { Schematics::Entities::Entity.new(schema:, name: 'active_storage/attachment') }
   let(:name) { 'byte_size' }
   let(:options) { {} }
 

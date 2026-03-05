@@ -13,8 +13,10 @@
 describe Schematics::Attributes::String do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
+  let(:schema) { Schematics::Schema.new }
   let(:entity) do
     Schematics::Entities::Entity.new(
+      schema:,
       name: 'user',
       options: {
         descriptor: 'full_name'

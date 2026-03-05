@@ -13,7 +13,8 @@
 describe Schematics::Attributes::Action do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.new(name: 'permission') }
+  let(:schema) { Schematics::Schema.new }
+  let(:entity) { Schematics::Entities::Entity.new(schema:, name: 'permission') }
   let(:name) { 'action' }
   let(:options) { {} }
 

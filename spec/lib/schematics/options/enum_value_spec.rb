@@ -13,7 +13,8 @@
 describe Schematics::Options::EnumValue do
   subject { described_class.new(enum:, value: 'completed') }
 
-  let(:entity) { Schematics::Entities::Entity.new(name: 'task') }
+  let(:schema) { Schematics::Schema.new }
+  let(:entity) { Schematics::Entities::Entity.new(schema:, name: 'task') }
   let(:enum) { Schematics::Attributes::Enum.new(entity:, name: 'state') }
 
   it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }

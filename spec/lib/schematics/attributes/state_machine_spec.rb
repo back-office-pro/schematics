@@ -13,7 +13,8 @@
 describe Schematics::Attributes::StateMachine do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.new(name: 'order') }
+  let(:schema) { Schematics::Schema.new }
+  let(:entity) { Schematics::Entities::Entity.new(schema:, name: 'order') }
   let(:name) { 'state' }
   let(:options) do
     {

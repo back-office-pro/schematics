@@ -13,7 +13,8 @@
 describe Schematics::Triggers::Trigger do
   subject { described_class.new(id:, entity:, action:, callback:) }
 
-  let(:entity) { Schematics::Entities::Entity.new(name: 'task') }
+  let(:schema) { Schematics::Schema.new }
+  let(:entity) { Schematics::Entities::Entity.new(schema:, name: 'task') }
   let(:callback) { '$in_stock = true' }
   let(:id) { '10ee534b-896e-4fc9-9070-ff060500c614' }
 

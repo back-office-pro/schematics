@@ -13,7 +13,8 @@
 describe Schematics::Attributes::Ip do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.new(name: 'session') }
+  let(:schema) { Schematics::Schema.new }
+  let(:entity) { Schematics::Entities::Entity.new(schema:, name: 'session') }
   let(:name) { 'ip' }
   let(:options) { {} }
 

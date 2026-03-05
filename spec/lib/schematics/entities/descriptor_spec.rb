@@ -13,8 +13,10 @@
 describe Schematics::Entities::Descriptor do
   subject(:descriptor) { described_class.new(entity:, field_name:) }
 
+  let(:schema) { Schematics::Schema.new }
   let(:entity) do
     Schematics::Entities::Entity.new(
+      schema:,
       name: 'entity',
       options: {
         descriptor: 'type'

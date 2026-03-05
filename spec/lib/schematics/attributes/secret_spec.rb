@@ -13,7 +13,8 @@
 describe Schematics::Attributes::Secret do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.new(name: 'entity') }
+  let(:schema) { Schematics::Schema.new }
+  let(:entity) { Schematics::Entities::Entity.new(schema:, name: 'entity') }
   let(:name) { 'gcloud_public_api_key' }
   let(:options) { {} }
 

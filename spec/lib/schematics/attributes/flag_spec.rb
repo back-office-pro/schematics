@@ -13,7 +13,8 @@
 describe Schematics::Attributes::Flag do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.new(name: 'product') }
+  let(:schema) { Schematics::Schema.new }
+  let(:entity) { Schematics::Entities::Entity.new(schema:, name: 'product') }
   let(:name) { 'states' }
   let(:options) { { values: %w[available available_soon not_available] } }
 
