@@ -15,8 +15,8 @@ module Schematics
     extend ActiveSupport::Concern
 
     included do
-      scope :autocomplete, AutocompleteQuery.new(self) # rubocop:disable Rails/ScopeArgs
-      scope :list, ListQuery.new(self) # rubocop:disable Rails/ScopeArgs
+      scope :autocomplete, ->(*args) { AutocompleteQuery.new(self).(*args) } # rubocop:disable Style/LambdaCall
+      scope :list, ->(*args) { ListQuery.new(self).(*args) } # rubocop:disable Style/LambdaCall
     end
 
     class_methods do
