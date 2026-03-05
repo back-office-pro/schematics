@@ -16,7 +16,7 @@ require 'active_support/core_ext/string/inflections'
 
 module Schematics
   module Entities
-    # :reek:Attribute, :reek:InstanceVariableAssumption
+    # :reek:Attribute :reek:InstanceVariableAssumption :reek:TooManyMethods
     class Entity # rubocop:disable Metrics/ClassLength
       include Behaviours::Specifiable
       include Behaviours::Optionable
