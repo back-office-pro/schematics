@@ -16,6 +16,7 @@ module Schematics
       def model_classes = SchemaCache
         .entities
         .reject(&:hidden?)
+        .reject(&:abstract?)
         .filter_map(&:model_class)
         .sort_by(&:human_name)
 

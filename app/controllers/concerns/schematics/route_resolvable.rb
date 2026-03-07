@@ -16,6 +16,7 @@ module Schematics
 
     def resolve_model_name_from_route = SchemaCache
       .entities
+      .reject(&:abstract?)
       .filter_map(&:model_class)
       .flat_map(&method(:model_class_localized_routes))
       .reduce(&:merge)
