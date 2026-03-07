@@ -24,6 +24,9 @@ module Schematics
                 presence: true,
                 uniqueness: { scope: %i[entity has_and_belongs_to_many_associations] },
                 comparison: { other_than: :denied_name, unless: :hidden? }
+      validates :name,
+                uniqueness: { scope: %i[parent_entity has_and_belongs_to_many_associations] },
+                if: :parent_entity
       validates :association_type, inclusion: { in: :allowed_association_types }
 
       # :reek:UtilityFunction
@@ -72,7 +75,7 @@ module Schematics
         options.filter_by&.to_sym || :itself
       end
 
-      def join_table = [entity, inverse_entity]
+      def join_table = [source_entity, inverse_entity]
         .map(&:table_name)
         .map(&:pluralize)
         .sort
@@ -86,7 +89,7 @@ module Schematics
         has_and_belongs_to_many :#{name},
                                 class_name: '#{class_name}',
                                 join_table: '#{join_table}',
-                                foreign_key: '#{entity.table_name}_id',
+                                foreign_key: '#{source_entity.table_name}_id',
                                 association_foreign_key: '#{inverse_entity.table_name}_id'
       RUBY
 
