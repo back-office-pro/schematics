@@ -3,18 +3,18 @@
     {
       "warning_type": "Dangerous Eval",
       "warning_code": 13,
-      "fingerprint": "3ad5d4249d0f07c94212cc1936cfd5a3c45815ef75abf42a5b7c779f5647172d",
+      "fingerprint": "1163dcf61663c62b94c6d7521ee055b6b915a11cb0954530d2dd8ec44a3db3ed",
       "check_name": "Evaluation",
       "message": "Dynamic code evaluation",
       "file": "app/models/concerns/schematics/loadable.rb",
-      "line": 37,
+      "line": 90,
       "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
-      "code": "eval(model_element, binding, \"app/models/concerns/schematics/loadable.rb\", 37)",
+      "code": "eval(SchemaCache.find_entity_by_name(name.to_s.underscore), binding, \"app/models/concerns/schematics/loadable.rb\", 90)",
       "render_path": null,
       "location": {
         "type": "method",
         "class": "Schematics::Loadable",
-        "method": "inherited"
+        "method": "load!"
       },
       "user_input": null,
       "confidence": "Weak",
@@ -46,18 +46,18 @@
     {
       "warning_type": "Dangerous Eval",
       "warning_code": 13,
-      "fingerprint": "b1ca7fedb6fb97815225f07807d230cf4c694c5f174de12460fcb8033efbf76e",
+      "fingerprint": "ea1c8bf622e4e7a29ad639cd7531c213f339ca84777251fdca3b0f33afc4eb06",
       "check_name": "Evaluation",
       "message": "Dynamic code evaluation",
       "file": "app/models/concerns/schematics/loadable.rb",
-      "line": 89,
+      "line": 38,
       "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
-      "code": "eval(SchemaCache.find_entity_by_name(name.to_s.underscore), binding, \"app/models/concerns/schematics/loadable.rb\", 89)",
+      "code": "eval(model_element, binding, \"app/models/concerns/schematics/loadable.rb\", 38)",
       "render_path": null,
       "location": {
         "type": "method",
         "class": "Schematics::Loadable",
-        "method": "load!"
+        "method": "inherited"
       },
       "user_input": null,
       "confidence": "Weak",
