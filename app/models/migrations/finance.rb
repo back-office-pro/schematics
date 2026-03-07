@@ -77,8 +77,7 @@ module Migrations
         id: SecureRandom.uuid,
         name: 'portfolio',
         options: {
-          icon: 'wallet',
-          descriptor: 'type'
+          icon: 'wallet'
         },
         virtuals: [
           id: SecureRandom.uuid,
@@ -90,22 +89,33 @@ module Migrations
           }
         ],
         attributes: [
-          {
-            id: SecureRandom.uuid,
-            name: 'type',
-            type: 'enum',
-            options: {
-              required: true,
-              values: %w[life_insurance brokerage_account]
-            }
-          },
-          {
-            id: SecureRandom.uuid,
-            name: 'customer',
-            type: 'belongs_to',
-            options: {
-              required: true
-            }
+          id: SecureRandom.uuid,
+          name: 'customer',
+          type: 'belongs_to',
+          options: {
+            required: true
+          }
+        ]
+      },
+      {
+        id: SecureRandom.uuid,
+        name: 'brokerage_account',
+        options: {
+          parent: 'portfolio'
+        }
+      },
+      {
+        id: SecureRandom.uuid,
+        name: 'life_insurance',
+        options: {
+          parent: 'portfolio'
+        },
+        attributes: [
+          id: SecureRandom.uuid,
+          name: 'fees',
+          type: 'percentage',
+          options: {
+            required: true
           }
         ]
       },
