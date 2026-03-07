@@ -15,7 +15,7 @@ module Schematics
     primary_abstract_class
 
     self.implicit_order_column = 'created_at'
-    self.inheritance_column = nil
+    self.inheritance_column = :sti_type
 
     include Loadable
     include Duplicable
