@@ -26,6 +26,7 @@ module Schematics
     end
 
     class_methods do
+      delegate :abstract?, to: :entity, allow_nil: true
       # :reek:Attribute
       attr_accessor :concerns
 
@@ -91,6 +92,10 @@ module Schematics
         end
 
         const_get(name)
+      end
+
+      def find_sti_class(type_name)
+        type_name.safe_constantize || super
       end
 
       private
