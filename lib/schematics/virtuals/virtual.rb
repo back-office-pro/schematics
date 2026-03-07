@@ -25,12 +25,15 @@ module Schematics
       include Behaviours::Documentable
       include Behaviours::Internationalizable
 
+      delegate :parent_entity, to: :entity
+
       attr_accessor :id, :entity, :function
 
       validates :function,
                 presence: true,
                 format: { with: Tokens::Tokenizer.parser, message: :function }
       validates :name, uniqueness: { scope: %i[entity fields] }
+      validates :name, uniqueness: { scope: %i[parent_entity fields] }, if: :parent_entity
       validates :preload, inclusion: { in: :allowed_references }
       validates :variables, inclusion: { in: :allowed_variables }
       validate :tokens_cannot_have_assignment

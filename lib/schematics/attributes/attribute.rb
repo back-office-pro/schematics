@@ -26,11 +26,13 @@ module Schematics
       include Behaviours::Internationalizable
 
       delegate :cached?, to: :options
+      delegate :parent_entity, :source_entity, to: :entity
 
       attr_accessor :id, :entity
 
       validates :type, presence: true
       validates :name, uniqueness: { scope: %i[entity fields] }
+      validates :name, uniqueness: { scope: %i[parent_entity fields] }, if: :parent_entity
 
       class << self
         def build(type:, **)
