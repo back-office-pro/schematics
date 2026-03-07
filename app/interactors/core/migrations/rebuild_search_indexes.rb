@@ -23,6 +23,7 @@ module Core
 
       def call = perform_all_later(
         migrator_new_and_changed_entities
+          .reject(&:abstract?)
           .filter_map(&:model_class)
           .map(&Schematics::RebuildSearchIndexJob.method(:new))
       )

@@ -66,6 +66,7 @@ module Schematics
     def timeline_preferences = SchemaCache
       .entities
       .reject(&:hidden?)
+      .reject(&:abstract?)
       .flat_map do |entity|
         Version::EVENTS
           .select { |action| can?(action.to_sym, entity.model_class) }
@@ -74,10 +75,12 @@ module Schematics
 
     def viewer_preferences = SchemaCache
       .entities
+      .reject(&:abstract?)
       .map { "viewer_#{_1.id}" }
 
     def viewer_col_preferences = SchemaCache
       .entities
+      .reject(&:abstract?)
       .flat_map(&:listable_elements)
       .map { "col_#{_1.entity.id}_#{_1.id}" }
   end

@@ -41,6 +41,7 @@ module OpenAPI
 
     def paths = schema
       .entities
+      .reject(&:abstract?)
       .flat_map(&method(:entity_paths))
       .filter_map(&:to_h)
       .reduce(&:deep_merge)
@@ -48,6 +49,7 @@ module OpenAPI
 
     def tags = schema
       .entities
+      .reject(&:abstract?)
       .flat_map(&method(:entity_paths))
       .compact
       .map(&:tag)
