@@ -43,12 +43,14 @@ module Schematics
 
       def permission_generator(action)
         return if core?
+        return if abstract?
 
         PermissionGenerator.new([class_name], ["--action=#{action}"])
       end
 
       def migration_generator
         return if existing?
+        return if child?
 
         Rails::Generators::MigrationGenerator.new(
           ["create_#{table_name.pluralize}", *migratable_attributes],
@@ -59,11 +61,12 @@ module Schematics
       # :reek:FeatureEnvy
       def create_join_table_migration_generator(association)
         return if existing?
+        return if child?
 
         Rails::Generators::MigrationGenerator.new(
           [
             "create_join_table_#{association.join_table}",
-            association.entity.table_name.pluralize,
+            association.source_entity.table_name.pluralize,
             "#{association.inverse_entity.table_name.pluralize}:uniq"
           ]
         )
