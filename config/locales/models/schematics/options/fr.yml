@@ -55,6 +55,7 @@ fr:
           downcase: Minuscule
           upcase: Majuscule
         other_than: Autre que
+        parent: Parent
         polymorphic: Polymorphique
         precision: Précision
         readonly: Lecture seule
