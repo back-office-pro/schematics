@@ -120,4 +120,19 @@ describe Schematics::Associations::HasAndBelongsToMany do
 
     it { is_expected.not_to be_valid }
   end
+
+  context 'when association has a parent entity' do
+    let(:parent) { 'message' }
+
+    its(:to_str) do
+      is_expected.to eq <<~RUBY
+        scope :with_permissions, -> { includes([:permissions]) }
+        has_and_belongs_to_many :permissions,
+                                class_name: 'Permission',
+                                join_table: 'messages_permissions',
+                                foreign_key: 'message_id',
+                                association_foreign_key: 'permission_id'
+      RUBY
+    end
+  end
 end
