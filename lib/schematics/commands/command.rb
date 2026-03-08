@@ -50,9 +50,7 @@ module Schematics
 
       def has_and_belongs_to_many_associations = entity # rubocop:disable Naming/PredicatePrefix
         .has_and_belongs_to_many_associations
-        .concat(children.flat_map(&:has_and_belongs_to_many_associations))
         .reject(&:hidden?)
-        .uniq
 
       def migratable_attributes = entity
         .migratable_attributes

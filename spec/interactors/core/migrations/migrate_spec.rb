@@ -624,7 +624,7 @@ RSpec.describe Core::Migrations::Migrate do
         # migrate
         expect { expect(migrate).to be_a_success }
           .to change(Permission, :count).by(6)
-          .and change(Translation, :count).by(36)
+          .and change(Translation, :count).by(33)
           .and change(Documentation, :count).by(1)
         expect(migration.backup).not_to be_attached
         expect(Dir[root.join('storage/migrate/*_create_portfolios_*.rb')]).not_to be_empty
@@ -635,7 +635,7 @@ RSpec.describe Core::Migrations::Migrate do
         # rollback
         expect { expect(rollback).to be_a_success }
           .to change(Permission.with_deleted, :count).by(-6)
-          .and change(Translation.with_deleted, :count).by(-36)
+          .and change(Translation.with_deleted, :count).by(-33)
           .and change(Documentation.with_deleted, :count).by(-1)
         expect(Dir[root.join('storage/migrate/*_drop_portfolios_*.rb')]).not_to be_empty
         expect(Dir[root.join('storage/migrate/*_drop_join_table_portfolios_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
@@ -735,7 +735,7 @@ RSpec.describe Core::Migrations::Migrate do
         # migrate
         expect { expect(migrate).to be_a_success }
           .to change(Permission.with_deleted, :count).by(-6)
-          .and change(Translation.with_deleted, :count).by(-36)
+          .and change(Translation.with_deleted, :count).by(-33)
           .and change(Documentation, :count).by(1)
         expect(migration.backup).to be_attached
         expect(Dir[root.join('storage/migrate/*_drop_portfolios_*.rb')]).not_to be_empty
@@ -747,7 +747,7 @@ RSpec.describe Core::Migrations::Migrate do
         # rollback
         expect { expect(rollback).to be_a_success }
           .to change(Permission, :count).by(6)
-          .and change(Translation, :count).by(36)
+          .and change(Translation, :count).by(33)
           .and change(Documentation.with_deleted, :count).by(-1)
         expect(Dir[root.join('storage/migrate/*_create_portfolios_*.rb')]).not_to be_empty
         expect(Dir[root.join('storage/migrate/*_create_join_table_portfolios_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
@@ -1085,7 +1085,7 @@ RSpec.describe Core::Migrations::Migrate do
         # migrate
         expect { expect(migrate).to be_a_success }
           .to not_change(Permission, :count)
-          .and change(Translation.with_deleted, :count).by(-12)
+          .and change(Translation.with_deleted, :count).by(-9)
           .and change(Documentation, :count).by(1)
         expect(migration.backup).to be_attached
         expect(Dir[root.join('storage/migrate/*_drop_join_table_portfolios_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
