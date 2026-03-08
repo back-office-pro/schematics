@@ -75,13 +75,13 @@ module Schematics
 
       # :reek:FeatureEnvy
       def rename_join_table_migration_generator(association)
-        return if child?
+        return if abstract?
 
         Rails::Generators::MigrationGenerator.new(
           [
             [
               'rename',
-              old_name.pluralize,
+              attribute.source_entity.table_name.pluralize,
               association.inverse_entity.table_name.pluralize,
               'to',
               association.join_table
@@ -92,13 +92,13 @@ module Schematics
 
       # :reek:FeatureEnvy
       def rename_column_migration_generator(association)
-        return if child?
+        return if abstract?
 
         Rails::Generators::MigrationGenerator.new(
           [
             [
               'rename',
-              "#{old_name}_id",
+              "#{attribute.source_entity.table_name}_id",
               'to',
               "#{association.source_entity.table_name}_id",
               'in',

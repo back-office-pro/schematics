@@ -58,7 +58,7 @@ module Schematics
 
       # :reek:FeatureEnvy
       def drop_join_table_migration_generator(association)
-        return if child?
+        return if abstract?
 
         Rails::Generators::MigrationGenerator.new(
           [
