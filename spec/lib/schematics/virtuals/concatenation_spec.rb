@@ -14,12 +14,14 @@ describe Schematics::Virtuals::Concatenation do
   subject(:virtual) { described_class.new(entity:, name:, function:, options:) }
 
   let(:schema) { Schematics::Schema.new }
+  let(:parent) { nil }
   let(:entity) do
     Schematics::Entities::Entity.new(
       schema:,
       name: 'user',
       options: {
-        descriptor: 'full_name'
+        descriptor: 'full_name',
+        parent:
       },
       attributes: [
         { name: 'first_name', type: 'string' },
@@ -105,6 +107,20 @@ describe Schematics::Virtuals::Concatenation do
 
   context 'when virtual name is already taken by another attribute' do
     let(:name) { 'first_name' }
+
+    it { is_expected.not_to be_valid }
+  end
+
+  context 'when virtual name is already taken by another virtual in the parent entity' do
+    let(:name) { 'full_name' }
+    let(:parent) { 'user' }
+
+    it { is_expected.not_to be_valid }
+  end
+
+  context 'when virtual name is already taken by another attribute in the parent entity' do
+    let(:name) { 'email' }
+    let(:parent) { 'user' }
 
     it { is_expected.not_to be_valid }
   end

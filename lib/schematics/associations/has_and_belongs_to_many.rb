@@ -22,11 +22,10 @@ module Schematics
 
       validates :name,
                 presence: true,
-                uniqueness: { scope: %i[entity has_and_belongs_to_many_associations] },
-                comparison: { other_than: :denied_name, unless: :hidden? }
-      validates :name,
-                uniqueness: { scope: %i[parent_entity has_and_belongs_to_many_associations] },
-                if: :parent_entity
+                comparison: { other_than: :denied_name, unless: :hidden? },
+                uniqueness: {
+                  scope: %i[entity parent_and_children_has_and_belongs_to_many_associations]
+                }
       validates :association_type, inclusion: { in: :allowed_association_types }
 
       # :reek:UtilityFunction

@@ -142,6 +142,8 @@ module Schematics
 
       def fields = attributes + virtuals
 
+      def parent_and_children_fields = Array(parent_entity&.fields) + fields
+
       def elements = fields + associations
 
       def renderable_with_created_ats_fields = renderable_fields + created_at_attributes
@@ -320,6 +322,11 @@ module Schematics
       def children = schema
         .entities
         .select { _1.parent_entity == self }
+
+      def parent_and_children_has_and_belongs_to_many_associations
+        Array(parent_entity&.has_and_belongs_to_many_associations) +
+          has_and_belongs_to_many_associations
+      end
 
       protected
 

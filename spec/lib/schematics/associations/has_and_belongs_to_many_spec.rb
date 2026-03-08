@@ -21,12 +21,14 @@ describe Schematics::Associations::HasAndBelongsToMany do
   end
 
   let(:schema) { Schematics::Schema.new }
+  let(:parent) { nil }
   let(:entity) do
     Schematics::Entities::Entity.new(
       schema:,
       name: 'role',
       options: {
-        descriptor: 'name'
+        descriptor: 'name',
+        parent:
       },
       associations: [
         name: 'users', type: 'has_and_belongs_to_many'
@@ -102,6 +104,13 @@ describe Schematics::Associations::HasAndBelongsToMany do
 
   context 'when association name is already taken by another association' do
     let(:name) { 'users' }
+
+    it { is_expected.not_to be_valid }
+  end
+
+  context 'when association name is already taken by another association in parent entity' do
+    let(:name) { 'recipients' }
+    let(:parent) { 'message' }
 
     it { is_expected.not_to be_valid }
   end
