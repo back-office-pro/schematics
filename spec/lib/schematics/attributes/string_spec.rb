@@ -14,12 +14,14 @@ describe Schematics::Attributes::String do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
   let(:schema) { Schematics::Schema.new }
+  let(:parent) { nil }
   let(:entity) do
     Schematics::Entities::Entity.new(
       schema:,
       name: 'user',
       options: {
-        descriptor: 'full_name'
+        descriptor: 'full_name',
+        parent:
       },
       attributes: [
         name: 'first_name', type: 'string'
@@ -172,6 +174,20 @@ describe Schematics::Attributes::String do
 
   context 'when attribute name is already taken by another virtual' do
     let(:name) { 'full_name' }
+
+    it { is_expected.not_to be_valid }
+  end
+
+  context 'when attribute name is already taken by another attribute in the parent entity' do
+    let(:name) { 'action' }
+    let(:parent) { 'permission' }
+
+    it { is_expected.not_to be_valid }
+  end
+
+  context 'when attribute name is already taken by another virtual in the parent entity' do
+    let(:name) { 'name' }
+    let(:parent) { 'permission' }
 
     it { is_expected.not_to be_valid }
   end

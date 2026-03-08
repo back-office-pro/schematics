@@ -28,8 +28,6 @@ module Schematics
       delegate :hidden?, to: :options
       delegate :entity,
                :inverse_entity,
-               :parent_entity,
-               :source_entity,
                :inverse_association,
                :required?,
                :polymorphic?,
@@ -38,6 +36,7 @@ module Schematics
                :options,
                to: :belongs_to
       delegate :descriptor,
+               :source_entity,
                :class_name,
                :model_class,
                :icon,
