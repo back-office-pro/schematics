@@ -19,7 +19,6 @@ module Schematics
                :id_attribute,
                :created_at_attribute,
                :parent_entity,
-               :children,
                to: :@entity,
                private: true
 
