@@ -61,6 +61,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
   its(:input_name) { is_expected.to eq('role[permission_ids][]') }
   its(:allowed_association_types) { is_expected.to include('user', 'role') }
   its(:association_type) { is_expected.to eq('permission') }
+  its(:foreign_key) { is_expected.to eq('role_id') }
   its(:inverse_association) { is_expected.to be_a(described_class) }
   its(:icon) { is_expected.to eq(:lock) }
   its(:weight) { is_expected.to eq(3) }
@@ -123,6 +124,8 @@ describe Schematics::Associations::HasAndBelongsToMany do
 
   context 'when association has a parent entity' do
     let(:parent) { 'message' }
+
+    its(:foreign_key) { is_expected.to eq('message_id') }
 
     its(:to_str) do
       is_expected.to eq <<~RUBY

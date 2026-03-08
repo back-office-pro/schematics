@@ -22,10 +22,8 @@ module Schematics
 
       validates :name,
                 presence: true,
-                comparison: { other_than: :denied_name, unless: :hidden? },
-                uniqueness: {
-                  scope: %i[entity parent_and_children_has_and_belongs_to_many_associations]
-                }
+                uniqueness: { scope: %i[entity parent_and_children_has_and_belongs_to_many_associations] }, # rubocop:disable Layout/LineLength
+                comparison: { other_than: :denied_name, unless: :hidden? }
       validates :association_type, inclusion: { in: :allowed_association_types }
 
       # :reek:UtilityFunction
@@ -59,6 +57,8 @@ module Schematics
 
       def association_type = super.singularize
 
+      def foreign_key = "#{source_entity.table_name}_id"
+
       memoize def inverse_association = Associations::Association.build(
         type:,
         entity: inverse_entity,
@@ -84,12 +84,14 @@ module Schematics
 
       def prefixed? = false
 
+      def association_foreign_key = "#{inverse_entity.table_name}_id"
+
       def association_to_str = <<~RUBY
         has_and_belongs_to_many :#{name},
                                 class_name: '#{class_name}',
                                 join_table: '#{join_table}',
-                                foreign_key: '#{source_entity.table_name}_id',
-                                association_foreign_key: '#{inverse_entity.table_name}_id'
+                                foreign_key: '#{foreign_key}',
+                                association_foreign_key: '#{association_foreign_key}'
       RUBY
 
       def denied_name = entity

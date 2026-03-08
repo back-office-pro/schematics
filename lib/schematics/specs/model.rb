@@ -267,6 +267,7 @@ module Schematics
               .to have_and_belong_to_many(association.name.to_sym)
               .class_name(association.class_name)
               .join_table(association.join_table)
+              .with_foreign_key(association.foreign_key)
               .strict_loading
           end
         end

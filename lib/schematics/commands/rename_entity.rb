@@ -100,7 +100,7 @@ module Schematics
               'rename',
               "#{attribute.source_entity.table_name}_id",
               'to',
-              "#{association.source_entity.table_name}_id",
+              association.foreign_key,
               'in',
               association.join_table
             ].join('_')
