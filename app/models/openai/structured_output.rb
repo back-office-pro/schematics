@@ -19,6 +19,7 @@ module OpenAI
       EnumValue
       Option
       Icon
+      Parent
       StateMachineEvent
       Wrapper
     ].freeze
@@ -46,12 +47,13 @@ module OpenAI
       }
     }
 
-    def forbidden_entity_names = Schematics::Schema
-      .new
+    def forbidden_entity_names = schema
       .entities
       .map(&:name)
       .concat(Schematics::Entities::Entity::NAME_DENYLIST)
       .to_sentence
+
+    memoize def schema = Schematics::Schema.new
 
     def entity_options_def = {
       options: {
@@ -89,7 +91,7 @@ module OpenAI
       .map(&:to_openai_schema)
       .reduce(&:merge)
 
-    def entity = Schematics::Entities::Entity.new
+    def entity = Schematics::Entities::Entity.new(schema:)
 
     def icon_def = Schematics::Options::Icon
       .to_openai_schema
