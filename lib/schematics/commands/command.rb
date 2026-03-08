@@ -54,6 +54,7 @@ module Schematics
 
       def migratable_attributes = entity
         .migratable_attributes
+        .concat(children.flat_map(&:migratable_attributes))
         .push('slug:string:uniq', 'lock_version:integer', 'deleted_at:datetime:index')
         .push(('sti_type:string' if abstract?))
         .compact
