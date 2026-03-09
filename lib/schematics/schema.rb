@@ -15,7 +15,7 @@ require 'singleton'
 
 module Schematics
   # :reek:InstanceVariableAssumption
-  class Schema # rubocop:disable Metrics/ClassLength
+  class Schema
     include ::ActiveModel::API
     include ::ActiveModel::NestedAttributes
 
