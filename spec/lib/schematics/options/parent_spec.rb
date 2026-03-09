@@ -20,5 +20,5 @@ describe Schematics::Options::Parent do
   its(:option_name) { is_expected.to eq(:parent) }
   its(:input_type) { is_expected.to eq(:select) }
   its(:collection) { is_expected.to eq(%w[portfolio investment instrument]) }
-  its(:controller) { is_expected.to eq('schema-editor--association-dropdown') }
+  its(:controller) { is_expected.to eq('schema-editor--parent-dropdown') }
 end
