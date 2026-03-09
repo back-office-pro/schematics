@@ -56,7 +56,6 @@ module Schematics
 
     def polymorphic_associations = entities
       .flat_map(&:association_attributes)
-      .uniq
       .select(&:polymorphic?)
 
     def model_classes = entities
@@ -88,7 +87,6 @@ module Schematics
     # :reek:FeatureEnvy
     def add_inverse_associations = entities
       .flat_map(&:association_attributes)
-      .uniq
       .reject(&:polymorphic?)
       .select(&:inverse_entity)
       .each { _1.inverse_entity.associations << _1.inverse_association }
