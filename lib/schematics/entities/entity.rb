@@ -323,11 +323,6 @@ module Schematics
         .entities
         .select { _1.parent_entity == self }
 
-      def parent_and_children_has_and_belongs_to_many_associations
-        Array(parent_entity&.has_and_belongs_to_many_associations) +
-          has_and_belongs_to_many_associations
-      end
-
       protected
 
       def allowed_parent_entities = schema
