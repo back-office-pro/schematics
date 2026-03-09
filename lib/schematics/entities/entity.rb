@@ -334,6 +334,7 @@ module Schematics
         .entities
         .excluding(self)
         .reject(&:hidden?)
+        .reject(&:abstract?)
         .reject(&:core?)
         .map(&:name)
         .sort
