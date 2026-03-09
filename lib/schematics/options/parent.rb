@@ -14,8 +14,6 @@ module Schematics
   module Options
     class Parent < CollectionOption
       def controller = 'schema-editor--association-dropdown'
-
-      def openai_description = 'The parent entity name'
     end
   end
 end

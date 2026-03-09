@@ -63,6 +63,10 @@ module OpenAI
             type: 'string',
             description: 'The attribute name which represents the most the entity'
           },
+          parent: {
+            type: 'string',
+            description: 'The parent entity name in case of inheritance'
+          },
           icon: { '$ref': '#/$defs/icon' }
         },
         additionalProperties: false,

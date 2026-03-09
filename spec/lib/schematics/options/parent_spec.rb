@@ -21,5 +21,4 @@ describe Schematics::Options::Parent do
   its(:input_type) { is_expected.to eq(:select) }
   its(:collection) { is_expected.to eq(%w[portfolio investment instrument]) }
   its(:controller) { is_expected.to eq('schema-editor--association-dropdown') }
-  its(:openai_description) { is_expected.to eq('The parent entity name') }
 end
