@@ -36,7 +36,6 @@ module Schematics
                :options,
                to: :belongs_to
       delegate :descriptor,
-               :source_entity,
                :class_name,
                :model_class,
                :icon,
@@ -70,6 +69,8 @@ module Schematics
       def inverse_of = belongs_to.name
 
       def to_str = scope_to_str.concat(association_to_str)
+
+      def entity=(entity); end
 
       protected
 

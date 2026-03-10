@@ -18,7 +18,7 @@ module Schematics
       include Behaviours::Fillable
 
       delegate :includes, :descriptor, :class_name, :model_class, to: :inverse_entity
-      delegate :options, :allowed_association_types, to: :belongs_to
+      delegate :options, :allowed_association_types, :entity=, to: :belongs_to
 
       validates :name,
                 presence: true,
@@ -57,7 +57,7 @@ module Schematics
 
       def association_type = super.singularize
 
-      def foreign_key = "#{source_entity.table_name}_id"
+      def foreign_key = "#{entity.table_name}_id"
 
       memoize def inverse_association = Associations::Association.build(
         type:,
@@ -74,7 +74,7 @@ module Schematics
         options.filter_by&.to_sym || :itself
       end
 
-      def join_table = [source_entity, inverse_entity]
+      def join_table = [entity, inverse_entity]
         .map(&:table_name)
         .map(&:pluralize)
         .sort

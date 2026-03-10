@@ -32,6 +32,7 @@ module Schematics
 
       def translations_generator
         return if core?
+        return if abstract?
 
         TranslationsGenerator.new([name], ["--rename=#{old_name}"])
       end
@@ -39,6 +40,7 @@ module Schematics
       # :reek:FeatureEnvy
       def translation_generator(element)
         return if core?
+        return if abstract?
 
         TranslationGenerator.new(
           [element.i18n_key],
@@ -56,15 +58,16 @@ module Schematics
 
       def old_name = attribute.name
 
-      def permissions_generator = PermissionsGenerator.new(
-        [class_name],
-        ["--rename=#{old_class_name}"]
-      )
+      def permissions_generator
+        return if abstract?
+
+        PermissionsGenerator.new([class_name], ["--rename=#{old_class_name}"])
+      end
 
       def old_class_name = old_name.camelize
 
       def migration_generator
-        return if child?
+        return if abstract?
 
         Rails::Generators::MigrationGenerator.new(
           ["rename_#{old_table_name.pluralize}_to_#{table_name.pluralize}"]
@@ -81,7 +84,7 @@ module Schematics
           [
             [
               'rename',
-              attribute.source_entity.table_name.pluralize,
+              old_name.pluralize,
               association.inverse_entity.table_name.pluralize,
               'to',
               association.join_table
@@ -98,7 +101,7 @@ module Schematics
           [
             [
               'rename',
-              "#{attribute.source_entity.table_name}_id",
+              "#{old_name}_id",
               'to',
               association.foreign_key,
               'in',

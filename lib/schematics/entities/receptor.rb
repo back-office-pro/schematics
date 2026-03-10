@@ -32,7 +32,11 @@ module Schematics
         return super unless mod || constant
 
         elements = public_send(mod.to_s.underscore)
-        elements += parent_entity.public_send(method_name) if parent_entity && constant != :Migratable # rubocop:disable Layout/LineLength
+        if parent_entity
+          parent_elements = parent_entity.public_send(method_name)
+          parent_elements.each { _1.entity = @entity }
+          elements += parent_elements
+        end
         if Schematics.const_defined?(mod) && Schematics.const_get(mod).const_defined?(constant)
           elements.public_send(predicate, Schematics.const_get(mod).const_get(constant))
         elsif Behaviours.const_defined?(constant)

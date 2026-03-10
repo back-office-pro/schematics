@@ -174,14 +174,17 @@ module Schematics
       entity
         .attributes
         .map do |attribute|
-          current_attribute = current_entity.attributes.find { _1.id == attribute.id }
-          next Commands::AddAttribute.new(entity:, attribute:) unless current_attribute
+          children = entity.children.empty? ? [entity] : entity.children
+          children.flat_map do |entity|
+            current_attribute = current_entity.attributes.find { _1.id == attribute.id }
+            next Commands::AddAttribute.new(entity:, attribute:) unless current_attribute
 
-          [
-            rename_attribute_command(entity, current_attribute, attribute),
-            change_attribute_command(entity, current_attribute, attribute),
-            change_attribute_uniqueness_command(entity, current_attribute, attribute)
-          ]
+            [
+              rename_attribute_command(entity, current_attribute, attribute),
+              change_attribute_command(entity, current_attribute, attribute),
+              change_attribute_uniqueness_command(entity, current_attribute, attribute)
+            ]
+          end
         end
     end
 
@@ -227,7 +230,10 @@ module Schematics
       entity
         .attributes
         .reject { |attribute| new_entity.attributes.find { _1.id == attribute.id } }
-        .map { |attribute| Commands::RemoveAttribute.new(entity:, attribute:) }
+        .map do |attribute|
+          children = entity.children.empty? ? [entity] : entity.children
+          children.flat_map { |entity| Commands::RemoveAttribute.new(entity:, attribute:) }
+        end
     end
 
     def remove_translation_commands(entity, new_entity)

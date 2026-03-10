@@ -31,12 +31,14 @@ module Schematics
 
       def translations_generator
         return if core?
+        return if abstract?
 
         TranslationsGenerator.new([name], [], behavior: :revoke)
       end
 
       def translation_generator(element)
         return if core?
+        return if abstract?
 
         TranslationGenerator.new([element.i18n_key], [], behavior: :revoke)
       end
@@ -48,7 +50,7 @@ module Schematics
       end
 
       def migration_generator
-        return if child?
+        return if abstract?
 
         Rails::Generators::MigrationGenerator.new(
           ["drop_#{table_name.pluralize}", *migratable_attributes],
@@ -63,7 +65,7 @@ module Schematics
         Rails::Generators::MigrationGenerator.new(
           [
             "drop_join_table_#{association.join_table}",
-            association.source_entity.table_name.pluralize,
+            association.entity.table_name.pluralize,
             association.inverse_entity.table_name.pluralize
           ]
         )

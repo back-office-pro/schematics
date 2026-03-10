@@ -69,7 +69,6 @@ module Schematics
         serialized_json
         slug
         slugs
-        sti_type
         to_param
         to_s
         unstale

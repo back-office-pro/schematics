@@ -256,15 +256,12 @@ module Schematics
         .uniq
 
       def to_str = <<~RUBY
-        class ::#{class_name} < #{parent_class_name}; end
+        class ::#{class_name} < Schematics::ApplicationRecord; end
       RUBY
 
-      def digest = Digest::MD5.hexdigest(
-        model_elements
-          .concat(children.flat_map(&:model_elements))
-          .map(&:to_str)
-          .join
-      )
+      def digest
+        Digest::MD5.hexdigest(model_elements.map(&:to_str).join)
+      end
 
       def association_elements = has_many_and_through_and_belongs_to_many_associations
         .reject(&:existing?)
@@ -276,6 +273,7 @@ module Schematics
       end
 
       def model_elements = elements
+        .concat(Array(parent_entity&.model_elements))
         .concat(triggers, validators, search_aliases)
         .push(descriptor)
 
@@ -311,10 +309,6 @@ module Schematics
         .stable_sort_by(&:weight)
         .to_h(&:to_open_api_schema)
 
-      def source_entity
-        parent_entity || self
-      end
-
       def parent_entity
         schema.find_entity_by_name(parent)
       end
@@ -344,12 +338,6 @@ module Schematics
         Attributes::Month.new(entity: self, name: 'created_at/month'),
         Attributes::Year.new(entity: self, name: 'created_at/year')
       ]
-
-      def parent_class_name
-        return 'Schematics::ApplicationRecord' unless parent
-
-        "::#{parent_entity&.class_name}"
-      end
 
       def receptor = Receptor.new(self)
 

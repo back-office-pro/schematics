@@ -336,13 +336,27 @@ describe Schematics::Entities::Receptor do
     describe '#migratable_elements' do
       subject { receptor.migratable_elements.map(&:name) }
 
-      it { is_expected.to contain_exactly('subject', 'record') }
+      it { is_expected.to contain_exactly('subject', 'record', 'name') }
     end
 
     describe '#non_migratable_elements' do
       subject { receptor.non_migratable_elements.map(&:name) }
 
-      it { is_expected.to contain_exactly('content', 'participants', 'preview') }
+      let(:expected_elements) do
+        %w[
+          content
+          meetings
+          participants
+          preview
+          record_comments
+          record_drafts
+          record_emailings
+          tasks
+          users
+        ]
+      end
+
+      it { is_expected.to match_array(expected_elements) }
     end
 
     describe '#preloadable_elements' do
@@ -495,7 +509,7 @@ describe Schematics::Entities::Receptor do
     describe '#migratable_attributes' do
       subject { receptor.migratable_attributes.map(&:name) }
 
-      it { is_expected.to contain_exactly('subject', 'record') }
+      it { is_expected.to contain_exactly('subject', 'record', 'name') }
     end
 
     describe '#non_migratable_attributes' do
@@ -599,7 +613,19 @@ describe Schematics::Entities::Receptor do
     describe '#non_migratable_associations' do
       subject { receptor.non_migratable_associations.map(&:name) }
 
-      it { is_expected.to contain_exactly('participants') }
+      let(:expected_associations) do
+        %w[
+          meetings
+          participants
+          record_comments
+          record_drafts
+          record_emailings
+          tasks
+          users
+        ]
+      end
+
+      it { is_expected.to match_array(expected_associations) }
     end
 
     describe '#preloadable_associations' do

@@ -23,7 +23,6 @@ module Schematics
 
       def groups = SchemaCache
         .model_classes
-        .reject(&:abstract?)
         .push(::Import, ::ActiveStorage::Blob, ::Emailing)
         .select { can?(:index, _1) }
         .sort_by(&:human_name)

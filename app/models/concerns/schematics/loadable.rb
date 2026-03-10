@@ -26,13 +26,13 @@ module Schematics
     end
 
     class_methods do
-      delegate :abstract?, to: :entity, allow_nil: true
       # :reek:Attribute
       attr_accessor :concerns
 
       def inherited(subclass)
         super
         subclass.class_eval do
+          self.abstract_class = entity&.abstract?
           superclass.concerns&.each(&method(:include))
           entity&.model_elements&.each do |model_element|
             eval model_element, binding, __FILE__, __LINE__ # rubocop:disable Security/Eval
@@ -92,10 +92,6 @@ module Schematics
         end
 
         const_get(name)
-      end
-
-      def find_sti_class(type_name)
-        type_name.safe_constantize || super
       end
 
       private
