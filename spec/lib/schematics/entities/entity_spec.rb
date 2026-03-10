@@ -52,6 +52,7 @@ describe Schematics::Entities::Entity do
   its(:digest) { is_expected.to eq('950d5abb604834b4815b3c40634a63ee') }
   its(:to_spec) { is_expected.to eq('We manage **discussions**') }
   its(:parent_entity) { is_expected.to be_nil }
+  its(:children) { is_expected.to be_empty }
 
   its(:available_options) do
     is_expected.to contain_exactly(
@@ -103,5 +104,6 @@ describe Schematics::Entities::Entity do
 
     its(:digest) { is_expected.to eq('07bcdbf90a8c4c9ad9dc844ff71586ca') }
     its(:parent_entity) { is_expected.to eq(parent_entity) }
+    its(:children) { is_expected.to be_empty }
   end
 end
