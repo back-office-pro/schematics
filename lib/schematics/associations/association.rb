@@ -70,6 +70,7 @@ module Schematics
 
       def to_str = scope_to_str.concat(association_to_str)
 
+      # :reek:UnusedParameters
       def entity=(entity); end
 
       protected
