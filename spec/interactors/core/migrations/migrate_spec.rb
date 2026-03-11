@@ -980,7 +980,7 @@ RSpec.describe Core::Migrations::Migrate do
         # migrate
         expect { expect(migrate).to be_a_success }
           .to not_change(Permission, :count)
-          .and change(Translation.with_deleted, :count).by(-6) # FIXME: should be -12
+          .and change(Translation.with_deleted, :count).by(-6)
           .and change(Documentation, :count).by(1)
         expect(migration.backup).not_to be_attached
         expect(Dir[root.join('storage/migrate/*_remove_name_from_brokerage_accounts_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
@@ -1276,7 +1276,7 @@ RSpec.describe Core::Migrations::Migrate do
         # migrate
         expect { expect(migrate).to be_a_success }
           .to not_change(Permission, :count)
-          .and change(Translation.with_deleted, :count).by(-9) # FIXME: should be 12
+          .and change(Translation.with_deleted, :count).by(-9)
           .and change(Documentation, :count).by(1)
         expect(migration.backup).to be_attached
         expect(Dir[root.join('storage/migrate/*_drop_join_table_brokerage_accounts_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
