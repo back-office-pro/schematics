@@ -1213,7 +1213,7 @@ RSpec.describe Core::Migrations::Migrate do
           .to not_change(Permission.with_deleted, :count)
           .and change(Translation.with_deleted, :count).by(-12)
           .and change(Documentation.with_deleted, :count).by(-1)
-        expect(Dir[root.join('storage/migrate/*_drop_join_table_api_keysbrokerage_accounts_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('storage/migrate/*_drop_join_table_api_keys_brokerage_accounts_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_drop_join_table_brokerage_accounts_permissions_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_drop_join_table_api_keys_life_insurances_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_drop_join_table_life_insurances_permissions_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
