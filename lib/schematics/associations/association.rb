@@ -70,6 +70,10 @@ module Schematics
 
       def to_str = scope_to_str.concat(association_to_str)
 
+      def dup
+        self.class.new(belongs_to: belongs_to.dup)
+      end
+
       # :reek:UnusedParameters
       def entity=(entity); end
 
