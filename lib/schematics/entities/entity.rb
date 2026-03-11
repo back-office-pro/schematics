@@ -315,6 +315,10 @@ module Schematics
         .entities
         .select { _1.parent_entity == self }
 
+      def non_hidden_has_and_belongs_to_many_associations = associations
+        .grep(Associations::HasAndBelongsToMany)
+        .reject(&:hidden?)
+
       protected
 
       def allowed_parent_entities = schema
