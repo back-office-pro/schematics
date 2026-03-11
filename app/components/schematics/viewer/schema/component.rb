@@ -36,7 +36,6 @@ module Schematics
 
         def add_association_edges = entities
           .flat_map(&:association_attributes)
-          .uniq
           .each { graph.add_edges(_1.entity.name, _1.inverse_entity.name, arrowhead: 'none') }
 
         def entities = schema

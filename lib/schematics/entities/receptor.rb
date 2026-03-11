@@ -32,11 +32,12 @@ module Schematics
         return super unless mod || constant
 
         elements = public_send(mod.to_s.underscore)
-        if parent_entity
-          parent_elements = parent_entity.public_send(method_name)
-          parent_elements.each { _1.entity = @entity }
-          elements += parent_elements
-        end
+        elements += Array(
+          parent_entity
+            &.public_send(method_name)
+            &.map(&:dup)
+            &.map { |element| element.tap { _1.entity = @entity } }
+        )
         if Schematics.const_defined?(mod) && Schematics.const_get(mod).const_defined?(constant)
           elements.public_send(predicate, Schematics.const_get(mod).const_get(constant))
         elsif Behaviours.const_defined?(constant)
