@@ -270,8 +270,8 @@ module Schematics
         searchable_elements.map(&:search_alias)
       end
 
-      def model_elements = elements
-        .concat(Array(parent_entity&.model_elements))
+      def model_elements = Array(parent_entity&.model_elements)
+        .concat(elements)
         .concat(triggers, validators, search_aliases)
         .push(descriptor)
 

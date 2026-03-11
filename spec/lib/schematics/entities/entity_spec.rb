@@ -102,7 +102,7 @@ describe Schematics::Entities::Entity do
 
     it { is_expected.to be_child }
 
-    its(:digest) { is_expected.to eq('506cc6e303d7625111df73f9e435dbab') }
+    its(:digest) { is_expected.to eq('58e30a57034ce485724c274bfb5553bc') }
     its(:parent_entity) { is_expected.to eq(parent_entity) }
     its(:children) { is_expected.to be_empty }
   end
