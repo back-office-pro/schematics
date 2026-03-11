@@ -142,8 +142,6 @@ module Schematics
 
       def fields = attributes + virtuals
 
-      def parent_and_children_fields = Array(parent_entity&.fields) + fields
-
       def elements = fields + associations
 
       def renderable_with_created_ats_fields = renderable_fields + created_at_attributes
