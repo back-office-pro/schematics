@@ -1702,6 +1702,161 @@ describe Schematics::Migrator do
     end
   end
 
+  context 'when renaming an entity with a parent' do
+    let(:current_data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'portfolio',
+          associations: [
+            type: 'has_and_belongs_to_many',
+            name: 'users'
+          ],
+          attributes: [
+            id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+            name: 'name',
+            type: 'string'
+          ]
+        },
+        {
+          id: '5311570e-b976-410d-b5d9-48eb928c8fb1',
+          name: 'brokerage_account',
+          options: {
+            parent: 'portfolio'
+          },
+          associations: [
+            type: 'has_and_belongs_to_many',
+            name: 'teams'
+          ],
+          attributes: [
+            id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
+            name: 'fees',
+            type: 'percentage'
+          ]
+        },
+        {
+          id: '635476ac-2c51-4ce2-a23b-2c8ba6535598',
+          name: 'life_insurance',
+          options: {
+            parent: 'portfolio'
+          },
+          associations: [
+            type: 'has_and_belongs_to_many',
+            name: 'roles'
+          ],
+          attributes: [
+            id: '286ce97a-d000-4c26-93ea-7a969850d124',
+            name: 'age',
+            type: 'integer'
+          ]
+        }
+      ]
+    end
+    let(:new_data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'stock_portfolio',
+          associations: [
+            type: 'has_and_belongs_to_many',
+            name: 'users'
+          ],
+          attributes: [
+            id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+            name: 'name',
+            type: 'string'
+          ]
+        },
+        {
+          id: '5311570e-b976-410d-b5d9-48eb928c8fb1',
+          name: 'investment_account',
+          options: {
+            parent: 'stock_portfolio'
+          },
+          associations: [
+            type: 'has_and_belongs_to_many',
+            name: 'teams'
+          ],
+          attributes: [
+            id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
+            name: 'fees',
+            type: 'percentage'
+          ]
+        },
+        {
+          id: '635476ac-2c51-4ce2-a23b-2c8ba6535598',
+          name: 'insurance',
+          options: {
+            parent: 'stock_portfolio'
+          },
+          associations: [
+            type: 'has_and_belongs_to_many',
+            name: 'roles'
+          ],
+          attributes: [
+            id: '286ce97a-d000-4c26-93ea-7a969850d124',
+            name: 'age',
+            type: 'integer'
+          ]
+        }
+      ]
+    end
+
+    describe '#build_commands' do
+      subject { migration.build_commands }
+
+      its(:size) { is_expected.to eq(3) }
+      its([0]) { is_expected.to be_a(Schematics::Commands::RenameEntity) }
+      its([1]) { is_expected.to be_a(Schematics::Commands::RenameEntity) }
+      its([2]) { is_expected.to be_a(Schematics::Commands::RenameEntity) }
+
+      its([0]) do
+        is_expected.to have_attributes(
+          entity: kind_of(Schematics::Entities::Entity),
+          attribute: kind_of(Schematics::Entities::Entity)
+        )
+      end
+
+      its([1]) do
+        is_expected.to have_attributes(
+          entity: kind_of(Schematics::Entities::Entity),
+          attribute: kind_of(Schematics::Entities::Entity)
+        )
+      end
+
+      its([2]) do
+        is_expected.to have_attributes(
+          entity: kind_of(Schematics::Entities::Entity),
+          attribute: kind_of(Schematics::Entities::Entity)
+        )
+      end
+    end
+
+    describe '#clean_commands' do
+      subject { migration.clean_commands }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#new_entities' do
+      subject { migration.new_entities.map(&:name) }
+
+      it { is_expected.to eq(%w[stock_portfolio investment_account insurance]) }
+    end
+
+    describe '#old_entities' do
+      subject { migration.old_entities.map(&:name) }
+
+      it { is_expected.to eq(%w[portfolio brokerage_account life_insurance]) }
+    end
+
+    describe '#changed_entities' do
+      subject { migration.changed_entities.map(&:name) }
+
+      it { is_expected.to eq(%w[user team role]) }
+    end
+  end
+
   context 'when destroying an entity with a parent' do
     let(:current_data) do
       [
@@ -2120,6 +2275,354 @@ describe Schematics::Migrator do
       subject { migration.changed_entities.map(&:name) }
 
       it { is_expected.to eq(%w[portfolio brokerage_account life_insurance]) }
+    end
+  end
+
+  context 'when adding a new habtm association with a parent' do
+    let(:current_data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'portfolio',
+          associations: [
+            type: 'has_and_belongs_to_many',
+            name: 'users'
+          ],
+          attributes: [
+            id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+            name: 'name',
+            type: 'string'
+          ]
+        },
+        {
+          id: '5311570e-b976-410d-b5d9-48eb928c8fb1',
+          name: 'brokerage_account',
+          options: {
+            parent: 'portfolio'
+          },
+          associations: [
+            type: 'has_and_belongs_to_many',
+            name: 'teams'
+          ],
+          attributes: [
+            id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
+            name: 'fees',
+            type: 'percentage'
+          ]
+        },
+        {
+          id: '635476ac-2c51-4ce2-a23b-2c8ba6535598',
+          name: 'life_insurance',
+          options: {
+            parent: 'portfolio'
+          },
+          associations: [
+            type: 'has_and_belongs_to_many',
+            name: 'roles'
+          ],
+          attributes: [
+            id: '286ce97a-d000-4c26-93ea-7a969850d124',
+            name: 'age',
+            type: 'integer'
+          ]
+        }
+      ]
+    end
+    let(:new_data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'portfolio',
+          associations: [
+            {
+              type: 'has_and_belongs_to_many',
+              name: 'users'
+            },
+            {
+              type: 'has_and_belongs_to_many',
+              name: 'api_keys'
+            }
+          ],
+          attributes: [
+            id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+            name: 'name',
+            type: 'string'
+          ]
+        },
+        {
+          id: '5311570e-b976-410d-b5d9-48eb928c8fb1',
+          name: 'brokerage_account',
+          options: {
+            parent: 'portfolio'
+          },
+          associations: [
+            {
+              type: 'has_and_belongs_to_many',
+              name: 'teams'
+            },
+            {
+              type: 'has_and_belongs_to_many',
+              name: 'permissions'
+            }
+          ],
+          attributes: [
+            id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
+            name: 'fees',
+            type: 'percentage'
+          ]
+        },
+        {
+          id: '635476ac-2c51-4ce2-a23b-2c8ba6535598',
+          name: 'life_insurance',
+          options: {
+            parent: 'portfolio'
+          },
+          associations: [
+            {
+              type: 'has_and_belongs_to_many',
+              name: 'roles'
+            },
+            {
+              type: 'has_and_belongs_to_many',
+              name: 'permissions'
+            }
+          ],
+          attributes: [
+            id: '286ce97a-d000-4c26-93ea-7a969850d124',
+            name: 'age',
+            type: 'integer'
+          ]
+        }
+      ]
+    end
+
+    describe '#build_commands' do
+      subject { migration.build_commands }
+
+      its(:size) { is_expected.to eq(5) }
+      its([0]) { is_expected.to be_a(Schematics::Commands::AddAssociation) }
+      its([1]) { is_expected.to be_a(Schematics::Commands::AddAssociation) }
+      its([2]) { is_expected.to be_a(Schematics::Commands::AddAssociation) }
+      its([3]) { is_expected.to be_a(Schematics::Commands::AddAssociation) }
+      its([4]) { is_expected.to be_a(Schematics::Commands::AddAssociation) }
+
+      its([0]) do
+        is_expected.to have_attributes(
+          entity: kind_of(Schematics::Entities::Entity),
+          attribute: kind_of(Schematics::Associations::HasAndBelongsToMany)
+        )
+      end
+
+      its([1]) do
+        is_expected.to have_attributes(
+          entity: kind_of(Schematics::Entities::Entity),
+          attribute: kind_of(Schematics::Associations::HasAndBelongsToMany)
+        )
+      end
+
+      its([2]) do
+        is_expected.to have_attributes(
+          entity: kind_of(Schematics::Entities::Entity),
+          attribute: kind_of(Schematics::Associations::HasAndBelongsToMany)
+        )
+      end
+
+      its([3]) do
+        is_expected.to have_attributes(
+          entity: kind_of(Schematics::Entities::Entity),
+          attribute: kind_of(Schematics::Associations::HasAndBelongsToMany)
+        )
+      end
+
+      its([4]) do
+        is_expected.to have_attributes(
+          entity: kind_of(Schematics::Entities::Entity),
+          attribute: kind_of(Schematics::Associations::HasAndBelongsToMany)
+        )
+      end
+    end
+
+    describe '#clean_commands' do
+      subject { migration.clean_commands }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#new_entities' do
+      subject { migration.new_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#old_entities' do
+      subject { migration.old_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#changed_entities' do
+      subject { migration.changed_entities.map(&:name) }
+
+      it { is_expected.to eq(%w[permission api_key portfolio brokerage_account life_insurance]) }
+    end
+  end
+
+  context 'when removing a habtm association with a parent' do
+    let(:current_data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'portfolio',
+          associations: [
+            type: 'has_and_belongs_to_many',
+            name: 'users'
+          ],
+          attributes: [
+            id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+            name: 'name',
+            type: 'string'
+          ]
+        },
+        {
+          id: '5311570e-b976-410d-b5d9-48eb928c8fb1',
+          name: 'brokerage_account',
+          options: {
+            parent: 'portfolio'
+          },
+          associations: [
+            type: 'has_and_belongs_to_many',
+            name: 'teams'
+          ],
+          attributes: [
+            id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
+            name: 'fees',
+            type: 'percentage'
+          ]
+        },
+        {
+          id: '635476ac-2c51-4ce2-a23b-2c8ba6535598',
+          name: 'life_insurance',
+          options: {
+            parent: 'portfolio'
+          },
+          associations: [
+            type: 'has_and_belongs_to_many',
+            name: 'roles'
+          ],
+          attributes: [
+            id: '286ce97a-d000-4c26-93ea-7a969850d124',
+            name: 'age',
+            type: 'integer'
+          ]
+        }
+      ]
+    end
+    let(:new_data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'portfolio',
+          attributes: [
+            id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+            name: 'name',
+            type: 'string'
+          ]
+        },
+        {
+          id: '5311570e-b976-410d-b5d9-48eb928c8fb1',
+          name: 'brokerage_account',
+          options: {
+            parent: 'portfolio'
+          },
+          attributes: [
+            id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
+            name: 'fees',
+            type: 'percentage'
+          ]
+        },
+        {
+          id: '635476ac-2c51-4ce2-a23b-2c8ba6535598',
+          name: 'life_insurance',
+          options: {
+            parent: 'portfolio'
+          },
+          attributes: [
+            id: '286ce97a-d000-4c26-93ea-7a969850d124',
+            name: 'age',
+            type: 'integer'
+          ]
+        }
+      ]
+    end
+
+    describe '#build_commands' do
+      subject { migration.build_commands }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#clean_commands' do
+      subject { migration.clean_commands }
+
+      its(:size) { is_expected.to eq(5) }
+      its([0]) { is_expected.to be_a(Schematics::Commands::RemoveAssociation) }
+      its([1]) { is_expected.to be_a(Schematics::Commands::RemoveAssociation) }
+      its([2]) { is_expected.to be_a(Schematics::Commands::RemoveAssociation) }
+      its([3]) { is_expected.to be_a(Schematics::Commands::RemoveAssociation) }
+      its([4]) { is_expected.to be_a(Schematics::Commands::RemoveAssociation) }
+
+      its([0]) do
+        is_expected.to have_attributes(
+          entity: kind_of(Schematics::Entities::Entity),
+          attribute: kind_of(Schematics::Associations::HasAndBelongsToMany)
+        )
+      end
+
+      its([1]) do
+        is_expected.to have_attributes(
+          entity: kind_of(Schematics::Entities::Entity),
+          attribute: kind_of(Schematics::Associations::HasAndBelongsToMany)
+        )
+      end
+
+      its([2]) do
+        is_expected.to have_attributes(
+          entity: kind_of(Schematics::Entities::Entity),
+          attribute: kind_of(Schematics::Associations::HasAndBelongsToMany)
+        )
+      end
+
+      its([3]) do
+        is_expected.to have_attributes(
+          entity: kind_of(Schematics::Entities::Entity),
+          attribute: kind_of(Schematics::Associations::HasAndBelongsToMany)
+        )
+      end
+
+      its([4]) do
+        is_expected.to have_attributes(
+          entity: kind_of(Schematics::Entities::Entity),
+          attribute: kind_of(Schematics::Associations::HasAndBelongsToMany)
+        )
+      end
+    end
+
+    describe '#new_entities' do
+      subject { migration.new_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#old_entities' do
+      subject { migration.old_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#changed_entities' do
+      subject { migration.changed_entities.map(&:name) }
+
+      it { is_expected.to eq(%w[user team role portfolio brokerage_account life_insurance]) }
     end
   end
 end
