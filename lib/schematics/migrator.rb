@@ -171,10 +171,10 @@ module Schematics
     end
 
     def add_attribute_commands(entity, current_entity)
+      children = entity.children.empty? ? [entity] : entity.children
       entity
         .attributes
-        .map do |attribute|
-          children = entity.children.empty? ? [entity] : entity.children
+        .flat_map do |attribute|
           children.flat_map do |entity|
             current_attribute = current_entity.attributes.find { _1.id == attribute.id }
             next Commands::AddAttribute.new(entity:, attribute:) unless current_attribute
@@ -227,13 +227,11 @@ module Schematics
     end
 
     def remove_attribute_commands(entity, new_entity)
+      children = entity.children.empty? ? [entity] : entity.children
       entity
         .attributes
         .reject { |attribute| new_entity.attributes.find { _1.id == attribute.id } }
-        .map do |attribute|
-          children = entity.children.empty? ? [entity] : entity.children
-          children.flat_map { |entity| Commands::RemoveAttribute.new(entity:, attribute:) }
-        end
+        .map { |attribute| children.flat_map { |entity| Commands::RemoveAttribute.new(entity:, attribute:) } } # rubocop:disable Layout/LineLength
     end
 
     def remove_translation_commands(entity, new_entity)
