@@ -24,6 +24,7 @@ module Schematics
       include Behaviours::Preloadable
       include Behaviours::Documentable
       include Behaviours::Internationalizable
+      include Behaviours::Duplicable
 
       attr_accessor :id, :entity, :function
 

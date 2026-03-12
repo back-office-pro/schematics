@@ -176,6 +176,7 @@ module Schematics
         .attributes
         .flat_map do |attribute|
           children.flat_map do |entity|
+            attribute = attribute.duplicate(entity)
             current_attribute = current_entity.attributes.find { _1.id == attribute.id }
             next Commands::AddAttribute.new(entity:, attribute:) unless current_attribute
 
@@ -231,7 +232,11 @@ module Schematics
       entity
         .attributes
         .reject { |attribute| new_entity.attributes.find { _1.id == attribute.id } }
-        .map { |attribute| children.flat_map { |entity| Commands::RemoveAttribute.new(entity:, attribute:) } } # rubocop:disable Layout/LineLength
+        .map do |attribute|
+          children.flat_map do |entity|
+            Commands::RemoveAttribute.new(entity:, attribute: attribute.duplicate(entity))
+          end
+        end
     end
 
     def remove_translation_commands(entity, new_entity)

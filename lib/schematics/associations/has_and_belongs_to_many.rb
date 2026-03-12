@@ -18,7 +18,7 @@ module Schematics
       include Behaviours::Fillable
 
       delegate :includes, :descriptor, :class_name, :model_class, to: :inverse_entity
-      delegate :options, :allowed_association_types, :entity=, to: :belongs_to
+      delegate :options, :allowed_association_types, to: :belongs_to
 
       validates :name,
                 presence: true,
@@ -79,6 +79,10 @@ module Schematics
         .map(&:pluralize)
         .sort
         .join('_')
+
+      def duplicate(entity)
+        super.tap { _1.belongs_to.entity = entity }
+      end
 
       protected
 

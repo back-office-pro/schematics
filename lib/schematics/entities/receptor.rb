@@ -35,8 +35,8 @@ module Schematics
         elements += Array(
           parent_entity
             &.public_send(method_name)
-            &.map(&:dup)
-            &.map { |element| element.tap { _1.entity = @entity } }
+            &.each_with_object(@entity)
+            &.map(&:duplicate)
         )
         if Schematics.const_defined?(mod) && Schematics.const_get(mod).const_defined?(constant)
           elements.public_send(predicate, Schematics.const_get(mod).const_get(constant))

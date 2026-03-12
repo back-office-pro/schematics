@@ -23,6 +23,7 @@ module Schematics
       include Behaviours::Preloadable
       include Behaviours::Documentable
       include Behaviours::Internationalizable
+      include Behaviours::Duplicable
       include ::ActiveModel::API
 
       delegate :hidden?, to: :options
@@ -70,12 +71,9 @@ module Schematics
 
       def to_str = scope_to_str.concat(association_to_str)
 
-      def dup
+      def duplicate(*)
         self.class.new(belongs_to: belongs_to.dup)
       end
-
-      # :reek:UnusedParameters
-      def entity=(entity); end
 
       protected
 
