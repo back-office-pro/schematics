@@ -47,6 +47,7 @@ describe Schematics::Associations::HasManyNested do
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Duplicable) }
 
   its(:type) { is_expected.to eq('has_many') }
   its(:name) { is_expected.to eq('entities') }

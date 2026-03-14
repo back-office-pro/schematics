@@ -52,6 +52,7 @@ describe Schematics::Associations::HasOneThrough do
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Duplicable) }
 
   its(:type) { is_expected.to eq('has_one') }
   its(:name) { is_expected.to eq('user') }

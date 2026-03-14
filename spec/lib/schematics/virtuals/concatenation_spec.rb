@@ -47,6 +47,7 @@ describe Schematics::Virtuals::Concatenation do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
   it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Duplicable) }
   it { is_expected.to be_valid }
 
   its(:open_api_schema_type) { is_expected.to eq('string') }

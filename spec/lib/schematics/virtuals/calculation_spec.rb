@@ -52,6 +52,7 @@ describe Schematics::Virtuals::Calculation do
   it { is_expected.to be_a(Schematics::Behaviours::Rangeable) }
   it { is_expected.to be_a(Schematics::Behaviours::Numerable) }
   it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Duplicable) }
   it { is_expected.to be_valid }
 
   its(:open_api_schema_type) { is_expected.to eq('float') }
