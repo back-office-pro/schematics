@@ -24,19 +24,23 @@ module Schematics
       .grep(Commands::CreateEntity)
       .concat(build_commands.grep(Commands::RenameEntity))
       .map(&:entity)
+      .reject(&:abstract?)
 
     def old_entities = clean_commands
       .grep(Commands::DestroyEntity)
       .map(&:entity)
       .concat(build_commands.grep(Commands::RenameEntity).map(&:attribute))
+      .reject(&:abstract?)
 
-    def changed_entities = Array(
+    def changed_entities = Array( # rubocop:disable Metrics/CyclomaticComplexity
       @current_schema
         &.entities
+        &.reject(&:abstract?)
         &.excluding(old_entities)
         &.reject do |current_entity|
           @new_schema
             .entities
+            .reject(&:abstract?)
             .find { _1.id == current_entity.id }
             .digest
             .eql?(current_entity.digest)

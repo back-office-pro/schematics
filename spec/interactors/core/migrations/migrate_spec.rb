@@ -649,7 +649,6 @@ RSpec.describe Core::Migrations::Migrate do
         expect(Dir[root.join('storage/migrate/*_create_join_table_brokerage_accounts_teams_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_create_join_table_life_insurances_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_create_join_table_life_insurances_roles_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
-        expect { Portfolio }.not_to raise_error
         expect { BrokerageAccount }.not_to raise_error
         expect { LifeInsurance }.not_to raise_error
         # rollback
@@ -663,7 +662,6 @@ RSpec.describe Core::Migrations::Migrate do
         expect(Dir[root.join('storage/migrate/*_drop_join_table_brokerage_accounts_teams_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_drop_join_table_life_insurances_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_drop_join_table_life_insurances_roles_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
-        expect { Portfolio }.to raise_error(NameError)
         expect { BrokerageAccount }.to raise_error(NameError)
         expect { LifeInsurance }.to raise_error(NameError)
       end
@@ -744,10 +742,8 @@ RSpec.describe Core::Migrations::Migrate do
         expect(Dir[root.join('storage/migrate/*_rename_life_insurance_id_to_insurance_id_in_insurances_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_rename_life_insurances_roles_to_insurances_roles_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_rename_life_insurance_id_to_insurance_id_in_insurances_roles_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
-        expect { Portfolio }.to raise_error(NameError)
         expect { BrokerageAccount }.to raise_error(NameError)
         expect { LifeInsurance }.to raise_error(NameError)
-        expect { StockPortfolio }.not_to raise_error
         expect { InvestmentAccount }.not_to raise_error
         expect { Insurance }.not_to raise_error
         # rollback
@@ -765,10 +761,8 @@ RSpec.describe Core::Migrations::Migrate do
         expect(Dir[root.join('storage/migrate/*_rename_insurance_id_to_life_insurance_id_in_life_insurances_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_rename_insurances_roles_to_life_insurances_roles_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_rename_insurance_id_to_life_insurance_id_in_life_insurances_roles_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
-        expect { Portfolio }.not_to raise_error
         expect { BrokerageAccount }.not_to raise_error
         expect { LifeInsurance }.not_to raise_error
-        expect { StockPortfolio }.to raise_error(NameError)
         expect { InvestmentAccount }.to raise_error(NameError)
         expect { Insurance }.to raise_error(NameError)
       end
@@ -799,7 +793,6 @@ RSpec.describe Core::Migrations::Migrate do
         expect(Dir[root.join('storage/migrate/*_drop_join_table_brokerage_accounts_teams_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_drop_join_table_life_insurances_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_drop_join_table_life_insurances_roles_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
-        expect { Portfolio }.to raise_error(NameError)
         expect { BrokerageAccount }.to raise_error(NameError)
         expect { LifeInsurance }.to raise_error(NameError)
         expect { first_resource.reload }.to raise_error(ActiveRecord::StatementInvalid)
@@ -815,7 +808,6 @@ RSpec.describe Core::Migrations::Migrate do
         expect(Dir[root.join('storage/migrate/*_create_join_table_brokerage_accounts_teams_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_create_join_table_life_insurances_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_create_join_table_life_insurances_roles_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
-        expect { Portfolio }.not_to raise_error
         expect { BrokerageAccount }.not_to raise_error
         expect { LifeInsurance }.not_to raise_error
         expect { first_resource.reload }.not_to raise_error
@@ -1644,10 +1636,8 @@ RSpec.describe Core::Migrations::Migrate do
         expect(Dir[root.join('storage/migrate/*_rename_life_insurances_roles_to_insurances_roles_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_rename_life_insurance_id_to_insurance_id_in_insurances_roles_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_rename_age_to_years_in_insurances_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
-        expect { Portfolio }.to raise_error(NameError)
         expect { BrokerageAccount }.to raise_error(NameError)
         expect { LifeInsurance }.to raise_error(NameError)
-        expect { StockPortfolio }.not_to raise_error
         expect { InvestmentAccount }.not_to raise_error
         expect { Insurance }.not_to raise_error
         expect(InvestmentAccount.new).not_to respond_to(:fees)
@@ -1673,10 +1663,8 @@ RSpec.describe Core::Migrations::Migrate do
         expect(Dir[root.join('storage/migrate/*_rename_insurances_roles_to_life_insurances_roles_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_rename_insurance_id_to_life_insurance_id_in_life_insurances_roles_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_rename_years_to_age_in_life_insurances_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
-        expect { Portfolio }.not_to raise_error
         expect { BrokerageAccount }.not_to raise_error
         expect { LifeInsurance }.not_to raise_error
-        expect { StockPortfolio }.to raise_error(NameError)
         expect { InvestmentAccount }.to raise_error(NameError)
         expect { Insurance }.to raise_error(NameError)
         expect(BrokerageAccount.new).to respond_to(:fees)

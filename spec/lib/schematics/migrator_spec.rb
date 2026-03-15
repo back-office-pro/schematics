@@ -1686,7 +1686,7 @@ describe Schematics::Migrator do
     describe '#new_entities' do
       subject { migration.new_entities.map(&:name) }
 
-      it { is_expected.to eq(%w[portfolio brokerage_account life_insurance]) }
+      it { is_expected.to eq(%w[brokerage_account life_insurance]) }
     end
 
     describe '#old_entities' do
@@ -1841,13 +1841,13 @@ describe Schematics::Migrator do
     describe '#new_entities' do
       subject { migration.new_entities.map(&:name) }
 
-      it { is_expected.to eq(%w[stock_portfolio investment_account insurance]) }
+      it { is_expected.to eq(%w[investment_account insurance]) }
     end
 
     describe '#old_entities' do
       subject { migration.old_entities.map(&:name) }
 
-      it { is_expected.to eq(%w[portfolio brokerage_account life_insurance]) }
+      it { is_expected.to eq(%w[brokerage_account life_insurance]) }
     end
 
     describe '#changed_entities' do
@@ -1936,7 +1936,7 @@ describe Schematics::Migrator do
     describe '#old_entities' do
       subject { migration.old_entities.map(&:name) }
 
-      it { is_expected.to eq(%w[portfolio brokerage_account life_insurance]) }
+      it { is_expected.to eq(%w[brokerage_account life_insurance]) }
     end
 
     describe '#changed_entities' do
@@ -2126,7 +2126,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to eq(%w[portfolio brokerage_account life_insurance]) }
+      it { is_expected.to eq(%w[brokerage_account life_insurance]) }
     end
   end
 
@@ -2274,7 +2274,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to eq(%w[portfolio brokerage_account life_insurance]) }
+      it { is_expected.to eq(%w[brokerage_account life_insurance]) }
     end
   end
 
@@ -2458,7 +2458,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to include('portfolio', 'brokerage_account', 'life_insurance') }
+      it { is_expected.to include('brokerage_account', 'life_insurance') }
     end
   end
 
@@ -2647,7 +2647,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to eq(%w[permission api_key portfolio brokerage_account life_insurance]) }
+      it { is_expected.to eq(%w[permission api_key brokerage_account life_insurance]) }
     end
   end
 
@@ -2806,7 +2806,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to eq(%w[user team role portfolio brokerage_account life_insurance]) }
+      it { is_expected.to eq(%w[user team role brokerage_account life_insurance]) }
     end
   end
 
@@ -2973,7 +2973,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to eq(%w[portfolio brokerage_account life_insurance]) }
+      it { is_expected.to eq(%w[brokerage_account life_insurance]) }
     end
   end
 
@@ -3290,7 +3290,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to eq(%w[portfolio brokerage_account life_insurance]) }
+      it { is_expected.to eq(%w[brokerage_account life_insurance]) }
     end
   end
 
@@ -3469,13 +3469,13 @@ describe Schematics::Migrator do
     describe '#new_entities' do
       subject { migration.new_entities.map(&:name) }
 
-      it { is_expected.to eq(%w[stock_portfolio investment_account insurance]) }
+      it { is_expected.to eq(%w[investment_account insurance]) }
     end
 
     describe '#old_entities' do
       subject { migration.old_entities.map(&:name) }
 
-      it { is_expected.to eq(%w[portfolio brokerage_account life_insurance]) }
+      it { is_expected.to eq(%w[brokerage_account life_insurance]) }
     end
 
     describe '#changed_entities' do
