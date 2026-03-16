@@ -20,11 +20,9 @@ module Schematics
 
       def translation_generator
         return if core?
+        return if abstract?
 
-        TranslationGenerator.new(
-          [target.i18n_key],
-          ["--rename=#{attribute.i18n_key}"]
-        )
+        TranslationGenerator.new([target.i18n_key], ["--rename=#{attribute.i18n_key}"])
       end
 
       def weight = 3

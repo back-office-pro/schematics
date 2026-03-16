@@ -175,11 +175,10 @@ module Schematics
     end
 
     def add_attribute_commands(entity, current_entity)
-      children = entity.children.empty? ? [entity] : entity.children
       entity
         .attributes
         .flat_map do |attribute|
-          children.flat_map do |entity|
+          entity.children.push(entity).reject(&:abstract?).flat_map do |entity|
             attribute = attribute.duplicate(entity)
             current_attribute = current_entity.attributes.find { _1.id == attribute.id }
             next Commands::AddAttribute.new(entity:, attribute:) unless current_attribute
@@ -232,12 +231,11 @@ module Schematics
     end
 
     def remove_attribute_commands(entity, new_entity)
-      children = entity.children.empty? ? [entity] : entity.children
       entity
         .attributes
         .reject { |attribute| new_entity.attributes.find { _1.id == attribute.id } }
         .map do |attribute|
-          children.flat_map do |entity|
+          entity.children.push(entity).reject(&:abstract?).flat_map do |entity|
             Commands::RemoveAttribute.new(entity:, attribute: attribute.duplicate(entity))
           end
         end

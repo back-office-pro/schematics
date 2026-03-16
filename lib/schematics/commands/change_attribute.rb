@@ -16,19 +16,19 @@ require 'rails/generators/rails/migration/migration_generator'
 module Schematics
   module Commands
     class ChangeAttribute < Command
-      def generators
+      def generators = [migration_generator].compact
+
+      def migration_generator
+        return if abstract?
+
         case attribute
         when Behaviours::Migratable
-          [
-            Rails::Generators::MigrationGenerator.new(
-              [
-                "change_#{attribute.column_name}_column_#{target.database_type}_in_#{table_name.pluralize}", # rubocop:disable Layout/LineLength
-                attribute.to_s
-              ]
-            )
-          ]
-        else
-          super
+          Rails::Generators::MigrationGenerator.new(
+            [
+              "change_#{attribute.column_name}_column_#{target.database_type}_in_#{table_name.pluralize}", # rubocop:disable Layout/LineLength
+              attribute.to_s
+            ]
+          )
         end
       end
 

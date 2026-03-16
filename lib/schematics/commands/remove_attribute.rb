@@ -20,6 +20,8 @@ module Schematics
       def generators = [migration_generator, translation_generator].compact
 
       def migration_generator
+        return if abstract?
+
         case attribute
         when Behaviours::Migratable
           Rails::Generators::MigrationGenerator.new(
@@ -31,6 +33,7 @@ module Schematics
 
       def translation_generator
         return if core?
+        return if abstract?
 
         TranslationGenerator.new([attribute.i18n_key], [], behavior: :revoke)
       end

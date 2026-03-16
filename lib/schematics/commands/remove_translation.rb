@@ -20,6 +20,7 @@ module Schematics
 
       def translation_generator
         return if core?
+        return if abstract?
 
         TranslationGenerator.new([attribute.i18n_key], [], behavior: :revoke)
       end

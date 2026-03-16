@@ -3294,6 +3294,140 @@ describe Schematics::Migrator do
     end
   end
 
+  context 'when changing attribute mandatoriness with a parent' do
+    let(:current_data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'portfolio',
+          associations: [
+            type: 'has_and_belongs_to_many',
+            name: 'users'
+          ],
+          attributes: [
+            id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+            name: 'name',
+            type: 'string'
+          ]
+        },
+        {
+          id: '5311570e-b976-410d-b5d9-48eb928c8fb1',
+          name: 'brokerage_account',
+          options: {
+            parent: 'portfolio'
+          },
+          associations: [
+            type: 'has_and_belongs_to_many',
+            name: 'teams'
+          ],
+          attributes: [
+            id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
+            name: 'fees',
+            type: 'percentage'
+          ]
+        },
+        {
+          id: '635476ac-2c51-4ce2-a23b-2c8ba6535598',
+          name: 'life_insurance',
+          options: {
+            parent: 'portfolio'
+          },
+          associations: [
+            type: 'has_and_belongs_to_many',
+            name: 'roles'
+          ],
+          attributes: [
+            id: '286ce97a-d000-4c26-93ea-7a969850d124',
+            name: 'age',
+            type: 'integer'
+          ]
+        }
+      ]
+    end
+    let(:new_data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'portfolio',
+          associations: [
+            type: 'has_and_belongs_to_many',
+            name: 'users'
+          ],
+          attributes: [
+            id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+            name: 'name',
+            type: 'string',
+            options: {
+              required: true
+            }
+          ]
+        },
+        {
+          id: '5311570e-b976-410d-b5d9-48eb928c8fb1',
+          name: 'brokerage_account',
+          options: {
+            parent: 'portfolio'
+          },
+          associations: [
+            type: 'has_and_belongs_to_many',
+            name: 'teams'
+          ],
+          attributes: [
+            id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
+            name: 'fees',
+            type: 'percentage'
+          ]
+        },
+        {
+          id: '635476ac-2c51-4ce2-a23b-2c8ba6535598',
+          name: 'life_insurance',
+          options: {
+            parent: 'portfolio'
+          },
+          associations: [
+            type: 'has_and_belongs_to_many',
+            name: 'roles'
+          ],
+          attributes: [
+            id: '286ce97a-d000-4c26-93ea-7a969850d124',
+            name: 'age',
+            type: 'integer'
+          ]
+        }
+      ]
+    end
+
+    describe '#build_commands' do
+      subject { migration.build_commands }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#clean_commands' do
+      subject { migration.clean_commands }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#new_entities' do
+      subject { migration.new_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#old_entities' do
+      subject { migration.old_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#changed_entities' do
+      subject { migration.changed_entities.map(&:name) }
+
+      it { is_expected.to eq(%w[brokerage_account life_insurance]) }
+    end
+  end
+
   context 'with a more complex scenario and a parent' do
     let(:current_data) do
       [

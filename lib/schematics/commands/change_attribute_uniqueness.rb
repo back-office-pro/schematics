@@ -16,16 +16,16 @@ require 'rails/generators/rails/migration/migration_generator'
 module Schematics
   module Commands
     class ChangeAttributeUniqueness < Command
-      def generators
+      def generators = [migration_generator].compact
+
+      def migration_generator
+        return if abstract?
+
         case attribute
         when Behaviours::Migratable
-          [
-            Rails::Generators::MigrationGenerator.new(
-              ["change_#{attribute.column_name}_index_in_#{table_name.pluralize}", attribute.to_s]
-            )
-          ]
-        else
-          super
+          Rails::Generators::MigrationGenerator.new(
+            ["change_#{attribute.column_name}_index_in_#{table_name.pluralize}", attribute.to_s]
+          )
         end
       end
 
