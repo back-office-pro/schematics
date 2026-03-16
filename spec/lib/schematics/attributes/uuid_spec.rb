@@ -27,6 +27,7 @@ describe Schematics::Attributes::Uuid do
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Duplicable) }
 
   its(:database_type) { is_expected.to eq('uuid') }
   its(:column_name) { is_expected.to eq('id') }

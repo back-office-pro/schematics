@@ -31,6 +31,7 @@ describe Schematics::Attributes::Jsonb do
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Translatable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Duplicable) }
 
   its(:icon) { is_expected.to eq(:table) }
   its(:database_type) { is_expected.to eq('jsonb') }

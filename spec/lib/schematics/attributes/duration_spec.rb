@@ -35,6 +35,7 @@ describe Schematics::Attributes::Duration do
   it { is_expected.to be_a(Schematics::Behaviours::Rangeable) }
   it { is_expected.to be_a(Schematics::Behaviours::Numerable) }
   it { is_expected.to be_a(Schematics::Behaviours::Unincrementable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Duplicable) }
   it { is_expected.not_to be_auto_increment }
 
   its(:database_type) { is_expected.to eq('integer') }

@@ -32,6 +32,7 @@ describe Schematics::Attributes::Month do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Rangeable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Duplicable) }
 
   its(:group_method) { is_expected.to eq(:group_by_month) }
   its(:to_sql) { is_expected.to eq('users.created_at') }

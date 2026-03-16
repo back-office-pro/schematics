@@ -33,6 +33,7 @@ describe Schematics::Attributes::Array do
   it { is_expected.to be_a(Schematics::Behaviours::Encryptable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Translatable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Duplicable) }
 
   its(:icon) { is_expected.to eq(:list) }
   its(:database_type) { is_expected.to eq('jsonb') }

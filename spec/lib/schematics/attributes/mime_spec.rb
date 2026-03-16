@@ -37,6 +37,7 @@ describe Schematics::Attributes::Mime do
   it { is_expected.to be_a(Schematics::Behaviours::Enumerable) }
   it { is_expected.to be_a(Schematics::Behaviours::Unnormalizable) }
   it { is_expected.to be_a(Schematics::Behaviours::Untranslatable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Duplicable) }
   it { is_expected.not_to be_translated }
 
   its(:database_type) { is_expected.to eq('string') }

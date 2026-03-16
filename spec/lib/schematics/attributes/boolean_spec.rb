@@ -32,6 +32,7 @@ describe Schematics::Attributes::Boolean do
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Duplicable) }
 
   its(:database_type) { is_expected.to eq('boolean') }
   its(:default) { is_expected.to be_falsy }

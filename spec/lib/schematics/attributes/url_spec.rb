@@ -33,6 +33,7 @@ describe Schematics::Attributes::Url do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Normalizable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Duplicable) }
   it { is_expected.to be_case_insensitive }
 
   its(:database_type) { is_expected.to eq('string') }

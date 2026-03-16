@@ -44,6 +44,7 @@ describe Schematics::Attributes::User do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Duplicable) }
 
   its(:database_type) { is_expected.to eq('belongs_to') }
   its(:column_name) { is_expected.to eq('user_id') }

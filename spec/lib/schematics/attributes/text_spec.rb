@@ -38,6 +38,7 @@ describe Schematics::Attributes::Text do
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
   it { is_expected.to be_a(Schematics::Behaviours::Translatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Normalizable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Duplicable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Listable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Indexable) }
 

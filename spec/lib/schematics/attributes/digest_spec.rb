@@ -28,6 +28,7 @@ describe Schematics::Attributes::Digest do
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Duplicable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Listable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Searchable) }

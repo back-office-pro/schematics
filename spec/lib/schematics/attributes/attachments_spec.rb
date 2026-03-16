@@ -30,6 +30,7 @@ describe Schematics::Attributes::Attachments do
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Duplicable) }
 
   its(:database_type) { is_expected.to eq('attachments') }
   its(:column_name) { is_expected.to eq('files') }

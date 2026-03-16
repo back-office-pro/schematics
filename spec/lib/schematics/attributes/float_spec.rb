@@ -39,6 +39,7 @@ describe Schematics::Attributes::Float do
   it { is_expected.to be_a(Schematics::Behaviours::Rangeable) }
   it { is_expected.to be_a(Schematics::Behaviours::Numerable) }
   it { is_expected.to be_a(Schematics::Behaviours::Incrementable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Duplicable) }
 
   its(:database_type) { is_expected.to eq('float') }
   its(:default) { is_expected.to be_zero }
