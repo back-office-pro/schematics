@@ -49,7 +49,8 @@ module Schematics
         .concat(entity.state_machine_attributes.flat_map(&:events))
 
       def has_and_belongs_to_many_associations = entity # rubocop:disable Naming/PredicatePrefix
-        .has_and_belongs_to_many_associations
+        .associations
+        .grep(Associations::HasAndBelongsToMany)
         .reject(&:hidden?)
 
       def migratable_attributes = entity
