@@ -1089,7 +1089,7 @@ RSpec.describe Core::Migrations::Migrate do
         expect(migration.backup).not_to be_attached
         expect(Dir[root.join('storage/migrate/*_add_role_to_portfolios_*.rb')]).not_to be_empty
         expect(Dir[root.join('storage/migrate/*_add_permission_to_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
-        expect(Dir[root.join('storage/migrate/*_add_user_to_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('storage/migrate/*_add_user_to_portfolios_*.rb')]).not_to be_empty
         expect(Portfolio.new).to respond_to(:role)
         expect(BrokerageAccount.new).to respond_to(:role)
         expect(BrokerageAccount.new).to respond_to(:permission)
@@ -1102,7 +1102,7 @@ RSpec.describe Core::Migrations::Migrate do
           .and change(Documentation.with_deleted, :count).by(-1)
         expect(Dir[root.join('storage/migrate/*_remove_role_from_portfolios_*.rb')]).not_to be_empty
         expect(Dir[root.join('storage/migrate/*_remove_permission_from_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
-        expect(Dir[root.join('storage/migrate/*_remove_user_from_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('storage/migrate/*_remove_user_from_portfolios_*.rb')]).not_to be_empty
         expect(Portfolio.new).not_to respond_to(:role)
         expect(BrokerageAccount.new).not_to respond_to(:role)
         expect(BrokerageAccount.new).not_to respond_to(:permission)
