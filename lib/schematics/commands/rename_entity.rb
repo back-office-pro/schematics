@@ -78,8 +78,6 @@ module Schematics
 
       # :reek:FeatureEnvy
       def rename_join_table_migration_generator(association)
-        return if abstract?
-
         Rails::Generators::MigrationGenerator.new(
           [
             [
@@ -95,8 +93,6 @@ module Schematics
 
       # :reek:FeatureEnvy
       def rename_column_migration_generator(association)
-        return if abstract?
-
         Rails::Generators::MigrationGenerator.new(
           [
             [

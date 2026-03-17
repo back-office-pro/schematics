@@ -20,8 +20,6 @@ module Schematics
       def generators = [migration_generator, translation_generator].compact
 
       def migration_generator
-        return if abstract?
-
         Rails::Generators::MigrationGenerator.new(
           [
             "drop_join_table_#{attribute.join_table}",
