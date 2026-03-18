@@ -323,7 +323,7 @@ module Schematics
         .entities
         .select { _1.parent_entity == self }
 
-      def has_and_belongs_to_many_associations
+      def has_and_belongs_to_many_associations # rubocop:disable Naming/PredicatePrefix
         associations.grep(Associations::HasAndBelongsToMany)
       end
 
