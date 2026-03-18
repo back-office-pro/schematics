@@ -2070,11 +2070,10 @@ describe Schematics::Migrator do
     describe '#build_commands' do
       subject { migration.build_commands }
 
-      its(:size) { is_expected.to eq(4) }
+      its(:size) { is_expected.to eq(3) }
       its([0]) { is_expected.to be_a(Schematics::Commands::AddAttribute) }
       its([1]) { is_expected.to be_a(Schematics::Commands::AddAttribute) }
       its([2]) { is_expected.to be_a(Schematics::Commands::AddAttribute) }
-      its([3]) { is_expected.to be_a(Schematics::Commands::AddAttribute) }
 
       its([0]) do
         is_expected.to have_attributes(
@@ -2086,18 +2085,11 @@ describe Schematics::Migrator do
       its([1]) do
         is_expected.to have_attributes(
           entity: kind_of(Schematics::Entities::Entity),
-          attribute: kind_of(Schematics::Attributes::String)
-        )
-      end
-
-      its([2]) do
-        is_expected.to have_attributes(
-          entity: kind_of(Schematics::Entities::Entity),
           attribute: kind_of(Schematics::Attributes::Float)
         )
       end
 
-      its([3]) do
+      its([2]) do
         is_expected.to have_attributes(
           entity: kind_of(Schematics::Entities::Entity),
           attribute: kind_of(Schematics::Attributes::Float)
@@ -2224,11 +2216,10 @@ describe Schematics::Migrator do
     describe '#clean_commands' do
       subject { migration.clean_commands }
 
-      its(:size) { is_expected.to eq(4) }
+      its(:size) { is_expected.to eq(3) }
       its([0]) { is_expected.to be_a(Schematics::Commands::RemoveAttribute) }
       its([1]) { is_expected.to be_a(Schematics::Commands::RemoveAttribute) }
       its([2]) { is_expected.to be_a(Schematics::Commands::RemoveAttribute) }
-      its([3]) { is_expected.to be_a(Schematics::Commands::RemoveAttribute) }
 
       its([0]) do
         is_expected.to have_attributes(
@@ -2240,18 +2231,11 @@ describe Schematics::Migrator do
       its([1]) do
         is_expected.to have_attributes(
           entity: kind_of(Schematics::Entities::Entity),
-          attribute: kind_of(Schematics::Attributes::String)
+          attribute: kind_of(Schematics::Attributes::Percentage)
         )
       end
 
       its([2]) do
-        is_expected.to have_attributes(
-          entity: kind_of(Schematics::Entities::Entity),
-          attribute: kind_of(Schematics::Attributes::Float)
-        )
-      end
-
-      its([3]) do
         is_expected.to have_attributes(
           entity: kind_of(Schematics::Entities::Entity),
           attribute: kind_of(Schematics::Attributes::Integer)
@@ -2402,11 +2386,10 @@ describe Schematics::Migrator do
     describe '#build_commands' do
       subject { migration.build_commands }
 
-      its(:size) { is_expected.to eq(4) }
+      its(:size) { is_expected.to eq(3) }
       its([0]) { is_expected.to be_a(Schematics::Commands::AddAttribute) }
       its([1]) { is_expected.to be_a(Schematics::Commands::AddAttribute) }
       its([2]) { is_expected.to be_a(Schematics::Commands::AddAttribute) }
-      its([3]) { is_expected.to be_a(Schematics::Commands::AddAttribute) }
 
       its([0]) do
         is_expected.to have_attributes(
@@ -2423,13 +2406,6 @@ describe Schematics::Migrator do
       end
 
       its([2]) do
-        is_expected.to have_attributes(
-          entity: kind_of(Schematics::Entities::Entity),
-          attribute: kind_of(Schematics::Attributes::BelongsTo)
-        )
-      end
-
-      its([3]) do
         is_expected.to have_attributes(
           entity: kind_of(Schematics::Entities::Entity),
           attribute: kind_of(Schematics::Attributes::BelongsTo)
@@ -2583,12 +2559,10 @@ describe Schematics::Migrator do
     describe '#build_commands' do
       subject { migration.build_commands }
 
-      its(:size) { is_expected.to eq(5) }
+      its(:size) { is_expected.to eq(3) }
       its([0]) { is_expected.to be_a(Schematics::Commands::AddAssociation) }
       its([1]) { is_expected.to be_a(Schematics::Commands::AddAssociation) }
       its([2]) { is_expected.to be_a(Schematics::Commands::AddAssociation) }
-      its([3]) { is_expected.to be_a(Schematics::Commands::AddAssociation) }
-      its([4]) { is_expected.to be_a(Schematics::Commands::AddAssociation) }
 
       its([0]) do
         is_expected.to have_attributes(
@@ -2605,20 +2579,6 @@ describe Schematics::Migrator do
       end
 
       its([2]) do
-        is_expected.to have_attributes(
-          entity: kind_of(Schematics::Entities::Entity),
-          attribute: kind_of(Schematics::Associations::HasAndBelongsToMany)
-        )
-      end
-
-      its([3]) do
-        is_expected.to have_attributes(
-          entity: kind_of(Schematics::Entities::Entity),
-          attribute: kind_of(Schematics::Associations::HasAndBelongsToMany)
-        )
-      end
-
-      its([4]) do
         is_expected.to have_attributes(
           entity: kind_of(Schematics::Entities::Entity),
           attribute: kind_of(Schematics::Associations::HasAndBelongsToMany)
@@ -2748,12 +2708,10 @@ describe Schematics::Migrator do
     describe '#clean_commands' do
       subject { migration.clean_commands }
 
-      its(:size) { is_expected.to eq(5) }
+      its(:size) { is_expected.to eq(3) }
       its([0]) { is_expected.to be_a(Schematics::Commands::RemoveAssociation) }
       its([1]) { is_expected.to be_a(Schematics::Commands::RemoveAssociation) }
       its([2]) { is_expected.to be_a(Schematics::Commands::RemoveAssociation) }
-      its([3]) { is_expected.to be_a(Schematics::Commands::RemoveAssociation) }
-      its([4]) { is_expected.to be_a(Schematics::Commands::RemoveAssociation) }
 
       its([0]) do
         is_expected.to have_attributes(
@@ -2770,20 +2728,6 @@ describe Schematics::Migrator do
       end
 
       its([2]) do
-        is_expected.to have_attributes(
-          entity: kind_of(Schematics::Entities::Entity),
-          attribute: kind_of(Schematics::Associations::HasAndBelongsToMany)
-        )
-      end
-
-      its([3]) do
-        is_expected.to have_attributes(
-          entity: kind_of(Schematics::Entities::Entity),
-          attribute: kind_of(Schematics::Associations::HasAndBelongsToMany)
-        )
-      end
-
-      its([4]) do
         is_expected.to have_attributes(
           entity: kind_of(Schematics::Entities::Entity),
           attribute: kind_of(Schematics::Associations::HasAndBelongsToMany)
@@ -2913,11 +2857,10 @@ describe Schematics::Migrator do
     describe '#build_commands' do
       subject { migration.build_commands }
 
-      its(:size) { is_expected.to eq(4) }
+      its(:size) { is_expected.to eq(3) }
       its([0]) { is_expected.to be_a(Schematics::Commands::RenameAttribute) }
       its([1]) { is_expected.to be_a(Schematics::Commands::RenameAttribute) }
       its([2]) { is_expected.to be_a(Schematics::Commands::RenameAttribute) }
-      its([3]) { is_expected.to be_a(Schematics::Commands::RenameAttribute) }
 
       its([0]) do
         is_expected.to have_attributes(
@@ -2930,20 +2873,12 @@ describe Schematics::Migrator do
       its([1]) do
         is_expected.to have_attributes(
           entity: kind_of(Schematics::Entities::Entity),
-          attribute: kind_of(Schematics::Attributes::String),
-          target: kind_of(Schematics::Attributes::String)
-        )
-      end
-
-      its([2]) do
-        is_expected.to have_attributes(
-          entity: kind_of(Schematics::Entities::Entity),
           attribute: kind_of(Schematics::Attributes::Percentage),
           target: kind_of(Schematics::Attributes::Percentage)
         )
       end
 
-      its([3]) do
+      its([2]) do
         is_expected.to have_attributes(
           entity: kind_of(Schematics::Entities::Entity),
           attribute: kind_of(Schematics::Attributes::Integer),
@@ -3080,11 +3015,10 @@ describe Schematics::Migrator do
     describe '#build_commands' do
       subject { migration.build_commands }
 
-      its(:size) { is_expected.to eq(4) }
+      its(:size) { is_expected.to eq(3) }
       its([0]) { is_expected.to be_a(Schematics::Commands::ChangeAttribute) }
       its([1]) { is_expected.to be_a(Schematics::Commands::ChangeAttribute) }
       its([2]) { is_expected.to be_a(Schematics::Commands::ChangeAttribute) }
-      its([3]) { is_expected.to be_a(Schematics::Commands::ChangeAttribute) }
 
       its([0]) do
         is_expected.to have_attributes(
@@ -3097,20 +3031,12 @@ describe Schematics::Migrator do
       its([1]) do
         is_expected.to have_attributes(
           entity: kind_of(Schematics::Entities::Entity),
-          attribute: kind_of(Schematics::Attributes::Text),
-          target: kind_of(Schematics::Attributes::String)
-        )
-      end
-
-      its([2]) do
-        is_expected.to have_attributes(
-          entity: kind_of(Schematics::Entities::Entity),
           attribute: kind_of(Schematics::Attributes::Integer),
           target: kind_of(Schematics::Attributes::Percentage)
         )
       end
 
-      its([3]) do
+      its([2]) do
         is_expected.to have_attributes(
           entity: kind_of(Schematics::Entities::Entity),
           attribute: kind_of(Schematics::Attributes::Float),
@@ -3250,18 +3176,10 @@ describe Schematics::Migrator do
     describe '#build_commands' do
       subject { migration.build_commands }
 
-      its(:size) { is_expected.to eq(2) }
+      its(:size) { is_expected.to eq(1) }
       its([0]) { is_expected.to be_a(Schematics::Commands::ChangeAttributeUniqueness) }
-      its([1]) { is_expected.to be_a(Schematics::Commands::ChangeAttributeUniqueness) }
 
       its([0]) do
-        is_expected.to have_attributes(
-          entity: kind_of(Schematics::Entities::Entity),
-          attribute: kind_of(Schematics::Attributes::String)
-        )
-      end
-
-      its([1]) do
         is_expected.to have_attributes(
           entity: kind_of(Schematics::Entities::Entity),
           attribute: kind_of(Schematics::Attributes::String)
@@ -3531,14 +3449,13 @@ describe Schematics::Migrator do
     describe '#build_commands' do
       subject { migration.build_commands }
 
-      its(:size) { is_expected.to eq(7) }
+      its(:size) { is_expected.to eq(6) }
       its([0]) { is_expected.to be_a(Schematics::Commands::RenameEntity) }
       its([1]) { is_expected.to be_a(Schematics::Commands::RenameEntity) }
       its([2]) { is_expected.to be_a(Schematics::Commands::RenameEntity) }
       its([3]) { is_expected.to be_a(Schematics::Commands::RenameAttribute) }
       its([4]) { is_expected.to be_a(Schematics::Commands::RenameAttribute) }
       its([5]) { is_expected.to be_a(Schematics::Commands::RenameAttribute) }
-      its([6]) { is_expected.to be_a(Schematics::Commands::RenameAttribute) }
 
       its([0]) do
         is_expected.to have_attributes(
@@ -3572,20 +3489,12 @@ describe Schematics::Migrator do
       its([4]) do
         is_expected.to have_attributes(
           entity: kind_of(Schematics::Entities::Entity),
-          attribute: kind_of(Schematics::Attributes::String),
-          target: kind_of(Schematics::Attributes::String)
-        )
-      end
-
-      its([5]) do
-        is_expected.to have_attributes(
-          entity: kind_of(Schematics::Entities::Entity),
           attribute: kind_of(Schematics::Attributes::Percentage),
           target: kind_of(Schematics::Attributes::Percentage)
         )
       end
 
-      its([6]) do
+      its([5]) do
         is_expected.to have_attributes(
           entity: kind_of(Schematics::Entities::Entity),
           attribute: kind_of(Schematics::Attributes::Integer),

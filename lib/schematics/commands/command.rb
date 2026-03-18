@@ -32,7 +32,6 @@ module Schematics
                :abstract?,
                :child?,
                :schema,
-               :non_hidden_has_and_belongs_to_many_associations,
                to: :entity,
                private: true
       attr_accessor :entity, :attribute, :target
@@ -45,9 +44,13 @@ module Schematics
 
       def translatable_elements = entity
         .fields
-        .concat(non_hidden_has_and_belongs_to_many_associations)
+        .concat(has_and_belongs_to_many_associations)
         .concat(entity.enum_attributes.flat_map(&:enum_values))
         .concat(entity.state_machine_attributes.flat_map(&:events))
+
+      def has_and_belongs_to_many_associations = entity # rubocop:disable Naming/PredicatePrefix
+        .has_and_belongs_to_many_associations
+        .reject(&:hidden?)
 
       def migratable_attributes = entity
         .migratable_attributes
