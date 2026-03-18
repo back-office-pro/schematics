@@ -111,10 +111,10 @@
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-7.2.0.tgz#188c1053ce422ad1f934d7df242a973fcb89636d"
   integrity sha512-3DguDv/oUE+7vjMeTSOjCSG+KeawgVQOHrKRnvUuqYh1mfArrh7s+s8hXW3e4RerBA1+Wh+hBqf8sJNpqNrBWg==
 
-"@github/hotkey@3.1.1":
-  version "3.1.1"
-  resolved "https://registry.npmjs.org/@github/hotkey/-/hotkey-3.1.1.tgz"
-  integrity sha512-H30I6XDO3gFSgLuEuHoMBRZG9c3uCKNdAcYklL1FaZDPdU1bXfgjnpzGDPcUr0U6eGQ+T3XLY9slatwZYWL1dA==
+"@github/hotkey@3.1.4":
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/@github/hotkey/-/hotkey-3.1.4.tgz#033fce67e71448d43e8558cbebc4fc6fff6c215a"
+  integrity sha512-pFGIqElJ/ISKhBGG3l9uVaq3XlVRrROkbWDVFmR4799mvCp2UPfFo2YBFdZVvYubLuV9Lk9JuTEkEBL3ISh6GA==
 
 "@humanwhocodes/config-array@^0.11.11":
   version "0.11.11"
