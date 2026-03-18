@@ -1191,34 +1191,38 @@ RSpec.describe Core::Migrations::Migrate do
         # migrate
         expect { expect(migrate).to be_a_success }
           .to not_change(Permission, :count)
-          .and change(Translation, :count).by(12)
+          .and change(Translation, :count).by(9)
           .and change(Documentation, :count).by(1)
         expect(migration.backup).not_to be_attached
         expect(Dir[root.join('storage/migrate/*_create_join_table_permissions_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_create_join_table_api_keys_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_create_join_table_charts_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
-        expect(Portfolio.new).to respond_to(:roles)
+        expect(Portfolio.new).to respond_to(:users)
         expect(Portfolio.new).to respond_to(:api_keys)
-        expect(BrokerageAccount.new).to respond_to(:roles)
+        expect(BrokerageAccount.new).to respond_to(:users)
+        expect(BrokerageAccount.new).to respond_to(:teams)
         expect(BrokerageAccount.new).to respond_to(:api_keys)
         expect(BrokerageAccount.new).to respond_to(:permissions)
+        expect(LifeInsurance.new).to respond_to(:users)
         expect(LifeInsurance.new).to respond_to(:roles)
         expect(LifeInsurance.new).to respond_to(:api_keys)
         expect(LifeInsurance.new).to respond_to(:charts)
         # rollback
         expect { expect(rollback).to be_a_success }
           .to not_change(Permission.with_deleted, :count)
-          .and change(Translation.with_deleted, :count).by(-12)
+          .and change(Translation.with_deleted, :count).by(-9)
           .and change(Documentation.with_deleted, :count).by(-1)
         expect(Dir[root.join('storage/migrate/*_drop_join_table_permissions_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_drop_join_table_api_keys_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_drop_join_table_charts_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
-        expect(Portfolio.new).not_to respond_to(:roles)
+        expect(Portfolio.new).to respond_to(:users)
         expect(Portfolio.new).not_to respond_to(:api_keys)
-        expect(BrokerageAccount.new).not_to respond_to(:roles)
+        expect(BrokerageAccount.new).to respond_to(:users)
+        expect(BrokerageAccount.new).to respond_to(:teams)
         expect(BrokerageAccount.new).not_to respond_to(:api_keys)
         expect(BrokerageAccount.new).not_to respond_to(:permissions)
-        expect(LifeInsurance.new).not_to respond_to(:roles)
+        expect(LifeInsurance.new).to respond_to(:users)
+        expect(LifeInsurance.new).to respond_to(:roles)
         expect(LifeInsurance.new).not_to respond_to(:api_keys)
         expect(LifeInsurance.new).not_to respond_to(:charts)
       end
@@ -1226,7 +1230,8 @@ RSpec.describe Core::Migrations::Migrate do
 
     context 'when removing a habtm association with a parent' do
       let(:initial_data) { initial_sti_data }
-      let(:resource) { BrokerageAccount.create!(fees: 2.0, users: [user], teams: [teams.first]) }
+      let(:first_resource) { BrokerageAccount.create!(fees: 2.0, users: [user], teams:) }
+      let(:second_resource) { LifeInsurance.create!(age: 8, users: [user], roles: [role]) }
       let(:data) do
         [
           {
@@ -1249,11 +1254,23 @@ RSpec.describe Core::Migrations::Migrate do
               name: 'fees',
               type: 'percentage'
             ]
+          },
+          {
+            id: '635476ac-2c51-4ce2-a23b-2c8ba6535598',
+            name: 'life_insurance',
+            options: {
+              parent: 'portfolio'
+            },
+            attributes: [
+              id: '286ce97a-d000-4c26-93ea-7a969850d124',
+              name: 'age',
+              type: 'integer'
+            ]
           }
         ]
       end
 
-      before { [migrate_initial_migration, resource] }
+      before { [migrate_initial_migration, first_resource, second_resource] }
 
       after { [rollback_initial_migration, rollback_user_transaction] }
 
@@ -1268,9 +1285,12 @@ RSpec.describe Core::Migrations::Migrate do
         expect(migration.backup).to be_attached
         expect(Dir[root.join('storage/migrate/*_drop_join_table_portfolios_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_drop_join_table_portfolios_teams_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('storage/migrate/*_drop_join_table_portfolios_roles_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Portfolio.new).not_to respond_to(:users)
         expect(BrokerageAccount.new).not_to respond_to(:users)
         expect(BrokerageAccount.new).not_to respond_to(:teams)
+        expect(LifeInsurance.new).not_to respond_to(:users)
+        expect(LifeInsurance.new).not_to respond_to(:roles)
         # rollback
         expect { expect(rollback).to be_a_success }
           .to not_change(Permission, :count)
@@ -1278,11 +1298,16 @@ RSpec.describe Core::Migrations::Migrate do
           .and change(Documentation.with_deleted, :count).by(-1)
         expect(Dir[root.join('storage/migrate/*_create_join_table_portfolios_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_create_join_table_portfolios_teams_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('storage/migrate/*_create_join_table_portfolios_roles_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Portfolio.new).to respond_to(:users)
         expect(BrokerageAccount.new).to respond_to(:users)
         expect(BrokerageAccount.new).to respond_to(:teams)
-        expect(resource.reload.users.first.as_json).to eq(user.as_json)
-        expect(resource.reload.teams.first.as_json).to eq(teams.first.as_json)
+        expect(LifeInsurance.new).to respond_to(:users)
+        expect(LifeInsurance.new).to respond_to(:roles)
+        expect(first_resource.reload.users.first.as_json).to eq(user.as_json)
+        expect(first_resource.reload.teams.first.as_json).to eq(teams.first.as_json)
+        expect(second_resource.reload.users.first.as_json).to eq(user.as_json)
+        expect(second_resource.reload.roles.first.as_json).to eq(role.as_json)
       end
     end
 

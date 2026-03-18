@@ -112,10 +112,18 @@ describe Schematics::Commands::RemoveAssociation do
     describe '#generators' do
       subject { command.generators }
 
-      its(:size) { is_expected.to eq(1) }
-      its([0]) { is_expected.to be_a(TranslationGenerator) }
+      its(:size) { is_expected.to eq(2) }
+      its([0]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
+      its([1]) { is_expected.to be_a(TranslationGenerator) }
 
       its([0]) do
+        is_expected.to have_attributes(
+          name: 'drop_join_table_portfolios_users',
+          behavior: :invoke
+        )
+      end
+
+      its([1]) do
         is_expected.to have_attributes(
           name: 'activerecord.attributes.portfolio.users',
           behavior: :revoke

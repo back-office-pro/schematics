@@ -24,7 +24,7 @@ module Schematics
         translatable_elements.map(&method(:translation_generator)),
         actions_with_events.map(&method(:permission_generator)),
         migration_generator,
-        has_and_belongs_to_many_associations.map(&method(:create_join_table_migration_generator))
+        non_hidden_has_and_belongs_to_many_associations.map(&method(:create_join_table_migration_generator))
       ].flatten.compact
 
       private

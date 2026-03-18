@@ -162,10 +162,9 @@ module Schematics
     end
 
     def add_association_commands(entity, current_entity)
-      associations = current_entity.has_and_belongs_to_many_associations.reject(&:hidden?)
+      associations = current_entity.non_hidden_has_and_belongs_to_many_associations
       entity
-        .has_and_belongs_to_many_associations
-        .reject(&:hidden?)
+        .non_hidden_has_and_belongs_to_many_associations
         .reject { |association| associations.find { _1.association_type == association.association_type } } # rubocop:disable Layout/LineLength
         .map { |attribute| Commands::AddAssociation.new(entity:, attribute:) }
     end
@@ -240,10 +239,9 @@ module Schematics
     end
 
     def remove_association_commands(entity, new_entity)
-      associations = new_entity.has_and_belongs_to_many_associations.reject(&:hidden?)
+      associations = new_entity.non_hidden_has_and_belongs_to_many_associations
       entity
-        .has_and_belongs_to_many_associations
-        .reject(&:hidden?)
+        .non_hidden_has_and_belongs_to_many_associations
         .reject { |association| associations.find { _1.association_type == association.association_type } } # rubocop:disable Layout/LineLength
         .map { |attribute| Commands::RemoveAssociation.new(entity:, attribute:) }
     end
