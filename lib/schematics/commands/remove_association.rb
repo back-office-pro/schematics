@@ -19,17 +19,13 @@ module Schematics
     class RemoveAssociation < Command
       def generators = [migration_generator, translation_generator].compact
 
-      def migration_generator
-        return if abstract?
-
-        Rails::Generators::MigrationGenerator.new(
-          [
-            "drop_join_table_#{attribute.join_table}",
-            table_name.pluralize,
-            attribute.name
-          ]
-        )
-      end
+      def migration_generator = Rails::Generators::MigrationGenerator.new(
+        [
+          "drop_join_table_#{attribute.join_table}",
+          table_name.pluralize,
+          attribute.name
+        ]
+      )
 
       def translation_generator
         return if core?

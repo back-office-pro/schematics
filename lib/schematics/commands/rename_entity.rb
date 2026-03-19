@@ -56,10 +56,11 @@ module Schematics
 
       def old_name = attribute.name
 
-      def permissions_generator = PermissionsGenerator.new(
-        [class_name],
-        ["--rename=#{old_class_name}"]
-      )
+      def permissions_generator
+        return if abstract?
+
+        PermissionsGenerator.new([class_name], ["--rename=#{old_class_name}"])
+      end
 
       def old_class_name = old_name.camelize
 
@@ -75,25 +76,23 @@ module Schematics
 
       # :reek:FeatureEnvy
       def rename_join_table_migration_generator(association)
-        return if abstract?
-
         Rails::Generators::MigrationGenerator.new(
           [
             [
               'rename',
-              attribute.source_entity.table_name.pluralize,
-              association.inverse_entity.table_name.pluralize,
+              [
+                attribute.source_entity.table_name.pluralize,
+                association.inverse_entity.table_name.pluralize
+              ].sort,
               'to',
               association.join_table
-            ].join('_')
+            ].flatten.join('_')
           ]
         )
       end
 
       # :reek:FeatureEnvy
       def rename_column_migration_generator(association)
-        return if abstract?
-
         Rails::Generators::MigrationGenerator.new(
           [
             [

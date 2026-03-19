@@ -29,10 +29,11 @@ module Schematics
       def method_missing(method_name, *, &) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         predicate, constant, mod = parse_method_name(method_name)
         with_id_and_created_at_attrs = mod != :Associations && constant != :Migratable && !parent_entity # rubocop:disable Layout/LineLength
+        with_parent_elements = parent_entity && constant != :Migratable && method_name != :has_and_belongs_to_many_associations # rubocop:disable Layout/LineLength
         return super unless mod || constant
 
         elements = public_send(mod.to_s.underscore)
-        elements += parent_entity.public_send(method_name) if parent_entity && constant != :Migratable # rubocop:disable Layout/LineLength
+        elements += parent_entity.public_send(method_name) if with_parent_elements
         if Schematics.const_defined?(mod) && Schematics.const_get(mod).const_defined?(constant)
           elements.public_send(predicate, Schematics.const_get(mod).const_get(constant))
         elsif Behaviours.const_defined?(constant)
