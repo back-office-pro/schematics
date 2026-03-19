@@ -210,7 +210,7 @@ module Schematics
       end
 
       def can?(action)
-        actions.include?(action.to_sym)
+        actions.include?(action.to_sym) && !abstract?
       end
 
       def child?
