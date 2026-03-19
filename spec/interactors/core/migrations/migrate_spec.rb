@@ -69,6 +69,22 @@ RSpec.describe Core::Migrations::Migrate do
           name: 'fees',
           type: 'percentage'
         ]
+      },
+      {
+        id: '635476ac-2c51-4ce2-a23b-2c8ba6535598',
+        name: 'life_insurance',
+        options: {
+          parent: 'portfolio'
+        },
+        associations: [
+          type: 'has_and_belongs_to_many',
+          name: 'roles'
+        ],
+        attributes: [
+          id: '286ce97a-d000-4c26-93ea-7a969850d124',
+          name: 'age',
+          type: 'integer'
+        ]
       }
     ]
   end
@@ -615,7 +631,7 @@ RSpec.describe Core::Migrations::Migrate do
       end
     end
 
-    context 'when creating a new entity with STI' do
+    context 'when creating a new entity with a parent' do
       let(:data) { initial_sti_data }
 
       uses_transaction 'migrates and rollbacks successfully'
@@ -623,29 +639,33 @@ RSpec.describe Core::Migrations::Migrate do
       it 'migrates and rollbacks successfully' do # rubocop:disable RSpec/MultipleExpectations, RSpec/ExampleLength
         # migrate
         expect { expect(migrate).to be_a_success }
-          .to change(Permission, :count).by(6)
-          .and change(Translation, :count).by(33)
+          .to change(Permission, :count).by(12)
+          .and change(Translation, :count).by(45)
           .and change(Documentation, :count).by(1)
         expect(migration.backup).not_to be_attached
         expect(Dir[root.join('storage/migrate/*_create_portfolios_*.rb')]).not_to be_empty
         expect(Dir[root.join('storage/migrate/*_create_join_table_portfolios_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_create_join_table_portfolios_teams_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('storage/migrate/*_create_join_table_portfolios_roles_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect { Portfolio }.not_to raise_error
         expect { BrokerageAccount }.not_to raise_error
+        expect { LifeInsurance }.not_to raise_error
         # rollback
         expect { expect(rollback).to be_a_success }
-          .to change(Permission.with_deleted, :count).by(-6)
-          .and change(Translation.with_deleted, :count).by(-33)
+          .to change(Permission.with_deleted, :count).by(-12)
+          .and change(Translation.with_deleted, :count).by(-45)
           .and change(Documentation.with_deleted, :count).by(-1)
         expect(Dir[root.join('storage/migrate/*_drop_portfolios_*.rb')]).not_to be_empty
         expect(Dir[root.join('storage/migrate/*_drop_join_table_portfolios_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_drop_join_table_portfolios_teams_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('storage/migrate/*_drop_join_table_portfolios_roles_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect { Portfolio }.to raise_error(NameError)
         expect { BrokerageAccount }.to raise_error(NameError)
+        expect { LifeInsurance }.to raise_error(NameError)
       end
     end
 
-    context 'when renaming an entity with STI' do
+    context 'when renaming an entity with a parent' do
       let(:initial_data) { initial_sti_data }
       let(:data) do
         [
@@ -677,6 +697,22 @@ RSpec.describe Core::Migrations::Migrate do
               name: 'fees',
               type: 'percentage'
             ]
+          },
+          {
+            id: '635476ac-2c51-4ce2-a23b-2c8ba6535598',
+            name: 'insurance',
+            options: {
+              parent: 'stock_portfolio'
+            },
+            associations: [
+              type: 'has_and_belongs_to_many',
+              name: 'roles'
+            ],
+            attributes: [
+              id: '286ce97a-d000-4c26-93ea-7a969850d124',
+              name: 'age',
+              type: 'integer'
+            ]
           }
         ]
       end
@@ -699,10 +735,14 @@ RSpec.describe Core::Migrations::Migrate do
         expect(Dir[root.join('storage/migrate/*_rename_portfolio_id_to_stock_portfolio_id_in_stock_portfolios_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_rename_portfolios_teams_to_stock_portfolios_teams_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_rename_portfolio_id_to_stock_portfolio_id_in_stock_portfolios_teams_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('storage/migrate/*_rename_portfolios_roles_to_roles_stock_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('storage/migrate/*_rename_portfolio_id_to_stock_portfolio_id_in_roles_stock_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect { Portfolio }.to raise_error(NameError)
         expect { BrokerageAccount }.to raise_error(NameError)
+        expect { LifeInsurance }.to raise_error(NameError)
         expect { StockPortfolio }.not_to raise_error
         expect { InvestmentAccount }.not_to raise_error
+        expect { Insurance }.not_to raise_error
         # rollback
         expect { expect(rollback).to be_a_success }
           .to not_change(Permission.with_deleted, :count)
@@ -713,19 +753,24 @@ RSpec.describe Core::Migrations::Migrate do
         expect(Dir[root.join('storage/migrate/*_rename_stock_portfolio_id_to_portfolio_id_in_portfolios_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_rename_stock_portfolios_teams_to_portfolios_teams*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_rename_stock_portfolio_id_to_portfolio_id_in_portfolios_teams_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('storage/migrate/*_rename_roles_stock_portfolios_to_portfolios_roles*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('storage/migrate/*_rename_stock_portfolio_id_to_portfolio_id_in_portfolios_roles_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect { Portfolio }.not_to raise_error
         expect { BrokerageAccount }.not_to raise_error
+        expect { LifeInsurance }.not_to raise_error
         expect { StockPortfolio }.to raise_error(NameError)
         expect { InvestmentAccount }.to raise_error(NameError)
+        expect { Insurance }.to raise_error(NameError)
       end
     end
 
-    context 'when destroying an entity with STI' do
+    context 'when destroying an entity with a parent' do
       let(:initial_data) { initial_sti_data }
-      let(:resource) { BrokerageAccount.create!(fees: 2.0) }
+      let(:first_resource) { BrokerageAccount.create!(fees: 2.0) }
+      let(:second_resource) { LifeInsurance.create!(age: 8) }
       let(:data) { [] }
 
-      before { [migrate_initial_migration, resource] }
+      before { [migrate_initial_migration, first_resource, second_resource] }
 
       after { rollback_initial_migration }
 
@@ -734,31 +779,37 @@ RSpec.describe Core::Migrations::Migrate do
       it 'migrates and rollbacks successfully' do # rubocop:disable RSpec/MultipleExpectations, RSpec/ExampleLength
         # migrate
         expect { expect(migrate).to be_a_success }
-          .to change(Permission.with_deleted, :count).by(-6)
-          .and change(Translation.with_deleted, :count).by(-33)
+          .to change(Permission.with_deleted, :count).by(-12)
+          .and change(Translation.with_deleted, :count).by(-45)
           .and change(Documentation, :count).by(1)
         expect(migration.backup).to be_attached
         expect(Dir[root.join('storage/migrate/*_drop_portfolios_*.rb')]).not_to be_empty
         expect(Dir[root.join('storage/migrate/*_drop_join_table_portfolios_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_drop_join_table_portfolios_teams_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('storage/migrate/*_drop_join_table_portfolios_roles_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect { Portfolio }.to raise_error(NameError)
         expect { BrokerageAccount }.to raise_error(NameError)
-        expect { resource.reload }.to raise_error(ActiveRecord::StatementInvalid)
+        expect { LifeInsurance }.to raise_error(NameError)
+        expect { first_resource.reload }.to raise_error(ActiveRecord::StatementInvalid)
+        expect { second_resource.reload }.to raise_error(ActiveRecord::StatementInvalid)
         # rollback
         expect { expect(rollback).to be_a_success }
-          .to change(Permission, :count).by(6)
-          .and change(Translation, :count).by(33)
+          .to change(Permission, :count).by(12)
+          .and change(Translation, :count).by(45)
           .and change(Documentation.with_deleted, :count).by(-1)
         expect(Dir[root.join('storage/migrate/*_create_portfolios_*.rb')]).not_to be_empty
         expect(Dir[root.join('storage/migrate/*_create_join_table_portfolios_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_create_join_table_portfolios_teams_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('storage/migrate/*_create_join_table_portfolios_roles_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect { Portfolio }.not_to raise_error
         expect { BrokerageAccount }.not_to raise_error
-        expect { resource.reload }.not_to raise_error
+        expect { LifeInsurance }.not_to raise_error
+        expect { first_resource.reload }.not_to raise_error
+        expect { second_resource.reload }.not_to raise_error
       end
     end
 
-    context 'when adding a new attribute with STI' do
+    context 'when adding a new attribute with a parent' do
       let(:initial_data) { initial_sti_data }
       let(:data) do
         [
@@ -770,9 +821,16 @@ RSpec.describe Core::Migrations::Migrate do
               name: 'users'
             ],
             attributes: [
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'name',
-              type: 'string'
+              {
+                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+                name: 'name',
+                type: 'string'
+              },
+              {
+                id: 'e413afe3-5406-46db-981a-7db2e9acf717',
+                name: 'label',
+                type: 'string'
+              }
             ]
           },
           {
@@ -797,6 +855,29 @@ RSpec.describe Core::Migrations::Migrate do
                 type: 'float'
               }
             ]
+          },
+          {
+            id: '635476ac-2c51-4ce2-a23b-2c8ba6535598',
+            name: 'life_insurance',
+            options: {
+              parent: 'portfolio'
+            },
+            associations: [
+              type: 'has_and_belongs_to_many',
+              name: 'roles'
+            ],
+            attributes: [
+              {
+                id: '286ce97a-d000-4c26-93ea-7a969850d124',
+                name: 'age',
+                type: 'integer'
+              },
+              {
+                id: 'febafd73-fb60-437a-954b-ab24d69a9259',
+                name: 'total',
+                type: 'float'
+              }
+            ]
           }
         ]
       end
@@ -811,24 +892,38 @@ RSpec.describe Core::Migrations::Migrate do
         # migrate
         expect { expect(migrate).to be_a_success }
           .to not_change(Permission, :count)
-          .and change(Translation, :count).by(3)
+          .and change(Translation, :count).by(9)
           .and change(Documentation, :count).by(1)
         expect(migration.backup).not_to be_attached
+        expect(Dir[root.join('storage/migrate/*_add_label_to_portfolios_*.rb')]).not_to be_empty
         expect(Dir[root.join('storage/migrate/*_add_amount_to_portfolios_*.rb')]).not_to be_empty
+        expect(Dir[root.join('storage/migrate/*_add_total_to_portfolios_*.rb')]).not_to be_empty
+        expect(Portfolio.new).to respond_to(:label)
         expect(Portfolio.new).to respond_to(:amount)
+        expect(Portfolio.new).to respond_to(:total)
+        expect(BrokerageAccount.new).to respond_to(:label)
         expect(BrokerageAccount.new).to respond_to(:amount)
+        expect(LifeInsurance.new).to respond_to(:label)
+        expect(LifeInsurance.new).to respond_to(:total)
         # rollback
         expect { expect(rollback).to be_a_success }
           .to not_change(Permission.with_deleted, :count)
-          .and change(Translation.with_deleted, :count).by(-3)
+          .and change(Translation.with_deleted, :count).by(-9)
           .and change(Documentation.with_deleted, :count).by(-1)
+        expect(Dir[root.join('storage/migrate/*_remove_label_from_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_remove_amount_from_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('storage/migrate/*_remove_total_from_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Portfolio.new).not_to respond_to(:label)
         expect(Portfolio.new).not_to respond_to(:amount)
+        expect(Portfolio.new).not_to respond_to(:total)
+        expect(BrokerageAccount.new).not_to respond_to(:label)
         expect(BrokerageAccount.new).not_to respond_to(:amount)
+        expect(LifeInsurance.new).not_to respond_to(:label)
+        expect(LifeInsurance.new).not_to respond_to(:total)
       end
     end
 
-    context 'when removing an attribute with STI' do
+    context 'when removing an attribute with a parent' do
       let(:initial_data) { initial_sti_data }
       let(:data) do
         [
@@ -838,11 +933,6 @@ RSpec.describe Core::Migrations::Migrate do
             associations: [
               type: 'has_and_belongs_to_many',
               name: 'users'
-            ],
-            attributes: [
-              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'name',
-              type: 'string'
             ]
           },
           {
@@ -855,6 +945,17 @@ RSpec.describe Core::Migrations::Migrate do
               type: 'has_and_belongs_to_many',
               name: 'teams'
             ]
+          },
+          {
+            id: '635476ac-2c51-4ce2-a23b-2c8ba6535598',
+            name: 'life_insurance',
+            options: {
+              parent: 'portfolio'
+            },
+            associations: [
+              type: 'has_and_belongs_to_many',
+              name: 'roles'
+            ]
           }
         ]
       end
@@ -869,24 +970,38 @@ RSpec.describe Core::Migrations::Migrate do
         # migrate
         expect { expect(migrate).to be_a_success }
           .to not_change(Permission, :count)
-          .and change(Translation.with_deleted, :count).by(-3)
+          .and change(Translation.with_deleted, :count).by(-9)
           .and change(Documentation, :count).by(1)
         expect(migration.backup).not_to be_attached
+        expect(Dir[root.join('storage/migrate/*_remove_name_from_portfolios_*.rb')]).not_to be_empty
         expect(Dir[root.join('storage/migrate/*_remove_fees_from_portfolios_*.rb')]).not_to be_empty
+        expect(Dir[root.join('storage/migrate/*_remove_age_from_portfolios_*.rb')]).not_to be_empty
+        expect(Portfolio.new).not_to respond_to(:name)
         expect(Portfolio.new).not_to respond_to(:fees)
+        expect(Portfolio.new).not_to respond_to(:age)
+        expect(BrokerageAccount.new).not_to respond_to(:name)
         expect(BrokerageAccount.new).not_to respond_to(:fees)
+        expect(LifeInsurance.new).not_to respond_to(:name)
+        expect(LifeInsurance.new).not_to respond_to(:age)
         # rollback
         expect { expect(rollback).to be_a_success }
           .to not_change(Permission.with_deleted, :count)
-          .and change(Translation, :count).by(3)
+          .and change(Translation, :count).by(9)
           .and change(Documentation.with_deleted, :count).by(-1)
+        expect(Dir[root.join('storage/migrate/*_add_name_to_portfolios_*.rb')]).not_to be_empty
         expect(Dir[root.join('storage/migrate/*_add_fees_to_portfolios_*.rb')]).not_to be_empty
+        expect(Dir[root.join('storage/migrate/*_add_age_to_portfolios_*.rb')]).not_to be_empty
+        expect(Portfolio.new).to respond_to(:name)
         expect(Portfolio.new).to respond_to(:fees)
+        expect(Portfolio.new).to respond_to(:age)
+        expect(BrokerageAccount.new).to respond_to(:name)
         expect(BrokerageAccount.new).to respond_to(:fees)
+        expect(LifeInsurance.new).to respond_to(:name)
+        expect(LifeInsurance.new).to respond_to(:age)
       end
     end
 
-    context 'when adding a new belongs_to association with STI' do
+    context 'when adding a new belongs_to association with a parent' do
       let(:initial_data) { initial_sti_data }
       let(:data) do
         [
@@ -932,6 +1047,29 @@ RSpec.describe Core::Migrations::Migrate do
                 type: 'belongs_to'
               }
             ]
+          },
+          {
+            id: '635476ac-2c51-4ce2-a23b-2c8ba6535598',
+            name: 'life_insurance',
+            options: {
+              parent: 'portfolio'
+            },
+            associations: [
+              type: 'has_and_belongs_to_many',
+              name: 'roles'
+            ],
+            attributes: [
+              {
+                id: '286ce97a-d000-4c26-93ea-7a969850d124',
+                name: 'age',
+                type: 'integer'
+              },
+              {
+                id: 'b3342de2-5716-4e44-b6d2-484903e99a01',
+                name: 'user',
+                type: 'belongs_to'
+              }
+            ]
           }
         ]
       end
@@ -946,28 +1084,34 @@ RSpec.describe Core::Migrations::Migrate do
         # migrate
         expect { expect(migrate).to be_a_success }
           .to not_change(Permission, :count)
-          .and change(Translation, :count).by(6)
+          .and change(Translation, :count).by(9)
           .and change(Documentation, :count).by(1)
         expect(migration.backup).not_to be_attached
         expect(Dir[root.join('storage/migrate/*_add_role_to_portfolios_*.rb')]).not_to be_empty
         expect(Dir[root.join('storage/migrate/*_add_permission_to_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('storage/migrate/*_add_user_to_portfolios_*.rb')]).not_to be_empty
         expect(Portfolio.new).to respond_to(:role)
         expect(BrokerageAccount.new).to respond_to(:role)
         expect(BrokerageAccount.new).to respond_to(:permission)
+        expect(LifeInsurance.new).to respond_to(:role)
+        expect(LifeInsurance.new).to respond_to(:user)
         # rollback
         expect { expect(rollback).to be_a_success }
           .to not_change(Permission.with_deleted, :count)
-          .and change(Translation.with_deleted, :count).by(-6)
+          .and change(Translation.with_deleted, :count).by(-9)
           .and change(Documentation.with_deleted, :count).by(-1)
         expect(Dir[root.join('storage/migrate/*_remove_role_from_portfolios_*.rb')]).not_to be_empty
         expect(Dir[root.join('storage/migrate/*_remove_permission_from_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('storage/migrate/*_remove_user_from_portfolios_*.rb')]).not_to be_empty
         expect(Portfolio.new).not_to respond_to(:role)
         expect(BrokerageAccount.new).not_to respond_to(:role)
         expect(BrokerageAccount.new).not_to respond_to(:permission)
+        expect(LifeInsurance.new).not_to respond_to(:role)
+        expect(LifeInsurance.new).not_to respond_to(:user)
       end
     end
 
-    context 'when adding a new habtm association with STI' do
+    context 'when adding a new habtm association with a parent' do
       let(:initial_data) { initial_sti_data }
       let(:data) do
         [
@@ -981,7 +1125,7 @@ RSpec.describe Core::Migrations::Migrate do
               },
               {
                 type: 'has_and_belongs_to_many',
-                name: 'roles'
+                name: 'api_keys'
               }
             ],
             attributes: [
@@ -1011,6 +1155,28 @@ RSpec.describe Core::Migrations::Migrate do
               name: 'fees',
               type: 'percentage'
             ]
+          },
+          {
+            id: '635476ac-2c51-4ce2-a23b-2c8ba6535598',
+            name: 'life_insurance',
+            options: {
+              parent: 'portfolio'
+            },
+            associations: [
+              {
+                type: 'has_and_belongs_to_many',
+                name: 'roles'
+              },
+              {
+                type: 'has_and_belongs_to_many',
+                name: 'charts'
+              }
+            ],
+            attributes: [
+              id: '286ce97a-d000-4c26-93ea-7a969850d124',
+              name: 'age',
+              type: 'integer'
+            ]
           }
         ]
       end
@@ -1028,27 +1194,44 @@ RSpec.describe Core::Migrations::Migrate do
           .and change(Translation, :count).by(9)
           .and change(Documentation, :count).by(1)
         expect(migration.backup).not_to be_attached
-        expect(Dir[root.join('storage/migrate/*_create_join_table_portfolios_roles_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_create_join_table_permissions_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
-        expect(Portfolio.new).to respond_to(:roles)
-        expect(BrokerageAccount.new).to respond_to(:roles)
+        expect(Dir[root.join('storage/migrate/*_create_join_table_api_keys_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('storage/migrate/*_create_join_table_charts_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Portfolio.new).to respond_to(:users)
+        expect(Portfolio.new).to respond_to(:api_keys)
+        expect(BrokerageAccount.new).to respond_to(:users)
+        expect(BrokerageAccount.new).to respond_to(:api_keys)
+        expect(BrokerageAccount.new).to respond_to(:teams)
         expect(BrokerageAccount.new).to respond_to(:permissions)
+        expect(LifeInsurance.new).to respond_to(:users)
+        expect(LifeInsurance.new).to respond_to(:api_keys)
+        expect(LifeInsurance.new).to respond_to(:roles)
+        expect(LifeInsurance.new).to respond_to(:charts)
         # rollback
         expect { expect(rollback).to be_a_success }
           .to not_change(Permission.with_deleted, :count)
           .and change(Translation.with_deleted, :count).by(-9)
           .and change(Documentation.with_deleted, :count).by(-1)
-        expect(Dir[root.join('storage/migrate/*_drop_join_table_portfolios_roles_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_drop_join_table_permissions_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
-        expect(Portfolio.new).not_to respond_to(:roles)
-        expect(BrokerageAccount.new).not_to respond_to(:roles)
+        expect(Dir[root.join('storage/migrate/*_drop_join_table_api_keys_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('storage/migrate/*_drop_join_table_charts_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Portfolio.new).to respond_to(:users)
+        expect(Portfolio.new).not_to respond_to(:api_keys)
+        expect(BrokerageAccount.new).to respond_to(:users)
+        expect(BrokerageAccount.new).not_to respond_to(:api_keys)
+        expect(BrokerageAccount.new).to respond_to(:teams)
         expect(BrokerageAccount.new).not_to respond_to(:permissions)
+        expect(LifeInsurance.new).to respond_to(:users)
+        expect(LifeInsurance.new).not_to respond_to(:api_keys)
+        expect(LifeInsurance.new).to respond_to(:roles)
+        expect(LifeInsurance.new).not_to respond_to(:charts)
       end
     end
 
-    context 'when removing a habtm association with STI' do
+    context 'when removing a habtm association with a parent' do
       let(:initial_data) { initial_sti_data }
-      let(:resource) { BrokerageAccount.create!(fees: 2.0, users: [user], teams: [teams.first]) }
+      let(:first_resource) { BrokerageAccount.create!(fees: 2.0, users: [user], teams:) }
+      let(:second_resource) { LifeInsurance.create!(age: 8, users: [user], roles: [role]) }
       let(:data) do
         [
           {
@@ -1071,11 +1254,23 @@ RSpec.describe Core::Migrations::Migrate do
               name: 'fees',
               type: 'percentage'
             ]
+          },
+          {
+            id: '635476ac-2c51-4ce2-a23b-2c8ba6535598',
+            name: 'life_insurance',
+            options: {
+              parent: 'portfolio'
+            },
+            attributes: [
+              id: '286ce97a-d000-4c26-93ea-7a969850d124',
+              name: 'age',
+              type: 'integer'
+            ]
           }
         ]
       end
 
-      before { [migrate_initial_migration, resource] }
+      before { [migrate_initial_migration, first_resource, second_resource] }
 
       after { [rollback_initial_migration, rollback_user_transaction] }
 
@@ -1090,9 +1285,12 @@ RSpec.describe Core::Migrations::Migrate do
         expect(migration.backup).to be_attached
         expect(Dir[root.join('storage/migrate/*_drop_join_table_portfolios_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_drop_join_table_portfolios_teams_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('storage/migrate/*_drop_join_table_portfolios_roles_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Portfolio.new).not_to respond_to(:users)
         expect(BrokerageAccount.new).not_to respond_to(:users)
         expect(BrokerageAccount.new).not_to respond_to(:teams)
+        expect(LifeInsurance.new).not_to respond_to(:users)
+        expect(LifeInsurance.new).not_to respond_to(:roles)
         # rollback
         expect { expect(rollback).to be_a_success }
           .to not_change(Permission, :count)
@@ -1100,15 +1298,20 @@ RSpec.describe Core::Migrations::Migrate do
           .and change(Documentation.with_deleted, :count).by(-1)
         expect(Dir[root.join('storage/migrate/*_create_join_table_portfolios_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_create_join_table_portfolios_teams_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('storage/migrate/*_create_join_table_portfolios_roles_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Portfolio.new).to respond_to(:users)
         expect(BrokerageAccount.new).to respond_to(:users)
         expect(BrokerageAccount.new).to respond_to(:teams)
-        expect(resource.reload.users.first.as_json).to eq(user.as_json)
-        expect(resource.reload.teams.first.as_json).to eq(teams.first.as_json)
+        expect(LifeInsurance.new).to respond_to(:users)
+        expect(LifeInsurance.new).to respond_to(:roles)
+        expect(first_resource.reload.users.first.as_json).to eq(user.as_json)
+        expect(first_resource.reload.teams.first.as_json).to eq(teams.first.as_json)
+        expect(second_resource.reload.users.first.as_json).to eq(user.as_json)
+        expect(second_resource.reload.roles.first.as_json).to eq(role.as_json)
       end
     end
 
-    context 'when renaming an attribute with STI' do
+    context 'when renaming an attribute with a parent' do
       let(:initial_data) { initial_sti_data }
       let(:data) do
         [
@@ -1121,7 +1324,7 @@ RSpec.describe Core::Migrations::Migrate do
             ],
             attributes: [
               id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-              name: 'name',
+              name: 'label',
               type: 'string'
             ]
           },
@@ -1140,6 +1343,22 @@ RSpec.describe Core::Migrations::Migrate do
               name: 'charges',
               type: 'percentage'
             ]
+          },
+          {
+            id: '635476ac-2c51-4ce2-a23b-2c8ba6535598',
+            name: 'life_insurance',
+            options: {
+              parent: 'portfolio'
+            },
+            associations: [
+              type: 'has_and_belongs_to_many',
+              name: 'roles'
+            ],
+            attributes: [
+              id: '286ce97a-d000-4c26-93ea-7a969850d124',
+              name: 'years',
+              type: 'integer'
+            ]
           }
         ]
       end
@@ -1157,25 +1376,49 @@ RSpec.describe Core::Migrations::Migrate do
           .and not_change(Translation, :count)
           .and change(Documentation, :count).by(1)
         expect(migration.backup).not_to be_attached
+        expect(Dir[root.join('storage/migrate/*_rename_name_to_label_in_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_rename_fees_to_charges_in_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('storage/migrate/*_rename_age_to_years_in_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Portfolio.new).not_to respond_to(:name)
         expect(Portfolio.new).not_to respond_to(:fees)
+        expect(Portfolio.new).not_to respond_to(:age)
+        expect(Portfolio.new).to respond_to(:label)
         expect(Portfolio.new).to respond_to(:charges)
+        expect(Portfolio.new).to respond_to(:years)
+        expect(BrokerageAccount.new).not_to respond_to(:name)
+        expect(BrokerageAccount.new).to respond_to(:label)
         expect(BrokerageAccount.new).not_to respond_to(:fees)
         expect(BrokerageAccount.new).to respond_to(:charges)
+        expect(LifeInsurance.new).not_to respond_to(:name)
+        expect(LifeInsurance.new).to respond_to(:label)
+        expect(LifeInsurance.new).not_to respond_to(:age)
+        expect(LifeInsurance.new).to respond_to(:years)
         # rollback
         expect { expect(rollback).to be_a_success }
           .to not_change(Permission.with_deleted, :count)
           .and not_change(Translation.with_deleted, :count)
           .and change(Documentation.with_deleted, :count).by(-1)
+        expect(Dir[root.join('storage/migrate/*_rename_label_to_name_in_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_rename_charges_to_fees_in_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('storage/migrate/*_rename_years_to_age_in_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Portfolio.new).to respond_to(:name)
         expect(Portfolio.new).to respond_to(:fees)
+        expect(Portfolio.new).to respond_to(:age)
+        expect(Portfolio.new).not_to respond_to(:label)
         expect(Portfolio.new).not_to respond_to(:charges)
+        expect(Portfolio.new).not_to respond_to(:years)
+        expect(BrokerageAccount.new).to respond_to(:name)
+        expect(BrokerageAccount.new).not_to respond_to(:label)
         expect(BrokerageAccount.new).to respond_to(:fees)
         expect(BrokerageAccount.new).not_to respond_to(:charges)
+        expect(LifeInsurance.new).to respond_to(:name)
+        expect(LifeInsurance.new).not_to respond_to(:label)
+        expect(LifeInsurance.new).to respond_to(:age)
+        expect(LifeInsurance.new).not_to respond_to(:years)
       end
     end
 
-    context 'when changing attribute type with STI' do
+    context 'when changing attribute type with a parent' do
       let(:initial_data) { initial_sti_data }
       let(:data) do
         [
@@ -1207,6 +1450,22 @@ RSpec.describe Core::Migrations::Migrate do
               name: 'fees',
               type: 'integer'
             ]
+          },
+          {
+            id: '635476ac-2c51-4ce2-a23b-2c8ba6535598',
+            name: 'life_insurance',
+            options: {
+              parent: 'portfolio'
+            },
+            associations: [
+              type: 'has_and_belongs_to_many',
+              name: 'roles'
+            ],
+            attributes: [
+              id: '286ce97a-d000-4c26-93ea-7a969850d124',
+              name: 'age',
+              type: 'float'
+            ]
           }
         ]
       end
@@ -1226,6 +1485,7 @@ RSpec.describe Core::Migrations::Migrate do
         expect(migration.backup).not_to be_attached
         expect(Dir[root.join('storage/migrate/*_change_name_column_string_in_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_change_fees_column_float_in_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('storage/migrate/*_change_age_column_integer_in_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         # rollback
         expect { expect(rollback).to be_a_success }
           .to not_change(Permission.with_deleted, :count)
@@ -1233,10 +1493,11 @@ RSpec.describe Core::Migrations::Migrate do
           .and change(Documentation.with_deleted, :count).by(-1)
         expect(Dir[root.join('storage/migrate/*_change_name_column_text_in_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_change_fees_column_integer_in_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('storage/migrate/*_change_age_column_float_in_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
       end
     end
 
-    context 'when changing attribute uniqueness with STI' do
+    context 'when changing attribute uniqueness with a parent' do
       let(:initial_data) { initial_sti_data }
       let(:data) do
         [
@@ -1271,6 +1532,22 @@ RSpec.describe Core::Migrations::Migrate do
               name: 'fees',
               type: 'percentage'
             ]
+          },
+          {
+            id: '635476ac-2c51-4ce2-a23b-2c8ba6535598',
+            name: 'life_insurance',
+            options: {
+              parent: 'portfolio'
+            },
+            associations: [
+              type: 'has_and_belongs_to_many',
+              name: 'roles'
+            ],
+            attributes: [
+              id: '286ce97a-d000-4c26-93ea-7a969850d124',
+              name: 'age',
+              type: 'integer'
+            ]
           }
         ]
       end
@@ -1298,7 +1575,7 @@ RSpec.describe Core::Migrations::Migrate do
       end
     end
 
-    context 'with a more complex scenario and STI' do
+    context 'with a more complex scenario and a parent' do
       let(:initial_data) { initial_sti_data }
       let(:data) do
         [
@@ -1330,6 +1607,22 @@ RSpec.describe Core::Migrations::Migrate do
               name: 'charges',
               type: 'percentage'
             ]
+          },
+          {
+            id: '635476ac-2c51-4ce2-a23b-2c8ba6535598',
+            name: 'insurance',
+            options: {
+              parent: 'stock_portfolio'
+            },
+            associations: [
+              type: 'has_and_belongs_to_many',
+              name: 'roles'
+            ],
+            attributes: [
+              id: '286ce97a-d000-4c26-93ea-7a969850d124',
+              name: 'years',
+              type: 'integer'
+            ]
           }
         ]
       end
@@ -1354,14 +1647,19 @@ RSpec.describe Core::Migrations::Migrate do
         expect(Dir[root.join('storage/migrate/*_rename_portfolios_teams_to_stock_portfolios_teams_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_rename_portfolio_id_to_stock_portfolio_id_in_stock_portfolios_teams_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_rename_fees_to_charges_in_stock_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('storage/migrate/*_rename_age_to_years_in_stock_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect { Portfolio }.to raise_error(NameError)
         expect { BrokerageAccount }.to raise_error(NameError)
+        expect { LifeInsurance }.to raise_error(NameError)
         expect { StockPortfolio }.not_to raise_error
         expect { InvestmentAccount }.not_to raise_error
+        expect { Insurance }.not_to raise_error
         expect(StockPortfolio.new).not_to respond_to(:name)
         expect(StockPortfolio.new).to respond_to(:designation)
         expect(InvestmentAccount.new).not_to respond_to(:fees)
         expect(InvestmentAccount.new).to respond_to(:charges)
+        expect(Insurance.new).not_to respond_to(:age)
+        expect(Insurance.new).to respond_to(:years)
         # rollback
         expect { expect(rollback).to be_a_success }
           .to not_change(Permission.with_deleted, :count)
@@ -1374,14 +1672,19 @@ RSpec.describe Core::Migrations::Migrate do
         expect(Dir[root.join('storage/migrate/*_rename_stock_portfolios_teams_to_portfolios_teams_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_rename_stock_portfolio_id_to_portfolio_id_in_portfolios_teams_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('storage/migrate/*_rename_charges_to_fees_in_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('storage/migrate/*_rename_years_to_age_in_portfolios_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect { Portfolio }.not_to raise_error
         expect { BrokerageAccount }.not_to raise_error
+        expect { LifeInsurance }.not_to raise_error
         expect { StockPortfolio }.to raise_error(NameError)
         expect { InvestmentAccount }.to raise_error(NameError)
+        expect { Insurance }.to raise_error(NameError)
         expect(Portfolio.new).to respond_to(:name)
         expect(Portfolio.new).not_to respond_to(:designation)
         expect(BrokerageAccount.new).to respond_to(:fees)
         expect(BrokerageAccount.new).not_to respond_to(:charges)
+        expect(LifeInsurance.new).to respond_to(:age)
+        expect(LifeInsurance.new).not_to respond_to(:years)
       end
     end
   end
