@@ -16,7 +16,7 @@ require 'solid_queue/configuration'
 describe SolidQueue::Configuration do
   it_behaves_like 'a monkey patched instance method',
                   :processes_config,
-                  '1ca96fe11e181b1051e74307676720ff74c794e898c7e71939190641544dc914'
+                  'ca536e94f8028d8cbb1992ec48396e409b17545380d42ed8a3a7d455aff679fa'
 
   it_behaves_like 'a monkey patched instance method',
                   :recurring_tasks_config,
