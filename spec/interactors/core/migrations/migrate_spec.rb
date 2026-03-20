@@ -1305,7 +1305,7 @@ RSpec.describe Core::Migrations::Migrate do
         expect(LifeInsurance.new).to respond_to(:users)
         expect(LifeInsurance.new).to respond_to(:roles)
         expect(first_resource.reload.users.first.as_json).to eq(user.as_json)
-        expect(first_resource.reload.teams.first.as_json).to eq(teams.first.as_json)
+        expect(first_resource.reload.teams.map(&:as_json)).to match_array(teams.map(&:as_json))
         expect(second_resource.reload.users.first.as_json).to eq(user.as_json)
         expect(second_resource.reload.roles.first.as_json).to eq(role.as_json)
       end
