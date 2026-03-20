@@ -51,7 +51,7 @@ module Schematics
         return if child?
 
         Rails::Generators::MigrationGenerator.new(
-          ["drop_#{table_name.pluralize}", *migratable_attributes],
+          ["drop_#{table_name.pluralize}", *migratable_attributes.map(&:to_s)],
           ['--timestamps=true', '--primary_key_type=string']
         )
       end

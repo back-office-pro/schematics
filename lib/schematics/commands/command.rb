@@ -24,6 +24,7 @@ module Schematics
       delegate :name,
                :class_name,
                :association_attributes,
+               :migratable_attributes,
                :actions_with_events,
                :core?,
                :existing?,
@@ -51,14 +52,6 @@ module Schematics
       def has_and_belongs_to_many_associations = entity # rubocop:disable Naming/PredicatePrefix
         .has_and_belongs_to_many_associations
         .reject(&:hidden?)
-
-      def migratable_attributes = entity
-        .migratable_attributes
-        .concat(children.flat_map(&:migratable_attributes))
-        .push('slug:string:uniq', 'lock_version:integer', 'deleted_at:datetime:index')
-        .push(('sti_type:string' if abstract?))
-        .compact
-        .map(&:to_s)
 
       def spec_interpolations = super.merge(
         attribute: attribute.try(:name) || attribute,

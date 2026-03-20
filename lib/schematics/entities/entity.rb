@@ -337,6 +337,14 @@ module Schematics
         .entities
         .select { _1.parent_entity == self }
 
+      def migratable_attributes = super
+        .concat(children.flat_map(&:migratable_attributes))
+        .push((slug_attribute unless child?))
+        .push((lock_version_attribute unless child?))
+        .push((deleted_at_attribute unless child?))
+        .push((sti_type_attribute if abstract?))
+        .compact
+
       protected
 
       def allowed_parent_entities = schema
@@ -364,6 +372,30 @@ module Schematics
 
         "::#{parent_entity&.class_name}"
       end
+
+      def slug_attribute = Attributes::String.new(
+        entity: self,
+        name: 'slug',
+        options: { unique: true, readonly: true }
+      )
+
+      def lock_version_attribute = Attributes::Integer.new(
+        entity: self,
+        name: 'lock_version',
+        options: { readonly: true }
+      )
+
+      def deleted_at_attribute = Attributes::Datetime.new(
+        entity: self,
+        name: 'deleted_at',
+        options: { readonly: true }
+      )
+
+      def sti_type_attribute = Attributes::String.new(
+        entity: self,
+        name: 'sti_type',
+        options: { readonly: true }
+      )
 
       def receptor = Receptor.new(self)
 
