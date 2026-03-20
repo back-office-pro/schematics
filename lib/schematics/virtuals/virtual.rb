@@ -30,7 +30,7 @@ module Schematics
       validates :function,
                 presence: true,
                 format: { with: Tokens::Tokenizer.parser, message: :function }
-      validates :name, uniqueness: { scope: %i[entity fields] }
+      validates :name, uniqueness: { scope: %i[entity specifiable_fields] }
       validates :preload, inclusion: { in: :allowed_references }
       validates :variables, inclusion: { in: :allowed_variables }
       validate :tokens_cannot_have_assignment
@@ -100,7 +100,7 @@ module Schematics
 
       def allowed_references = entity
         .association_attributes
-        .concat(entity.associations)
+        .concat(entity.specifiable_associations)
         .map(&:name)
         .map(&:to_sym)
 

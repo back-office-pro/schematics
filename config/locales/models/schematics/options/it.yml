@@ -54,6 +54,7 @@ it:
           downcase: Minuscolo
           upcase: Maiuscole
         other_than: Altro che
+        parent: Genitore
         polymorphic: Polimorfico
         precision: Precisione
         readonly: Sola lettura

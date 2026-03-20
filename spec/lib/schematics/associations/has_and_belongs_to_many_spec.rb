@@ -20,13 +20,16 @@ describe Schematics::Associations::HasAndBelongsToMany do
     )
   end
 
-  let(:schema) { Schematics::Schema.new }
+  let(:schema) { Schematics::Schema.new(data:) }
+  let(:data) { [] }
+  let(:parent) { nil }
   let(:entity) do
     Schematics::Entities::Entity.new(
       schema:,
       name: 'role',
       options: {
-        descriptor: 'name'
+        descriptor: 'name',
+        parent:
       },
       associations: [
         name: 'users', type: 'has_and_belongs_to_many'
@@ -59,6 +62,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
   its(:input_name) { is_expected.to eq('role[permission_ids][]') }
   its(:allowed_association_types) { is_expected.to include('user', 'role') }
   its(:association_type) { is_expected.to eq('permission') }
+  its(:foreign_key) { is_expected.to eq('role_id') }
   its(:inverse_association) { is_expected.to be_a(described_class) }
   its(:icon) { is_expected.to eq(:lock) }
   its(:weight) { is_expected.to eq(3) }
@@ -106,9 +110,89 @@ describe Schematics::Associations::HasAndBelongsToMany do
     it { is_expected.not_to be_valid }
   end
 
+  context 'when association name is already taken by another association in the parent entity' do
+    let(:name) { 'recipients' }
+    let(:parent) { 'message' }
+
+    it { is_expected.not_to be_valid }
+  end
+
+  context 'when association name is already taken by another association in a child entity' do
+    let(:data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'portfolio',
+          associations: [
+            type: 'has_and_belongs_to_many',
+            name: 'users'
+          ],
+          attributes: [
+            id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+            name: 'name',
+            type: 'string'
+          ]
+        },
+        {
+          id: '5311570e-b976-410d-b5d9-48eb928c8fb1',
+          name: 'brokerage_account',
+          options: {
+            parent: 'portfolio'
+          },
+          associations: [
+            type: 'has_and_belongs_to_many',
+            name: 'teams'
+          ],
+          attributes: [
+            id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
+            name: 'fees',
+            type: 'percentage'
+          ]
+        },
+        {
+          id: '635476ac-2c51-4ce2-a23b-2c8ba6535598',
+          name: 'life_insurance',
+          options: {
+            parent: 'portfolio'
+          },
+          associations: [
+            type: 'has_and_belongs_to_many',
+            name: 'roles'
+          ],
+          attributes: [
+            id: '286ce97a-d000-4c26-93ea-7a969850d124',
+            name: 'age',
+            type: 'integer'
+          ]
+        }
+      ]
+    end
+    let(:entity) { schema.find_entity_by_name('brokerage_account') }
+    let(:name) { 'roles' }
+
+    it { is_expected.not_to be_valid }
+  end
+
   context 'when association name is the same as entity name' do
     let(:name) { 'roles' }
 
     it { is_expected.not_to be_valid }
+  end
+
+  context 'when association has a parent entity' do
+    let(:parent) { 'message' }
+
+    its(:foreign_key) { is_expected.to eq('message_id') }
+
+    its(:to_str) do
+      is_expected.to eq <<~RUBY
+        scope :with_permissions, -> { includes([:permissions]) }
+        has_and_belongs_to_many :permissions,
+                                class_name: 'Permission',
+                                join_table: 'messages_permissions',
+                                foreign_key: 'message_id',
+                                association_foreign_key: 'permission_id'
+      RUBY
+    end
   end
 end

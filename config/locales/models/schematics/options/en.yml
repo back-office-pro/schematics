@@ -54,6 +54,7 @@ en:
           downcase: Lowercase
           upcase: Uppercase
         other_than: Other than
+        parent: Parent
         polymorphic: Polymorphic
         precision: Precision
         readonly: Readonly

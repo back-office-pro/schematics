@@ -36,6 +36,7 @@ module Schematics
                :options,
                to: :belongs_to
       delegate :descriptor,
+               :source_entity,
                :class_name,
                :model_class,
                :icon,
@@ -73,7 +74,7 @@ module Schematics
       protected
 
       def prefixed? = inverse_entity
-        .associations
+        .specifiable_associations
         .reject { _1.belongs_to == belongs_to }
         .any? { _1.source == source }
 

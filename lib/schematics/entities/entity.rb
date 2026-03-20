@@ -61,10 +61,11 @@ module Schematics
       validates :actions, inclusion: { in: self::DEFAULT_ACTIONS }
       validates :name, singular: true, uniqueness: { scope: %i[schema entities] }
       validates :icon, inclusion: { in: Options::Icon.collection }
+      validates :parent, allow_nil: true, inclusion: { in: :allowed_parent_entities }
 
       attr_accessor :id, :schema
 
-      delegate :core?, :existing?, to: :options
+      delegate :core?, :existing?, :parent, to: :options
       delegate :method_missing, :receptor_respond_to_missing?, to: :receptor, private: true
 
       class << self
@@ -133,12 +134,29 @@ module Schematics
         Options::Existing,
         Options::Descriptor.new(collection: descriptor.allowed_field_names),
         Options::Actions.new(collection: self.class::DEFAULT_ACTIONS),
+        Options::Parent.new(collection: allowed_parent_entities),
         Options::Icon
       ]
 
       def weight = has_many_and_through_and_belongs_to_many_associations.size
 
       def fields = attributes + virtuals
+
+      def parent_fields_and_children_attributes
+        return fields unless parent
+
+        parent_entity
+          .fields
+          .concat(parent_entity.children.flat_map(&:attributes))
+      end
+
+      def parent_and_children_has_and_belongs_to_many_associations
+        return has_and_belongs_to_many_associations unless parent
+
+        parent_entity
+          .has_and_belongs_to_many_associations
+          .concat(parent_entity.children.flat_map(&:has_and_belongs_to_many_associations))
+      end
 
       def elements = fields + associations
 
@@ -206,7 +224,15 @@ module Schematics
       end
 
       def can?(action)
-        actions.include?(action.to_sym)
+        actions.include?(action.to_sym) && !abstract?
+      end
+
+      def child?
+        parent.present?
+      end
+
+      def abstract?
+        children.any?
       end
 
       def actions_with_events
@@ -244,12 +270,15 @@ module Schematics
         .uniq
 
       def to_str = <<~RUBY
-        class ::#{class_name} < Schematics::ApplicationRecord; end
+        class ::#{class_name} < #{parent_class_name}; end
       RUBY
 
-      def digest
-        Digest::MD5.hexdigest(model_elements.map(&:to_str).join)
-      end
+      def digest = Digest::MD5.hexdigest(
+        model_elements
+          .concat(children.flat_map(&:model_elements))
+          .map(&:to_str)
+          .join
+      )
 
       def association_elements = has_many_and_through_and_belongs_to_many_associations
         .reject(&:existing?)
@@ -296,9 +325,28 @@ module Schematics
         .stable_sort_by(&:weight)
         .to_h(&:to_open_api_schema)
 
+      def source_entity
+        parent_entity || self
+      end
+
+      def parent_entity
+        schema.find_entity_by_name(parent)
+      end
+
+      def children = schema
+        .entities
+        .select { _1.parent_entity == self }
+
       protected
 
-      def receptor = Receptor.new(self)
+      def allowed_parent_entities = schema
+        .entities
+        .excluding(self)
+        .reject(&:hidden?)
+        .reject(&:child?)
+        .reject(&:core?)
+        .map(&:name)
+        .sort
 
       def has_many_and_through_and_belongs_to_many_associations # rubocop:disable Naming/PredicatePrefix
         has_many_associations + has_many_through_associations + has_and_belongs_to_many_associations
@@ -310,6 +358,14 @@ module Schematics
         Attributes::Month.new(entity: self, name: 'created_at/month'),
         Attributes::Year.new(entity: self, name: 'created_at/year')
       ]
+
+      def parent_class_name
+        return 'Schematics::ApplicationRecord' unless parent
+
+        "::#{parent_entity&.class_name}"
+      end
+
+      def receptor = Receptor.new(self)
 
       def spec_interpolations = { name: name.pluralize }
     end

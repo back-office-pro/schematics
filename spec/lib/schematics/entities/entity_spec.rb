@@ -37,6 +37,8 @@ describe Schematics::Entities::Entity do
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
   it { is_expected.to be_core }
   it { is_expected.to be_existing }
+  it { is_expected.not_to be_abstract }
+  it { is_expected.not_to be_child }
   it { is_expected.to be_valid }
 
   its(:icon) { is_expected.to eq(:circle_nodes) }
@@ -49,6 +51,9 @@ describe Schematics::Entities::Entity do
   its(:preload) { is_expected.to eq([record: :string_translations]) }
   its(:digest) { is_expected.to eq('950d5abb604834b4815b3c40634a63ee') }
   its(:to_spec) { is_expected.to eq('We manage **discussions**') }
+  its(:source_entity) { is_expected.to eq(entity) }
+  its(:parent_entity) { is_expected.to be_nil }
+  its(:children) { is_expected.to be_empty }
 
   its(:available_options) do
     is_expected.to contain_exactly(
@@ -57,6 +62,7 @@ describe Schematics::Entities::Entity do
       Schematics::Options::Existing,
       Schematics::Options::Descriptor,
       Schematics::Options::Actions,
+      Schematics::Options::Parent,
       Schematics::Options::Icon
     )
   end
@@ -89,5 +95,23 @@ describe Schematics::Entities::Entity do
     let(:name) { 'user' }
 
     it { is_expected.not_to be_valid }
+  end
+
+  context 'when entity has a parent' do
+    let(:parent_entity) { schema.find_entity_by_name('message') }
+    let(:options) { { parent: 'message' } }
+
+    it { is_expected.to be_child }
+
+    its(:digest) { is_expected.to eq('e601790cf60f0768387b0fda5b23879e') }
+    its(:source_entity) { is_expected.to eq(parent_entity) }
+    its(:parent_entity) { is_expected.to eq(parent_entity) }
+    its(:children) { is_expected.to be_empty }
+
+    its(:to_str) do
+      is_expected.to eq <<~RUBY
+        class ::Discussion < ::Message; end
+      RUBY
+    end
   end
 end

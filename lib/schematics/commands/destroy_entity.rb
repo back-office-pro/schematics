@@ -42,19 +42,26 @@ module Schematics
       end
 
       def permissions_generator
+        return if abstract?
+
         PermissionsGenerator.new([class_name], [], behavior: :revoke)
       end
 
-      def migration_generator = Rails::Generators::MigrationGenerator.new(
-        ["drop_#{table_name.pluralize}", *migratable_attributes],
-        ['--timestamps=true', '--primary_key_type=string']
-      )
+      def migration_generator
+        return if child?
 
+        Rails::Generators::MigrationGenerator.new(
+          ["drop_#{table_name.pluralize}", *migratable_attributes],
+          ['--timestamps=true', '--primary_key_type=string']
+        )
+      end
+
+      # :reek:FeatureEnvy
       def drop_join_table_migration_generator(association)
         Rails::Generators::MigrationGenerator.new(
           [
             "drop_join_table_#{association.join_table}",
-            association.entity.table_name.pluralize,
+            association.source_entity.table_name.pluralize,
             association.inverse_entity.table_name.pluralize
           ]
         )

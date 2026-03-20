@@ -18,6 +18,7 @@ module Schematics
 
         def before_render
           add_association_edges
+          add_inheritance_edges
           add_habtm_edges
           add_enum_edges
           add_entity_nodes
@@ -35,11 +36,16 @@ module Schematics
 
         def add_association_edges = entities
           .flat_map(&:association_attributes)
+          .uniq
           .each { graph.add_edges(_1.entity.name, _1.inverse_entity.name, arrowhead: 'none') }
 
         def entities = schema
           .entities
           .reject(&:core?)
+
+        def add_inheritance_edges = entities
+          .select(&:parent)
+          .each { graph.add_edges(_1.name, _1.parent) }
 
         def add_habtm_edges = entities
           .flat_map(&:has_and_belongs_to_many_associations)

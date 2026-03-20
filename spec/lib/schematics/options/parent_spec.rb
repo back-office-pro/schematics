@@ -10,18 +10,15 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  module Sidebar
-    class Component < ApplicationComponent
-      delegate :company_name, to: '::Configuration'
-      delegate :preferences_sidebar_toggled, to: :current_user
+describe Schematics::Options::Parent do
+  subject { described_class.new(collection:) }
 
-      def model_classes = SchemaCache
-        .model_classes
-        .reject(&:abstract?)
-        .push(::Import, ::Emailing, ::ActiveStorage::Blob)
-        .select { can?(:index, _1) }
-        .sort_by(&:human_name)
-    end
-  end
+  let(:collection) { %w[portfolio investment instrument] }
+
+  it { is_expected.not_to be_multiple }
+
+  its(:option_name) { is_expected.to eq(:parent) }
+  its(:input_type) { is_expected.to eq(:select) }
+  its(:collection) { is_expected.to eq(%w[portfolio investment instrument]) }
+  its(:controller) { is_expected.to eq('schema-editor--parent-dropdown') }
 end

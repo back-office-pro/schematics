@@ -56,16 +56,21 @@ module Schematics
 
       def old_name = attribute.name
 
-      def permissions_generator = PermissionsGenerator.new(
-        [class_name],
-        ["--rename=#{old_class_name}"]
-      )
+      def permissions_generator
+        return if abstract?
+
+        PermissionsGenerator.new([class_name], ["--rename=#{old_class_name}"])
+      end
 
       def old_class_name = old_name.camelize
 
-      def migration_generator = Rails::Generators::MigrationGenerator.new(
-        ["rename_#{old_table_name.pluralize}_to_#{table_name.pluralize}"]
-      )
+      def migration_generator
+        return if child?
+
+        Rails::Generators::MigrationGenerator.new(
+          ["rename_#{old_table_name.pluralize}_to_#{table_name.pluralize}"]
+        )
+      end
 
       def old_table_name = old_name.tr('/', '_')
 
@@ -75,11 +80,13 @@ module Schematics
           [
             [
               'rename',
-              old_name.pluralize,
-              association.inverse_entity.table_name.pluralize,
+              [
+                attribute.source_entity.table_name.pluralize,
+                association.inverse_entity.table_name.pluralize
+              ].sort,
               'to',
               association.join_table
-            ].join('_')
+            ].flatten.join('_')
           ]
         )
       end
@@ -90,9 +97,9 @@ module Schematics
           [
             [
               'rename',
-              "#{old_name}_id",
+              "#{attribute.source_entity.table_name}_id",
               'to',
-              "#{association.entity.table_name}_id",
+              association.foreign_key,
               'in',
               association.join_table
             ].join('_')

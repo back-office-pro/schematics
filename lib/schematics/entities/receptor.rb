@@ -15,7 +15,12 @@ module Schematics
     class Receptor
       REGEX = /(non_)?([a-zA-Z_]+)_(attributes|virtuals|associations|fields|elements)/
 
-      delegate :public_send, :id_attribute, :created_at_attribute, to: :@entity, private: true
+      delegate :public_send,
+               :id_attribute,
+               :created_at_attribute,
+               :parent_entity,
+               to: :@entity,
+               private: true
 
       def initialize(entity)
         @entity = entity
@@ -23,17 +28,21 @@ module Schematics
 
       def method_missing(method_name, *, &) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         predicate, constant, mod = parse_method_name(method_name)
-        with_id_and_created_at_attrs = mod != :Associations && constant != :Migratable
         return super unless mod || constant
 
         elements = public_send(mod.to_s.underscore)
+        if parent_entity && %i[Migratable HasAndBelongsToMany].exclude?(constant)
+          elements += parent_entity.public_send(method_name)
+        end
         if Schematics.const_defined?(mod) && Schematics.const_get(mod).const_defined?(constant)
           elements.public_send(predicate, Schematics.const_get(mod).const_get(constant))
         elsif Behaviours.const_defined?(constant)
-          elements = [id_attribute, *elements, created_at_attribute] if with_id_and_created_at_attrs
+          if mod != :Associations && !parent_entity && %i[Migratable Nameable].exclude?(constant)
+            elements = [id_attribute, *elements, created_at_attribute]
+          end
           elements = elements.public_send(predicate, Behaviours.const_get(constant))
           case constant
-          when :Migratable, :Validatable
+          when :Migratable, :Validatable, :Specifiable
             elements
           when :Fillable
             elements
