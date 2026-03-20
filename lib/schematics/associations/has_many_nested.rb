@@ -38,7 +38,9 @@ module Schematics
         .values
         .map { _1.merge(id: 'string', _destroy: 'boolean') }
 
-      def input_name = "#{entity.name}[#{attributes_param_key}]"
+      def input_name(source_entity = entity)
+        "#{source_entity.table_name}[#{attributes_param_key}]"
+      end
 
       def default = [entity.default]
 

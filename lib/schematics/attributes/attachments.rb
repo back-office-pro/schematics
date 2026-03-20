@@ -39,7 +39,7 @@ module Schematics
         super.second
       ]
 
-      def input_name = "#{super}[]"
+      def input_name(*) = "#{super}[]"
 
       def search_column = :"#{search_column_association}_filename"
 

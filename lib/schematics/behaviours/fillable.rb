@@ -27,7 +27,9 @@ module Schematics
 
       def permitted_params = column_name.to_sym
 
-      def input_name = "#{entity.table_name}[#{column_name}]"
+      def input_name(source_entity = entity)
+        "#{source_entity.table_name}[#{column_name}]"
+      end
 
       def open_api_body_type = open_api_schema_type
 

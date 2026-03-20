@@ -21,7 +21,7 @@ module Schematics
 
       def permitted_params = { super => [] }
 
-      def input_name = "#{super}[]"
+      def input_name(*) = "#{super}[]"
 
       def format(values)
         Array(values)

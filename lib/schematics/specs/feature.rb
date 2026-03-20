@@ -132,21 +132,22 @@ module Schematics
       # :reek:FeatureEnvy
       def fill_form(elements) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
         elements.each do |element|
+          input_name = element.input_name(entity)
           case element
           when Associations::HasAndBelongsToMany
             select element.model_class.find(&element.filter_by).to_s,
-                   from: element.input_name,
+                   from: input_name,
                    match: :first
           when Attributes::BelongsTo
             select element.model_class.first.to_s,
-                   from: element.input_name,
+                   from: input_name,
                    match: :first
           when Attributes::Boolean
-            check(element.input_name)
+            check(input_name)
           when Attributes::Attachments
-            attach_file element.input_name, element.default.first.path
+            attach_file input_name, element.default.first.path
           when Attributes::Attachment
-            attach_file element.input_name, element.default.path
+            attach_file input_name, element.default.path
           when Attributes::RichText
             type = element.required? ? :text : :hidden
             if element.translated?
@@ -155,22 +156,22 @@ module Schematics
                   .set(element.default)
               end
             else
-              find_field(element.input_name, type:).set(element.default)
+              find_field(input_name, type:).set(element.default)
             end
           when Behaviours::Enumerable
             select element.format(element.default),
-                   from: element.input_name,
+                   from: input_name,
                    match: :first
           when Attributes::Address, Attributes::Array
             select element.name,
-                   from: element.input_name,
+                   from: input_name,
                    match: :prefer_exact
           when Attributes::Digest
             element
               .permitted_params
               .each { |param| fill_in "#{entity.table_name}[#{param}]", with: element.default }
           when Attributes::Date
-            fill_in element.input_name, with: element.default.to_date
+            fill_in input_name, with: element.default.to_date
           when Behaviours::Translatable
             if element.translated?
               available_locales.each do |locale|
@@ -178,10 +179,10 @@ module Schematics
                         with: element.default
               end
             else
-              fill_in element.input_name, with: element.default
+              fill_in input_name, with: element.default
             end
           else
-            fill_in element.input_name, with: element.default
+            fill_in input_name, with: element.default
           end
         end
       end
