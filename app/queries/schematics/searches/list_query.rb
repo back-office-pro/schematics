@@ -11,7 +11,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  module Searchable
+  module Searches
     class ListQuery < ApplicationQuery
       # :reek:ControlParameter
       def call(filter_params, ability, sort_params = nil)

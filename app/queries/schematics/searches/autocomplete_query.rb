@@ -11,7 +11,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  module Searchable
+  module Searches
     class AutocompleteQuery < ListQuery
       LIMIT = 5
 

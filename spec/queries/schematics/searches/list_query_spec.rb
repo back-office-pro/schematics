@@ -12,7 +12,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Schematics::Searchable::AutocompleteQuery do
+RSpec.describe Schematics::Searches::ListQuery do
   subject(:query) { described_class.new(model_class) }
 
   include_context 'with user'
@@ -22,23 +22,22 @@ RSpec.describe Schematics::Searchable::AutocompleteQuery do
   let(:role) { admin_role }
   let(:other_user) { User.create!(email: 'jane.doe@nowhere.com', role:) }
   let(:ability) { Schematics::Ability.new(user) }
-  let(:field) { 'email' }
 
   before { other_user }
 
   describe '.call' do
-    subject { query.call(params, ability, field) }
+    subject { query.call(filter_params, ability) }
 
     context 'when looking for john' do
-      let(:params) { { email_i_cont: 'john' } }
+      let(:filter_params) { { email_i_cont: 'john' } }
 
-      it { is_expected.to contain_exactly('john.doe@nowhere.com') }
+      it { is_expected.to contain_exactly(user) }
     end
 
     context 'when looking for jane' do
-      let(:params) { { email_i_cont: 'jane' } }
+      let(:filter_params) { { email_i_cont: 'jane' } }
 
-      it { is_expected.to contain_exactly('jane.doe@nowhere.com') }
+      it { is_expected.to contain_exactly(other_user) }
     end
   end
 end
