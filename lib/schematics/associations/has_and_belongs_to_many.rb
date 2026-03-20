@@ -22,7 +22,7 @@ module Schematics
 
       validates :name,
                 presence: true,
-                uniqueness: { scope: %i[entity has_and_belongs_to_many_associations] },
+                uniqueness: { scope: %i[entity parent_and_children_has_and_belongs_to_many_associations] }, # rubocop:disable Layout/LineLength
                 comparison: { other_than: :denied_name, unless: :hidden? }
       validates :association_type, inclusion: { in: :allowed_association_types }
 

@@ -142,7 +142,21 @@ module Schematics
 
       def fields = attributes + virtuals
 
-      def parent_and_children_fields = Array(parent_entity&.fields) + fields
+      def parent_fields_and_children_attributes
+        return fields unless parent
+
+        parent_entity
+          .fields
+          .concat(parent_entity.children.flat_map(&:attributes))
+      end
+
+      def parent_and_children_has_and_belongs_to_many_associations
+        return has_and_belongs_to_many_associations unless parent
+
+        parent_entity
+          .has_and_belongs_to_many_associations
+          .concat(parent_entity.children.flat_map(&:has_and_belongs_to_many_associations))
+      end
 
       def elements = fields + associations
 

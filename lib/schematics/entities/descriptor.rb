@@ -34,7 +34,7 @@ module Schematics
       RUBY
 
       def allowed_field_names = entity
-        .fields
+        .nameable_fields
         .map(&:name)
         .sort
 
