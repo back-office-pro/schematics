@@ -32,7 +32,7 @@ module Schematics
 
         elements = public_send(mod.to_s.underscore)
         if parent_entity && %i[Migratable HasAndBelongsToMany].exclude?(constant)
-          elements += parent_entity.public_send(method_name)
+          elements = parent_entity.public_send(method_name) + elements
         end
         if Schematics.const_defined?(mod) && Schematics.const_get(mod).const_defined?(constant)
           elements.public_send(predicate, Schematics.const_get(mod).const_get(constant))
