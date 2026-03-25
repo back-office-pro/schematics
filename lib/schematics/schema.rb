@@ -40,7 +40,7 @@ module Schematics
       self.entities = core_data.concat(@data)
     end
 
-    def as_json = @data
+    def as_json(*) = @data
 
     def entities=(entities)
       @entities = entities
