@@ -12,6 +12,8 @@
 
 # frozen_string_literal: true
 
+abort if ENV['RAILS_ENV'] == 'production' && (ARGV.include?('console') || ARGV.include?('c'))
+
 APP_PATH = File.expand_path('../config/application', __dir__).freeze
 require_relative '../config/boot'
 require 'rails/commands'
