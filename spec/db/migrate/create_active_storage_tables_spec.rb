@@ -10,6 +10,7 @@
 
 # frozen_string_literal: true
 
+require 'openssl'
 require 'active_storage'
 
 describe 'ActiveStorage migration file' do
