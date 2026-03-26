@@ -26,14 +26,14 @@ module Schematics
     include Previewable
     include Attachable
     include Routable
-    include Licensable
 
     loadable concerns: [
       SoftDeletable,
       Multisearchable,
       Searchable,
       Trackable,
-      Sluggable
+      Sluggable,
+      Licensable
     ]
   end
 end
