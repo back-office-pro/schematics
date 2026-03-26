@@ -1,0 +1,26 @@
+#!/bin/bash -e
+
+# Copyright © 2025 Dev & Software. All rights reserved.
+
+# THIS SOFTWARE IS PROPRIETARY AND CONFIDENTIAL. UNAUTHORIZED COPYING, DISTRIBUTION, MODIFICATION,
+# REVERSE ENGINEERING, OR DISCLOSURE IS STRICTLY PROHIBITED.
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+# NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND
+# NONINFRINGEMENT.
+# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+# LIABILITY ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.
+
+# Encode with Ruby Encoder
+# Keep config/puma.rb and rgloader/loader.rb untouched
+# Make sure .dockerignore is present
+
+cd ./pkg/1.0.0/schematics
+docker login
+docker build -t backofficeapp/back-office:1.0.0 --no-cache .
+docker build -t backofficeapp/back-office:1.0.0-core --build-arg CORE=true --no-cache .
+docker tag backofficeapp/back-office:1.0.0 backofficeapp/back-office:latest
+docker tag backofficeapp/back-office:1.0.0-core backofficeapp/back-office:latest-core
+docker push backofficeapp/back-office:1.0.0
+docker push backofficeapp/back-office:1.0.0-core
+docker push backofficeapp/back-office:latest
+docker push backofficeapp/back-office:latest-core
