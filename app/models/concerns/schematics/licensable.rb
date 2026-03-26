@@ -11,29 +11,26 @@
 # frozen_string_literal: true
 
 module Schematics
-  class ApplicationRecord < ::ActiveRecord::Base
-    primary_abstract_class
+  module Licensable
+    extend ActiveSupport::Concern
 
-    self.implicit_order_column = 'created_at'
-    self.inheritance_column = :sti_type
+    included do
+      before_create :authorize_create!
+      before_restore :authorize_restore!
+    end
 
-    include Loadable
-    include Duplicable
-    include Serializable
-    include Identifiable
-    include Translatable
-    include Mentionable
-    include Previewable
-    include Attachable
-    include Routable
-    include Licensable
+    private
 
-    loadable concerns: [
-      SoftDeletable,
-      Multisearchable,
-      Searchable,
-      Trackable,
-      Sluggable
-    ]
+    def authorize_create!
+      throw :abort if ability.cannot?(:create, self)
+    end
+
+    def authorize_restore!
+      throw :abort if ability.cannot?(:restore, self)
+    end
+
+    def ability
+      @ability ||= RecordAbility.new.merge(LicenseAbility.new)
+    end
   end
 end

@@ -16,11 +16,10 @@ module Schematics
 
     queue_as :critical
 
+    discard_on ActiveRecord::RecordNotSaved
     retry_on IOError, wait: :polynomially_longer, attempts: 5
 
     def perform
-      return unless ::Configuration.license.active?
-
       ::Backup.create!(file: Core::Backups::Create.call.file)
     end
   end

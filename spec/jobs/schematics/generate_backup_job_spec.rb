@@ -44,5 +44,13 @@ RSpec.describe Schematics::GenerateBackupJob do
       perform_now
       expect(ActiveStorage::Blob.service).to exist('backups/2021_01_01_10_00_00_000/db.dump')
     end
+
+    context 'when license is not active' do
+      before { allow(Configuration).to receive(:license).and_call_original }
+
+      it 'does not perform database backup' do
+        expect { perform_now }.not_to change(Backup, :count)
+      end
+    end
   end
 end

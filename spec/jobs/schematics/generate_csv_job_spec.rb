@@ -64,5 +64,13 @@ RSpec.describe Schematics::GenerateCSVJob do
       perform_now
       expect(stream.first['target']).to eq('generate_file_in_background')
     end
+
+    context 'when license is not active' do
+      before { allow(Configuration).to receive(:license).and_call_original }
+
+      it 'does not upload a blob' do
+        expect { perform_now }.not_to change(ActiveStorage::Blob, :count)
+      end
+    end
   end
 end

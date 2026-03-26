@@ -11,29 +11,10 @@
 # frozen_string_literal: true
 
 module Schematics
-  class ApplicationRecord < ::ActiveRecord::Base
-    primary_abstract_class
-
-    self.implicit_order_column = 'created_at'
-    self.inheritance_column = :sti_type
-
-    include Loadable
-    include Duplicable
-    include Serializable
-    include Identifiable
-    include Translatable
-    include Mentionable
-    include Previewable
-    include Attachable
-    include Routable
-    include Licensable
-
-    loadable concerns: [
-      SoftDeletable,
-      Multisearchable,
-      Searchable,
-      Trackable,
-      Sluggable
-    ]
+  class RecordAbility < ApplicationAbility
+    def initialize
+      super
+      can %i[create restore], :all
+    end
   end
 end

@@ -10,30 +10,12 @@
 
 # frozen_string_literal: true
 
-module Schematics
-  class ApplicationRecord < ::ActiveRecord::Base
-    primary_abstract_class
+require 'rails_helper'
+require 'cancan/matchers'
 
-    self.implicit_order_column = 'created_at'
-    self.inheritance_column = :sti_type
+RSpec.describe Schematics::RecordAbility do
+  subject(:ability) { described_class.new }
 
-    include Loadable
-    include Duplicable
-    include Serializable
-    include Identifiable
-    include Translatable
-    include Mentionable
-    include Previewable
-    include Attachable
-    include Routable
-    include Licensable
-
-    loadable concerns: [
-      SoftDeletable,
-      Multisearchable,
-      Searchable,
-      Trackable,
-      Sluggable
-    ]
-  end
+  it { is_expected.to be_able_to(:create, :all) }
+  it { is_expected.to be_able_to(:restore, :all) }
 end
