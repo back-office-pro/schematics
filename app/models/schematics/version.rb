@@ -74,6 +74,11 @@ module Schematics
       }
     end
 
+    def item=(item)
+      super
+      self.item_type = item.class.name if item
+    end
+
     private
 
     memoize def webhook_event
