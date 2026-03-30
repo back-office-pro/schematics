@@ -25,6 +25,11 @@ module Schematics
                         name: :paper_trail_versions,
                         class_name: 'Schematics::Version'
                       }
+
+      has_many versions_association_name, # rubocop:disable Rails/HasManyOrHasOneDependent
+               -> { unscope(where: :item_type).where(item_type: _1.class.name) },
+               class_name: version_class_name,
+               as: :item
     end
 
     class_methods do
