@@ -12,7 +12,6 @@
 
 class ::Message < Schematics::ApplicationRecord
   scope :unread, ::Core::Messages::UnreadQuery
-  scope :read, ::Core::Messages::ReadQuery
 
   def new_reply = self
     .class
