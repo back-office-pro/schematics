@@ -19,6 +19,10 @@ module Schematics
     include ::ActiveModel::API
     include ::ActiveModel::NestedAttributes
 
+    VERSIONS_PATH = ::Pathname
+      .new(File.expand_path('versions', __dir__))
+      .freeze
+
     accepts_nested_attributes_for :entities
     validates_associated :entities
     attr_reader :entities, :version
@@ -66,10 +70,15 @@ module Schematics
     private
 
     def core_data = ::JSON
-      .parse(File.read(core_data_filepath), symbolize_names: true)
+      .parse(core_data_filepath.read, symbolize_names: true)
       .tap { |json| json.each { _1[:options]&.store(:core, true) } }
 
-    def core_data_filepath = File.expand_path(File.join('versions', "#{version}.json"), __dir__)
+    def core_data_filepath
+      path = VERSIONS_PATH / "#{version}.json"
+      return path if path.exist?
+
+      VERSIONS_PATH.children.max
+    end
 
     def add_associations_and_check_for_name_collisions
       add_has_and_belongs_to_many_associations
