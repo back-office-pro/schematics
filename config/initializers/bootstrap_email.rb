@@ -13,8 +13,10 @@
 BootstrapEmail.configure do |config|
   config.sass_email_string = lambda {
     <<~SCSS
-      $primary: #{Configuration.theme_color};
-      @import 'bootstrap-email';
+      @use 'scss/variable' with (
+        $primary: #{Configuration.theme_color}
+      );
+      @use 'bootstrap-email';
     SCSS
   }
 end

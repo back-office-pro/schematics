@@ -63,7 +63,7 @@ gem 'based_uuid'
 gem 'bcrypt'
 gem 'benchmark'
 gem 'bootsnap', require: false
-gem 'bootstrap-email', '1.5.2'
+gem 'bootstrap-email'
 gem 'bootstrap_form'
 gem 'browser'
 gem 'cancancan'
