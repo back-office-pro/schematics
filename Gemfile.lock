@@ -272,7 +272,7 @@ GEM
     ffi (1.17.4-x86_64-darwin)
     ffi (1.17.4-x86_64-linux-gnu)
     ffi (1.17.4-x86_64-linux-musl)
-    flay (2.14.3)
+    flay (2.14.4)
       erubi (~> 1.10)
       path_expander (~> 2.0)
       prism (~> 1.7)
@@ -526,7 +526,7 @@ GEM
     mini_magick (5.3.1)
       logger
     mini_mime (1.1.5)
-    minitest (6.0.3)
+    minitest (6.0.4)
       drb (~> 2.0)
       prism (~> 1.5)
     mission_control-jobs (1.1.0)
