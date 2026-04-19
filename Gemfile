@@ -32,6 +32,7 @@ group :development do
   gem 'rubocop-rspec', require: false
   gem 'rubocop-rspec_rails', require: false
   gem 'rubocop-thread_safety', require: false
+  gem 'rubocop-view_component', require: false
   gem 'rubycritic', require: false
   gem 'slim_lint'
   gem 'web-console'

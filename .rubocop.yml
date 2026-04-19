@@ -7,6 +7,7 @@ plugins:
   - rubocop-rspec_rails
   - rubocop-thread_safety
   - rubocop-obsession
+  - rubocop-view_component
 AllCops:
   TargetRubyVersion: 3.2.10
   NewCops: enable
@@ -253,3 +254,10 @@ Obsession/Rails/MigrationBelongsTo:
 # rubocop-thread_safety
 ThreadSafety/DirChdir:
   AllowCallWithBlock: true
+# rubocop-view_component
+ViewComponent/NoGlobalState:
+  Enabled: false
+ViewComponent/PreferComposition:
+  Enabled: false
+ViewComponent/PreferPrivateMethods:
+  Enabled: false
