@@ -142,7 +142,7 @@ module Schematics
         .with_slugs
         .then_tap { _1.with_deleted if request.delete? }
         .load_async
-        .finder(params.expect(:id))
+        .finder(params[:id])
     end
 
     def set_resources
