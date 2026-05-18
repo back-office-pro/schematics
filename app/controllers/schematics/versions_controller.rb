@@ -57,7 +57,7 @@ module Schematics
       @version = model_class
         .with_user
         .load_async
-        .find(params[:id])
+        .find(params.expect(:id))
     end
 
     def model_class = Version

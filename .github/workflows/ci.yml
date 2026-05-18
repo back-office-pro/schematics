@@ -39,6 +39,7 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           cache: yarn
+          node-version: 24
       - name: Install dependencies
         run: yarn --immutable --immutable-cache --check-cache
       - name: Run stylelint
@@ -61,6 +62,7 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           cache: yarn
+          node-version: 24
       - name: Install dependencies
         run: yarn --immutable --immutable-cache --check-cache
       - name: Run standard
