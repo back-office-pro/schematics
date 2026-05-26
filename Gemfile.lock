@@ -1018,7 +1018,7 @@ GEM
       nokogiri (~> 1.8)
     yajl-ruby (1.4.3)
     yaml (0.4.0)
-    zeitwerk (2.8.1)
+    zeitwerk (2.8.2)
 
 PLATFORMS
   aarch64-linux
