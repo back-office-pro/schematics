@@ -16,10 +16,8 @@ import '@hotwired/turbo-rails'
 import 'controllers'
 import 'chartkick'
 import 'Chart.bundle'
-import { application } from 'controllers/application'
-import Rollbar from 'rollbar'
 
-/* global matchMedia, environment, mapsAPIKey, rollbarClientKey, Chartkick, I18n, Trix, Pagy */
+/* global matchMedia, mapsAPIKey, Chartkick, I18n, Trix, Pagy */
 
 const setTheme = () => {
   if (matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -49,20 +47,6 @@ const redirectOnFrameMissing = (event) => {
     event.preventDefault()
     event.detail.visit(event.detail.response)
   }
-}
-
-const defaultErrorHandler = application.handleError.bind(application)
-const rollbar = new Rollbar({
-  accessToken: rollbarClientKey,
-  captureUncaught: true,
-  captureUnhandledRejections: true,
-  captureIp: 'anonymize',
-  environment
-})
-
-application.handleError = (error, message, detail = {}) => {
-  defaultErrorHandler(error, message, detail)
-  rollbar.error(error)
 }
 
 Chartkick.configure({ language: document.documentElement.lang, mapsAPIKey })

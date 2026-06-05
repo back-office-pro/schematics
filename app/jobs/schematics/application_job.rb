@@ -12,8 +12,6 @@
 
 module Schematics
   class ApplicationJob < ::ActiveJob::Base
-    include Rollbar::ActiveJob
-
     discard_on ActiveRecord::RecordNotFound, ActiveJob::DeserializationError
     retry_on ActiveRecord::Deadlocked, wait: :polynomially_longer, attempts: 5
   end

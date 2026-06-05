@@ -27,14 +27,6 @@ module Schematics
         .to_json
         .html_safe # rubocop:disable Rails/OutputSafety
 
-      def rollbar_client_key = Rails
-        .application
-        .credentials
-        .rollbar
-        &.client_key
-        .to_json
-        .html_safe # rubocop:disable Rails/OutputSafety
-
       def routes = {
         autocompletions: t('routes.autocompletions'),
         bulkActions: t('routes.bulk_actions'),

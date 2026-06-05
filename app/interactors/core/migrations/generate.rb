@@ -17,7 +17,8 @@ module Core
       include Schematics::Progressable
 
       delegate :migration, :fail!, to: :context, private: true
-      delegate :root, :env, :configuration, to: '::Rails', private: true
+      delegate :root, :env, :configuration, :logger, to: '::Rails', private: true
+      delegate :error, to: :logger, private: true
       delegate :database_configuration, to: :configuration, private: true
       delegate :migrator_clean_commands,
                :migrator_build_commands,
@@ -38,7 +39,7 @@ module Core
           .flat_map(&:generators)
           .each(&method(:invoke))
       rescue StandardError => e
-        Rollbar.error(e, '[Migration] Generate error')
+        error("[Migration Generate] #{e.message}")
         fail!
       end
 
