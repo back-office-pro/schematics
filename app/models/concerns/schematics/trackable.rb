@@ -27,7 +27,7 @@ module Schematics
                       }
 
       has_many versions_association_name, # rubocop:disable Rails/HasManyOrHasOneDependent
-               -> { unscope(where: :item_type).where(item_type: _1.class.name) },
+               -> { unscope(where: :item_type).where(item_type: it.class.name) },
                class_name: version_class_name,
                as: :item
     end

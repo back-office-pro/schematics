@@ -18,8 +18,8 @@ module Schematics
           class Component < Inputs::Component
             def field = object
               .dup
-              .tap { _1.name = option_name }
-              .tap { _1.options.delete(:required) }
+              .tap { it.name = option_name }
+              .tap { it.options.delete(:required) }
           end
         end
       end

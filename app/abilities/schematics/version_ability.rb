@@ -21,7 +21,7 @@ module Schematics
       user
         .role
         .permissions
-        .each { can :read, Version, event: _1.action, item_type: _1.model }
+        .each { can :read, Version, event: it.action, item_type: it.model }
     end
   end
 end

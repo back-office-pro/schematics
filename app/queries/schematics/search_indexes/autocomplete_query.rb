@@ -19,8 +19,8 @@ module Schematics
         where("#{table_name} MATCH ?", query.to_json)
           .select(:searchable_id, :searchable_type)
           .order(:rank)
-          .map { _1.searchable_type.safe_constantize&.preload_all&.where(id: _1.searchable_id) }
-          .filter_map { _1.accessible_by(ability) }
+          .map { it.searchable_type.safe_constantize&.preload_all&.where(id: it.searchable_id) }
+          .filter_map { it.accessible_by(ability) }
           .compact_blank
           .flatten
           .take(LIMIT)

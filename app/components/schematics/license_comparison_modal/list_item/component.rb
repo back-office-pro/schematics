@@ -26,7 +26,7 @@ module Schematics
         def text
           super || model_class
             .human_name(count:)
-            .then_tap { _1.capitalize if zero? }
+            .then_tap { it.capitalize if zero? }
         end
 
         def css_class

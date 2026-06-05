@@ -67,7 +67,7 @@ describe Schematics::Attributes::Secret do
   its(:to_str) do
     is_expected.to eq <<~RUBY
       encrypts :gcloud_public_api_key, deterministic: true
-      normalizes :gcloud_public_api_key, with: -> { _1.strip.itself.presence }
+      normalizes :gcloud_public_api_key, with: -> { it.strip.itself.presence }
     RUBY
   end
 

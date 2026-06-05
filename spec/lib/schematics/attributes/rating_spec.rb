@@ -71,7 +71,7 @@ describe Schematics::Attributes::Rating do
 
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
-      validates :rating, {:numericality=>{:allow_blank=>true, :in=>0..5}}
+      validates :rating, {numericality: {allow_blank: true, in: 0..5}}
     RUBY
   end
 

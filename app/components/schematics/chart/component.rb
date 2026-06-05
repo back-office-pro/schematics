@@ -35,7 +35,7 @@ module Schematics
 
       def col_size = ::Chart
         .sizes
-        .transform_values { _1.next * 3 }
+        .transform_values { it.next * 3 }
         .fetch(size)
 
       def max_col_size = [12, col_size * 2].min

@@ -50,7 +50,7 @@ module Schematics
         .map
         .with_index { |value, index| ["state :#{value}", ('initial: true' if index.zero?)] }
         .map(&:compact)
-        .map { _1.join(', ').indent(2) }
+        .map { it.join(', ').indent(2) }
         .join("\n")
 
       def events_to_str = events

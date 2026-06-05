@@ -18,7 +18,7 @@ module ActiveStorage
         user
           .role
           .permissions
-          .select { _1.action == action.to_s }
+          .select { it.action == action.to_s }
           .map(&:model)
           .select(&Object.method(:const_defined?))
           .each { |record_type| can(permission, ::ActiveStorage::Attachment, record_type:) }

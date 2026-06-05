@@ -36,7 +36,7 @@ module Schematics
       def open_api_body_type = entity
         .open_api_body
         .values
-        .map { _1.merge(id: 'string', _destroy: 'boolean') }
+        .map { it.merge(id: 'string', _destroy: 'boolean') }
 
       def input_name(source_entity = entity)
         "#{source_entity.table_name}[#{attributes_param_key}]"

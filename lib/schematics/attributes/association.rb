@@ -145,7 +145,7 @@ module Schematics
 
         inverse_entity
           .preloadable_elements
-          .select { _1.preload.any? }
+          .select { it.preload.any? }
           .map do |element|
             <<~RUBY
               scope :with_#{name}_#{element.name}, -> { includes(#{{ name.to_sym => element.preload }}) }

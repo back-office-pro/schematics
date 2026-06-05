@@ -21,7 +21,7 @@ module Schematics
         .sort_by(&:human_name)
 
       def events = Version::EVENTS
-        .map { [_1, t(_1, scope: %i[activerecord enums permission action])] }
+        .map { [it, t(it, scope: %i[activerecord enums permission action])] }
         .sort_by(&:last)
         .to_h
     end

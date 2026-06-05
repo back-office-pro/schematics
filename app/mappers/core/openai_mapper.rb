@@ -22,31 +22,31 @@ module Core
       rename_keys choices: :data
       map_values { extract_key :message }
       map_values { extract_key :tool_calls }
-      map_values -> { _1.flatten }
+      map_values -> { it.flatten }
       map_values { extract_key :function }
       map_values { extract_key :arguments }
-      map_values { map_array -> { JSON.parse(_1) } }
+      map_values { map_array -> { JSON.parse(it) } }
       deep_symbolize_keys
       map_values do
-        map_array -> { _1.merge(id: SecureRandom.uuid) }
+        map_array -> { it.merge(id: SecureRandom.uuid) }
       end
       map_values do
         map_array do
           map_value :attributes do
-            map_array -> { _1.merge(id: SecureRandom.uuid) }
+            map_array -> { it.merge(id: SecureRandom.uuid) }
             map_array do
-              guard -> { _1.key?(:options) } do
-                map_value :options, -> { _1.compact_blank }
+              guard -> { it.key?(:options) } do
+                map_value :options, -> { it.compact_blank }
                 map_value :options do
-                  guard -> { _1.key?(:events) } do
+                  guard -> { it.key?(:events) } do
                     map_value :events do
-                      map_array -> { _1.merge(id: SecureRandom.uuid) }
+                      map_array -> { it.merge(id: SecureRandom.uuid) }
                     end
                   end
                 end
               end
             end
-            map_array -> { _1.compact_blank }
+            map_array -> { it.compact_blank }
           end
         end
       end

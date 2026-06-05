@@ -78,7 +78,7 @@ module OpenAI
       .collection
       .map(&:type)
       .sort
-      .map { { '$ref': "#/$defs/#{_1}" } }
+      .map { { '$ref': "#/$defs/#{it}" } }
 
     def option_defs = Schematics::Options
       .constants

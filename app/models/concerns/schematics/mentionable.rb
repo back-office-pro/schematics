@@ -33,7 +33,7 @@ module Schematics
     protected
 
     def notify_mentions = ::ActiveJob.perform_all_later(
-      rich_text_mentions.map { NotifyJob.new(self, 'mention', _1) }
+      rich_text_mentions.map { NotifyJob.new(self, 'mention', it) }
     )
   end
 end

@@ -80,13 +80,13 @@ describe Schematics::Attributes::Email do
 
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
-      validates :email, {:email=>{:allow_blank=>true, :ban_disposable_email=>true, :partial=>true}}
+      validates :email, {email: {allow_blank: true, ban_disposable_email: true, partial: true}}
     RUBY
   end
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      normalizes :email, with: -> { _1.strip.downcase.presence }
+      normalizes :email, with: -> { it.strip.downcase.presence }
     RUBY
   end
 
@@ -141,7 +141,7 @@ describe Schematics::Attributes::Email do
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :email, {:uniqueness_with_deleted=>{:case_sensitive=>false, :allow_blank=>true}, :email=>{:allow_blank=>true, :ban_disposable_email=>true, :partial=>true}}
+        validates :email, {uniqueness_with_deleted: {case_sensitive: false, allow_blank: true}, email: {allow_blank: true, ban_disposable_email: true, partial: true}}
       RUBY
     end
   end
@@ -164,7 +164,7 @@ describe Schematics::Attributes::Email do
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :email, {:presence=>true, :email=>{:allow_blank=>false, :ban_disposable_email=>true, :partial=>true}}
+        validates :email, {presence: true, email: {allow_blank: false, ban_disposable_email: true, partial: true}}
       RUBY
     end
   end

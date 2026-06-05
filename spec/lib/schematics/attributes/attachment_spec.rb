@@ -72,7 +72,7 @@ describe Schematics::Attributes::Attachment do
 
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
-      validates :avatar, {:antivirus=>true, :storage_quota=>true}
+      validates :avatar, {antivirus: true, storage_quota: true}
     RUBY
   end
 
@@ -145,7 +145,7 @@ describe Schematics::Attributes::Attachment do
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :avatar, {:attached=>true, :antivirus=>true, :storage_quota=>true}
+        validates :avatar, {attached: true, antivirus: true, storage_quota: true}
       RUBY
     end
   end
@@ -159,7 +159,7 @@ describe Schematics::Attributes::Attachment do
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :avatar, {:antivirus=>true, :storage_quota=>true, :size=>{:less_than=>10485760}}
+        validates :avatar, {antivirus: true, storage_quota: true, size: {less_than: 10485760}}
       RUBY
     end
   end
@@ -173,7 +173,7 @@ describe Schematics::Attributes::Attachment do
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :avatar, {:antivirus=>true, :storage_quota=>true, :aspect_ratio=>10}
+        validates :avatar, {antivirus: true, storage_quota: true, aspect_ratio: 10}
       RUBY
     end
   end
@@ -198,7 +198,7 @@ describe Schematics::Attributes::Attachment do
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :avatar, {:antivirus=>true, :storage_quota=>true, :content_type=>{:with=>["image/png", "image/jpeg"], :spoofing_protection=>true}}
+        validates :avatar, {antivirus: true, storage_quota: true, content_type: {with: ["image/png", "image/jpeg"], spoofing_protection: true}}
       RUBY
     end
   end

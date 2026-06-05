@@ -49,7 +49,7 @@ describe Schematics::Entities::Entity do
   its(:joins) { is_expected.to be_empty }
   its(:includes) { is_expected.to eq([rich_text_content: [embeds_attachments: :blob]]) }
   its(:preload) { is_expected.to eq([record: :string_translations]) }
-  its(:digest) { is_expected.to eq('950d5abb604834b4815b3c40634a63ee') }
+  its(:digest) { is_expected.to eq('33a807f4ffb50300d5ab2226fbf75527') }
   its(:to_spec) { is_expected.to eq('We manage **discussions**') }
   its(:source_entity) { is_expected.to eq(entity) }
   its(:parent_entity) { is_expected.to be_nil }
@@ -103,7 +103,7 @@ describe Schematics::Entities::Entity do
 
     it { is_expected.to be_child }
 
-    its(:digest) { is_expected.to eq('88acda9e018630d77f73f71e553225c4') }
+    its(:digest) { is_expected.to eq('3920f83336b86d36392176741ca7c036') }
     its(:source_entity) { is_expected.to eq(parent_entity) }
     its(:parent_entity) { is_expected.to eq(parent_entity) }
     its(:children) { is_expected.to be_empty }

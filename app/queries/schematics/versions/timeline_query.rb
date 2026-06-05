@@ -17,8 +17,8 @@ module Schematics
       def call(ability, versions = nil)
         (versions || self)
           .with_user
-          .then_tap { _1.accessible_by(ability) unless versions }
-          .then_tap { _1.filter_by_user_preferences unless versions }
+          .then_tap { it.accessible_by(ability) unless versions }
+          .then_tap { it.filter_by_user_preferences unless versions }
           .order(created_at: :desc)
       end
     end

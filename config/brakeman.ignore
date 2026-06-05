@@ -25,6 +25,29 @@
       "note": ""
     },
     {
+      "warning_type": "Remote Code Execution",
+      "warning_code": 24,
+      "fingerprint": "26e08d2a64c8ac539fb3633dd6cbb3189985e7b64c46612f2a1ca3be8dc34538",
+      "check_name": "UnsafeReflection",
+      "message": "Unsafe reflection method `constantize` called on parameter value",
+      "file": "app/controllers/schematics/routing_controller.rb",
+      "line": 56,
+      "link": "https://brakemanscanner.org/docs/warning_types/remote_code_execution/",
+      "code": "{ \"ActiveStorage::BlobsController\" => ([\"files\", \"fichiers\"]), \"CommentsController\" => ([\"comments\", \"commentaires\", \"commenti\"]), \"ComparisonsController\" => ([\"comparisons\", \"comparaisons\", \"confronti\"]), \"DraftsController\" => ([\"drafts\", \"brouillons\", \"bozze\"]), \"EmailingsController\" => ([\"emailings\", \"envois-d-e-mails\", \"invii-di-e-mail\"]), \"ImportsController\" => ([\"imports\", \"importations\", \"importazioni\"]), \"MessagesController\" => ([\"messages\", \"messaggi\"]), \"MigrationsController\" => ([\"migrations\", \"migrazioni\"]), \"SearchesController\" => ([\"searches\", \"recherches\", \"ricerche\"]), \"SessionsController\" => ([\"sessions\", \"sessioni\"]), \"UsersController\" => ([\"users\", \"utilisateurs\", \"utenti\"]) }.invert.select do\n it.include?(params[:resource])\n end.values.first.constantize",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Schematics::RoutingController",
+        "method": "controller_class"
+      },
+      "user_input": "params[:resource]",
+      "confidence": "Medium",
+      "cwe_id": [
+        470
+      ],
+      "note": ""
+    },
+    {
       "warning_type": "Dangerous Eval",
       "warning_code": 13,
       "fingerprint": "ea1c8bf622e4e7a29ad639cd7531c213f339ca84777251fdca3b0f33afc4eb06",
@@ -45,48 +68,6 @@
       "cwe_id": [
         913,
         95
-      ],
-      "note": ""
-    },
-    {
-      "warning_type": "Unmaintained Dependency",
-      "warning_code": 121,
-      "fingerprint": "edf687f759ec9765bd5db185dbc615c80af77d6e7e19386fc42934e7a80307af",
-      "check_name": "EOLRuby",
-      "message": "Support for Ruby 3.2.10 ended on 2026-03-31",
-      "file": ".ruby-version",
-      "line": 1,
-      "link": "https://brakemanscanner.org/docs/warning_types/unmaintained_dependency/",
-      "code": null,
-      "render_path": null,
-      "location": null,
-      "user_input": null,
-      "confidence": "High",
-      "cwe_id": [
-        1104
-      ],
-      "note": ""
-    },
-    {
-      "warning_type": "Remote Code Execution",
-      "warning_code": 24,
-      "fingerprint": "fd8e0875d3dbbd2366f7a986e74e1d5f011ecc06780e48d555d38f75675c672c",
-      "check_name": "UnsafeReflection",
-      "message": "Unsafe reflection method `constantize` called on parameter value",
-      "file": "app/controllers/schematics/routing_controller.rb",
-      "line": 56,
-      "link": "https://brakemanscanner.org/docs/warning_types/remote_code_execution/",
-      "code": "{ \"ActiveStorage::BlobsController\" => ([\"files\", \"fichiers\"]), \"CommentsController\" => ([\"comments\", \"commentaires\", \"commenti\"]), \"ComparisonsController\" => ([\"comparisons\", \"comparaisons\", \"confronti\"]), \"DraftsController\" => ([\"drafts\", \"brouillons\", \"bozze\"]), \"EmailingsController\" => ([\"emailings\", \"envois-d-e-mails\", \"invii-di-e-mail\"]), \"ImportsController\" => ([\"imports\", \"importations\", \"importazioni\"]), \"MessagesController\" => ([\"messages\", \"messaggi\"]), \"MigrationsController\" => ([\"migrations\", \"migrazioni\"]), \"SearchesController\" => ([\"searches\", \"recherches\", \"ricerche\"]), \"SessionsController\" => ([\"sessions\", \"sessioni\"]), \"UsersController\" => ([\"users\", \"utilisateurs\", \"utenti\"]) }.invert.select do\n _1.include?(params[:resource])\n end.values.first.constantize",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Schematics::RoutingController",
-        "method": "controller_class"
-      },
-      "user_input": "params[:resource]",
-      "confidence": "Medium",
-      "cwe_id": [
-        470
       ],
       "note": ""
     }

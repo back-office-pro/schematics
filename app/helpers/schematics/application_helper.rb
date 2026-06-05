@@ -21,7 +21,7 @@ module Schematics
       tag.i(
         class: [style, icon.to_s.dasherize, size, animation]
           .compact
-          .map { "fa-#{_1}" }
+          .map { "fa-#{it}" }
           .push(binding.local_variable_get(:class)),
         **
       )
@@ -29,7 +29,7 @@ module Schematics
 
     Dir
       .glob(COMPONENTS_DIRECTORY.join('**', 'component.rb'))
-      .map { _1[COMPONENTS_PATH, 1] }
+      .map { it[COMPONENTS_PATH, 1] }
       .each do |component|
         method_name = component.tr('/', '_').prepend('__')
         define_method(method_name) do |method_or_collection = :new, **kwargs, &block|

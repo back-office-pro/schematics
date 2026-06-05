@@ -55,7 +55,7 @@ module Schematics
     end
 
     def find_entity_by_name(name)
-      entities.find { _1.name == name }
+      entities.find { it.name == name }
     end
 
     def polymorphic_associations = entities
@@ -71,7 +71,7 @@ module Schematics
 
     def core_data = ::JSON
       .parse(core_data_filepath.read, symbolize_names: true)
-      .tap { |json| json.each { _1[:options]&.store(:core, true) } }
+      .tap { |json| json.each { it[:options]&.store(:core, true) } }
 
     def core_data_filepath
       path = VERSIONS_PATH / "#{version}.json"
@@ -92,7 +92,7 @@ module Schematics
     def add_has_and_belongs_to_many_associations = entities
       .flat_map(&:has_and_belongs_to_many_associations)
       .select(&:inverse_entity)
-      .each { _1.inverse_entity.associations << _1.inverse_association }
+      .each { it.inverse_entity.associations << it.inverse_association }
 
     # :reek:FeatureEnvy
     def add_inverse_associations = entities
@@ -100,7 +100,7 @@ module Schematics
       .uniq
       .reject(&:polymorphic?)
       .select(&:inverse_entity)
-      .each { _1.inverse_entity.associations << _1.inverse_association }
+      .each { it.inverse_entity.associations << it.inverse_association }
 
     def add_has_many_through_associations
       entities.each do |entity|

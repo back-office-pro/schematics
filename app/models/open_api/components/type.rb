@@ -45,8 +45,8 @@ module OpenAPI
               .reduce(&:merge),
             required: type
               .keys
-              .select { _1.end_with?('!') }
-              .map { _1.to_s.delete_suffix('!') }
+              .select { it.end_with?('!') }
+              .map { it.to_s.delete_suffix('!') }
           }.compact_blank
         else
           { type: }
