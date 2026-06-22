@@ -242,9 +242,6 @@ Performance/MethodObjectAsBlock:
   Enabled: false
 Performance/MapMethodChain:
   Enabled: false
-# rubocop-capybara
-Capybara/ClickLinkOrButtonStyle:
-  EnforcedStyle: strict
 # rubocop-obsession
 Obsession/Rails/ValidationMethodName:
   Enabled: false
