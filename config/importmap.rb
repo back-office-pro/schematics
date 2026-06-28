@@ -77,7 +77,7 @@ pin 'monaco-editor', to: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.55.1/+esm
 pin 'path', to: 'https://ga.jspm.io/npm:@jspm/core@2.1.0/nodelibs/browser/path.js'
 pin 'pluralize', to: 'pluralize-esm/dist/index.js'
 pin 'sortablejs', to: 'sortablejs/modular/sortable.esm.js'
-pin 'swagger-ui-dist', to: 'https://ga.jspm.io/npm:swagger-ui-dist@5.32.6/index.js'
+pin 'swagger-ui-dist', to: 'https://ga.jspm.io/npm:swagger-ui-dist@5.32.8/index.js'
 pin 'timeago.js', to: 'https://unpkg.com/timeago.js@4.0.2/esm/index.js'
 pin 'timeago.fr.js', to: 'https://unpkg.com/timeago.js@4.0.2/esm/lang/fr.js'
 pin 'timeago.it.js', to: 'https://unpkg.com/timeago.js@4.0.2/esm/lang/it.js'
