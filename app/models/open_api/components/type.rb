@@ -18,7 +18,7 @@ module OpenAPI
 
       attr_accessor :value
 
-      def to_h(type = value) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+      def to_h(type = value) # rubocop:disable Metrics/CyclomaticComplexity
         case type
         in 'date'
           { type: 'string', format: 'date' }
