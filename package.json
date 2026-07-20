@@ -15,7 +15,7 @@
     "bootstrap": "5.3.8",
     "file-saver-es": "2.0.5",
     "flag-icons": "7.5.0",
-    "monaco-editor": "0.55.1",
+    "monaco-editor": "0.56.0",
     "pluralize-esm": "9.0.5",
     "sortablejs": "1.15.7",
     "swagger-ui-dist": "5.32.6",
