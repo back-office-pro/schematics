@@ -323,7 +323,7 @@ GEM
     google-cloud-core (1.9.0)
       google-cloud-env (>= 1.0, < 3.a)
       google-cloud-errors (~> 1.0)
-    google-cloud-env (2.4.0)
+    google-cloud-env (2.4.1)
       base64 (~> 0.2)
       faraday (>= 1.0, < 3.a)
     google-cloud-errors (1.7.0)
@@ -1018,7 +1018,7 @@ PLATFORMS
   arm-linux-gnueabihf
   arm-linux-musl
   arm-linux-musleabihf
-  arm64-darwin-25
+  arm64-darwin-27
   x86_64-linux
   x86_64-linux-gnu
   x86_64-linux-musl
@@ -1191,7 +1191,6 @@ CHECKSUMS
   brakeman (8.1.0) sha256=cfa9e5214e4925842f4bc849a64f8a7e6c5d0425fe98eac8d7b7bc60fdc17e07
   browser (6.2.0) sha256=281d5295788825c9396427c292c2d2be0a5c91875c93c390fde6e5d61a5ace2d
   builder (3.3.0) sha256=497918d2f9dca528fdca4b88d84e4ef4387256d984b8154e9d5d3fe5a9c8835f
-  bundler (4.0.13) sha256=19f08be7f27022cf0b89f27da0b044ae075e8270a9ef44ad248a932614e1ca3b
   bundler-audit (0.9.3) sha256=81c8766c71e47d0d28a0f98c7eed028539f21a6ea3cd8f685eb6f42333c9b4e9
   cancancan (3.6.1) sha256=975c1d5cbf58d5df48a9452a7f61ae3d254608cd87570402f5925a8864c56b62
   capybara (3.40.0) sha256=42dba720578ea1ca65fd7a41d163dd368502c191804558f6e0f71b391054aeef
@@ -1258,7 +1257,7 @@ CHECKSUMS
   google-apis-iamcredentials_v1 (0.28.0) sha256=0a92ffe6cc39c569554af2a77a25dfc61519ed8bbb64ab04cffdd352dc5ef106
   google-apis-storage_v1 (0.68.0) sha256=43387d0466b4fc569fca05fdef5098ecf135ce173626b5c5f45bfe5e8db959fc
   google-cloud-core (1.9.0) sha256=ab55409f51488e8deefb6edcc1ce4771dfb5da2fe7b3bc075709a030c2b682a4
-  google-cloud-env (2.4.0) sha256=01cb35ecee5d1c4d1cd4deaed8bb5bddc838e296bcc2a35c5d1ddd07ce40d28d
+  google-cloud-env (2.4.1) sha256=987cc58afc50ce2903128ab4dcd442159be4457246b8137e41d49d5c3fc590dd
   google-cloud-errors (1.7.0) sha256=6e682f42d89aae08689f36f28495de629d756da076bafff0003bac7f8042ebb3
   google-cloud-location (1.5.1) sha256=ab0c4d29b9616f93c07b3307dbaf07e373e47115bb81ee7067eda6e448b9a0ae
   google-cloud-storage (1.62.1) sha256=10dbf2ebda3af1b4b841335364cb889827c6cb17bf6c9f8bc5313b6bef7a4d3c
@@ -1524,4 +1523,4 @@ CHECKSUMS
   zeitwerk (2.8.3) sha256=2c85125a8467ce069e20123d1e709a08955c9d29c118c25b46b7b7fafdbb92e5
 
 BUNDLED WITH
-  4.0.13
+  4.0.20
