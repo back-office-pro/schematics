@@ -105,7 +105,7 @@ describe Schematics::Attributes::StateMachine do
            prefix: true,
            validate: { allow_blank: true },
            default: "pending"
-      aasm :state, column: :state, enum: true, namespace: :state, create_scopes: false, no_direct_assignment: true do
+      aasm :state, column: :state, enum: true, namespace: :state, create_scopes: false, whiny_persistence: false, no_direct_assignment: true do
         state :pending, initial: true
         state :closed
         state :refused
@@ -172,7 +172,7 @@ describe Schematics::Attributes::StateMachine do
              {pending: 0},
              prefix: true,
              validate: { allow_blank: true }
-        aasm :state, column: :state, enum: true, namespace: :state, create_scopes: false, no_direct_assignment: true do
+        aasm :state, column: :state, enum: true, namespace: :state, create_scopes: false, whiny_persistence: false, no_direct_assignment: true do
           state :pending, initial: true
         end
       RUBY
@@ -185,7 +185,7 @@ describe Schematics::Attributes::StateMachine do
     its(:to_str) do
       is_expected.to eq <<~RUBY
         enum :state, prefix: true, validate: { allow_blank: true }
-        aasm :state, column: :state, enum: true, namespace: :state, create_scopes: false, no_direct_assignment: true do
+        aasm :state, column: :state, enum: true, namespace: :state, create_scopes: false, whiny_persistence: false, no_direct_assignment: true do
         end
       RUBY
     end
