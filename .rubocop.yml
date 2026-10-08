@@ -9,7 +9,7 @@ plugins:
   - rubocop-obsession
   - rubocop-view_component
 AllCops:
-  TargetRubyVersion: 4.0.5
+  TargetRubyVersion: 4.0.7
   NewCops: enable
   DisplayStyleGuide: true
   Exclude:
