@@ -25,7 +25,7 @@ module Schematics
         .model_classes
         .reject(&:abstract?)
         .push(::Import, ::ActiveStorage::Blob, ::Emailing)
-        .select { can?(:index, _1) }
+        .select { can?(:index, it) }
         .sort_by(&:human_name)
         .map
         .with_index { |klass, index| [ALPHABET[index], klass.human_name_plural.humanize] }

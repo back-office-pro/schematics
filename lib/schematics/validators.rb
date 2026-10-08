@@ -24,7 +24,7 @@ module Schematics
     attr_accessor :name, :validators
 
     def compact_validators = validators
-      .transform_values { _1.try(:compact) || _1 }
+      .transform_values { it.try(:compact) || it }
       .compact_blank
 
     def merge(other_validators)

@@ -121,7 +121,7 @@ describe Schematics::Attributes::Boolean do
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :toggle, {:acceptance=>true}
+        validates :toggle, {acceptance: true}
       RUBY
     end
   end

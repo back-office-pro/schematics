@@ -31,7 +31,7 @@ module Schematics
               anyOf: available_options
                 .reject(&:hidden?)
                 .map(&:option_name)
-                .map { { '$ref': "#/$defs/#{_1}" } }
+                .map { { '$ref': "#/$defs/#{it}" } }
             }
           }
         }

@@ -26,7 +26,7 @@ module Schematics
               .select(&filter_by)
               .group_by(&group_by)
               .to_h
-              .transform_values { |value| value.map { [_1.to_s, _1.id] } }
+              .transform_values { |value| value.map { [it.to_s, it.id] } }
               .transform_values(&:sort)
               .sort
           end

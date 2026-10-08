@@ -19,7 +19,7 @@ RSpec.describe Migration do
   its(:migrator) { is_expected.to be_a(Schematics::Migrator) }
 
   it 'enqueues a migrate schema job after migrate' do
-    expect { record.migrate! }
+    expect { record.migrate_state! }
       .to have_enqueued_job(Schematics::MigrateSchemaJob)
       .exactly(:once)
       .with(record)
@@ -28,7 +28,7 @@ RSpec.describe Migration do
   end
 
   it 'enqueues a rollback schema job after rollback' do
-    expect { record.tap { _1.finalize!(false) }.reload.rollback! }
+    expect { record.tap { it.finalize!(false) }.reload.rollback_state! }
       .to have_enqueued_job(Schematics::RollbackSchemaJob)
       .exactly(:once)
       .with(record)

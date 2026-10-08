@@ -29,7 +29,7 @@ module Schematics
       .class
       .entity
       .multisearchable_elements
-      .map { _1.format(public_send(_1.name)) }
+      .map { it.format(public_send(it.name)) }
       .compact_blank
       .map(&:squish)
       .join(' ')

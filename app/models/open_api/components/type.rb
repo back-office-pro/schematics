@@ -18,7 +18,7 @@ module OpenAPI
 
       attr_accessor :value
 
-      def to_h(type = value) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+      def to_h(type = value) # rubocop:disable Metrics/CyclomaticComplexity
         case type
         in 'date'
           { type: 'string', format: 'date' }
@@ -45,8 +45,8 @@ module OpenAPI
               .reduce(&:merge),
             required: type
               .keys
-              .select { _1.end_with?('!') }
-              .map { _1.to_s.delete_suffix('!') }
+              .select { it.end_with?('!') }
+              .map { it.to_s.delete_suffix('!') }
           }.compact_blank
         else
           { type: }

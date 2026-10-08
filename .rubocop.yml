@@ -9,12 +9,11 @@ plugins:
   - rubocop-obsession
   - rubocop-view_component
 AllCops:
-  TargetRubyVersion: 3.2.10
+  TargetRubyVersion: 4.0.7
   NewCops: enable
   DisplayStyleGuide: true
   Exclude:
     - db/*schema.rb
-    - rgloader/*
     - storage/migrate/*
     - vendor/**/*
 # rubocop
@@ -243,9 +242,6 @@ Performance/MethodObjectAsBlock:
   Enabled: false
 Performance/MapMethodChain:
   Enabled: false
-# rubocop-capybara
-Capybara/ClickLinkOrButtonStyle:
-  EnforcedStyle: strict
 # rubocop-obsession
 Obsession/Rails/ValidationMethodName:
   Enabled: false

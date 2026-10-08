@@ -37,7 +37,7 @@ module Schematics
         def add_association_edges = entities
           .flat_map(&:association_attributes)
           .uniq
-          .each { graph.add_edges(_1.entity.name, _1.inverse_entity.name, arrowhead: 'none') }
+          .each { graph.add_edges(it.entity.name, it.inverse_entity.name, arrowhead: 'none') }
 
         def entities = schema
           .entities
@@ -45,17 +45,17 @@ module Schematics
 
         def add_inheritance_edges = entities
           .select(&:parent)
-          .each { graph.add_edges(_1.name, _1.parent) }
+          .each { graph.add_edges(it.name, it.parent) }
 
         def add_habtm_edges = entities
           .flat_map(&:has_and_belongs_to_many_associations)
           .reject(&:hidden?)
-          .each { graph.add_edges(_1.entity.name, _1.association_type, dir: 'both') }
+          .each { graph.add_edges(it.entity.name, it.association_type, dir: 'both') }
 
         def add_enum_edges = entities
           .flat_map(&:enum_attributes)
           .grep_v(Attributes::StateMachine)
-          .each { graph.add_edges(_1.entity.name, _1.to_sql, label: "  #{_1.name}", arrowhead: 'none', style: 'dashed') } # rubocop:disable Layout/LineLength
+          .each { graph.add_edges(it.entity.name, it.to_sql, label: "  #{it.name}", arrowhead: 'none', style: 'dashed') } # rubocop:disable Layout/LineLength
 
         memoize def graph
           graph = GraphViz.digraph('schema')

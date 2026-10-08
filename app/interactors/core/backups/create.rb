@@ -36,7 +36,7 @@ module Core
         when 'SQLite'
           ["sqlite3 #{db_path} '.dump #{tables.join(' ')}' | gzip -c"]
         when 'PostgreSQL'
-          ['pg_dump -Fc', ('-a' if tables.any?), tables.map { "-t #{_1}" }, current_database]
+          ['pg_dump -Fc', ('-a' if tables.any?), tables.map { "-t #{it}" }, current_database]
         end
       end
 
@@ -57,7 +57,7 @@ module Core
       def file(content)
         Tempfile
           .new
-          .tap { _1.write(content) }
+          .tap { it.write(content) }
           .tap(&:rewind)
       end
     end

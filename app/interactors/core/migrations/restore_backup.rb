@@ -18,6 +18,7 @@ module Core
       delegate :migration, to: :context, private: true
       delegate :backup, to: :migration, private: true
       delegate :attached?, to: :backup, private: true
+      delegate :error, to: '::Rails.logger', private: true
 
       progressable migration: 60
 
@@ -25,7 +26,7 @@ module Core
       def call
         Backups::Restore.call(backup:) if attached?
       rescue ActiveStorage::FileNotFoundError => e
-        Rollbar.error(e, '[Migration] RestoreBackup error')
+        error("[RestoreBackup] #{e.message}")
       end
     end
   end

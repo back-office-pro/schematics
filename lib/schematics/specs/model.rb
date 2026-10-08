@@ -39,7 +39,7 @@ module Schematics
             is_expected.to(
               callback(trigger.method_name)
                 .public_send(*trigger.action.split('_'))
-                .tap { _1.after(:commit) if trigger.action.start_with?('after') }
+                .tap { it.after(:commit) if trigger.action.start_with?('after') }
             )
           end
         end
@@ -58,8 +58,8 @@ module Schematics
             it do
               is_expected.to(
                 validate_uniqueness_of(attribute.name.to_sym)
-                  .tap { _1.ignoring_case_sensitivity if attribute.case_insensitive? }
-                  .tap { _1.allow_blank unless attribute.required? }
+                  .tap { it.ignoring_case_sensitivity if attribute.case_insensitive? }
+                  .tap { it.allow_blank unless attribute.required? }
               )
             end
           end
@@ -69,7 +69,7 @@ module Schematics
             is_expected.to(
               validates_inclusion_of(attribute.name.to_sym)
                 .in(attribute.values)
-                .tap { _1.allow_blank unless attribute.required? }
+                .tap { it.allow_blank unless attribute.required? }
             )
           end
         end
@@ -78,13 +78,13 @@ module Schematics
           it do
             is_expected.to(
               validate_numericality_of(attribute.name.to_sym)
-                .tap { _1.allow_nil unless attribute.required? }
-                .tap { _1.is_equal_to(attribute.equal_to) if attribute.equal_to }
-                .tap { _1.is_less_than(attribute.less_than) if attribute.less_than }
-                .tap { _1.is_other_than(attribute.other_than) if attribute.other_than }
-                .tap { _1.is_greater_than(attribute.greater_than) if attribute.greater_than }
-                .tap { _1.is_less_than_or_equal_to(attribute.less_than_or_equal_to) if attribute.less_than_or_equal_to } # rubocop:disable Layout/LineLength
-                .tap { _1.is_greater_than_or_equal_to(attribute.greater_than_or_equal_to) if attribute.greater_than_or_equal_to } # rubocop:disable Layout/LineLength
+                .tap { it.allow_nil unless attribute.required? }
+                .tap { it.is_equal_to(attribute.equal_to) if attribute.equal_to }
+                .tap { it.is_less_than(attribute.less_than) if attribute.less_than }
+                .tap { it.is_other_than(attribute.other_than) if attribute.other_than }
+                .tap { it.is_greater_than(attribute.greater_than) if attribute.greater_than }
+                .tap { it.is_less_than_or_equal_to(attribute.less_than_or_equal_to) if attribute.less_than_or_equal_to } # rubocop:disable Layout/LineLength
+                .tap { it.is_greater_than_or_equal_to(attribute.greater_than_or_equal_to) if attribute.greater_than_or_equal_to } # rubocop:disable Layout/LineLength
             )
           end
         end
@@ -175,9 +175,9 @@ module Schematics
           it do
             is_expected.to(
               validate_length_of(attribute.name.to_sym)
-                .tap { _1.is_at_least(attribute.min) if attribute.min }
-                .tap { _1.is_at_most(attribute.limit) if attribute.limit }
-                .tap { _1.is_equal_to(attribute.length) if attribute.length }
+                .tap { it.is_at_least(attribute.min) if attribute.min }
+                .tap { it.is_at_most(attribute.limit) if attribute.limit }
+                .tap { it.is_equal_to(attribute.length) if attribute.length }
             )
           end
         end
@@ -190,8 +190,8 @@ module Schematics
           it do
             is_expected.to(
               validate_numericality_of(attribute.name.to_sym)
-                .tap { _1.is_less_than(attribute.bound) if attribute.precision }
-                .tap { _1.is_greater_than(-attribute.bound) if attribute.precision }
+                .tap { it.is_less_than(attribute.bound) if attribute.precision }
+                .tap { it.is_greater_than(-attribute.bound) if attribute.precision }
             )
           end
         end
@@ -229,7 +229,7 @@ module Schematics
             is_expected.to(
               validate_length_of(attribute.name.to_sym)
                 .is_at_most(::ActiveModel::SecurePassword::MAX_PASSWORD_LENGTH_ALLOWED)
-                .tap { _1.is_at_least(attribute.options.min) if attribute.options.min }
+                .tap { it.is_at_least(attribute.options.min) if attribute.options.min }
             )
           end
         end
@@ -251,8 +251,8 @@ module Schematics
                 .with_foreign_key(attribute.column_name)
                 .inverse_of(attribute.inverse_association.name.to_sym)
                 .strict_loading
-                .tap { _1.class_name(attribute.class_name) unless attribute.polymorphic? }
-                .tap { _1.optional unless attribute.required? }
+                .tap { it.class_name(attribute.class_name) unless attribute.polymorphic? }
+                .tap { it.optional unless attribute.required? }
             )
           end
         end

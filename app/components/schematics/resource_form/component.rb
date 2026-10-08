@@ -35,7 +35,7 @@ module Schematics
       def attributes
         return @attributes unless persisted?
 
-        @attributes.select { can?(:update, @resource, _1.name) }
+        @attributes.select { can?(:update, @resource, it.name) }
       end
 
       def wrapper_class

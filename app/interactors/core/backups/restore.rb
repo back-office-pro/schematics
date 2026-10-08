@@ -27,7 +27,7 @@ module Core
       before :disconnect!
 
       def call
-        backup.open { system command(_1.path).compact.join(' ') }
+        backup.open { system command(it.path).compact.join(' ') }
       end
 
       private

@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 # check=error=true
 
-ARG RUBY_VERSION=3.2.10
+ARG RUBY_VERSION=4.0.7
 FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 
 WORKDIR /back-office
@@ -81,4 +81,4 @@ COPY --from=build /back-office /back-office
 ENTRYPOINT ["/back-office/bin/docker-entrypoint"]
 
 EXPOSE 80
-CMD ["./bin/thrust", "./bin/puma", "-C", "config/puma.rb", "--silent"]
+CMD ["./bin/thrust", "./bin/rails", "server"]

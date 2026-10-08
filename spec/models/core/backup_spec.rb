@@ -16,7 +16,7 @@ RSpec.describe Backup do
   include Schematics::Specs::Model
 
   it 'enqueues a restore backup job after restore database' do
-    expect { record.restore_database! }
+    expect { record.restore_database_state! }
       .to have_enqueued_job(Schematics::RestoreBackupJob)
       .exactly(:once)
       .with(record)

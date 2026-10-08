@@ -52,7 +52,7 @@ describe Schematics::Attributes::Token do
 
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
-      validates :access_token, {:uniqueness_with_deleted=>{:case_sensitive=>true, :allow_blank=>true}}
+      validates :access_token, {uniqueness_with_deleted: {case_sensitive: true, allow_blank: true}}
     RUBY
   end
 

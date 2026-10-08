@@ -26,7 +26,7 @@ module Schematics
       def format(values)
         Array(values)
           .map(&:to_s)
-          .map { super(_1) }
+          .map { super(it) }
           .join(', ')
       end
 

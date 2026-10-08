@@ -26,7 +26,7 @@ module Schematics
               .scan(/([A-Z][a-z]+)/)
               .flatten
               .map(&:downcase)
-              .map { "errors.triggers.types.#{_1}" }
+              .map { "errors.triggers.types.#{it}" }
               .map(&method(:translate))
           ).to_h
       end

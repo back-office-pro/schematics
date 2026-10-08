@@ -17,7 +17,7 @@ module Schematics
       schema
         .entities
         .flat_map(&:has_and_belongs_to_many_associations)
-        .select { _1.model_class == ::Team }
+        .select { it.model_class == ::Team }
         .map(&:entity)
         .filter_map(&:model_class)
         .each do |model_class|

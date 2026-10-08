@@ -38,7 +38,7 @@ module Schematics
       attr_accessor :id, :entity, :action, :callback
 
       class << self
-        def to_proc = -> { new(**_1) }
+        def to_proc = -> { new(**it) }
       end
 
       def method_name = [action, id]

@@ -1,13 +1,13 @@
 {
   "name": "schematics",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "scripts": {
     "lint": "./node_modules/.bin/standard",
     "stylelint": "./node_modules/.bin/stylelint app/**/*.css"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "7.2.0",
+    "@fortawesome/fontawesome-free": "7.3.1",
     "@github/hotkey": "3.1.4",
     "@popperjs/core": "2.11.8",
     "animate.css": "4.1.1",
@@ -15,10 +15,10 @@
     "bootstrap": "5.3.8",
     "file-saver-es": "2.0.5",
     "flag-icons": "7.5.0",
-    "monaco-editor": "0.55.1",
+    "monaco-editor": "0.57.0",
     "pluralize-esm": "9.0.5",
     "sortablejs": "1.15.7",
-    "swagger-ui-dist": "5.32.6",
+    "swagger-ui-dist": "5.33.1",
     "swagger-ui-themes": "3.0.1",
     "timeago.js": "4.0.2",
     "tom-select": "2.3.1",
@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "standard": "17.1.2",
-    "stylelint": "17.12.0",
+    "stylelint": "17.16.0",
     "stylelint-config-standard": "40.0.0"
   },
   "stylelint": {

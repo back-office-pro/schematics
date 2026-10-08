@@ -20,7 +20,7 @@ module Schematics
         option :builder
 
         def collection = compatible_types
-          .map { [_1.model_name.human, _1.type] }
+          .map { [it.model_name.human, it.type] }
           .sort
 
         def prompt = t('prompt', attribute_name:)

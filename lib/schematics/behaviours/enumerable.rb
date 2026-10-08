@@ -22,7 +22,7 @@ module Schematics
 
       def values = Array(options.values)
 
-      def collection = values.map { [format(_1), _1] }
+      def collection = values.map { [format(it), it] }
 
       def default = values.first
 

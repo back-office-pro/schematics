@@ -32,7 +32,7 @@ module Core
 
       def io = Tempfile
         .new
-        .tap { _1.write(current_data.to_json) }
+        .tap { it.write(current_data.to_json) }
         .tap(&:rewind)
     end
   end

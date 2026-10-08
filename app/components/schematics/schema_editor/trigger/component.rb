@@ -17,7 +17,7 @@ module Schematics
         option :builder
 
         def collection = Schematics::Triggers::Trigger::ACTIONS
-          .map { [t(_1, scope: %i[activemodel attributes schematics/triggers/trigger actions]), _1] } # rubocop:disable Layout/LineLength
+          .map { [t(it, scope: %i[activemodel attributes schematics/triggers/trigger actions]), it] } # rubocop:disable Layout/LineLength
           .sort
 
         def icon = :atom

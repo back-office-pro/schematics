@@ -432,7 +432,7 @@ module Schematics
 
         # :reek:FeatureEnvy
         def params(format = nil)
-          { entity.table_name.to_sym => fillable_elements.to_h { nested_params(_1, format) } }
+          { entity.table_name.to_sym => fillable_elements.to_h { nested_params(it, format) } }
         end
 
         # :reek:FeatureEnvy
@@ -446,15 +446,15 @@ module Schematics
                   .entity
                   .fillable_elements
                   .excluding(element.belongs_to)
-                  .to_h { nested_params(_1, format) }
+                  .to_h { nested_params(it, format) }
               ]
             ]
           else
             [
               element.column_name.to_sym,
               element.public_send([format, 'default'].compact.join('_'))
-                .then_tap { _1.tap(&:save!).id if element in Attributes::Association }
-                .then_tap { _1.map(&:save!) && _1.map(&:id) if element in Associations::HasAndBelongsToMany } # rubocop:disable Layout/LineLength
+                .then_tap { it.tap(&:save!).id if element in Attributes::Association }
+                .then_tap { it.map(&:save!) && it.map(&:id) if element in Associations::HasAndBelongsToMany } # rubocop:disable Layout/LineLength
             ]
           end
         end

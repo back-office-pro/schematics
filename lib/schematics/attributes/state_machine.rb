@@ -29,7 +29,7 @@ module Schematics
       def readonly? = true
 
       def to_str = super + <<~RUBY.squeeze("\n")
-        aasm :#{name}, column: :#{name}, enum: true, namespace: :#{name}, create_scopes: false, no_direct_assignment: #{!direct_assignment} do
+        aasm :#{name}, column: :#{name}, enum: true, namespace: :#{name}, create_scopes: false, whiny_persistence: false, no_direct_assignment: #{!direct_assignment} do
         #{states_to_str}
         #{events_to_str}
         end
@@ -50,7 +50,7 @@ module Schematics
         .map
         .with_index { |value, index| ["state :#{value}", ('initial: true' if index.zero?)] }
         .map(&:compact)
-        .map { _1.join(', ').indent(2) }
+        .map { it.join(', ').indent(2) }
         .join("\n")
 
       def events_to_str = events

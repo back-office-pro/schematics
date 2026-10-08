@@ -22,7 +22,7 @@ module Schematics
 
     def disallowed_params(action, subject)
       relevant_rules(action, subject)
-        .select { _1.matches_conditions?(action, subject) }
+        .select { it.matches_conditions?(action, subject) }
         .reject(&:base_behavior)
         .flat_map(&:attributes)
     end

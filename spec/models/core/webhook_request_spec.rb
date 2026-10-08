@@ -20,7 +20,7 @@ RSpec.describe WebhookRequest do
   its(:body) { is_expected.to match('event' => String, 'payload' => {}) }
 
   it 'enqueues a trigger webhook job after retry' do
-    expect { record.retry! }
+    expect { record.retry_state! }
       .to have_enqueued_job(Schematics::TriggerWebhookJob)
       .exactly(:once)
       .with(record)

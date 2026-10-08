@@ -31,7 +31,7 @@ module Schematics
 
     def parent_model_class = SchemaCache
       .entities
-      .to_h { [_1.class_name, _1.model_class] }
+      .to_h { [it.class_name, it.model_class] }
       .fetch(parent_model_name)
 
     def parent_model_name = resolve_model_name_from_route

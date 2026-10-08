@@ -14,7 +14,6 @@ Schematics::InlineJavascript::SLIM = <<~SLIM
   javascript [nonce=content_security_policy_nonce]:
     window.environment = \#{environment}
     window.mapsAPIKey = \#{maps_api_key}
-    window.rollbarClientKey = \#{rollbar_client_key}
     window.I18n = \#{i18n}
     window.routes = \#{routes}
 SLIM
