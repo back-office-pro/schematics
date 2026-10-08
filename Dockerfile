@@ -81,4 +81,4 @@ COPY --from=build /back-office /back-office
 ENTRYPOINT ["/back-office/bin/docker-entrypoint"]
 
 EXPOSE 80
-CMD ["./bin/rails", "server"]
+CMD ["./bin/thrust", "./bin/rails", "server"]
