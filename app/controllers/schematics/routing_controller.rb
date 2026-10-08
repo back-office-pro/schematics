@@ -21,7 +21,7 @@ module Schematics
       configuration
       configurazione
     ].freeze
-    # rubocop:disable Style/StringHashKeys
+    # rubocop:disable-next Style/StringHashKeys
     CORE_CONTROLLERS = {
       'ActiveStorage::BlobsController' => %w[files fichiers],
       'CommentsController' => %w[comments commentaires commenti],
@@ -35,7 +35,6 @@ module Schematics
       'SessionsController' => %w[sessions sessioni],
       'UsersController' => %w[users utilisateurs utenti]
     }.freeze
-    # rubocop:enable Style/StringHashKeys
 
     %i[show new create edit update delete destroy archive restore duplicate trigger]
       .each do |action|
