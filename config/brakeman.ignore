@@ -1,37 +1,13 @@
 {
   "ignored_warnings": [
     {
-      "warning_type": "Dangerous Eval",
-      "warning_code": 13,
-      "fingerprint": "1163dcf61663c62b94c6d7521ee055b6b915a11cb0954530d2dd8ec44a3db3ed",
-      "check_name": "Evaluation",
-      "message": "Dynamic code evaluation",
-      "file": "app/models/concerns/schematics/loadable.rb",
-      "line": 90,
-      "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
-      "code": "eval(SchemaCache.find_entity_by_name(name.to_s.underscore), binding, \"app/models/concerns/schematics/loadable.rb\", 90)",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Schematics::Loadable",
-        "method": "load!"
-      },
-      "user_input": null,
-      "confidence": "Weak",
-      "cwe_id": [
-        913,
-        95
-      ],
-      "note": ""
-    },
-    {
       "warning_type": "Remote Code Execution",
       "warning_code": 24,
       "fingerprint": "26e08d2a64c8ac539fb3633dd6cbb3189985e7b64c46612f2a1ca3be8dc34538",
       "check_name": "UnsafeReflection",
       "message": "Unsafe reflection method `constantize` called on parameter value",
       "file": "app/controllers/schematics/routing_controller.rb",
-      "line": 56,
+      "line": 45,
       "link": "https://brakemanscanner.org/docs/warning_types/remote_code_execution/",
       "code": "{ \"ActiveStorage::BlobsController\" => ([\"files\", \"fichiers\"]), \"CommentsController\" => ([\"comments\", \"commentaires\", \"commenti\"]), \"ComparisonsController\" => ([\"comparisons\", \"comparaisons\", \"confronti\"]), \"DraftsController\" => ([\"drafts\", \"brouillons\", \"bozze\"]), \"EmailingsController\" => ([\"emailings\", \"envois-d-e-mails\", \"invii-di-e-mail\"]), \"ImportsController\" => ([\"imports\", \"importations\", \"importazioni\"]), \"MessagesController\" => ([\"messages\", \"messaggi\"]), \"MigrationsController\" => ([\"migrations\", \"migrazioni\"]), \"SearchesController\" => ([\"searches\", \"recherches\", \"ricerche\"]), \"SessionsController\" => ([\"sessions\", \"sessioni\"]), \"UsersController\" => ([\"users\", \"utilisateurs\", \"utenti\"]) }.invert.select do\n it.include?(params[:resource])\n end.values.first.constantize",
       "render_path": null,
@@ -50,13 +26,13 @@
     {
       "warning_type": "Dangerous Eval",
       "warning_code": 13,
-      "fingerprint": "ea1c8bf622e4e7a29ad639cd7531c213f339ca84777251fdca3b0f33afc4eb06",
+      "fingerprint": "70cfc6731d5989901301d351b1ddd91fc980e295bcee886594df0693f7fddb39",
       "check_name": "Evaluation",
       "message": "Dynamic code evaluation",
       "file": "app/models/concerns/schematics/loadable.rb",
-      "line": 38,
+      "line": 28,
       "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
-      "code": "eval(model_element, binding, \"app/models/concerns/schematics/loadable.rb\", 38)",
+      "code": "eval(model_element, binding, \"app/models/concerns/schematics/loadable.rb\", 28)",
       "render_path": null,
       "location": {
         "type": "method",
@@ -70,7 +46,31 @@
         95
       ],
       "note": ""
+    },
+    {
+      "warning_type": "Dangerous Eval",
+      "warning_code": 13,
+      "fingerprint": "a26eb0f4c2c8bb67b5c51e554874970fe4e4b42c57aa628cc943ebcf69580d42",
+      "check_name": "Evaluation",
+      "message": "Dynamic code evaluation",
+      "file": "app/models/concerns/schematics/loadable.rb",
+      "line": 80,
+      "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
+      "code": "eval(SchemaCache.find_entity_by_name(name.to_s.underscore), binding, \"app/models/concerns/schematics/loadable.rb\", 80)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Schematics::Loadable",
+        "method": "load!"
+      },
+      "user_input": null,
+      "confidence": "Weak",
+      "cwe_id": [
+        913,
+        95
+      ],
+      "note": ""
     }
   ],
-  "brakeman_version": "8.0.4"
+  "brakeman_version": "8.1.0"
 }

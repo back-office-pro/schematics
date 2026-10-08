@@ -1,4 +1,3 @@
-
 # frozen_string_literal: false
 
 require 'i18n/backend/active_record'
